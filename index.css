@@ -1,5 +1,6 @@
 .dive{
     width:80%;
-    float:left;
     margin:auto;
+    background-color:red;
+    height:200px;
 }
