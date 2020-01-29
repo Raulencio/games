@@ -1,2 +1,2 @@
-<?php include('index.html');?>
-<?php include('index.css');?>
+<?php include('index.html');
+include('index.css');?>
