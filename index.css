@@ -1,8 +1,72 @@
-.dive{    
-    text-align:center;
-    width:80%;
-    margin:auto;
-    background-color:red;
+.contenedor>div{
+    transition: all 1s;
+    display:flex;
+    background-color: blue;
+    color:white;
+    width:138px;
     height:200px;
-    padding-top:1%;
+    margin:10px;  
+    justify-content: center;
+    align-items: center;
+}
+.contenedor>div:hover{
+    width: 600px;
+    height: 200px;
+    background-color: rgba(0, 0, 255, 0.959);
+}
+.contenedor{
+    display:flex;
+    flex-direction: row;       
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    width:500px;
+    height: 500px;
+}
+.menu>div{
+    transition: all 1s;
+    height:100px;
+    display:flex;
+    background-color: blue;
+    color:white;
+    justify-content: center;
+    align-items: center;
+}
+.menu>div:hover{
+    width:500px;
+    height: 450px;    
+    
+}
+div:nth-child(2){
+    background-color: red;
+}
+
+div:nth-child(3){
+    background-color: rgb(224, 224, 15);
+}
+
+div:nth-child(4){
+    background-color: green;
+}
+div:nth-child(5){
+    background-color: rgb(47, 211, 211);
+}
+div:nth-child(6){
+    background-color: red;
+}
+
+div:nth-child(7){
+    background-color: rgb(224, 224, 15);
+}
+
+div:nth-child(8){
+    background-color: green;
+}
+div:nth-child(9){
+    background-color: rgb(47, 211, 211);
+}
+div:nth-child(10){
+    background-color: blueviolet;
 }
