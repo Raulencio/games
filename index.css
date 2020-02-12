@@ -1,72 +1,91 @@
-.contenedor>div{
-    transition: all 1s;
-    display:flex;
-    background-color: blue;
-    color:white;
-    width:138px;
-    height:200px;
-    margin:10px;  
-    justify-content: center;
-    align-items: center;
-}
-.contenedor>div:hover{
-    width: 600px;
-    height: 200px;
-    background-color: rgba(0, 0, 255, 0.959);
-}
-.contenedor{
-    display:flex;
-    flex-direction: row;       
+@media(max-width:1200px){
+
+    .contenedor>div{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+    }
+    .contenedor{
+        display:inline-flex;
+        flex-direction: column;        
+        width:70%;
+        margin-left: 15%;
+        height:250px;
+    }
+    .contenedor div:nth-child(1){
+        background-color: green;
+        height:25px;
+        order:2;
+            
+    }
+    .contenedor div:nth-child(2){
+        background-color: whitesmoke;
+        height:200px;
+        order:1;
+    }
+
+    .contenedor div:nth-child(3){
+        background-color: red;
+        height:25px;
+        order:3;
+    }
+    .jeder{
+        width: 70%;
+        margin:auto;
+        background-color: rgb(172, 137, 137);
+        height:25px;
+    }
+    .futer{
+            width: 70%;
+            margin:auto;
+            background-color: rgb(153, 129, 129);
+            height:25px;
+    }
 }
 
-.menu{
-    display:flex;
-    flex-direction:column;
-    width:500px;
-    height: 500px;
-}
-.menu>div{
-    transition: all 1s;
-    height:100px;
-    display:flex;
-    background-color: blue;
-    color:white;
-    justify-content: center;
-    align-items: center;
-}
-.menu>div:hover{
-    width:500px;
-    height: 450px;    
-    
-}
-div:nth-child(2){
-    background-color: red;
-}
-
-div:nth-child(3){
-    background-color: rgb(224, 224, 15);
-}
-
-div:nth-child(4){
-    background-color: green;
-}
-div:nth-child(5){
-    background-color: rgb(47, 211, 211);
-}
-div:nth-child(6){
-    background-color: red;
-}
-
-div:nth-child(7){
-    background-color: rgb(224, 224, 15);
-}
-
-div:nth-child(8){
-    background-color: green;
-}
-div:nth-child(9){
-    background-color: rgb(47, 211, 211);
-}
-div:nth-child(10){
-    background-color: blueviolet;
+@media(min-width:1200px){
+ 
+    .jeder{
+        width: 70%;
+        margin:auto;
+        background-color: rgb(105, 184, 82);
+        height:100px;
+    }
+    .futer{
+            width: 70%;
+            margin:auto;
+            background-color: rgb(194, 70, 70);
+            height:100px;
+    }
+    .contenedor>div{
+        display:flex;
+        flex-grow: 1;
+        justify-content: center;
+        align-items: center;
+    }        
+    .contenedor{
+        width:70%;
+        margin:auto;
+        display:flex;
+        flex-direction: row;
+        height:550px;
+    }
+    .contenedor div:nth-child(1){
+        background-color: green;
+        
+        
+        
+    }
+    .contenedor div:nth-child(2){
+        background-color: rgba(249, 252, 252, 0.808);
+        flex-grow: 4;
+        
+        
+    }
+    .contenedor div:nth-child(3){
+        background-color: red;
+        
+       
+    }
 }
