@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0, maximum-scale=0.67, user-scalable=no">
+    <title>Hinode Hinoiri</title>
+    <link rel="stylesheet" href="css/coloro.css">
+    <link rel="stylesheet" href="css/listo.css">
+    <script src="js/yohi.js"></script>
+    <script src="js/adventur.js"></script>
+</head>
+<body>
+    
+<div class="divinicio"id="dInicio" ><!--onClick="dalePlay(3)"> on click musica intro -->
+    
+        <img src="img/logoYohiroStory.png" alt="">
+        <p class="elPPlay" id="pPlay" onClick="iniciar()"> Sobrevivir </p>
+        <p class="elPPlays" id="pPlay" onClick="aventura()"> Modo Historia </p> <!-- on click nuevo modo aventura con la historia ahora si xd -->
+        
+</div> <!-- Portada -->    
+
+<div id="dnj" hidden="true" class="ts">
+    <div class="funcional" onClick="clickPlay()">
+    </div>
+    <img src="img/logoYohiroStorySelec.png" alt="">
+    <img class="tik" src="onscreenControls/Sprites/flatDark/flatDark44.png"  alt="" onClick="patra()" >
+</div>
+
+<div id="dpan"class="pantalla" hidden="true">
+<div class="comic" id="icomic" hidden="false">
+    <div class="hoja" id="prt">
+        <img src="img/portadademomento.png" alt="">
+    </div>
+<div class="hoja"hidden="true" id="pgs">
+    <div class="cua1">
+        <p id="textoc1">Hace un tiempo atras</p>
+        <img src="img/prueba2.png" alt=""width="100%" id="cuadro1">
+        
+    </div>
+    <div class="cua2">
+        <p id="textoc2">Cayó un gran meteoro</p>
+        <img src="img/prueba4.png" alt=""width="100%" id="cuadro2">
+        
+    </div>
+    <div class="cua3">
+        <p id="textoc3">Anunciando asi</p>
+        <img src="comisk/cuadro3.png" alt=""width="100%" id="cuadro3">
+        
+    </div>
+    <div class="cua4">
+        <p id="textoc4">la llegada de un gran peligro</p>
+        <img src="img/prueba.png" alt=""width="100%" id="cuadro4">
+        
+    </div>
+    <div class="cua5">
+        <p id="textoc5">pero asi tambien el nacimiento</p>
+        <img src="img/prueba.png" alt=""width="100%" id="cuadro5">
+        
+    </div>
+    <div class="cua6">
+        <p id="textoc6">de una nueva esperanza</p>
+        <img src="img/prueba.png" alt=""width="100%" id="cuadro6">
+        
+    </div>
+</div>
+<p class="numpg"id="nupg">0</p>
+</div>
+<!-- AQUI VAN VARIAS COSAS BOTONES MAPA TODO-->
+
+    <img id="imgf"class ="fonde" src="img/adventur.png" alt="">
+
+    <div class="fondoJ">
+    <div class="icInv" onClick="imggris()"><!--//icono inventario-->
+        <img id="iv"class="fonde"src="img/libritoyohirostory.png" alt="">
+    </div>
+    <div class="rin" id="invg" onClick="mosinv()">
+        <img class="fonde" id="irin" src="img/imginv.png" alt="">
+    </div>
+    <div class="rectt" id="noche" hidden="true">
+
+    </div>
+    <div class="rect" id="dia">        
+       <div class="cufoP" onClick="pensamiento()">
+        <img id="imgic"class="fonde" src="img/iconoNinja.png" alt="">
+       </div>
+       <div class="diag" onClick="dialogo()">
+           <img id="ch"class="diag"src="img/cuadrocuadrado.png" alt="">
+        <p class="dtgt" id="pdt">Los ka...</p>
+       </div>
+    </div>
+</div>
+<div id="fleD" class="flechaderecha" hidden="true" onClick="mas()"><img class="fonde"src="img/flecharoja.png" alt=""></div>
+<div id="fleI"class="flechaizquierda" hidden="true" onClick="menos()"><img class="fonde" src="img/flecharoja.png" alt=""></div>
+
+</div>
+
+<div class="opcionesD" id="dOtro" hidden="true">
+
+    <!--<p class="elPOpciones">  Personajes: </p>-->
+
+    <div id="superv">
+<div class="delado">
+<div class="iconos" onClick="stats(1)">
+    <p class="elPOpcion" >Ko</p>
+    <img id="icoKo"class="imgicono"src="img/ko.png" alt="" width="100%">
+</div>
+<div class="iconos" onClick="stats(2)">
+    <p class="elPOpcion" >Rain</p>
+    <img id="icoR"class="imgicono"src="img/rain.png" alt="" width="100%">
+</div>
+<div class="iconos" onClick="stats(3)">
+    <p class="elPOpcion" >Sol</p>    
+    <img id="icoS"class="imgicono"src="img/sol.png" alt="" width="100%"> 
+</div>
+<div class="iconos" onClick="stats(4)">
+    <p class="elPOpcion" >Yohiro</p>
+    <img id="icoY"class="imgicono" src="img/yohirostand.png" alt="" width="100%">    
+</div>
+</div>
+
+<div class="delado">
+<div class="iconos" onClick="stats(5)">
+    <p class="elPOpcion" >Ninja</p>
+    <img id="icoN"class="imgicono"src="img/ninja.png" alt="" width="100%">
+</div>
+<div class="iconos" onClick="stats(6)">
+    <p class="elPOpcion" >Humhn</p>
+    <img id="icoH"class="imgicono"src="img/humhn.png" alt="" width="100%">
+</div>
+
+<div class="iconos" onClick="stats(7)">
+    <p class="elPOpcion" >Jaco</p>
+    <img id="icoJ"class="imgicono"src="img/jaco.png" alt="" width="100%">
+</div>
+<div class="iconos" onClick="stats(8)">
+    <p class="elPOpcion" >Kila</p>
+    <img id="icoK"class="imgicono"src="img/kila.png" alt="" width="100%">
+</div>
+
+
+</div>
+    </div>
+    <img class="tik" src="onscreenControls/Sprites/flatLight/flatLight43.png"alt="" onClick="cancelatres()" >
+
+    <div class="revistas" id="histor" hidden="true">
+        
+        <div class="funcional"  onClick="deselec()">       
+        </div>
+
+        <div class="delado">
+    <div class="debajo">
+        <div class="revista" id="r1" onClick="borde(1,'plys')">
+<img id="lys"src="img/libroyohiroStory.png" alt="" width="150px">
+<p id="plys" class="infoLibro">Capitulo : 1 "Hijos del Volcan" <br><br> Yohiro y sus amigos iniciaran un viaje<br> hacia el volcan Yanike en busca de Kein<br> ...</p>
+        </div>
+
+        <div class="revista"id="r3" onClick="borde(3,'plrs')">
+<img src="img/libro.png" alt="" width="150px">
+<p id="plrs"class="infoLibro">Capitulo : 3 "Todos a Bordo"<br>...</p>
+        </div>    
+    </div>
+    <div class="debajo">
+        <div class="revista"id="r2" onClick="borde(2,'pdd')">
+            <img src="img/libro.png" alt="" width="150px">
+            <p class="infoLibro" id="pdd">Capitulo : 2 "La decision" <br>...</p>
+        </div>
+        <div class="revista"id="r4" onClick="borde(4,'pvs')">
+            <img src="img/libro.png" alt="" width="150px">
+            <p class="infoLibro" id="pvs">Capitulo : 4 "Valle del Sur"<br>...</p>
+        </div>
+    </div>
+
+    <img class="tik" src="onscreenControls/Sprites/flatLight/flatLight43.png"alt="" onClick="cancelados()" >
+    <img id="adelanti" class="ti" src="onscreenControls/Sprites/flatDark/flatDark23.png" alt="" onClick="palante()" hidden="true">
+    </div>
+    
+</div> <!-- Modo -->
+
+</div>
+<div class="opcionesE" id="entremedio"hidden="true">
+    <img id="tiktak" class="tik" src="onscreenControls/Sprites/flatDark/flatDark44.png"  alt="" onClick="stats(0)" >
+
+    <p class="elPOpciones" id="nombrpj"></p>
+    <p class="muchoTexto" id="algopj"></p>
+    <p class="muchoTexto" id="losstats" hidden="true">Estadisticas</p>
+    <p class="pocoTexto" id="otrostats" hidden="true">Nivel</p>
+    <p class="elitemm" id="elitemn" hidden="true">Item : Ninguno</p>
+    <img class="pers" id="imgpj"src="" alt="">
+    <img class="espad" id="esppj"src="" alt="">
+
+    <img id="titi" class="ti" src="onscreenControls/Sprites/flatDark/flatDark23.png" alt="" onClick="elegitres()" >
+
+</div>
+    <div class="juego" id="delJuego" hidden="true">
+
+        <div>
+
+            <div class="stats" id="dStats">  </div><!-- estadisticas personaje y vida -->
+            
+            <div class="cielo" id="dCielo"> </div> <!-- fondo cielo -->
+            
+            <div class="tierra" id="dTierra"> 
+                <img id="lluviaxd" class="lalluvia"src="img/lluvia.gif" alt="" width="100%" hidden="true">
+                <img id="iTierra" class="tierran" src="img/fondo.png" alt="">
+                <div class="playerR" id="iPlayer">
+                    <img id="imPlayer" width="100%">
+                </div > <!-- player -->
+                <div class="player" id="iMono" hidden="true" onClick="go(1)">
+                    <img src="img/practica.png" alt="">
+                </div> <!-- other -->
+                <div class="tiendaMapa" id="iTiendaMapa" hidden="true" onClick="mostrarTienda(1)">  
+                    <img id="imagenTiendaMapa"src="img/latienda.png" alt="">
+                </div> <!-- other -->
+                <div class=player id="ipajarrock" onClick="go(2)">
+                    <img id="imagenPajarrock" src="img/pajarrock.png" alt="">
+                    <p id="lavie"> vida  </p>
+                </div> <!-- other -->
+                <div>
+                </div> <!-- other -->
+                <div>
+                </div> <!-- other -->
+
+            </div> <!-- fondo tierra -->
+            
+        </div> <!-- arriba todo -->
+
+        <div id="tyb" class="invd">
+
+          <!-- texto y botones -->         
+                <img class="iz"src="onscreenControls/Sprites/flatDark/flatDark04.png" alt="" id="biz"  onClick="moverse(1,20)"> </img>
+                <img class="de"src="onscreenControls/Sprites/flatDark/flatDark05.png" alt="" id="bde" onClick="moverse(2,20)"> </img>
+                <img class="ar"src="onscreenControls/Sprites/flatDark/flatDark02.png" alt="" id="bar" onClick="moverse(3,20)"> </img>                
+                <img class="ab"src="onscreenControls/Sprites/flatDark/flatDark09.png" alt="" id="bab" onClick="moverse(4,20)"> </img>              
+
+
+                <!--  estos son los poderes xd -->   
+                <img class="seA"src="onscreenControls/Sprites/flatDark/flatDark17.png" alt="" id="biz"  onClick="moverse(1,20)"> </img>
+                <img class="seB"src="onscreenControls/Sprites/flatDark/flatDark20.png" alt="" id="bde" onClick="moverse(2,20)"> </img>
+                <img class="seC"src="onscreenControls/Sprites/flatDark/flatDark21.png" alt="" id="bar" onClick="moverse(3,20)"> </img>                
+                <img class="seD"src="onscreenControls/Sprites/flatDark/flatDark18.png" alt="" id="bab" onClick="moverse(4,20)"> </img>              
+
+                <img class="str"src="onscreenControls/Sprites/flatDark/flatDark41.png" alt="" id="start" onClick="stark()"> </img>                                
+                <img class="se"src="onscreenControls/Sprites/flatDark/flatDark42.png" alt="" id="bsee" onClick="mostrarInventario()"> </img>                                
+
+                <p class="elPEPlay" id="pTexte" onClick="">Equipo</p>
+                <p class="elPPPlay" id="pTexts" onClick="mostrarStats()"> Stats </p>
+                <p class="elPPlay" id="pText" onClick="hablaYohiro()">...</p>
+                <img id="ic"class="at"src="onscreenControls/Sprites/flatDark/flatDark35.png" alt="" onClick="corr()" hidden="true"> </img>
+                <img id="de"class="at"src="onscreenControls/Sprites/flatDark/flatDark36.png" alt="" onClick="bloqueo()" hidden="true"> </img>
+                <img id="iti"class="ti"src="onscreenControls/Sprites/flatDark/flatDark49.png" alt="" onClick="mostrarTienda(1)" hidden="true"> </img>              
+                
+
+                <img id="iba"class="ti"src="onscreenControls/Sprites/flatDark/flatDark48.png" alt="" onClick="zona(0)" hidden="true"> </img>              
+
+                <img class="ti"id="atq"src="onscreenControls/Sprites/flatDark/flatDark38.png" alt="" onClick="ataqueMapa()" hidden="true"></img>
+                <img id="idesenfunde"class="desen"src="onscreenControls/Sprites/flatDark/flatDark37.png" alt="" onClick="desenfunde()" hidden="true"> </img><!---->
+        </div>
+               <div id="cosas">
+        <div id="invt" hidden="true" class="k"> 
+            <div class="divCajas">
+                <div class="trap">
+            <div class="caja" id="caja1" onClick="itemSelec(0)"> <img id="icaja1"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja2" onClick="itemSelec(1)"><img id="icaja2"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja3" onClick="itemSelec(2)"><img id="icaja3"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja4" onClick="itemSelec(3)"><img id="icaja4"src="" alt=""width="100%"> </div>
+        </div>
+        <div class="trap">
+            <div class="caja" id="caja5" onClick="itemSelec(4)"><img id="icaja5"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja6" onClick="itemSelec(5)"><img id="icaja6"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja7" onClick="itemSelec(6)"><img id="icaja7"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja8" onClick="itemSelec(7)"><img id="icaja8"src="" alt=""width="100%"> </div>                
+        </div>
+        <div class="trap">
+            <div class="caja" id="caja9" onClick="itemSelec(8)"><img id="icaja9"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja10" onClick="itemSelec(9)"><img id="icaja10"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja11" onClick="itemSelec(10)"><img id="icaja11"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja12" onClick="itemSelec(11)"><img id="icaja12"src="" alt=""width="100%"> </div>
+        </div>
+        </div>
+            
+            <img id="espInv"src="img/yohiroStand.png" alt="" class="espIn" onClick="desenfunde()">
+            <div class="otk"></div>
+            <img class="imp"src="onscreenControls/Sprites/flatDark/flatDark40.png" alt="" id="bmp" onClick="mostrarPoderes()"> </img>
+            <img class="ti"src="onscreenControls/Sprites/flatDark/flatDark44.png" alt="" id="bsev" onClick="mostrarInventario()"> </img>
+             </div>               
+             <div class="p" id="podrs" hidden="true">
+
+                <div class="divCajass">
+                    <div class="trap">
+                <div class="caja" id="caja13" onClick="itemSelec(0)"> <img id="icaja1"src="" alt=""width="100%"> </div>
+                <div class="caja" id="caja14" onClick="itemSelec(1)"><img id="icaja2"src="" alt=""width="100%"> </div>
+                <div class="caja" id="caja15" onClick="itemSelec(2)"><img id="icaja3"src="" alt=""width="100%"> </div>
+                <div class="caja" id="caja16" onClick="itemSelec(3)"><img id="icaja4"src="" alt=""width="100%"> </div>
+            </div>
+            <div class="trap">
+                <div class="caja" id="caja17" onClick="itemSelec(4)"><img id="icaja5"src="" alt=""width="100%"> </div>
+                <div class="caja" id="caja18" onClick="itemSelec(5)"><img id="icaja6"src="" alt=""width="100%"> </div>
+                <div class="caja" id="caja19" onClick="itemSelec(6)"><img id="icaja7"src="" alt=""width="100%"> </div>
+                <div class="caja" id="caja20" onClick="itemSelec(7)"><img id="icaja8"src="" alt=""width="100%"> </div>                
+            </div>
+            <div class="trap">
+                <div class="caja" id="caja21" onClick="itemSelec(8)"><img id="icaja9"src="" alt=""width="100%"> </div>
+                <div class="caja" id="caja22" onClick="itemSelec(9)"><img id="icaja10"src="" alt=""width="100%"> </div>
+                <div class="caja" id="caja23" onClick="itemSelec(10)"><img id="icaja11"src="" alt=""width="100%"> </div>
+                <div class="caja" id="caja24" onClick="itemSelec(11)"><img id="icaja12"src="" alt=""width="100%"> </div>
+            </div>
+                </div>
+            <div class="divCajas">
+                <div class="trap">
+            <div class="caja" id="caja26" onClick="itemSelec(0)"> <img id="icaja1"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja27" onClick="itemSelec(1)"><img id="icaja2"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja28" onClick="itemSelec(2)"><img id="icaja3"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja29" onClick="itemSelec(3)"><img id="icaja4"src="" alt=""width="100%"> </div>
+        </div>
+        <!--
+        <div class="trap">
+            <div class="caja" id="caja30" onClick="itemSelec(4)"><img id="icaja5"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja31" onClick="itemSelec(5)"><img id="icaja6"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja32" onClick="itemSelec(6)"><img id="icaja7"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja34" onClick="itemSelec(7)"><img id="icaja8"src="" alt=""width="100%"> </div>                
+        </div>
+        <div class="trap">
+            <div class="caja" id="caja35" onClick="itemSelec(8)"><img id="icaja9"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja36" onClick="itemSelec(9)"><img id="icaja10"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja37" onClick="itemSelec(10)"><img id="icaja11"src="" alt=""width="100%"> </div>
+            <div class="caja" id="caja38" onClick="itemSelec(11)"><img id="icaja12"src="" alt=""width="100%"> </div>
+        </div> -->
+        </div>
+        <img class="imp"src="onscreenControls/Sprites/flatLight/flatLight39.png" alt="" id="bmp" onClick="mostrarPoderes()"> </img>
+        <img class="ti"src="onscreenControls/Sprites/flatLight/flatLight45.png" alt="" id="bsev" onClick="mostrarInventario()"> </img>
+            
+    </div>    
+        </div>
+ <!-- <img src="img/inventario.png" alt="">      -->             
+    <!-- Principal Juego-->
+</div>
+
+    <div class="juego" id="dTienda" hidden="true">
+
+        <div class="contenedorImagenTienda">
+
+        <img id="iTienda" src="img/tienda.png" alt="">
+        
+
+            <div class="dtVendedor" onClick="hablaGato(1)" >
+                <img class="" id="itVendedor" src="" alt="">
+            </div>
+            <div class="dtIzquierda" onClick="productos(1)" >
+                <img class="" id="itIzquierda"  alt=""><!-- src="onscreenControls/Sprites/flatDark/flatDark23.png" -->
+            </div>
+            <div class="dtArma" onClick="" > 
+                <img class="" id="itArma" src="" alt="">
+            </div>
+            <div class="dtDerecha" onClick="productos(2)" >
+                <img class="" id="itDerecha"  alt=""> <!-- src="onscreenControls/Sprites/flatDark/flatDark24.png" -->
+            </div>
+            <div class="dtAbajo" onClick="comprar()" > 
+                <img class="" id="itAbajo" src="img/comprar.png" alt="">
+            </div>
+
+            <p class="elPEPlay" id="pToro" onClick="">Money</p>
+            <p class="elPPlay" id="pTienda">Bienvenido</p><!-- -->
+
+        <img id=""class="ti"src="onscreenControls/Sprites/flatDark/flatDark44.png" alt="" onClick="mostrarTienda(2)" > </img>              
+    </div>
+
+    </div><!-- Tienda -->
+    
+
+    <div class="juego" id="idJuego" hidden="true">
+        <div class="contenedorImagen"><img id="imagenJuego" src="" alt="">
+            </div><!-- DIV QUE CONTIENE LA IMAGEN-->
+
+            <div class="contenedoropciones">
+                <p class="textY" id="textY">Vida</p>
+                <p class="textO" id="textO">Vida</p>
+
+                <img class="iyohiro"id="yohiro"src="" alt="">
+                <img class="iotro"id="otre"src="" alt="">
+                <p class="elPPlay" id="pJug"onClick="continuar()" hidden="true">Capitulo 1</p><!-- -->
+                <p class="elPPlay" id="pctn"onClick="sino()" hidden="true">Continuar</p>
+                <div class="op"id="iOp1" hidden="true" onClick="accion(0)">
+                    <p class="opciones" id="pop1"></p>
+                </div> <!--OPCION 1 -->
+                <div class="op"id="iOp2" hidden="true" onClick="accion(1)">
+                    <p class="opciones" id="pop2"></p>
+                </div> <!--OPCION 2 -->
+                <div class="op"id="iOp3" hidden="true" onClick="accion(2)">
+                    <p class="opciones" id="pop3"></p>
+                </div> <!--OPCION 3 -->
+                <div class="op"id="iOp4" hidden="true" onClick="accion(3)">
+                    <p class="opciones" id="pop4"></p>
+                </div> <!--OPCION 4 -->
+            </div><!-- DIV QUE CONTIENE LOS BOTONES :O -->
+    </div>  
+    
+    <div class="config" id="conf" hidden="true"> 
+        <img class="opcionC" id="msc" src="onscreenControls/Sprites/flatDark/flatDark16.png"  alt="" onClick="pauset()" >        
+        <img id="cc" class="opcionC"src="onscreenControls/Sprites/flatLight/flatLight31.png" alt="" onClick="cambiarColor()">
+        <img class="opcionC" id="slr" src="onscreenControls/Sprites/flatDark/flatDark33.png"  alt="" onClick="" >    
+        <img class="opcionC" id="slr" src="onscreenControls/Sprites/flatDark/flatDark34.png"  alt="" onClick="salir()" >    
+    </div>
+    <img class="musik" id="cf" src="onscreenControls/Sprites/flatDark/flatDark30.png"  alt="" onClick="confg()" >    
+
+</body>
+</html>

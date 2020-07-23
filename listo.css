@@ -1,0 +1,202 @@
+.flechaderecha{
+    position:absolute;
+    top:180px;
+    left:780px;
+    transform:scale(0.9,0.9);
+    filter:grayscale(100%);
+}
+.flechaizquierda{
+    position:absolute;
+    top:180px;
+    left:20px;
+    transform:scale(-0.9,0.9);
+    filter:grayscale(100%);
+}
+.flechaderecha:hover{    
+    transform:scale(1,1);filter:grayscale(0%);
+}
+
+.flechaizquierda:hover{    
+    transform:scale(-1,1);filter:grayscale(0%);
+}
+
+.funcinoalnt{
+    width:1000px;
+    height:500px;
+    position:absolute;
+    top:0px;
+    left:0px;
+    z-index:1;    
+}
+.musik{z-index: 100;
+    position:absolute;
+    top:20px;
+    left:900px;    
+}
+.divinicio{
+    position:absolute;
+    top:0px;
+    left:0px;
+}
+.lalluvia{
+    position: absolute;
+    top:0px;
+    left:0px;
+}
+.fondoJ{
+    width:1000px;
+    height:500px;
+    position:absolute;
+    top:0px;
+    left:0px;    
+}
+/* .fondoJ>div:hover{
+    background-color: rgba(255, 255, 255, 0.699);
+} */
+.rect>div:hover{
+    background-color: rgba(52, 51, 85, 0.527);
+}
+.icInv{    
+    width:125px;
+    height:125px;
+    position: absolute;
+    top:15px;
+    left:15px;
+}
+.config{
+    background-color: rgba(57, 73, 54, 0.61);
+    width:200px;
+    height: 200px;
+    position:absolute;
+    top:10px;
+    left:700px;
+    z-index:100;
+}
+.opcionC{
+    padding-top:20px;
+    padding-left:20px;
+}
+
+.rect{
+    width:700px;
+    height:175px;
+    
+    position:absolute;
+    top:325px;
+    left:290px;
+}
+
+.rectt{
+    width:700px;
+    height:250px;
+    background-color: rgba(53, 53, 48, 0.5);
+    position:absolute;
+    top:50px;
+    left:150px;
+}
+.cufoP{
+    
+    position: absolute;
+    top:0px;
+    left:420px;
+    width:290px;
+    height:175px;    
+}
+.diag{width:420px;
+    height:175px;
+    
+    position:absolute;
+    top:0xp;
+    left:0px;
+    filter:grayscale(100%);
+}
+.dtgt{
+    position:absolute;
+    top:20px;
+    left:20px;
+    text-align: center;
+    
+    font-size: 42px;
+}
+.rin{
+    position:absolute;
+    top:325px;
+    left:0px;
+    width:290px;
+    height:175px;
+    
+}
+ .fonde{
+    filter:grayscale(100%);    
+} 
+.fonde:hover{
+    filter:grayscale(0%);
+    transform:scale(1.1,1.1);
+}
+.comic{
+    background-color: whitesmoke;
+    position: absolute;
+    top:0px;
+    left:200px;
+    width:600px;
+    height: 500px;
+    z-index: 100;
+}
+.hoja{
+    width:600px;
+    height:500px;
+}
+.numpg{
+    position: absolute;top:440px;
+    left:280px;
+}
+
+.cua1{position:absolute;
+    top: 20px;
+    left:20px;
+    width:250px;
+    height:120px;
+    background-color: rgba(114, 110, 110, 0.712);
+}
+.cua2{position:absolute;
+    top: 20px;
+    left:300px;
+    width:250px;
+    height:120px;
+    background-color: rgba(114, 110, 110, 0.712);
+}
+.cua3{position:absolute;
+    top: 160px;
+    left:20px;
+    width:250px;
+    height:120px;
+    background-color: rgba(114, 110, 110, 0.712);
+}
+.cua4{position:absolute;
+    top: 160px;
+    left:300px;
+    width:250px;
+    height:120px;
+    background-color: rgba(114, 110, 110, 0.712);
+}
+.cua5{position:absolute;
+    top: 300px;
+    left:20px;
+    width:250px;
+    height:120px;
+    background-color: rgba(114, 110, 110, 0.712);
+}
+.cua6{position:absolute;
+    top: 300px;
+    left:300px;
+    width:250px;
+    height:120px;
+    background-color: rgba(114, 110, 110, 0.712);
+}.hoja>div:hover{
+    z-index:100;
+    transition: 1s all;
+    transform: scale(3.3,3.3);
+    top:140px;
+    left:200px;
+    background-color: whitesmoke;
+}
