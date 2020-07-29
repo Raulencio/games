@@ -6,7 +6,7 @@ function fun(){
         eldiv.innerHTML+=("<div class='divB' id='id"+i+"' onClick='dime("+i+")'></div>");
         
     var otrodiv=document.getElementById("id"+i);
-    for(var e=1;e<=14;e++){
+    for(var e=1;e<=10;e++){
         otrodiv.innerHTML+=("<div class='divC' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><p id='"+i+"p"+e+"'>"+i+","+e+"</p></div>");  
     }       
     }
