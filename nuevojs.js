@@ -11,7 +11,10 @@ function fun(){
     }       
     }
     unavez=false;}
-    else{if(ctn==dn){dn+=20;eldiv.style.backgroundColor=colorHEX(6)}}
+    else{if(ctn==dn){dn+=20;eldiv.style.backgroundColor=colorHEX(6)
+}else if(ctn==420){eldiv.innerHTML="";
+unavez=true;ctn=0;
+}}
 }
 
 function dime(x){
