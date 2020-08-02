@@ -9,24 +9,19 @@ pNa=[true,7,1],pNa=[true,7,2],pNa=[true,7,3],pNa=[true,7,4],pNa=[true,7,5],pNa=[
 
 function fun(){
     if(unavez){
-    for(var i=1;i<9;i++){
+        for(var i=1;i<9;i++){
         eldiv.innerHTML+=("<div class='divB' id='id"+i+"' onClick='dime("+i+")'></div>");
-        
-    var otrodiv=document.getElementById("id"+i);
-    for(var e=1;e<=8;e++){    
-    if(i%2==0){
-        if(e%2==0){
-        otrodiv.innerHTML+=("<div class='divC' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><p class='pa' id='"+i+"p"+e+"'>"+i+","+e+"</p></div>");
-        }else{
-        otrodiv.innerHTML+=("<div class='divD' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><p class='pb' id='"+i+"p"+e+"'>"+i+","+e+"</p></div>");
-        }    
-    }else{
-        if(e%2==0){
-            otrodiv.innerHTML+=("<div class='divD' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><p class='pb' id='"+i+"p"+e+"'>"+i+","+e+"</p></div>");        
-        }else{    otrodiv.innerHTML+=("<div class='divC' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><p class='pa' id='"+i+"p"+e+"'>"+i+","+e+"</p></div>");                
-    }
-    }
-    }}
+        var otrodiv=document.getElementById("id"+i);
+            for(var e=1;e<=8;e++){    
+                if(i%2==0){
+                    if(e%2==0){otrodiv.innerHTML+=("<div class='divC' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><div class='pa' id='"+i+"a"+e+"'><div class='pb' id='"+i+"b"+e+"'></div></div></div>");}
+                    else{otrodiv.innerHTML+=("<div class='divD' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><div class='pa' id='"+i+"a"+e+"'><div class='pb' id='"+i+"b"+e+"'></div></div></div>");}    
+                }else{
+                    if(e%2==0){otrodiv.innerHTML+=("<div class='divD' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><div class='pa' id='"+i+"a"+e+"'><div class='pb' id='"+i+"b"+e+"'></div></div></div>");}
+                    else{ otrodiv.innerHTML+=("<div class='divC' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><div class='pa' id='"+i+"a"+e+"'><div class='pb' id='"+i+"b"+e+"'></div></div></div>");}
+                }
+            }
+        }
     unavez=false;}
     else{if(ctn==dn){dn+=20;eldiv.style.backgroundColor=colorHEX(6)}}
 }
@@ -42,9 +37,11 @@ function decime(x,y){
     ctn++;
     var otrodivmas=document.getElementById(y+"id"+x);
     otrodivmas.style.backgroundColor=colorHEX(6);
-    var elp=document.getElementById(y+"p"+x);
-    elp.style.color=colorHEX(3);
-    elp.textContent=ctn;
+    var elp=document.getElementById(y+"a"+x);
+    elp.style.backgroundColor=colorHEX(3);
+    var elp=document.getElementById(y+"b"+x);
+    elp.style.backgroundColor=colorHEX(3);
+    
 }
 
 function generarLetra(){
