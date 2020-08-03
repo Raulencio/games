@@ -7,13 +7,58 @@ pBa=[true,2,1],pBa=[true,2,2],pBa=[true,2,3],pBa=[true,2,4],pBa=[true,2,5],pBa=[
 var piezasN=[tNa=[true,8,1],aNa=[true,8,2],cNa=[true,8,3],rNa=[true,8,4],rNb=[true,8,5],aNb=[true,8,6],aNb=[true,8,7],tNb=[true,8,8],
 pNa=[true,7,1],pNa=[true,7,2],pNa=[true,7,3],pNa=[true,7,4],pNa=[true,7,5],pNa=[true,7,6],pNa=[true,7,7],pNa=[true,7,8]]
 
+var colorA="#059729";
+var colorB="#059297";
+var color1=colorA;
+var color2="#dde007";
+var color3="#760504ff";
+var color4=colorB;
+//unavez=false;
+
+document.getElementById("cr1").style.backgroundColor=color1;
+document.getElementById("cr2").style.backgroundColor=color2;
+
+document.getElementById("cr3").style.backgroundColor=color3;
+document.getElementById("cr4").style.backgroundColor=color4;
+
+document.getElementById("cr5").style.backgroundColor=color1;
+document.getElementById("cr6").style.backgroundColor=color2;
+
+document.getElementById("cr7").style.backgroundColor=color3;
+document.getElementById("cr8").style.backgroundColor=color4;
+
+function elC(n){
+switch(n){
+    case 1:colorA=color1;break;
+    case 2:colorA=color2;break;
+    case 3:colorA=color3;break;
+    case 4:colorA=color4;break;
+    case 5:colorB=color1;break;
+    case 6:colorB=color2;break;
+    case 7:colorB=color3;break;
+    case 8:colorB=color4;break;    
+}
+if(n<5){
+    for(var i=1;i<5;i++){
+        if(i==n){document.getElementById("color"+i).style.backgroundColor=colorA;}
+        else{document.getElementById("color"+i).style.backgroundColor="#000";}        
+    }
+}else{
+    for(var i=5;i<9;i++){
+        if(i==n){document.getElementById("color"+i).style.backgroundColor=colorB;}
+        else{document.getElementById("color"+i).style.backgroundColor="#fff";}  
+}
+}
+}
+
 function fun(){
-    if(unavez){
+    if(unavez){document.getElementById("borre").hidden=true;
+        
         for(var i=1;i<9;i++){
         eldiv.innerHTML+=("<div class='divB' id='id"+i+"' onClick='dime("+i+")'></div>");
         var otrodiv=document.getElementById("id"+i);
         // if(i!=3&&i!=4&&i!=5&&i!=6){
-            for(var e=1;e<=8;e++){    
+            for(var e=1;e<=8;e++){ 
                 if(i%2==0){
                     if(e%2==0){otrodiv.innerHTML+=("<div class='divC' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><div class='pa' id='"+i+"a"+e+"'><div class='pb' id='"+i+"b"+e+"'></div></div></div>");}
                     else{otrodiv.innerHTML+=("<div class='divD' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><div class='pa' id='"+i+"a"+e+"'><div class='pb' id='"+i+"b"+e+"'></div></div></div>");}    
@@ -35,8 +80,10 @@ function fun(){
 
         //     }
         }
-    unavez=false;todos();}
-    else{if(ctn==dn){dn+=20;eldiv.style.backgroundColor=colorHEX(6)}}
+    unavez=false;todos();
+}
+    else{if(ctn==dn){dn+=20;eldiv.style.backgroundColor=colorHEX(6)}
+}
 }
 
 function dime(x){
@@ -53,8 +100,7 @@ function todos(){
         }    
     }
 }
-var colorA="#059729";
-var colorB="#059297";
+
 function decime(x,y){
     // ctn++;
     // var otrodivmas=document.getElementById(y+"id"+x);
