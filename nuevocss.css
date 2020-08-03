@@ -1,17 +1,23 @@
 .divA{
-    width:1000;
-    height:500px;
-    background-color: #ff000050;
+    width:336px;
+    height:336px;
+    background-color: #1a1212af;
     display: flex;
     flex-direction: column;
 }
 .divB{    
-    width:400;
+    width:336px;
     height:42px;
-    background-color: #bebe1857;
+    background-color: #b3b3ae57;
     display: flex;
-    flex-direction:row;    
+    flex-direction:row;      
 }
+.divE{    
+    width:336px;
+    height:42px;
+    background-color: #b3b3ae57;
+}
+
 .divC{
     text-align:center;
     width:32px;
@@ -35,4 +41,8 @@
     padding-top:4px;
     padding-left:4px;
     background-color: #059297;    
+}
+.muchotexto{
+    color:#0f0f0f;
+    text-align:center;
 }

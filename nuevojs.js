@@ -26,18 +26,21 @@ document.getElementById("cr6").style.backgroundColor=color2;
 
 document.getElementById("cr7").style.backgroundColor=color3;
 document.getElementById("cr8").style.backgroundColor=color4;
-
+var cnA="Verde";
+var cnB="Azul";
 function elC(n){
+    if(unavez){
 switch(n){
-    case 1:colorA=color1;break;
-    case 2:colorA=color2;break;
-    case 3:colorA=color3;break;
-    case 4:colorA=color4;break;
-    case 5:colorB=color1;break;
-    case 6:colorB=color2;break;
-    case 7:colorB=color3;break;
-    case 8:colorB=color4;break;    
+    case 1:colorA=color1;cnA="Verde";break;
+    case 2:colorA=color2;cnA="Amarillo";break;
+    case 3:colorA=color3;cnA="Rojo";break;
+    case 4:colorA=color4;cnA="Azul";break;
+    case 5:colorB=color1;cnB="Verde";break;
+    case 6:colorB=color2;cnB="Amarillo";break;
+    case 7:colorB=color3;cnB="Rojo";break;
+    case 8:colorB=color4;cnB="Azul";break;    
 }
+document.getElementById("elpo").textContent=cnA+" vs "+cnB;
 if(n<5){
     for(var i=1;i<5;i++){
         if(i==n){document.getElementById("color"+i).style.backgroundColor=colorA;}
@@ -48,7 +51,7 @@ if(n<5){
         if(i==n){document.getElementById("color"+i).style.backgroundColor=colorB;}
         else{document.getElementById("color"+i).style.backgroundColor="#fff";}  
 }
-}
+}}
 }
 
 function fun(){
