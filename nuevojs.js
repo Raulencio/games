@@ -38,9 +38,9 @@ function al(){
 elC(randomAr(4,0));
 elC(randomAr(8,4));}
 }
-al();
 var cnA="Verde";
 var cnB="Azul";
+al();
 function elC(n){
     if(unavez){
 switch(n){
