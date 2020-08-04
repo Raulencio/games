@@ -1,29 +1,20 @@
 var eldiv=document.getElementById("diva");
-var unavez=true,dn=20,nd=10,ctn=0;
-
-var piezasB=[tBa=[true,1,1],aBa=[true,1,2],cBa=[true,1,3],rBa=[true,1,4],rBb=[true,1,5],aBb=[true,1,6],aBb=[true,1,7],tBb=[true,1,8],
-pBa=[true,2,1],pBa=[true,2,2],pBa=[true,2,3],pBa=[true,2,4],pBa=[true,2,5],pBa=[true,2,6],pBa=[true,2,7],pBa=[true,2,8]]
-
-var piezasN=[tNa=[true,8,1],aNa=[true,8,2],cNa=[true,8,3],rNa=[true,8,4],rNb=[true,8,5],aNb=[true,8,6],aNb=[true,8,7],tNb=[true,8,8],
-pNa=[true,7,1],pNa=[true,7,2],pNa=[true,7,3],pNa=[true,7,4],pNa=[true,7,5],pNa=[true,7,6],pNa=[true,7,7],pNa=[true,7,8]]
+var unavez=true;
+var cnA="";
+var cnB="";
+//[3] 1=torre 2=caballo 3=alfil 4=reina 5=rey 6=peon
+var piezas=[tBa=[true,1,1,1,1],cBa=[true,1,2,2,1],aBa=[true,1,3,3,1],rBa=[true,1,4,4,1],rBb=[true,1,5,5,1],aBb=[true,1,6,3,1],cBb=[true,1,7,2,1],tBb=[true,1,8,1,1],
+pBa=[true,2,1,6,1],pBa=[true,2,2,6,1],pBa=[true,2,3,6,1],pBa=[true,2,4,6,1],pBa=[true,2,5,6,1],pBa=[true,2,6,6,1],pBa=[true,2,7,6,1],pBa=[true,2,8,6,1],
+tNa=[true,8,1,1,2],cNa=[true,8,2,2,2],aNa=[true,8,3,3,2],rNa=[true,8,4,4,2],rNb=[true,8,5,5,2],aNb=[true,8,6,3,2],cNb=[true,8,7,2,2],tNb=[true,8,8,1,2],
+pNa=[true,7,1,6,2],pNa=[true,7,2,6,2],pNa=[true,7,3,6,2],pNa=[true,7,4,6,2],pNa=[true,7,5,6,2],pNa=[true,7,6,6,2],pNa=[true,7,7,6,2],pNa=[true,7,8,6,2]];
 
 var colorA="#13e900";//verde
 var colorB="#0013bd";//azul
-var color1=colorA;
-var color2="#e6f517";//amarillo
-var color3="#e40e0a";//rojo
-var color4=colorB;
+var colores=[colorA,"#e6f517","#e40e0a",colorB,colorA,"#e6f517","#e40e0a",colorB]
 //unavez=false;
-
-document.getElementById("cr1").style.backgroundColor=color1;
-document.getElementById("cr2").style.backgroundColor=color2;
-document.getElementById("cr3").style.backgroundColor=color3;
-document.getElementById("cr4").style.backgroundColor=color4;
-document.getElementById("cr5").style.backgroundColor=color1;
-document.getElementById("cr6").style.backgroundColor=color2;
-document.getElementById("cr7").style.backgroundColor=color3;
-document.getElementById("cr8").style.backgroundColor=color4;
-
+for(var cr=1;cr<9;cr++){
+    document.getElementById("cr"+cr).style.backgroundColor=colores[cr-1];    
+}
 function randomAr(aM, bM) {
     do {
         num = Math.random();
@@ -38,197 +29,172 @@ function al(){
 elC(randomAr(4,0));
 elC(randomAr(8,4));}
 }
-var cnA="Verde";
-var cnB="Azul";
 al();
+
 function elC(n){
-    if(unavez){
-switch(n){
-    case 1:colorA=color1;cnA="Verde";break;
-    case 2:colorA=color2;cnA="Amarillo";break;
-    case 3:colorA=color3;cnA="Rojo";break;
-    case 4:colorA=color4;cnA="Azul";break;
-    case 5:colorB=color1;cnB="Verde";break;
-    case 6:colorB=color2;cnB="Amarillo";break;
-    case 7:colorB=color3;cnB="Rojo";break;
-    case 8:colorB=color4;cnB="Azul";break;    
-}
-document.getElementById("elpo").textContent=cnA+" vs "+cnB;
-if(n<5){
-    for(var i=1;i<5;i++){
-        if(i==n){document.getElementById("color"+i).style.backgroundColor=colorA;}
-        else{document.getElementById("color"+i).style.backgroundColor="#000";}        
+    if(unavez){        
+        if(n<5){for(var k=1;k<5;k++){document.getElementById("cr"+k).style.backgroundColor=colores[k-1];}
+        }else{for(var k=5;k<9;k++){document.getElementById("cr"+k).style.backgroundColor=colores[k-1];}}
+    
+        switch(n){
+            case 1:colorA=colores[n-1];cnA="Verde";document.getElementById("cr1").style.backgroundColor="#000";break;
+            case 2:colorA=colores[n-1];cnA="Amarillo";document.getElementById("cr2").style.backgroundColor="#000";break;
+            case 3:colorA=colores[n-1];cnA="Rojo";document.getElementById("cr3").style.backgroundColor="#000";break;
+            case 4:colorA=colores[n-1];cnA="Azul";document.getElementById("cr4").style.backgroundColor="#000";break;
+            case 5:colorB=colores[n-1];cnB="Verde";document.getElementById("cr5").style.backgroundColor="#fff";break;
+            case 6:colorB=colores[n-1];cnB="Amarillo";document.getElementById("cr6").style.backgroundColor="#fff";break;
+            case 7:colorB=colores[n-1];cnB="Rojo";document.getElementById("cr7").style.backgroundColor="#fff";break;
+            case 8:colorB=colores[n-1];cnB="Azul";document.getElementById("cr8").style.backgroundColor="#fff";break;    
+        }
+    document.getElementById("elpo").textContent=cnA+" vs "+cnB;
+        if(n<5){
+            for(var i=1;i<5;i++){
+                if(i==n){document.getElementById("color"+i).style.backgroundColor=colorA;}
+                else{document.getElementById("color"+i).style.backgroundColor="#000";}        
+            }
+        }else{
+            for(var i=5;i<9;i++){
+                if(i==n){document.getElementById("color"+i).style.backgroundColor=colorB;}
+                else{document.getElementById("color"+i).style.backgroundColor="#fff";}  
+            }
+        }
     }
-}else{
-    for(var i=5;i<9;i++){
-        if(i==n){document.getElementById("color"+i).style.backgroundColor=colorB;}
-        else{document.getElementById("color"+i).style.backgroundColor="#fff";}  
-}
-}}
 }
 
 function fun(){
     if(unavez){document.getElementById("borre").hidden=true;
         
         for(var i=1;i<9;i++){
-        eldiv.innerHTML+=("<div class='divB' id='id"+i+"' onClick='dime("+i+")'></div>");
-        var otrodiv=document.getElementById("id"+i);
-        // if(i!=3&&i!=4&&i!=5&&i!=6){
-            for(var e=1;e<=8;e++){ 
-                if(i%2==0){
-                    if(e%2==0){otrodiv.innerHTML+=("<div class='divC' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><div class='pa' id='"+i+"a"+e+"'><div class='pb' id='"+i+"b"+e+"'></div></div></div>");}
-                    else{otrodiv.innerHTML+=("<div class='divD' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><div class='pa' id='"+i+"a"+e+"'><div class='pb' id='"+i+"b"+e+"'></div></div></div>");}    
-                }else{
-                    if(e%2==0){otrodiv.innerHTML+=("<div class='divD' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><div class='pa' id='"+i+"a"+e+"'><div class='pb' id='"+i+"b"+e+"'></div></div></div>");}
-                    else{ otrodiv.innerHTML+=("<div class='divC' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'><div class='pa' id='"+i+"a"+e+"'><div class='pb' id='"+i+"b"+e+"'></div></div></div>");}
-                }
+            eldiv.innerHTML+=("<div class='divB' id='id"+i+"'></div>");
+        var otrodiv=document.getElementById("id"+i);        
+            for(var e=1;e<=8;e++){                 
+                otrodiv.innerHTML+=("<div class='divC' id='"+i+"id"+e+"' onClick='dime("+i+","+e+")'><div class='pa' id='"+i+"a"+e+"'><div class='pb' id='"+i+"b"+e+"'></div></div></div>");
             }
-        // }else{
-        //         for(var e=1;e<=8;e++){    
-        //             if(i%2==0){
-        //                 if(e%2==0){otrodiv.innerHTML+=("<div class='divC' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'></div>");}
-        //                 else{otrodiv.innerHTML+=("<div class='divD' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'></div>");}    
-        //             }else{
-        //                 if(e%2==0){otrodiv.innerHTML+=("<div class='divD' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'></div>");}
-        //                 else{ otrodiv.innerHTML+=("<div class='divC' id='"+i+"id"+e+"' onClick='decime("+e+","+i+")'></div>");}
-        //             }
-        //         }
-
-        //     }
         }
     unavez=false;todos();
-}
-    else{if(ctn==dn){dn+=20;eldiv.style.backgroundColor=colorHEX(6)}
-}
+}   
 }
 
-function dime(x){
-    var color=document.getElementById("id"+x);
-    if(ctn==nd){nd+=20;
-    color.style.backgroundColor=colorHEX(8);
+function digame(n){
+    var nombre="";
+    switch(n){
+        case 1:nombre="Torre";break;
+        case 2:nombre="Caballo";break;
+        case 3:nombre="Alfil";break;
+        case 4:nombre="Reina";break;
+        case 5:nombre="Rey";break;
+        case 6:nombre="Peon";break;
     }
+    return nombre;
 }
+
+function averiguar(x,y){var guarde="";
+    for(var i=piezas.length-1;i>=0;i--){
+        if(piezas[i][1]==x&&piezas[i][2]==y){
+            //console.log(piezas[i][1]+","+piezas[i][2]);
+            guarde=(piezas[i][3]);
+        }        
+    }return digame(guarde);
+}
+
+function dime(x,y){document.getElementById("elpo").textContent=(averiguar(x,y)+" ("+x+","+y+")");}
 
 function todos(){
-    for(var i=1;i<9;i++){
-        for(var e=1;e<9;e++){        
-            decime(e,i);
+    for(var y=1;y<9;y++){
+        for(var x=1;x<9;x++){   
+            if(y%2==0){
+                if(x%2==0){
+                    var otrodivmas=document.getElementById(y+"id"+x);
+                    otrodivmas.style.backgroundColor="#fff";
+                    var otrodivmas=document.getElementById(y+"a"+x);
+                    otrodivmas.style.backgroundColor="#fff";
+                    var otrodivmas=document.getElementById(y+"b"+x);
+                    otrodivmas.style.backgroundColor="#fff";
+                    
+                }else{var otrodivmas=document.getElementById(y+"id"+x);
+                    otrodivmas.style.backgroundColor="#000";
+                    var otrodivmas=document.getElementById(y+"a"+x);
+                    otrodivmas.style.backgroundColor="#000";
+                    var otrodivmas=document.getElementById(y+"b"+x);
+                    otrodivmas.style.backgroundColor="#000";
+            }
+            }else{
+                if(x%2==0){var otrodivmas=document.getElementById(y+"id"+x);
+                otrodivmas.style.backgroundColor="#000";
+                var otrodivmas=document.getElementById(y+"a"+x);
+                otrodivmas.style.backgroundColor="#000";
+                var otrodivmas=document.getElementById(y+"b"+x);
+                otrodivmas.style.backgroundColor="#000";}
+                else{ var otrodivmas=document.getElementById(y+"id"+x);
+                otrodivmas.style.backgroundColor="#fff";
+                var otrodivmas=document.getElementById(y+"a"+x);
+                otrodivmas.style.backgroundColor="#fff";
+                var otrodivmas=document.getElementById(y+"b"+x);
+                otrodivmas.style.backgroundColor="#fff";
+                }
+            }              
+            decime(y,x);
         }    
     }
 }
 
-function decime(x,y){
-    // ctn++;
-    // var otrodivmas=document.getElementById(y+"id"+x);
-    // otrodivmas.style.backgroundColor=colorHEX(6);
-    if(y==1||y==2){        
+function cambio(y,x,z,a){
+    if(a==1){ 
     var elp=document.getElementById(y+"a"+x);    
     elp.style.backgroundColor="#000";
     elp.style.boxShadow=("2px 2px 5px "+colorA+",-2px -2px 5px "+colorA+",-2px 2px 5px "+colorA+",2px -2px 5px "+colorA+"");
     var elp=document.getElementById(y+"b"+x);
-    elp.style.backgroundColor=colorA;
-    
-        if(y==2){
-            var elp=document.getElementById(y+"b"+x);
-            elp.style.borderRadius="25px";
-            var elp=document.getElementById(y+"a"+x);
-            elp.style.borderRadius="25px";            
-        }
-        if(y==1){            
-            if(x==2||x==7){//caballo
-            var elp=document.getElementById(y+"b"+x);
-            elp.style.borderRadius="20px 0px 0px 0px";
-            var elp=document.getElementById(y+"a"+x);
-            elp.style.borderRadius="20px 0px 0px 0px";}
-            if(x==3||x==6){//alfil              
-                var elp=document.getElementById(y+"b"+x);
-                elp.style.borderRadius="0px 10px 0px 10px";
-                var elp=document.getElementById(y+"a"+x);
-                elp.style.borderRadius="0px 10px 0px 10px";
-                }
-                if(x==5){//rey
-                var elp=document.getElementById(y+"b"+x);
-                elp.style.borderRadius="15px 15px 0px 0px";
-                var elp=document.getElementById(y+"a"+x);
-                elp.style.borderRadius="15px 15px 0px 0px";
-                }
-                if(x==4){//reina
-                var elp=document.getElementById(y+"b"+x);
-                elp.style.borderRadius="0px 0px 15px 15px";
-                var elp=document.getElementById(y+"a"+x);
-                elp.style.borderRadius="0px 0px 15px 15px";
-                }
-        }
-
-    }else if(y==7||y==8){        
+    elp.style.backgroundColor=colorA;           
+    }else{
     var elp=document.getElementById(y+"a"+x);
     elp.style.backgroundColor="#fff";
     elp.style.boxShadow=("2px 2px 5px "+colorB+",-2px -2px 5px "+colorB+",-2px 2px 5px "+colorB+",2px -2px 5px "+colorB+"");
     var elp=document.getElementById(y+"b"+x);
     elp.style.backgroundColor=colorB;
-    if(y==7){
-        var elp=document.getElementById(y+"b"+x);
-        elp.style.borderRadius="25px";
-        var elp=document.getElementById(y+"a"+x);
-        elp.style.borderRadius="25px";            
     }
-    if(y==8){            
-        if(x==2||x==7){//caballo
+switch(z){
+    case 1:
+        break;//torre
+    case 2:
         var elp=document.getElementById(y+"b"+x);
         elp.style.borderRadius="20px 0px 0px 0px";
         var elp=document.getElementById(y+"a"+x);
-        elp.style.borderRadius="20px 0px 0px 0px";}
-        if(x==3||x==6){//alfil              
-            var elp=document.getElementById(y+"b"+x);
-            elp.style.borderRadius="0px 10px 0px 10px";
-            var elp=document.getElementById(y+"a"+x);
-            elp.style.borderRadius="0px 10px 0px 10px";
-            }
-            if(x==5){//rey
-            var elp=document.getElementById(y+"b"+x);
-            elp.style.borderRadius="15px 15px 0px 0px";
-            var elp=document.getElementById(y+"a"+x);
-            elp.style.borderRadius="15px 15px 0px 0px";
-            }
-            if(x==4){//reina
-            var elp=document.getElementById(y+"b"+x);
-            elp.style.borderRadius="0px 0px 15px 15px";
-            var elp=document.getElementById(y+"a"+x);
-            elp.style.borderRadius="0px 0px 15px 15px";
-            }
-    }
-
-    }
-    if(y==3||y==4||y==5||y==6){
-        if(y==3||y==5){
-            if(x%2==0){
-                var elp=document.getElementById(y+"b"+x);
-        elp.style.backgroundColor="#000";
-        var elp=document.getElementById(y+"a"+x);
-        elp.style.backgroundColor="#000";
-            }else{
-                var elp=document.getElementById(y+"b"+x);
-        elp.style.backgroundColor="#fff";
-        var elp=document.getElementById(y+"a"+x);
-        elp.style.backgroundColor="#fff";
-            }
-        }else{
-            if(x%2==0){
-                var elp=document.getElementById(y+"b"+x);
-        elp.style.backgroundColor="#fff";
-        var elp=document.getElementById(y+"a"+x);
-        elp.style.backgroundColor="#fff";
-             }else{
-                
+        elp.style.borderRadius="20px 0px 0px 0px";
+        break;//caballo
+    case 3:
+         var elp=document.getElementById(y+"b"+x);
+                elp.style.borderRadius="0px 10px 0px 10px";
+                var elp=document.getElementById(y+"a"+x);
+                elp.style.borderRadius="0px 10px 0px 10px";
+        break;//alfil
+    case 4:
+    var elp=document.getElementById(y+"b"+x);
+    elp.style.borderRadius="0px 0px 15px 15px";
+    var elp=document.getElementById(y+"a"+x);
+    elp.style.borderRadius="0px 0px 15px 15px";
+        break;//reina
+    case 5:
         var elp=document.getElementById(y+"b"+x);
-        elp.style.backgroundColor="#000";
+        elp.style.borderRadius="15px 15px 0px 0px";
         var elp=document.getElementById(y+"a"+x);
-        elp.style.backgroundColor="#000";
-      }
+        elp.style.borderRadius="15px 15px 0px 0px";
+        break;//rey
+    case 6:
+        var elp=document.getElementById(y+"b"+x);
+            elp.style.borderRadius="25px";
+            var elp=document.getElementById(y+"a"+x);
+            elp.style.borderRadius="25px"; 
+        break;//peon
+}
+}
+function decime(x,y){
+    for(var i=piezas.length-1;i>=0;i--){
+        if(piezas[i][0]){
+            if(piezas[i][1]==x&&piezas[i][2]==y){
+                cambio(x,y,piezas[i][3],piezas[i][4]);
+            }
         }
-        
     }
-    
 }
 
 function generarLetra(){
