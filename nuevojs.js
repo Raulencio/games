@@ -87,11 +87,11 @@ function digame(n){
     }
     return nombre;
 }
-var lapieza;
+var lapieza;var equipo;
 function averiguar(x,y){var guarde="";
     for(var i=piezas.length-1;i>=0;i--){
-        if(piezas[i][1]==x&&piezas[i][2]==y){lapieza=i;
-            console.log(piezas[i]);
+        if(piezas[i][1]==x&&piezas[i][2]==y){lapieza=i;equipo=piezas[i][4];
+            console.log(piezas[i][4]);
             guarde=(piezas[i][3]);
         }      
     }return digame(guarde);
@@ -102,7 +102,7 @@ console.log(lapieza);
 piezas[lapieza][1]=x;
 piezas[lapieza][2]=y;
 todos();
-
+document.getElementById("elpo").textContent=(averiguar(x,y)+" ("+x+","+y+")")
 //funcion con el guarde segun su numero de tipo de pieza
 }
 
@@ -166,6 +166,10 @@ function cambio(y,x,z,a){
     }
 switch(z){
     case 1:
+        var elp=document.getElementById(y+"b"+x);
+        elp.style.borderRadius="0px 0px 0px 0px";
+        var elp=document.getElementById(y+"a"+x);
+        elp.style.borderRadius="0px 0px 0px 0px";
         break;//torre
     case 2:
         var elp=document.getElementById(y+"b"+x);
