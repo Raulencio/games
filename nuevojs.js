@@ -87,21 +87,33 @@ function digame(n){
     }
     return nombre;
 }
-
+var lapieza;
 function averiguar(x,y){var guarde="";
     for(var i=piezas.length-1;i>=0;i--){
-        if(piezas[i][1]==x&&piezas[i][2]==y){
-            //console.log(piezas[i][1]+","+piezas[i][2]);
+        if(piezas[i][1]==x&&piezas[i][2]==y){lapieza=i;
+            console.log(piezas[i]);
             guarde=(piezas[i][3]);
-        }        
+        }      
     }return digame(guarde);
 }
 
-function dime(x,y){document.getElementById("elpo").textContent=(averiguar(x,y)+" ("+x+","+y+")");}
+function dime(x,y){document.getElementById("elpo").textContent=(averiguar(x,y)+" ("+x+","+y+")");
+console.log(lapieza);
+piezas[lapieza][1]=x;
+piezas[lapieza][2]=y;
+todos();
+
+//funcion con el guarde segun su numero de tipo de pieza
+}
 
 function todos(){
     for(var y=1;y<9;y++){
-        for(var x=1;x<9;x++){   
+        for(var x=1;x<9;x++){  
+            var otrodivmas=document.getElementById(y+"a"+x);
+            otrodivmas.style.boxShadow=("0px 0px 0px "+colorA+",-0px -0px 0px "+colorA+",-0px 0px 0px "+colorA+",0px -0px 0px "+colorA+"");
+            var otrodivmas=document.getElementById(y+"b"+x);
+            otrodivmas.style.boxShadow=("0px 0px 0px "+colorA+",-0px -0px 0px "+colorA+",-0px 0px 0px "+colorA+",0px -0px 0px "+colorA+"");
+            
             if(y%2==0){
                 if(x%2==0){
                     var otrodivmas=document.getElementById(y+"id"+x);
