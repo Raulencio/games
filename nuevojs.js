@@ -6,7 +6,7 @@ var cnB="";
 var piezas=[tBa=[true,1,1,1,1],cBa=[true,1,2,2,1],aBa=[true,1,3,3,1],rBa=[true,1,4,4,1],rBb=[true,1,5,5,1],aBb=[true,1,6,3,1],cBb=[true,1,7,2,1],tBb=[true,1,8,1,1],
 pBa=[true,2,1,6,1],pBa=[true,2,2,6,1],pBa=[true,2,3,6,1],pBa=[true,2,4,6,1],pBa=[true,2,5,6,1],pBa=[true,2,6,6,1],pBa=[true,2,7,6,1],pBa=[true,2,8,6,1],
 tNa=[true,8,1,1,2],cNa=[true,8,2,2,2],aNa=[true,8,3,3,2],rNa=[true,8,4,4,2],rNb=[true,8,5,5,2],aNb=[true,8,6,3,2],cNb=[true,8,7,2,2],tNb=[true,8,8,1,2],
-pNa=[true,7,1,6,2],pNa=[true,7,2,6,2],pNa=[true,7,3,6,2],pNa=[true,7,4,6,2],pNa=[true,7,5,6,2],pNa=[true,7,6,6,2],pNa=[true,7,7,6,2],pNa=[true,7,8,6,2]];
+pNa=[true,7,1,6,2],pNa=[true,7,2,6,2],pNa=[true,7,3,6,2],pNa=[true,7,4,6,2],pNa=[true,7,5,6,2],pNa=[true,7,6,6,2],pNa=[true,7,7,6,2],pNa=[true,7,8,6,2],vacui=[false,0,0,0,0]];
 
 var colorA="#13e900";//verde
 var colorB="#0013bd";//azul
@@ -62,7 +62,10 @@ function elC(n){
 }
 
 function fun(){
-    if(unavez){document.getElementById("borre").hidden=true;
+    if(unavez){
+        for(var x=1;x<9;x++){
+        document.getElementById("color"+x).hidden=true;        
+        }
         
         for(var i=1;i<9;i++){
             eldiv.innerHTML+=("<div class='divB' id='id"+i+"'></div>");
@@ -87,23 +90,57 @@ function digame(n){
     }
     return nombre;
 }
-var lapieza;var equipo;
+var turno=1;
+var lapieza=32;var equipo=2;
+
+var xan=0,yan=0;
 function averiguar(x,y){var guarde="";
     for(var i=piezas.length-1;i>=0;i--){
-        if(piezas[i][1]==x&&piezas[i][2]==y){lapieza=i;equipo=piezas[i][4];
-            console.log(piezas[i][4]);
+        if(piezas[i][0]){
+        if(piezas[i][1]==x&&piezas[i][2]==y){lapieza=i;
+            
+            if(equipo!=piezas[i][4]){            
+            equipo=piezas[i][4];                        
+            console.log("equipo "+piezas[i][4]);            
+        }            
             guarde=(piezas[i][3]);
-        }      
+        }   }   
     }return digame(guarde);
 }
+var mover=false;
+function dime(x,y){
+document.getElementById("elpo").textContent=(averiguar(x,y)+" ("+x+","+y+")");
+if(equipo==1&&((piezas[lapieza][3]==6)&&x==((piezas[lapieza][1])+1)&&piezas[lapieza][2]==y)){mover=true;}//peon arriba
+if(equipo==2&&((piezas[lapieza][3]==6)&&x==((piezas[lapieza][1])-1)&&piezas[lapieza][2]==y)){mover=true;}//peon abajo
+if(piezas[lapieza][3]==1&&((x==piezas[lapieza][1])||(y==piezas[lapieza][2]))){mover=true;}//torres
+if(piezas[lapieza][3]==2){mover=true;}//caballo
+if(piezas[lapieza][3]==3){mover=true;}//alfil
+if(piezas[lapieza][3]==5){mover=true;}//rey
+if(piezas[lapieza][3]==4){mover=true;}//reina la reina puede ser una suma de movimientos de alfil + torre
 
-function dime(x,y){document.getElementById("elpo").textContent=(averiguar(x,y)+" ("+x+","+y+")");
-console.log(lapieza);
-piezas[lapieza][1]=x;
-piezas[lapieza][2]=y;
+if(mover){
+    piezas[lapieza][1]=x;
+    piezas[lapieza][2]=y;
+    mover=false;
+}
+
+//console.log(lapieza);
+// if((turno==1||turno==2)&&equipo==2){
+// piezas[lapieza][1]=x;
+// piezas[lapieza][2]=y;turno++;
+// }
+// if((turno==3||turno==4)&&equipo==1){    
+//     turno++;
+//     }
+//     console.log(turno);
+// if(turno==5){
+//     turno=1;
+// }
 todos();
 document.getElementById("elpo").textContent=(averiguar(x,y)+" ("+x+","+y+")")
-//funcion con el guarde segun su numero de tipo de pieza
+//funcion con el guarde segun su numero de tipo de pieza--
+//eligo la pieza 1 muevo la pieza , siguiente turno
+//eligo la pieza 1er equipo puede comer piezas del equipo 2 si se elige una del mismo equipo cambian de posicion(?)
 }
 
 function todos(){
