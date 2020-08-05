@@ -108,15 +108,18 @@ function averiguar(x,y){var guarde="";
     }return digame(guarde);
 }
 var mover=false;
-function dime(x,y){
+function dime(x,y){var lax=piezas[lapieza][1];var lay=piezas[lapieza][2];
 document.getElementById("elpo").textContent=(averiguar(x,y)+" ("+x+","+y+")");
 if(equipo==1&&((piezas[lapieza][3]==6)&&x==((piezas[lapieza][1])+1)&&piezas[lapieza][2]==y)){mover=true;}//peon arriba
 if(equipo==2&&((piezas[lapieza][3]==6)&&x==((piezas[lapieza][1])-1)&&piezas[lapieza][2]==y)){mover=true;}//peon abajo
-if(piezas[lapieza][3]==1&&((x==piezas[lapieza][1])||(y==piezas[lapieza][2]))){mover=true;}//torres
-if(piezas[lapieza][3]==2){mover=true;}//caballo
-if(piezas[lapieza][3]==3){mover=true;}//alfil
-if(piezas[lapieza][3]==5){mover=true;}//rey
-if(piezas[lapieza][3]==4){mover=true;}//reina la reina puede ser una suma de movimientos de alfil + torre
+if((piezas[lapieza][3]==1)||(piezas[lapieza][3]==4)&&((x==piezas[lapieza][1])||(y==piezas[lapieza][2]))){mover=true;}//torres
+if(piezas[lapieza][3]==2){
+    if(((x==lax+2)&&((y==lay+1)||(y==lay-1)))||((x==lax-2)&&((y==lay+1)||(y==lay-1)))||((y==lay+2)&&((x==lax+1)||(x==lax-1)))||((y==lay-2)&&((x==lax+1)||(x==lax-1)))){mover=true;}}//caballo
+if((piezas[lapieza][3]==3)||(piezas[lapieza][3]==4)){for(var unl=1;unl<8;unl++){
+    if(((x==(lax)+unl)&&(y==(lay)+unl))||((x==(lax)-unl)&&(y==(lay)-unl))||((x==(lax)+unl)&&(y==(lay)-unl))||((x==(lax)-unl)&&(y==(lay)+unl))){mover=true;}}}//alfil
+if(piezas[lapieza][3]==5){var unl=1;
+    if(((((x==lax+1)||(x==lax-1))&&(y==lay))||((y==lay+1)||((y==lay-1))&&(x==lax)))||(((x==(lax)+unl)&&(y==(lay)+unl))||((x==(lax)-unl)&&(y==(lay)-unl))||((x==(lax)+unl)&&(y==(lay)-unl))||((x==(lax)-unl)&&(y==(lay)+unl)))){mover=true;}}//rey}
+//if(piezas[lapieza][3]==4){mover=true;}//reina la reina puede ser una suma de movimientos de alfil + torre
 
 if(mover){
     piezas[lapieza][1]=x;
