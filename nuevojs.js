@@ -39,7 +39,9 @@ function al(){
         }
 elC(randomAr(4,0));
 elC(randomAr(8,4));
+if(!unavez){todos();}
 }
+//setInterval("al()",500);
 al();
 fun();
 
