@@ -1,2 +1,2 @@
-# nuevo
-aaaaa
+# Ajedrez
+mini juego
