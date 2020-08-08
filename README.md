@@ -1,2 +1,2 @@
-# Ajedrez
-mini juego
+# Juegos
+mini games
