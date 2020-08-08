@@ -73,6 +73,7 @@ function elC(n){
             }
         }
     //}
+    if(!unavez){todos();}
 }
 
 function fun(){
