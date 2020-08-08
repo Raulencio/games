@@ -14,6 +14,7 @@ var colores=[colorA,"#e6f517","#e40e0a",colorB,colorA,"#e6f517","#e40e0a",colorB
 var colorEa=colores[8];
 var colorEb=colores[9];
 //unavez=false;
+document.getElementById("pbr").style.color="#fff";
 for(var cr=1;cr<9;cr++){
     document.getElementById("cr"+cr).style.backgroundColor=colores[cr-1];    
 }
@@ -126,7 +127,7 @@ var mover=false;
 function dime(x,y){var lax=piezas[lapieza][1];var lay=piezas[lapieza][2];    
 document.getElementById("elpo").textContent=(averiguar(x,y)+" ("+x+","+y+")");
 if(conborr){
- piezas[lapieza][0]=false;conborr=false;
+ piezas[lapieza][0]=false;borrar();
 }
 //if(equipo==1&&((piezas[lapieza][3]==6)&&x==((piezas[lapieza][1])+1)&&piezas[lapieza][2]==y)){mover=true;}//peon arriba
 //if(equipo==2&&((piezas[lapieza][3]==6)&&x==((piezas[lapieza][1])-1)&&piezas[lapieza][2]==y)){mover=true;}//peon abajo
@@ -264,6 +265,10 @@ var conborr=false;
 function borrar(){
     if(!conborr){
         conborr=true;
+        document.getElementById("pbr").style.color="#000";
+    }else{
+        conborr=false;
+        document.getElementById("pbr").style.color="#fff";
     }
 }
 function generarLetra(){
