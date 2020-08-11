@@ -8,16 +8,21 @@ pBa=[true,2,1,6,1],pBa=[true,2,2,6,1],pBa=[true,2,3,6,1],pBa=[true,2,4,6,1],pBa=
 tNa=[true,8,1,1,2],cNa=[true,8,2,2,2],aNa=[true,8,3,3,2],rNa=[true,8,4,4,2],rNb=[true,8,5,5,2],aNb=[true,8,6,3,2],cNb=[true,8,7,2,2],tNb=[true,8,8,1,2],
 pNa=[true,7,1,6,2],pNa=[true,7,2,6,2],pNa=[true,7,3,6,2],pNa=[true,7,4,6,2],pNa=[true,7,5,6,2],pNa=[true,7,6,6,2],pNa=[true,7,7,6,2],pNa=[true,7,8,6,2],vacui=[false,0,0,0,0]];
 
-var colorA="#13e900";//verde
-var colorB="#0013bd";//azul
-var colores=[colorA,"#e6f517","#e40e0a",colorB,colorA,"#e6f517","#e40e0a",colorB,"#000","#fff"];
-var colorEa=colores[8];
-var colorEb=colores[9];
+var mov=1;var turno=1;
+var lapieza=32;var equipo=2;
+var xan=0,yan=0;
+var mover=false,conborr=false;
+var colorA="#";
+var colorB="#";
+var colores=["#13e900","#e6f517","#e40e0a","#0013bd","#000","#fff"];
+var colorEa=colores[4];
+var colorEb=colores[5];
+var resta=1;
 //unavez=false;
-document.getElementById("pbr").style.color="#fff";
-for(var cr=1;cr<9;cr++){
-    document.getElementById("cr"+cr).style.backgroundColor=colores[cr-1];    
-}
+document.getElementById("pbr").style.color=colorEb;
+
+for(var cr=1;cr<9;cr++){if(cr>4){resta=5;}document.getElementById("cr"+cr).style.backgroundColor=colores[cr-resta];}
+
 function randomAr(aM, bM) {
     do {
         num = Math.random();
@@ -27,39 +32,39 @@ function randomAr(aM, bM) {
 
     return num;
 }
-var mov=1;
+
 function al(){
     //if(unavez){
         if(mov==1){
-        colorEb=colores[9];
-        colorEa=colores[8];mov++;
+        colorEb=colores[5];
+        colorEa=colores[4];mov++;
         }else{            
-        colorEb=colores[8];
-        colorEa=colores[9];mov=1;
+        colorEb=colores[4];
+        colorEa=colores[5];mov=1;
 //        }
         }
 elC(randomAr(4,0));
 elC(randomAr(8,4));
 if(!unavez){todos();}
 }
-//setInterval("al()",500);
+//setInterval("al()",1000);
 al();
 fun();
 
 function elC(n){
     //if(unavez){        
         if(n<5){for(var k=1;k<5;k++){document.getElementById("cr"+k).style.backgroundColor=colores[k-1];}
-        }else{for(var k=5;k<9;k++){document.getElementById("cr"+k).style.backgroundColor=colores[k-1];}}
+        }else{for(var k=5;k<9;k++){document.getElementById("cr"+k).style.backgroundColor=colores[k-5];}}
     
         switch(n){
             case 1:colorA=colores[n-1];cnA="Verde";document.getElementById("cr1").style.backgroundColor=colorEa;break;
             case 2:colorA=colores[n-1];cnA="Amarillo";document.getElementById("cr2").style.backgroundColor=colorEa;break;
             case 3:colorA=colores[n-1];cnA="Rojo";document.getElementById("cr3").style.backgroundColor=colorEa;break;
             case 4:colorA=colores[n-1];cnA="Azul";document.getElementById("cr4").style.backgroundColor=colorEa;break;
-            case 5:colorB=colores[n-1];cnB="Verde";document.getElementById("cr5").style.backgroundColor=colorEb;break;
-            case 6:colorB=colores[n-1];cnB="Amarillo";document.getElementById("cr6").style.backgroundColor=colorEb;break;
-            case 7:colorB=colores[n-1];cnB="Rojo";document.getElementById("cr7").style.backgroundColor=colorEb;break;
-            case 8:colorB=colores[n-1];cnB="Azul";document.getElementById("cr8").style.backgroundColor=colorEb;break;    
+            case 5:colorB=colores[n-5];cnB="Verde";document.getElementById("cr5").style.backgroundColor=colorEb;break;
+            case 6:colorB=colores[n-5];cnB="Amarillo";document.getElementById("cr6").style.backgroundColor=colorEb;break;
+            case 7:colorB=colores[n-5];cnB="Rojo";document.getElementById("cr7").style.backgroundColor=colorEb;break;
+            case 8:colorB=colores[n-5];cnB="Azul";document.getElementById("cr8").style.backgroundColor=colorEb;break;    
         }
     document.getElementById("elpo").textContent=cnA+" vs "+cnB;
         if(n<5){
@@ -106,10 +111,7 @@ function digame(n){
     }
     return nombre;
 }
-var turno=1;
-var lapieza=32;var equipo=2;
 
-var xan=0,yan=0;
 function averiguar(x,y){var guarde="";
     for(var i=piezas.length-1;i>=0;i--){
         if(piezas[i][0]){
@@ -123,7 +125,7 @@ function averiguar(x,y){var guarde="";
         }   }   
     }return digame(guarde);
 }
-var mover=false;
+
 function dime(x,y){var lax=piezas[lapieza][1];var lay=piezas[lapieza][2];    
 document.getElementById("elpo").textContent=(averiguar(x,y)+" ("+x+","+y+")");
 if(conborr){
@@ -176,32 +178,32 @@ function todos(){
             if(y%2==0){
                 if(x%2==0){
                     var otrodivmas=document.getElementById(y+"id"+x);
-                    otrodivmas.style.backgroundColor="#fff";
+                    otrodivmas.style.backgroundColor=colorEb;
                     var otrodivmas=document.getElementById(y+"a"+x);
-                    otrodivmas.style.backgroundColor="#fff";
+                    otrodivmas.style.backgroundColor=colorEb;
                     var otrodivmas=document.getElementById(y+"b"+x);
-                    otrodivmas.style.backgroundColor="#fff";
+                    otrodivmas.style.backgroundColor=colorEb;
                     
                 }else{var otrodivmas=document.getElementById(y+"id"+x);
-                    otrodivmas.style.backgroundColor="#000";
+                    otrodivmas.style.backgroundColor=colorEa;
                     var otrodivmas=document.getElementById(y+"a"+x);
-                    otrodivmas.style.backgroundColor="#000";
+                    otrodivmas.style.backgroundColor=colorEa;
                     var otrodivmas=document.getElementById(y+"b"+x);
-                    otrodivmas.style.backgroundColor="#000";
+                    otrodivmas.style.backgroundColor=colorEa;
             }
             }else{
                 if(x%2==0){var otrodivmas=document.getElementById(y+"id"+x);
-                otrodivmas.style.backgroundColor="#000";
+                otrodivmas.style.backgroundColor=colorEa;
                 var otrodivmas=document.getElementById(y+"a"+x);
-                otrodivmas.style.backgroundColor="#000";
+                otrodivmas.style.backgroundColor=colorEa;
                 var otrodivmas=document.getElementById(y+"b"+x);
-                otrodivmas.style.backgroundColor="#000";}
+                otrodivmas.style.backgroundColor=colorEa;}
                 else{ var otrodivmas=document.getElementById(y+"id"+x);
-                otrodivmas.style.backgroundColor="#fff";
+                otrodivmas.style.backgroundColor=colorEb;
                 var otrodivmas=document.getElementById(y+"a"+x);
-                otrodivmas.style.backgroundColor="#fff";
+                otrodivmas.style.backgroundColor=colorEb;
                 var otrodivmas=document.getElementById(y+"b"+x);
-                otrodivmas.style.backgroundColor="#fff";
+                otrodivmas.style.backgroundColor=colorEb;
                 }
             }              
             decime(y,x);
@@ -252,6 +254,7 @@ switch(z){
         break;//peon
     }
 }
+
 function decime(x,y){
     for(var i=piezas.length-1;i>=0;i--){
         if(piezas[i][0]){
@@ -261,7 +264,7 @@ function decime(x,y){
         }
     }
 }
-var conborr=false;
+
 function borrar(){
     if(!conborr){
         conborr=true;
@@ -271,6 +274,7 @@ function borrar(){
         document.getElementById("pbr").style.color="#fff";
     }
 }
+
 function generarLetra(){
 	var letras = ["a","b","c","d","e","f","0","1","2","3","4","5","6","7","8","9"];
 	var numero = (Math.random()*15).toFixed(0);
