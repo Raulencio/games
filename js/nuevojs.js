@@ -2,6 +2,7 @@ var eldiv=document.getElementById("diva");
 var unavez=true;
 var cnA="";
 var cnB="";
+alert(8/2(2+2));
 //[3] 1=torre 2=caballo 3=alfil 4=reina 5=rey 6=peon
 var piezas=[tBa=[true,1,1,1,1],cBa=[true,1,2,2,1],aBa=[true,1,3,3,1],rBa=[true,1,4,4,1],rBb=[true,1,5,5,1],aBb=[true,1,6,3,1],cBb=[true,1,7,2,1],tBb=[true,1,8,1,1],
 pBa=[true,2,1,6,1],pBa=[true,2,2,6,1],pBa=[true,2,3,6,1],pBa=[true,2,4,6,1],pBa=[true,2,5,6,1],pBa=[true,2,6,6,1],pBa=[true,2,7,6,1],pBa=[true,2,8,6,1],
