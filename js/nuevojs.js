@@ -3,10 +3,10 @@ var unavez=true;
 var cnA="";
 var cnB="";
 //[3] 1=torre 2=caballo 3=alfil 4=reina 5=rey 6=peon
-var piezas=[tBa=[true,1,1,1,1],cBa=[true,1,2,2,1],aBa=[true,1,3,3,1],rBa=[true,1,4,4,1],rBb=[true,1,7,5,1],aBb=[true,1,8,3,1],cBb=[true,1,9,2,1],tBb=[true,1,10,1,1],
-pBa=[true,2,1,6,1],pBa=[true,2,2,6,1],pBa=[true,2,3,6,1],pBa=[true,2,4,6,1],pBa=[true,2,7,6,1],pBa=[true,2,8,6,1],pBa=[true,2,9,6,1],pBa=[true,2,10,6,1],
-tNa=[true,10,1,1,2],cNa=[true,10,2,2,2],aNa=[true,10,3,3,2],rNa=[true,10,4,4,2],rNb=[true,10,7,5,2],aNb=[true,10,8,3,2],cNb=[true,10,9,2,2],tNb=[true,10,10,1,2],
-pNa=[true,9,1,6,2],pNa=[true,9,2,6,2],pNa=[true,9,3,6,2],pNa=[true,9,4,6,2],pNa=[true,9,7,6,2],pNa=[true,9,8,6,2],pNa=[true,9,9,6,2],pNa=[true,9,10,6,2],vacui=[false,0,0,0,0]];
+var piezas=[tBa=[true,1,1,1,1],cBa=[true,1,2,2,1],aBa=[true,1,3,3,1],rBa=[true,1,4,3,1],rBb=[true,1,7,3,1],aBb=[true,1,8,3,1],cBb=[true,1,9,2,1],tBb=[true,1,10,1,1],
+pBa=[true,2,1,1,1],pBa=[true,2,2,6,1],pBa=[true,2,3,6,1],pBa=[true,2,4,6,1],pBa=[true,2,7,6,1],pBa=[true,2,8,6,1],pBa=[true,2,9,6,1],pBa=[true,2,10,1,1],
+tNa=[true,10,1,1,2],cNa=[true,10,2,2,2],aNa=[true,10,3,3,2],rNa=[true,10,4,3,2],rNb=[true,10,7,3,2],aNb=[true,10,8,3,2],cNb=[true,10,9,2,2],tNb=[true,10,10,1,2],
+pNa=[true,9,1,1,2],pNa=[true,9,2,6,2],pNa=[true,9,3,6,2],pNa=[true,9,4,6,2],pNa=[true,9,7,6,2],pNa=[true,9,8,6,2],pNa=[true,9,9,6,2],pNa=[true,9,10,1,2],vacui=[false,0,0,0,0],unpa=[true,1,5,2,1],unpa=[true,1,6,2,1],unpa=[true,2,5,6,1],unpa=[true,2,6,6,1],unpa=[true,9,5,6,2],unpa=[true,9,6,6,2],unpa=[true,10,5,2,2],unpa=[true,10,6,2,2]];
 
 var mov=1;var turno=1;
 var lapieza=32;var equipo=2;
@@ -241,16 +241,16 @@ switch(z){
         elpe.style.borderRadius="0px 10px 0px 10px";
         break;//alfil
     case 4:        
-        elp.style.borderRadius="0px 0px 15px 15px";
-        elpe.style.borderRadius="0px 0px 15px 15px";
+        elp.style.borderRadius="0px 10px 10px 0px";
+        elpe.style.borderRadius="0px 10px 10px 0px";
         break;//reina
     case 5:
-        elp.style.borderRadius="15px 15px 0px 0px";
-        elpe.style.borderRadius="15px 15px 0px 0px";
+        elp.style.borderRadius="10px 0px 0px 10px";
+        elpe.style.borderRadius="10px 0px 0px 10px";
         break;//rey
     case 6:
-        elp.style.borderRadius="25px";
-        elpe.style.borderRadius="25px"; 
+        elp.style.borderRadius="24px";
+        elpe.style.borderRadius="24px"; 
         break;//peon
     }
 }
