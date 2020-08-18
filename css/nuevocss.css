@@ -1,19 +1,19 @@
 .divA{
-    width:336px;
-    height:336px;
+    width:420px;
+    height:420px;
     background-color: #1a1212af;
     display: flex;
     flex-direction: column;
 }
 .divB{    
-    width:336px;
+    width:420px;
     height:42px;
     background-color: #fff;
     display: flex;
     flex-direction:row;      
 }
 .divE{    
-    width:336px;
+    width:420px;
     height:42px;
     background-color: #b3b3ae57;
 }

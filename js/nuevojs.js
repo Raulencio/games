@@ -3,10 +3,10 @@ var unavez=true;
 var cnA="";
 var cnB="";
 //[3] 1=torre 2=caballo 3=alfil 4=reina 5=rey 6=peon
-var piezas=[tBa=[true,1,1,1,1],cBa=[true,1,2,2,1],aBa=[true,1,3,3,1],rBa=[true,1,4,4,1],rBb=[true,1,5,5,1],aBb=[true,1,6,3,1],cBb=[true,1,7,2,1],tBb=[true,1,8,1,1],
-pBa=[true,2,1,6,1],pBa=[true,2,2,6,1],pBa=[true,2,3,6,1],pBa=[true,2,4,6,1],pBa=[true,2,5,6,1],pBa=[true,2,6,6,1],pBa=[true,2,7,6,1],pBa=[true,2,8,6,1],
-tNa=[true,8,1,1,2],cNa=[true,8,2,2,2],aNa=[true,8,3,3,2],rNa=[true,8,4,4,2],rNb=[true,8,5,5,2],aNb=[true,8,6,3,2],cNb=[true,8,7,2,2],tNb=[true,8,8,1,2],
-pNa=[true,7,1,6,2],pNa=[true,7,2,6,2],pNa=[true,7,3,6,2],pNa=[true,7,4,6,2],pNa=[true,7,5,6,2],pNa=[true,7,6,6,2],pNa=[true,7,7,6,2],pNa=[true,7,8,6,2],vacui=[false,0,0,0,0]];
+var piezas=[tBa=[true,1,1,1,1],cBa=[true,1,2,2,1],aBa=[true,1,3,3,1],rBa=[true,1,4,4,1],rBb=[true,1,7,5,1],aBb=[true,1,8,3,1],cBb=[true,1,9,2,1],tBb=[true,1,10,1,1],
+pBa=[true,2,1,6,1],pBa=[true,2,2,6,1],pBa=[true,2,3,6,1],pBa=[true,2,4,6,1],pBa=[true,2,7,6,1],pBa=[true,2,8,6,1],pBa=[true,2,9,6,1],pBa=[true,2,10,6,1],
+tNa=[true,10,1,1,2],cNa=[true,10,2,2,2],aNa=[true,10,3,3,2],rNa=[true,10,4,4,2],rNb=[true,10,7,5,2],aNb=[true,10,8,3,2],cNb=[true,10,9,2,2],tNb=[true,10,10,1,2],
+pNa=[true,9,1,6,2],pNa=[true,9,2,6,2],pNa=[true,9,3,6,2],pNa=[true,9,4,6,2],pNa=[true,9,7,6,2],pNa=[true,9,8,6,2],pNa=[true,9,9,6,2],pNa=[true,9,10,6,2],vacui=[false,0,0,0,0]];
 
 var mov=1;var turno=1;
 var lapieza=32;var equipo=2;
@@ -49,7 +49,7 @@ if(!unavez){todos();}
 }
 //setInterval("al()",1000);
 al();
-fun();
+fun(10,10);
 
 function elC(n){
     //if(unavez){        
@@ -81,17 +81,17 @@ function elC(n){
     //}
     if(!unavez){todos();}
 }
-
-function fun(){
+var linx,liny;
+function fun(x,y){linx=x;liy=y;
     if(unavez){
         // for(var x=1;x<9;x++){
         // document.getElementById("color"+x).hidden=true;        
         // }
         
-        for(var i=1;i<9;i++){
+        for(var i=1;i<=x;i++){
             eldiv.innerHTML+=("<div class='divB' id='id"+i+"'></div>");
         var otrodiv=document.getElementById("id"+i);        
-            for(var e=1;e<=8;e++){                 
+            for(var e=1;e<=y;e++){                 
                 otrodiv.innerHTML+=("<div class='divC' id='"+i+"id"+e+"' onClick='dime("+i+","+e+")'><div class='pa' id='"+i+"a"+e+"'><div class='pb' id='"+i+"b"+e+"'></div></div></div>");
             }
         }
@@ -168,8 +168,8 @@ document.getElementById("elpo").textContent=(averiguar(x,y)+" ("+x+","+y+")")
 }
 
 function todos(){
-    for(var y=1;y<9;y++){
-        for(var x=1;x<9;x++){  
+    for(var y=1;y<11;y++){
+        for(var x=1;x<11;x++){  
             var otrodivmas=document.getElementById(y+"a"+x);
             otrodivmas.style.boxShadow=("0px 0px 0px "+colorA+",-0px -0px 0px "+colorA+",-0px 0px 0px "+colorA+",0px -0px 0px "+colorA+"");
             var otrodivmas=document.getElementById(y+"b"+x);
