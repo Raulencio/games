@@ -3,10 +3,11 @@ var unavez=true;
 var cnA="";
 var cnB="";
 //[3] 1=torre 2=caballo 3=alfil 4=reina 5=rey 6=peon
-var piezas=[tBa=[true,1,1,1,1],cBa=[true,1,2,2,1],aBa=[true,1,3,3,1],rBa=[true,1,4,3,1],rBb=[true,1,7,3,1],aBb=[true,1,8,3,1],cBb=[true,1,9,2,1],tBb=[true,1,10,1,1],
-pBa=[true,2,1,1,1],pBa=[true,2,2,6,1],pBa=[true,2,3,6,1],pBa=[true,2,4,6,1],pBa=[true,2,7,6,1],pBa=[true,2,8,6,1],pBa=[true,2,9,6,1],pBa=[true,2,10,1,1],
-tNa=[true,10,1,1,2],cNa=[true,10,2,2,2],aNa=[true,10,3,3,2],rNa=[true,10,4,3,2],rNb=[true,10,7,3,2],aNb=[true,10,8,3,2],cNb=[true,10,9,2,2],tNb=[true,10,10,1,2],
-pNa=[true,9,1,1,2],pNa=[true,9,2,6,2],pNa=[true,9,3,6,2],pNa=[true,9,4,6,2],pNa=[true,9,7,6,2],pNa=[true,9,8,6,2],pNa=[true,9,9,6,2],pNa=[true,9,10,1,2],vacui=[false,0,0,0,0],unpa=[true,1,5,2,1],unpa=[true,1,6,2,1],unpa=[true,2,5,6,1],unpa=[true,2,6,6,1],unpa=[true,9,5,6,2],unpa=[true,9,6,6,2],unpa=[true,10,5,2,2],unpa=[true,10,6,2,2]];
+var piezas=[tBa=[true,1,1,1,1],cBa=[true,2,2,3,1],aBa=[true,2,3,2,1],rBa=[true,2,4,2,1],rBb=[true,2,7,2,1],aBb=[true,2,8,2,1],cBb=[true,2,9,3,1],tBb=[true,1,10,1,1],
+pBa=[true,2,1,1,1],pBa=[true,1,2,6,1],pBa=[true,1,3,6,1],pBa=[true,1,4,6,1],pBa=[true,1,7,6,1],pBa=[true,1,8,6,1],pBa=[true,1,9,6,1],pBa=[true,2,10,1,1],
+tNa=[true,10,1,1,2],cNa=[true,9,2,3,2],aNa=[true,9,3,2,2],rNa=[true,9,4,2,2],rNb=[true,9,7,2,2],aNb=[true,9,8,2,2],cNb=[true,9,9,3,2],tNb=[true,10,10,1,2],
+pNa=[true,9,1,1,2],pNa=[true,10,2,6,2],pNa=[true,10,3,6,2],pNa=[true,10,4,6,2],pNa=[true,10,7,6,2],pNa=[true,10,8,6,2],pNa=[true,10,9,6,2],pNa=[true,9,10,1,2],vacui=[false,0,0,0,0],
+unpa=[true,2,5,3,1],unpa=[true,2,6,3,1],unpa=[true,1,5,6,1],unpa=[true,1,6,6,1],unpa=[true,10,5,6,2],unpa=[true,10,6,6,2],unpa=[true,9,5,3,2],unpa=[true,9,6,3,2]];
 
 var mov=1;var turno=1;
 var lapieza=32;var equipo=2;
