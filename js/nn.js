@@ -18,13 +18,13 @@ function colorTodo(x){
 
 
 var planetas=[["",""]];
+var numa=120,numb=110;var abajo=true;var dias=0;var nupl=1;var energia=0;
+
 function colorTodos(){
     for(var a=planetas.length-1;a>=0;a--){
         colorTodo(a);
-    }
+    }nupl++;
 }
-
-var numa=120,numb=110;var abajo=true;var orbital=420;var dias=0;
 
 function movimientoSatelite(n){    
     if(n==1){              
@@ -46,8 +46,8 @@ function movimientoSatelite(n){
     numa++;numb++;
     }else{        
     numa--;numb--;
-    }
-    document.getElementById("pp0").textContent=dias+" dias "+cte+" estrellas";
+    }energia++;
+    document.getElementById("pp0").textContent=dias+" dias "+cte+" estrellas "+nupl+" planetas "+energia+" Energia";
 }
 
 function movimientoSatelites(){
@@ -55,23 +55,22 @@ function movimientoSatelites(){
         movimientoSatelite(a);
     }
 }
-setInterval("movimientoSatelites()",orbital);
+setInterval("movimientoSatelites()",420);
 var cte=1;
 function mas(n){var eltea="";
     if(n==2){cte++;var laid="es"+cte;
         eltea="<div class='estrella' id='"+laid+"'> </div>";
         document.getElementById("universo"+0).innerHTML+=eltea;
   var iabl=document.getElementById(laid);
-        iabl.style.top=randomAr(800,2)+"px";
-        iabl.style.left=randomAr(600,2)+"px";
+        iabl.style.top=randomAr(770,2)+"px";
+        iabl.style.left=randomAr(570,2)+"px";
     }else if(n==3){
         for(var e=cte;e>1;e--){            
             document.getElementById("es"+e).style.width=randomAr(5,1)+"px";
             document.getElementById("es"+e).style.height=randomAr(2,1)+"px";
-            document.getElementById("es"+e).style.top=randomAr(850,10)+"px";
-            document.getElementById("es"+e).style.left=randomAr(650,10)+"px";
-            document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(5,1)+"px "+randomAr(1,0)+"px "+colorRan();
-            document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(5,1)+"px "+randomAr(1,0)+"px "+colorRan();
+            document.getElementById("es"+e).style.top=randomAr(770,2)+"px";
+            document.getElementById("es"+e).style.left=randomAr(570,2)+"px";
+            document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(7,1)+"px "+randomAr(1,0)+"px "+colorRan();            
         }
     }
     
