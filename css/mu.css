@@ -1,7 +1,7 @@
 .universo{width:600px;
     height:840px;
     background-color: rgb(9, 3, 56);
-    
+    overflow: hidden;
 }
 .planeta{
 width:300px;
@@ -18,8 +18,8 @@ box-shadow: 0px 0px 10px 5px whitesmoke;
     position: absolute;z-index:10;
     top:50px;
     left:50px;
-    border-radius: 90px;background-color: white;
-    box-shadow: 0px 0px 5px 1px whitesmoke;
+    border-radius: 90px;background-color: whitesmoke;
+    box-shadow: 0px 0px 5px 3px rgb(235, 236, 213);
 }
 .estrella{
     width:1px;
@@ -28,5 +28,5 @@ box-shadow: 0px 0px 10px 5px whitesmoke;
     top:40px;
     left:40px;
     background-color: whitesmoke;
-    border-radius: 5px;
+    border-radius: 5px;color:whitesmoke;
 }
