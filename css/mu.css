@@ -13,12 +13,12 @@ border-radius: 250px;background-color: blue;z-index:5;
 box-shadow: 0px 0px 10px 5px whitesmoke;
 }
 .satelite{
-    width:90px;
-    height:90px;
+    width:85px;
+    height:85px;
     position: absolute;z-index:10;
     top:50px;
     left:50px;
-    border-radius: 90px;background-color: rgb(253, 255, 144);
+    border-radius: 85px;background-color: rgb(253, 255, 144);
     box-shadow: 0px 0px 5px 3px rgb(235, 236, 213);
 }
 .estrella{
