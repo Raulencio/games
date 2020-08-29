@@ -57,13 +57,23 @@ function movimientoSatelites(){
 }
 setInterval("movimientoSatelites()",420);
 var cte=1;var eest=10;
+function unnomb(){
+    var elnom;
+    for(var e=9;e>0;e--){       
+    elnom = elnom + generarLetra(35) ;
+}    
+    return elnom;
+}
+function nombre(nom){
+alert(nom);
+}
 function mas(n){var eltea="";
 
     if(n==2){
         if(energia>=eest){energia-=eest;eest++;
         cte++;
         var laid="es"+cte;
-        eltea="<div class='estrella' id='"+laid+"'> </div>";
+        eltea="<div class='estrella' id='"+laid+"' onClick='nombre('"+unnomb()+"')'> </div>";
         document.getElementById("universo"+0).innerHTML+=eltea;
   var iabl=document.getElementById(laid);
         iabl.style.top=randomAr(770,2)+"px";
@@ -95,3 +105,22 @@ function estas2(){
     //colorTodos();
 }
 setInterval("estas2()",5000);
+var esa="es1";var posicion=0;var altura=0;
+function estrellafugaz(){
+    var num=randomAr(cte,2);
+    esa=("es"+num);
+    posicion=randomAr(300,0);altura=randomAr(300,0);energia+=cte*nupl;
+}
+
+setInterval("estrellafugaz()",20000);
+
+function movimiento(){
+    if(altura<800){document.getElementById(esa).textContent="+"+cte*nupl;
+    document.getElementById(esa).style.top=altura+"px";
+    document.getElementById(esa).style.left=posicion+"px";
+    altura+=randomAr(20,5);
+    posicion+=randomAr(20,5);
+    }
+}
+
+setInterval("movimiento()",10);
