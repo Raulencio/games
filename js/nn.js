@@ -6,7 +6,7 @@ function colorTodo(x){
     document.getElementById("satelite"+x).style.boxShadow="0px 0px "+randomAr(10,1)+"px "+randomAr(10,1)+"px "+colorRan();
     document.getElementById("planeta"+x).style.boxShadow="0px 0px "+randomAr(25,5)+"px "+randomAr(25,5)+"px "+colorRan();
 
-    var num=randomAr(10,0);
+    var num=randomAr(8,3);
     if(num==7){
     document.getElementById("planeta"+x).style.boxShadow="0px 0px "+randomAr(50,10)+"px "+randomAr(25,10)+"px "+colorRan();
     }
@@ -46,7 +46,7 @@ function movimientoSatelite(n){
     numa++;numb++;
     }else{        
     numa--;numb--;
-    }energia++;
+    }energia+=cte;
     document.getElementById("pp0").textContent=dias+" dias "+cte+" estrellas "+nupl+" planetas "+energia+" Energia";
 }
 
@@ -56,14 +56,21 @@ function movimientoSatelites(){
     }
 }
 setInterval("movimientoSatelites()",420);
-var cte=1;
+var cte=1;var eest=10;
 function mas(n){var eltea="";
-    if(n==2){cte++;var laid="es"+cte;
+
+    if(n==2){
+        if(energia>=eest){energia-=eest;eest++;
+        cte++;
+        var laid="es"+cte;
         eltea="<div class='estrella' id='"+laid+"'> </div>";
         document.getElementById("universo"+0).innerHTML+=eltea;
   var iabl=document.getElementById(laid);
         iabl.style.top=randomAr(770,2)+"px";
         iabl.style.left=randomAr(570,2)+"px";
+        }else{
+            
+        }
     }else if(n==3){
         for(var e=cte;e>1;e--){            
             document.getElementById("es"+e).style.width=randomAr(5,1)+"px";
@@ -72,11 +79,19 @@ function mas(n){var eltea="";
             document.getElementById("es"+e).style.left=randomAr(570,2)+"px";
             document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(7,1)+"px "+randomAr(1,0)+"px "+colorRan();            
         }
+    }else if(n==1){
+        cte++;
+        var laid="es"+cte;
+        eltea="<div class='estrella' id='"+laid+"'> </div>";
+        document.getElementById("universo"+0).innerHTML+=eltea;
+  var iabl=document.getElementById(laid);
+        iabl.style.top=randomAr(770,2)+"px";
+        iabl.style.left=randomAr(570,2)+"px";
     }
     
 }
 function estas2(){
-    mas(2);
+    mas(1);
     //colorTodos();
 }
 setInterval("estas2()",5000);
