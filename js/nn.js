@@ -70,6 +70,8 @@ function mas(n){var eltea="";
         for(var e=cte;e>1;e--){
             document.getElementById("es"+e).style.top=randomAr(800,10)+"px";
             document.getElementById("es"+e).style.left=randomAr(600,10)+"px";
+            document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(5,1)+"px "+randomAr(2,1)+"px "+colorRan();
+            document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(5,1)+"px "+randomAr(2,1)+"px "+colorRan();
         }
     }
     
