@@ -46,7 +46,7 @@ function movimientoSatelite(n){
     numa++;numb++;
     }else{        
     numa--;numb--;
-    }energia+=cte;
+    }energia+=cte;energia-=(nupl*(dias+2));
     document.getElementById("pp0").textContent=dias+" dias "+cte+" estrellas "+nupl+" planetas "+energia+" Energia";
 }
 
@@ -108,7 +108,7 @@ function estas2(){
     //colorTodos();
 }
 setInterval("estas2()",5000);
-var esa="es1";var posicion=0;var altura=0;
+var esa="es2";var posicion=0;var altura=0;
 function estrellafugaz(){
     var num=randomAr(cte,2);
     esa=("es"+num);
@@ -126,5 +126,5 @@ function movimiento(){
     
     }
 }
-
+mas(1);
 setInterval("movimiento()",10);
