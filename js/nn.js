@@ -1,11 +1,5 @@
 var ptop=200,pleft=200,pwidth=250,pheight=250;
-function colorTodo(x){
-    
-    ptop+=10,pleft+=10,pwidth-=10,pheight-=10;
-    document.getElementById("planeta"+x).style.top=ptop+"px";
-    document.getElementById("planeta"+x).style.left=pleft+"px";
-    document.getElementById("planeta"+x).style.width=pwidth+"px";
-    document.getElementById("planeta"+x).style.height=pheight+"px";
+function colorTodo(x){    
     document.getElementById("planeta"+x).style.backgroundColor=colorRan();
     document.getElementById("satelite"+x).style.backgroundColor=colorRan();
     //document.getElementById("universo"+x).style.backgroundColor=colorRan();
@@ -84,6 +78,8 @@ function mas(n){var eltea="";
         var iabl=document.getElementById(laid);
         iabl.style.top=randomAr(840,2)+"px";
         iabl.style.left=randomAr(600,2)+"px";
+       
+
         }else{
             
         }
@@ -94,7 +90,8 @@ function mas(n){var eltea="";
             document.getElementById("es"+e).style.top=randomAr(840,2)+"px";
             document.getElementById("es"+e).style.left=randomAr(600,2)+"px";
             document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(7,1)+"px "+randomAr(1,0)+"px "+colorRan();            
-        }
+        } 
+       
     }else if(n==1){
         cte++;
         var laid="es"+cte;
