@@ -39,7 +39,7 @@ function movimientoSatelite(n){
         abajo=false;
         document.getElementById("satelite"+n).style.zIndex="1";
         document.getElementById("planeta"+n).style.zIndex="10";
-    }else if(numa<=115){dias++;
+    }else if(numa<=110){dias++;
         abajo=true;document.getElementById("satelite"+n).style.zIndex="10";
     }
     if(abajo){    
@@ -47,7 +47,7 @@ function movimientoSatelite(n){
     }else{        
     numa--;numb--;
     }
-    document.getElementById("pp0").textContent=dias+" dias";
+    document.getElementById("pp0").textContent=dias+" dias "+cte+" estrellas";
 }
 
 function movimientoSatelites(){
@@ -67,11 +67,11 @@ function mas(n){var eltea="";
     }else if(n==3){
         for(var e=cte;e>1;e--){            
             document.getElementById("es"+e).style.width=randomAr(5,1)+"px";
-            document.getElementById("es"+e).style.height=randomAr(5,1)+"px";
-            document.getElementById("es"+e).style.top=randomAr(800,10)+"px";
-            document.getElementById("es"+e).style.left=randomAr(600,10)+"px";
-            document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(7,1)+"px "+randomAr(1,0)+"px "+colorRan();
-            document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(7,1)+"px "+randomAr(1,0)+"px "+colorRan();
+            document.getElementById("es"+e).style.height=randomAr(2,1)+"px";
+            document.getElementById("es"+e).style.top=randomAr(850,10)+"px";
+            document.getElementById("es"+e).style.left=randomAr(650,10)+"px";
+            document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(5,1)+"px "+randomAr(1,0)+"px "+colorRan();
+            document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(5,1)+"px "+randomAr(1,0)+"px "+colorRan();
         }
     }
     
@@ -80,4 +80,4 @@ function estas2(){
     mas(2);
     //colorTodos();
 }
-setInterval("estas2()",10000);
+setInterval("estas2()",5000);
