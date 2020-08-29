@@ -19,3 +19,11 @@ border-radius: 300px;background-color: blue;z-index:5;text-align: center;padding
     left:50px;
     border-radius: 90px;background-color: whitesmoke;
 }
+.estrella{
+    width:1px;
+    height:1px;
+    position:absolute;
+    top:40px;
+    left:40px;
+    background-color: whitesmoke;
+}
