@@ -2,7 +2,7 @@ function colorTodo(x){
  
     document.getElementById("planeta"+x).style.backgroundColor=colorRan();
     document.getElementById("satelite"+x).style.backgroundColor=colorRan();
-    document.getElementById("universo"+x).style.backgroundColor=colorRan();
+    //document.getElementById("universo"+x).style.backgroundColor=colorRan();
     document.getElementById("satelite"+x).style.boxShadow="0px 0px "+randomAr(10,1)+"px "+randomAr(10,1)+"px "+colorRan();
     document.getElementById("planeta"+x).style.boxShadow="0px 0px "+randomAr(25,5)+"px "+randomAr(25,5)+"px "+colorRan();
 
@@ -78,6 +78,6 @@ function mas(n){var eltea="";
 }
 function estas2(){
     mas(2);
-    colorTodos();
+    //colorTodos();
 }
 setInterval("estas2()",10000);
