@@ -1,0 +1,21 @@
+.universo{width:100%;
+    height:420px;
+    background-color: rgb(3, 0, 32);
+    
+}
+.planeta{
+width:300px;
+height:300px;
+position: absolute;
+top:150px;
+left:150px;
+border-radius: 300px;background-color: blue;z-index:5;
+}
+.satelite{
+    width:90px;
+    height:90px;
+    position: absolute;z-index:10;
+    top:50px;
+    left:50px;
+    border-radius: 90px;background-color: whitesmoke;text-align: center;
+}
