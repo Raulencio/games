@@ -23,7 +23,7 @@ function colorTodos(){
         colorTodo(a);
     }
 }
-// setInterval("colorTodos()",10000);
+
 var numa=120,numb=110;var abajo=true;var orbital=420;var dias=0;
 
 function movimientoSatelite(n){    
@@ -76,4 +76,8 @@ function mas(n){var eltea="";
     }
     
 }
-setInterval("mas(2)",10000);
+function estas2(){
+    mas(2);
+    colorTodos();
+}
+setInterval("estas2()",10000);
