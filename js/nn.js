@@ -25,7 +25,7 @@ function colorTodos(){
         colorTodo(a);
     }
 }
-setInterval("colorTodos()",10000);
+// setInterval("colorTodos()",10000);
 var numa=120,numb=110;var abajo=true;var orbital=420;var dias=0;
 
 function movimientoSatelite(n){    
@@ -58,3 +58,19 @@ function movimientoSatelites(){
     }
 }
 setInterval("movimientoSatelites()",orbital);
+var cte=1;
+function mas(n){var eltea="";
+    if(n==2){cte++;var laid="es"+cte;
+        eltea="<div class='estrella' id='"+laid+"'> </div>";
+        document.getElementById("universo"+0).innerHTML+=eltea;
+  var iabl=document.getElementById(laid);
+        iabl.style.top=randomAr(800,2)+"px";
+        iabl.style.left=randomAr(600,2)+"px";
+    }else if(n==3){
+        for(var e=cte;e>1;e--){
+            document.getElementById("es"+e).style.top=randomAr(800,10)+"px";
+            document.getElementById("es"+e).style.left=randomAr(600,10)+"px";
+        }
+    }
+    
+}
