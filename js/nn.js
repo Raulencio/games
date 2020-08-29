@@ -115,7 +115,7 @@ function estrellafugaz(){
 setInterval("estrellafugaz()",20000);
 
 function movimiento(){
-    if(altura<800){document.getElementById(esa).textContent="+"+cte*nupl;
+    if(altura<800){//document.getElementById(esa).textContent="+"+cte*nupl;
     document.getElementById(esa).style.top=altura+"px";
     document.getElementById(esa).style.left=posicion+"px";
     altura+=randomAr(20,5);
