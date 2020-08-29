@@ -4,12 +4,12 @@
     overflow: hidden;
 }
 .planeta{
-width:300px;
-height:300px;
+width:250px;
+height:250px;
 position: absolute;
-top:150px;
-left:150px;
-border-radius: 300px;background-color: blue;z-index:5;
+top:200px;
+left:200px;
+border-radius: 250px;background-color: blue;z-index:5;
 box-shadow: 0px 0px 10px 5px whitesmoke;
 }
 .satelite{
@@ -18,7 +18,7 @@ box-shadow: 0px 0px 10px 5px whitesmoke;
     position: absolute;z-index:10;
     top:50px;
     left:50px;
-    border-radius: 90px;background-color: whitesmoke;
+    border-radius: 90px;background-color: rgb(253, 255, 144);
     box-shadow: 0px 0px 5px 3px rgb(235, 236, 213);
 }
 .estrella{
