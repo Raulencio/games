@@ -1,5 +1,11 @@
+var ptop=200,pleft=200,pwidth=250,pheight=250;
 function colorTodo(x){
- 
+    
+    ptop+=10,pleft+=10,pwidth-=10,pheight-=10;
+    document.getElementById("planeta"+x).style.top=ptop+"px";
+    document.getElementById("planeta"+x).style.left=pleft+"px";
+    document.getElementById("planeta"+x).style.width=pwidth+"px";
+    document.getElementById("planeta"+x).style.height=pheight+"px";
     document.getElementById("planeta"+x).style.backgroundColor=colorRan();
     document.getElementById("satelite"+x).style.backgroundColor=colorRan();
     //document.getElementById("universo"+x).style.backgroundColor=colorRan();
@@ -58,7 +64,7 @@ function movimientoSatelites(){
 setInterval("movimientoSatelites()",420);
 var cte=1;var eest=10;
 function unnomb(){
-    var elnom;
+    var elnom="-";
     for(var e=9;e>0;e--){       
     elnom = elnom + generarLetra(35) ;
 }    
@@ -73,11 +79,11 @@ function mas(n){var eltea="";
         if(energia>=eest){energia-=eest;eest++;
         cte++;
         var laid="es"+cte;
-        eltea="<div class='estrella' id='"+laid+"' onClick='nombre('"+unnomb()+"')'> </div>";
+        eltea="<div class='estrella' id='"+laid+"' onClick='nombre("+unnomb()+")'> </div>";
         document.getElementById("universo"+0).innerHTML+=eltea;
-  var iabl=document.getElementById(laid);
-        iabl.style.top=randomAr(770,2)+"px";
-        iabl.style.left=randomAr(570,2)+"px";
+        var iabl=document.getElementById(laid);
+        iabl.style.top=randomAr(840,2)+"px";
+        iabl.style.left=randomAr(600,2)+"px";
         }else{
             
         }
@@ -85,8 +91,8 @@ function mas(n){var eltea="";
         for(var e=cte;e>1;e--){            
             document.getElementById("es"+e).style.width=randomAr(5,1)+"px";
             document.getElementById("es"+e).style.height=randomAr(2,1)+"px";
-            document.getElementById("es"+e).style.top=randomAr(770,2)+"px";
-            document.getElementById("es"+e).style.left=randomAr(570,2)+"px";
+            document.getElementById("es"+e).style.top=randomAr(840,2)+"px";
+            document.getElementById("es"+e).style.left=randomAr(600,2)+"px";
             document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(7,1)+"px "+randomAr(1,0)+"px "+colorRan();            
         }
     }else if(n==1){
@@ -115,11 +121,12 @@ function estrellafugaz(){
 setInterval("estrellafugaz()",20000);
 
 function movimiento(){
-    if(altura<800){//document.getElementById(esa).textContent="+"+cte*nupl;
-    document.getElementById(esa).style.top=altura+"px";
-    document.getElementById(esa).style.left=posicion+"px";
+    if(altura<840&&posicion<600){//document.getElementById(esa).textContent="+"+cte*nupl;
     altura+=randomAr(20,5);
     posicion+=randomAr(20,5);
+    document.getElementById(esa).style.top=altura+"px";
+    document.getElementById(esa).style.left=posicion+"px";
+    
     }
 }
 
