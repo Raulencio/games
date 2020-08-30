@@ -1,59 +1,59 @@
 var ptop=200,pleft=200,pwidth=250,pheight=250;
-function colorTodo(x){    
-    if(energia>10000){
-    document.getElementById("planeta"+x).style.background="linear-gradient("+colorRan()+","+colorRan()+","+colorRan()+","+colorRan()+","+colorRan()+")";    
-    }else if(energia>1000){
-        document.getElementById("planeta"+x).style.background="linear-gradient("+colorRan()+","+colorRan()+","+colorRan()+")";    
-    }else if(energia<=1000){
-        document.getElementById("planeta"+x).style.background="linear-gradient("+colorRan()+","+colorRan()+")";    
+
+function colorTodo(x){
+
+    if(energia>10000){document.getElementById("planeta"+x).style.background="linear-gradient("+colorRan()+","+colorRan()+","+colorRan()+","+colorRan()+","+colorRan()+")";
     }
+    else if(energia>1000){document.getElementById("planeta"+x).style.background="linear-gradient("+colorRan()+","+colorRan()+","+colorRan()+")";
+    }
+    else if(energia<=1000){document.getElementById("planeta"+x).style.background="linear-gradient("+colorRan()+","+colorRan()+")";
+    }
+
     document.getElementById("astro"+x).style.background="linear-gradient("+colorRan()+","+colorRan()+")";    
     //document.getElementById("universo"+x).style.backgroundColor=colorRan();
-    document.getElementById("astro"+x).style.boxShadow="0px 0px "+randomAr(10,1)+"px "+randomAr(10,1)+"px "+colorRan();
+    document.getElementById("astro"+x).style.boxShadow="0px 0px "+randomAr(5,1)+"px "+randomAr(5,1)+"px "+colorRan();
     document.getElementById("planeta"+x).style.boxShadow="0px 0px "+randomAr(25,5)+"px "+randomAr(25,10)+"px "+colorRan();
 
     var num=randomAr(8,3);
-    if(num==7){
-    document.getElementById("planeta"+x).style.boxShadow="0px 0px "+randomAr(50,25)+"px "+randomAr(15,1)+"px "+colorRan();
-    }
-    if(num==4){
-        document.getElementById("astro"+x).style.boxShadow="0px 0px "+randomAr(50,10)+"px "+randomAr(25,1)+"px "+colorRan();
-    }
 
+    if(num==7){document.getElementById("planeta"+x).style.boxShadow="0px 0px "+randomAr(25,5)+"px "+randomAr(15,1)+"px "+colorRan();
+    }
+    if(num==4){document.getElementById("astro"+x).style.boxShadow="0px 0px "+randomAr(15,10)+"px "+randomAr(5,1)+"px "+colorRan();
+    }
 }
 
 
 var planetas=[["",""]];
+
 var numa=120,numb=110;var abajo=true;var dias=0;var nupl=1;var energia=0;
 
-function colorTodos(){
-    for(var a=planetas.length;a>=0;a--){
-        colorTodo(a);
-    }nupl++;
-}
+function colorTodos(){for(var a=planetas.length;a>=0;a--){colorTodo(a);}nupl++;}
 
-function movimientoastro(n){    console.log(numa);
-    if(n==1){              
-    document.getElementById("astro"+n).style.top=numa-1+"px";
-    document.getElementById("astro"+n).style.left=numb-1+"px";    
-    }else{
-    document.getElementById("astro"+n).style.top=numa+"px";
-    document.getElementById("astro"+n).style.left=numb+"px";
+function movimientoastro(n){    
+    //console.log(numa);    
+    var asn=document.getElementById("astro"+n);
+
+    if(n==1){asn.style.top=numa-1+"px";asn.style.left=numb-1+"px";    
+    }
+    else{asn.style.top=numa+"px";asn.style.left=numb+"px";
     }
 
     if(numa>415){;
         abajo=false;
         document.getElementById("astro"+n).style.zIndex="1";
         document.getElementById("planeta"+n).style.zIndex="10";
-    }else if(numa<=110){dias++;
-        abajo=true;document.getElementById("astro"+n).style.zIndex="10";
     }
-    if(abajo){    
-    numa++;numb++;
-    }else{        
-    numa--;numb--;
-    }energia+=cte;energia-=(nupl*(dias+2));
+    else if(numa<=110){dias++;abajo=true;document.getElementById("astro"+n).style.zIndex="10";
+    }
+
+    if(abajo){numa++;numb++;
+    }
+    if(!abajo){numa--;numb--;
+    }
+    energia+=cte;energia-=(nupl*(dias+nupl));
+
     document.getElementById("pp0").textContent=dias+" dias "+cte+" estrellas "+nupl+" planetas "+energia+" Energia";
+
 }
 
 function movimientoastros(){
@@ -61,25 +61,26 @@ function movimientoastros(){
         movimientoastro(a);
     }
 }
+
 setInterval("movimientoastros()",250);
+
 var cte=1;var eest=10;
+
 function unnomb(){
     var elnom="-";
-    for(var e=9;e>0;e--){       
-    elnom = elnom + generarLetra(35) ;
-}    
+    for(var e=9;e>0;e--){elnom = elnom + generarLetra(35) ;}    
     return elnom;
 }
 function nombre(nom){
-alert(nom);
+alert(nom+"-");
 }
 function mas(n){var eltea="";
     
     if(n==2){
         if(energia>=eest){energia-=eest;eest++;
         cte++;
-        var laid="es"+cte;
-        eltea="<div class='estrella' id='"+laid+"' onClick='nombre("+unnomb()+")'> </div>";
+        var laid="es"+cte;var noms=unnomb();
+        eltea="<div class='estrella' id='"+laid+"' onClick='nombre("+noms+")'> </div>";
         document.getElementById("universo"+0).innerHTML+=eltea;
         var iabl=document.getElementById(laid);
         iabl.style.top=randomAr(840,2)+"px";
@@ -103,7 +104,7 @@ function mas(n){var eltea="";
         var laid="es"+cte;
         eltea="<div class='estrella' id='"+laid+"'> </div>";
         document.getElementById("universo"+0).innerHTML+=eltea;
-  var iabl=document.getElementById(laid);
+    var iabl=document.getElementById(laid);
         iabl.style.top=randomAr(839,2)+"px";
         iabl.style.left=randomAr(599,2)+"px";
     }
@@ -111,7 +112,7 @@ function mas(n){var eltea="";
 }
 function estas2(){mas(1);//colorTodos();
 energia-=dias;}
-setInterval("estas2()",1000);
+setInterval("estas2()",10000);
 
  var esa="es2";var posicion=0;var altura=0;var modofugaz=0;var efugaz;
 function estrellafugaz(){
@@ -128,7 +129,7 @@ function estrellafugaz(){
 //     posicion=randomAr(400,100);altura=randomAr(600,300);energia+=cte*nupl;
  }
 
- setInterval("estrellafugaz()",4000);
+ setInterval("estrellafugaz()",40000);
 
 // function dsf(){
 //     var unnum=randomAr(20,5);
@@ -152,7 +153,7 @@ function estrellafugaz(){
 
 // setInterval("movimiento()",50);
 
-for(var e=42;e>=0;e--){
+for(var e=2;e>=0;e--){
     mas(1);}
     var moo=1;
 function movimientoo(n){
