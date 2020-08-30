@@ -29,6 +29,18 @@ var numa=120,numb=110;var abajo=true;var dias=0;var nupl=1;var energia=0;
 
 function colorTodos(){for(var a=planetas.length;a>=0;a--){colorTodo(a);}nupl++;}
 
+
+// function movimientoastro(n){    
+//     //console.log(numa);    
+//     var asn=document.getElementById("astro"+n);
+
+//     if(abajo){if(n==0){asn.style.top="420px";asn.style.left="420px";    
+//             }abajo=false;dias++;
+//     }
+//     else if(!abajo){if(n==0){asn.style.top="120px";asn.style.left="120px";    
+//             }abajo=true;
+//     }    
+// }
 function movimientoastro(n){    
     //console.log(numa);    
     var asn=document.getElementById("astro"+n);
@@ -38,12 +50,12 @@ function movimientoastro(n){
     else{asn.style.top=numa+"px";asn.style.left=numb+"px";
     }
 
-    if(numa>415){;
+    if(numa>420){;
         abajo=false;
         document.getElementById("astro"+n).style.zIndex="1";
         document.getElementById("planeta"+n).style.zIndex="10";
     }
-    else if(numa<=110){dias++;abajo=true;document.getElementById("astro"+n).style.zIndex="10";
+    else if(numa<=100){dias++;abajo=true;document.getElementById("astro"+n).style.zIndex="10";
     }
 
     if(abajo){numa++;numb++;
@@ -91,7 +103,7 @@ function mas(n){var eltea="";
             
         }
     }else if(n==3){
-        for(var e=cte-1;e>1;e--){                        
+        for(var e=cte;e>1;e--){                        
             document.getElementById("es"+e).style.width=randomAr(2,1)+"px";
             document.getElementById("es"+e).style.height=randomAr(2,1)+"px";
             document.getElementById("es"+e).style.top=randomAr(839,2)+"px";
@@ -112,7 +124,6 @@ function mas(n){var eltea="";
 }
 function estas2(){mas(1);//colorTodos();
 energia-=dias;}
-setInterval("estas2()",10000);
 
  var esa="es2";var posicion=0;var altura=0;var modofugaz=0;var efugaz;
 function estrellafugaz(){
@@ -129,7 +140,6 @@ function estrellafugaz(){
 //     posicion=randomAr(400,100);altura=randomAr(600,300);energia+=cte*nupl;
  }
 
- setInterval("estrellafugaz()",40000);
 
 // function dsf(){
 //     var unnum=randomAr(20,5);
@@ -158,10 +168,44 @@ for(var e=2;e>=0;e--){
     var moo=1;
 function movimientoo(n){
     //document.getElementById("asteroide"+n).transition="all 2s";  
-    if(moo==1){
-    document.getElementById("asteroide"+n).style.transform=("translate(0px,-420px)");moo++;
+    if(moo==1){    
+    document.getElementById("asteroide"+n).style.zIndex=6;
+    document.getElementById("planeta"+n).style.zIndex=3;
+    document.getElementById("asteroide"+n).style.transform=("translate(0px,-420px)");
+    moo++;
     }else if(moo==2){
-        document.getElementById("asteroide"+n).style.transform=("translate(0px,0px)");moo--;
+        document.getElementById("planeta"+n).style.zIndex=6;
+        document.getElementById("asteroide"+n).style.zIndex=3;        
+        document.getElementById("asteroide"+n).style.transform=("translate(0px,0px)");
+        moo--;
     }
       
+}
+    document.getElementById("astro1").style.zIndex=1;
+    document.getElementById("astro1").style.transform=("translate(-50px,0px)");
+    document.getElementById("astro1").style.height="80px";
+    document.getElementById("astro1").style.width="80px";
+    document.getElementById("astro1").style.borderRadius="80px";
+
+    document.getElementById("planeta1").style.zIndex=1;
+    document.getElementById("planeta1").style.transform=("translate(-150px,400px)");
+    document.getElementById("planeta1").style.height="420px";
+    document.getElementById("planeta1").style.width="420px";
+    document.getElementById("planeta1").style.borderRadius="420px";
+
+    var conteoA=0;var conteoB=0;var conteoC=0;
+    setInterval("taimto()",1000);
+
+    function taimto(){
+        if(conteoC==3||conteoC==6||conteoC==9){
+            movimientoastro(0);
+        }
+    conteoA++;
+    if(conteoA==10){estas2();conteoB++;conteoA=0;}
+        if(conteoB==2){estrellafugaz();conteoC++;conteoB=0;}
+            if(conteoC==10){energia+=nupl*cte*dias;conteoC=0;alert("haz visto 10 estrellas fugazes +"+(nupl*cte*dias))}
+
+
+    energia+=cte;energia-=(nupl*(dias+nupl));
+    document.getElementById("pp0").textContent=dias+" dias "+cte+" estrellas "+nupl+" planetas "+energia+" Energia";
 }
