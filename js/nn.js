@@ -40,7 +40,8 @@ function colorTodos(){for(var a=planetas.length;a>=0;a--){colorTodo(a);}nupl++;}
 //     else if(!abajo){if(n==0){asn.style.top="120px";asn.style.left="120px";    
 //             }abajo=true;
 //     }    
-// }
+// }var mensaje="";
+var mensaje="";
 function movimientoastro(n){    
     //console.log(numa);    
     var asn=document.getElementById("astro"+n);
@@ -63,8 +64,7 @@ function movimientoastro(n){
     if(!abajo){numa--;numb--;
     }
     energia+=cte;energia-=(nupl*(dias+nupl));
-
-    document.getElementById("pp0").textContent=dias+" dias "+cte+" estrellas "+nupl+" planetas "+energia+" Energia";
+    document.getElementById("pp0").textContent=" dias "+dias+" estrellas "+cte+" planetas "+nupl+" Energia "+energia+" mensaje: "+mensaje;
 
 }
 
@@ -80,11 +80,11 @@ var cte=1;var eest=10;
 
 function unnomb(){
     var elnom="-";
-    for(var e=9;e>0;e--){elnom = elnom + generarLetra(35) ;}    
+    for(var e=randomAr(nupl,0);e>=0;e--){elnom = elnom + generarLetra(randomAr(35,1)) ;}    
     return elnom;
 }
 function nombre(nom){
-alert(nom+"-");
+mensaje=nom+"-";
 }
 function mas(n){var eltea="";
     
@@ -95,8 +95,8 @@ function mas(n){var eltea="";
         eltea="<div class='estrella' id='"+laid+"' onClick='nombre("+noms+")'> </div>";
         document.getElementById("universo"+0).innerHTML+=eltea;
         var iabl=document.getElementById(laid);
-        iabl.style.top=randomAr(840,2)+"px";
-        iabl.style.left=randomAr(600,2)+"px";
+        iabl.style.top=randomAr(839,2)+"px";
+        iabl.style.left=randomAr(599,2)+"px";
        
 
         }else{document.getElementById("universo"+0).innerHTML=eltea;cte=0;
@@ -125,18 +125,24 @@ function mas(n){var eltea="";
 function estas2(){mas(1);//colorTodos();
 energia-=dias;}
 
- var esa="es2";var posicion=0;var altura=0;var modofugaz=0;var efugaz;
+ var esa="es2";var posicion=0;var altura=0;var modofugaz=0;var efugaz;var ctef=0;
 function estrellafugaz(){
-     modofugaz=randomAr(4,1);
+     modofugaz=randomAr(8,1);
      var num=randomAr(cte,2);
      esa=("es"+num);
      efugaz=document.getElementById(esa);
      switch(modofugaz){
-      case 1:efugaz.style.transform=("translate(0px,-420px)");break;
-      case 2:efugaz.style.transform=("translate(420px,-0px)");break;
-      case 3:efugaz.style.transform=("translate(-420px,0px)");break;
-      case 4:efugaz.style.transform=("translate(0px,420px)");break;
+      case 1:efugaz.style.transform=("translate(0px,-800px)");break;
+      case 2:efugaz.style.transform=("translate(800px,-0px)");break;
+      case 3:efugaz.style.transform=("translate(-800px,0px)");break;
+      case 4:efugaz.style.transform=("translate(0px,800px)");break;
+
+      case 5:efugaz.style.transform=("translate(-800px,-800px)");break;
+      case 6:efugaz.style.transform=("translate(800px,-800px)");break;
+      case 7:efugaz.style.transform=("translate(-800px,800px)");break;
+      case 8:efugaz.style.transform=("translate(800px,800px)");break;
       }
+      ctef++;
 //     posicion=randomAr(400,100);altura=randomAr(600,300);energia+=cte*nupl;
  }
 
@@ -166,20 +172,21 @@ function estrellafugaz(){
 for(var e=2;e>=0;e--){
     mas(1);}
     var moo=1;
+    var ctf=0;
 function movimientoo(n){
     //document.getElementById("asteroide"+n).transition="all 2s";  
-    if(moo==1){    
+    if(nupl>1){nupl--;colorTodo();
+    if(moo==1){moo++;  
     document.getElementById("asteroide"+n).style.zIndex=6;
     document.getElementById("planeta"+n).style.zIndex=3;
-    document.getElementById("asteroide"+n).style.transform=("translate(0px,-420px)");
-    moo++;
-    }else if(moo==2){
+    document.getElementById("asteroide"+n).style.transform=("translate(0px,-420px)");    
+    }
+    else if(moo==2){moo--;
         document.getElementById("planeta"+n).style.zIndex=6;
         document.getElementById("asteroide"+n).style.zIndex=3;        
-        document.getElementById("asteroide"+n).style.transform=("translate(0px,0px)");
-        moo--;
+        document.getElementById("asteroide"+n).style.transform=("translate(0px,0px)");      
     }
-      
+}    
 }
     document.getElementById("astro1").style.zIndex=1;
     document.getElementById("astro1").style.transform=("translate(-50px,0px)");
@@ -197,15 +204,15 @@ function movimientoo(n){
     setInterval("taimto()",1000);
 
     function taimto(){
-        if(conteoC==3||conteoC==6||conteoC==9){
+        if(conteoC%3==0){
             movimientoastro(0);
         }
     conteoA++;
     if(conteoA==10){estas2();conteoB++;conteoA=0;}
-        if(conteoB==2){estrellafugaz();conteoC++;conteoB=0;}
-            if(conteoC==10){energia+=nupl*cte*dias;conteoC=0;alert("haz visto 10 estrellas fugazes +"+(nupl*cte*dias))}
+        if(conteoB==2){estrellafugaz();conteoC++;conteoB=0;nombre(unnomb());}
+            if(conteoC==10){energia+=nupl*cte*dias;;alert("haz visto "+ctef+" estrellas fugaces +"+(nupl*cte*dias))}
 
 
     energia+=cte;energia-=(nupl*(dias+nupl));
-    document.getElementById("pp0").textContent=dias+" dias "+cte+" estrellas "+nupl+" planetas "+energia+" Energia";
+    
 }
