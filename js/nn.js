@@ -42,6 +42,7 @@ function colorTodos(){for(var a=planetas.length;a>=0;a--){colorTodo(a);}nupl++;}
 //     }    
 // }var mensaje="";
 var mensaje="";
+
 function movimientoastro(n){    
     //console.log(numa);    
     var asn=document.getElementById("astro"+n);
@@ -106,8 +107,8 @@ function mas(n){var eltea="";
         for(var e=cte;e>1;e--){                        
             document.getElementById("es"+e).style.width=randomAr(2,1)+"px";
             document.getElementById("es"+e).style.height=randomAr(2,1)+"px";
-            document.getElementById("es"+e).style.top=randomAr(839,2)+"px";
-            document.getElementById("es"+e).style.left=randomAr(599,2)+"px";
+            document.getElementById("es"+e).style.top=randomAr(840,2)+"px";
+            document.getElementById("es"+e).style.left=randomAr(600,2)+"px";
             document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(20,10)+"px "+randomAr(2,0)+"px "+colorRan();            
         } 
        
@@ -175,7 +176,7 @@ for(var e=2;e>=0;e--){
     var ctf=0;
 function movimientoo(n){
     //document.getElementById("asteroide"+n).transition="all 2s";  
-    if(nupl>1){nupl--;colorTodo();
+    if(nupl>1){
     if(moo==1){moo++;  
     document.getElementById("asteroide"+n).style.zIndex=6;
     document.getElementById("planeta"+n).style.zIndex=3;
@@ -185,7 +186,7 @@ function movimientoo(n){
         document.getElementById("planeta"+n).style.zIndex=6;
         document.getElementById("asteroide"+n).style.zIndex=3;        
         document.getElementById("asteroide"+n).style.transform=("translate(0px,0px)");      
-    }
+    }nupl--;colorTodo(0);
 }    
 }
     document.getElementById("astro1").style.zIndex=1;
@@ -200,7 +201,7 @@ function movimientoo(n){
     document.getElementById("planeta1").style.width="420px";
     document.getElementById("planeta1").style.borderRadius="420px";
 
-    var conteoA=0;var conteoB=0;var conteoC=0;
+    var conteoA=0;var conteoB=0;var conteoC=1;
     setInterval("taimto()",1000);
 
     function taimto(){
@@ -210,9 +211,10 @@ function movimientoo(n){
     conteoA++;
     if(conteoA==10){estas2();conteoB++;conteoA=0;}
         if(conteoB==2){estrellafugaz();conteoC++;conteoB=0;nombre(unnomb());}
-            if(conteoC==10){energia+=nupl*cte*dias;;alert("haz visto "+ctef+" estrellas fugaces +"+(nupl*cte*dias))}
+            if(conteoC%10==0){energia+=nupl*cte*dias;;alert("haz visto "+ctef+" estrellas fugaces +"+(nupl*cte*dias))}
 
 
     energia+=cte;energia-=(nupl*(dias+nupl));
     
 }
+nombre(unnomb());
