@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <title>planet</title>
+
     <link rel="stylesheet" href="css/mu.css">
+
     </head>
+
     <body>
         <div class="universo" id="universo0" onClick="mas(2)"><div class="estrella"></div>
-
         </div>
-            <div class="planeta" id="planeta0" onClick="mas(3)">                
-            </div>
-                <div class="satelite" id="satelite0" onClick="colorTodos()">                    
-                </div>                    
+
+            <div class="planeta" id="planeta0" onClick="mas(3)"></div>
+            <div class="planeta" id="planeta1" onClick="mas(3)"></div>
+            
+                <div class="astro" id="astro0" onClick="movimientoastro(0)"></div>                                
+
+                <div class="astro" id="astro1" onClick="colorTodos()"></div> 
+
+                <div class="asteroide" id="asteroide0" onClick="movimientoo(0)"></div>
+
                 <p class="" id="pp0">0</p>
+
                 <script src="js/skripitip.js"></script>
                 <script src="js/nn.js"></script>
         
     </body>
+
 </html>
