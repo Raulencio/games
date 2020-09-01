@@ -211,7 +211,9 @@ function movimientoo(n){
     conteoA++;
     if(conteoA==10){estas2();conteoB++;conteoA=0;}
         if(conteoB==2){estrellafugaz();conteoC++;conteoB=0;nombre(unnomb());}
-            if(conteoC%10==0){energia+=nupl*cte*dias;;alert("haz visto "+ctef+" estrellas fugaces +"+(nupl*cte*dias))}
+            if(conteoC%10==0){energia+=nupl*cte*dias;}
+//alert("haz visto "+ctef+" estrellas fugaces +"+(nupl*cte*dias));
+
 
 
     energia+=cte;energia-=(nupl*(dias+nupl));
