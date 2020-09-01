@@ -57,7 +57,7 @@ tres.style.left="0px";
 tres.style.zIndex=3;
 
 cuatro=contenido[4][1];
-cuatro.style.backgroundColor="#678910";
+cuatro.style.backgroundColor="#abc123";
 cuatro.style.width="100px";
 cuatro.style.height="100px";
 cuatro.style.position="absolute";
@@ -75,7 +75,7 @@ cinco.style.left="850px";
 cinco.style.zIndex=5;
 
 diez=contenido[10][1];
-diez.style.backgroundColor="#abcdef";
+diez.style.backgroundColor=colorRan();
 diez.style.width="50px";
 diez.style.height="100px";
 diez.style.position="absolute";
@@ -84,7 +84,7 @@ diez.style.left="200px";
 diez.style.zIndex=10;
 
 once=contenido[11][1];
-once.style.backgroundColor="#abcdef";
+once.style.backgroundColor=colorRan();
 once.style.width="50px";
 once.style.height="100px";
 once.style.position="absolute";
@@ -93,14 +93,7 @@ once.style.left="700px";
 once.style.zIndex=10;
 
 var did=randomAr(11,10);
-function estid(n){
-    did=n;document.getElementById("did"+n).style.backgroundColor="#000";
-    for(var e=contenido.length;e>9;e--){
-        if(e!=n){
-            document.getElementById("did"+n).style.backgroundColor="#0f0f0f";
-        }
-    }
-}
+function estid(n){did=n;document.getElementById("did"+n).style.backgroundColor=colorRan();}
 
 function dire(n){
     if(n==1){
