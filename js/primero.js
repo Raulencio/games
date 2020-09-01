@@ -75,25 +75,19 @@ cinco.style.left="850px";
 cinco.style.zIndex=5;
 
 diez=contenido[10][1];
-diez.style.backgroundColor=colorRan();
-diez.style.width="50px";
-diez.style.height="100px";
-diez.style.position="absolute";
-diez.style.top="300px";
+//diez.style.backgroundColor="#ce0404";
+diez.style.top="200px";
 diez.style.left="200px";
 diez.style.zIndex=10;
 
 once=contenido[11][1];
-once.style.backgroundColor=colorRan();
-once.style.width="50px";
-once.style.height="100px";
-once.style.position="absolute";
-once.style.top="300px";
+//once.style.backgroundColor="#020968";
+once.style.top="200px";
 once.style.left="700px";
 once.style.zIndex=10;
 
 var did=randomAr(11,10);
-function estid(n){did=n;document.getElementById("did"+n).style.backgroundColor=colorRan();}
+function estid(n){did=n;document.getElementById("did"+n).style.boxShadow="(0px 0px "+randomAr(10,5)+"px 5px"+colorRan()+")";}
 
 function dire(n){
     if(n==1){
@@ -109,5 +103,5 @@ function dire(n){
         }
 }
 function saltar(n){
-
+//document.getElementById("")
 }
