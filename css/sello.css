@@ -1,12 +1,13 @@
 .fondo{
     width:500px;
     height:1000px;
-    background-color: yellowgreen;
+    background-color: rgb(50, 205, 184);
 }
 .cuadroD{
     position:absolute;    
     top:0px;
     left:0px;
+    transition:all 2s;
 }
 .cuadroc{
     width:80px;
@@ -14,8 +15,7 @@
     position: absolute;
     top:32px;
     left:0px;
-    background-color:red;
-    transition:all 2s;
+    background-color:red;    
     border-radius: 80px 80px 0px 0px;
     padding-top:-20px;
 }
