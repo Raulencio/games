@@ -1,46 +1,75 @@
 .dexp0{    
     background-color: #121213;
-    width:125px;
+    width:120px;
     height:200px;
     position:absolute;
-    top:0px;
-    left:0px;
-    transition:all 0.5s;z-index:10;
+    top:80px;
+    left:420px;
+    transition:all 1s;z-index:10;
     }
 .dexp1{    
 background-color: #f80202;
-width:125px;
+width:120px;
 height:200px;
 position:absolute;
 top:0px;
 left:0px;
-transition:all 0.5s;z-index:10;
+transition:all 1s;z-index:10;
+border-radius: 5px;
+}
+.adentro1{
+    width:60px;
+    height:120px;
+    position:absolute;
+    top:40px;
+    left:30px;
+    background-color: #f80202;
+    border-radius: 5px;
+}
+.adentro2{
+    width:60px;
+    height:120px;
+    position:absolute;
+    top:40px;
+    left:30px;
+    background-color: #1b02f8;
+    border-radius: 5px;
+}
+.dexp2>p{
+    color: #1b02f8;
 }
 .dexp2{    
     background-color: #1b02f8;
-    width:125px;
+    width:120px;
     height:200px;
     position:absolute;
     top:0px;
     left:0px;
-    transition:all 0.5s;z-index:10;
+    transition:all 1s;z-index:10;
+    border-radius: 5px;
     }
-.ddos>div:hover{
-    transform:scale(-1,1);
-    background-color: rgb(255, 254, 254);
-}
+    .dexp1>p{
+        color: #f80202;}
 .esquinita{
     position:absolute;
     top:0px;
     left:100px;
-    color:black;
+    color:#121213;
     transform:scale(-1,1);
     font-size:20px;
 }
 .abajito{
     position:absolute;
-    top:150px;
+    top:50px;
     left:50px;
-    color:black;
+    color:#121213;
     transform:scale(-1,1);
+}
+.esquinitabajito{
+    position:absolute;
+    color:#121213;
+    transform:scale(1,-1);
+    top:120px;
+    left:10px;
+    font-size:20px;
 }
