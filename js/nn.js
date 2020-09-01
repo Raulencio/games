@@ -57,7 +57,7 @@ function movimientoastro(n){
         document.getElementById("astro"+n).style.zIndex="1";
         document.getElementById("planeta"+n).style.zIndex="10";
     }
-    else if(numa<=100){dias++;abajo=true;document.getElementById("astro"+n).style.zIndex="10";
+    else if(numa<=120){dias++;abajo=true;document.getElementById("astro"+n).style.zIndex="10";
     }
 
     if(abajo){numa++;numb++;
@@ -75,7 +75,7 @@ function movimientoastros(){
     }
 }
 
-setInterval("movimientoastros()",250);
+setInterval("movimientoastros()",500);
 
 var cte=1;var eest=10;
 
@@ -202,7 +202,7 @@ function movimientoo(n){
     document.getElementById("planeta1").style.borderRadius="420px";
 
     var conteoA=0;var conteoB=0;var conteoC=1;
-    setInterval("taimto()",1000);
+    //setInterval("taimto()",1000);
 
     function taimto(){
         if(conteoC%3==0){
@@ -212,9 +212,7 @@ function movimientoo(n){
     if(conteoA==10){estas2();conteoB++;conteoA=0;}
         if(conteoB==2){estrellafugaz();conteoC++;conteoB=0;nombre(unnomb());}
             if(conteoC%10==0){energia+=nupl*cte*dias;}
-//alert("haz visto "+ctef+" estrellas fugaces +"+(nupl*cte*dias));
-
-
+//alert("haz visto "+ctef+" estrellas fugaces +"+(nupl*cte*dias))
 
     energia+=cte;energia-=(nupl*(dias+nupl));
     
