@@ -1,3 +1,46 @@
-.dexp{    
-    transition:all 1s;
+.dexp0{    
+    background-color: #121213;
+    width:125px;
+    height:200px;
+    position:absolute;
+    top:0px;
+    left:0px;
+    transition:all 0.5s;z-index:10;
+    }
+.dexp1{    
+background-color: #f80202;
+width:125px;
+height:200px;
+position:absolute;
+top:0px;
+left:0px;
+transition:all 0.5s;z-index:10;
+}
+.dexp2{    
+    background-color: #1b02f8;
+    width:125px;
+    height:200px;
+    position:absolute;
+    top:0px;
+    left:0px;
+    transition:all 0.5s;z-index:10;
+    }
+.ddos>div:hover{
+    transform:scale(-1,1);
+    background-color: rgb(255, 254, 254);
+}
+.esquinita{
+    position:absolute;
+    top:0px;
+    left:100px;
+    color:black;
+    transform:scale(-1,1);
+    font-size:20px;
+}
+.abajito{
+    position:absolute;
+    top:150px;
+    left:50px;
+    color:black;
+    transform:scale(-1,1);
 }
