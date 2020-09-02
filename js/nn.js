@@ -47,13 +47,15 @@ function movimientoastro(n){
     //console.log(numa);    
     var asn=document.getElementById("astro"+n);
 if(idv==0){
-    if(n==0){asn.style.top="400px";asn.style.zIndex=1;
+    if(n==0){asn.style.zIndex=1;
+asn.style.top="400px";
     asn.style.left="400px";    idv++;dias++;
     
     }
 }
     else if(idv==1){
-        if(n==0){asn.style.top="230px";asn.style.zIndex=7;
+        if(n==0){asn.style.zIndex=7;
+asn.style.top="230px";
     asn.style.left="230px";    idv--;
     }
     }
