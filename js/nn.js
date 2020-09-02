@@ -42,32 +42,36 @@ function colorTodos(){for(var a=planetas.length;a>=0;a--){colorTodo(a);}nupl++;}
 //     }    
 // }var mensaje="";
 var mensaje="";
-
+var idv=0;
 function movimientoastro(n){    
     //console.log(numa);    
     var asn=document.getElementById("astro"+n);
-
-    if(n==1){asn.style.top=numa-1+"px";asn.style.left=numb-1+"px";    
+if(idv==0){
+    if(n==0){asn.style.top="400px";asn.style.zIndex=1;
+    asn.style.left="400px";    idv++;dias++;
+    
     }
-    else{asn.style.top=numa+"px";asn.style.left=numb+"px";
-    }
-
-    if(numa>420){;
-        abajo=false;
-        document.getElementById("astro"+n).style.zIndex="1";
-        document.getElementById("planeta"+n).style.zIndex="10";
-    }
-    else if(numa<=120){dias++;abajo=true;document.getElementById("astro"+n).style.zIndex="10";
-    }
-
-    if(abajo){numa++;numb++;
-    }
-    if(!abajo){numa--;numb--;
-    }
-    energia+=cte;energia-=(nupl*(dias+nupl));
-    document.getElementById("pp0").textContent=" dias "+dias+" estrellas "+cte+" planetas "+nupl+" Energia "+energia+" mensaje: "+mensaje;
-
 }
+    else if(idv==1){
+        if(n==0){asn.style.top="230px";asn.style.zIndex=7;
+    asn.style.left="230px";    idv--;
+    }
+    }
+
+    // 
+}
+// if(numa>420){;
+    //     abajo=false;
+    //     document.getElementById("astro"+n).style.zIndex="1";
+    //     document.getElementById("planeta"+n).style.zIndex="10";
+    // }
+    // else if(numa<=120){dias++;abajo=true;document.getElementById("astro"+n).style.zIndex="10";
+    // }
+
+    // if(abajo){numa++;numb++;
+    // }
+    // if(!abajo){numa--;numb--;
+    // }
 
 function movimientoastros(){
     for(var a=planetas.length-1;a>=0;a--){
@@ -75,7 +79,8 @@ function movimientoastros(){
     }
 }
 
-setInterval("movimientoastros()",500);
+setInterval("movimientoastro(0)",25000);
+movimientoastro(0);
 
 var cte=1;var eest=10;
 
@@ -124,7 +129,11 @@ function mas(n){var eltea="";
     
 }
 function estas2(){mas(1);//colorTodos();
-energia-=dias;}
+energia+=cte;energia-=(nupl*dias);
+document.getElementById("pp0").textContent=" dias "+dias+" estrellas "+cte+" planetas "+nupl+" Energia "+energia+" mensaje: "+mensaje;
+}
+
+setInterval("estas2()",1000);
 
  var esa="es2";var posicion=0;var altura=0;var modofugaz=0;var efugaz;var ctef=0;
 function estrellafugaz(){
@@ -190,7 +199,7 @@ function movimientoo(n){
 }    
 }
     document.getElementById("astro1").style.zIndex=1;
-    document.getElementById("astro1").style.transform=("translate(-50px,0px)");
+    document.getElementById("astro1").style.transform=("translate(-150px,-50px)");
     document.getElementById("astro1").style.height="80px";
     document.getElementById("astro1").style.width="80px";
     document.getElementById("astro1").style.borderRadius="80px";
