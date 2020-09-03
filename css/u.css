@@ -3,11 +3,11 @@
     flex-direction: column;
     
 }
-.fila{width:350px;height:50px;background-color: red;
+.fila{width:490px;height:70px;background-color: red;
     display:inline-flex;
     flex-direction: row;}
 .cuadro{
-    width:50px;height:50px;background-color: green;
+    width:70px;height:70px;background-color: green;
 }
 .eldiv>div>div:hover{
     background-color:yellow;
