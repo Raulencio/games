@@ -27,3 +27,13 @@ function colorRan(){
 	}
 	return "#" + coolor;
 }
+
+function generarDiv(na,nb,ta,tb){//generarDiv(7,11,"fila","cuadro");
+var envio="";
+for(var a=1;a<=na;a++){
+    envio+="<div class="+ta+" id="+ta+a+">";
+    for(var e=1;e<=nb;e++){
+   envio+="<div class="+tb+" id="+a+tb+e+"> </div>";
+    }envio+="</div>";
+}return envio;
+}
