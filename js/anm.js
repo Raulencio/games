@@ -23,7 +23,8 @@ div[f][0].hidden=div[f][6];
 if(div[3][2]>1&&div[4][2]>1){
 div[3][2]-=div[1][7];
 div[3][5]+=div[1][7];
-div[4][2]-=div[2][7];
+if(div[3][2]<900){
+div[4][2]-=div[2][7];}
 }
 }
 setInterval("juntos()",1000);
