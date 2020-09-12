@@ -2,10 +2,11 @@
 var colorEqA=colorRan(),colorEqB=colorRan();
 var div=[
 [document.getElementById("div0"),colorRan(),990,1200,0,0],
-[document.getElementById("div1"),colorEqA,100,200,420,180],
-[document.getElementById("div2"),colorEqB,100,200,420,720],
-[document.getElementById("div3"),colorEqB,900,90,100,45],
-[document.getElementById("div4"),colorEqA,900,90,900,45]
+[document.getElementById("botones"),colorRan(),990,420,1200,0],
+[document.getElementById("div1"),colorEqA,300,300,755,90],
+[document.getElementById("div2"),colorEqB,300,300,135,600],
+[document.getElementById("div3"),colorEqB,700,45,45,245],
+[document.getElementById("div4"),colorEqA,700,45,1100,45]
 ];
 
 for(var f=div.length-1;f>=0;f--){
