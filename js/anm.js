@@ -1,9 +1,11 @@
+/* div por id, color div,ancho,largo,top,left */
+var colorEqA=colorRan(),colorEqB=colorRan();
 var div=[
-[document.getElementById("div0"),colorRan(),840,420,0,0],
-[document.getElementById("div1"),colorRan(),50,100,200,200],
-[document.getElementById("div2"),colorRan(),50,100,200,600],
-[document.getElementById("div3"),colorRan(),150,10,50,50],
-[document.getElementById("div4"),colorRan(),150,10,50,300]
+[document.getElementById("div0"),colorRan(),990,1200,0,0],
+[document.getElementById("div1"),colorEqA,100,200,420,180],
+[document.getElementById("div2"),colorEqB,100,200,420,720],
+[document.getElementById("div3"),colorEqB,900,90,100,45],
+[document.getElementById("div4"),colorEqA,900,90,900,45]
 ];
 
 for(var f=div.length-1;f>=0;f--){
