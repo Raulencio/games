@@ -15,6 +15,7 @@ var div=[
 [document.getElementById("aumataque"),colorRan(),100,100,100,600,false],//aumentar ataque
 [document.getElementById("aumef"),colorRan(),100,100,100,410,false]//aumentar enerfil
 ];
+var ctne=1;
 var vidaMaximaA=div[4][2],vidaMaximaB=div[3][2];
 function juntos(){
     if(enerfil<maxenerfil){
@@ -36,11 +37,18 @@ div[f][0].style.transition="all 0.5s";
 
 }
 
-if(div[3][2]>1&&div[4][2]>1){
+if(div[3][2]>=0&&div[4][2]>=0){
 div[3][2]-=div[1][7];
 div[3][5]+=div[1][7];
-if(div[3][2]<0){
-div[3][2]=0;
+if((div[4][2])<=0){alert("Game Over");
+}else if(div[3][2]<0){
+    var nuevocolor=colorRan();
+div[3][2]=700;ctne++;
+div[2][1]=nuevocolor;
+div[3][1]=nuevocolor;
+div[5][1]=nuevocolor;
+div[3][5]=245;
+div[2][7]+=randomAr(ctne*2,ctne);
 }
 if(div[3][2]<810){
 div[4][2]-=div[2][7];}
