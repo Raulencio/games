@@ -1,5 +1,5 @@
 /* 0 div por id,1 color div,2 ancho,3 largo,4 top,5 left,6 hidden false = se ve ,7 daño por segundo */
-var enerfil=0,enerfilaum=1,maxenerfil=100;
+var enerfil=0,enerfilaum=1,maxenerfil=50;
 var colorEqA=colorRan(),colorEqB=colorRan();
 var recup=50;var aumd=1;
 var div=[
@@ -85,7 +85,7 @@ if(nen=="1"){
 function recupera(n){
     
     if(div[4][2]<vidaMaximaA){
-        if(enerfil>=recup){enerfil-=recup;
+        if(enerfil>=recup){enerfil-=recup;recup*=2;maxenerfil=recup;
     div[4][2]+=n;}}
 if(div[4][2]>vidaMaximaA){
     div[4][2]=vidaMaximaA}
