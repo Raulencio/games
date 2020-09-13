@@ -1,7 +1,7 @@
 /* 0 div por id,1 color div,2 ancho,3 largo,4 top,5 left,6 hidden false = se ve ,7 daño por segundo */
 var enerfil=0,enerfilaum=1,maxenerfil=50;
 var colorEqA=colorRan(),colorEqB=colorRan();
-var recup=50;var aumd=1;
+var recup=50;var aumd=1;var valr=10;
 var div=[
 [document.getElementById("div0"),colorRan(),990,1200,0,0,false],//fondo
 [document.getElementById("div1"),colorEqA,300,300,755,90,false,randomAr(5,1)],//cuadro pj1
@@ -11,9 +11,11 @@ var div=[
 [document.getElementById("div5"),colorEqB,420,300,135,90,false],//info pj2
 [document.getElementById("div6"),colorEqA,420,300,755,480,false],//info pj1
 [document.getElementById("botones"),colorRan(),990,420,1200,0,false],//cuadro botones
-[document.getElementById("recuperarvida"),colorRan(),100,100,100,790,false],//recuperar vida
-[document.getElementById("aumataque"),colorRan(),100,100,100,600,false],//aumentar ataque
-[document.getElementById("aumef"),colorRan(),100,100,100,410,false]//aumentar enerfil
+[document.getElementById("recuperarvida"),colorRan(),100,100,90,790,false],//recuperar vida
+[document.getElementById("aumataque"),colorRan(),100,100,90,600,false],//aumentar ataque
+[document.getElementById("aumef"),colorRan(),100,100,90,410,false],//aumentar enerfil
+[document.getElementById("maxef"),colorRan(),100,100,90,220,false]//aumentar enerfil
+
 ];
 var ctne=1;
 var vidaMaximaA=div[4][2],vidaMaximaB=div[3][2];
@@ -43,12 +45,12 @@ div[3][5]+=div[1][7];
 if((div[4][2])<=0){alert("Game Over");
 }else if(div[3][2]<0){
     var nuevocolor=colorRan();
-div[3][2]=700;ctne++;
+div[3][2]=700;ctne++;valr++;
 div[2][1]=nuevocolor;
 div[3][1]=nuevocolor;
 div[5][1]=nuevocolor;
 div[3][5]=245;
-div[2][7]+=randomAr(ctne*2,ctne);
+div[2][7]+=randomAr(ctne*2,ctne);enerfil+=valr*ctne;
 }
 if(div[3][2]<810){
 div[4][2]-=div[2][7];}
@@ -56,10 +58,11 @@ div[4][2]-=div[2][7];}
 
 document.getElementById("p3").textContent="EnerFill: "+enerfil+"/"+maxenerfil;
 document.getElementById("p2").textContent="Vida: "+div[4][2]+"/"+vidaMaximaA+" Ataque: "+div[1][7]+"/s";
-document.getElementById("p1").textContent="Vida: "+div[3][2]+"/"+vidaMaximaB+" Ataque: "+div[2][7]+"/s";
+document.getElementById("p1").textContent="Vida: "+div[3][2]+"/"+vidaMaximaB+" Ataque: "+div[2][7]+"/s Nivel: "+ctne;
 document.getElementById("pr").textContent=recup;
 document.getElementById("pa").textContent=aumd;
 document.getElementById("pf").textContent=enerfilaum;
+document.getElementById("pef").textContent=maxenerfil;
 }
 document.getElementById("p3").style.fontSize="45px";
 document.getElementById("p2").style.fontSize="45px";
@@ -67,6 +70,7 @@ document.getElementById("p1").style.fontSize="45px";
 document.getElementById("pr").style.fontSize="24px";
 document.getElementById("pa").style.fontSize="24px";
 document.getElementById("pf").style.fontSize="24px";
+document.getElementById("pef").style.fontSize="24px";
 
 setInterval("juntos()",1000);
 
@@ -89,11 +93,15 @@ if(nen=="1"){
     }
 }
 }
-
-function recupera(n){
-    
+function maxef(){
+    if(enerfil==maxenerfil){
+    maxenerfil*=2;
+    }
+}
+function recupera(n){    
     if(div[4][2]<vidaMaximaA){
-        if(enerfil>=recup){enerfil-=recup;recup*=2;maxenerfil=recup;
+        if(enerfil>=recup){enerfil-=recup;
+            recup++;
     div[4][2]+=n;}}
 if(div[4][2]>vidaMaximaA){
     div[4][2]=vidaMaximaA}
