@@ -32,13 +32,16 @@ div[f][0].style.height=div[f][3]+"px";
 div[f][0].style.top=div[f][4]+"px";
 div[f][0].style.left=div[f][5]+"px";
 div[f][0].hidden=div[f][6];
-div[f][0].style.transition="all 1s";
+div[f][0].style.transition="all 0.5s";
 
 }
 
 if(div[3][2]>1&&div[4][2]>1){
 div[3][2]-=div[1][7];
 div[3][5]+=div[1][7];
+if(div[3][2]<0){
+div[3][2]=0;
+}
 if(div[3][2]<810){
 div[4][2]-=div[2][7];}
 }
