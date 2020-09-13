@@ -1,16 +1,18 @@
 /* 0 div por id,1 color div,2 ancho,3 largo,4 top,5 left,6 hidden false = se ve ,7 daño por segundo */
 var enerfil=0;enerfilaum=1;
 var colorEqA=colorRan(),colorEqB=colorRan();
+var recup=50;var aumd=1;
 var div=[
 [document.getElementById("div0"),colorRan(),990,1200,0,0,false],
-[document.getElementById("div1"),colorEqA,300,300,755,90,false,randomAr(10,1)],
-[document.getElementById("div2"),colorEqB,300,300,135,600,false,randomAr(10,1)],
+[document.getElementById("div1"),colorEqA,300,300,755,90,false,randomAr(5,1)],
+[document.getElementById("div2"),colorEqB,300,300,135,600,false,randomAr(10,5)],
 [document.getElementById("div3"),colorEqB,700,45,45,245,false],
 [document.getElementById("div4"),colorEqA,randomAr(800,420),45,1100,45,false],
 [document.getElementById("div5"),colorEqB,420,300,135,90,false],
 [document.getElementById("div6"),colorEqA,420,300,755,480,false],
 [document.getElementById("botones"),colorRan(),990,420,1200,0,false],
-[document.getElementById("recuperarvida"),colorRan(),100,100,100,790,false]
+[document.getElementById("recuperarvida"),colorRan(),100,100,100,790,false],
+[document.getElementById("aumataque"),colorRan(),100,100,100,600,false]
 ];
 var vidaMaximaA=div[4][2],vidaMaximaB=div[3][2];
 function juntos(){enerfil+=enerfilaum;
@@ -33,12 +35,16 @@ if(div[3][2]<810){
 div[4][2]-=div[2][7];}
 }
 document.getElementById("p3").textContent="EnerFill: "+enerfil;
-document.getElementById("p2").textContent="Vida: "+div[4][2]+" / "+vidaMaximaA+" Ataque: "+div[1][7]+"/s";
-document.getElementById("p1").textContent="vida: "+div[3][2]+" / "+vidaMaximaB+" Ataque: "+div[2][7]+"/s";
+document.getElementById("p2").textContent="Vida: "+div[4][2]+"/"+vidaMaximaA+" Ataque: "+div[1][7]+"/s";
+document.getElementById("p1").textContent="Vida: "+div[3][2]+"/"+vidaMaximaB+" Ataque: "+div[2][7]+"/s";
+document.getElementById("pr").textContent=recup;
+document.getElementById("pa").textContent=aumd;
 }
 document.getElementById("p3").style.fontSize="45px";
 document.getElementById("p2").style.fontSize="45px";
 document.getElementById("p1").style.fontSize="45px";
+document.getElementById("pr").style.fontSize="24px";
+document.getElementById("pa").style.fontSize="24px";
 
 setInterval("juntos()",1000);
 
@@ -61,13 +67,20 @@ if(nen=="1"){
     }
 }
 }
-var recup=0;var cr=0;
+
 function recupera(n){
-    if(div[4][2]<vidaMaximaA){cr++;recup++;
-    div[4][2]+=n*cr;
+    if(enerfil>=recup){enerfil-=recup;
+    if(div[4][2]<vidaMaximaA){
+    div[4][2]+=n;}}
 if(div[4][2]>vidaMaximaA){div[4][2]=vidaMaximaA+div[2][7]}
-}document.getElementById("pr").textContent=n*cr;
-document.getElementById("pr").style.fontSize="24px";
+}
+
+function aumat(a){
+    if(enerfil>=a){
+    enerfil-=a;
+        div[1][7]+=a;
+        aumd++;
+    }
 }
 recupera(1);
 // for(var x=1;x<=z;x++){
