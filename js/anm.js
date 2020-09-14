@@ -11,11 +11,12 @@ var div=[
 [document.getElementById("div5"),colorEqB,420,300,135,90,false],//info pj2
 [document.getElementById("div6"),colorEqA,420,300,755,480,false],//info pj1
 [document.getElementById("botones"),colorRan(),990,420,1200,0,false],//cuadro botones
-[document.getElementById("recuperarvida"),colorRan(),90,90,180,810,false],//recuperar vida
-[document.getElementById("aumataque"),colorRan(),90,90,180,630,false],//aumentar ataque
-[document.getElementById("aumef"),colorRan(),90,90,180,450,false],//aumentar enerfil x s
-[document.getElementById("maxef"),colorRan(),90,90,180,270,false],//aumentar enerfil maximo
-[document.getElementById("vidmax"),colorRan(),90,90,180,90,false]//aumentar vida maxima
+[document.getElementById("recuperarvida"),colorRan(),90,90,180,510,false],//recuperar vida
+[document.getElementById("aumataque"),colorRan(),90,90,180,410,false],//aumentar ataque
+[document.getElementById("aumef"),colorRan(),90,90,180,310,false],//aumentar enerfil x s
+[document.getElementById("maxef"),colorRan(),90,90,180,210,false],//aumentar enerfil maximo
+[document.getElementById("vidmax"),colorRan(),90,90,180,110,false],//aumentar vida maxima
+[document.getElementById("recue"),colorRan(),90,90,180,10,false]//aumentar vida maxima
 
 ];
 var ctne=1;
@@ -137,6 +138,13 @@ function aumef(){
 function vidmax(){
     if(enerfil>=maxenerfil){enerfil-=maxenerfil;
     vidaMaximaA+=maxenerfil;}
+}
+function recue(){
+    div[4][7]+=enerfil;
+    enerfil-=enerfil;
+    if(div[4][7]>vidaMaximaA){
+        div[4][7]=vidaMaximaA;
+    }
 }
 recupera(1);
 // for(var x=1;x<=z;x++){
