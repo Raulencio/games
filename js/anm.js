@@ -1,7 +1,8 @@
 /* 0 div por id,1 color div,2 ancho,3 largo,4 top,5 left,6 hidden false = se ve ,7 daño por segundo */
-var enerfil=0,enerfilaum=1,maxenerfil=10;
+var enerfil=1000,enerfilaum=1,maxenerfil=10;var monedas=0;
 var colorEqA=colorRan(),colorEqB=colorRan();
 var recup=50;var aumd=1;var valr=10;var anchobarra=900;
+var rps=0;
 var div=[
 [document.getElementById("div0"),colorRan(),990,1200,0,0,false],//fondo
 [document.getElementById("div1"),colorEqA,300,300,755,90,false,randomAr(5,1)],//cuadro pj1
@@ -10,24 +11,71 @@ var div=[
 [document.getElementById("div4"),colorEqA,anchobarra,45,1100,45,false,randomAr(1000,500)],//vida pj1
 [document.getElementById("div5"),colorEqB,420,300,135,90,false],//info pj2
 [document.getElementById("div6"),colorEqA,420,300,755,480,false],//info pj1
+
+[document.getElementById("div7"),colorRan(),420,150,555,420,false],//jugaren
+
 [document.getElementById("botones"),colorRan(),990,420,1200,0,false],//cuadro botones
-[document.getElementById("recuperarvida"),colorRan(),90,90,180,510,false],//recuperar vida
-[document.getElementById("aumataque"),colorRan(),90,90,180,410,false],//aumentar ataque
-[document.getElementById("aumef"),colorRan(),90,90,180,310,false],//aumentar enerfil x s
-[document.getElementById("maxef"),colorRan(),90,90,180,210,false],//aumentar enerfil maximo
-[document.getElementById("vidmax"),colorRan(),90,90,180,110,false],//aumentar vida maxima
-[document.getElementById("recue"),colorRan(),90,90,180,10,false]//aumentar vida maxima
+[document.getElementById("recuperarvida"),colorRan(),90,135,180,510,false],//recuperar vida
+[document.getElementById("aumataque"),colorRan(),90,135,180,410,false],//aumentar ataque
+[document.getElementById("aumef"),colorRan(),90,135,180,310,false],//aumentar enerfil x s
+[document.getElementById("maxef"),colorRan(),90,135,180,210,false],//aumentar enerfil maximo
+[document.getElementById("vidmax"),colorRan(),90,135,180,110,false],//aumentar vida maxima
+[document.getElementById("recue"),colorRan(),90,135,180,10,false]//aumentar vida maxima
 
 ];
-var ctne=1;
-var vidaMaximaA=div[4][7],vidaMaximaB=div[3][7];
+var ctne=0;
+var vidaMaximaA=div[4][7],vidaMaximaB=div[3][7];var unavez=true;
+var veinte=true;
+var enemigo=true;
+function acontece(){
+if(veinte){
+    pp();veinte=false;
+}else{
+    veinte=true;enemigo=true;
+    div[2][6]=false;
+    div[3][6]=false;
+    div[5][6]=false;
+}
+}
+
+function pp(){    
+    var nuevocolor=colorRan();    
+    ctne++;
+    div[3][7]=((700+ctne)*(randomAr(10*ctne,5+ctne)));
+    vidaMaximaB=div[3][7];
+    valr++;
+    div[2][1]=nuevocolor;
+    div[3][1]=nuevocolor;
+    div[5][1]=nuevocolor;    
+    div[2][7]=randomAr(ctne*ctne,ctne);
+    div[2][6]=true;
+    div[3][6]=true;
+    div[5][6]=true;   
+}
+
+
+function pelea(){
+if(unavez){
+    if(!(div[2][6])){        
+        if(div[3][7]>0){
+        div[3][7]-=div[1][7];
+        div[4][7]-=div[2][7];   
+        }else if((div[3][2]<=0)&&enemigo){monedas+=ctne;
+//        acontece();
+            alert("monedas +"+ctne);enemigo=false; acontece();        
+        }    
+   }    
+}
+}
+ 
 function juntos(){
-    if(enerfil<maxenerfil){
+if(enerfil<maxenerfil){
     enerfil+=enerfilaum;
     if(enerfil>maxenerfil){
         enerfil=maxenerfil;
     }
-    }
+}
+
 for(var f=div.length-1;f>=0;f--){
     
 div[f][0].style.position="absolute";
@@ -40,51 +88,33 @@ div[f][0].hidden=div[f][6];
 div[f][0].style.transition="all 0.5s";
 
 }
-if(div[3][2]<anchobarra){
-    div[4][7]-=div[2][7];
-    div[4][2]=Math.floor((anchobarra*div[4][7])/vidaMaximaA);
-}
 
-if(div[3][2]>=1){
-div[3][7]-=div[1][7];
-div[3][2]=Math.floor((anchobarra*div[3][7])/vidaMaximaB);
+if(div[4][7]<vidaMaximaA){div[4][7]+=rps;}else if(div[4][7]>vidaMaximaA){div[4][7]=vidaMaximaA;}
 
+div[4][2]=Math.floor((anchobarra*div[4][7])/vidaMaximaA);
+div[3][2]=Math.floor((anchobarra*div[3][7])/vidaMaximaB);        
 div[3][5]=45+Math.floor(((vidaMaximaB-div[3][7])*anchobarra)/vidaMaximaB);
-}else if(div[3][2]<0){
-    div[3][2]=0;
-}
 
-if((div[4][2])<=0){alert("Game Over");
-}
+if(unavez){if((div[4][2])<=0){alert("Game Over");unavez=false;}}
+//reiniciar
 
-// else if(div[3][2]<0){
-//     var nuevocolor=colorRan();
-// div[3][2]=700;ctne++;valr++;
-// div[2][1]=nuevocolor;
-// div[3][1]=nuevocolor;
-// div[5][1]=nuevocolor;
-// div[3][5]=245;
-// div[2][7]+=randomAr(ctne*2,ctne);enerfil+=valr*ctne;
-// }
+pelea();
 
-
-
-
-document.getElementById("p3").textContent="EnerFill: "+enerfil+"/"+maxenerfil;
+document.getElementById("p3").textContent="EnerFill: "+enerfil+"/"+maxenerfil+" Monedas: "+monedas;
 document.getElementById("p2").textContent="Vida: "+div[4][7]+"/"+vidaMaximaA+" Ataque: "+div[1][7]+"/s";
-document.getElementById("p1").textContent="Vida: "+div[3][7]+"/"+vidaMaximaB+" Ataque: "+div[2][7]+"/s Nivel: "+ctne;
+document.getElementById("p1").textContent="Nivel: "+ctne+" Vida: "+div[3][7]+"/"+vidaMaximaB+" Ataque: "+div[2][7]+"/s";
 document.getElementById("pr").textContent=recup;
 document.getElementById("pa").textContent=aumd;
 document.getElementById("pf").textContent=enerfilaum;
 document.getElementById("pef").textContent=maxenerfil;
 }
+
+
 document.getElementById("p3").style.fontSize="45px";
 document.getElementById("p2").style.fontSize="45px";
 document.getElementById("p1").style.fontSize="45px";
-document.getElementById("pr").style.fontSize="24px";
-document.getElementById("pa").style.fontSize="24px";
-document.getElementById("pf").style.fontSize="24px";
-document.getElementById("pef").style.fontSize="24px";
+
+
 
 setInterval("juntos()",1000);
 
@@ -116,7 +146,7 @@ function maxef(){
 function recupera(n){    
     if(div[4][7]<vidaMaximaA){
         if(enerfil>=recup){enerfil-=recup;
-            recup++;
+            recup++;rps++;
     div[4][7]+=n;}}
 if(div[4][7]>vidaMaximaA){
     div[4][7]=vidaMaximaA}
@@ -146,6 +176,9 @@ function recue(){
         div[4][7]=vidaMaximaA;
     }
 }
+
+
+acontece();
 recupera(1);
 // for(var x=1;x<=z;x++){
 //     div[0][0].innerHTML+=("<div id='div"+x+"'></div>");
