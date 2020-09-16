@@ -1,27 +1,17 @@
 /* 0 div por id,1 color div,2 ancho,3 largo,4 top,5 left,6 hidden false = se ve ,7 daño por segundo vida total*/
 
-if(parseInt(localStorage.getItem("enerfilaum"))>1){
-    var enerfilaum=parseInt(localStorage.getItem("enerfilaum"));
-}else{
-    enerfilaum=1;
-}
-if(parseInt(localStorage.getItem("maxenerfil"))>1){
-    var maxenerfil=parseInt(localStorage.getItem("maxenerfil"));
-}else{
-    maxenerfil=10;
-}
-var enerfil=1000,monedas=0;
+var enerfil=1000;
 var colorEqA=colorRan(),colorEqB=colorRan();
-var recup=50;var aumd=1;var valr=10;var anchobarra=420;
+var valr=10;var anchobarra=420;
 var rps=0;
 var div=[
 [document.getElementById("div0"),colorRan()+"AA",990,1200,0,0,false],//fondo
 
-[document.getElementById("div1"),colorEqA,300,240,795,90,false,randomAr(5,1)],//cuadro pj1
+[document.getElementById("div1"),colorEqA,300,240,795,90,false,unas],//cuadro pj1
 [document.getElementById("div2"),colorEqB,300,240,795,600,false,randomAr(10,5)],//cuadro pj2
 
 [document.getElementById("div3"),colorEqB,anchobarra,45,1100,0,false,randomAr(5000,1000)],//vida pj2
-[document.getElementById("div4"),colorEqA,anchobarra,45,1100,45,false,randomAr(1000,500)],//vida pj1
+[document.getElementById("div4"),colorEqA,anchobarra,45,1100,45,false,vidaMaximaA],//vida pj1
 
 [document.getElementById("div5"),colorEqB,300,300,635,600,false],//info pj2
 [document.getElementById("div6"),colorEqA,300,300,635,90,false],//info pj1
@@ -39,8 +29,8 @@ var div=[
 [document.getElementById("recue"),colorRan(),90,135,180,10,false]//aumentar vida maxima
 
 ];
-var ctne=0;
-var vidaMaximaA=div[4][7],vidaMaximaB=div[3][7];var unavez=true;
+
+var vidaMaximaB=div[3][7];var unavez=true;
 var veinte=true;
 var enemigo=true;
 
@@ -57,7 +47,7 @@ if(veinte){
 
 function pp(){    
     var nuevocolor=colorRan();    
-    ctne++;
+    ctne++;    
     div[3][7]=((700+ctne)*(randomAr(10*ctne,5+ctne)));
     vidaMaximaB=div[3][7];
     valr++;
@@ -77,9 +67,10 @@ if(unavez){
         if(div[3][7]>0){
         div[3][7]-=div[1][7];
         div[4][7]-=div[2][7];   
-        }else if((div[3][2]<=0)&&enemigo){monedas+=ctne;
+        }else if((div[3][2]<=0)&&enemigo){ficha+=ctne;            
+        
 //        acontece();
-            alert("monedas +"+ctne);enemigo=false; acontece();        
+            alert("fichas +"+ctne);enemigo=false; acontece();        
         }    
    }    
 }
@@ -115,7 +106,7 @@ for(var f=div.length-1;f>=0;f--){
     
     }
     
-document.getElementById("p3").textContent="EnerFill: "+enerfil+"/"+maxenerfil+" Monedas: "+monedas;
+document.getElementById("p3").textContent="EnerFill: "+enerfil+"/"+maxenerfil+" Fichas: "+ficha;
 document.getElementById("p2").textContent="Vida: "+div[4][7]+"/"+vidaMaximaA+" Ataque: "+div[1][7]+"/s";
 document.getElementById("p1").textContent="Nivel: "+ctne+" Vida: "+div[3][7]+"/"+vidaMaximaB+" Ataque: "+div[2][7]+"/s";
 document.getElementById("pr").textContent=recup;
