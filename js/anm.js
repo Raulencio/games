@@ -6,8 +6,8 @@ var rps=0;
 var div=[
 [document.getElementById("div0"),colorRan()+"AA",990,1200,0,0,false],//fondo
 
-[document.getElementById("div1"),colorEqA,300,240,755,90,false,randomAr(5,1)],//cuadro pj1
-[document.getElementById("div2"),colorEqB,300,240,755,600,false,randomAr(10,5)],//cuadro pj2
+[document.getElementById("div1"),colorEqA,300,240,795,90,false,randomAr(5,1)],//cuadro pj1
+[document.getElementById("div2"),colorEqB,300,240,795,600,false,randomAr(10,5)],//cuadro pj2
 
 [document.getElementById("div3"),colorEqB,anchobarra,45,1100,0,false,randomAr(5000,1000)],//vida pj2
 [document.getElementById("div4"),colorEqA,anchobarra,45,1100,45,false,randomAr(1000,500)],//vida pj1
@@ -16,6 +16,8 @@ var div=[
 [document.getElementById("div6"),colorEqA,300,300,635,90,false],//info pj1
 
 [document.getElementById("div7"),colorRan(),150,150,420,0,false],//jugaren
+
+[document.getElementById("cielo"),colorRan(),990,420,0,0,false],//cielo
 
 [document.getElementById("botones"),colorRan(),990,420,1200,0,false],//cuadro botones
 [document.getElementById("recuperarvida"),colorRan(),90,135,180,510,false],//recuperar vida
