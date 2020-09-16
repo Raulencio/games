@@ -1,5 +1,5 @@
 /* 0 div por id,1 color div,2 ancho,3 largo,4 top,5 left,6 hidden false = se ve ,7 daño por segundo vida total*/
-var enerfil=1000,enerfilaum=1,maxenerfil=10;var monedas=0;
+var enerfil=1000,enerfilaum=1,maxenerfil=parseInt(localStorage.getItem("maxenerfil"));var monedas=0;
 var colorEqA=colorRan(),colorEqB=colorRan();
 var recup=50;var aumd=1;var valr=10;var anchobarra=420;
 var rps=0;
@@ -17,7 +17,7 @@ var div=[
 
 [document.getElementById("div7"),colorRan(),150,150,420,0,false],//jugaren
 
-[document.getElementById("cielo"),colorRan(),990,420,0,0,false],//cielo
+[document.getElementById("cielo"),colorRan()+"AA",990,420,0,0,false],//cielo
 
 [document.getElementById("botones"),colorRan(),990,420,1200,0,false],//cuadro botones
 [document.getElementById("recuperarvida"),colorRan(),90,135,180,510,false],//recuperar vida

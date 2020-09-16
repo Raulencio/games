@@ -23,6 +23,7 @@ function maxef(){
         enerfil-=maxenerfil;
     maxenerfil*=2;
     }
+    localStorage.setItem("maxenerfil",maxenerfil);
 }
 
 function recupera(n){    
