@@ -47,6 +47,7 @@ function aumef(){
     if(enerfil>enerfilaum){
         enerfil-=enerfilaum;
         enerfilaum++;
+        localStorage.setItem("enerfilaum",enerfilaum);
     }
 }
 

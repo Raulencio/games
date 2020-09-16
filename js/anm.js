@@ -1,5 +1,16 @@
 /* 0 div por id,1 color div,2 ancho,3 largo,4 top,5 left,6 hidden false = se ve ,7 daño por segundo vida total*/
-var enerfil=1000,enerfilaum=1,maxenerfil=parseInt(localStorage.getItem("maxenerfil"));var monedas=0;
+
+if(parseInt(localStorage.getItem("enerfilaum"))>1){
+    var enerfilaum=parseInt(localStorage.getItem("enerfilaum"));
+}else{
+    enerfilaum=1;
+}
+if(parseInt(localStorage.getItem("maxenerfil"))>1){
+    var maxenerfil=parseInt(localStorage.getItem("maxenerfil"));
+}else{
+    maxenerfil=10;
+}
+var enerfil=1000,monedas=0;
 var colorEqA=colorRan(),colorEqB=colorRan();
 var recup=50;var aumd=1;var valr=10;var anchobarra=420;
 var rps=0;
