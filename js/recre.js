@@ -59,6 +59,7 @@ function recue(){
     }
 }
 function guardar(){
+    if(!veinte){
     localStorage.setItem("vidaMaximaA",vidaMaximaA);
     localStorage.setItem("aumd",aumd);
     localStorage.setItem("maxenerfil",maxenerfil);
@@ -67,4 +68,5 @@ function guardar(){
     localStorage.setItem("ctne",ctne);
     localStorage.setItem("tofd",div[1][7]);
     localStorage.setItem("recup",recup);
+    alert("Guardado");}
 }
