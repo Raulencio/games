@@ -66,16 +66,3 @@ function mult(){
     document.getElementById("trt").textContent="x"+multiplicador;
     div[9][1]=colorRan();
 }
-function guardar(){
-    if(!veinte){
-    localStorage.setItem("vidaMaximaA",vidaMaximaA);
-    localStorage.setItem("aumd",aumd);
-    localStorage.setItem("maxenerfil",maxenerfil);
-    localStorage.setItem("enerfilaum",enerfilaum);
-    localStorage.setItem("ficha",ficha);
-    localStorage.setItem("ctne",ctne);
-    localStorage.setItem("tofd",div[1][7]);
-    localStorage.setItem("recup",recup);
-    localStorage.setItem("multiplicador",multiplicador);
-    alert("Guardado");}
-}

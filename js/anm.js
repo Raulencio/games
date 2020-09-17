@@ -78,14 +78,13 @@ if(unavez){
 }
 }
  
-function juntos(){
+function juntos(){segundo++;
 if(enerfil<maxenerfil){
     enerfil+=enerfilaum;
     if(enerfil>maxenerfil){
         enerfil=maxenerfil;
     }
 }
-
 
 if(div[4][7]<vidaMaximaA){div[4][7]+=rps;}else if(div[4][7]>vidaMaximaA){div[4][7]=vidaMaximaA;}
 
