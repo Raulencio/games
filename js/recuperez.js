@@ -17,7 +17,7 @@ if(parseInt(localStorage.getItem("ficha"))>0){
 }
 
 if(parseInt(localStorage.getItem("ctne"))>1){
-    var ctne=parseInt(localStorage.getItem("ctne"));
+    var ctne=(parseInt(localStorage.getItem("ctne")))-1;
 }else{
     ctne=0;
 }
@@ -46,3 +46,8 @@ else{
         recup=50;
     }
 
+    if(parseInt(localStorage.getItem("multiplicador"))>1){
+        var multiplicador=parseInt(localStorage.getItem("multiplicador"));
+    }else{
+        multiplicador=1;
+    }
