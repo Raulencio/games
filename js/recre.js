@@ -62,7 +62,10 @@ function recue(){for(var e=multiplicador;e>=1;e--){
     }
 }}
 function mult(){
-    multiplicador=parseInt(document.getElementById("trt").value);
-    document.getElementById("trt").textContent="x"+multiplicador;
+    
+if(parseInt(document.getElementById("trt").value)>=1){multiplicador=parseInt(document.getElementById("trt").value);}
+else{
+    multiplicador=1;
+}
     div[9][1]=colorRan();
 }

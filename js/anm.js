@@ -20,7 +20,7 @@ var div=[
 
 [document.getElementById("cielo"),colorRan()+"AA",990,420,0,0,false],//cielo
 
-[document.getElementById("bttn"),colorRan(),90,90,5,700,false],//btn mult
+[document.getElementById("bttn"),colorRan(),90,90,420,700,false],//btn mult
 
 [document.getElementById("botones"),colorRan(),990,420,1200,0,false],//cuadro botones
 [document.getElementById("recuperarvida"),colorRan(),90,135,180,510,false],//recuperar vida
