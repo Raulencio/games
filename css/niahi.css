@@ -8,3 +8,11 @@
 .cart:hover{
 transform:scale(1.1,1.1);z-index:10;
 }
+.igt{
+    width:150px;
+    height:90px;
+    position:absolute;
+    left:820px;
+    top:5px;
+    font-size:40px;
+}
