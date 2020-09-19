@@ -3,6 +3,7 @@
     width:90px;
     height:90px;
     font-size: 24px;
+    border-radius:90px;
     
 }
 .cart:hover{
@@ -12,7 +13,23 @@ transform:scale(1.1,1.1);z-index:10;
     width:150px;
     height:90px;
     position:absolute;
-    left:820px;
+    left:790px;
     top:420px;
     font-size:40px;
+}
+.estrella{
+    width:1px;
+    height:1px;
+    position:absolute;
+    top:0px;
+    left:0px;
+    background-color: whitesmoke;
+    border-radius: 5px;box-shadow: 0px 0px 1px 0px white;
+    transition: all 1.5s;
+}
+.soluna{
+    z-index:10;
+}
+.cielo{
+    z-index:5;
 }
