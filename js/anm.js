@@ -26,10 +26,21 @@ var div=[
 [document.getElementById("aumef"),colorRan(),90,135,180,310,false],//aumentar enerfil x s
 [document.getElementById("maxef"),colorRan(),90,135,180,210,false],//aumentar enerfil maximo
 [document.getElementById("vidmax"),colorRan(),90,135,180,110,false],//aumentar vida maxima
-[document.getElementById("recue"),colorRan(),90,135,180,10,false]//aumentar vida maxima
+[document.getElementById("recue"),colorRan(),90,135,180,10,false],//aumentar vida maxima
+
+[document.getElementById("guardar"),colorRan(),990,420,420,0,true],//17
+[document.getElementById("ganar"),colorRan(),990,420,420,0,true]//18
+
 
 ];
-
+function guardado(){
+    div[17][6]=true;
+}
+function continuar(n){
+    if(n==0){
+        div[18][6]=true;
+    }
+}
 var vidaMaximaB=div[3][7];var unavez=true;
 var veinte=true;
 var enemigo=true;
@@ -94,7 +105,12 @@ if(unavez){
         }else if((div[3][2]<=0)&&enemigo){ficha+=ctne;            
         
 //        acontece();
-            alert("fichas +"+ctne);enemigo=false; acontece();        
+            
+
+//alert("fichas +"+ctne);
+    div[18][6]=false;
+
+enemigo=false; acontece();        
         }    
    }    
 }

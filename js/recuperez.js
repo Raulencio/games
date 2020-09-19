@@ -71,5 +71,10 @@ function guardar(){
         localStorage.setItem("rps",rps);
         localStorage.setItem("enerfil",enerfil);
         localStorage.setItem("vma",div[4][7]);
-        alert("Guardado");}
+    
+        //alert("Guardado");
+    
+       div[17][6]=false;
+    
+    }
 }
