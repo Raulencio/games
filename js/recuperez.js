@@ -42,6 +42,19 @@ if(parseInt(localStorage.getItem("segundo"))>1){
     var segundo=parseInt(localStorage.getItem("segundo"));
 }else{segundo=0;
 }
+if(parseInt(localStorage.getItem("rps"))>1){
+    var rps=parseInt(localStorage.getItem("rps"));
+}else{rps=0;}
+
+if(parseInt(localStorage.getItem("enerfil"))>=0){
+    var enerfil=parseInt(localStorage.getItem("enerfil"));
+}else{enerfil=1000;}
+
+if(parseInt(localStorage.getItem("vma"))>=0){
+    var vma=parseInt(localStorage.getItem("vma"));
+}else{vma=vidaMaximaA;}
+
+
 
 function guardar(){
     if(!veinte){
@@ -55,5 +68,8 @@ function guardar(){
         localStorage.setItem("recup",recup);
         localStorage.setItem("multiplicador",multiplicador);
         localStorage.setItem("segundo",segundo);
+        localStorage.setItem("rps",rps);
+        localStorage.setItem("enerfil",enerfil);
+        localStorage.setItem("vma",div[4][7]);
         alert("Guardado");}
 }

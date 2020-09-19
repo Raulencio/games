@@ -1,9 +1,7 @@
 /* 0 div por id,1 color div,2 ancho,3 largo,4 top,5 left,6 hidden false = se ve ,7 daño por segundo vida total*/
 
-var enerfil=1000;
 var colorEqA=colorRan(),colorEqB=colorRan();
 var valr=10;var anchobarra=420;
-var rps=0;
 var div=[
 [document.getElementById("div0"),colorRan()+"AA",990,1200,0,0,false],//fondo
 
@@ -11,14 +9,14 @@ var div=[
 [document.getElementById("div2"),colorEqB,300,240,795,600,false,randomAr(10,5)],//cuadro pj2
 
 [document.getElementById("div3"),colorEqB,anchobarra,45,1100,0,false,randomAr(5000,1000)],//vida pj2
-[document.getElementById("div4"),colorEqA,anchobarra,45,1100,45,false,vidaMaximaA],//vida pj1
+[document.getElementById("div4"),colorEqA,anchobarra,45,1100,45,false,vma],//vida pj1
 
 [document.getElementById("div5"),colorEqB,300,300,635,600,false],//info pj2
 [document.getElementById("div6"),colorEqA,300,300,635,90,false],//info pj1
 
-[document.getElementById("div7"),colorRan(),150,150,420,0,false],//jugaren
+[document.getElementById("cielo"),"#00000088",990,420,0,0,false],//cielo
 
-[document.getElementById("cielo"),colorRan()+"AA",990,420,0,0,false],//cielo
+[document.getElementById("soluna"),"#f0f0f0",150,150,42,0,false],//jugaren
 
 [document.getElementById("bttn"),colorRan(),90,90,420,700,false],//btn mult
 
@@ -44,6 +42,18 @@ if(veinte){
     div[2][6]=false;
     div[3][6]=false;
     div[5][6]=false;
+ 
+    for(var e=ctne;e>=1;e--){   
+        try{                     
+        document.getElementById("es"+e).style.width=randomAr(2,1)+"px";
+        document.getElementById("es"+e).style.height=randomAr(2,1)+"px";
+        document.getElementById("es"+e).style.top=randomAr(418,2)+"px";
+        document.getElementById("es"+e).style.left=randomAr(988,2)+"px";
+        document.getElementById("es"+e).style.boxShadow="0px 0px "+randomAr(20,10)+"px "+randomAr(2,0)+"px "+colorRan();            
+        }catch{
+    
+        }}
+
 }
 }
 
@@ -59,7 +69,19 @@ function pp(){
     div[2][7]=randomAr(ctne*ctne,ctne);
     div[2][6]=true;
     div[3][6]=true;
-    div[5][6]=true;   
+    div[5][6]=true;  
+
+var laid="es"+ctne;
+var eltea="<div class='estrella' id='"+laid+"'> </div>";
+document.getElementById("cielo").innerHTML+=eltea;
+var iabl=document.getElementById(laid);
+
+
+iabl.style.top=randomAr(418,2)+"px";
+iabl.style.left=randomAr(988,2)+"px";
+iabl.style.backgroundColor=colorRan();
+  
+
 }
 
 
@@ -86,6 +108,7 @@ if(enerfil<maxenerfil){
     }
 }
 
+div[8][5]++;
 if(div[4][7]<vidaMaximaA){div[4][7]+=rps;}else if(div[4][7]>vidaMaximaA){div[4][7]=vidaMaximaA;}
 
 div[4][2]=Math.floor((anchobarra*div[4][7])/vidaMaximaA);
@@ -103,7 +126,7 @@ for(var f=div.length-1;f>=0;f--){
     div[f][0].style.top=div[f][4]+"px";
     div[f][0].style.left=div[f][5]+"px";
     div[f][0].hidden=div[f][6];
-    div[f][0].style.transition="all 0.420s";
+    div[f][0].style.transition="all 0.420s";    
     
     }
     
@@ -116,7 +139,7 @@ document.getElementById("pf").textContent=enerfilaum;
 document.getElementById("pef").textContent=maxenerfil;
 pelea();
 }
-
+div[8][0].style.borderRadius="90px";
 document.getElementById("p3").style.fontSize="45px";
 document.getElementById("p2").style.fontSize="45px";
 document.getElementById("p1").style.fontSize="45px";
@@ -156,4 +179,3 @@ console.log(div);
 // div[x][0].style.backgroundColor=colorRan();
 
 // }
-
