@@ -1,10 +1,20 @@
 .elp{
     background-color:rgba(255, 255, 255, 0.255);
     width:90px;
-    height:90px;
-    font-size: 24px;
+    height:60px;
+    font-size:30px;
     border-radius:90px;
-    
+    text-align: center;
+    padding-top:30px;
+}
+.elpe{
+    background-color:rgba(255, 255, 255, 0.255);
+    width:400px;
+    height:300px;
+    font-size: 42px;
+    border-radius:420px;
+    padding-top:100px;
+    text-align: center;
 }
 .cart:hover{
 transform:scale(1.1,1.1);z-index:10;
@@ -31,5 +41,10 @@ transform:scale(1.1,1.1);z-index:10;
     z-index:10;
 }
 .cielo{
+    z-index:5;
+}
+.guardar{
+    z-index:5;
+}.ganar{
     z-index:5;
 }
