@@ -952,72 +952,79 @@ function stats(n){
     } 
 }
 }
-
-var cKo=["Ko","Rey de las Artes Marciales, el legendario Ko una vez mas buscara ser el heroe","","img/ko.png"];
-var cRain=["Rain","Hija de la lluvia, capaz de generar una tormenta en segundos","","img/rain.png"];
-var cYohiro=["Yohiro","Nacido del Volcan Yanike. Yohiro blandira su espada contra todo el que se le interponga en su busqueda, hasta encontrar a su hermano...",iespadaB,yohiro];
-var cSol=["Sol","Bendecida con un poder sin igual, Sol madre de planetas, hija del universo","","img/sol.png"];
 var ninjaAbajo="img/ninja.png";
-var cJaco=["Jaco","Guardia de la ciudad del valle del sur",ibaculoB,"img/jaco.png"];
-var cNinja=["Ninja","Una orden secreta, encargada de la recoleccion de las armas, provee de su mejor guerrero para esta busqueda",iespadaD,ninjaAbajo];
-var cKila=["Kila","Guardia de la ciudad del valle del sur",ibaculoB,"img/kila.png"];
-var cHumhn=["Humhn","Luego de ser alcanzado por un rayo especial Humhn vio cambios en su cuerpo al principio no parecia mucho... ahora ya es una nube...",ibaculoA,"img/humhn.png"];
+var pjs=[cKo=["Ko","Rey de las Artes Marciales, el legendario Ko una vez mas buscara ser el heroe","","img/ko.png"]
+,cRain=["Rain","Hija de la lluvia, capaz de generar una tormenta en segundos","","img/rain.png"]
+,cSol=["Sol","Bendecida con un poder sin igual, Sol madre de planetas, hija del universo","","img/sol.png"]
+, cYohiro=["Yohiro","Nacido del Volcan Yanike. Yohiro blandira su espada contra todo el que se le interponga en su busqueda, hasta encontrar a su hermano...",iespadaB,yohiro]
+, cNinja=["Ninja","Una orden secreta, encargada de la recoleccion de las armas, provee de su mejor guerrero para esta busqueda",iespadaD,ninjaAbajo]
+, cHumhn=["Humhn","Luego de ser alcanzado por un rayo especial Humhn vio cambios en su cuerpo al principio no parecia mucho... ahora ya es una nube...",ibaculoA,koonline]
+, cJaco=["Jaco","Guardia de la ciudad del valle del sur",ibaculoB,"img/jaco.png"]
+, cKila=["Kila","Guardia de la ciudad del valle del sur",ibaculoB,"https://lh3.googleusercontent.com/-7BYIXwUXw8pOjK1_cSRgJtFZiW0gsbpFGDVkgRq9PwgAhOzBfvLv8WCXxr5IY8Ezymr8l4kshx89rxQkONGowxfxSpEc7kZhzxFhbbPO61mf-5YL-kXquzO0ly8PN7QXkbDJYdVko54_EI2rs17qhiPknP958THsULRNNiJFi9ndqwA0wfXtZIBCy8rzdvODjJ7EwoQn-rIq-RoAXEDTKgV5nrfR_6UKuvIxp34G-_e5WSGke9JHxnLUjw8PHmezWhOGNM9juefJICl8CCGpMQPp4I6-Zp5ZGcuvgBfc43NemDPFw13GNdvQhC03Vw6j50J7ghSounFJ9TIZusH6WA--S3XBVNfg9fWGkZdRh4pf3cfM2S97ubmwf45aYLxvjkhQTiQeFY27F4Jh2JXhExx45ZvKY1hUOq49F0EEGmmU6nI3q35MUjDWacWNoZXLhx2CWHay80n18wJF77t-K6B0__u49foqfQERwXNOgzi-6A7yATPir76wsr91gMVD9eu8cABik2E9wflz70Mv5dtKUNYkcghFu9Pfz99Tlpc-yoX_OJC1WiLyRqzQkf6AGG-j9sV3D_JfVfYUrdK5MYMEyl4E7KvLzGN0YqaWhUtizIDoEJi6-gbGcBYE4GFdl6V4X-_32QfSHLlY1mJ7u1bhBm7ZrJftFWLL6nSZlojZyULLn5GvcNsUaQCVO4=w50-h100-no?authuser=0"]
+];
 
 var nombrepj="",algopj="",esppj="",impj="";
 
 function segun(n){
 
-    if(n==1){        
-        nombrepj=cKo[0];
-        algopj=cKo[1];
-        esppj=cKo[2];
-        impj=cKo[3];
+//     if(n==1){        
+//         nombrepj=cKo[0];
+//         algopj=cKo[1];
+//         esppj=cKo[2];
+//         impj=cKo[3];
     
-    }
-    if(n==2){        
-        nombrepj=cRain[0];
-        algopj=cRain[1];
-        esppj=cRain[2];
-        impj=cRain[3];
+//     }
+//     if(n==2){        
+//         nombrepj=cRain[0];
+//         algopj=cRain[1];
+//         esppj=cRain[2];
+//         impj=cRain[3];
     
-    }
-    if(n==3){        
-        nombrepj=cSol[0];
-        algopj=cSol[1];
-        esppj=cSol[2];
-        impj=cSol[3];    
-    }
-    if(n==4){
-        nombrepj=cYohiro[0];
-        algopj=cYohiro[1];
-        esppj=cYohiro[2];
-        impj=cYohiro[3];
-    }
-    if(n==5){
-        nombrepj=cNinja[0];
-        algopj=cNinja[1];
-        esppj=cNinja[2];
-        impj=cNinja[3];
-    }
+//     }
+//     if(n==3){        
+//         nombrepj=cSol[0];
+//         algopj=cSol[1];
+//         esppj=cSol[2];
+//         impj=cSol[3];    
+//     }
+//     if(n==4){
+//         nombrepj=cYohiro[0];
+//         algopj=cYohiro[1];
+//         esppj=cYohiro[2];
+//         impj=cYohiro[3];
+//     }
+//     if(n==5){
+//         nombrepj=cNinja[0];
+//         algopj=cNinja[1];
+//         esppj=cNinja[2];
+//         impj=cNinja[3];
+//     }
     
-    if(n==6){
-        nombrepj=cHumhn[0];
-        algopj=cHumhn[1];
-        esppj=cHumhn[2];
-        impj=cHumhn[3];
-    }
-    if(n==7){
-        nombrepj=cJaco[0];
-        algopj=cJaco[1];
-        esppj=cJaco[2];
-        impj=cJaco[3];
-    }
-    if(n==8){
-        nombrepj=cKila[0];
-        algopj=cKila[1];
-        esppj=cKila[2];
-        impj=cKila[3];
-    }
+//     if(n==6){
+//         nombrepj=cHumhn[0];
+//         algopj=cHumhn[1];
+//         esppj=cHumhn[2];
+//         impj=cHumhn[3];
+//     }
+//     if(n==7){
+//         nombrepj=cJaco[0];
+//         algopj=cJaco[1];
+//         esppj=cJaco[2];
+//         impj=cJaco[3];
+//     }
+//     if(n==8){
+//         nombrepj=cKila[0];
+//         algopj=cKila[1];
+//         esppj=cKila[2];
+//         impj=cKila[3];
+//     }
+
+// /*
+n-=1;
+nombrepj=pjs[n][0];
+algopj=pjs[n][1];
+esppj=pjs[n][2];
+impj=pjs[n][3];
 
     document.getElementById("nombrpj").textContent=nombrepj;
     document.getElementById("algopj").textContent=algopj;
