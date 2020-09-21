@@ -141,6 +141,10 @@ ataque=0;
 tlasarmas="";
 exptotal=0;
 }
+var koonline="https://lh3.googleusercontent.com/PIUVaq1AMGLzfdmUEnVCuIgXhMfJkUPjuMproOAE9kWeWFKCxfTZjvY8yUZiIU4fv9AqO35hHdYq2YVzyQ7Ii1sqy3ljnAT1LX5zab3bD0qIVFHzLCoyWD_j4y2zMjmxFxIrqf4fr5Ufc4_F6gm4ZQzCA8wg6CztjeYf8E19EiUhYJCjhyVUn7O17jlyQDKv_5MEhf_5c3sz1GctaPhcYl79v0kxN_bbIcpUKGH5L36gY4hCZvGp_7lW4cZRoxJaDVRTi22SzbNvaMV8XkvGS2PGhu-9D14KV2gw9ZpmVikSMhTq8dz4Fx2T0Yrj3qyPoNeYNZiXXGvbA8bdp5faunvmAYFTPfqyi20NIA8-_JHIZvnatA5UHCPgPUWbxt0NXl0WG63b1xu8hlaKk1mwfDwOqwjDQWc-GW4IzE7sTC3JVQgCpuGWtFQd-5zT-k8CJjqR-Prg35h_8T_68xfv31BB-Kl7othoMwxZNH7DcGmJqeOMgxn0IFvfO1ANIcn9VvH6yJBMbzDyzSNYmOh6VzZ4EZCY7CWR9gq6pxeWs8y94kft1rV7BTKF7XrCn6YzgyPn89HGAMfYvF8azCm3ewKfCXpAFakb-YDr61l0A5-hlqZiLL0QJGMFV-2SRi9JcpMIBYNTGuoxJsrOwggkuxA9a0KAlkVl4Dyo4BVDOrcSOAByLIRRNA9j08r-_yM=w50-h100-no?authuser=0";
+
+
+
 function dif(n){todolasArmas();playTres=true;cuantaexp=500;ataqueCarma=0;ataque=0;porsupuesto=true;
     ahorasi=true;distinto=true;ctt=99;dia=0;muerto=false;conteoVict=0;dinero=0;iespada="";
     //document.getElementById("entremedio").hidden=true;
@@ -169,8 +173,7 @@ function dif(n){todolasArmas();playTres=true;cuantaexp=500;ataqueCarma=0;ataque=
         
         numturnos=2;
         vidamax=15000;
-        ataque=8000;                      
-        var koonline="https://lh3.googleusercontent.com/PIUVaq1AMGLzfdmUEnVCuIgXhMfJkUPjuMproOAE9kWeWFKCxfTZjvY8yUZiIU4fv9AqO35hHdYq2YVzyQ7Ii1sqy3ljnAT1LX5zab3bD0qIVFHzLCoyWD_j4y2zMjmxFxIrqf4fr5Ufc4_F6gm4ZQzCA8wg6CztjeYf8E19EiUhYJCjhyVUn7O17jlyQDKv_5MEhf_5c3sz1GctaPhcYl79v0kxN_bbIcpUKGH5L36gY4hCZvGp_7lW4cZRoxJaDVRTi22SzbNvaMV8XkvGS2PGhu-9D14KV2gw9ZpmVikSMhTq8dz4Fx2T0Yrj3qyPoNeYNZiXXGvbA8bdp5faunvmAYFTPfqyi20NIA8-_JHIZvnatA5UHCPgPUWbxt0NXl0WG63b1xu8hlaKk1mwfDwOqwjDQWc-GW4IzE7sTC3JVQgCpuGWtFQd-5zT-k8CJjqR-Prg35h_8T_68xfv31BB-Kl7othoMwxZNH7DcGmJqeOMgxn0IFvfO1ANIcn9VvH6yJBMbzDyzSNYmOh6VzZ4EZCY7CWR9gq6pxeWs8y94kft1rV7BTKF7XrCn6YzgyPn89HGAMfYvF8azCm3ewKfCXpAFakb-YDr61l0A5-hlqZiLL0QJGMFV-2SRi9JcpMIBYNTGuoxJsrOwggkuxA9a0KAlkVl4Dyo4BVDOrcSOAByLIRRNA9j08r-_yM=w50-h100-no?authuser=0";
+        ataque=8000;                              
         yohiroAtacandoA=koonline;
         yohiroAtacandoB=koonline;
         yohiroCorriendoA=koonline;
@@ -1515,7 +1518,8 @@ if(n==0){
     imagenMapa="img/fondobarco.png";document.getElementById("ipajarrock").hidden=true;
 }else if(abordo==1){
     abordo=0;
-        imagenMapa="img/fondo.png";document.getElementById("ipajarrock").hidden=false;
+        imagenMapa="https://lh3.googleusercontent.com/Jmb2zjPshBmBsmcoDPA79Rn1qq4lSabhgVtqJd_u2dDHpj95xZPG2QimwIyY0wc1Z3by3Q2hQRe7tNRy2Nc_VF4-VTJnDSHeNkGWlC0el19IGtV1yPKGvb3LUCkY49dKh-j3jccm3xxBrzBIDS-M6uz7vBNbu-maoxdoFmfp92_y7Pl27hl_gWPVDJkpNHZy_2p8NjMXa8glhewQVoHG6uQXX8nHDiO9_lxbxiovZt0RM6yUl8nZB7imCBbrtHq4DM2IpUnM9gtNPf-yFefMi2cLA6SvWoNWs5H1JCNkvOpXnoMwGVSOF0ZuQUYO8mEecu6V3Sw99XtF9RMMW8hqPMiyYM2LGqEy3nz2-J0OUNf-5BxMgag6soc72FplBC5zcV--BYQgNnij1C8qDtbg3NLWUT0fOS24D-PE1-0neLS37WdxEcTKVhFyujB9vhRIPq94EbeSWajtoWJ18UfknbdLaYBPAohKKycIyEzgkW2VPlEy-PmkJ7HRs1MkxzHPKlX2IzCQFQOHAp3aHCyfkMgXOz8jhb7iKabmvcZbS_bR3jcTkrXX-9bZiOQ9XWvkOcTLrLhZp-kOdUzsycqearPx_HdBTYyHQ2vCnbbXwxhY22047ej9tA6rkEE5BAJm6cGVMB4LMFzi6JFtpPSqIojgDZJ_6xvcv8U-BfvxcnkSljNRxc4kEg-8tyo_8kE=w1366-h547-no?authuser=0";
+        document.getElementById("ipajarrock").hidden=false;
         }
         
 }
