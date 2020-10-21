@@ -22,15 +22,26 @@
     padding-top:100px;
     text-align: center;
 }
+
+.elpef{
+    background-color:rgba(255, 255, 255, 0.255);
+    width:1000px;
+    height:240px;
+    font-size: 42px;
+    border-radius:420px;
+    padding-top:100px;
+    text-align: center;
+}
+
 .cart:hover{
 transform:scale(1.1,1.1);z-index:10;
 }
 .igt{
-    width:150px;
+    width:300px;
     height:90px;
     position:absolute;
-    left:790px;
-    top:420px;
+    left:130px;
+    top:40px;
     font-size:40px;
 }
 .estrella{
