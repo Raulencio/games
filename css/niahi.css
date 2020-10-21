@@ -11,7 +11,7 @@
     font-size:30px;
     border-radius:90px;
     text-align: center;
-    padding-top:30px;
+    padding-top:20px;
 }
 .elpe{
     background-color:rgba(255, 255, 255, 0.255);
@@ -25,11 +25,12 @@
 
 .elpef{
     background-color:rgba(255, 255, 255, 0.255);
-    width:1000px;
+    width:940px;
     height:240px;
     font-size: 42px;
     border-radius:420px;
     padding-top:100px;
+    padding-left:40px;
     text-align: center;
 }
 
@@ -64,4 +65,7 @@ transform:scale(1.1,1.1);z-index:10;
     z-index:5;
 }.ganar{
     z-index:5;
+}
+.cuci{
+    font-size:45px;
 }
