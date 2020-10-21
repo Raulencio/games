@@ -116,7 +116,11 @@ enemigo=false; acontece();
 }
 }
  
+
+///////////////////////////////
+
 function juntos(){segundo++;
+
 if(enerfil<maxenerfil){
     enerfil+=enerfilaum;
     if(enerfil>maxenerfil){
@@ -124,12 +128,11 @@ if(enerfil<maxenerfil){
     }
 }
 
-div[8][5]++;
-if(div[4][7]<vidaMaximaA){div[4][7]+=rps;}else if(div[4][7]>vidaMaximaA){div[4][7]=vidaMaximaA;}
+div[8][5]++;//soluna izquierda derecha
 
-div[4][2]=Math.floor((anchobarra*div[4][7])/vidaMaximaA);
-div[3][2]=Math.floor((anchobarra*div[3][7])/vidaMaximaB);        
-div[3][5]=525+Math.floor(((vidaMaximaB-div[3][7])*anchobarra)/vidaMaximaB);
+
+if(div[4][7]<vidaMaximaA){div[4][7]+=rps;}
+else if(div[4][7]>vidaMaximaA){div[4][7]=vidaMaximaA;}
 
 if(unavez){if((div[4][2])<=0){alert("Game Over");unavez=false;}}
 //reiniciar
@@ -146,6 +149,11 @@ for(var f=div.length-1;f>=0;f--){
     
     }
     
+    div[4][2]=Math.floor((anchobarra*div[4][7])/vidaMaximaA);
+    div[3][2]=Math.floor((anchobarra*div[3][7])/vidaMaximaB);        
+    div[3][5]=525+Math.floor(((vidaMaximaB-div[3][7])*anchobarra)/vidaMaximaB);
+    
+
 document.getElementById("p3").textContent="EnerFill: "+enerfil+"/"+maxenerfil+" Fichas: "+ficha;
 document.getElementById("p2").textContent="Vida: "+div[4][7]+"/"+vidaMaximaA+" Ataque: "+div[1][7]+"/s";
 document.getElementById("p1").textContent="Nivel: "+ctne+" Vida: "+div[3][7]+"/"+vidaMaximaB+" Ataque: "+div[2][7]+"/s";
