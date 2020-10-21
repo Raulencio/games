@@ -1,24 +1,34 @@
 /* 0 div por id,1 color div,2 ancho,3 largo,4 top,5 left,6 hidden false = se ve ,7 daño por segundo vida total*/
 
+//multimenu
+
+// pguardar pvictoria ////
+//divs arriba abajo izquierda derecha
+//movimiento
+
+//mapa(?)
+
+var color1=colorRan(),color2=colorRan(),color3=colorRan(),color4=colorRan();
+
 var colorEqA=colorRan(),colorEqB=colorRan();
 var valr=10;var anchobarra=420;
 var div=[
 [document.getElementById("div0"),colorRan()+"AA",990,1200,0,0,false],//fondo
 
-[document.getElementById("div1"),colorEqA,300,240,795,90,false,unas],//cuadro pj1
-[document.getElementById("div2"),colorEqB,300,240,795,600,false,randomAr(10,5)],//cuadro pj2
+[document.getElementById("div1"),colorEqA,75,120,795,90,false,unas],//cuadro pj1
+[document.getElementById("div2"),colorEqB,75,120,795,600,false,randomAr(10,5)],//cuadro pj2
 
 [document.getElementById("div3"),colorEqB,anchobarra,45,1100,0,false,randomAr(5000,1000)],//vida pj2
 [document.getElementById("div4"),colorEqA,anchobarra,45,1100,45,false,vma],//vida pj1
 
-[document.getElementById("div5"),colorEqB,300,300,635,600,false],//info pj2
-[document.getElementById("div6"),colorEqA,300,300,635,90,false],//info pj1
+[document.getElementById("div5"),colorEqB+"77",240,240,635,600,false],//info pj2
+[document.getElementById("div6"),colorEqA+"77",240,240,635,90,false],//info pj1
 
 [document.getElementById("cielo"),"#00000088",990,420,0,0,false],//cielo
 
 [document.getElementById("soluna"),"#f0f0f0",150,150,42,0,false],//jugaren
 
-[document.getElementById("bttn"),colorRan(),90,90,420,700,false],//btn mult
+[document.getElementById("bttn"),colorRan(),90,90,40,20,false],//btn mult
 
 [document.getElementById("botones"),colorRan(),990,420,1200,0,false],//cuadro botones
 [document.getElementById("recuperarvida"),colorRan(),90,135,180,510,false],//recuperar vida
@@ -29,8 +39,17 @@ var div=[
 [document.getElementById("recue"),colorRan(),90,135,180,10,false],//aumentar vida maxima
 
 [document.getElementById("guardar"),colorRan(),990,420,420,0,true],//17
-[document.getElementById("ganar"),colorRan(),990,420,420,0,true]//18
+[document.getElementById("ganar"),colorRan(),990,420,420,0,true],//18
 
+[document.getElementById("m1"),color1,90,90,10,575,false],//19
+[document.getElementById("m2"),color2,90,90,10,675,false],//20
+[document.getElementById("m3"),color3,90,90,10,775,false],//21
+[document.getElementById("m4"),color4,90,90,10,875,false],//22
+
+[document.getElementById("d1"),color1,990,420,100,0,true],//23
+[document.getElementById("d2"),color2,990,420,100,0,true],//24
+[document.getElementById("d3"),color3,990,420,100,0,true],//25
+[document.getElementById("d4"),color4,990,420,100,0,false] //26
 
 ];
 function guardado(){
@@ -51,7 +70,7 @@ if(veinte){
 }else{
     veinte=true;enemigo=true;
     div[2][6]=false;
-    div[3][6]=false;
+    div[3][6]=true;
     div[5][6]=false;
  
     for(var e=ctne;e>=1;e--){   
@@ -136,6 +155,12 @@ else if(div[4][7]>vidaMaximaA){div[4][7]=vidaMaximaA;}
 
 if(unavez){if((div[4][2])<=0){alert("Game Over");unavez=false;}}
 //reiniciar
+
+div[4][2]=Math.floor((anchobarra*div[4][7])/vidaMaximaA);
+div[3][2]=Math.floor((anchobarra*div[3][7])/vidaMaximaB);        
+div[3][5]=525+Math.floor(((vidaMaximaB-div[3][7])*anchobarra)/vidaMaximaB);
+
+
 for(var f=div.length-1;f>=0;f--){
     
     div[f][0].style.position="absolute";
@@ -149,12 +174,12 @@ for(var f=div.length-1;f>=0;f--){
     
     }
     
-    div[4][2]=Math.floor((anchobarra*div[4][7])/vidaMaximaA);
-    div[3][2]=Math.floor((anchobarra*div[3][7])/vidaMaximaB);        
-    div[3][5]=525+Math.floor(((vidaMaximaB-div[3][7])*anchobarra)/vidaMaximaB);
-    
+ 
 
-document.getElementById("p3").textContent="EnerFill: "+enerfil+"/"+maxenerfil+" Fichas: "+ficha;
+document.getElementById("p3").textContent="EnerFill: "+enerfil+"/"+maxenerfil;
+
+document.getElementById("pd4").textContent=" Fichas: "+ficha;
+
 document.getElementById("p2").textContent="Vida: "+div[4][7]+"/"+vidaMaximaA+" Ataque: "+div[1][7]+"/s";
 document.getElementById("p1").textContent="Nivel: "+ctne+" Vida: "+div[3][7]+"/"+vidaMaximaB+" Ataque: "+div[2][7]+"/s";
 document.getElementById("pr").textContent=recup;
@@ -182,6 +207,14 @@ function Numeros(string) {//Solo numeros
     return out;
 }
 
+function opcion(m){
+    switch(m){
+        case 1:div[23][6]=false;div[24][6]=true;div[25][6]=true;div[26][6]=true;break;
+        case 2:div[23][6]=true;div[24][6]=false;div[25][6]=true;div[26][6]=true;break;
+        case 3:div[23][6]=true;div[24][6]=true;div[25][6]=false;div[26][6]=true;break;
+        case 4:div[23][6]=true;div[24][6]=true;div[25][6]=true;div[26][6]=false;break;
+    }
+}
 
 acontece();
 recupera(1);
