@@ -1,3 +1,9 @@
+.cles{
+    position:absolute;
+    top:0px;
+    left:0px;
+    overflow: hidden;
+}
 .elp{
     background-color:rgba(255, 255, 255, 0.255);
     width:90px;
