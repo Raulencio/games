@@ -8,14 +8,14 @@
 
 //mapa(?)
 
-var color1=colorRan(),color2=colorRan(),color3=colorRan(),color4=colorRan(),color5=colorRan()+55;
+var color1=colorRan(),color2=colorRan(),color3=colorRan(),color4=colorRan(),color5=colorRan()+"24";
 
 var colorEqA=colorRan(),colorEqB=colorRan();
 var valr=10;var anchobarra=420;
 var div=[
 [document.getElementById("div0"),colorRan()+"AA",990,1200,0,0,false],//fondo
 
-[document.getElementById("div1"),colorEqA,75,120,795,90,false,unas],//cuadro pj1
+[document.getElementById("div1"),colorEqA,75,120,420,0,false,unas],//cuadro pj1
 [document.getElementById("div2"),colorEqB,75,120,795,600,false,randomAr(10,5)],//cuadro pj2
 
 [document.getElementById("div3"),colorEqB,anchobarra,45,1100,0,false,randomAr(5000,1000)],//vida pj2
@@ -51,10 +51,10 @@ var div=[
 [document.getElementById("d3"),color3,990,420,100,0,true],//25
 [document.getElementById("d4"),color4,990,420,100,0,false], //26
 
-[document.getElementById("arriba"),color5,420,80,420,100,false],//27
-[document.getElementById("abajo"),color5,420,80,620,100,false],//28
-[document.getElementById("izquierda"),color5,80,420,500,50,false],//29
-[document.getElementById("derecha"),color5,80,420,500,700,false]//30
+[document.getElementById("arriba"),color5,500,245,420,245,false],//27
+[document.getElementById("abajo"),color5,500,245,955,245,false],//28
+[document.getElementById("izquierda"),color5,245,880,420,0,false],//29
+[document.getElementById("derecha"),color5,245,880,420,745,false]//30
 
 ];
 function guardado(){
@@ -130,7 +130,6 @@ if(unavez){
         
 //        acontece();
             
-
 //alert("fichas +"+ctne);
     div[18][6]=false;
 
@@ -165,7 +164,6 @@ div[4][2]=Math.floor((anchobarra*div[4][7])/vidaMaximaA);
 div[3][2]=Math.floor((anchobarra*div[3][7])/vidaMaximaB);        
 div[3][5]=525+Math.floor(((vidaMaximaB-div[3][7])*anchobarra)/vidaMaximaB);
 
-
 for(var f=div.length-1;f>=0;f--){
     
     div[f][0].style.position="absolute";
@@ -177,9 +175,7 @@ for(var f=div.length-1;f>=0;f--){
     div[f][0].hidden=div[f][6];
     div[f][0].style.transition="all 0.420s";    
     
-    }
-    
- 
+    }    
 
 document.getElementById("p3").textContent="EF: "+enerfil+"/"+maxenerfil;
 
@@ -222,7 +218,19 @@ function opcion(m){
         case 4:div[23][6]=true;div[24][6]=true;div[25][6]=true;div[26][6]=false;break;
     }
 }
-
+var velocidad=100;
+function mover(n){
+    switch(n){
+        case 1:div[1][4]-=velocidad;
+            break;//arriba
+        case 2:div[1][4]+=velocidad;
+            break;//abajo
+        case 3:div[1][5]-=velocidad;
+            break;//izquierda
+        case 4:div[1][5]+=velocidad;
+            break;//derecha
+    }juntos();
+}
 acontece();
 recupera(1);
 
