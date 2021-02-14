@@ -1,4 +1,4 @@
-var nombre="";var cargo="novato";var dPlaneta=50;
+var nombre="";var cargo="novato";var dPlaneta=randomAr(80,40);
 
 function esconder(a){document.getElementById(a).hidden=true;}
 function mostrar(a){document.getElementById(a).hidden=false;}
@@ -26,7 +26,7 @@ var divs=[
     [$("#cargo"),"absolute",220,10,200,40,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
 
-    [$("#planeta"),"absolute",300,600,dPlaneta*2,dPlaneta*2,
+    [$("#planeta"),"absolute",randomAr(270,70),randomAr(660,540),dPlaneta*2,dPlaneta*2,
     colorRan(),"0px 0px 5px 1px",colorRan()],
 
     [$("#mensaje"),"absolute",10,50,800,400,
@@ -48,7 +48,7 @@ function verDivs(){
     
     }
 }
-var nEstrellas=10;
+var nEstrellas=42;
 function moverEstrellas(){    
    
     for(var u=0;u<nEstrellas;u++){
