@@ -1,4 +1,4 @@
-var nombre="";var cargo="novato";
+var nombre="";var cargo="novato";var dPlaneta=50;
 
 function esconder(a){document.getElementById(a).hidden=true;}
 function mostrar(a){document.getElementById(a).hidden=false;}
@@ -26,7 +26,7 @@ var divs=[
     [$("#cargo"),"absolute",220,10,200,40,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
 
-    [$("#planeta"),"absolute",300,600,100,100,
+    [$("#planeta"),"absolute",300,600,dPlaneta*2,dPlaneta*2,
     colorRan(),"0px 0px 5px 1px",colorRan()],
 
     [$("#mensaje"),"absolute",10,50,800,400,
@@ -71,7 +71,7 @@ $(document).ready(function(){
 verDivs();
 verificarNombre();
 moverEstrellas();
-$("#planeta").css("border-radius","50px 50px 50px 50px");
+$("#planeta").css("border-radius",dPlaneta+"px "+dPlaneta+"px "+dPlaneta+"px "+dPlaneta+"px");
 $("#titulomensaje").text("Binvenido "+nombre);//set 
 $("#textomensaje").text("Que hay");//set 
 $("#pCargoNombre").text(cargo+" - "+nombre);
