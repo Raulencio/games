@@ -6,14 +6,15 @@ function mostrar(id){document.getElementById(id).hidden=false;}
 function tiempo(){ttiempo+=nEstrellas;}
 function verificarDatos(){
 
-    if((localStorage.getItem("nombre"))!=null){
-        nombre=(localStorage.getItem("nombre"));          
-        cargo=(localStorage.getItem("cargo"));          
-        nEstrellas=parseInt(localStorage.getItem("nEstrellas"));
-        nOvnis=parseInt(localStorage.getItem("nOvnis"));           
-    }else{    
-    nombre=prompt("Ingresa tu nombre o apodo");      
-    }
+    if((localStorage.getItem("nombre"))!=null){nombre=(localStorage.getItem("nombre"));}
+    else{nombre=prompt("Ingresa tu nombre o apodo");}
+
+    if((localStorage.getItem("nOvnis"))!=null){nOvnis=parseInt(localStorage.getItem("nOvnis"));}
+
+    if((localStorage.getItem("cargo"))!=null){cargo=(localStorage.getItem("cargo"));}
+
+    if((localStorage.getItem("nEstrellas"))!=null){nEstrellas=parseInt(localStorage.getItem("nEstrellas"));}
+
     guardarDatos();
 }
 
@@ -24,12 +25,13 @@ function guardarDatos(){
     localStorage.setItem("nOvnis",nOvnis);
     console.log("nombre : "+nombre);
     console.log("cargo : "+cargo);
-    console.log("numero de Estrellas : "+nEstrellas);
+    console.log("estrellas : "+nEstrellas);
+    console.log("ovnis : "+nOvnis);    
     //alert("Guardado");
     textos();
     mostrar("mensaje"); 
 }
-var portesol=randomAr(420,240);
+var portesol=randomAr(400,240);
 var divs=[
     [$("#fondo"),"absolute",1,1,410,900,
     "black","0px 0px 5px 1px",colorRan()],
@@ -76,13 +78,9 @@ function verDivs(){
 
 function moverEstrellas(){    
     nEstrellas+=1;   
-    if(nEstrellas>150){
-        cargo="almirante";
-    }else if(nEstrellas>100){
-        cargo="capitan";
-    }else if(nEstrellas>50){
-        cargo="marinero";
-    }
+    if(nEstrellas>150){cargo="almirante";}
+    else if(nEstrellas>100){cargo="capitan";}
+    else if(nEstrellas>50){cargo="marinero";}
     var nes=0;
     if(nEstrellas>100){nes=99;
     }else{nes=nEstrellas;}
@@ -111,7 +109,9 @@ var saludo=["Bienvenido ","Hola ","Saludos ","Buenas ","Que tal "];
 var muchoTexto=["Aqui esta la lista ","La informacion del dia ","Sus datos ","Mensaje para ","Todo listo "];
 function textos(){
 $("#titulomensaje").text(saludo[randomAr(saludo.length-1,0)]+cargo);//set 
-$("#textomensaje").text(muchoTexto[randomAr(muchoTexto.length-1,0)]+nombre+"\n Ovnis avistados: "+nOvnis+" numero de Estrellas: "+nEstrellas);//set 
+$("#textomensaje1").text(muchoTexto[randomAr(muchoTexto.length-1,0)]+nombre);
+$("#textomensaje2").text(" numero de Estrellas: "+nEstrellas);//set 
+$("#textomensaje3").text(" Ovnis avistados: "+nOvnis);
 $("#pCargoNombre").text(cargo+" - "+nombre);
 
 }
@@ -120,7 +120,7 @@ $("#pCargoNombre").text(cargo+" - "+nombre);
 
 
 $(document).ready(function(){
-
+document.getElementById("ovni").style.transition="all 4.20s"; 
 verDivs();
 verificarDatos();
 moverEstrellas();
@@ -152,12 +152,17 @@ function sumE(){
     estrellita.style.height="1px";
     estrellita.style.backgroundColor=colorRan();
     estrellita.style.boxShadow=" 0px 0px "+randomAr(6,4)+"px "+randomAr(2,1)+"px "+colorRan();
-    document.querySelector("#fondo").appendChild(estrellita);
+    document.querySelector("#fondo").appendChild(estrellita);    
     console.log(nEstrellas);
 }
 
 function alertaOvni(){
     alert("Un Ovni!!!..");
     nOvnis+=1;
-    esconder("ovni");
+    esconder("ovni");    
+    for(var e=0;e<nOvnis;e++){
+        sumE();
+    }
+    localStorage.setItem("nOvnis",nOvnis); 
+    localStorage.setItem("nEstrellas",nEstrellas);   
 }
