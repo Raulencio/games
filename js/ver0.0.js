@@ -1,4 +1,4 @@
-var nombre="";
+var nombre="";var cargo="novato";
 
 function esconder(a){document.getElementById(a).hidden=true;}
 function mostrar(a){document.getElementById(a).hidden=false;}
@@ -6,18 +6,25 @@ function mostrar(a){document.getElementById(a).hidden=false;}
 function verificarNombre(){
 
     if((localStorage.getItem("nombre"))!=null){
-        nombre=(localStorage.getItem("nombre"));   
-        mostrar("mensaje");
+        nombre=(localStorage.getItem("nombre"));                   
+        mostrar("mensaje");    
     }else{    
     nombre=prompt("Ingresa tu nombre o apodo");
-    localStorage.setItem("nombre",nombre);    
+    localStorage.setItem("nombre",nombre); 
+    localStorage.setItem("cargo",cargo);    
     }
+    
 }
-
 
 var divs=[
     [$("#fondo"),"absolute",1,1,900,420,
     "green","0px 0px 5px 1px",colorRan()],
+
+    [$("#perfil"),"absolute",10,10,200,200,
+    colorRan()+"aa","0px 0px 5px 1px",colorRan()],
+
+    [$("#cargo"),"absolute",220,10,200,40,
+    colorRan()+"aa","0px 0px 5px 1px",colorRan()],
 
     [$("#mensaje"),"absolute",10,50,800,400,
     "yellow","0px 0px 10px 1px ","red"]
@@ -38,7 +45,6 @@ function verDivs(){
     
     }
 }
-
 $(document).ready(function(){
 
 verDivs();
@@ -46,5 +52,6 @@ verificarNombre();
 
 $("#titulomensaje").text("Binvenido "+nombre);//set 
 $("#textomensaje").text("Que hay");//set 
- 
+$("#pCargoNombre").text(cargo+" - "+nombre);
+
 })
