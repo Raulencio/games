@@ -18,7 +18,7 @@ function verificarNombre(){
 
 var divs=[
     [$("#fondo"),"absolute",1,1,900,420,
-    "green","0px 0px 5px 1px",colorRan()],
+    "black","0px 0px 5px 1px",colorRan()],
 
     [$("#perfil"),"absolute",10,10,200,200,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
@@ -26,8 +26,11 @@ var divs=[
     [$("#cargo"),"absolute",220,10,200,40,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
 
+    [$("#planeta"),"absolute",300,600,100,100,
+    colorRan(),"0px 0px 5px 1px",colorRan()],
+
     [$("#mensaje"),"absolute",10,50,800,400,
-    "yellow","0px 0px 10px 1px ","red"]
+    "#ffffffaa","0px 0px 10px 1px ","red"]
 
 ]
 
@@ -45,11 +48,30 @@ function verDivs(){
     
     }
 }
+var nEstrellas=10;
+function moverEstrellas(){    
+   
+    for(var u=0;u<nEstrellas;u++){
+        var estrellita=document.createElement("div");
+        estrellita.style.position=("absolute");
+        estrellita.style.top=randomAr(300,20)+"px";
+        estrellita.style.left=randomAr(800,300)+"px";
+        estrellita.style.width="1px";
+        estrellita.style.height="1px";
+        estrellita.style.backgroundColor="white";
+        estrellita.style.boxShadow=" 0px 0px"+randomAr(10,1)+"px "+randomAr(5,1)+"px "+colorRan();
+        document.querySelector("#fondo").appendChild(estrellita);
+    
+    }
+
+}
+
 $(document).ready(function(){
 
 verDivs();
 verificarNombre();
-
+moverEstrellas();
+$("#planeta").css("border-radius","50px 50px 50px 50px");
 $("#titulomensaje").text("Binvenido "+nombre);//set 
 $("#textomensaje").text("Que hay");//set 
 $("#pCargoNombre").text(cargo+" - "+nombre);
