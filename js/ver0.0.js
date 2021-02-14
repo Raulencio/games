@@ -1,19 +1,26 @@
-var nombre="";var cargo="novato";var dPlaneta=randomAr(80,40);
+var nombre="";var cargo="grumete";var dPlaneta=randomAr(80,40);var nEstrellas=0;
 
 function esconder(a){document.getElementById(a).hidden=true;}
 function mostrar(a){document.getElementById(a).hidden=false;}
 
-function verificarNombre(){
+function verificarDatos(){
 
     if((localStorage.getItem("nombre"))!=null){
-        nombre=(localStorage.getItem("nombre"));                   
+        nombre=(localStorage.getItem("nombre"));          
+        cargo=(localStorage.getItem("cargo"));          
+        nEstrellas=parseInt(localStorage.getItem("nEstrellas"));
         mostrar("mensaje");    
     }else{    
     nombre=prompt("Ingresa tu nombre o apodo");
-    localStorage.setItem("nombre",nombre); 
-    localStorage.setItem("cargo",cargo);    
+      guardarDatos();
     }
     
+}
+
+function guardarDatos(){
+    localStorage.setItem("nombre",nombre); 
+    localStorage.setItem("cargo",cargo); 
+    localStorage.setItem("nEstrellas",nEstrellas); 
 }
 
 var divs=[
@@ -48,9 +55,16 @@ function verDivs(){
     
     }
 }
-var nEstrellas=42;
+
 function moverEstrellas(){    
-   
+    nEstrellas++;   
+    if(nEstrellas>150){
+        cargo="almirante";
+    }else if(nEstrellas>100){
+        cargo="capitan";
+    }else if(nEstrellas>50){
+        cargo="marinero";
+    }
     for(var u=0;u<nEstrellas;u++){
         var estrellita=document.createElement("div");
         estrellita.style.position=("absolute");
@@ -61,15 +75,15 @@ function moverEstrellas(){
         estrellita.style.backgroundColor="white";
         estrellita.style.boxShadow=" 0px 0px"+randomAr(10,5)+"px "+randomAr(6,2)+"px "+colorRan();
         document.querySelector("#fondo").appendChild(estrellita);
-    
     }
-
+    guardarDatos();
+    console.log(nEstrellas);
 }
 
 $(document).ready(function(){
 
 verDivs();
-verificarNombre();
+verificarDatos();
 moverEstrellas();
 $("#planeta").css("border-radius",dPlaneta+"px "+dPlaneta+"px "+dPlaneta+"px "+dPlaneta+"px");
 $("#planeta").css("background","linear-gradient("+colorRan()+","+colorRan()+","+colorRan()+")");
