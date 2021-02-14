@@ -77,7 +77,7 @@ function verDivs(){
 }
 
 function moverEstrellas(){    
-    nEstrellas+=1;   
+    if(nEstrellas<51){nEstrellas+=1;}
     if(nEstrellas>150){cargo="almirante";}
     else if(nEstrellas>100){cargo="capitan";}
     else if(nEstrellas>50){cargo="marinero";}
