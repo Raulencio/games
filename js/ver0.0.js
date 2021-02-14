@@ -1,8 +1,9 @@
-var nombre="";var cargo="grumete";var dPlaneta=randomAr(80,40);var nEstrellas=0;
-
+var nombre="";var cargo="grumete";var dPlaneta=randomAr(80,40);var nEstrellas=0;var proporcion=42;
+var ttiempo=0;
+var coloressol=["whitesmoke","white","yellow","red",colorRan(),"lightblue"];
 function esconder(a){document.getElementById(a).hidden=true;}
 function mostrar(a){document.getElementById(a).hidden=false;}
-
+function tiempo(){ttiempo+=nEstrellas;}
 function verificarDatos(){
 
     if((localStorage.getItem("nombre"))!=null){
@@ -24,15 +25,24 @@ function guardarDatos(){
     console.log("nombre : "+nombre);
     console.log("cargo : "+cargo);
     console.log("numero de Estrellas : "+nEstrellas);
-    alert("Guardado");
+    //alert("Guardado");
+    mostrar("mensaje"); 
 }
-
+var portesol=randomAr(420,240);
 var divs=[
-    [$("#fondo"),"absolute",1,1,420,900,
+    [$("#fondo"),"absolute",1,1,415,900,
     "black","0px 0px 5px 1px",colorRan()],
+
+    [$("#sol"),"absolute",1,1,portesol,portesol,
+    coloressol[randomAr(coloressol.length-1,0)],"0px 0px "+randomAr(9,3)+"px "+randomAr(3,1)+"px",colorRan()],
 
     [$("#perfil"),"absolute",10,10,200,200,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
+
+    [$("#cabeza"),"absolute",100,60,proporcion,proporcion,
+    colorRan(),"0px 0px 0px 0px",colorRan()],
+    [$("#cuerpo"),"absolute",150,proporcion,proporcion*2,proporcion,
+    colorRan(),"0px 0px 0x 0px",colorRan()],
 
     [$("#cargo"),"absolute",220,10,200,40,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
@@ -88,12 +98,14 @@ function moverEstrellas(){
     }
     guardarDatos();    
 }
-
 $(document).ready(function(){
 
 verDivs();
 verificarDatos();
 moverEstrellas();
+$("#cabeza").css("border-radius",proporcion+"px "+proporcion+"px "+proporcion+"px "+proporcion+"px");
+$("#cuerpo").css("border-radius",proporcion/2+"px "+proporcion/2+"px 0px 0px");
+$("#sol").css("border-radius","0px 0px "+(portesol*2)+"px 0px");
 $("#planeta").css("border-radius",dPlaneta+"px "+dPlaneta+"px "+dPlaneta+"px "+dPlaneta+"px");
 $("#planeta").css("background","linear-gradient("+colorRan()+","+colorRan()+","+colorRan()+")");
 $("#planeta").css("transform","rotate("+randomAr(360,0)+"deg)");
