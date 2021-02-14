@@ -73,7 +73,7 @@ verificarNombre();
 moverEstrellas();
 $("#planeta").css("border-radius",dPlaneta+"px "+dPlaneta+"px "+dPlaneta+"px "+dPlaneta+"px");
 $("#titulomensaje").text("Binvenido "+nombre);//set 
-$("#textomensaje").text("Que hay");//set 
+$("#textomensaje").text("Que hay "+cargo);//set 
 $("#pCargoNombre").text(cargo+" - "+nombre);
 
 })
