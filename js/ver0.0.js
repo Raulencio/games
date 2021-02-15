@@ -86,14 +86,15 @@ function moverEstrellas(){
     }else{nes=nEstrellas;}
 
     for(var u=0;u<nes;u++){
-
+        var w= randomAr(2,1);
         var estrellita=document.createElement("div");
             estrellita.style.position=("absolute");
             estrellita.style.left=randomAr(400,20)+"px";
             estrellita.style.top=randomAr(880,240)+"px";
-            estrellita.style.width="1px";
-            estrellita.style.height="1px";
+            estrellita.style.width=w+"px";
+            estrellita.style.height=w+"px";
             estrellita.style.backgroundColor=colorRan();
+            estrellita.style.borderRadius=w+"px "+w+"px "+w+"px "+w+"px ";
         
         if(randomAr(2,1)==2){
             estrellita.style.boxShadow=" 0px 0px "+randomAr(6,2)+"px "+randomAr(1,0)+"px "+colorRan();
@@ -144,16 +145,18 @@ textos();
 //setInterval("sumE()",10000);
 function sumE(){
     nEstrellas++;
+    var w= randomAr(2,1);
     var estrellita=document.createElement("div");
     estrellita.style.position=("absolute");
-    estrellita.style.left=randomAr(400,20)+"px";
-    estrellita.style.top=randomAr(880,240)+"px";
-    estrellita.style.width="1px";
-    estrellita.style.height="1px";
+    estrellita.style.left=randomAr(380,20)+"px";
+    estrellita.style.top=randomAr(880,20)+"px";
+    estrellita.style.width=w+"px";
+    estrellita.style.height=w+"px";
     estrellita.style.backgroundColor=colorRan();
     estrellita.style.boxShadow=" 0px 0px "+randomAr(6,4)+"px "+randomAr(2,1)+"px "+colorRan();
+    estrellita.style.borderRadius=w+"px "+w+"px "+w+"px "+w+"px ";
     document.querySelector("#fondo").appendChild(estrellita);    
-    console.log(nEstrellas);
+    //console.log(nEstrellas);
 }
 
 function alertaOvni(){
