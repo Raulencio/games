@@ -108,14 +108,18 @@ function verDivs(){
     $("#sol").css("border-radius","0px 0px "+(portesol*2)+"px 0px");
     $("#planeta").css("border-radius",dPlaneta+"px "+dPlaneta+"px "+dPlaneta+"px "+dPlaneta+"px");
     $("#planeta").css("background","linear-gradient("+colorRan()+","+colorRan()+","+colorRan()+")");
-    $("#planeta").css("transform","rotate("+randomAr(360,0)+"deg)");
+    //$("#planeta").css("transform","rotate("+randomAr(360,0)+"deg)");
     $("#ovni").css("border-radius",""+povni*4+"px 0px "+povni*4+"px 0px");
     $("#ovni").css("transform","rotate("+randomAr(60,10)+"deg)");
     
     if(randomAr(3,1)!=2){esconder("ovni");
     }else{mostrar("ovni");}
 }
-
+var giros=1;
+function rote(){
+    $("#planeta").css("transform","rotate("+giros*30+"deg)");
+    giros++;
+}
 function moverEstrellas(){    
     if(nEstrellas<51){nEstrellas+=1;}
     if(nEstrellas>150){cargo="almirante";}
@@ -162,6 +166,8 @@ $("#pCargoNombre").text(cargo+" - "+nombre);
 
 $(document).ready(function(){
 document.getElementById("ovni").style.transition="all 4.20s"; 
+document.getElementById("planeta").style.transition="transform 4.20s"; 
+
 verDivs();
 verificarDatos();
 moverEstrellas();
