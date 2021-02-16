@@ -1,6 +1,7 @@
 var nombre="";var cargo="grumete";var dPlaneta=randomAr(80,40);var nEstrellas=0;var proporcion=42;
 var ttiempo=0;var povni=randomAr(35,10);var nOvnis=0;var portesol=randomAr(400,240);
 var coloressol=["whitesmoke","white","yellow","red",colorRan(),"lightblue"];
+var coloresPlaneta="linear-gradient(blue,brown,blue)";var colorSol="yellow";
 function esconder(id){document.getElementById(id).hidden=true;}
 function mostrar(id){document.getElementById(id).hidden=false;}
 function tiempo(){ttiempo+=nEstrellas;}
@@ -15,6 +16,11 @@ function verificarDatos(){
 
     if((localStorage.getItem("nEstrellas"))!=null){nEstrellas=parseInt(localStorage.getItem("nEstrellas"));}
 
+    if((localStorage.getItem("coloresPlaneta"))!=null){coloresPlaneta=(localStorage.getItem("coloresPlaneta"));}
+
+    if((localStorage.getItem("colorSol"))!=null){colorSol=(localStorage.getItem("colorSol"));}
+
+
     guardarDatos();
 }
 
@@ -23,6 +29,10 @@ function guardarDatos(){
     localStorage.setItem("cargo",cargo); 
     localStorage.setItem("nEstrellas",nEstrellas); 
     localStorage.setItem("nOvnis",nOvnis);
+    localStorage.setItem("coloresPlaneta",coloresPlaneta); 
+    localStorage.setItem("colorSol",colorSol);
+//console.log(localStorage.getItem("colorSol"));
+
     console.log("nombre : "+nombre);
     console.log("cargo : "+cargo);
     console.log("estrellas : "+nEstrellas);
@@ -38,7 +48,7 @@ var divs=[
     "black","0px 0px 5px 1px",colorRan()],
     //1
     [$("#sol"),"absolute",1,1,portesol,portesol,
-    coloressol[randomAr(coloressol.length-1,0)],"0px 0px "+randomAr(9,3)+"px "+randomAr(3,1)+"px",colorRan()],
+    colorSol,"0px 0px "+randomAr(9,3)+"px "+randomAr(3,1)+"px",colorRan()],
     //2
     [$("#perfil"),"absolute",10,10,200,200,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
@@ -53,7 +63,7 @@ var divs=[
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
     //6
     [$("#planeta"),"absolute",randomAr(660,540),randomAr(240,70),dPlaneta*2,dPlaneta*2,
-    colorRan(),"0px 0px "+randomAr(7,2)+"px "+randomAr(3,1)+"px",colorRan()],
+    "blue","0px 0px "+randomAr(7,2)+"px "+randomAr(3,1)+"px",colorRan()],
     //7
     [$("#ovni"),"absolute",randomAr(800,220),randomAr(350,50),povni,povni,
     colorRan()+"77","0px 0px 5px 1px",colorRan()],
@@ -65,13 +75,15 @@ var divs=[
 
 function viajar(){
     //sol
+    colorSol=coloressol[randomAr(coloressol.length-1,0)];//color;
     portesol=randomAr(400,240);
     divs[1][4]=portesol;//width;
-    divs[1][5]=portesol;//height;
-    divs[1][6]=coloressol[randomAr(coloressol.length-1,0)];//color;
+    divs[1][5]=portesol;//height;    
+    divs[1][6]=colorSol;
     divs[1][7]="0px 0px "+randomAr(9,3)+"px "+randomAr(3,1)+"px";//sombra;
     divs[1][8]=colorRan();//colorsombra;
     //planeta
+    coloresPlaneta="linear-gradient("+colorRan()+","+colorRan()+","+colorRan()+")";  
     dPlaneta=randomAr(80,40);
     divs[6][2]=randomAr(660,540);//top;
     divs[6][3]=randomAr(240,70);//left;
@@ -87,7 +99,10 @@ function viajar(){
     divs[7][5]=povni;//height;
     divs[7][6]=colorRan()+"77";//color;
     divs[7][7]="0px 0px 5px 1px";//sombra;
-    divs[7][8]=colorRan();//colorsombra;
+    divs[7][8]=colorRan();//colorsombra;    
+    
+    localStorage.setItem("coloresPlaneta",coloresPlaneta); 
+    localStorage.setItem("colorSol",colorSol);
 
     verDivs();
 }
@@ -106,20 +121,22 @@ function verDivs(){
     $("#cabeza").css("border-radius",proporcion+"px "+proporcion+"px "+proporcion+"px "+proporcion+"px");
     $("#cuerpo").css("border-radius",proporcion/2+"px "+proporcion/2+"px 0px 0px");
     $("#sol").css("border-radius","0px 0px "+(portesol*2)+"px 0px");
+    $("#sol").css("backgroundColor",colorSol);
     $("#planeta").css("border-radius",dPlaneta+"px "+dPlaneta+"px "+dPlaneta+"px "+dPlaneta+"px");
-    $("#planeta").css("background","linear-gradient("+colorRan()+","+colorRan()+","+colorRan()+")");
+    //$("#planeta").css("background","linear-gradient("+colorRan()+","+colorRan()+","+colorRan()+")");    
+    $("#planeta").css("background",coloresPlaneta);
     //$("#planeta").css("transform","rotate("+randomAr(360,0)+"deg)");
     $("#ovni").css("border-radius",""+povni*4+"px 0px "+povni*4+"px 0px");
     $("#ovni").css("transform","rotate("+randomAr(60,10)+"deg)");
     
     if(randomAr(3,1)!=2){esconder("ovni");
     }else{mostrar("ovni");}
+    console.log(colorSol);
+    console.log(coloresPlaneta);
 }
 var giros=1;
-function rote(){
-    $("#planeta").css("transform","rotate("+giros*30+"deg)");
-    giros++;
-}
+function rote(){$("#planeta").css("transform","rotate("+giros*20+"deg)");giros++;}
+
 function moverEstrellas(){    
     if(nEstrellas<51){nEstrellas+=1;}
     if(nEstrellas>150){cargo="almirante";}
@@ -133,8 +150,8 @@ function moverEstrellas(){
         var w= randomAr(2,1);
         var estrellita=document.createElement("div");
             estrellita.style.position=("absolute");
-            estrellita.style.left=randomAr(400,20)+"px";
-            estrellita.style.top=randomAr(880,240)+"px";
+            estrellita.style.left=randomAr(380,20)+"px";
+            estrellita.style.top=randomAr(880,20)+"px";
             estrellita.style.width=w+"px";
             estrellita.style.height=w+"px";
             estrellita.style.backgroundColor=colorRan();
@@ -167,12 +184,10 @@ $("#pCargoNombre").text(cargo+" - "+nombre);
 $(document).ready(function(){
 document.getElementById("ovni").style.transition="all 4.20s"; 
 document.getElementById("planeta").style.transition="transform 4.20s"; 
-
-verDivs();
 verificarDatos();
+verDivs();
 moverEstrellas();
 textos();
-
 })
 // document.getElementById("enemigo").style.backgroundColor="#"+(Math.floor(Math.random()*16777215).toString(16));
 
@@ -202,5 +217,7 @@ function alertaOvni(){
     }
     localStorage.setItem("nOvnis",nOvnis); 
     localStorage.setItem("nEstrellas",nEstrellas);  
-    viajar(); 
+    
+    var viaje=confirm("Deseas viajar a otro lugar?");
+    if(viaje){viajar();}
 }
