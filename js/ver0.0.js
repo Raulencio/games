@@ -50,7 +50,7 @@ var divs=[
     [$("#sol"),"absolute",1,1,portesol,portesol,
     colorSol,"0px 0px "+randomAr(9,3)+"px "+randomAr(3,1)+"px",colorRan()],
     //2
-    [$("#perfil"),"absolute",10,10,200,200,
+    [$("#perfil"),"absolute",60,10,200,200,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
     //3
     [$("#cabeza"),"absolute",100,60,proporcion,proporcion,
@@ -59,16 +59,16 @@ var divs=[
     [$("#cuerpo"),"absolute",150,proporcion,proporcion*2,proporcion,
     colorRan(),"0px 0px 0x 0px",colorRan()],
     //5
-    [$("#cargo"),"absolute",220,10,200,40,
+    [$("#cargo"),"absolute",10,10,200,40,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
     //6
     [$("#planeta"),"absolute",randomAr(660,540),randomAr(240,70),dPlaneta*2,dPlaneta*2,
     "blue","0px 0px "+randomAr(7,2)+"px "+randomAr(3,1)+"px",colorRan()],
     //7
     [$("#ovni"),"absolute",randomAr(800,220),randomAr(350,50),povni,povni,
-    colorRan()+"77","0px 0px 5px 1px",colorRan()],
+    colorRan()+"25","0px 0px 5px 1px",colorRan()],
     //8
-    [$("#mensaje"),"absolute",50,10,390,800,
+    [$("#mensaje"),"absolute",60,10,390,800,
     "#ffffffaa","0px 0px 10px 1px ","red"]
 
 ]
@@ -97,7 +97,7 @@ function viajar(){
     divs[7][3]=randomAr(350,50);//left;
     divs[7][4]=povni;//width;
     divs[7][5]=povni;//height;
-    divs[7][6]=colorRan()+"aa";//color;
+    divs[7][6]=colorRan()+"25";//color;
     divs[7][7]="0px 0px 5px 1px";//sombra;
     divs[7][8]=colorRan();//colorsombra;    
     
@@ -137,10 +137,11 @@ function verDivs(){
 var giros=1;
 function rote(){$("#planeta").css("transform","rotate("+giros*3+"deg)");giros++;
 if(document.getElementById("ovni").hidden){
-    if(randomAr(5,1)==2){
+    if(randomAr(9,0)==2){
         mostrar("ovni");
     }else{
         //console.log("Buscando..");
+        $("#ovni").css("transform","rotate("+giros*6+"deg)");
     }
 }
 }
@@ -155,16 +156,16 @@ function moverEstrellas(){
     }else{nes=nEstrellas;}
 
     for(var u=0;u<nes;u++){
-        var w= randomAr(2,1);
+        var w= randomAr(3,2);
         var estrellita=document.createElement("div");
             estrellita.style.position=("absolute");
-            estrellita.style.left=randomAr(380,20)+"px";
-            estrellita.style.top=randomAr(880,20)+"px";
+            estrellita.style.left=randomAr(409,1)+"px";
+            estrellita.style.top=randomAr(899,21)+"px";
             estrellita.style.width=w+"px";
             estrellita.style.height=w+"px";
             estrellita.style.backgroundColor=colorRan();
             estrellita.style.borderRadius=w+"px "+w+"px "+w+"px "+w+"px ";
-        
+            estrellita.className="estrellita";
         if(randomAr(2,1)==2){
             estrellita.style.boxShadow=" 0px 0px "+randomAr(5,2)+"px "+randomAr(1,0)+"px "+colorRan();
         }else{
@@ -203,16 +204,17 @@ textos();
 //setInterval("sumE()",10000);
 function sumE(){
     nEstrellas++;
-    var w= randomAr(2,1);
+    var w= randomAr(3,2);
     var estrellita=document.createElement("div");
     estrellita.style.position=("absolute");
-    estrellita.style.left=randomAr(380,20)+"px";
-    estrellita.style.top=randomAr(880,20)+"px";
+    estrellita.style.left=randomAr(409,1)+"px";
+    estrellita.style.top=randomAr(899,21)+"px";
     estrellita.style.width=w+"px";
     estrellita.style.height=w+"px";
     estrellita.style.backgroundColor=colorRan();
     estrellita.style.boxShadow=" 0px 0px "+randomAr(5,3)+"px "+randomAr(1,0)+"px "+colorRan();
     estrellita.style.borderRadius=w+"px "+w+"px "+w+"px "+w+"px ";
+    estrellita.className="estrellita";
     document.querySelector("#fondo").appendChild(estrellita);    
     //console.log(nEstrellas);
 }
@@ -225,9 +227,20 @@ function alertaOvni(){
     localStorage.setItem("nEstrellas",nEstrellas);  
     
     var viaje=confirm("Deseas viajar a otro lugar?");
-    if(viaje){viajar();planetasVisitados++;for(var e=0;e<nOvnis;e++){
-        sumE();giros=randomAr(36,1);
-    }}{
+    if(viaje){viajar();planetasVisitados++;
+         var cupcakes= document.getElementsByClassName("estrellita");
+do{
+    for(var i=0;i<cupcakes.length;i++){    
+    document.getElementById("fondo").removeChild(cupcakes[i]);
+    cupcakes= document.getElementsByClassName("estrellita");
+    }
+}while(cupcakes.length>0);
+        
+        
+        for(var e=0;e<nOvnis;e++){
+        sumE();    
+    }
+}{
     povni=randomAr(35,10);
     divs[7][2]=randomAr(800,220);//top;
     divs[7][3]=randomAr(350,50);//left;
