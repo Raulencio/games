@@ -1,5 +1,5 @@
 var nombre="";var cargo="grumete";var dPlaneta=randomAr(80,40);var nEstrellas=0;var proporcion=42;
-var ttiempo=0;var povni=randomAr(35,10);var nOvnis=0;var portesol=randomAr(400,240);
+var ttiempo=0;var povni=randomAr(35,10);var nOvnis=0;var portesol=randomAr(400,240);var planetasVisitados=1;
 var coloressol=["whitesmoke","white","yellow","red",colorRan(),"lightblue"];
 var coloresPlaneta="linear-gradient(blue,brown,blue)";var colorSol="yellow";
 function esconder(id){document.getElementById(id).hidden=true;}
@@ -18,9 +18,8 @@ function verificarDatos(){
 
     if((localStorage.getItem("coloresPlaneta"))!=null){coloresPlaneta=(localStorage.getItem("coloresPlaneta"));}
 
-    if((localStorage.getItem("colorSol"))!=null){colorSol=(localStorage.getItem("colorSol"));}
-
-
+    if((localStorage.getItem("colorSol"))!=null){colorSol=(localStorage.getItem("colorSol"));}    
+    if((localStorage.getItem("planetasVisitados"))!=null){planetasVisitados=parseInt(localStorage.getItem("planetasVisitados"));}
     guardarDatos();
 }
 
@@ -31,6 +30,7 @@ function guardarDatos(){
     localStorage.setItem("nOvnis",nOvnis);
     localStorage.setItem("coloresPlaneta",coloresPlaneta); 
     localStorage.setItem("colorSol",colorSol);
+    localStorage.setItem("planetasVisitados",planetasVisitados);
 //console.log(localStorage.getItem("colorSol"));
 
     console.log("nombre : "+nombre);
@@ -97,7 +97,7 @@ function viajar(){
     divs[7][3]=randomAr(350,50);//left;
     divs[7][4]=povni;//width;
     divs[7][5]=povni;//height;
-    divs[7][6]=colorRan()+"77";//color;
+    divs[7][6]=colorRan()+"aa";//color;
     divs[7][7]="0px 0px 5px 1px";//sombra;
     divs[7][8]=colorRan();//colorsombra;    
     
@@ -108,7 +108,7 @@ function viajar(){
 }
 function verDivs(){
     for(var i=0;i<divs.length;i++){
-        console.log(divs[i][0]);
+        //console.log(divs[i][0]);
             divs[i][0].css("position",divs[i][1]);
             divs[i][0].css("top",divs[i][2]+"px");
             divs[i][0].css("left",divs[i][3]+"px");
@@ -129,13 +129,21 @@ function verDivs(){
     $("#ovni").css("border-radius",""+povni*4+"px 0px "+povni*4+"px 0px");
     $("#ovni").css("transform","rotate("+randomAr(60,10)+"deg)");
     
-    if(randomAr(3,1)!=2){esconder("ovni");
-    }else{mostrar("ovni");}
-    console.log(colorSol);
-    console.log(coloresPlaneta);
+    esconder("ovni");
+    
+    //console.log(colorSol);
+    //console.log(coloresPlaneta);
 }
 var giros=1;
-function rote(){$("#planeta").css("transform","rotate("+giros*20+"deg)");giros++;}
+function rote(){$("#planeta").css("transform","rotate("+giros*3+"deg)");giros++;
+if(document.getElementById("ovni").hidden){
+    if(randomAr(5,1)==2){
+        mostrar("ovni");
+    }else{
+        //console.log("Buscando..");
+    }
+}
+}
 
 function moverEstrellas(){    
     if(nEstrellas<51){nEstrellas+=1;}
@@ -174,6 +182,7 @@ $("#titulomensaje").text(saludo[randomAr(saludo.length-1,0)]+cargo);//set
 $("#textomensaje1").text(muchoTexto[randomAr(muchoTexto.length-1,0)]+nombre);
 $("#textomensaje2").text(" numero de Estrellas: "+nEstrellas);//set 
 $("#textomensaje3").text(" Ovnis avistados: "+nOvnis);
+$("#textomensaje4").text("  Planetas visitados: "+planetasVisitados);
 $("#pCargoNombre").text(cargo+" - "+nombre);
 
 }
@@ -182,8 +191,8 @@ $("#pCargoNombre").text(cargo+" - "+nombre);
 
 
 $(document).ready(function(){
-document.getElementById("ovni").style.transition="all 4.20s"; 
-document.getElementById("planeta").style.transition="transform 4.20s"; 
+document.getElementById("ovni").style.transition="all 5s"; 
+document.getElementById("planeta").style.transition="transform 5s"; 
 verificarDatos();
 verDivs();
 moverEstrellas();
@@ -207,17 +216,27 @@ function sumE(){
     document.querySelector("#fondo").appendChild(estrellita);    
     //console.log(nEstrellas);
 }
-
 function alertaOvni(){
     alert("Un Ovni!!!..");
     nOvnis+=1;
-    esconder("ovni");    
-    for(var e=0;e<nOvnis;e++){
-        sumE();
-    }
+    //esconder("ovni");    
+    
     localStorage.setItem("nOvnis",nOvnis); 
     localStorage.setItem("nEstrellas",nEstrellas);  
     
     var viaje=confirm("Deseas viajar a otro lugar?");
-    if(viaje){viajar();}
+    if(viaje){viajar();planetasVisitados++;for(var e=0;e<nOvnis;e++){
+        sumE();giros=randomAr(36,1);
+    }}{
+    povni=randomAr(35,10);
+    divs[7][2]=randomAr(800,220);//top;
+    divs[7][3]=randomAr(350,50);//left;
+    divs[7][4]=povni;//width;
+    divs[7][5]=povni;//height;
+    divs[7][6]=colorRan()+"25";//color;
+    divs[7][7]="0px 0px 5px 1px";//sombra;
+    divs[7][8]=colorRan();//colorsombra;        
+    verDivs();}
+    
 }
+setInterval("rote()",5000);
