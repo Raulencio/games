@@ -235,9 +235,13 @@ do{
     cupcakes= document.getElementsByClassName("estrellita");
     }
 }while(cupcakes.length>0);
-        
-        
-        for(var e=0;e<nOvnis;e++){
+        var veces=0;
+        if(nEstrellas>100){
+            veces=100;
+        }else{
+            veces=nEstrellas;
+        }
+        for(var e=0;e<veces;e++){
         sumE();    
     }
 }{
