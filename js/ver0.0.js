@@ -72,7 +72,7 @@ var divs=[
     "#ffffffaa","0px 0px 10px 1px ","red"]
 
 ]
-
+var contador=0;
 function viajar(){
     //sol
     colorSol=coloressol[randomAr(coloressol.length-1,0)];//color;
@@ -103,7 +103,7 @@ function viajar(){
     
     localStorage.setItem("coloresPlaneta",coloresPlaneta); 
     localStorage.setItem("colorSol",colorSol);
-
+    contador=0;
     verDivs();
 }
 function verDivs(){
@@ -118,6 +118,8 @@ function verDivs(){
             divs[i][0].css("boxShadow",divs[i][7]+divs[i][8]);
             divs[i][0].css("z-index",i)    
     }
+    $("#cargo").css("z-index","7");
+    $("#perfil").css("z-index","7");
     $("#cabeza").css("border-radius",proporcion+"px "+proporcion+"px "+proporcion+"px "+proporcion+"px");
     $("#cuerpo").css("border-radius",proporcion/2+"px "+proporcion/2+"px 0px 0px");
     $("#sol").css("border-radius","0px 0px "+(portesol*2)+"px 0px");
@@ -128,22 +130,21 @@ function verDivs(){
     //$("#planeta").css("transform","rotate("+randomAr(360,0)+"deg)");
     $("#ovni").css("border-radius",""+povni*4+"px 0px "+povni*4+"px 0px");
     $("#ovni").css("transform","rotate("+randomAr(60,10)+"deg)");
-    
-    esconder("ovni");
-    
+            
     //console.log(colorSol);
     //console.log(coloresPlaneta);
 }
 var giros=1;
 function rote(){$("#planeta").css("transform","rotate("+giros*3+"deg)");giros++;
-if(document.getElementById("ovni").hidden){
+if(document.getElementById("ovni").hidden&&contador>12){
     if(randomAr(9,0)==2){
         mostrar("ovni");
     }else{
         //console.log("Buscando..");
         $("#ovni").css("transform","rotate("+giros*6+"deg)");
     }
-}
+}contador++;
+//console.log("Buscando.."+contador);
 }
 
 function moverEstrellas(){    
@@ -200,8 +201,6 @@ if(menuPerfil){
     divs[2][5]=40;   
     menuPerfil=false;
     verDivs();
-    esconder("cabeza");
-    esconder("cuerpo"); 
 
 }else{
     divs[5][2]=720;
@@ -209,8 +208,6 @@ if(menuPerfil){
     divs[2][5]=170;    
     menuPerfil=true;
     verDivs();
-    mostrar("cabeza"); 
-    mostrar("cuerpo"); 
     
 }
 
@@ -219,7 +216,7 @@ if(menuPerfil){
 ///////////////////////
 
 
-$(document).ready(function(){
+$(document).ready(function(){esconder("ovni");
     document.getElementById("perfil").style.transition="all 0.5s"; 
     document.getElementById("cargo").style.transition="all 0.5s"; 
 document.getElementById("ovni").style.transition="all 5s"; 
@@ -229,6 +226,7 @@ verDivs();
 moverEstrellas();
 textos();
 $("#fondo").css("overflow","hidden");
+$("#perfil").css("overflow","hidden");
 })
 // document.getElementById("enemigo").style.backgroundColor="#"+(Math.floor(Math.random()*16777215).toString(16));
 
@@ -275,7 +273,7 @@ do{
         for(var e=0;e<veces;e++){
         sumE();    
     }
-}{
+}else{
     povni=randomAr(35,10);
     divs[7][2]=randomAr(800,220);//top;
     divs[7][3]=randomAr(350,50);//left;
@@ -285,6 +283,6 @@ do{
     divs[7][7]="0px 0px 5px 1px";//sombra;
     divs[7][8]=colorRan();//colorsombra;        
     verDivs();}
-    
+    esconder("ovni");
 }
 setInterval("rote()",5000);
