@@ -68,7 +68,7 @@ var divs=[
     [$("#ovni"),"absolute",randomAr(800,220),randomAr(350,50),povni,povni,
     colorRan()+"25","0px 0px 5px 1px",colorRan()],
     //8
-    [$("#mensaje"),"absolute",60,10,390,800,
+    [$("#mensaje"),"absolute",10,10,390,880,
     "#ffffffaa","0px 0px 10px 1px ","red"]
 
 ]
@@ -225,6 +225,7 @@ verificarDatos();
 verDivs();
 moverEstrellas();
 textos();
+menudesp()
 $("#fondo").css("overflow","hidden");
 $("#perfil").css("overflow","hidden");
 })
@@ -285,4 +286,17 @@ do{
     verDivs();}
     esconder("ovni");
 }
+
+//var arr=[2,3,4,5].map(numero)=(console.log(numero));
+
+var arrre=[2,3,4,5,6];
+var arre=[2,3,4,5,6];
+arrre.push(...arre);
+console.log(arrre);
+
+function sumar(a,b,c){
+    return a+b+c;
+}
+console.log(sumar(...arrre));
+
 setInterval("rote()",5000);
