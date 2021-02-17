@@ -50,16 +50,16 @@ var divs=[
     [$("#sol"),"absolute",1,1,portesol,portesol,
     colorSol,"0px 0px "+randomAr(9,3)+"px "+randomAr(3,1)+"px",colorRan()],
     //2
-    [$("#perfil"),"absolute",60,10,200,200,
+    [$("#perfil"),"absolute",720,200,200,170,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
     //3
-    [$("#cabeza"),"absolute",100,60,proporcion,proporcion,
+    [$("#cabeza"),"absolute",60,60,proporcion,proporcion,
     colorRan(),"0px 0px 0px 0px",colorRan()],
     //4
-    [$("#cuerpo"),"absolute",150,proporcion,proporcion*2,proporcion,
+    [$("#cuerpo"),"absolute",110,proporcion,proporcion*2,proporcion,
     colorRan(),"0px 0px 0x 0px",colorRan()],
     //5
-    [$("#cargo"),"absolute",10,10,200,40,
+    [$("#cargo"),"absolute",720,200,200,40,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
     //6
     [$("#planeta"),"absolute",randomAr(660,540),randomAr(240,70),dPlaneta*2,dPlaneta*2,
@@ -188,16 +188,47 @@ $("#pCargoNombre").text(cargo+" - "+nombre);
 
 }
 
+
+var menuPerfil=true;
+function menudesp(){
+
+
+
+if(menuPerfil){
+    divs[5][2]=850;
+    divs[2][2]=850;  
+    divs[2][5]=40;   
+    menuPerfil=false;
+    verDivs();
+    esconder("cabeza");
+    esconder("cuerpo"); 
+
+}else{
+    divs[5][2]=720;
+    divs[2][2]=720; 
+    divs[2][5]=170;    
+    menuPerfil=true;
+    verDivs();
+    mostrar("cabeza"); 
+    mostrar("cuerpo"); 
+    
+}
+
+}
+
 ///////////////////////
 
 
 $(document).ready(function(){
+    document.getElementById("perfil").style.transition="all 0.5s"; 
+    document.getElementById("cargo").style.transition="all 0.5s"; 
 document.getElementById("ovni").style.transition="all 5s"; 
 document.getElementById("planeta").style.transition="transform 5s"; 
 verificarDatos();
 verDivs();
 moverEstrellas();
 textos();
+$("#fondo").css("overflow","hidden");
 })
 // document.getElementById("enemigo").style.backgroundColor="#"+(Math.floor(Math.random()*16777215).toString(16));
 
