@@ -1,6 +1,6 @@
 var nombre="";var cargo="grumete";var dPlaneta=randomAr(80,40);var nEstrellas=0;var proporcion=42;
 var ttiempo=0;var povni=randomAr(35,10);var nOvnis=0;var portesol=randomAr(400,240);var planetasVisitados=1;
-var coloressol=["whitesmoke","white","yellow","red",colorRan(),"lightblue"];
+var coloressol=["whitesmoke","white","yellow","red","lightblue","#040414","#5353ff","#0000b1","#e9f360","#deee00","#ee5700","#e20b0b","#cccaca","#f7ff8d","#00ffd5","#ff9d00","#fffb04","#ff0404","#39ffde"];
 var coloresPlaneta="linear-gradient(blue,brown,blue)";var colorSol="yellow";
 function esconder(id){document.getElementById(id).hidden=true;}
 function mostrar(id){document.getElementById(id).hidden=false;}
@@ -48,7 +48,7 @@ var divs=[
     "black","0px 0px 5px 1px",colorRan()],
     //1
     [$("#sol"),"absolute",1,1,portesol,portesol,
-    colorSol,"0px 0px "+randomAr(9,3)+"px "+randomAr(3,1)+"px",colorRan()],
+    colorSol,"0px 0px "+randomAr(30,3)+"px "+randomAr(10,1)+"px",coloressol[randomAr(coloressol.length-1,0)]],
     //2
     [$("#perfil"),"absolute",720,200,200,170,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
@@ -80,8 +80,8 @@ function viajar(){
     divs[1][4]=portesol;//width;
     divs[1][5]=portesol;//height;    
     divs[1][6]=colorSol;
-    divs[1][7]="0px 0px "+randomAr(9,3)+"px "+randomAr(3,1)+"px";//sombra;
-    divs[1][8]=colorRan();//colorsombra;
+    divs[1][7]="0px 0px "+randomAr(30,3)+"px "+randomAr(10,1)+"px";//sombra;    
+    divs[1][8]=coloressol[randomAr(coloressol.length-1,0)]
     //planeta
     coloresPlaneta="linear-gradient("+colorRan()+","+colorRan()+","+colorRan()+")";  
     dPlaneta=randomAr(80,40);
@@ -298,5 +298,9 @@ function sumar(a,b,c){
     return a+b+c;
 }
 console.log(sumar(...arrre));
+
+let{num1,num2,num3,num4,num5}=arrre;
+
+//console.log(num1);
 
 setInterval("rote()",5000);
