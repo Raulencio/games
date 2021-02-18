@@ -71,8 +71,8 @@ var divs=[
     [$("#mensaje"),"absolute",10,10,390,880,
     "#ffffffaa","0px 0px 10px 1px ","red"],
 
-    [$("#datos"),"absolute",420,0,390,420,
-    "#ffffffaa","0px 0px 0px 0px ","white"]
+    [$("#datos"),"absolute",40,150,240,170,
+    "#ffffff20","0px 0px 0px 0px ","white"]
 
 
 ]
