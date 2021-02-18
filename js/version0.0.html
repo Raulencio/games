@@ -3,34 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/ve0.0.css">
-    <title>Perfil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.95">    
+    <title>Space</title>
 </head>
 <body>
 
-<div id="fondo">
+<div id="fondo" onClick="">
 
+    <div id="sol" onClick="tiempo()"></div>
 
-    <div id="mensaje" onClick="esconder('mensaje')" hidden="true">
+    <div id="ovni" onClick="alertaOvni()" editable="false"></div>
+
+    <div id="mensaje" onClick="esconder('mensaje'),menudesp()">
 
         <h1 id="titulomensaje">
-            Titulo
+            
         </h1>
-
-        <p id="textomensaje">
-            Mensaje            
-        </p>
-
+        <p id="muchoTexto"></p>
+    <div id="datos">
+        <h1 id="textomensaje1">
+                    
+        </h1>
+        <h1 id="textomensaje2">
+                       
+        </pp>
+        <h1 id="textomensaje3">
+                      
+        </h1>
+        <h1 id="textomensaje4">
+                     
+        </h1>
+        <h1 id="textomensaje4">
+                       
+        </h1>
+    </div>
+    
     </div>
 
-<div id="perfil" onClick="mostrar('mensaje'),sumE()">
+    <div id="perfil" onClick="guardarDatos()">
+
+    <div id="cabeza"></div>
+    <div id="cuerpo"></div>
 
 </div>
-<div id="cargo">
-<p id="pCargoNombre"><b>Cargo Nombre</b> </p>
+<div id="cargo" onClick="menudesp()">
+<h2 id="pCargoNombre"> </h2>
 </div>
-<div id="planeta" class="planeta" onClick="guardarDatos()"></div>
+<div id="planeta" class="planeta" onClick="rote()"></div>
 </div>
 
 
