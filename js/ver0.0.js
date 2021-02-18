@@ -211,7 +211,8 @@ if(menuPerfil){
     menuPerfil=true;
     verDivs();
     
-}
+}textos();
+
 
 }
 
@@ -309,7 +310,7 @@ do{
     divs[7][7]="0px 0px 5px 1px";//sombra;
     divs[7][8]=colorRan();//colorsombra;        
     verDivs();}
-    esconder("ovni");
+    esconder("ovni");textos();
 }
 
 
