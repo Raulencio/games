@@ -50,7 +50,7 @@ var divs=[
     [$("#sol"),"absolute",1,1,portesol,portesol,
     colorSol,"0px 0px "+randomAr(30,3)+"px "+randomAr(10,1)+"px",coloressol[randomAr(coloressol.length-1,0)]],
     //2
-    [$("#perfil"),"absolute",720,200,200,170,
+    [$("#perfil"),"absolute",720,10,390,170,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
     //3
     [$("#cabeza"),"absolute",60,60,proporcion,proporcion,
@@ -59,8 +59,8 @@ var divs=[
     [$("#cuerpo"),"absolute",110,proporcion,proporcion*2,proporcion,
     colorRan(),"0px 0px 0x 0px",colorRan()],
     //5
-    [$("#cargo"),"absolute",720,200,200,40,
-    colorRan()+"aa","0px 0px 5px 1px",colorRan()],
+    [$("#cargo"),"absolute",720,10,390,40,
+    colorRan()+"20","0px 0px 5px 1px",colorRan()],
     //6
     [$("#planeta"),"absolute",randomAr(660,540),randomAr(240,70),dPlaneta*2,dPlaneta*2,
     "blue","0px 0px "+randomAr(7,2)+"px "+randomAr(3,1)+"px",colorRan()],
@@ -236,7 +236,7 @@ $(document).ready(function(){
     document.getElementById("ovni").style.transition="all 5s"; 
     document.getElementById("planeta").style.transition="transform 5s"; 
 
-    
+
 esconder("ovni");
 verificarDatos();
 verDivs();
