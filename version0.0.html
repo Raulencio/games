@@ -8,31 +8,36 @@
 </head>
 <body>
 
-<div id="fondo">
+<div id="fondo" onClick="">
 
     <div id="sol" onClick="tiempo()"></div>
 
-    <div id="ovni" onClick="alertaOvni()"></div>
+    <div id="ovni" onClick="alertaOvni()" editable="false"></div>
 
-    <div id="mensaje" onClick="esconder('mensaje')">
+    <div id="mensaje" onClick="esconder('mensaje'),menudesp()">
 
         <h1 id="titulomensaje">
-            Bienvenido
+            
         </h1>
-
-        <p id="textomensaje1">
-            Mensaje          
-        </p>
-        <p id="textomensaje2">
-            Mensaje            
-        </p>
-        <p id="textomensaje3">
-            Mensaje            
-        </p>
-        <p id="textomensaje4">
-            Mensaje            
-        </p>
-
+        <p id="muchoTexto"></p>
+    <div id="datos">
+        <h1 id="textomensaje1">
+                    
+        </h1>
+        <h1 id="textomensaje2">
+                       
+        </pp>
+        <h1 id="textomensaje3">
+                      
+        </h1>
+        <h1 id="textomensaje4">
+                     
+        </h1>
+        <h1 id="textomensaje4">
+                       
+        </h1>
+    </div>
+    
     </div>
 
     <div id="perfil" onClick="guardarDatos()">
@@ -42,7 +47,7 @@
 
 </div>
 <div id="cargo" onClick="menudesp()">
-<p id="pCargoNombre"><b>Nombre</b> </p>
+<h2 id="pCargoNombre"> </h2>
 </div>
 <div id="planeta" class="planeta" onClick="rote()"></div>
 </div>
