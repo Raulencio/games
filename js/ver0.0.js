@@ -44,13 +44,13 @@ function guardarDatos(){
 
 var divs=[
     //0
-    [$("#fondo"),"absolute",1,1,410,900,//
+    [$("#fondo"),"absolute",1,1,410,2700,//
     "black","0px 0px 5px 1px",colorRan()],
     //1
     [$("#sol"),"absolute",1,1,portesol,portesol,
     colorSol,"0px 0px "+randomAr(30,3)+"px "+randomAr(10,1)+"px",coloressol[randomAr(coloressol.length-1,0)]],
     //2
-    [$("#perfil"),"absolute",720,10,390,170,
+    [$("#perfil"),"absolute",620,10,390,170,
     colorRan()+"aa","0px 0px 5px 1px",colorRan()],
     //3
     [$("#cabeza"),"absolute",60,60,proporcion,proporcion,
@@ -59,10 +59,10 @@ var divs=[
     [$("#cuerpo"),"absolute",110,proporcion,proporcion*2,proporcion,
     colorRan(),"0px 0px 0x 0px",colorRan()],
     //5
-    [$("#cargo"),"absolute",720,10,390,40,
+    [$("#cargo"),"absolute",620,10,390,40,
     colorRan()+"20","0px 0px 5px 1px",colorRan()],
     //6
-    [$("#planeta"),"absolute",randomAr(660,540),randomAr(240,70),dPlaneta*2,dPlaneta*2,
+    [$("#planeta"),"absolute",2500,150,dPlaneta*2,dPlaneta*2,
     "blue","0px 0px "+randomAr(7,2)+"px "+randomAr(3,1)+"px",colorRan()],
     //7
     [$("#ovni"),"absolute",randomAr(800,220),randomAr(350,50),povni,povni,
@@ -72,6 +72,12 @@ var divs=[
     "#ffffffaa","0px 0px 10px 1px ","red"],
 
     [$("#datos"),"absolute",40,150,240,170,
+    "#ffffff20","0px 0px 0px 0px ","white"],
+
+    [$("#subir"),"absolute",10,380,20,20,
+    "#ffffff20","0px 0px 0px 0px ","white"],
+
+    [$("#bajar"),"absolute",40,380,20,20,
     "#ffffff20","0px 0px 0px 0px ","white"]
 
 
@@ -89,8 +95,8 @@ function viajar(){
     //planeta
     coloresPlaneta="linear-gradient("+colorRan()+","+colorRan()+","+colorRan()+")";  
     dPlaneta=randomAr(80,40);
-    divs[6][2]=randomAr(660,540);//top;
-    divs[6][3]=randomAr(240,70);//left;
+    //divs[6][2]=randomAr(660,540);//top;
+    //divs[6][3]=randomAr(240,70);//left;
     divs[6][4]=dPlaneta*2;//width;
     divs[6][5]=dPlaneta*2//height;
     divs[6][7]="0px 0px "+randomAr(7,2)+"px "+randomAr(3,1)+"px";//sombra;
@@ -165,7 +171,7 @@ function moverEstrellas(){
         var estrellita=document.createElement("div");
             estrellita.style.position=("absolute");
             estrellita.style.left=randomAr(409,1)+"px";
-            estrellita.style.top=randomAr(899,21)+"px";
+            estrellita.style.top=randomAr(2699,21)+"px";
             estrellita.style.width=w+"px";
             estrellita.style.height=w+"px";
             estrellita.style.backgroundColor=colorRan();
@@ -198,15 +204,15 @@ var menuPerfil=true;
 function menudesp(){
 
 if(menuPerfil){
-    divs[5][2]=850;
-    divs[2][2]=850;  
+    divs[5][2]=750;
+    divs[2][2]=750;  
     divs[2][5]=40;   
     menuPerfil=false;
     verDivs();
 
 }else{
-    divs[5][2]=720;
-    divs[2][2]=720; 
+    divs[5][2]=620;
+    divs[2][2]=620; 
     divs[2][5]=170;    
     menuPerfil=true;
     verDivs();
@@ -231,7 +237,7 @@ $(document).ready(function(){
     $("#perfil").css("overflow","hidden");
     
     
-    
+    document.getElementById("fondo").style.transition="all 0.5s"; 
     document.getElementById("perfil").style.transition="all 0.5s"; 
     document.getElementById("cargo").style.transition="all 0.5s"; 
     document.getElementById("ovni").style.transition="all 5s"; 
@@ -263,7 +269,7 @@ function sumE(){
     var estrellita=document.createElement("div");
     estrellita.style.position=("absolute");
     estrellita.style.left=randomAr(409,1)+"px";
-    estrellita.style.top=randomAr(899,21)+"px";
+    estrellita.style.top=randomAr(2699,21)+"px";
     estrellita.style.width=w+"px";
     estrellita.style.height=w+"px";
     estrellita.style.backgroundColor=colorRan();
@@ -316,24 +322,13 @@ do{
 
 
 
-
-
-
-//var arr=[2,3,4,5].map(numero)=(console.log(numero));
-
-var arrre=[2,3,4,5,6];
-var arre=[2,3,4,5,6];
-arrre.push(...arre);
-//console.log(arrre);
-
-function sumar(a,b,c){
-    return a+b+c;
+function mover(x){
+    switch(x){        
+        case 1:divs[0][2]=0;break;
+        case 2:divs[0][2]=-1900;break;
+    }
+    verDivs();
 }
-//console.log(sumar(...arrre));
-
-let{num1,num2,num3,num4,num5}=arrre;
-
-//console.log(num1);
 
 
 
@@ -363,3 +358,21 @@ estrellita.style.transform="rotate("+randomAr(60,10)+"deg)";
 estrellita.className="ovni";    
 numO++;console.log("algo");
 }
+
+
+//var arr=[2,3,4,5].map(numero)=(console.log(numero));
+
+var arrre=[2,3,4,5,6];
+var arre=[2,3,4,5,6];
+arrre.push(...arre);
+//console.log(arrre);
+
+function sumar(a,b,c){
+    return a+b+c;
+}
+//console.log(sumar(...arrre));
+
+let{num1,num2,num3,num4,num5}=arrre;
+
+//console.log(num1);
+
