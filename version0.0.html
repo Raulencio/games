@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=0.95">    
+    <meta name="viewport" content="width=device-width, initial-scale=0.95">
+    <link rel="stylesheet" href="css/ve0.0.css">    
     <title>Space</title>
 </head>
 <body>
-
+<div id="pantalla" class="pantalla">
+    <div id="subir" onClick="mover(1)">
+    
+    </div>
+    <div id="bajar" onClick="mover(2)">
+    
+    </div>
 <div id="fondo" onClick="">
 
     <div id="sol" onClick="tiempo()"></div>
@@ -23,8 +30,14 @@
     
     </div>
 
-    <div id="perfil" onClick="guardarDatos()">
-        
+    
+<div id="planeta" class="planeta" onClick="rote()"></div>
+</div>
+<div id="cargo" onClick="menudesp()">
+
+</div>
+<div id="perfil" onClick="menudesp()">
+    
     <div id="cabeza"></div>
     <div id="cuerpo"></div>
     <p id="pCargoNombre"> </p>
@@ -48,12 +61,7 @@
     </div>
 
 </div>
-<div id="cargo" onClick="menudesp()">
-
 </div>
-<div id="planeta" class="planeta" onClick="rote()"></div>
-</div>
-
 
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/skrips.js"></script>
