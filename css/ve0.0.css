@@ -1,0 +1,9 @@
+.pantalla{
+    width: 410px;
+    height: 800px;
+    overflow:hidden;    
+    position:absolute;
+    top:0px;
+    left:0px;
+    z-index:0;
+}
