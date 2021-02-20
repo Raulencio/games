@@ -244,7 +244,7 @@ $(document).ready(function(){
     $("#bajar").css("border-right","20px solid transparent");
     $("#bajar").css("border-top","30px solid whitesmoke");
 
-    document.getElementById("fondo").style.transition="all 2s"; 
+    document.getElementById("fondo").style.transition="all 1s"; 
     document.getElementById("perfil").style.transition="all 0.5s"; 
     document.getElementById("cargo").style.transition="all 0.5s"; 
     document.getElementById("ovni").style.transition="all 5s"; 
