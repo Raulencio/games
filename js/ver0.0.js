@@ -62,7 +62,7 @@ var divs=[
     [$("#cargo"),"absolute",620,10,390,40,
     colorRan()+"20","0px 0px 5px 1px",colorRan()],
     //6
-    [$("#planeta"),"absolute",2500,150,dPlaneta*2,dPlaneta*2,
+    [$("#planeta"),"absolute",2400,150,dPlaneta*2,dPlaneta*2,
     "blue","0px 0px "+randomAr(7,2)+"px "+randomAr(3,1)+"px",colorRan()],
     //7
     [$("#ovni"),"absolute",randomAr(800,220),randomAr(350,50),povni,povni,
@@ -74,11 +74,11 @@ var divs=[
     [$("#datos"),"absolute",40,150,240,170,
     "#ffffff20","0px 0px 0px 0px ","white"],
 
-    [$("#subir"),"absolute",10,380,20,20,
-    "#ffffff20","0px 0px 0px 0px ","white"],
+    [$("#subir"),"absolute",360,360,0,0,
+    "#ffffff00","0px 0px 0px 0px ","white"],
 
-    [$("#bajar"),"absolute",40,380,20,20,
-    "#ffffff20","0px 0px 0px 0px ","white"]
+    [$("#bajar"),"absolute",420,360,0,0,
+    "#ffffff00","0px 0px 0px 0px ","white"]
 
 
 ]
@@ -236,7 +236,14 @@ $(document).ready(function(){
     $("#fondo").css("overflow","hidden");
     $("#perfil").css("overflow","hidden");
     
+    $("#subir").css("border-left","20px solid transparent");
+    $("#subir").css("border-right","20px solid transparent");
+    $("#subir").css("border-bottom","30px solid whitesmoke");
     
+    $("#bajar").css("border-left","20px solid transparent");
+    $("#bajar").css("border-right","20px solid transparent");
+    $("#bajar").css("border-top","30px solid whitesmoke");
+
     document.getElementById("fondo").style.transition="all 0.5s"; 
     document.getElementById("perfil").style.transition="all 0.5s"; 
     document.getElementById("cargo").style.transition="all 0.5s"; 
