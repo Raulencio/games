@@ -44,7 +44,7 @@ function guardarDatos(){
 
 var divs=[
     //0
-    [$("#fondo"),"absolute",1,1,410,2700,//
+    [$("#fondo"),"absolute",1,1,410,4200,//
     "black","0px 0px 5px 1px",colorRan()],
     //1
     [$("#sol"),"absolute",1,1,portesol,portesol,
@@ -62,7 +62,7 @@ var divs=[
     [$("#cargo"),"absolute",620,10,390,40,
     colorRan()+"20","0px 0px 5px 1px",colorRan()],
     //6
-    [$("#planeta"),"absolute",2400,150,dPlaneta*2,dPlaneta*2,
+    [$("#planeta"),"absolute",3800,150,dPlaneta*2,dPlaneta*2,
     "blue","0px 0px "+randomAr(7,2)+"px "+randomAr(3,1)+"px",colorRan()],
     //7
     [$("#ovni"),"absolute",randomAr(800,220),randomAr(350,50),povni,povni,
@@ -171,7 +171,7 @@ function moverEstrellas(){
         var estrellita=document.createElement("div");
             estrellita.style.position=("absolute");
             estrellita.style.left=randomAr(409,1)+"px";
-            estrellita.style.top=randomAr(2699,21)+"px";
+            estrellita.style.top=randomAr(4199,21)+"px";
             estrellita.style.width=w+"px";
             estrellita.style.height=w+"px";
             estrellita.style.backgroundColor=colorRan();
@@ -244,7 +244,7 @@ $(document).ready(function(){
     $("#bajar").css("border-right","20px solid transparent");
     $("#bajar").css("border-top","30px solid whitesmoke");
 
-    document.getElementById("fondo").style.transition="all 0.5s"; 
+    document.getElementById("fondo").style.transition="all 2s"; 
     document.getElementById("perfil").style.transition="all 0.5s"; 
     document.getElementById("cargo").style.transition="all 0.5s"; 
     document.getElementById("ovni").style.transition="all 5s"; 
@@ -276,7 +276,7 @@ function sumE(){
     var estrellita=document.createElement("div");
     estrellita.style.position=("absolute");
     estrellita.style.left=randomAr(409,1)+"px";
-    estrellita.style.top=randomAr(2699,21)+"px";
+    estrellita.style.top=randomAr(4199,21)+"px";
     estrellita.style.width=w+"px";
     estrellita.style.height=w+"px";
     estrellita.style.backgroundColor=colorRan();
@@ -332,7 +332,7 @@ do{
 function mover(x){
     switch(x){        
         case 1:divs[0][2]=0;break;
-        case 2:divs[0][2]=-1900;break;
+        case 2:divs[0][2]=-3400;break;
     }
     verDivs();
 }
