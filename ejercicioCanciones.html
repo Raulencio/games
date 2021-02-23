@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>    
+    <title>musica</title>
+</head>
+<body>
+    
+<div class="todo">
+
+    <div class="tabla">
+      
+        <div class="espacio">
+
+                <table class="table" id="tabla">
+                    
+                    <thead class="thead-inverse">
+
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Autor</th>
+                            <th>Disco</th>
+                            <th>Fecha</th>
+
+                        </tr>
+
+                    </thead>
+
+                </table>
+
+        </div>
+
+        <input type="button" value="Agregar Cancion" id="btnAgregar" onClick="mostrar()">
+
+        <input type="button" value="Borrar Cancion" id="btnBorrar" onClick="borrar()">
+
+
+    </div>
+
+    <div id="forformulario" hidden="true">
+
+        <div class="formulario" id="formulario" >
+
+<h5>Nombre</h5>
+<input type="text" value="" id="nombre">
+
+<h5>Autor</h5>
+<input type="text" value="" id="autor">
+
+<h5>Disco</h5>
+<input type="text" value="" id="disco">
+
+<h5>Fecha</h5>
+<input type="text" value="" id="fecha">
+
+<input type="button" value="Agregar" class="botonAgregar" onClick="capturar()">
+<input type="button" value="Cancelar" class="botonCancelar" onClick="cancelar()">
+
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .espacio{
+        width:800px;
+        height:500px;
+        background-color: #f0f0f020;
+    }
+.tabla{
+    position:absolute;
+    top:25px;
+    left:50px;
+    width:800px;
+    height:800px;
+    background-color: blueviolet;
+}
+.todo{
+    width:900px;
+    height:900px;
+    background-color: teal;
+}
+.formulario{
+    width:600px;
+    height:400px;
+    background-color: tomato;
+    position:absolute;
+    top:50px;
+    left:100px;
+    display:inline-flex;
+    flex-direction: column;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.botonAgregar{
+    position:absolute;
+    top:350px;
+    left:585px;
+}
+.botonCancelar{
+    position:absolute;
+    top:350px;
+    left:500px;
+}
+</style>
+
+<script src="js/jquery-3.5.1.js"></script>
+
+<script>
+
+    var campoNombre=document.getElementById("nombre");
+    var campoAutor=document.getElementById("autor");
+    var campoDisco=document.getElementById("disco");
+    var campoFecha=document.getElementById("fecha");
+    var btnAgregar=document.getElementById("btnAgregar");
+    
+    var mostran12=false;
+
+function mostrar(){
+
+    if(mostran12){ 
+
+        document.getElementById("forformulario").hidden=true;
+        mostran12=false;
+        
+    }else{   
+
+        document.getElementById("forformulario").hidden=false;
+        mostran12=true;
+        
+    }
+}
+
+
+function limpiarCampos(){campoAutor.value="";campoNombre.value="";campoDisco.value="";campoFecha.value="";}
+
+
+function cancelar(){document.getElementById("forformulario").hidden=true;mostran12=false;
+limpiarCampos();
+}
+
+
+function capturar(){
+
+    function Cancion(nombre,autor,disco,fecha){
+    this.nombre=nombre;
+    this.autor=autor;
+    this.disco=disco;
+    this.fecha=fecha;
+    }    
+    nuevo = new Cancion(campoNombre.value,campoAutor.value,campoDisco.value,campoFecha.value);    
+    agregar();
+
+}
+
+var canciones=[];//contenedor de canciones
+
+
+function agregar(){
+
+    canciones.push(nuevo);
+  
+    agrege();
+
+    limpiarCampos();
+        
+    console.log(canciones);
+}
+
+function agrege(){
+
+    console.log(canciones.length);
+
+    document.getElementById("tabla").innerHTML ='<thead class="thead-inverse"><tr><th>Nombre</th><th>Autor</th><th>Disco</th><th>Fecha</th></tr></thead></table>';
+
+    if(canciones.length>=1){
+        for(var i=0; i<canciones.length;i++){        
+        document.getElementById("tabla").innerHTML += '<tbody><td>'+canciones[i].nombre+'</td><td>'+canciones[i].autor+'</td><td>'+canciones[i].disco+'</td><td>'+canciones[i].fecha+'</td></tbody>'
+        }
+    }
+}
+function borrar(){ 
+        canciones.splice(canciones.length-1,1);
+        agrege();
+}
+</script>
+    
+</body>
+</html>
