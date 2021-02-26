@@ -1,27 +1,77 @@
 
+var esshiny=false;
 async function cargarPokemon(url){
     let respuesta= await fetch(url);
     let datosPokemon= await respuesta.json();//
-    console.log(datosPokemon);
-    let arreglo=[datosPokemon.name,datosPokemon.id,datosPokemon.sprites.front_default];
+    //console.log(datosPokemon);
+    let arreglo=[datosPokemon.name,datosPokemon.id,datosPokemon.sprites.front_default,datosPokemon.sprites.front_shiny];
     return arreglo;
 }
 
 async function click(){
-    var numero=Math.floor((Math.random()*150)+1);
+    var numero=Math.floor((Math.random()*898)+1);
     var url="https://pokeapi.co/api/v2/pokemon/"+numero;
 
     var pokemon=await cargarPokemon(url);
-    var color1=colorRan();
-    var color2=colorRan();
-    $("#azul").css("background-image","repeating-radial-gradient("+color1+","+color1+" 10px,"+color2+" 10px,"+color2+" 20px)");
-    $("#pnombre").text(""+pokemon[0]);
-    $("#numero").text("Nro "+pokemon[1]);
-    $("#sprite").attr("src",pokemon[2]);
+
+    pantalla(pokemon);
+
 }
 
+async function click2(){
+    try{
+    var busqueda=$("#texto").val();
+    var url="https://pokeapi.co/api/v2/pokemon/"+busqueda;
+
+    var pokemon=await cargarPokemon(url);
+    pantalla(pokemon);
+    }catch(e){
+        alert("no encontrado");
+    }
+    $("#texto").val("");
+}
+function pantalla(pokemon){
+
+    $("#pnombre").text(""+pokemon[0]);
+    $("#numero").text("Nro "+pokemon[1]);
+    
+    if(esshiny){
+        $("#sprite").attr("src",pokemon[3]);
+    }else{
+    $("#sprite").attr("src",pokemon[2]);
+    }
+    colorP();
+
+}
+function colorP(){
+    var color=randomAr(4,1);
+
+    var color1=colorRan();
+    var color2=colorRan();
+    var color3=colorRan();
+    var color4=colorRan();      
+    
+    switch(color){
+    case 1:$("#azul").css("background-image","repeating-radial-gradient("+color1+","+color3+" 10px,"+color2+" 10px,"+color4+" 20px)");break;    
+    case 2:$("#azul").css("background-image","repeating-linear-gradient("+randomAr(360,0)+"0deg,"+color4+","+color1+" 10px,"+color3+" 10px,"+color2+" 20px)");break;
+    case 3:$("#azul").css("background-image","repeating-radial-gradient("+color1+","+color1+" 10px,"+color2+" 10px,"+color2+" 20px)");break;    
+    case 4:$("#azul").css("background-image","repeating-linear-gradient("+randomAr(360,0)+"0deg,"+color1+","+color1+" 10px,"+color2+" 10px,"+color2+" 20px)");break;
+    }
+}
+
+function shinyC(){
+if(esshiny){
+    $("#btnShiny").css("background-color","whitesmoke");
+    esshiny=false;
+}else{
+    $("#btnShiny").css("background-color",colorRan());
+    esshiny=true;    
+}
+}
 window.onload=function(){
     $("#btnCargar").click(click);    
+    $("#btnBuscar").click(click2);
+    $("#btnShiny").click(shinyC);
     click();
 }
 
