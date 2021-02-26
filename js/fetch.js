@@ -9,29 +9,25 @@ async function cargarPokemon(url){
 }
 
 async function click(){
+    try{
     var numero=Math.floor((Math.random()*898)+1);
-    var url="https://pokeapi.co/api/v2/pokemon/"+numero;
-
-    pokemon=await cargarPokemon(url);
-
-    pantalla(pokemon);
-
+        buscar(numero);
+    }catch{
+        alert("error");
+    }
+    colorP();
 }
 
-async function click2(){
-    try{
-    var busqueda=$("#texto").val().toLowerCase();
-    var url="https://pokeapi.co/api/v2/pokemon/"+busqueda;
-
+async function buscar(x){
+try {    
+    var url="https://pokeapi.co/api/v2/pokemon/"+x;    
     pokemon=await cargarPokemon(url);
     pantalla(pokemon);
-    }catch(e){
-        alert("no encontrado");
-    }
-    $("#texto").val("");
+} catch (error) {
+    alert("pokemon no encontrado");
+}
 }
 function pantalla(pokemon){
-
     
     $("#numero").text("Nro "+pokemon[1]);
     
@@ -41,9 +37,8 @@ function pantalla(pokemon){
     }else{
     $("#sprite").attr("src",pokemon[2]);
     $("#pnombre").text(""+pokemon[0]);
-    }
-    colorP();
-
+    }    
+    $("#texto").val("");
 }
 var color1,color2,color3,color4;
 function colorP(){
@@ -84,8 +79,7 @@ $("#pnombre").text(pokemon[0]+"");
 
 }
 window.onload=function(){
-    $("#btnCargar").click(click);    
-    $("#btnBuscar").click(click2);
+    $("#btnCargar").click(click);        
     $("#btnShiny").click(shinyC);
     click();
 }
