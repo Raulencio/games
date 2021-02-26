@@ -1,4 +1,4 @@
-
+var pokemon;
 var esshiny=false;
 async function cargarPokemon(url){
     let respuesta= await fetch(url);
@@ -12,7 +12,7 @@ async function click(){
     var numero=Math.floor((Math.random()*898)+1);
     var url="https://pokeapi.co/api/v2/pokemon/"+numero;
 
-    var pokemon=await cargarPokemon(url);
+    pokemon=await cargarPokemon(url);
 
     pantalla(pokemon);
 
@@ -23,7 +23,7 @@ async function click2(){
     var busqueda=$("#texto").val();
     var url="https://pokeapi.co/api/v2/pokemon/"+busqueda;
 
-    var pokemon=await cargarPokemon(url);
+    pokemon=await cargarPokemon(url);
     pantalla(pokemon);
     }catch(e){
         alert("no encontrado");
@@ -32,30 +32,39 @@ async function click2(){
 }
 function pantalla(pokemon){
 
-    $("#pnombre").text(""+pokemon[0]);
+    
     $("#numero").text("Nro "+pokemon[1]);
     
     if(esshiny){
         $("#sprite").attr("src",pokemon[3]);
+        $("#pnombre").text(pokemon[0]+" shiny");
     }else{
     $("#sprite").attr("src",pokemon[2]);
+    $("#pnombre").text(""+pokemon[0]);
     }
     colorP();
 
 }
+var color1,color2,color3,color4;
 function colorP(){
-    var color=randomAr(4,1);
-
+    
+    var color;
+    if(esshiny){
+        color=randomAr(4,1);
+    }else{
+        color=randomAr(2,1);
+    }
+    
     var color1=colorRan();
     var color2=colorRan();
     var color3=colorRan();
     var color4=colorRan();      
     
     switch(color){
-    case 1:$("#azul").css("background-image","repeating-radial-gradient("+color1+","+color3+" 10px,"+color2+" 10px,"+color4+" 20px)");break;    
-    case 2:$("#azul").css("background-image","repeating-linear-gradient("+randomAr(360,0)+"0deg,"+color4+","+color1+" 10px,"+color3+" 10px,"+color2+" 20px)");break;
-    case 3:$("#azul").css("background-image","repeating-radial-gradient("+color1+","+color1+" 10px,"+color2+" 10px,"+color2+" 20px)");break;    
-    case 4:$("#azul").css("background-image","repeating-linear-gradient("+randomAr(360,0)+"0deg,"+color1+","+color1+" 10px,"+color2+" 10px,"+color2+" 20px)");break;
+    case 4:$("#azul").css("background-image","repeating-radial-gradient("+color1+","+color3+" 10px,"+color2+" 10px,"+color4+" 20px)");break;    
+    case 3:$("#azul").css("background-image","repeating-linear-gradient("+randomAr(360,0)+"0deg,"+color4+","+color1+" 10px,"+color3+" 10px,"+color2+" 20px)");break;
+    case 2:$("#azul").css("background-image","repeating-radial-gradient("+color1+","+color1+" 10px,"+color2+" 10px,"+color2+" 20px)");break;    
+    case 1:$("#azul").css("background-image","repeating-linear-gradient("+randomAr(360,0)+"0deg,"+color1+","+color1+" 10px,"+color2+" 10px,"+color2+" 20px)");break;
     }
 }
 
@@ -63,10 +72,16 @@ function shinyC(){
 if(esshiny){
     $("#btnShiny").css("background-color","whitesmoke");
     esshiny=false;
+    $("#sprite").attr("src",pokemon[2]);
+$("#pnombre").text(pokemon[0]+"");
 }else{
     $("#btnShiny").css("background-color",colorRan());
-    esshiny=true;    
+    esshiny=true;   
+    $("#sprite").attr("src",pokemon[3]);
+    $("#pnombre").text(pokemon[0]+" shiny"); 
 }
+
+
 }
 window.onload=function(){
     $("#btnCargar").click(click);    
