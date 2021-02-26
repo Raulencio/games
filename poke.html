@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=0.95">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Prueba</title>
 </head>
 <body>    
@@ -14,17 +14,31 @@
        <img id="sprite" src="" alt="" width="200px">
     </div>
     <br>
-    <input type="button" value="Aleatorio" id="btnCargar">
-    <input type="text" id="texto" placeholder="ingresa nombre o numero">
-    <input type="button" value="Buscar" id="btnBuscar">
-    
+    <input type="button" value="Aleatorio" id="btnCargar" class="boton">
+    <input type="text" id="texto" placeholder="..." class="busqueda">
+    <input type="button" value="Buscar" id="btnBuscar" class="boton">
+    <br>
+    <input type="button" value="Shiny" id="btnShiny" class="boton">
 </div>
 <script src="js/jquery-3.5.1.js"></script>
-<script src="js/skrips.js"></script>r
+<script src="js/skrips.js"></script>
 <script src="js/fetch.js"></script>
 
 <style>
-
+    
+    h2,h1{
+        text-shadow: 0px 0px 10px white;;
+    }
+.boton{
+    height:40px;
+    background-color: whitesmoke;
+    font-size: 20px;
+}
+.busqueda{
+    width:150px;
+    height:40px;
+    font-size:20px;
+}
 .azul{
     width:375px;
     height:475px;
@@ -35,11 +49,11 @@
     text-align: center;
     width:350px;
     height:350px;    
-    border-radius: 0px 10px 0px 10px;
-    box-shadow: -5px 5px 10px 1px black;
-    background-image: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
-                linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
-                linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+    border-radius: 0px 20px 0px 20px;
+    box-shadow: 0px 0px 10px 1px black;
+    background-image: linear-gradient(217deg, rgba(255,0,0), rgba(255,0,0,0) 70.71%),
+                linear-gradient(127deg, rgba(0,255,0), rgba(0,255,0,0) 70.71%),
+                linear-gradient(336deg, rgba(0,0,255), rgba(0,0,255,0) 70.71%);
    
 }
 
@@ -47,43 +61,3 @@
 </body>
 </html>
 
-
-<!--
-
-    <script src="js/febrero17.js"></script>
-
-<h1 id="encabezado">Gran Titulo</h1>
-<a href="version0.0.html"> link</a>
-
-    <script src="js/jquery-3.5.1.js"></script>
-    <script src="js/skrips.js"></script>
-    <script src="js/nuevo.js"></script>
-
-<div id="contenido">
-
-</div>
-<input type="button" value="cargar" id="boton">
-
-
-<div id="contador">
-    <h2>titular</h2>
-    <input type="button" value="boton1" id="boton1">
-
-</div>
-
-<div id="contenidor">
-
-
-
-</div>
-
-<div id="ejecucion">
-
-    <input type="button" value="boton2" id="boton2">
-    <input type="button" value="boton3" id="boton3">
-    <input type="button" value="boton4" id="boton4">
-
-</div>
-
-
--->
