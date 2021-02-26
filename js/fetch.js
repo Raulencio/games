@@ -20,7 +20,7 @@ async function click(){
 
 async function click2(){
     try{
-    var busqueda=$("#texto").val();
+    var busqueda=$("#texto").val().toLowerCase();
     var url="https://pokeapi.co/api/v2/pokemon/"+busqueda;
 
     pokemon=await cargarPokemon(url);
