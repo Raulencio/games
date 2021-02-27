@@ -20,6 +20,7 @@
 
 
         <p id="p"></p>
+        <p id="op"></p>
 
         </div>
 
@@ -28,7 +29,7 @@
 
 <style >
 .pantalla{
-    width:670px;
+    width:700px;
     height:330px;
     background-color: teal;
     transition: all 0.7s;
@@ -71,11 +72,11 @@ function clicks(x){
 }
 window.onload=function(){
 
-    $('#iz').mouseenter(function () {izquierda=true;});
-    $('#iz').mouseleave(function () {izquierda=false;});   
+    $('#iz').mouseenter(function () {izquierda=true;document.getElementById("op").textContent=("izquierda ++");});
+    $('#iz').mouseleave(function () {izquierda=false;document.getElementById("op").textContent=("izquierda --");});   
 
-    $('#de').mouseenter(function () {derecha=true;});
-    $('#de').mouseleave(function () {derecha=false;});   
+    $('#de').mouseenter(function () {derecha=true;document.getElementById("op").textContent=("derecha ++");});
+    $('#de').mouseleave(function () {derecha=false;document.getElementById("op").textContent=("derecha --");});   
 
     $('#ar').mouseenter(function () {arriba=true;});
     $('#ar').mouseleave(function () {arriba=false;});   
