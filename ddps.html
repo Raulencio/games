@@ -10,50 +10,205 @@
 <div class="fondo" id="fondo">
     <div class="pantalla" id="pantalla">
 
+<div class="personaje" id="personaje">
+<img src="" alt="" id="ipersonaje" width='100%'>
+</div>
+
+<div class="personaje" id="opersonaje">
+    <img src="" alt="" id="iopersonaje" width='100%'>
+</div>
+
+<div class="linea1"></div>
+<div class="linea2"></div>
+<div class="linea3"></div>
+
 
         <div class="controles" id="controles">
+
+<div class="boton1" editable="no" id="btn1"><div class="izquierda" editable="no"></div></div>
+<div class="boton2" editable="no" id="btn2"><div class="derecha" editable="no"></div></div>
+<div class="boton3" editable="no" id="btn3"><div class="arriba" editable="no"></div></div>
+<div class="boton4" editable="no" id="btn4"><div class="abajo" editable="no"></div></div>
+
 
         <input type="button" value="izquierda" id="iz">
         <input type="button" value="derecha" id="de" >
         <input type="button" value="arriba" id="ar">
         <input type="button" value="abajo" id="ab">
         <input type="button" value="todo" id="todo">
-
-
-        <p id="p"></p>
+        
         <p id="op"></p>
 
-        </div>
+<img src="" alt="" width="20%" id="impg" class="imagenEspada">
 
+        </div>        
 
     </div>
+
+    <div class="pantalla" id="pantalla1">
+        
+<div class="ache">
+        <img src="" alt="" id="iFP">
+    </div>
+    <div class="pclick">
+        <p id="pContinuar">Texto en un parrafo</p>
+    </div>
+    
+</div>
 </div>    
 <style >
+    .linea1{
+        position:absolute;
+        top:50px;
+        left:0px;
+        width:100%;
+        height:50px;
+        background-color: rgba(26, 148, 15, 0.52);
+    }
+    .linea2{
+        position:absolute;
+        top:100px;
+        left:0px;
+        width:100%;
+        height:50px;
+        background-color: rgba(67, 165, 22, 0.52);
+    }
+    .linea3{
+        position:absolute;
+        top:150px;
+        left:0px;
+        width:100%;
+        height:50px;
+        background-color: rgba(28, 97, 7, 0.52);
+    }
+    .personaje{
+        position:absolute;
+        top:50px;
+        left:100px;
+        width:50px;
+        height:100px;        
+        transition: all 0.7s;
+    }
+    .boton1{
+        position: absolute;
+        top:40px;
+        left:40px;        
+        width:50px;
+        height:50px;
+        border-radius: 50px;
+        background-color: tomato;
+    }
+    .izquierda{
+        position: absolute;
+        top:15px;
+        left:10px;        
+        width:0px;
+        height:0px;
+        border-top:10px solid transparent;
+        border-right:25px solid  whitesmoke;
+        border-bottom:10px solid transparent;
+    }
+    .boton2{
+        position: absolute;
+        top:40px;
+        left:120px;        
+        width:50px;
+        height:50px;
+        border-radius: 50px;
+        background-color: tomato;
+    }
+    .derecha{
+        position: absolute;
+        top:15px;
+        left:15px;        
+        width:0px;
+        height:0px;
+        border-top:10px solid transparent;
+        border-left:25px solid  whitesmoke;
+        border-bottom:10px solid transparent;
+    }
+
+    .boton3{
+        position: absolute;
+        top:0px;
+        left:80px;        
+        width:50px;
+        height:50px;
+        border-radius: 50px;
+        background-color: tomato;
+    }
+    .arriba{
+        position: absolute;
+        top:10px;
+        left:15px;        
+        width:0px;
+        height:0px;
+        border-bottom:25px solid whitesmoke;
+        border-right:10px solid transparent;
+        border-left:10px solid transparent;
+    }
+    .boton4{
+        position: absolute;
+        top:80px;
+        left:80px;        
+        width:50px;
+        height:50px;
+        border-radius: 50px;
+        background-color: tomato;
+    }
+    .abajo{
+        position: absolute;
+        top:15px;
+        left:15px;        
+        width:0px;
+        height:0px;
+        border-top:25px solid whitesmoke;
+        border-right:10px solid transparent;
+        border-left:10px solid transparent;
+    }
+    .pclick{
+        position:absolute;
+        top:220px;
+        left:0px;
+        width:100%;
+    }
+    .ache{
+        position:absolute;
+        top:20px;
+        left:0px;
+        width:100%;
+    }
     .fondo{
         display:flexbox;
         justify-content: center; 
         text-align: center; 
         width:100%;
-        height:750px;
+        height:330px;
         background-color: whitesmoke;
             
     }
-.pantalla{
+.pantalla{    
+    position:absolute;
     width:700px;
     height:330px;
-    background-color: teal;
+    background-color: rgb(6, 173, 173);
     transition: all 0.7s;
 }
 .controles{
-    width:600px;
-    height:200px;
+    position:absolute;
+    top:200px;
+    left:0px;
+    width:100%;
+    height:130px;    
     background-color: #f0f0f025;
 }
 </style>
 <script src="js/jquery-3.5.1.js"></script>
+<script src="js/skrips.js"></script>
 <script>
     var derecha=false,izquierda=false,arriba=false,abajo=false;
     var veces=700,veces2=330;
+    
 function mensaje(){
     
     if(derecha){
@@ -69,10 +224,12 @@ function mensaje(){
     veces2+=10;
     document.getElementById("pantalla").style.height=veces2+"px";
     }
-    document.getElementById("p").textContent=("width : "+veces+" height : "+veces2);
+    //document.getElementById("p").textContent=("width : "+veces+" height : "+veces2);
+    $("#op").text(espada.nombre);
+    $("#impg").attr("src",espada.url);
+
 }
 
-setInterval("mensaje()","420");
 function clicks(x){
     derecha=false,izquierda=false,abajo=false,arriba=false;
     switch(x){        
@@ -80,19 +237,78 @@ function clicks(x){
         
     }console.log(x);
 }
+var espada={nombre:"",url:"",habiliad:""};
+var cual=[
+{nombre:"espada de hielo",url:"https://lh3.googleusercontent.com/qTCY8Ts0_fFUaKAqg1Oo06RTbTKzYlZ-_hcfPTzxD2xfsvYUeGZu_YKWcILimayHQAO8J8KZvAWTagCNQjgN8-hvAamRomecbQZF93zXVXYo_y7vx1bOIqrkYKJa9JhfPbxgUn83jKWeRtPgzGMkm4M1E2qkSZrdRbPxWbScj6LD4XN65mpY2xG1IZgz7NHyn_Dm-okw5h0nYKXVqCRcj1Thzg6jj_R04x2lur9WIAKHEim-z1ZizYODKQL5qwWbZRTisGw4FWe3ArbqV1lWkWkzLIFZ0DbvyraByL05BpYZ0KBSiyaHegTrDao0jxZBQ3F0BThbYEROM1lFqNkzPONvPh7ueNUPT-7JuZCk2qmKHwibYt_Aipa9Dwy-jLQrhrGFNF_GLmdVs65WbsDGOGdMNJ28Mvx2fyMhG_44pMI-R1nS9twy-CZUEgHHNlvaSsQU8McxmX3RuxTMgVEthq8lLIarp8BQJvwwUdgIsH2NOg7_qzwXXA1wdBD0eapyQ3LaLa-CZTq3Le8DXfLaH-ZX-2LjFIJh7bx5Zasro2xq3MPoqDDj65f6C2QtYusg5BKNIscWSQSIr-neqPqHVODwwEmEtNI120aVEh-9J71CB0Db3noYsfOqqZn1TPjqh28tfIAeLtsNzH-t9g5ufA2swXTokMQyvzMHn6_gb8LW92FjaMX4yZ79yI8MLic=w450-h150-no?authuser=0"}
+,{nombre:"espada de fuego",url:"https://lh3.googleusercontent.com/9AbUcqcOyLnUcp76PoldOwKDzlpZQg9yUA7HUxBmB0stbQyV1CEYhwgiX6wQvBZ55BU1pVLzytt6Hj8dhqmJhXuzTn0jjObMh0ND68FruMZUJALsYWEcPDBk_w6d2AkDGtzLQ3BnqkjlBPHv5re0DBGeoP0-QBzvEjXWyODtUzoCV-_Bot-7KYwltFYGASNa7TgxRP9ixA5Z8xn7ZpPxp-XRPtOI1NH7nqKJVTd0usz0cz7sQehJTxiCcpeKYvWZUI0zy7LXzu3ErZbs1v7q2pGrsN8I2T6PMovhxxE1_LL9xCS4XhhoD7mTJOxOcIhyjKqX7UpMjZ_iGj4AZE1nDqiUqet5VID5y8tu4exYgJRahJD0qn3ClHyo85Qt-yKhuJYpqp3O0mzt6ctQsuEE3PT_cNQXmEclqY-kogtb0K7JguWyAkNptC6mvyAyQcREzKDOblfVCa4YEAoyLWf-aJUXcOE7_xyEwCB6S-N2L-6TODn2rELVmEy8aLWckKGrTSsl3qTrSgPzo8TF3d-vQ1UxUvotFPEDdjhn0-qxNV_s72gqcyNPCzBrrDPtJ70iOvfQREcy0zbPJ0hwC3Y0iefXjxfJlhWe5PVJzLmhHFl_PltAuHpRFRUF3KvZtBNyXPRblwnMsXCPTbaAzUmQSeATrC-6gSMCndq5iOCZgnr5dwA_kJHf04TQVJBxAzg=w450-h150-no?authuser=0"}
+,{nombre:"katana filosa",url:"https://lh3.googleusercontent.com/A6zMcmD1AF3VW_pG9GVY3vm6Nuf2W9FZ3MPoRyXi875mgJLghHq-QLjnqm-UYmjkJQ0fsALVCOItgN_GLR2xLEwiYy8WL5LJmmQSgrsdJR02SGvQK_CoyRgX0aGjdJ8t18H5Yed-EGmQD3SowgZWJkWl7JSJdOH1K0Mq6V-RM589IlYT5BlZDdhPvzcPRrRQXapOG-QOj93gpJ9IZi0nLmSbQNLL2_XneuEw3_XSivJj1_cBnpupVWcx-qDgCzJQNkxoMU57p1uV4dZV65rasaySrS6rpE0vkGXS-ZG8gU41IKHuLEo9UiqhDTTxvZSi0pqDUmMIFMFkjfZYdUT0kLhveZ4xgNuwfFsj35-RSF1C4VTBlDGGQzP_7SxTlrwz_pe04i7BewXf9Ecz1eqhqnNjKCjY8YhrI6HkFoogqHVPSURohfHEvy4Y1HWqCDTHQXPgB1qEugvMdeTMaSseq3kE0m7qIMLVaMT2UO7QbjEMRO3P5o2ku-cHs6Ps8ZY_cfuV0vw9TQeV9F6Ad9ieXlw-noeW9Gbug1dY0uMyzRJjQdwCaJ68coDneUJi082xljoDr_saPzpzKy3wancbk1rSXgWOf9iS45skqYdvp5HOhVrqudnAPvozJhyQKpY2FJRLZpomGEZ12_tusGOz-lPX3Hb4csR8d9Tq2Ytf4or5sX98yXK0KcYbB6oy4T0=w450-h150-no?authuser=0"}
+,{nombre:"espada del bosque",url:"https://lh3.googleusercontent.com/UC3xiyNXJ4-jhQJCIJtuL_h9rtdr1pk-F0yDvvQIAhB9VffPsNbw5h4U9IMr-URpjaq3gKlr4MkApbGODS_cY31V7k6R2M5ytifGjr6ca3Mja8rihoNfvdsR8z_kyeFAAvkFbqCoujPLlEAOtHPmXpHheYSYn79JKYNhdT0yv7mFgt118e-O0-bqO5NYXUPz-W2VOT_X-fNzTLk-zAtI-laJklmGEqwP9xiOd-6cVkSR1Ljckjo8KT9CsR4dMF4Tz4hsmBUak6y9WbmgggSZzdvYcr22aP0pvSYijxzQ3Fw3A7e8yRImDeRaTnEaRyHteL9x29_1xjwfDRACse6yKNZuRfDzu_8j6m0BW6dnV8GtOjMlP5piq82JYEguiSYkOveW63bNfyBjobBixDgtbui-IEacWlxkMndcnqJ0Ql-XKMMb7hCJRgYZSJ04qo5tuMWFfSEIYYDsYBd08onmlRAbGQlFunKIyvRIOcmK9IqKT6vqDK5BT0auvNGaou7E4fjLe2E9RUEgVK53mYS7J5ws3GY_EHkdawSorGYANr0GiuVMDSChlcNPlWcBs5MY6Gx5W4BJySdIffySCPY4H1h-GMVk0DG14n4oplMP2ue9oPw83nmTLNLDc4vuWg9eDyRTaJ6P_MJHgPrO1pKhEEuUCSf_ngKDGRPFvOEjduyHWOMeUlhVW3-po8NgcZo=w450-h150-no?authuser=0"}
+]
+
+var pLeft=100;var pTop=50;var ifp="";
+
 window.onload=function(){
 
-    $('#iz').mouseenter(function () {izquierda=true;document.getElementById("op").textContent=("izquierda ++");});
-    $('#iz').mouseleave(function () {izquierda=false;document.getElementById("op").textContent=("izquierda --");});   
+    $('#iz').mouseenter(function () {izquierda=true;});
+    $('#iz').mouseleave(function () {izquierda=false;});   
 
-    $('#de').mouseenter(function () {derecha=true;document.getElementById("op").textContent=("derecha ++");});
-    $('#de').mouseleave(function () {derecha=false;document.getElementById("op").textContent=("derecha --");});   
+    $('#de').mouseenter(function () {derecha=true;});
+    $('#de').mouseleave(function () {derecha=false;});   
 
     $('#ar').mouseenter(function () {arriba=true;});
     $('#ar').mouseleave(function () {arriba=false;});   
 
     $('#ab').mouseenter(function () {abajo=true;});
-    $('#ab').mouseleave(function () {abajo=false;});   
+    $('#ab').mouseleave(function () {abajo=false;});  
+
+    $("#pantalla1").click(function (){esconder("pantalla1");});
+
+    $("#btn1").click(function (){  
+        if(pLeft>0){
+            pLeft-=50;
+        $("#personaje").css("left",pLeft+"px");
+        }
+     });
+     $("#btn2").click(function (){  
+         if(pLeft<650){
+        pLeft+=50;
+        $("#personaje").css("left",pLeft+"px");
+        }
+     });
+     $("#btn3").click(function (){  
+        if(pTop>0){
+            pTop-=50;
+        $("#personaje").css("top",pTop+"px");
+        if(pTop==0){
+            $("#personaje").css("z-index","7");
+        }else if(pTop==50){
+            $("#personaje").css("z-index","8");
+        }else if(pTop==100){
+            $("#personaje").css("z-index","9");
+        }
+        }
+     });
+     $("#btn4").click(function (){  
+         if(pTop<100){
+            pTop+=50;
+        $("#personaje").css("top",pTop+"px");
+        if(pTop==0){
+            $("#personaje").css("z-index","7");
+        }else if(pTop==50){
+            $("#personaje").css("z-index","8");
+        }else if(pTop==100){
+            $("#personaje").css("z-index","9");
+        }
+        }
+     });
+
+$("#personaje").css("z-index","8");
+$("#opersonaje").css("z-index","8");
+$("#opersonaje").css("top",50);
+$("#opersonaje").css("left",400);
+
+$("#pantalla1").css("z-index","10");
+$("#pContinuar").text("> Click para continuar <");
 
 var numero=$("#fondo").width();
 
@@ -103,9 +319,14 @@ var numero=$("#fondo").width();
     $("#fondo").css("padding-left",""+numero+"px");
     numero2=Number($("#fondo").width());
     $("#fondo").width(numero2-numero);
-
+    $("#ipersonaje").attr("src","https://lh3.googleusercontent.com/2NIx7PqqMuUIF80LIXCuENNvXrR9T5h_fseWxTki35S4MHFbL2bESwBdKcCl6qkEJHw4Q-gibyGhBAbbu99ytUwb8ky_-RON4qV1FREet_Ca_8dzS10utCtQ3_AwSVWZ7B0E0o7xlNhOAwvC7yqc6YU4hXPQh79_djSLo23ELyXW6BUrviYI5_boayEiy9GbvLX8nbh9BwECpSGiKoPYUQTg2-YkNIBxujcICf0RlxIkrJqhgOt3VQp7sOuwVfktD4VxnZ-rLIVzJo9X-HOB4z3jHxU5n1AM5r5_0LYLSQEA1ftGRjdtDM3hTpXtP4q1ZgznC_4Ko9b6gbnm_owggiFCELwT6c1IEFoHVWE5Q2RgC45THP0dJWWqYBsI24j9uK4SUxtmY_Bf3asl654zI1CElMcEydxdOPwz3gjFOTnISXZvn6xcG3r9RiAwg2cuJAV2iC3LxoQ2aE0d4TeJpaodAqNnvspYFyYgwjV5lNbJKqyNR1BI2xtldrgdexa1dXBJzZCtMZcLydgnsreqRFqVxXRa_GPY-zx5KdEMHB5rlfIpbNdzejnjGoUxk9KFJpNiaRwu8x7tCBi_AG7aFuQjOezxlOtKhscbSiXdFu_c1u0wAgQtY77e9WVPrH6sYrnMX6FI2rbbOGEH8vydEwWGjYNBwRj_KyxEyypmmPIktrnI9beMLEef6ACBPqU=w50-h100-no?authuser=0");
+    $("#iopersonaje").attr("src","https://lh3.googleusercontent.com/d0u0cea5eiyOP9rLxeD2fC0qE7XhhqRozc5Gl18lAOs8y5nHBv0fH47bQwst6nsrGiCIHuaWaApSaRlRzaIc4eSFLoL1i32Qs3AOJe2Ai3Ic4lM0658WUWkiR3RtKY-WXkORsoCiF_yRkJsx_ZFUeNeN0_6CQKis6esawNRyKIzobezrvY1b507HSoCwatfaC8O0N-hvGH_2ZN3FBdnGOBx5sCXi_9eVClgYOVBTv77Eu6cIrxHZpUtmzOMK8vMrWy4BL07Ff86HBlLxHwxBkvHLRF4Gdc9e3FS1OOeAvHzNcCL-80SIlgophd2JcvC-WBVf5hYnOgsSZ60ZYht-zF053BNoHg6n7-T6DWUTDOBwjjk1crM_3yI3RgmAntNQQgpj_j6r0HfbSp_5t62lGC6atX-0GFzjmygqtWPRfFSBnkX9t9pNu-XhyiiVpUJibvv1PFpUddILwqkavGAsrW8e4KGFPQ96qdCl5t0_EjhA-zvv-LO_rvcJHuFIgh_CXpM7hJI7pem3IlkbsMHJ9Ytt6E7Y0gpw2b1JqHbuq81RlTig1CTV9lJ-RI22Zpry5o4wgttCpzMFsPmL7FRbJaGIROL_VjH_qKoDjy7pZ5yEthjohhoher_RruWvS4UnPtStT-UgfhXctc2ykUR0gtdwn2v17sPEH56XqNV4Y1ui75n23vZe4cxgWQpmzTQ=w50-h100-no?authuser=0");
+     ifp=(randomAr(3,0));
+    $("#iFP").attr("src",cual[ifp].url);
+     espada.nombre=cual[ifp].nombre;
+     espada.url=cual[ifp].url;
 }
-
+setInterval("mensaje()","420");
 </script>
 </body>
 </html>
