@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="pantalla" id="pantalla">
+
+
+        <div class="controles" id="controles">
+
+        <input type="button" value="izquierda" id="iz">
+        <input type="button" value="derecha" id="de">
+        <input type="button" value="arriba" id="ar">
+        <input type="button" value="abajo" id="ab">
+
+        <p id="p"></p>
+
+        </div>
+
+
+    </div>
+
+<style >
+.pantalla{
+    width:420px;
+    height:420px;
+    background-color: teal;
+    transition: all 0.7s;
+}
+.controles{
+    width:400px;
+    height:400px;
+    background-color: #f0f0f025;
+}
+</style>
+<script src="js/jquery-3.5.1.js"></script>
+<script>
+    var derecha=false,izquierda=false,arriba=false,abajo=false;
+    var veces=420,veces2=420;
+function mensaje(){
+    
+    if(derecha){
+    veces+=10;
+    document.getElementById("pantalla").style.width=veces+"px";
+    }else if(izquierda){
+    veces-=10;
+    document.getElementById("pantalla").style.width=veces+"px";
+    }else if(arriba){    
+    veces2-=10;
+    document.getElementById("pantalla").style.height=veces2+"px";
+    }else if(abajo){    
+    veces2+=10;
+    document.getElementById("pantalla").style.height=veces2+"px";
+    }
+    document.getElementById("p").textContent=("width : "+veces+" height : "+veces2);
+}
+
+setInterval("mensaje()","420");
+
+window.onload=function(){
+
+}
+
+var btnIzquierda = document.getElementById('iz');
+var btnDerecha = document.getElementById('de');
+var btnArriba = document.getElementById('ar');
+var btnAbajo = document.getElementById('ab');
+
+//izquierda
+
+btnIzquierda.onmousedown = function() {izquierda=true;};
+btnIzquierda.onmouseup = function() {izquierda=false;};
+
+btnDerecha.onmousedown = function() {derecha=true;};
+btnDerecha.onmouseup = function() {derecha=false;};
+
+btnArriba.onmousedown = function() {arriba=true;};
+btnArriba.onmouseup = function() {arriba=false;};
+
+btnAbajo.onmousedown = function() {abajo=true;};
+btnAbajo.onmouseup = function() {abajo=false;};
+
+
+
+
+</script>
+</body>
+</html>
+
+
+
+<!--
+
+/*Cuando se haga clic*/
+btnClick.onmousedown = async function() {
+  startTime = new Date();
+  console.log("Estoy presionado, haz lo que necesites...");
+  abajo=true;    
+
+};
+
+/*Cuando se deje de hacer clic*/
+btnClick.onmouseup = function() {
+    abajo=false;
+  endTime = new Date();
+  var timeDiff = endTime - startTime; //en ms
+  console.log("Se hizo clic:\n" + startTime);
+  console.log("Se levantó el clic:\n" + endTime);
+  console.log("Tiempo transcurrido:\n" + timeDiff + " ms");
+}
+
+
+-->
