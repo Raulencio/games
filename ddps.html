@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-<div class="fondo">
+<div class="fondo" id="fondo">
     <div class="pantalla" id="pantalla">
 
 
@@ -30,7 +30,6 @@
 </div>    
 <style >
     .fondo{
-
         display:flexbox;
         justify-content: center; 
         text-align: center; 
@@ -95,6 +94,13 @@ window.onload=function(){
     $('#ab').mouseenter(function () {abajo=true;});
     $('#ab').mouseleave(function () {abajo=false;});   
 
+var numero=$("#fondo").width();
+
+    numero=Number(numero);
+    numero-=veces;
+    numero/=2;
+    numero=Math.floor(numero);
+    $("#fondo").css("padding-left",""+numero+"px");
 
 }
 
