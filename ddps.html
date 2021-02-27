@@ -4,58 +4,78 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Document</title>
+    <title>DDPSS</title>
 </head>
 <body>
 <div class="fondo" id="fondo">
+    
     <div class="pantalla" id="pantalla">
 
-<div class="personaje" id="personaje">
-<img src="" alt="" id="ipersonaje" width='100%'>
-</div>
+        <div class="personaje" id="personaje">
+            <img src="" alt="" id="ipersonaje" width='100%'>
+        </div>
 
-<div class="personaje" id="opersonaje">
-    <img src="" alt="" id="iopersonaje" width='100%'>
-</div>
+        <div class="personaje" id="opersonaje">
+            <img src="" alt="" id="iopersonaje" width='100%'>
+        </div>
 
-<div class="linea1"></div>
-<div class="linea2"></div>
-<div class="linea3"></div>
-
+        <div class="linea1"></div>
+        <div class="linea2"></div>
+        <div class="linea3"></div>
 
         <div class="controles" id="controles">
 
-<div class="boton1" editable="no" id="btn1"><div class="izquierda" editable="no"></div></div>
-<div class="boton2" editable="no" id="btn2"><div class="derecha" editable="no"></div></div>
-<div class="boton3" editable="no" id="btn3"><div class="arriba" editable="no"></div></div>
-<div class="boton4" editable="no" id="btn4"><div class="abajo" editable="no"></div></div>
+            <div class="boton1" editable="no" id="btn1"><div class="izquierda" editable="no"></div></div>
+            <div class="boton2" editable="no" id="btn2"><div class="derecha" editable="no"></div></div>
+            <div class="boton3" editable="no" id="btn3"><div class="arriba" editable="no"></div></div>
+            <div class="boton4" editable="no" id="btn4"><div class="abajo" editable="no"></div></div>
+            <div class="boton5" editable="no" id="btn5"><div class="circulo" editable="no">A</div></div>
+            <div class="boton6" editable="no" id="btn6"><div class="circulo" editable="no">B</div></div>
+            <div class="boton7" editable="no" id="btn7"><div class="circulo" editable="no">C</div></div>
+            <div class="boton8" editable="no" id="btn8"><div class="circulo" editable="no">D</div></div>
 
-
-        <input type="button" value="izquierda" id="iz">
-        <input type="button" value="derecha" id="de" >
-        <input type="button" value="arriba" id="ar">
-        <input type="button" value="abajo" id="ab">
-        <input type="button" value="todo" id="todo">
+            <input type="button" value="Perfil" id="iz" class="btns1">
+            <input type="button" value="Equipo" id="de" class="btns2" >
+            <input type="button" value="Objetivo" id="ar" class="btns3">
+            <input type="button" value="..." id="ab" class="btns4">
+            <input type="button" value="..." id="todo" class="btns5">
         
-        <p id="op"></p>
+        
+            <div class="menues" id="menu1" hidden="true">
+                <br>
+                <p id="pi1">informacion</p>
+                <p id="pi2">informacion</p>
+                <p id="pi3">informacion</p>
+        
+            </div>
 
-<img src="" alt="" width="20%" id="impg" class="imagenEspada">
+            <div class="menues" id="menu2" hidden="true">
+                <br>
+                <p id="op"></p>
+                <img src="" alt="" width="60%" id="impg" class="imagenEspada">
+            </div>
+
 
         </div>        
 
     </div>
 
+
+
     <div class="pantalla" id="pantalla1">
         
-<div class="ache">
-        <img src="" alt="" id="iFP">
-    </div>
-    <div class="pclick">
-        <p id="pContinuar">Texto en un parrafo</p>
-    </div>
+        <div class="ache">
+            <img src="" alt="" id="iFP">
+        </div>
     
-</div>
-</div>    
+        <div class="pclick">
+            <p id="pContinuar">...</p>
+        </div>
+    
+    </div>
+
+</div>  
+
 <style >
     .linea1{
         position:absolute;
@@ -93,10 +113,6 @@
         position: absolute;
         top:40px;
         left:40px;        
-        width:50px;
-        height:50px;
-        border-radius: 50px;
-        background-color: tomato;
     }
     .izquierda{
         position: absolute;
@@ -112,10 +128,6 @@
         position: absolute;
         top:40px;
         left:120px;        
-        width:50px;
-        height:50px;
-        border-radius: 50px;
-        background-color: tomato;
     }
     .derecha{
         position: absolute;
@@ -127,15 +139,10 @@
         border-left:25px solid  whitesmoke;
         border-bottom:10px solid transparent;
     }
-
     .boton3{
         position: absolute;
         top:0px;
         left:80px;        
-        width:50px;
-        height:50px;
-        border-radius: 50px;
-        background-color: tomato;
     }
     .arriba{
         position: absolute;
@@ -151,10 +158,6 @@
         position: absolute;
         top:80px;
         left:80px;        
-        width:50px;
-        height:50px;
-        border-radius: 50px;
-        background-color: tomato;
     }
     .abajo{
         position: absolute;
@@ -165,6 +168,78 @@
         border-top:25px solid whitesmoke;
         border-right:10px solid transparent;
         border-left:10px solid transparent;
+    }
+    .boton5{
+        position: absolute;
+        top:10px;
+        left:560px;        
+    }
+    .boton6{
+        position: absolute;
+        top:10px;
+        left:620px;               
+    }  
+     .boton7{
+        position: absolute;
+        top:70px;
+        left:560px;          
+    } 
+      .boton8{
+        position: absolute;
+        top:70px;
+        left:620px;          
+    }   
+    .boton1,.boton2,.boton3,.boton4,.boton5,.boton6,.boton7,.boton8{
+        background-color: rgb(26, 172, 82);
+        width:50px;
+        height:50px;
+        border-radius: 50px;
+        z-index:4;   
+    }
+    .circulo{
+        position: absolute;
+        top:12.5px;
+        left:12.5px;        
+        width:25px;
+        height:25px;
+        border-radius: 25px;
+        background-color: whitesmoke;
+    }
+     
+    .btns1{
+        z-index:4;
+        position:absolute;
+        top:0px;
+        left:200px;
+        width:100px;
+    }
+    .btns2{
+        z-index:4;
+        position:absolute;
+        top:0px;
+        left:300px;
+        width:100px;
+    }
+    .btns3{
+        z-index:4;
+        position:absolute;
+        top:0px;
+        left:400px;
+        width:100px;
+    }
+    .btns4{
+        z-index:4;
+        position:absolute;
+        top:0px;
+        left:0px;
+        width:25px;
+    }
+    .btns5{
+        z-index:4;
+        position:absolute;
+        top:0px;
+        left:25px;
+        width:25px;
     }
     .pclick{
         position:absolute;
@@ -191,8 +266,7 @@
     position:absolute;
     width:700px;
     height:330px;
-    background-color: rgb(6, 173, 173);
-    transition: all 0.7s;
+    background-color: rgb(35, 156, 156);    
 }
 .controles{
     position:absolute;
@@ -201,65 +275,97 @@
     width:100%;
     height:130px;    
     background-color: #f0f0f025;
+    z-index:4;
+}
+.menues{
+    position:absolute;
+    top:0px;
+    left:200px;
+    width:300px;
+    height:130px;    
+    background-color: #3331312f;
+    z-index:3;
 }
 </style>
 <script src="js/jquery-3.5.1.js"></script>
 <script src="js/skrips.js"></script>
 <script>
+
     var derecha=false,izquierda=false,arriba=false,abajo=false;
     var veces=700,veces2=330;
     
-function mensaje(){
-    
-    if(derecha){
-    veces+=10;
-    document.getElementById("pantalla").style.width=veces+"px";
-    }else if(izquierda){
-    veces-=10;
-    document.getElementById("pantalla").style.width=veces+"px";
-    }else if(arriba){    
-    veces2-=10;
-    document.getElementById("pantalla").style.height=veces2+"px";
-    }else if(abajo){    
-    veces2+=10;
-    document.getElementById("pantalla").style.height=veces2+"px";
-    }
-    //document.getElementById("p").textContent=("width : "+veces+" height : "+veces2);
-    $("#op").text(espada.nombre);
-    $("#impg").attr("src",espada.url);
-
-}
-
-function clicks(x){
-    derecha=false,izquierda=false,abajo=false,arriba=false;
-    switch(x){        
-        case 5:derecha=false,izquierda=false,abajo=false,arriba=false;break;        
-        
-    }console.log(x);
-}
+var datosPj={nombre:"",vidamax:0,vida:0,ataque:0,defensa:0,probCrit:0,dmgCrit:0,recuperacion:0,url:""};
+var infoPjs=[
+    {nombre:"Rain",vidamax:2000,vida:2000
+    ,ataque:200,defensa:100,probCrit:20
+    ,dmgCrit:110,recuperacion:10
+    ,url:"https://lh3.googleusercontent.com/rByffD1Yc82VjltG_o49spYycjq4v95PWUlhJ_558DSxd259v3kqLVOZOg95jqNUXx-SLC_Ig2WyhPn26JbaX6-4bVaDk9sc0BzMrsV__JQmU9MbvMUKGO_BuMsQ7TyDvj05QqljrOsLakph3FePUVXaBqDNC61zK0Me4dzs9J-tnuc6IFmtBAt5wqGEWURvdQne52SNVYiDRbWBA_zjOhI7YCBA9AfUVirlDR8MJa7txrkz0GLtlvsqbNL0iH8A9A1Q8tVp4J7LPIKIacotz-3_Vru4aaUZiVW2cGyGiiyPaTBLslzdCrvydYPRk060yWcpFFK3Lwg7kGZLxo6mwz9Vf6w7m2shggl8VDZb6ehMAeR-u_r1U3mnCgtvNL8U5FtYiOJkEp-Vj7Pa9trK90otMsE5iV4ZvOu-G-TjADDoAHHAruyQIfDn7Kh0_QkkdQ3dysPl0cfngFeNVV8oUdTpNJqvDw_mUHC06AqhGrXcXltcZLDzFXUDQy3ZcJiPci5eI2h4Fxg49xCWQUMCyFdxMBPZTHW9DyCcQvRSRszUu-SJKkbw1n5P3ajlKkbNRTJpUnOLOarh1iyPy3qppbwtg6Je5aNMspBLKEdG6fLMgzcbRY0ugrLgEqVcHuUO1KF-Qb7AK-2PRzZHfWroifgsFZpl-Jb9S6AThxwdx4x09iWt8ZH0iZFIERWCH44=w50-h100-no?authuser=0"}
+    ,{nombre:"Yohiro",vidamax:1000,vida:1000
+    ,ataque:100,defensa:50,probCrit:10
+    ,dmgCrit:150,recuperacion:10
+    ,url:"https://lh3.googleusercontent.com/2NIx7PqqMuUIF80LIXCuENNvXrR9T5h_fseWxTki35S4MHFbL2bESwBdKcCl6qkEJHw4Q-gibyGhBAbbu99ytUwb8ky_-RON4qV1FREet_Ca_8dzS10utCtQ3_AwSVWZ7B0E0o7xlNhOAwvC7yqc6YU4hXPQh79_djSLo23ELyXW6BUrviYI5_boayEiy9GbvLX8nbh9BwECpSGiKoPYUQTg2-YkNIBxujcICf0RlxIkrJqhgOt3VQp7sOuwVfktD4VxnZ-rLIVzJo9X-HOB4z3jHxU5n1AM5r5_0LYLSQEA1ftGRjdtDM3hTpXtP4q1ZgznC_4Ko9b6gbnm_owggiFCELwT6c1IEFoHVWE5Q2RgC45THP0dJWWqYBsI24j9uK4SUxtmY_Bf3asl654zI1CElMcEydxdOPwz3gjFOTnISXZvn6xcG3r9RiAwg2cuJAV2iC3LxoQ2aE0d4TeJpaodAqNnvspYFyYgwjV5lNbJKqyNR1BI2xtldrgdexa1dXBJzZCtMZcLydgnsreqRFqVxXRa_GPY-zx5KdEMHB5rlfIpbNdzejnjGoUxk9KFJpNiaRwu8x7tCBi_AG7aFuQjOezxlOtKhscbSiXdFu_c1u0wAgQtY77e9WVPrH6sYrnMX6FI2rbbOGEH8vydEwWGjYNBwRj_KyxEyypmmPIktrnI9beMLEef6ACBPqU=w50-h100-no?authuser=0"}
+    ,{nombre:"Ninja",vidamax:500,vida:500
+    ,ataque:1000,defensa:500,probCrit:1
+    ,dmgCrit:200,recuperacion:50
+    ,url:"https://lh3.googleusercontent.com/mNrOQ3HaYykgJsLSzyAvJ1vQZtLmcdyVr1z1ZW4iP_a9l5bso6jojZZXNOlzj-_1uuvUqJysUJmsI9v7NPFOSK_8uHpDp-8NW1wrvEaisPqqg4LGpH2vIgNnSW3YIvB-_iuzIdxtSNb3ahMHTeMzv5D5N0PhbnvEI6ZoNBBPWaJeXqin8v02k3NHb8k23WGLNxJ0KC5ScBLoUjvDEYwPR13idgmX9r8H96qQNor1HGjoSAnM3j6GbKEMwDuwg1j-oMEmtqOSjenjQUaLk0Wl6jdt-SnqDcVgmWz2wNUqepwFm6VFo0aUEYUhXTMC99Z0cnZxbEfr3ftV2CJ7G8fjlFEPs8rHsS4WmO8g9DVlqOqILJwatFtPRTnE64K7D5Me5MT6Mhp37o8i1mh7sLwya3QI4Q_LPFxQ0JxqwhUPbHf5_DS866N1h2q-rQ7HPa7COglXDNanYJSuD8Okrqko13n_-FqaK1r_egxYzYqx5uvZP6aOyu-KB3FaPNBlACwkITnq0Gw8LjZl3PPTJsF3mvuspEO3nCNEF_H8gQPBYShdu8Knn08ope9r4dx3HLYsX7FOJgdwIpV1JJLQUUUKG-KEuL9uyp7R6BZlHJjbCl4l3BeuxGvpccPTfECVpkCbTfc3gmSViWzQPoie9EhU41dGIL1v_4n9QdzjRE5dN9it-qn4_szslEk5kjTL-F0=w50-h100-no?authuser=0"}
+    ,{nombre:"Sol",vidamax:1500,vida:1500
+    ,ataque:2000,defensa:10,probCrit:50
+    ,dmgCrit:150,recuperacion:100
+    ,url:"https://lh3.googleusercontent.com/QP0h71gLUmxyWVn708VUS2hemkcgVhSYo_pCFkZ97tZtWjmtr8v-WjKVGfF0hF83jSwswxwzMH--4nfYnpLE1gW_fEF3C4FcgIhChBFVR4Flosz-OaFftt3NVqUNZ2nvfGxNdiYdd24waysQhyF1atIw0z2cJ0nnsLEAf2tSmUfzCaaPlooLgHP_d2Vg0l00j1g8Wgc5W6QuKODbMMpejMzaKWOq7qbts53rdvG5PAAkNS0O7bVFGolR87hsoskCKnsfA3pHc0gPpdJFUyLffobtcWY6RVAduTn22xAJodkejGkxr2pIjWEJxuxRe1ssiWN-yXz78gmX3lvqSCTKV8ckUAOFPke__vUuBDLR50Rf04XJWUzGz661nW3epvMNBjzIUGvTPTMz7ttaVbze8MuDEkN2amn_lREp62Hvsm8q_ZdfD5IpMGdIofhx4JWH9mA5xC6OlggyPwz6uuBjxnLoCssiukNOoLVzBeGL7OsLFbnA17dsgx6RjgDoWCEiH6RTueWsiMwv13dMHHeIvG78yPPEBmEUVbNuFpRejKgJVvYPQh027iLqQiNdujQrL0XWxgfQFqa5tWK3cq4AtE2z5xI-YG3phpDoDIXfTOi0bNchFR3DrsxI5cCUYD-2jkapCBxCICUm4KePD5ntAKaiZMVK-F8T7O9pHWf7Qb2KTLr-cOjIx7x2eMsYcxs=w50-h100-no?authuser=0"}
+    ];
 var espada={nombre:"",url:"",habiliad:""};
 var cual=[
-{nombre:"espada de hielo",url:"https://lh3.googleusercontent.com/qTCY8Ts0_fFUaKAqg1Oo06RTbTKzYlZ-_hcfPTzxD2xfsvYUeGZu_YKWcILimayHQAO8J8KZvAWTagCNQjgN8-hvAamRomecbQZF93zXVXYo_y7vx1bOIqrkYKJa9JhfPbxgUn83jKWeRtPgzGMkm4M1E2qkSZrdRbPxWbScj6LD4XN65mpY2xG1IZgz7NHyn_Dm-okw5h0nYKXVqCRcj1Thzg6jj_R04x2lur9WIAKHEim-z1ZizYODKQL5qwWbZRTisGw4FWe3ArbqV1lWkWkzLIFZ0DbvyraByL05BpYZ0KBSiyaHegTrDao0jxZBQ3F0BThbYEROM1lFqNkzPONvPh7ueNUPT-7JuZCk2qmKHwibYt_Aipa9Dwy-jLQrhrGFNF_GLmdVs65WbsDGOGdMNJ28Mvx2fyMhG_44pMI-R1nS9twy-CZUEgHHNlvaSsQU8McxmX3RuxTMgVEthq8lLIarp8BQJvwwUdgIsH2NOg7_qzwXXA1wdBD0eapyQ3LaLa-CZTq3Le8DXfLaH-ZX-2LjFIJh7bx5Zasro2xq3MPoqDDj65f6C2QtYusg5BKNIscWSQSIr-neqPqHVODwwEmEtNI120aVEh-9J71CB0Db3noYsfOqqZn1TPjqh28tfIAeLtsNzH-t9g5ufA2swXTokMQyvzMHn6_gb8LW92FjaMX4yZ79yI8MLic=w450-h150-no?authuser=0"}
-,{nombre:"espada de fuego",url:"https://lh3.googleusercontent.com/9AbUcqcOyLnUcp76PoldOwKDzlpZQg9yUA7HUxBmB0stbQyV1CEYhwgiX6wQvBZ55BU1pVLzytt6Hj8dhqmJhXuzTn0jjObMh0ND68FruMZUJALsYWEcPDBk_w6d2AkDGtzLQ3BnqkjlBPHv5re0DBGeoP0-QBzvEjXWyODtUzoCV-_Bot-7KYwltFYGASNa7TgxRP9ixA5Z8xn7ZpPxp-XRPtOI1NH7nqKJVTd0usz0cz7sQehJTxiCcpeKYvWZUI0zy7LXzu3ErZbs1v7q2pGrsN8I2T6PMovhxxE1_LL9xCS4XhhoD7mTJOxOcIhyjKqX7UpMjZ_iGj4AZE1nDqiUqet5VID5y8tu4exYgJRahJD0qn3ClHyo85Qt-yKhuJYpqp3O0mzt6ctQsuEE3PT_cNQXmEclqY-kogtb0K7JguWyAkNptC6mvyAyQcREzKDOblfVCa4YEAoyLWf-aJUXcOE7_xyEwCB6S-N2L-6TODn2rELVmEy8aLWckKGrTSsl3qTrSgPzo8TF3d-vQ1UxUvotFPEDdjhn0-qxNV_s72gqcyNPCzBrrDPtJ70iOvfQREcy0zbPJ0hwC3Y0iefXjxfJlhWe5PVJzLmhHFl_PltAuHpRFRUF3KvZtBNyXPRblwnMsXCPTbaAzUmQSeATrC-6gSMCndq5iOCZgnr5dwA_kJHf04TQVJBxAzg=w450-h150-no?authuser=0"}
-,{nombre:"katana filosa",url:"https://lh3.googleusercontent.com/A6zMcmD1AF3VW_pG9GVY3vm6Nuf2W9FZ3MPoRyXi875mgJLghHq-QLjnqm-UYmjkJQ0fsALVCOItgN_GLR2xLEwiYy8WL5LJmmQSgrsdJR02SGvQK_CoyRgX0aGjdJ8t18H5Yed-EGmQD3SowgZWJkWl7JSJdOH1K0Mq6V-RM589IlYT5BlZDdhPvzcPRrRQXapOG-QOj93gpJ9IZi0nLmSbQNLL2_XneuEw3_XSivJj1_cBnpupVWcx-qDgCzJQNkxoMU57p1uV4dZV65rasaySrS6rpE0vkGXS-ZG8gU41IKHuLEo9UiqhDTTxvZSi0pqDUmMIFMFkjfZYdUT0kLhveZ4xgNuwfFsj35-RSF1C4VTBlDGGQzP_7SxTlrwz_pe04i7BewXf9Ecz1eqhqnNjKCjY8YhrI6HkFoogqHVPSURohfHEvy4Y1HWqCDTHQXPgB1qEugvMdeTMaSseq3kE0m7qIMLVaMT2UO7QbjEMRO3P5o2ku-cHs6Ps8ZY_cfuV0vw9TQeV9F6Ad9ieXlw-noeW9Gbug1dY0uMyzRJjQdwCaJ68coDneUJi082xljoDr_saPzpzKy3wancbk1rSXgWOf9iS45skqYdvp5HOhVrqudnAPvozJhyQKpY2FJRLZpomGEZ12_tusGOz-lPX3Hb4csR8d9Tq2Ytf4or5sX98yXK0KcYbB6oy4T0=w450-h150-no?authuser=0"}
-,{nombre:"espada del bosque",url:"https://lh3.googleusercontent.com/UC3xiyNXJ4-jhQJCIJtuL_h9rtdr1pk-F0yDvvQIAhB9VffPsNbw5h4U9IMr-URpjaq3gKlr4MkApbGODS_cY31V7k6R2M5ytifGjr6ca3Mja8rihoNfvdsR8z_kyeFAAvkFbqCoujPLlEAOtHPmXpHheYSYn79JKYNhdT0yv7mFgt118e-O0-bqO5NYXUPz-W2VOT_X-fNzTLk-zAtI-laJklmGEqwP9xiOd-6cVkSR1Ljckjo8KT9CsR4dMF4Tz4hsmBUak6y9WbmgggSZzdvYcr22aP0pvSYijxzQ3Fw3A7e8yRImDeRaTnEaRyHteL9x29_1xjwfDRACse6yKNZuRfDzu_8j6m0BW6dnV8GtOjMlP5piq82JYEguiSYkOveW63bNfyBjobBixDgtbui-IEacWlxkMndcnqJ0Ql-XKMMb7hCJRgYZSJ04qo5tuMWFfSEIYYDsYBd08onmlRAbGQlFunKIyvRIOcmK9IqKT6vqDK5BT0auvNGaou7E4fjLe2E9RUEgVK53mYS7J5ws3GY_EHkdawSorGYANr0GiuVMDSChlcNPlWcBs5MY6Gx5W4BJySdIffySCPY4H1h-GMVk0DG14n4oplMP2ue9oPw83nmTLNLDc4vuWg9eDyRTaJ6P_MJHgPrO1pKhEEuUCSf_ngKDGRPFvOEjduyHWOMeUlhVW3-po8NgcZo=w450-h150-no?authuser=0"}
+{nombre:"espada de hielo",ataque:700,defensa:0,probCrit:10,dmgCrit:0,recuperacion:0,vida:2000
+,url:"https://lh3.googleusercontent.com/qTCY8Ts0_fFUaKAqg1Oo06RTbTKzYlZ-_hcfPTzxD2xfsvYUeGZu_YKWcILimayHQAO8J8KZvAWTagCNQjgN8-hvAamRomecbQZF93zXVXYo_y7vx1bOIqrkYKJa9JhfPbxgUn83jKWeRtPgzGMkm4M1E2qkSZrdRbPxWbScj6LD4XN65mpY2xG1IZgz7NHyn_Dm-okw5h0nYKXVqCRcj1Thzg6jj_R04x2lur9WIAKHEim-z1ZizYODKQL5qwWbZRTisGw4FWe3ArbqV1lWkWkzLIFZ0DbvyraByL05BpYZ0KBSiyaHegTrDao0jxZBQ3F0BThbYEROM1lFqNkzPONvPh7ueNUPT-7JuZCk2qmKHwibYt_Aipa9Dwy-jLQrhrGFNF_GLmdVs65WbsDGOGdMNJ28Mvx2fyMhG_44pMI-R1nS9twy-CZUEgHHNlvaSsQU8McxmX3RuxTMgVEthq8lLIarp8BQJvwwUdgIsH2NOg7_qzwXXA1wdBD0eapyQ3LaLa-CZTq3Le8DXfLaH-ZX-2LjFIJh7bx5Zasro2xq3MPoqDDj65f6C2QtYusg5BKNIscWSQSIr-neqPqHVODwwEmEtNI120aVEh-9J71CB0Db3noYsfOqqZn1TPjqh28tfIAeLtsNzH-t9g5ufA2swXTokMQyvzMHn6_gb8LW92FjaMX4yZ79yI8MLic=w450-h150-no?authuser=0"}
+,{nombre:"espada de fuego",ataque:1200,defensa:40,probCrit:0,dmgCrit:40,recuperacion:50,vida:5000
+,url:"https://lh3.googleusercontent.com/9AbUcqcOyLnUcp76PoldOwKDzlpZQg9yUA7HUxBmB0stbQyV1CEYhwgiX6wQvBZ55BU1pVLzytt6Hj8dhqmJhXuzTn0jjObMh0ND68FruMZUJALsYWEcPDBk_w6d2AkDGtzLQ3BnqkjlBPHv5re0DBGeoP0-QBzvEjXWyODtUzoCV-_Bot-7KYwltFYGASNa7TgxRP9ixA5Z8xn7ZpPxp-XRPtOI1NH7nqKJVTd0usz0cz7sQehJTxiCcpeKYvWZUI0zy7LXzu3ErZbs1v7q2pGrsN8I2T6PMovhxxE1_LL9xCS4XhhoD7mTJOxOcIhyjKqX7UpMjZ_iGj4AZE1nDqiUqet5VID5y8tu4exYgJRahJD0qn3ClHyo85Qt-yKhuJYpqp3O0mzt6ctQsuEE3PT_cNQXmEclqY-kogtb0K7JguWyAkNptC6mvyAyQcREzKDOblfVCa4YEAoyLWf-aJUXcOE7_xyEwCB6S-N2L-6TODn2rELVmEy8aLWckKGrTSsl3qTrSgPzo8TF3d-vQ1UxUvotFPEDdjhn0-qxNV_s72gqcyNPCzBrrDPtJ70iOvfQREcy0zbPJ0hwC3Y0iefXjxfJlhWe5PVJzLmhHFl_PltAuHpRFRUF3KvZtBNyXPRblwnMsXCPTbaAzUmQSeATrC-6gSMCndq5iOCZgnr5dwA_kJHf04TQVJBxAzg=w450-h150-no?authuser=0"}
+,{nombre:"espada del bosque",ataque:800,defensa:70,probCrit:20,dmgCrit:30,recuperacion:0,vida:3000
+,url:"https://lh3.googleusercontent.com/A6zMcmD1AF3VW_pG9GVY3vm6Nuf2W9FZ3MPoRyXi875mgJLghHq-QLjnqm-UYmjkJQ0fsALVCOItgN_GLR2xLEwiYy8WL5LJmmQSgrsdJR02SGvQK_CoyRgX0aGjdJ8t18H5Yed-EGmQD3SowgZWJkWl7JSJdOH1K0Mq6V-RM589IlYT5BlZDdhPvzcPRrRQXapOG-QOj93gpJ9IZi0nLmSbQNLL2_XneuEw3_XSivJj1_cBnpupVWcx-qDgCzJQNkxoMU57p1uV4dZV65rasaySrS6rpE0vkGXS-ZG8gU41IKHuLEo9UiqhDTTxvZSi0pqDUmMIFMFkjfZYdUT0kLhveZ4xgNuwfFsj35-RSF1C4VTBlDGGQzP_7SxTlrwz_pe04i7BewXf9Ecz1eqhqnNjKCjY8YhrI6HkFoogqHVPSURohfHEvy4Y1HWqCDTHQXPgB1qEugvMdeTMaSseq3kE0m7qIMLVaMT2UO7QbjEMRO3P5o2ku-cHs6Ps8ZY_cfuV0vw9TQeV9F6Ad9ieXlw-noeW9Gbug1dY0uMyzRJjQdwCaJ68coDneUJi082xljoDr_saPzpzKy3wancbk1rSXgWOf9iS45skqYdvp5HOhVrqudnAPvozJhyQKpY2FJRLZpomGEZ12_tusGOz-lPX3Hb4csR8d9Tq2Ytf4or5sX98yXK0KcYbB6oy4T0=w450-h150-no?authuser=0"}
+,{nombre:"katana filosa",ataque:500,defensa:0,probCrit:10,dmgCrit:50,recuperacion:0,vida:1500
+,url:"https://lh3.googleusercontent.com/UC3xiyNXJ4-jhQJCIJtuL_h9rtdr1pk-F0yDvvQIAhB9VffPsNbw5h4U9IMr-URpjaq3gKlr4MkApbGODS_cY31V7k6R2M5ytifGjr6ca3Mja8rihoNfvdsR8z_kyeFAAvkFbqCoujPLlEAOtHPmXpHheYSYn79JKYNhdT0yv7mFgt118e-O0-bqO5NYXUPz-W2VOT_X-fNzTLk-zAtI-laJklmGEqwP9xiOd-6cVkSR1Ljckjo8KT9CsR4dMF4Tz4hsmBUak6y9WbmgggSZzdvYcr22aP0pvSYijxzQ3Fw3A7e8yRImDeRaTnEaRyHteL9x29_1xjwfDRACse6yKNZuRfDzu_8j6m0BW6dnV8GtOjMlP5piq82JYEguiSYkOveW63bNfyBjobBixDgtbui-IEacWlxkMndcnqJ0Ql-XKMMb7hCJRgYZSJ04qo5tuMWFfSEIYYDsYBd08onmlRAbGQlFunKIyvRIOcmK9IqKT6vqDK5BT0auvNGaou7E4fjLe2E9RUEgVK53mYS7J5ws3GY_EHkdawSorGYANr0GiuVMDSChlcNPlWcBs5MY6Gx5W4BJySdIffySCPY4H1h-GMVk0DG14n4oplMP2ue9oPw83nmTLNLDc4vuWg9eDyRTaJ6P_MJHgPrO1pKhEEuUCSf_ngKDGRPFvOEjduyHWOMeUlhVW3-po8NgcZo=w450-h150-no?authuser=0"}
 ]
 
 var pLeft=100;var pTop=50;var ifp="";
 
+
+function mensaje(){
+       
+       //document.getElementById("p").textContent=("width : "+veces+" height : "+veces2);
+
+       if(datosPj.vidamax>datosPj.vida){
+        datosPj.vida+=datosPj.recuperacion;
+        if(datosPj.vida>datosPj.vidamax){
+            datosPj.vida=datosPj.vidamax;
+        }
+    }
+
+       
+       $("#pi1").text("Nombre: "+datosPj.nombre+" | Vida: "+datosPj.vidamax+"/"+datosPj.vida);
+       $("#pi2").text("Ataque: "+datosPj.ataque+" | Defensa: "+datosPj.defensa);
+       $("#pi3").text("Prob Crit: "+datosPj.probCrit+" | Dmg Crit: "+datosPj.dmgCrit);
+       $("#op").text(espada.nombre);
+       $("#impg").attr("src",espada.url);
+        
+
+   }
+
 window.onload=function(){
 
-    $('#iz').mouseenter(function () {izquierda=true;});
-    $('#iz').mouseleave(function () {izquierda=false;});   
+    $('#iz').click(function () {mostrar("menu1");$("#iz").css("background-color",colorRan());
+    $("#de").css("background-color","whitesmoke");
+    esconder("menu2");});
+    
 
-    $('#de').mouseenter(function () {derecha=true;});
-    $('#de').mouseleave(function () {derecha=false;});   
+    $('#de').click(function () {mostrar("menu2");$("#de").css("background-color",colorRan());
+    $("#iz").css("background-color","whitesmoke");
+    esconder("menu1");});
+    
 
-    $('#ar').mouseenter(function () {arriba=true;});
-    $('#ar').mouseleave(function () {arriba=false;});   
+    $('#ar').click(function () {arriba=true;});
+     
 
-    $('#ab').mouseenter(function () {abajo=true;});
-    $('#ab').mouseleave(function () {abajo=false;});  
+    $('#ab').click(function () {abajo=true;});
+    
 
     $("#pantalla1").click(function (){esconder("pantalla1");});
 
@@ -318,13 +424,28 @@ var numero=$("#fondo").width();
     numero=Math.floor(numero);
     $("#fondo").css("padding-left",""+numero+"px");
     numero2=Number($("#fondo").width());
-    $("#fondo").width(numero2-numero);
-    $("#ipersonaje").attr("src","https://lh3.googleusercontent.com/2NIx7PqqMuUIF80LIXCuENNvXrR9T5h_fseWxTki35S4MHFbL2bESwBdKcCl6qkEJHw4Q-gibyGhBAbbu99ytUwb8ky_-RON4qV1FREet_Ca_8dzS10utCtQ3_AwSVWZ7B0E0o7xlNhOAwvC7yqc6YU4hXPQh79_djSLo23ELyXW6BUrviYI5_boayEiy9GbvLX8nbh9BwECpSGiKoPYUQTg2-YkNIBxujcICf0RlxIkrJqhgOt3VQp7sOuwVfktD4VxnZ-rLIVzJo9X-HOB4z3jHxU5n1AM5r5_0LYLSQEA1ftGRjdtDM3hTpXtP4q1ZgznC_4Ko9b6gbnm_owggiFCELwT6c1IEFoHVWE5Q2RgC45THP0dJWWqYBsI24j9uK4SUxtmY_Bf3asl654zI1CElMcEydxdOPwz3gjFOTnISXZvn6xcG3r9RiAwg2cuJAV2iC3LxoQ2aE0d4TeJpaodAqNnvspYFyYgwjV5lNbJKqyNR1BI2xtldrgdexa1dXBJzZCtMZcLydgnsreqRFqVxXRa_GPY-zx5KdEMHB5rlfIpbNdzejnjGoUxk9KFJpNiaRwu8x7tCBi_AG7aFuQjOezxlOtKhscbSiXdFu_c1u0wAgQtY77e9WVPrH6sYrnMX6FI2rbbOGEH8vydEwWGjYNBwRj_KyxEyypmmPIktrnI9beMLEef6ACBPqU=w50-h100-no?authuser=0");
+    $("#fondo").width(numero2-numero);    
     $("#iopersonaje").attr("src","https://lh3.googleusercontent.com/d0u0cea5eiyOP9rLxeD2fC0qE7XhhqRozc5Gl18lAOs8y5nHBv0fH47bQwst6nsrGiCIHuaWaApSaRlRzaIc4eSFLoL1i32Qs3AOJe2Ai3Ic4lM0658WUWkiR3RtKY-WXkORsoCiF_yRkJsx_ZFUeNeN0_6CQKis6esawNRyKIzobezrvY1b507HSoCwatfaC8O0N-hvGH_2ZN3FBdnGOBx5sCXi_9eVClgYOVBTv77Eu6cIrxHZpUtmzOMK8vMrWy4BL07Ff86HBlLxHwxBkvHLRF4Gdc9e3FS1OOeAvHzNcCL-80SIlgophd2JcvC-WBVf5hYnOgsSZ60ZYht-zF053BNoHg6n7-T6DWUTDOBwjjk1crM_3yI3RgmAntNQQgpj_j6r0HfbSp_5t62lGC6atX-0GFzjmygqtWPRfFSBnkX9t9pNu-XhyiiVpUJibvv1PFpUddILwqkavGAsrW8e4KGFPQ96qdCl5t0_EjhA-zvv-LO_rvcJHuFIgh_CXpM7hJI7pem3IlkbsMHJ9Ytt6E7Y0gpw2b1JqHbuq81RlTig1CTV9lJ-RI22Zpry5o4wgttCpzMFsPmL7FRbJaGIROL_VjH_qKoDjy7pZ5yEthjohhoher_RruWvS4UnPtStT-UgfhXctc2ykUR0gtdwn2v17sPEH56XqNV4Y1ui75n23vZe4cxgWQpmzTQ=w50-h100-no?authuser=0");
      ifp=(randomAr(3,0));
     $("#iFP").attr("src",cual[ifp].url);
-     espada.nombre=cual[ifp].nombre;
-     espada.url=cual[ifp].url;
+
+    espada.nombre=cual[ifp].nombre;
+    espada.url=cual[ifp].url;
+     
+    var eifp=(randomAr(3,0));
+    $("#ipersonaje").attr("src",infoPjs[eifp].url);
+     
+console.log(infoPjs[eifp]);
+console.log(cual[ifp]);
+
+     datosPj.nombre=infoPjs[eifp].nombre;
+     datosPj.vidamax=((infoPjs[eifp].vidamax)+(cual[ifp].vida));
+     datosPj.vida=infoPjs[eifp].vida;
+     datosPj.ataque=((infoPjs[eifp].ataque)+(cual[ifp].ataque));
+     datosPj.defensa=((infoPjs[eifp].defensa)+(cual[ifp].defensa));
+     datosPj.probCrit=((infoPjs[eifp].probCrit)+(cual[ifp].probCrit));
+     datosPj.dmgCrit=((infoPjs[eifp].dmgCrit)+(cual[ifp].dmgCrit));
+     datosPj.recuperacion=((infoPjs[eifp].recuperacion)+(cual[ifp].recuperacion));
 }
 setInterval("mensaje()","420");
 </script>
