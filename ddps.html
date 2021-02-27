@@ -72,8 +72,8 @@ var btnAbajo = document.getElementById('ab');
 
 //izquierda
 
-btnIzquierda.onmousedown = function() {izquierda=true;};
-btnIzquierda.onmouseup = function() {izquierda=false;};
+//btnIzquierda.onmousedown = function() {izquierda=true;};
+//btnIzquierda.onmouseup = function() {izquierda=false;};
 
 btnDerecha.onmousedown = function() {derecha=true;};
 btnDerecha.onmouseup = function() {derecha=false;};
@@ -84,6 +84,32 @@ btnArriba.onmouseup = function() {arriba=false;};
 btnAbajo.onmousedown = function() {abajo=true;};
 btnAbajo.onmouseup = function() {abajo=false;};
 
+
+
+var myBtn= document.getElementById('iz');       
+var timer, timePressed = 0;
+
+myBtn.addEventListener('touchstart', function(e){
+        timePressed = 0;
+        timer = setInterval(function(){
+            //aqui tienes el control de cuanto tiempo el boton esta presionado
+            timePressed += 100;
+            if (timePressed > 500){
+               alert('Largo click!');
+               clearInterval(timer);
+            }
+        }, 100);
+        izquierda=true;
+    });
+
+    myBtn.addEventListener('touchend', function(e){
+        clearInterval(timer);
+        izquierda=false;
+    });
+
+myBtn.addEventListener('click', function(e){
+        alert('Corto click!');
+    });
 
 
 
