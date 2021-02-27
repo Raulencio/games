@@ -37,3 +37,6 @@ for(var a=1;a<=na;a++){
     }envio+="</div>";
 }return envio;
 }
+
+function esconder(id){document.getElementById(id).hidden=true;}
+function mostrar(id){document.getElementById(id).hidden=false;}
