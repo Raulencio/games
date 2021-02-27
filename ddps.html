@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+<div class="fondo">
     <div class="pantalla" id="pantalla">
 
 
@@ -26,8 +27,18 @@
 
 
     </div>
-
+</div>    
 <style >
+    .fondo{
+
+        display:flexbox;
+        justify-content: center; 
+        text-align: center; 
+        width:730px;
+        height:350px;
+        background-color: black;
+            
+    }
 .pantalla{
     width:700px;
     height:330px;
@@ -43,7 +54,7 @@
 <script src="js/jquery-3.5.1.js"></script>
 <script>
     var derecha=false,izquierda=false,arriba=false,abajo=false;
-    var veces=670,veces2=330;
+    var veces=700,veces2=330;
 function mensaje(){
     
     if(derecha){
