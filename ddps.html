@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Document</title>
 </head>
 <body>
@@ -12,10 +12,12 @@
 
         <div class="controles" id="controles">
 
-        <input type="button" value="izquierda" id="iz">
-        <input type="button" value="derecha" id="de">
-        <input type="button" value="arriba" id="ar">
-        <input type="button" value="abajo" id="ab">
+        <input type="button" value="izquierda" id="iz" onClick="clicks(1)">
+        <input type="button" value="derecha" id="de" onClick="clicks(2)">
+        <input type="button" value="arriba" id="ar" onClick="clicks(3)">
+        <input type="button" value="abajo" id="ab" onClick="clicks(4)">
+        <input type="button" value="todo" id="todo" onClick="clicks(5)">
+
 
         <p id="p"></p>
 
@@ -60,10 +62,32 @@ function mensaje(){
 }
 
 setInterval("mensaje()","420");
-
+function clicks(x){
+    derecha=false,izquierda=false,abajo=false,arriba=false;
+    switch(x){        
+        case 1:izquierda=true;break;        
+        case 2:derecha=true;break;
+        case 3:arriba=true;break;
+        case 4:abajo=true;break;
+        case 5:derecha=false,izquierda=false,abajo=false,arriba=false;break;        
+        
+    }console.log(x);
+}
 window.onload=function(){
 
+
+
 }
+
+</script>
+</body>
+</html>
+
+
+
+<!--
+
+
 
 var btnIzquierda = document.getElementById('iz');
 var btnDerecha = document.getElementById('de');
@@ -75,7 +99,7 @@ var btnAbajo = document.getElementById('ab');
 //btnIzquierda.onmousedown = function() {izquierda=true;};
 //btnIzquierda.onmouseup = function() {izquierda=false;};
 
-btnDerecha.onmousedown = function() {derecha=true;};
+btnDerecha.hover = function() {derecha=true;};
 btnDerecha.onmouseup = function() {derecha=false;};
 
 btnArriba.onmousedown = function() {arriba=true;};
@@ -84,7 +108,10 @@ btnArriba.onmouseup = function() {arriba=false;};
 btnAbajo.onmousedown = function() {abajo=true;};
 btnAbajo.onmouseup = function() {abajo=false;};
 
-
+function algo(){
+    izquierda=true;
+}
+$("#izquierda").hover(algo);
 
 var myBtn= document.getElementById('iz');       
 var timer, timePressed = 0;
@@ -112,14 +139,6 @@ myBtn.addEventListener('click', function(e){
     });
 
 
-
-</script>
-</body>
-</html>
-
-
-
-<!--
 
 /*Cuando se haga clic*/
 btnClick.onmousedown = async function() {
