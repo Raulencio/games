@@ -31,16 +31,17 @@ function pantalla(pokemon){
     
     $("#numero").text("Nro "+pokemon[1]);
     
-    if(esshiny){
+        if(esshiny){
         $("#sprite").attr("src",pokemon[3]);
         $("#pnombre").text(pokemon[0]+" shiny");
-    }else{
-    $("#sprite").attr("src",pokemon[2]);
-    $("#pnombre").text(""+pokemon[0]);
-    }    
+        }else{
+        $("#sprite").attr("src",pokemon[2]);
+        $("#pnombre").text(""+pokemon[0]);
+        }    
+
     $("#texto").val("");
 }
-var color1,color2,color3,color4;
+//var color1,color2,color3,color4;
 function colorP(){
     
     var color;
