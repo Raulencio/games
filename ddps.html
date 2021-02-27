@@ -34,8 +34,8 @@
         justify-content: center; 
         text-align: center; 
         width:100%;
-        height:100%;
-        background-color: black;
+        height:750px;
+        background-color: whitesmoke;
             
     }
 .pantalla{
@@ -101,6 +101,8 @@ var numero=$("#fondo").width();
     numero/=2;
     numero=Math.floor(numero);
     $("#fondo").css("padding-left",""+numero+"px");
+    numero2=Number($("#fondo").width());
+    $("#fondo").width(numero2-numero);
 
 }
 
