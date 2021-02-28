@@ -1,3 +1,24 @@
+.cPersonajes{
+    display:inline-flex;
+    flex-direction: row;
+}
+.cArmas{
+    display:inline-flex;
+    flex-direction: row;
+}
+.cuadrado{
+    width:100px;
+    height:100px;
+    background-color: green;
+}
+.cuadra2{
+    width:100px;
+    height:50px;
+    background-color: green;
+}
+.cuadrado:hover,.cuadra2:hover{
+    background-color: rgb(10, 87, 10);
+}
 .linea1{
     position:absolute;
     top:50px;
