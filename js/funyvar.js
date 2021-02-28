@@ -78,6 +78,8 @@ function prosiga(){
         proceder();
         esconder("pantalla2");
         mostrar("pantalla");
+
+        $("#iz").click();
     }
 }
 
