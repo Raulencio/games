@@ -1,7 +1,7 @@
 var derecha=false,izquierda=false,arriba=false,abajo=false;
 var veces=700,veces2=330;
 var pLeft=100;var pTop=50;var ifp=0, eifp=0;
-
+var rangoA=0;
 
 var datosPj={nombre:"",vidamax:0,vida:0,ataque:0,defensa:0,probCrit:0,dmgCrit:0,recuperacion:0,url:""};
 var infoPjs=[
@@ -24,15 +24,15 @@ var infoPjs=[
 ];
 
 
-var espada={nombre:"",url:"",habiliad:""};
+var espada={nombre:"",ataque:0,defensa:0,probCrit:00,dmgCrit:0,recuperacion:0,vida:0,alcance:0,url:"",habiliad:""};
 var cual=[
-{nombre:"espada de hielo",ataque:2000,defensa:200,probCrit:40,dmgCrit:0,recuperacion:0,vida:2000
+{nombre:"espada de hielo",ataque:2000,defensa:200,probCrit:40,dmgCrit:0,recuperacion:0,vida:2000,alcance:2
 ,url:"https://lh3.googleusercontent.com/qTCY8Ts0_fFUaKAqg1Oo06RTbTKzYlZ-_hcfPTzxD2xfsvYUeGZu_YKWcILimayHQAO8J8KZvAWTagCNQjgN8-hvAamRomecbQZF93zXVXYo_y7vx1bOIqrkYKJa9JhfPbxgUn83jKWeRtPgzGMkm4M1E2qkSZrdRbPxWbScj6LD4XN65mpY2xG1IZgz7NHyn_Dm-okw5h0nYKXVqCRcj1Thzg6jj_R04x2lur9WIAKHEim-z1ZizYODKQL5qwWbZRTisGw4FWe3ArbqV1lWkWkzLIFZ0DbvyraByL05BpYZ0KBSiyaHegTrDao0jxZBQ3F0BThbYEROM1lFqNkzPONvPh7ueNUPT-7JuZCk2qmKHwibYt_Aipa9Dwy-jLQrhrGFNF_GLmdVs65WbsDGOGdMNJ28Mvx2fyMhG_44pMI-R1nS9twy-CZUEgHHNlvaSsQU8McxmX3RuxTMgVEthq8lLIarp8BQJvwwUdgIsH2NOg7_qzwXXA1wdBD0eapyQ3LaLa-CZTq3Le8DXfLaH-ZX-2LjFIJh7bx5Zasro2xq3MPoqDDj65f6C2QtYusg5BKNIscWSQSIr-neqPqHVODwwEmEtNI120aVEh-9J71CB0Db3noYsfOqqZn1TPjqh28tfIAeLtsNzH-t9g5ufA2swXTokMQyvzMHn6_gb8LW92FjaMX4yZ79yI8MLic=w450-h150-no?authuser=0"}
-,{nombre:"espada de fuego",ataque:1200,defensa:400,probCrit:0,dmgCrit:40,recuperacion:50,vida:5000
+,{nombre:"espada de fuego",ataque:1200,defensa:400,probCrit:0,dmgCrit:40,recuperacion:50,vida:5000,alcance:3
 ,url:"https://lh3.googleusercontent.com/9AbUcqcOyLnUcp76PoldOwKDzlpZQg9yUA7HUxBmB0stbQyV1CEYhwgiX6wQvBZ55BU1pVLzytt6Hj8dhqmJhXuzTn0jjObMh0ND68FruMZUJALsYWEcPDBk_w6d2AkDGtzLQ3BnqkjlBPHv5re0DBGeoP0-QBzvEjXWyODtUzoCV-_Bot-7KYwltFYGASNa7TgxRP9ixA5Z8xn7ZpPxp-XRPtOI1NH7nqKJVTd0usz0cz7sQehJTxiCcpeKYvWZUI0zy7LXzu3ErZbs1v7q2pGrsN8I2T6PMovhxxE1_LL9xCS4XhhoD7mTJOxOcIhyjKqX7UpMjZ_iGj4AZE1nDqiUqet5VID5y8tu4exYgJRahJD0qn3ClHyo85Qt-yKhuJYpqp3O0mzt6ctQsuEE3PT_cNQXmEclqY-kogtb0K7JguWyAkNptC6mvyAyQcREzKDOblfVCa4YEAoyLWf-aJUXcOE7_xyEwCB6S-N2L-6TODn2rELVmEy8aLWckKGrTSsl3qTrSgPzo8TF3d-vQ1UxUvotFPEDdjhn0-qxNV_s72gqcyNPCzBrrDPtJ70iOvfQREcy0zbPJ0hwC3Y0iefXjxfJlhWe5PVJzLmhHFl_PltAuHpRFRUF3KvZtBNyXPRblwnMsXCPTbaAzUmQSeATrC-6gSMCndq5iOCZgnr5dwA_kJHf04TQVJBxAzg=w450-h150-no?authuser=0"}
-,{nombre:"espada del bosque",ataque:1800,defensa:700,probCrit:20,dmgCrit:30,recuperacion:200,vida:3000
+,{nombre:"espada del bosque",ataque:1800,defensa:700,probCrit:20,dmgCrit:30,recuperacion:200,vida:3000,alcance:1
 ,url:"https://lh3.googleusercontent.com/A6zMcmD1AF3VW_pG9GVY3vm6Nuf2W9FZ3MPoRyXi875mgJLghHq-QLjnqm-UYmjkJQ0fsALVCOItgN_GLR2xLEwiYy8WL5LJmmQSgrsdJR02SGvQK_CoyRgX0aGjdJ8t18H5Yed-EGmQD3SowgZWJkWl7JSJdOH1K0Mq6V-RM589IlYT5BlZDdhPvzcPRrRQXapOG-QOj93gpJ9IZi0nLmSbQNLL2_XneuEw3_XSivJj1_cBnpupVWcx-qDgCzJQNkxoMU57p1uV4dZV65rasaySrS6rpE0vkGXS-ZG8gU41IKHuLEo9UiqhDTTxvZSi0pqDUmMIFMFkjfZYdUT0kLhveZ4xgNuwfFsj35-RSF1C4VTBlDGGQzP_7SxTlrwz_pe04i7BewXf9Ecz1eqhqnNjKCjY8YhrI6HkFoogqHVPSURohfHEvy4Y1HWqCDTHQXPgB1qEugvMdeTMaSseq3kE0m7qIMLVaMT2UO7QbjEMRO3P5o2ku-cHs6Ps8ZY_cfuV0vw9TQeV9F6Ad9ieXlw-noeW9Gbug1dY0uMyzRJjQdwCaJ68coDneUJi082xljoDr_saPzpzKy3wancbk1rSXgWOf9iS45skqYdvp5HOhVrqudnAPvozJhyQKpY2FJRLZpomGEZ12_tusGOz-lPX3Hb4csR8d9Tq2Ytf4or5sX98yXK0KcYbB6oy4T0=w450-h150-no?authuser=0"}
-,{nombre:"katana filosa",ataque:1500,defensa:0,probCrit:50,dmgCrit:150,recuperacion:0,vida:1500
+,{nombre:"katana filosa",ataque:1500,defensa:0,probCrit:50,dmgCrit:150,recuperacion:0,vida:1500,alcance:1
 ,url:"https://lh3.googleusercontent.com/UC3xiyNXJ4-jhQJCIJtuL_h9rtdr1pk-F0yDvvQIAhB9VffPsNbw5h4U9IMr-URpjaq3gKlr4MkApbGODS_cY31V7k6R2M5ytifGjr6ca3Mja8rihoNfvdsR8z_kyeFAAvkFbqCoujPLlEAOtHPmXpHheYSYn79JKYNhdT0yv7mFgt118e-O0-bqO5NYXUPz-W2VOT_X-fNzTLk-zAtI-laJklmGEqwP9xiOd-6cVkSR1Ljckjo8KT9CsR4dMF4Tz4hsmBUak6y9WbmgggSZzdvYcr22aP0pvSYijxzQ3Fw3A7e8yRImDeRaTnEaRyHteL9x29_1xjwfDRACse6yKNZuRfDzu_8j6m0BW6dnV8GtOjMlP5piq82JYEguiSYkOveW63bNfyBjobBixDgtbui-IEacWlxkMndcnqJ0Ql-XKMMb7hCJRgYZSJ04qo5tuMWFfSEIYYDsYBd08onmlRAbGQlFunKIyvRIOcmK9IqKT6vqDK5BT0auvNGaou7E4fjLe2E9RUEgVK53mYS7J5ws3GY_EHkdawSorGYANr0GiuVMDSChlcNPlWcBs5MY6Gx5W4BJySdIffySCPY4H1h-GMVk0DG14n4oplMP2ue9oPw83nmTLNLDc4vuWg9eDyRTaJ6P_MJHgPrO1pKhEEuUCSf_ngKDGRPFvOEjduyHWOMeUlhVW3-po8NgcZo=w450-h150-no?authuser=0"}
 ]
 
@@ -99,7 +99,7 @@ function seleccionarA(n){
     }
     document.getElementById("cuadroA"+n).style.backgroundColor=colorRan();
     ifp=(n-1);confirmacion2++;
-    $("#infoA").text("- "+cual[ifp].nombre+" - ataque: "+cual[ifp].ataque+" - vida: "+cual[ifp].vida+" - probCrit: "+cual[ifp].probCrit+" - dmgCrit: "+cual[ifp].dmgCrit+" - def: "+cual[ifp].defensa+" -");
+    $("#infoA").text("- "+cual[ifp].nombre+" - ataque: "+cual[ifp].ataque+" - vida: "+cual[ifp].vida+" - probCrit: "+cual[ifp].probCrit+" - dmgCrit: "+cual[ifp].dmgCrit+" - def: "+cual[ifp].defensa+" - alcance : "+cual[ifp].alcance+" -");
 }
 
 function prosiga(){
@@ -122,29 +122,20 @@ function proceder(){
     console.log(infoPjs[eifp]);
     console.log(cual[ifp]);
 
-     datosPj.nombre=infoPjs[eifp].nombre;
-     datosPj.vidamax=((infoPjs[eifp].vidamax)+(cual[ifp].vida));
-     datosPj.vida=datosPj.vidamax;
-     datosPj.ataque=((infoPjs[eifp].ataque)+(cual[ifp].ataque));
-     datosPj.defensa=((infoPjs[eifp].defensa)+(cual[ifp].defensa));
-     datosPj.probCrit=((infoPjs[eifp].probCrit)+(cual[ifp].probCrit));
-     datosPj.dmgCrit=((infoPjs[eifp].dmgCrit)+(cual[ifp].dmgCrit));
-     datosPj.recuperacion=((infoPjs[eifp].recuperacion)+(cual[ifp].recuperacion));
-
-    var x=0;        
+    datosPj.nombre=infoPjs[eifp].nombre;
+    datosPj.vidamax=((infoPjs[eifp].vidamax)+(cual[ifp].vida));
+    datosPj.vida=datosPj.vidamax;
+    datosPj.ataque=((infoPjs[eifp].ataque)+(cual[ifp].ataque));
+    datosPj.defensa=((infoPjs[eifp].defensa)+(cual[ifp].defensa));
+    datosPj.probCrit=((infoPjs[eifp].probCrit)+(cual[ifp].probCrit));
+    datosPj.dmgCrit=((infoPjs[eifp].dmgCrit)+(cual[ifp].dmgCrit));
+    datosPj.recuperacion=((infoPjs[eifp].recuperacion)+(cual[ifp].recuperacion));
+    rangoA=50*cual[ifp].alcance;
+         
     
+    equipar();
 
-    $("#iopersonaje").attr("src",enemigos[x].url);    
-    oponente.nombre=enemigos[x].nombre;
-    oponente.vidamax=((enemigos[x].vidamax));
-    oponente.vida=oponente.vidamax;
-    oponente.ataque=((enemigos[x].ataque));
-    oponente.defensa=((enemigos[x].defensa));
-    oponente.probCrit=((enemigos[x].probCrit));
-    oponente.dmgCrit=((enemigos[x].dmgCrit));
-    oponente.recuperacion=((enemigos[x].recuperacion));
-
-    console.log(oponente);
+    apareceEnemigo();
 
 }
 
@@ -153,7 +144,7 @@ function damage(){
 
     var num=randomAr(100,0);
     if(num<=(datosPj.probCrit)){
-    num=(datosPj.ataque)*((datosPj.dmgCrit)/100);
+    num=Math.ceil((datosPj.ataque)*((datosPj.dmgCrit)/100));
     }else{
         num=(datosPj.ataque);
     }
@@ -161,7 +152,8 @@ function damage(){
     return num;
     }
 
-var rangoA=50;
+var menp=1;var conteo=1;
+
 function ataque(){
 
     var opl=$("#opersonaje").css("left");//oponente left
@@ -174,23 +166,77 @@ function ataque(){
     pl =Number(pl.split('').slice(0, -2).join(''));
 
     var peguele=false;
-    if((pl-rangoA==opl||pl+rangoA==opl||pl==opl)&&oponente.vida>0){
+    //posicion pl+rangoA>=opl&&!(pl<opl-rangoA) pl-rangoA==opl||pl+rangoA==opl||pl==opl
+
+    
+
+    if(((pl>opl-rangoA-50)&&pl<50+opl+rangoA)&&oponente.vida>0){
         peguele=true;
     }
     if(peguele){
         var tuc=((damage())-oponente.defensa);
-        $("#pdmgo").css('top',"20px");
-        $("#pdmgo").css('color',"red");
-        $("#pdmgo").text(tuc);            
+        if(menp==1){
+        $("#pdmgo").css('top',"40px");
+        $("#pdmgo").css('color',"red");        
+        $("#pdmgo").text(tuc);        
+        }else{
+        $("#pdmgo2").css('top',"40px");
+        $("#pdmgo2").css('color',"red");        
+        $("#pdmgo2").text(tuc);            
+        }
         oponente.vida-=tuc;
         if(oponente.vida<=0){
             oponente.vida=0;oponente.recuperacion=0;
+            $("#iopersonaje").css("opacity","0.0");
+            $("#barraenemigo").css('background-color',"#3f3e3e00");
+            conteo++;
+            $("#ab").css("background-color","#3f3e3e");
         }
         setTimeout(borre,800);
+       
     }
 
 }
 function borre(){
+    if(menp==1){
     $("#pdmgo").css('top',"60px");
-    $("#pdmgo").css('color',"#3f3e3e00");
+    $("#pdmgo").css('color',"#3f3e3e00");}else{
+    $("#pdmgo2").css('top',"60px");
+    $("#pdmgo2").css('color',"#3f3e3e00");}
+    if(menp<2){menp++;}else{menp=1;}
+    
+}
+
+function equipar(){
+
+    espada.nombre=cual[ifp].nombre;
+    espada.ataque=cual[ifp].ataque;
+    espada.defensa=cual[ifp].defensa;
+    espada.probCrit=cual[ifp].probCrit;
+    espada.recuperacion=cual[ifp].recuperacion;
+    espada.vida=cual[ifp].vida;
+    espada.alcance=cual[ifp].alcance;
+    espada.url=cual[ifp].url;
+        
+}
+function apareceEnemigo(){
+
+    $("#iopersonaje").css("opacity","1.0");
+    $("#barraenemigo").css('background-color',"#3f3e3e");
+
+    var x=0;   
+    $("#iopersonaje").attr("src",enemigos[x].url);    
+    oponente.nombre=enemigos[x].nombre;
+    oponente.vidamax=((enemigos[x].vidamax));
+    oponente.vida=oponente.vidamax;
+    oponente.ataque=((enemigos[x].ataque));
+    oponente.defensa=((enemigos[x].defensa));
+    oponente.probCrit=((enemigos[x].probCrit));
+    oponente.dmgCrit=((enemigos[x].dmgCrit));
+    oponente.recuperacion=((enemigos[x].recuperacion));
+
+    console.log(oponente);
+    
+    $("#ab").attr("value","practica: "+conteo);
+    $("#ab").css("background-color","whitesmoke");
 }
