@@ -9,15 +9,15 @@
 .cuadrado{
     width:100px;
     height:100px;
-    background-color: green;
+    background-color: #130688b9;
 }
 .cuadra2{
     width:100px;
     height:50px;
-    background-color: green;
+    background-color: #130688b9;
 }
 .cuadrado:hover,.cuadra2:hover{
-    background-color: rgb(10, 87, 10);
+    background-color: #0f0852b9;
 }
 .linea1{
     position:absolute;
