@@ -151,8 +151,8 @@ function proceder(){
 
 function damage(){
 
-    var num=randomAr(100,datosPj.probCrit);
-    if(num==(datosPj.probCrit)){
+    var num=randomAr(100,0);
+    if(num<=(datosPj.probCrit)){
     num=(datosPj.ataque)*((datosPj.dmgCrit)/100);
     }else{
         num=(datosPj.ataque);
