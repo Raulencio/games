@@ -79,7 +79,9 @@ function mensaje(){
   
 
     $("#op").text(espada.nombre);
-    $("#impg").attr("src",espada.url);    
+    $("#impg").attr("src",espada.url); 
+    var anchobarra=((oponente.vida)*50)/oponente.vidamax;
+    $("#saludOP").width(anchobarra);
 }
 var confirmacion=0,confirmacion2=0;
 
