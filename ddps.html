@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="css/ddpss.css">
+    <link rel="stylesheet" href="css/ddpssbtns.css">
     <title>DDPSS</title>
 </head>
 <body>
@@ -17,6 +18,7 @@
         </div>
 
         <div class="personaje" id="opersonaje">
+            <p class="rop" id="pdmgo">0</p>
             <img src="" alt="" id="iopersonaje" width='100%'>
         </div>
 
@@ -30,9 +32,10 @@
             <div class="boton2" editable="no" id="btn2"><div class="derecha" editable="no"></div></div>
             <div class="boton3" editable="no" id="btn3"><div class="arriba" editable="no"></div></div>
             <div class="boton4" editable="no" id="btn4"><div class="abajo" editable="no"></div></div>
+
             <div class="boton5" editable="no" id="btn5"><div class="circulo" editable="no">A</div></div>
             <div class="boton6" editable="no" id="btn6"><div class="circulo" editable="no">B</div></div>
-            <div class="boton7" editable="no" id="btn7"><div class="circulo" editable="no">C</div></div>
+            <div class="boton7" editable="no" id="btn7" onClick="ataque()" ><div class="circulo" editable="no">C</div></div>
             <div class="boton8" editable="no" id="btn8"><div class="circulo" editable="no">D</div></div>
 
             <input type="button" value="Perfil" id="iz" class="btns1">
@@ -56,6 +59,14 @@
                 <img src="" alt="" width="60%" id="impg" class="imagenEspada">
             </div>
 
+            <div class="menues" id="menu3" hidden="true">
+                <br>
+                <p id="pe1">informacion</p>
+                <p id="pe2">informacion</p>
+                <p id="pe3">informacion</p>
+        
+            </div>
+
 
         </div>        
 
@@ -64,7 +75,7 @@
 
     <div class="pantalla" id="pantalla2" hidden="true">
         
-        <h2>Selecciona un personaje y un arma</h2>
+        <p>Selecciona un personaje y un arma</p>
 
         <div class="cPersonajes">
             <div class="cuadrado" onClick="seleccionarP(1)" id="cuadroP1"></div>
@@ -72,21 +83,21 @@
             <div class="cuadrado" onClick="seleccionarP(3)" id="cuadroP3"></div>
             <div class="cuadrado" onClick="seleccionarP(4)" id="cuadroP4"></div>
         </div>
-
+        <p id="infoP">...</p>
         <div class="cArmas">
             <div class="cuadra2" onClick="seleccionarA(1)" id="cuadroA1"></div>
             <div class="cuadra2" onClick="seleccionarA(2)" id="cuadroA2"></div>
             <div class="cuadra2" onClick="seleccionarA(3)" id="cuadroA3"></div>
             <div class="cuadra2" onClick="seleccionarA(4)" id="cuadroA4"></div>
         </div>
-        
-        <br>
+        <p id="infoA">...</p>
+
             <input type="button" value="elegir" onClick="prosiga()">
     
     </div>
 
     <div class="pantalla" id="pantalla1">
-        
+        <div><h1>DDPSS</h1></div>
         <div class="ache">
             <img src="" alt="" id="iFP">
         </div>
