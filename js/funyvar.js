@@ -114,7 +114,7 @@ function prosiga(){
 
 function proceder(){
 
-    cargarDatos();
+    cargarDatos();//aqui podria hacer varias cosas vite
 
     espada.nombre=cual[ifp].nombre;
     espada.url=cual[ifp].url;
@@ -243,9 +243,11 @@ function apareceEnemigo(){
     $("#ab").css("background-color","whitesmoke");
     guardarDatos();
 }
+//quiza guardar info del arma o el personaje o todos los stats
 function cargarDatos(){
     if((localStorage.getItem("conteo"))!=null){conteo=Number(localStorage.getItem("conteo"));}    
 }
+//cargar que arma y personaje se estaba usando habria que ver si borrar o ponerle un continue o new game
 function guardarDatos(){
     localStorage.setItem("conteo",conteo); 
 }
