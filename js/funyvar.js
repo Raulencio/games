@@ -114,6 +114,8 @@ function prosiga(){
 
 function proceder(){
 
+    cargarDatos();
+
     espada.nombre=cual[ifp].nombre;
     espada.url=cual[ifp].url;
         
@@ -230,7 +232,7 @@ function apareceEnemigo(){
     oponente.vidamax=((enemigos[x].vidamax));
     oponente.vida=oponente.vidamax;
     oponente.ataque=((enemigos[x].ataque));
-    oponente.defensa=((enemigos[x].defensa));
+    oponente.defensa=((enemigos[x].defensa)*conteo);
     oponente.probCrit=((enemigos[x].probCrit));
     oponente.dmgCrit=((enemigos[x].dmgCrit));
     oponente.recuperacion=((enemigos[x].recuperacion));
@@ -239,4 +241,11 @@ function apareceEnemigo(){
     
     $("#ab").attr("value","practica: "+conteo);
     $("#ab").css("background-color","whitesmoke");
+    guardarDatos();
+}
+function cargarDatos(){
+    if((localStorage.getItem("conteo"))!=null){conteo=Number(localStorage.getItem("conteo"));}    
+}
+function guardarDatos(){
+    localStorage.setItem("conteo",conteo); 
 }
