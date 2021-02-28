@@ -1,6 +1,6 @@
 var derecha=false,izquierda=false,arriba=false,abajo=false;
 var veces=700,veces2=330;
-var pLeft=100;var pTop=50;var ifp="";
+var pLeft=100;var pTop=50;var ifp=0, eifp=0;
 
 
 var datosPj={nombre:"",vidamax:0,vida:0,ataque:0,defensa:0,probCrit:0,dmgCrit:0,recuperacion:0,url:""};
@@ -55,5 +55,49 @@ function mensaje(){
     $("#op").text(espada.nombre);
     $("#impg").attr("src",espada.url);
      
+}
+var confirmacion=0;
+
+function seleccionarP(n){
+    for(var e=1;e<5;e++){
+        document.getElementById("cuadroP"+e).style.backgroundColor="green";
+    }
+    document.getElementById("cuadroP"+n).style.backgroundColor=colorRan();
+    eifp=(n-1);confirmacion++;
+}
+function seleccionarA(n){
+    for(var e=1;e<5;e++){
+        document.getElementById("cuadroA"+e).style.backgroundColor="green";
+    }
+    document.getElementById("cuadroA"+n).style.backgroundColor=colorRan();
+    ifp=(n-1);confirmacion++;
+}
+
+function prosiga(){
+    if(confirmacion>=2){        
+        proceder();
+        esconder("pantalla2");
+        mostrar("pantalla");
+    }
+}
+
+function proceder(){
+
+    espada.nombre=cual[ifp].nombre;
+    espada.url=cual[ifp].url;
+        
+    $("#ipersonaje").attr("src",infoPjs[eifp].url);
+     
+    console.log(infoPjs[eifp]);
+    console.log(cual[ifp]);
+
+     datosPj.nombre=infoPjs[eifp].nombre;
+     datosPj.vidamax=((infoPjs[eifp].vidamax)+(cual[ifp].vida));
+     datosPj.vida=infoPjs[eifp].vida;
+     datosPj.ataque=((infoPjs[eifp].ataque)+(cual[ifp].ataque));
+     datosPj.defensa=((infoPjs[eifp].defensa)+(cual[ifp].defensa));
+     datosPj.probCrit=((infoPjs[eifp].probCrit)+(cual[ifp].probCrit));
+     datosPj.dmgCrit=((infoPjs[eifp].dmgCrit)+(cual[ifp].dmgCrit));
+     datosPj.recuperacion=((infoPjs[eifp].recuperacion)+(cual[ifp].recuperacion));
 
 }
