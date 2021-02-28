@@ -60,14 +60,14 @@ var confirmacion=0;
 
 function seleccionarP(n){
     for(var e=1;e<5;e++){
-        document.getElementById("cuadroP"+e).style.backgroundColor="green";
+        document.getElementById("cuadroP"+e).style.backgroundColor="#130688b9";
     }
     document.getElementById("cuadroP"+n).style.backgroundColor=colorRan();
     eifp=(n-1);confirmacion++;
 }
 function seleccionarA(n){
     for(var e=1;e<5;e++){
-        document.getElementById("cuadroA"+e).style.backgroundColor="green";
+        document.getElementById("cuadroA"+e).style.backgroundColor="#130688b9";
     }
     document.getElementById("cuadroA"+n).style.backgroundColor=colorRan();
     ifp=(n-1);confirmacion++;
