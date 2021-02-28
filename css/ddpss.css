@@ -1,3 +1,6 @@
+.borrarse{
+    transition:all 1s;
+}
 .barraVida{
     position:absolute;
     top:-10px;
@@ -5,6 +8,7 @@
     width:50px;
     height:5px;
     background-color: whitesmoke;
+    transition:all 1s;
 }
 
 .barraMuerte{
@@ -14,13 +18,14 @@
     width:50px;
     height:5px;
     background-color: red;
+    transition:all 0.3s;
 }
 
 .rop{
     position: absolute;
     top:60px;
     left:40px;
-    transition:all 0.7s;
+    transition:all 0.3s;
     color:#3f3e3e00;
 }
 
