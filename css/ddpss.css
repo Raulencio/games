@@ -1,3 +1,21 @@
+.barraVida{
+    position:absolute;
+    top:-10px;
+    left:0px;
+    width:50px;
+    height:5px;
+    background-color: whitesmoke;
+}
+
+.barraMuerte{
+    position:absolute;
+    top:-10px;
+    left:0px;
+    width:50px;
+    height:5px;
+    background-color: red;
+}
+
 .rop{
     position: absolute;
     top:60px;
