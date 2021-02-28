@@ -21,8 +21,9 @@
 
         <div class="personaje" id="opersonaje">
             <p class="rop" id="pdmgo">0</p>
-            <img src="" alt="" id="iopersonaje" width='100%'>
-            <div class="barraVida"></div>
+            <p class="rop" id="pdmgo2">0</p>
+            <img class="borrarse"src="" alt="" id="iopersonaje" width='100%'>
+            <div class="barraVida" id="barraenemigo"></div>
             <div class="barraMuerte" id="saludOP"></div>
         </div>
 
@@ -37,16 +38,16 @@
             <div class="boton3" editable="no" id="btn3"><div class="arriba" editable="no"></div></div>
             <div class="boton4" editable="no" id="btn4"><div class="abajo" editable="no"></div></div>
 
-            <div class="boton5" editable="no" id="btn5"><div class="circulo" editable="no">A</div></div>
-            <div class="boton6" editable="no" id="btn6"><div class="circulo" editable="no">B</div></div>
-            <div class="boton7" editable="no" id="btn7" onClick="ataque()" ><div class="circulo" editable="no">C</div></div>
-            <div class="boton8" editable="no" id="btn8"><div class="circulo" editable="no">D</div></div>
+            <div class="boton5" editable="no" id="btn5" hidden="true"><div class="circulo" editable="no"></div></div>
+            <div class="boton6" editable="no" id="btn6" hidden="true"><div class="circulo" editable="no"></div></div>
+            <div class="boton7" editable="no" id="btn7" onClick="ataque()" ><div class="circulo" editable="no"></div></div>
+            <div class="boton8" editable="no" id="btn8" hidden="true"><div class="circulo" editable="no"></div></div>
 
             <input type="button" value="Perfil" id="iz" class="btns1">
             <input type="button" value="Equipo" id="de" class="btns2" >
             <input type="button" value="Objetivo" id="ar" class="btns3">
-            <input type="button" value="..." id="ab" class="btns4">
-            <input type="button" value="..." id="todo" class="btns5">
+            <input type="button" value="" id="ab" class="btns4" onClick="apareceEnemigo()">
+            <input type="button" value="..." id="todo" class="btns5" hidden="true">
         
         
             <div class="menues" id="menu1" hidden="true">
@@ -79,7 +80,7 @@
 
     <div class="pantalla" id="pantalla2" hidden="true">
         
-        <p>Selecciona un personaje y un arma</p>
+        <br><br>
 
         <div class="cPersonajes">
             <div class="cuadrado" onClick="seleccionarP(1)" id="cuadroP1"></div>
@@ -87,14 +88,14 @@
             <div class="cuadrado" onClick="seleccionarP(3)" id="cuadroP3"></div>
             <div class="cuadrado" onClick="seleccionarP(4)" id="cuadroP4"></div>
         </div>
-        <p id="infoP">...</p>
+        <p id="infoP">Selecciona un personaje</p>
         <div class="cArmas">
             <div class="cuadra2" onClick="seleccionarA(1)" id="cuadroA1"></div>
             <div class="cuadra2" onClick="seleccionarA(2)" id="cuadroA2"></div>
             <div class="cuadra2" onClick="seleccionarA(3)" id="cuadroA3"></div>
             <div class="cuadra2" onClick="seleccionarA(4)" id="cuadroA4"></div>
         </div>
-        <p id="infoA">...</p>
+        <p id="infoA">Selecciona un arma</p>
 
             <input type="button" value="elegir" onClick="prosiga()">
     
