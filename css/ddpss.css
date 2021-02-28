@@ -1,0 +1,209 @@
+.linea1{
+    position:absolute;
+    top:50px;
+    left:0px;
+    width:100%;
+    height:50px;
+    background-color: rgba(26, 148, 15, 0.52);
+}
+.linea2{
+    position:absolute;
+    top:100px;
+    left:0px;
+    width:100%;
+    height:50px;
+    background-color: rgba(67, 165, 22, 0.52);
+}
+.linea3{
+    position:absolute;
+    top:150px;
+    left:0px;
+    width:100%;
+    height:50px;
+    background-color: rgba(28, 97, 7, 0.52);
+}
+.personaje{
+    position:absolute;
+    top:50px;
+    left:100px;
+    width:50px;
+    height:100px;        
+    transition: all 0.7s;
+}
+.boton1{
+    position: absolute;
+    top:40px;
+    left:40px;        
+}
+.izquierda{
+    position: absolute;
+    top:15px;
+    left:10px;        
+    width:0px;
+    height:0px;
+    border-top:10px solid transparent;
+    border-right:25px solid  whitesmoke;
+    border-bottom:10px solid transparent;
+}
+.boton2{
+    position: absolute;
+    top:40px;
+    left:120px;        
+}
+.derecha{
+    position: absolute;
+    top:15px;
+    left:15px;        
+    width:0px;
+    height:0px;
+    border-top:10px solid transparent;
+    border-left:25px solid  whitesmoke;
+    border-bottom:10px solid transparent;
+}
+.boton3{
+    position: absolute;
+    top:0px;
+    left:80px;        
+}
+.arriba{
+    position: absolute;
+    top:10px;
+    left:15px;        
+    width:0px;
+    height:0px;
+    border-bottom:25px solid whitesmoke;
+    border-right:10px solid transparent;
+    border-left:10px solid transparent;
+}
+.boton4{
+    position: absolute;
+    top:80px;
+    left:80px;        
+}
+.abajo{
+    position: absolute;
+    top:15px;
+    left:15px;        
+    width:0px;
+    height:0px;
+    border-top:25px solid whitesmoke;
+    border-right:10px solid transparent;
+    border-left:10px solid transparent;
+}
+.boton5{
+    position: absolute;
+    top:10px;
+    left:560px;        
+}
+.boton6{
+    position: absolute;
+    top:10px;
+    left:620px;               
+}  
+ .boton7{
+    position: absolute;
+    top:70px;
+    left:560px;          
+} 
+  .boton8{
+    position: absolute;
+    top:70px;
+    left:620px;          
+}   
+.boton1,.boton2,.boton3,.boton4,.boton5,.boton6,.boton7,.boton8{
+    background-color: rgb(26, 172, 82);
+    width:50px;
+    height:50px;
+    border-radius: 50px;
+    z-index:4;   
+}
+.circulo{
+    position: absolute;
+    top:12.5px;
+    left:12.5px;        
+    width:25px;
+    height:25px;
+    border-radius: 25px;
+    background-color: whitesmoke;
+}
+ 
+.btns1{
+    z-index:4;
+    position:absolute;
+    top:0px;
+    left:200px;
+    width:100px;
+}
+.btns2{
+    z-index:4;
+    position:absolute;
+    top:0px;
+    left:300px;
+    width:100px;
+}
+.btns3{
+    z-index:4;
+    position:absolute;
+    top:0px;
+    left:400px;
+    width:100px;
+}
+.btns4{
+    z-index:4;
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:25px;
+}
+.btns5{
+    z-index:4;
+    position:absolute;
+    top:0px;
+    left:25px;
+    width:25px;
+}
+.pclick{
+    position:absolute;
+    top:220px;
+    left:0px;
+    width:100%;
+}
+.ache{
+    position:absolute;
+    top:20px;
+    left:0px;
+    width:100%;
+}
+.fondo{
+    display:flexbox;
+    justify-content: center; 
+    text-align: center; 
+    width:100%;
+    height:330px;
+    background-color: whitesmoke;
+        
+}
+.pantalla{    
+position:absolute;
+width:700px;
+height:330px;
+background-color: rgb(35, 156, 156);    
+}
+.controles{
+position:absolute;
+top:200px;
+left:0px;
+width:100%;
+height:130px;    
+background-color: #f0f0f025;
+z-index:4;
+}
+.menues{
+position:absolute;
+top:0px;
+left:200px;
+width:300px;
+height:130px;    
+background-color: #3331312f;
+z-index:3;
+}
