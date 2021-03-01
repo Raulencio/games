@@ -91,7 +91,7 @@ function seleccionarP(n){
     }
     document.getElementById("cuadroP"+n).style.backgroundColor=colorRan();
     eifp=(n-1);confirmacion++;
-    $("#infoP").text("- "+infoPjs[eifp].nombre+" - ataque: "+infoPjs[eifp].ataque+" - vida: "+infoPjs[eifp].vidamax+" - probCrit: "+infoPjs[eifp].probCrit+" - dmgCrit: "+infoPjs[eifp].dmgCrit+" - def: "+infoPjs[eifp].defensa+" -");
+    $("#infoP").text(""+infoPjs[eifp].nombre+" | ataque: "+infoPjs[eifp].ataque+" | vida: "+infoPjs[eifp].vidamax+" | probCrit: "+infoPjs[eifp].probCrit+" | dmgCrit: "+infoPjs[eifp].dmgCrit+" | def: "+infoPjs[eifp].defensa+"");
 }
 function seleccionarA(n){
     for(var e=1;e<5;e++){
@@ -99,7 +99,7 @@ function seleccionarA(n){
     }
     document.getElementById("cuadroA"+n).style.backgroundColor=colorRan();
     ifp=(n-1);confirmacion2++;
-    $("#infoA").text("- "+cual[ifp].nombre+" - ataque: "+cual[ifp].ataque+" - vida: "+cual[ifp].vida+" - probCrit: "+cual[ifp].probCrit+" - dmgCrit: "+cual[ifp].dmgCrit+" - def: "+cual[ifp].defensa+" - alcance : "+cual[ifp].alcance+" -");
+    $("#infoA").text(""+cual[ifp].nombre+" | ataque: "+cual[ifp].ataque+" | vida: "+cual[ifp].vida+" | probCrit: "+cual[ifp].probCrit+" | dmgCrit: "+cual[ifp].dmgCrit+" | def: "+cual[ifp].defensa+" | alcance : "+cual[ifp].alcance+"");
 }
 
 function prosiga(){
