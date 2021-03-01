@@ -227,18 +227,6 @@ function equipar(){
         
 }
 
-function rTop(){
-    var num=randomAr(3,1);
-    if(num==1){
-        num=0;
-    }else if(num==2){
-        num=50;
-    }else if(num=3){
-        num=100;
-    }
-    return num;
-}
-
 function apareceEnemigo(){
 
     $("#iopersonaje").css("opacity","1.0");
@@ -259,8 +247,8 @@ function apareceEnemigo(){
     
     $("#ab").attr("value","practica: "+conteo);
     $("#ab").css("background-color","whitesmoke");
-    $("#opersonaje").css("left",randomAr(650,300)+"px");
-    $("#opersonaje").css("top",rTop()+"px");
+    $("#opersonaje").css("left",(randomAr(13,6)*50)+"px");
+    $("#opersonaje").css("top",(randomAr(2,0)*50)+"px");
     guardarDatos();
 }
 //quiza guardar info del arma o el personaje o todos los stats
