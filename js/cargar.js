@@ -60,7 +60,6 @@ window.onload=function(){
 $("#personaje").css("z-index","8");
 $("#opersonaje").css("z-index","8");
 $("#opersonaje").css("top",50);
-$("#opersonaje").css("left",400);
 
 $("#pantalla1").css("z-index","10");
 $("#pContinuar").text("> Click para continuar <");
@@ -81,5 +80,22 @@ for(var e=1;e<5;e++){
     $("#cuadroP"+e).append("<img src='"+infoPjs[e-1].url+"'>");
     $("#cuadroA"+e).append("<img width='100%' src='"+cual[e-1].url+"'>");
 }
-    
+seleccionarP(randomAr(4,1));
+seleccionarA(randomAr(4,1));
 }
+
+document.addEventListener("keydown",function(e){
+    if(e.keyCode=="37"||e.keyCode=="65"){
+        $("#btn1").click();}
+    if(e.keyCode=="39"||e.keyCode=="68"){     
+        $("#btn2").click();}
+    if(e.keyCode=="38"||e.keyCode=="87"){
+        $("#btn3").click();}
+    if(e.keyCode=="40"||e.keyCode=="83"){
+        $("#btn4").click();}
+
+    if(e.keyCode=="32"){//espacio
+        ataque();
+    }
+    }
+);

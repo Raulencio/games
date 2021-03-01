@@ -69,12 +69,12 @@ function mensaje(){
        }
 
 
-    $("#pi1").text("Nombre: "+datosPj.nombre+" | Vida: "+datosPj.vidamax+"/"+datosPj.vida);
-    $("#pi2").text("Ataque: "+datosPj.ataque+" | Defensa: "+datosPj.defensa);
+    $("#pi1").text("- "+datosPj.nombre+" - | Vida: "+datosPj.vidamax+"/"+datosPj.vida);
+    $("#pi2").text("Atq: "+datosPj.ataque+" | Def: "+datosPj.defensa);
     $("#pi3").text("Prob Crit: "+datosPj.probCrit+" | Dmg Crit: "+datosPj.dmgCrit);
     
-    $("#pe1").text("Nombre: "+oponente.nombre+" | Vida: "+oponente.vidamax+"/"+oponente.vida);
-    $("#pe2").text("Ataque: "+oponente.ataque+" | Defensa: "+oponente.defensa);
+    $("#pe1").text("- "+oponente.nombre+" - | Vida: "+oponente.vidamax+"/"+oponente.vida);
+    $("#pe2").text("Atq: "+oponente.ataque+" | Def: "+oponente.defensa);
     $("#pe3").text("Prob Crit: "+oponente.probCrit+" | Dmg Crit: "+oponente.dmgCrit);
   
 
@@ -157,9 +157,10 @@ function damage(){
 var menp=1;var conteo=1;
 
 function ataque(){
-
+    var opt=$("#opersonaje").css("top");//oponente top
     var opl=$("#opersonaje").css("left");//oponente left
     var pl=$("#personaje").css("left");//personaje left
+    var po=$("#personaje").css("top");//personaje top
 
     opl =Number(opl.split('') // separa el string según espacios en blanco
             .slice(0, -2) // toma todos los elementos menos el último
@@ -167,16 +168,20 @@ function ataque(){
 
     pl =Number(pl.split('').slice(0, -2).join(''));
 
+    po =Number(po.split('').slice(0, -2).join(''));
+    opt =Number(opt.split('').slice(0, -2).join(''));
+
     var peguele=false;
     //posicion pl+rangoA>=opl&&!(pl<opl-rangoA) pl-rangoA==opl||pl+rangoA==opl||pl==opl
 
     
 
-    if(((pl>opl-rangoA-50)&&pl<50+opl+rangoA)&&oponente.vida>0){
+    if((((pl>opl-rangoA-50)&&pl<50+opl+rangoA)&&oponente.vida>0)&&po==opt){
         peguele=true;
     }
     if(peguele){
         var tuc=((damage())-oponente.defensa);
+        if(tuc<0){tuc=0};
         if(menp==1){
         $("#pdmgo").css('top',"40px");
         $("#pdmgo").css('color',"red");        
@@ -185,7 +190,7 @@ function ataque(){
         $("#pdmgo2").css('top',"40px");
         $("#pdmgo2").css('color',"red");        
         $("#pdmgo2").text(tuc);            
-        }
+        }        
         oponente.vida-=tuc;
         if(oponente.vida<=0){
             oponente.vida=0;oponente.recuperacion=0;
@@ -221,6 +226,19 @@ function equipar(){
     espada.url=cual[ifp].url;
         
 }
+
+function rTop(){
+    var num=randomAr(3,1);
+    if(num==1){
+        num=0;
+    }else if(num==2){
+        num=50;
+    }else if(num=3){
+        num=100;
+    }
+    return num;
+}
+
 function apareceEnemigo(){
 
     $("#iopersonaje").css("opacity","1.0");
@@ -241,6 +259,8 @@ function apareceEnemigo(){
     
     $("#ab").attr("value","practica: "+conteo);
     $("#ab").css("background-color","whitesmoke");
+    $("#opersonaje").css("left",randomAr(650,300)+"px");
+    $("#opersonaje").css("top",rTop()+"px");
     guardarDatos();
 }
 //quiza guardar info del arma o el personaje o todos los stats
