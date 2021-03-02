@@ -267,3 +267,4 @@ function cargarDatos(){
 //cargar que arma y personaje se estaba usando habria que ver si borrar o ponerle un continue o new game
 function guardarDatos(){
     localStorage.setItem("conteo",conteo);
+}
