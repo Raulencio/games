@@ -181,6 +181,7 @@ function ataque(){
     }
     if(peguele){
         var tuc=((damage())-oponente.defensa);
+moverOP("opersonaje",13,6,2,0);
         if(tuc<0){tuc=0};
         if(menp==1){
         $("#pdmgo").css('top',"40px");
@@ -190,7 +191,7 @@ function ataque(){
         $("#pdmgo2").css('top',"40px");
         $("#pdmgo2").css('color',"red");        
         $("#pdmgo2").text(tuc);
-	moverOP("opersonaje",13,6,2,0);
+	
         }        
         oponente.vida-=tuc;
         if(oponente.vida<=0){
@@ -242,7 +243,7 @@ function apareceEnemigo(){
     oponente.defensa=((enemigos[x].defensa)*conteo);
     oponente.probCrit=((enemigos[x].probCrit));
     oponente.dmgCrit=((enemigos[x].dmgCrit));
-    oponente.recuperacion=((enemigos[x].recuperacion));
+    oponente.recuperacion=((enemigos[x].recuperacion)*conteo);
 
     console.log(oponente);
     
