@@ -189,7 +189,8 @@ function ataque(){
         }else{
         $("#pdmgo2").css('top',"40px");
         $("#pdmgo2").css('color',"red");        
-        $("#pdmgo2").text(tuc);            
+        $("#pdmgo2").text(tuc);
+	moverOP("opersonaje",13,6,2,0);
         }        
         oponente.vida-=tuc;
         if(oponente.vida<=0){
@@ -251,11 +252,18 @@ function apareceEnemigo(){
     $("#opersonaje").css("top",(randomAr(2,0)*50)+"px");
     guardarDatos();
 }
+
+function moverOP(quien,a,b,c,d){
+
+$("#" +quien).css("left",(randomAr(a,b)*50)+"px");
+$("#" +quien).css("top",(randomAr(c,d)*50)+"px");
+    
+} 
+
 //quiza guardar info del arma o el personaje o todos los stats
 function cargarDatos(){
     if((localStorage.getItem("conteo"))!=null){conteo=Number(localStorage.getItem("conteo"));}    
 }
 //cargar que arma y personaje se estaba usando habria que ver si borrar o ponerle un continue o new game
 function guardarDatos(){
-    localStorage.setItem("conteo",conteo); 
-}
+    localStorage.setItem("conteo",conteo);
