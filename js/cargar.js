@@ -56,6 +56,12 @@ window.onload=function(){
         }
         }
      });
+     $("#todo").click(function (){  
+        if(unavez){
+        oro+=nivel*conteo;}
+        conteo=1;
+        apareceEnemigo();unavez=false;
+     });
 
 $("#personaje").css("z-index","8");
 $("#opersonaje").css("z-index","8");
