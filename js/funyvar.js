@@ -138,7 +138,15 @@ function prosiga(){
         $("#iz").click();
     }
 }
-
+function pegensen (){
+var number = randomAr(100,1);
+if(number<=oponente.probCrit){
+number=((oponente.ataque*oponente.dmgCrit/100)-datosPj.defensa)
+}ese{
+number=oponente.ataque-datosPj.defensa;
+}
+return number
+}
 function proceder(){
 
     cargarDatos();//aqui podria hacer varias cosas vite
@@ -154,7 +162,7 @@ function proceder(){
     datosPj.nombre=infoPjs[eifp].nombre;
     datosPj.vidamax=((infoPjs[eifp].vidamax)+(cual[ifp].vida));
     datosPj.vida=datosPj.vidamax;
-    datosPj.ataque=((infoPjs[eifp].ataque)+(cual[ifp].ataque));
+    datosPj.ataque=((infoPjs[eifp].ataque)+(cual[ifp].ataque)+(infoPjs[eifp].ataque)+(cual[ifp].ataque)*nivel/20);
     datosPj.defensa=((infoPjs[eifp].defensa)+(cual[ifp].defensa));
     datosPj.probCrit=((infoPjs[eifp].probCrit)+(cual[ifp].probCrit));
     datosPj.dmgCrit=((infoPjs[eifp].dmgCrit)+(cual[ifp].dmgCrit));
@@ -221,6 +229,7 @@ moverOP("opersonaje",13,6,2,0);
 	
         }        
         oponente.vida-=tuc;
+datosPj.vida-=pegensen();
         if(oponente.vida<=0){
             oponente.vida=0;oponente.recuperacion=0;
             $("#iopersonaje").css("opacity","0.0");
@@ -237,7 +246,7 @@ var exp=0;
 
 function nivelexp(n){
     exp+=n;
-    if(exp>100*nivel){
+    if(exp>1000*nivel){
         nivel++;
     }
 }
@@ -323,4 +332,5 @@ function guardarDatos(){
     localStorage.setItem("oro",oro);
     localStorage.setItem("nivel",nivel);
     localStorage.setItem("exp",exp);
+
 }
