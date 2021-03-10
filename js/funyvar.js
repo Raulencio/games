@@ -142,7 +142,7 @@ function pegensen (){
 var number = randomAr(100,1);
 if(number<=oponente.probCrit){
 number=((oponente.ataque*oponente.dmgCrit/100)-datosPj.defensa)
-}ese{
+}else{
 number=oponente.ataque-datosPj.defensa;
 }
 return number
