@@ -141,7 +141,7 @@ function prosiga(){
 function pegensen (){
 var number = randomAr(100,1);
 if(number<=oponente.probCrit){
-number=((oponente.ataque*oponente.dmgCrit/100)-datosPj.defensa)
+number=Math.ceil(((oponente.ataque*(oponente.dmgCrit/100))-datosPj.defensa));
 }else{
 number=oponente.ataque-datosPj.defensa;
 }
@@ -160,10 +160,10 @@ function proceder(){
     console.log(cual[ifp]);
 
     datosPj.nombre=infoPjs[eifp].nombre;
-    datosPj.vidamax=((infoPjs[eifp].vidamax)+(cual[ifp].vida));
+    datosPj.vidamax=Math.ceil(((infoPjs[eifp].vidamax)+(cual[ifp].vida))+((infoPjs[eifp].vidamax)+(cual[ifp].vida))*nivel/20)
     datosPj.vida=datosPj.vidamax;
-    datosPj.ataque=((infoPjs[eifp].ataque)+(cual[ifp].ataque)+(infoPjs[eifp].ataque)+(cual[ifp].ataque)*nivel/20);
-    datosPj.defensa=((infoPjs[eifp].defensa)+(cual[ifp].defensa));
+    datosPj.ataque=Math.ceil((infoPjs[eifp].ataque)+(cual[ifp].ataque)+(infoPjs[eifp].ataque)+(cual[ifp].ataque)*nivel/20);
+    datosPj.defensa=Mary.ceil(((infoPjs[eifp].defensa)+(cual[ifp].defensa))+((infoPjs[eifp].defensa)+(cual[ifp].defensa))*nivel/20);
     datosPj.probCrit=((infoPjs[eifp].probCrit)+(cual[ifp].probCrit));
     datosPj.dmgCrit=((infoPjs[eifp].dmgCrit)+(cual[ifp].dmgCrit));
     datosPj.recuperacion=((infoPjs[eifp].recuperacion)+(cual[ifp].recuperacion));
