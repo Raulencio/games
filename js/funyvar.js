@@ -163,7 +163,7 @@ function proceder(){
     datosPj.vidamax=Math.ceil(((infoPjs[eifp].vidamax)+(cual[ifp].vida))+((infoPjs[eifp].vidamax)+(cual[ifp].vida))*nivel/20)
     datosPj.vida=datosPj.vidamax;
     datosPj.ataque=Math.ceil((infoPjs[eifp].ataque)+(cual[ifp].ataque)+(infoPjs[eifp].ataque)+(cual[ifp].ataque)*nivel/20);
-    datosPj.defensa=Mary.ceil(((infoPjs[eifp].defensa)+(cual[ifp].defensa))+((infoPjs[eifp].defensa)+(cual[ifp].defensa))*nivel/20);
+    datosPj.defensa=Math.ceil(((infoPjs[eifp].defensa)+(cual[ifp].defensa))+((infoPjs[eifp].defensa)+(cual[ifp].defensa))*nivel/20);
     datosPj.probCrit=((infoPjs[eifp].probCrit)+(cual[ifp].probCrit));
     datosPj.dmgCrit=((infoPjs[eifp].dmgCrit)+(cual[ifp].dmgCrit));
     datosPj.recuperacion=((infoPjs[eifp].recuperacion)+(cual[ifp].recuperacion));
