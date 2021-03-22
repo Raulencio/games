@@ -33,6 +33,7 @@
 
         <div class="controles" id="controles">
 
+            <div id="botones">
             <div class="boton1" editable="no" id="btn1"><div class="izquierda" editable="no"></div></div>
             <div class="boton2" editable="no" id="btn2"><div class="derecha" editable="no"></div></div>
             <div class="boton3" editable="no" id="btn3"><div class="arriba" editable="no"></div></div>
@@ -42,14 +43,27 @@
             <div class="boton6" editable="no" id="btn6" hidden="true"><div class="circulo" editable="no"></div></div>
             <div class="boton7" editable="no" id="btn7" onClick="ataque()" ><div class="circulo" editable="no"></div></div>
             <div class="boton8" editable="no" id="btn8" hidden="true"><div class="circulo" editable="no"></div></div>
-
-            <input type="button" value="Perfil" id="iz" class="btns1">
-            <input type="button" value="Equipo" id="de" class="btns2" >
-            <input type="button" value="Objetivo" id="ar" class="btns3">
+<!--  <input type="button" value="Perfil" id="btns1" class="btns1">
+            <input type="button" value="Equipo" id="btns2" class="btns2" >
+            <input type="button" value="Objetivo" id="btns3" class="btns3">  
+            
+            <input type="button" value="x" id="btns6" class="btns6" >
+            <input type="button" value="y" id="btns7" class="btns7">  
+            <input type="button" value="z" id="btns8" class="btns8" >            
+            <input type="button" value="Practica" id="btns4" class="btns4" onClick="apareceEnemigo()">
+            <input type="button" value="Reiniciar" id="btns8" class="btns5" onClick="aumentarDMG(0)">
+      -->
+            <input type="button" value="Perfil" id="btns1" class="btns1">
+            <input type="button" value="Equipo" id="btns2" class="btns2" >
+            <input type="button" value="Objetivo" id="btns3" class="btns3">  
+            
+            <input type="button" value="x" id="btns6" class="btns6" >
+            <input type="button" value="y" id="btns7" class="btns7">  
+            <input type="button" value="z" id="btns8" class="btns8" >            
             <input type="button" value="Practica" id="ab" class="btns4" onClick="apareceEnemigo()">
-            <input type="button" value="Reiniciar" id="todo" class="btns5" onClick="aumentarDMG(0)">
-        
-        
+            <input type="button" value="Reiniciar" id="todo" class="btns5">
+        </div>
+        <div id="menuesCaja">
             <div class="menues" id="menu1" hidden="true">
                 <br>
                 <p id="pi1">informacion</p>
@@ -71,12 +85,33 @@
                 <p id="pe3">informacion</p>
         
             </div>
-
+            <div class="menues" id="menu6" hidden="true">
+              <div class="cosa" onClick="aumentarDMG(0)">
+                  <p id="paumAt">ataque++</p>
+              </div>
+              <div class="cosa" onClick="aumentarDMG(1)">
+                <p id="paumCri">Crit++</p>
+            </div>
+            </div>
+            <div class="menues" id="menu7" hidden="true">
+                <p id="pMenu7"></p>
+            </div>
+            <div class="menues" id="menu8" hidden="true">
+                <p id="pMenu8"></p>
+            </div>
+        </div>
 
         </div>        
 
     </div>
-
+<style>
+    .cosa{
+        display: flexbox;
+        width:100px;
+        height:50px;
+        background-color: red;
+    }
+</style>
 
     <div class="pantalla" id="pantalla2" hidden="true">
         
@@ -121,7 +156,8 @@
 </style>
 <script src="js/jquery-3.5.1.js"></script>
 <script src="js/skrips.js"></script>
-<script src="js/funyvar.js"></script>
+<!--<script src="js/funyvar.js"></script>-->
+<script src="js/otraprueba.js"></script>
 <script src="js/cargar.js"></script>
 
 <script>
