@@ -336,7 +336,7 @@ function guardarDatos(){
 }
 function aumentarDMG(x){
 
-Switch(x){
+switch(x){
 case 0:personaje.ataque+=100*nivel;
 break;
 proceder();
