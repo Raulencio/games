@@ -98,13 +98,14 @@ function mensaje(){
 
     $("#pi1").text("- "+datosPj.nombre+" - | Vida: "+datosPj.vidamax+"/"+datosPj.vida);
     $("#pi2").text("Nivel:"+nivel+"  |Atq: "+datosPj.ataque+" | Def: "+datosPj.defensa);
-    $("#pi3").text("Prob Crit: "+datosPj.probCrit+" | Dmg Crit: "+datosPj.dmgCrit+"|oro: "+oro);
+    $("#pi3").text("Prob Crit: "+datosPj.probCrit+" | Dmg Crit: "+datosPj.dmgCrit);
     
     $("#pe1").text("- "+oponente.nombre+" - | Vida: "+oponente.vidamax+"/"+oponente.vida);
     $("#pe2").text("Atq: "+oponente.ataque+" | Def: "+oponente.defensa);
     $("#pe3").text("Prob Crit: "+oponente.probCrit+" | Dmg Crit: "+oponente.dmgCrit);
-    $("#pMenu7").text("Menu 7");
-    $("#pMenu8").text("Menu 8");
+    $("#pMenu6").text("Ataque");
+    $("#pMenu7").text("Critico");
+    $("#pMenu8").text("|oro: "+oro+"|");
     $("#op").text(espada.nombre);
     $("#impg").attr("src",espada.url); 
     var anchobarra=((oponente.vida)*50)/oponente.vidamax;
