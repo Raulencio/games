@@ -1,17 +1,44 @@
+function menuesdeColores(idm,idb){
+    esconder("menu1");
+    esconder("menu2");
+    esconder("menu3");
+    esconder("menu6");
+    esconder("menu7");
+    esconder("menu8");
+
+    $("#btns1").css("background-color","whitesmoke");
+    $("#btns2").css("background-color","whitesmoke");
+    $("#btns3").css("background-color","whitesmoke");
+    $("#btns6").css("background-color","whitesmoke");
+    $("#btns7").css("background-color","whitesmoke");
+    $("#btns8").css("background-color","whitesmoke");
+
+    mostrar(idm);    
+    let colorM=colorRan();
+    $(idb).css("background-color",colorM);
+    $("#"+idm).css("background-color",colorM);
+}
 window.onload=function(){
 
-    $('#iz').click(function () {mostrar("menu1");$("#iz").css("background-color",colorRan());
-    $("#de").css("background-color","whitesmoke");$("#ar").css("background-color","whitesmoke");
-    esconder("menu2");esconder("menu3");});
+    $('#btns1').click(function () {        
+        menuesdeColores("menu1","#btns1");         
+    });
     
-    $('#de').click(function () {mostrar("menu2");$("#de").css("background-color",colorRan());
-    $("#iz").css("background-color","whitesmoke");$("#ar").css("background-color","whitesmoke");
-    esconder("menu3");esconder("menu1");});
+    $('#btns2').click(function () {menuesdeColores("menu2","#btns2");
+    });
     
 
-    $('#ar').click(function () {mostrar("menu3");$("#ar").css("background-color",colorRan());
-    $("#iz").css("background-color","whitesmoke");$("#de").css("background-color","whitesmoke");
-    esconder("menu2");esconder("menu1");});     
+    $('#btns3').click(function () {menuesdeColores("menu3","#btns3");
+    });    
+    $('#btns6').click(function () {menuesdeColores("menu6","#btns6");
+    });     
+
+    $('#btns7').click(function () {menuesdeColores("menu7","#btns7");
+    });     
+
+    $('#btns8').click(function () {menuesdeColores("menu8","#btns8");
+    });     
+
 
     $('#ab').click(function () {abajo=true;});
     
@@ -57,8 +84,7 @@ window.onload=function(){
         }
      });
      $("#todo").click(function (){  
-        if(unavez){
-        oro+=nivel*conteo;}
+        oro+=nivel*(conteo-1);
         conteo=1;
         apareceEnemigo();unavez=false;
      });
