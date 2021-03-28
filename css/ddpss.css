@@ -52,26 +52,26 @@
 }
 .linea1{
     position:absolute;
-    top:50px;
+    top:125px;
     left:0px;
     width:100%;
-    height:50px;
+    height:25px;
     background-color: rgba(26, 148, 15, 0.52);
 }
 .linea2{
     position:absolute;
-    top:100px;
+    top:150px;
     left:0px;
     width:100%;
-    height:50px;
+    height:25px;
     background-color: rgba(67, 165, 22, 0.52);
 }
 .linea3{
     position:absolute;
-    top:150px;
+    top:175px;
     left:0px;
     width:100%;
-    height:50px;
+    height:25px;
     background-color: rgba(28, 97, 7, 0.52);
 }
 .personaje{
@@ -90,7 +90,7 @@
 }
 .ache{
     position:absolute;
-    top:60px;
+    top:100px;
     left:0px;
     width:100%;
 }
@@ -107,7 +107,7 @@
 position:absolute;
 width:700px;
 height:330px;
-background-color: rgb(26, 108, 185);    
+background-color: rgb(2, 32, 59);    
 }
 .controles{
 position:absolute;
