@@ -45,25 +45,25 @@ window.onload=function(){
 
     $("#pantalla1").click(function (){esconder("pantalla1");mostrar("pantalla2");});
 
-    $("#btn1").click(function (){  
+    $("#btn1").click(function (){  //izquierda
         if(pLeft>0){
-            pLeft-=50;
+            pLeft-=50; document.getElementById("ipersonaje").style.transform="scale(-1,1)";
         $("#personaje").css("left",pLeft+"px");
         }
      });
-     $("#btn2").click(function (){  
+     $("#btn2").click(function (){   //derecha
          if(pLeft<650){
-        pLeft+=50;
+        pLeft+=50; document.getElementById("ipersonaje").style.transform="scale(1,1)";
         $("#personaje").css("left",pLeft+"px");
         }
      });
      $("#btn3").click(function (){  
-        if(pTop>0){
-            pTop-=50;
+        if(pTop>50){
+            pTop-=25;
         $("#personaje").css("top",pTop+"px");
-        if(pTop==0){
+        if(pTop==50){
             $("#personaje").css("z-index","7");
-        }else if(pTop==50){
+        }else if(pTop==75){
             $("#personaje").css("z-index","8");
         }else if(pTop==100){
             $("#personaje").css("z-index","9");
@@ -72,11 +72,11 @@ window.onload=function(){
      });
      $("#btn4").click(function (){  
          if(pTop<100){
-            pTop+=50;
+            pTop+=25;
         $("#personaje").css("top",pTop+"px");
-        if(pTop==0){
+        if(pTop==50){
             $("#personaje").css("z-index","7");
-        }else if(pTop==50){
+        }else if(pTop==75){
             $("#personaje").css("z-index","8");
         }else if(pTop==100){
             $("#personaje").css("z-index","9");

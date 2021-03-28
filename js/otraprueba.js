@@ -175,6 +175,28 @@ function proceder(){
 
     apareceEnemigo();
 
+for(var i=nivel;i>0;i--){
+    sumE();
+}
+
+}
+
+var nEstrellas=0;
+function sumE(){
+    nEstrellas++;
+    var w= randomAr(3,2);
+    var estrellita=document.createElement("div");
+    estrellita.style.position=("absolute");
+    estrellita.style.left=randomAr(699,1)+"px";
+    estrellita.style.top=randomAr(100,1)+"px";
+    estrellita.style.width=w+"px";
+    estrellita.style.height=w+"px";
+    estrellita.style.backgroundColor=colorRan();
+    estrellita.style.boxShadow=" 0px 0px "+randomAr(5,3)+"px "+randomAr(1,0)+"px "+colorRan();
+    estrellita.style.borderRadius=w+"px "+w+"px "+w+"px "+w+"px ";
+    estrellita.className="estrellita";
+    document.querySelector("#pantalla").appendChild(estrellita);    
+    //console.log(nEstrellas);
 }
 
 
@@ -217,7 +239,7 @@ function ataque(){
     }
     if(peguele){
         var tuc=((damage())-oponente.defensa);
-moverOP("opersonaje",13,6,2,0);
+    moverOP("opersonaje",13,1,2,1);
         if(tuc<0){tuc=0};
         if(menp==1){
         $("#pdmgo").css('top',"40px");
@@ -308,8 +330,8 @@ function apareceEnemigo(){
 
     $("#ab").attr("value","practica: "+conteo);
     $("#ab").css("background-color","whitesmoke");
-    $("#opersonaje").css("left",(randomAr(13,6)*50)+"px");
-    $("#opersonaje").css("top",(randomAr(2,0)*50)+"px");
+    $("#opersonaje").css("left",(randomAr(13,8)*50)+"px");
+    $("#opersonaje").css("top",(randomAr(2,1)*50)+"px");
     guardarDatos();
 }
 
