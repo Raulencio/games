@@ -40,12 +40,12 @@
 .cuadrado{
     width:100px;
     height:100px;
-    background-color: #130688b9;
+    background-color: #3726d1b9;
 }
 .cuadra2{
     width:100px;
     height:50px;
-    background-color: #130688b9;
+    background-color: #3321ccb9;
 }
 .cuadrado:hover,.cuadra2:hover{
     background-color: #0f0852b9;
@@ -107,7 +107,7 @@
 position:absolute;
 width:700px;
 height:330px;
-background-color: rgb(2, 32, 59);    
+background-color: rgb(10, 79, 139);    
 }
 .controles{
 position:absolute;
