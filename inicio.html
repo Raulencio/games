@@ -1,30 +1,51 @@
+
 <!DOCTYPE html>
 <html lang="es">
-<head>    
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/colores.css">
+
+    /<link rel="stylesheet" href="css/colores.css">
+    
+  
     <title>beta</title>
 </head>
 <body>
 <div class="fondo">
-
     <div class="menu">
         <input type="button" value="JUGAR" id="btn1" class="texto" onclick="algo()" hidden="true">
-        
     </div>
-    <div class="contenedor" id="contenedor" hidden="true" >    
-
-        <div class="casa" onclick=datos()></div>
-        <div class="bosque" onclick=talar()></div>
-        <div class="rio" onclick=pescar()></div>
-        
-        <div class="texto2">
-            <p id="texto2">Nivel:    Madera:    Comida: </p>
+    <div class="contenedor" id="contenedor" hidden="true">
+        <div class="casa" onclick="abrirtienda()"></div>
+        <div class="bosque" onclick="talar()"></div>
+        <div class="rio" onclick="pescar()"></div>
+        <div class="texto3">
+            <p id="texto3">Nivel: oro: </p>
         </div>
-        
+        <div class="texto2">
+            <p id="texto2">Madera: Comida: </p>
+        </div>
+        <div class="tienda" id="tienda" hidden="true">
+            <div class="cerrartienda" onclick="cerrartienda()"></div>
+            <p class="texto3">Tienda</p>
+            <div class="vender1">
+                <input type="number" id="cantidadMadera" placeholder="0"> <!-- Placeholder para cantidad de madera -->
+                <button onclick="venderMadera()">Vender madera</button>
+            </div>
+            <div class="vender2">
+                <input type="number" id="cantidadPescado" placeholder="0"> <!-- Placeholder para cantidad de pescado -->
+                <button onclick="venderPescado()">Vender pescado</button>
+            </div>
+            <div class="comprar1" onclick="ayudantemadera()">
+                <p id="textoayudantemadera"></p>
+            </div>
+            <div class="comprar2" onclick="ayudantepescado()">
+                <p id="textoayudantepescado"></p>
+            </div>
+        </div>
     </div>
 </div>
 <script src="js/skrips.js"></script>
 <script src="js/windouh.js"></script>
 </body>
 </html>
+
