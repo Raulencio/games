@@ -1,0 +1,63 @@
+.fondo{
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    background-color: rgba(28, 97, 7, 0.52);
+}
+.menu{position:absolute;
+    top:10%;
+    left:10%;
+    width:80%;
+    height:80%;
+
+}
+.texto{
+    text-align: center;
+    position:absolute;
+    top:25%;
+    left:10%;
+    width:80%;
+    height:50%;
+}
+.texto2{
+    text-align: center;
+    position:absolute;
+    top:90%;
+    left:10%;
+    width:80%;
+    height:50%;
+}
+.contenedor{
+    top:10%;
+    left:10%;
+    width:100%;
+    height:100%;
+
+}
+.casa{
+    position:absolute;
+    top:70%;
+    left:10%;
+    width:20%;
+    height:20%;
+    background-color: rgba(181, 21, 21, 0.973);
+
+}
+.bosque{
+    position:absolute;
+    top:10%;
+    left:10%;
+    width:50%;
+    height:40%;
+    background-color: rgba(9, 157, 41, 0.52);
+}
+.rio{
+    position:absolute;
+    top:10%;
+    left:70%;
+    width:20%;
+    height:80%;
+    background-color: rgb(21, 69, 181);
+}
