@@ -1,0 +1,216 @@
+.fondo{
+
+        position:absolute;
+        top:0px;
+        left:0px;
+        width:100%;
+        height:100%;
+        background-color: rgba(28, 97, 7, 0.52);
+
+
+}
+.inventario{
+
+    position:absolute;
+    top:5%;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(196, 205, 194, 0.689);
+    z-index: 11;
+
+}
+
+
+.controles{
+    position:absolute;
+    top:10%;
+    left:10%;
+    width:80%;
+    height:80%;
+    background-color: rgba(0, 0, 0, 0.726);
+    z-index: 10;
+
+}
+
+.mapa1{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(199, 193, 10, 0.52);
+}
+.mapa2{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(65, 154, 63, 0.52);
+}
+.mapa3{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(111, 146, 226, 0.52);
+}
+.mapa4{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(129, 12, 47, 0.52);
+}
+.mapa5{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(50, 201, 85, 0.52);
+}
+.mapa6{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(108, 117, 140, 0.52);
+}
+.mapa7{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(72, 168, 130, 0.605);
+}
+.mapa8{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(63, 205, 118, 0.52);
+}
+.mapa9{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(22, 17, 129, 0.52);
+}
+.mapa10{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(73, 16, 67, 0.756);
+}
+.mapa11{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(129, 125, 12, 0.52);
+}
+.mapa12{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(50, 204, 61, 0.52);
+}
+.mapa13{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(13, 192, 211, 0.52);
+}
+.mapa14{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(3, 12, 32, 0.52);
+}
+.mapa15{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(12, 129, 28, 0.52);
+}
+.mapa16{
+    position:absolute;
+    top:5% ;
+    left:5%;
+    width:90%;
+    height:90%;
+    background-color: rgba(192, 58, 5, 0.952);
+}
+.cerrarInventario{
+    position:absolute;
+    top:5%;
+    right:5%;
+}
+.botonInventario{
+
+    position:absolute;
+    bottom:5%;
+    left:5%;
+}
+.botonPjs{
+    position:absolute;
+    bottom:5%;
+    right:5%;
+}
+
+.botoninicio{
+    position:absolute;
+    top:80% ;
+    right:45%;
+    width:10%;
+    height:10%;
+}
+.botonD{
+    position:absolute;
+    top:50% ;
+    left:0%;
+    width:5%;
+    height:5%;
+}
+.botonI{
+    position:absolute;
+    top:50% ;
+    right:0%;
+    width:5%;
+    height:5%;
+}
+.botonAr{
+    position:absolute;
+    top:0% ;
+    right:45%;
+    width:5%;
+    height:5%;
+}
+.botonAb{
+    position:absolute;
+    bottom:0% ;
+    right:45%;
+    width:5%;
+    height:5%;
+}
+
