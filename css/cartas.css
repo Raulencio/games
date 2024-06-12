@@ -202,14 +202,14 @@
 .botonAr{
     position:absolute;
     top:0% ;
-    right:45%;
+    right:50%;
     width:5%;
     height:5%;
 }
 .botonAb{
     position:absolute;
     bottom:0% ;
-    right:45%;
+    right:50%;
     width:5%;
     height:5%;
 }
