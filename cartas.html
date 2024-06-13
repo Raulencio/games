@@ -11,10 +11,18 @@
 <body>
 
 
+
 <div class="fondo">
+
+<div>
     <p class="datosPj" id="datosPj" hidden="true">datos</p>
+</div>
+
 <div class="mapa16" id="inicio">
-    <p>La batalla</p>
+
+    <h1>La batalla</h1>
+
+
     <input class="botoninicio" type="button" value="iniciar" onclick="mostrar('datosPj'),mostrar('mapa1'),mostrar('controles'),esconder('inicio'),enemigoAc()">
        
 </div>
@@ -36,8 +44,9 @@
 
     <p class="probCrit" id="probCrit"> Critico </p>
 
-    </div>
 
+    </div>
+    
     <div class="listaPjs1" id="listaPjs1" onclick=seleccionar(1)>
         <p class="nombrePj" id="nombrePj1"> nombre </p>
         <p class="ataquePJ" id="ataquePj1"> ataque </p>
@@ -78,10 +87,21 @@
     
 </div> 
 
-
 </div>
-<div class="controles" id="controles" hidden="true">
+<div
+ class="controles" id="controles" hidden="true">
     
+ <div id="barraDeVidaContainer">
+    <div id="barraDeVida" style="background-color: green; height: 20px; width: 100%;"></div>
+</div>
+
+
+ 
+<div id="barraDeVidaContainerPj" class="barraPj">
+    <div id="barraDeVidaPj" style="background-color: green; height: 20px; width: 100%;"></div>
+</div>
+
+
     <input class="botonInventario" type="button" value="Inventario" onclick="mostrar('inventario')">
     
     <input class="botonPjs" type="button" value="Personajes" onclick="listaPersonajes(),mostrar('listaPersonajes')">
@@ -91,7 +111,8 @@
         
     </div>
 
-<div class="enemigo" id="enemigo">
+<div class="enemigo" id="enemigo" onclick=pelear()>
+
     <p class="nivelE" id="nivelE">nivel</p>
  
     <div class="barradeVida" id="vidaE">   
@@ -105,85 +126,86 @@
 
 </div>
 </div>
-    <div class="mapa1" id="mapa1" hidden="true">Entrenamiento   
+
+    <div class="mapa1" id="mapa1" hidden="true">Entrenamiento - Zona 01  
         <input class="botonI"type="button" value="→" onclick="mostrar('mapa2'),esconder('mapa1'),enemigoAc()">
     </div>
-    <div class="mapa2" id="mapa2" hidden =true>2
+    <div class="mapa2" id="mapa2" hidden =true>Zona 02
     
         <input class="botonD" type="button" value="←" onclick="mostrar('mapa1'),esconder('mapa2'),enemigoAc()">
         <input class="botonI"type="button" value="→" onclick="mostrar('mapa3'),esconder('mapa2'),enemigoAc()">
         <input  class="botonAb"type="button" value="↓" onclick="mostrar('mapa6'),esconder('mapa2'),enemigoAc()">
     </div>
-    <div class="mapa3" id="mapa3" hidden=true>3
+    <div class="mapa3" id="mapa3" hidden=true> Zona 03
 
         <input class="botonD"type="button" value="←"onclick="mostrar('mapa2'),esconder('mapa3'),enemigoAc()">
         <input class="botonAb"type="button" value="↓"onclick="mostrar('mapa7'),esconder('mapa3'),enemigoAc()">
 
     </div>
-    <div class="mapa4" id="mapa4" hidden=true>Fuente Magica
+    <div class="mapa4" id="mapa4" hidden=true>Fuente Magica - Zona 04
         <input class="botonAb"type="button" value="↓"onclick="mostrar('mapa8'),esconder('mapa4'),enemigoAc()">
     </div>
-    <div class="mapa5" id="mapa5" hidden=true>5
+    <div class="mapa5" id="mapa5" hidden=true>Zona 05
         <input class="botonI"type="button" value="→"onclick="mostrar('mapa6'),esconder('mapa5'),enemigoAc()">
     </div>
-    <div class="mapa6" id="mapa6" hidden=true>6
+    <div class="mapa6" id="mapa6" hidden=true>Zona 06
         <input class="botonAr"type="button" value="↑"onclick="mostrar('mapa2'),esconder('mapa6'),enemigoAc()">
         <input class="botonD"type="button" value="←"onclick="mostrar('mapa5'),esconder('mapa6'),enemigoAc()">
         <input class="botonI"type="button" value="→"onclick="mostrar('mapa7'),esconder('mapa6'),enemigoAc()">
         <input class="botonAb"type="button" value="↓"onclick="mostrar('mapa10'),esconder('mapa6'),enemigoAc()">
     </div>
-    <div class="mapa7" id="mapa7" hidden=true>7
+    <div class="mapa7" id="mapa7" hidden=true>Zona 07
         <input class="botonAr"type="button" value="↑"onclick="mostrar('mapa3'),esconder('mapa7'),enemigoAc()">
         <input class="botonD"type="button" value="←"onclick="mostrar('mapa6'),esconder('mapa7'),enemigoAc()">
         <input class="botonI"type="button" value="→"onclick="mostrar('mapa8'),esconder('mapa7'),enemigoAc()">
         <input class="botonAb"type="button" value="↓"onclick="mostrar('mapa11'),esconder('mapa7'),enemigoAc()">
     </div>
-    <div class="mapa8" id="mapa8" hidden=true>8
+    <div class="mapa8" id="mapa8" hidden=true>Zona 08
         <input class="botonAr"type="button" value="↑"onclick="mostrar('mapa4'),esconder('mapa8'),enemigoAc()">
         <input class="botonD"type="button" value="←"onclick="mostrar('mapa7'),esconder('mapa8'),enemigoAc()">
         <input class="botonAb"type="button" value="↓"onclick="mostrar('mapa12'),esconder('mapa8',enemigoAc())">
     </div>
-    <div class="mapa9" id="mapa9" hidden=true>9
+    <div class="mapa9" id="mapa9" hidden=true>Zona 09
         <input class="botonI"type="button" value="→"onclick="mostrar('mapa10'),esconder('mapa9'),enemigoAc()">
         <input class="botonAb"type="button" value="↓"onclick="mostrar('mapa13'),esconder('mapa9'),enemigoAc()">
     </div>
-    <div class="mapa10" id="mapa10" hidden=true>10
+    <div class="mapa10" id="mapa10" hidden=true>Zona 10
         <input class="botonAr"type="button" value="↑"onclick="mostrar('mapa6'),esconder('mapa10'),enemigoAc()">
         <input class="botonD"type="button" value="←"onclick="mostrar('mapa9'),esconder('mapa10'),enemigoAc()">
         <input class="botonI"type="button" value="→"onclick="mostrar('mapa11'),esconder('mapa10'),enemigoAc()">
         <input class="botonAb"type="button" value="↓"onclick="mostrar('mapa14'),esconder('mapa10'),enemigoAc()">
     </div>
-    <div class="mapa11" id="mapa11" hidden=true>11
+    <div class="mapa11" id="mapa11" hidden=true>Zona 11
         <input class="botonAr"type="button" value="↑"onclick="mostrar('mapa7'),esconder('mapa11'),enemigoAc()">
         <input class="botonD"type="button" value="←"onclick="mostrar('mapa10'),esconder('mapa11'),enemigoAc()">
         <input class="botonI"type="button" value="→"onclick="mostrar('mapa12'),esconder('mapa11'),enemigoAc()">
     </div>
-    <div class="mapa12" id="mapa12" hidden=true>12
+    <div class="mapa12" id="mapa12" hidden=true>Zona 12
         <input class="botonAr"type="button" value="↑"onclick="mostrar('mapa8'),esconder('mapa12'),enemigoAc()">
         <input class="botonD"type="button" value="←"onclick="mostrar('mapa11'),esconder('mapa12'),enemigoAc()">
 
     </div>
 
-    <div class="mapa13" id="mapa13" hidden=true>13
+    <div class="mapa13" id="mapa13" hidden=true>Zona 13
       
         <input class="botonAr"type="button" value="↑" onclick="mostrar('mapa9'),esconder('mapa13'),enemigoAc()">
  
         <input class="botonI"type="button" value="→"onclick="mostrar('mapa14'),esconder('mapa13'),enemigoAc()">
 
     </div>
-    <div class="mapa14" id="mapa14" hidden=true>14
+    <div class="mapa14" id="mapa14" hidden=true>Zona 14
         <input class="botonAr"type="button" value="↑"onclick="mostrar('mapa10'),esconder('mapa14'),enemigoAc()">
         <input class="botonD"type="button" value="←"onclick="mostrar('mapa13'),esconder('mapa14'),enemigoAc()">
         <input class="botonI"type="button" value="→"onclick="mostrar('mapa15'),esconder('mapa14'),enemigoAc()">
  
     </div>
-    <div class="mapa15" id="mapa15" hidden=true>15
+    <div class="mapa15" id="mapa15" hidden=true>Zona 15
 
         <input class="botonD"type="button" value="←"onclick="mostrar('mapa14'),esconder('mapa15'),enemigoAc()">
         <input class="botonI"type="button" value="→"onclick="mostrar('mapa16'),esconder('mapa15'),enemigoAc()">
   
     </div>
-    <div class="mapa16" id="mapa16" hidden=true>16
+    <div class="mapa16" id="mapa16" hidden=true>Zona 16
         <input class="botonD"type="button" value="←"onclick="mostrar('mapa15'),esconder('mapa16'),enemigoAc()">
     </div>
 
