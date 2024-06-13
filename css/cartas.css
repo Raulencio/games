@@ -34,10 +34,10 @@
 }
 .personaje{
     position:absolute;
-    top:60%;
+    top:30%;
     left:10%;
     width:40%;
-    height:20%;
+    height:50%;
     background-color: rgba(144, 245, 150, 0.726);
     z-index: 10;
 }
@@ -46,7 +46,7 @@
     top:10%;
     left:50%;
     width:40%;
-    height:20%;
+    height:50%;
     background-color: rgba(96, 3, 3, 0.726);
     z-index: 10;
 }
