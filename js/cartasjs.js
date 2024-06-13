@@ -11,7 +11,7 @@ var exp=0;
 var npj=0;
 var pjs=[
     { 
-        id: 1,nivel:0,
+        id: 1,nivel:1,
         nombre:"Samurai",
         tipo: "Espadachin",
         vida: 2000,
@@ -167,13 +167,13 @@ function enemigoAc() {
 
        pjActual = pjs[npj];
 
-    document.getElementById("nivelE").textContent=(enemigoActual.nivel)
+    document.getElementById("nivelE").textContent=("Nivel "+enemigoActual.nivel)
     document.getElementById("nombreE").textContent=(enemigoActual.nombre)
     document.getElementById("vidaE").textContent=(enemigoActual.vida)
     document.getElementById("ataqueE").textContent=(enemigoActual.ataque)
     document.getElementById("defensaE").textContent=(enemigoActual.defensa)
 
-    document.getElementById("datosPj").textContent = (pjActual.nivel);
+    document.getElementById("datosPj").textContent = ("Nivel "+pjActual.nivel);
     document.getElementById("nombrePj").textContent = (pjActual.nombre);
     document.getElementById("vidaPj").textContent = (pjActual.vida);
     document.getElementById("ataquePj").textContent = (pjActual.ataque);
