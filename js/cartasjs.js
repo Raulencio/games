@@ -21,7 +21,7 @@ var pjs=[
         nombre:"Samurai",
         tipo: "Espadachin",
         vida: 2000,vidaAc:2000,
-        ataque:200,
+        ataque:202,
         defensa:100
    },
    { 
@@ -29,7 +29,7 @@ var pjs=[
     nombre:"Ninja",
     tipo: "Espadachin",
     vida: 1500,vidaAc:1500,
-    ataque:250,
+    ataque:255,
     defensa:80
 },
 { 
@@ -37,7 +37,7 @@ var pjs=[
     nombre:"Arquero",
     tipo: "Rango",
     vida: 1000,vidaAc:1000,
-    ataque:300,
+    ataque:303,
     defensa:50
 },
 { 
@@ -45,7 +45,7 @@ id: 4,nivel:1,
 nombre:"Mago",
 tipo: "Soporte",
 vida: 1800,vidaAc:1800,
-ataque:190,
+ataque:199,
 defensa:90
 }
 
@@ -240,6 +240,10 @@ function enemigoAc() {
 
     recrearBarraDeVidaPj(pjActual.vidaAc, pjActual.vida);
     recrearBarraDeVida(enemigoActual.vidaAc, enemigoActual.vida);
+
+
+    
+
 }
 
 function seleccionar(n){
@@ -255,10 +259,12 @@ function pelear(){
     pjActual.vida=pjActual.vida-enemigoActual.ataque;
         
     }
-    if(enemigoActual.vida<=0){
+    if(enemigoActual.vida<0){
      enemigoActual.vida=0;   
      oros=oros+enemigoActual.nivel;
      alert(""+enemigoActual.nombre+" ha caido +$"+enemigoActual.nivel)
+
+
     }
     
      if(pjActual.vida<0){
@@ -314,3 +320,40 @@ function recrearBarraDeVidaPj(vidaMax, vidaActual) {
 }
 
 
+function iniciarRecuperacionDeVida(vidaMax, vidaActual, incremento, intervalo) {
+    // Obtener el elemento de la barra de vida del DOM
+    var barraDeVida = document.getElementById('barraDeVidaPj');
+
+    // Función para actualizar la barra de vida
+    function actualizarBarraDeVida() {
+        // Calcular el porcentaje de vida actual con respecto a la vida máxima
+        var porcentajeVida = (vidaActual / vidaMax) * 100;
+
+        // Actualizar el ancho de la barra de vida para reflejar el porcentaje de vida
+        barraDeVida.style.width = porcentajeVida + '%';
+
+        // También podemos actualizar el texto dentro de la barra de vida, si existe
+        barraDeVida.innerText = vidaActual + ' / ' + vidaMax;
+    }
+
+    // Función para recuperar vida
+    function recuperarVida() {
+        if (vidaActual < vidaMax) {
+            vidaActual += incremento;
+            if (vidaActual > vidaMax) {
+                vidaActual = vidaMax;
+            }
+            actualizarBarraDeVida();
+        } else {
+            clearInterval(intervalID); // Detener la recuperación si la vida está completa
+        }
+    }
+
+    // Iniciar el intervalo para recuperar vida
+    var intervalID = setInterval(recuperarVida, intervalo);
+
+    // Llamar inmediatamente para actualizar la barra al inicio
+    actualizarBarraDeVida();
+}
+
+// Ejemplo de uso
