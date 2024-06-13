@@ -8,7 +8,13 @@ var level=0;
 var exp=0;
 
 
-var npj=0;
+var npj=1;
+var armas=[
+    {id:1,nivel:1,nombre:"Katana",ataque:"1000",probCritico:50,atsp:1},
+    {id:2,nivel:1,nombre:"Sable",ataque:"800",probCritico:80,atsp:2},
+    {id:3,nivel:1,nombre:"Arco",ataque:"500",probCritico:70,atsp:4},
+    {id:4,nivel:1,nombre:"Baculo",ataque:"400",probCritico:90,atsp:3}
+]
 var pjs=[
     { 
         id: 1,nivel:1,
@@ -17,8 +23,31 @@ var pjs=[
         vida: 2000,
         ataque:200,
         defensa:100
-   }
-
+   },
+   { 
+    id: 2,nivel:1,
+    nombre:"Ninja",
+    tipo: "Espadachin",
+    vida: 1500,
+    ataque:250,
+    defensa:80
+},
+{ 
+    id: 3,nivel:1,
+    nombre:"Arquero",
+    tipo: "Rango",
+    vida: 1000,
+    ataque:300,
+    defensa:50
+},
+{ 
+id: 4,nivel:1,
+nombre:"Mago",
+tipo: "Soporte",
+vida: 1800,
+ataque:190,
+defensa:90
+}
 
 ]
 var nenemigo=0;
@@ -153,8 +182,20 @@ var enemigos = [
 ];
 var enemigoActual=0;
 var pjActual=1;
+function listaPersonajes(){
 
 
+    for (var i = 1; i <= 4; i++) {
+    document.getElementById('nombrePj' + i).textContent=("Nombre: "+pjs[i-1].nombre);
+       
+    document.getElementById('ataquePj' + i).textContent=("ataque: "+pjs[i-1].ataque);;
+
+    document.getElementById('vidaPj' + i).textContent=("vida: "+pjs[i-1].vida);;
+    document.getElementById('defensaPj' + i).textContent=("defensa: "+pjs[i-1].defensa);;
+    document.getElementById('manaPj' + i).textContent=("Tipo: "+pjs[i-1].tipo);;
+    }
+
+}
 function enemigoAc() {
     for (var i = 1; i <= 16; i++) {
         var mapa = document.getElementById('mapa' + i);
@@ -165,19 +206,24 @@ function enemigoAc() {
     }
     enemigoActual = enemigos[nenemigo - 1];
 
-       pjActual = pjs[npj];
 
-    document.getElementById("nivelE").textContent=("Nivel "+enemigoActual.nivel)
-    document.getElementById("nombreE").textContent=(enemigoActual.nombre)
-    document.getElementById("vidaE").textContent=(enemigoActual.vida)
-    document.getElementById("ataqueE").textContent=(enemigoActual.ataque)
-    document.getElementById("defensaE").textContent=(enemigoActual.defensa)
+       pjActual = pjs[npj-1];
+
+
+
+    document.getElementById("nivelE").textContent=("Nivel "+enemigoActual.nivel+" "+enemigoActual.nombre)
+    document.getElementById("nombreE").textContent=("");
+    document.getElementById("vidaE").textContent=("Vida: "+ enemigoActual.vida)
+    document.getElementById("ataqueE").textContent=("Ataque: "+enemigoActual.ataque+" Defensa: "+enemigoActual.defensa)
+    document.getElementById("defensaE").textContent=("")
 
     document.getElementById("datosPj").textContent = ("Nivel "+pjActual.nivel);
     document.getElementById("nombrePj").textContent = (pjActual.nombre);
-    document.getElementById("vidaPj").textContent = (pjActual.vida);
-    document.getElementById("ataquePj").textContent = (pjActual.ataque);
-    document.getElementById("defensaPj").textContent = (pjActual.defensa);
+    document.getElementById("nombrePjI").textContent = (pjActual.nombre);
+    document.getElementById("vidaPj").textContent = ("Vida Maxima: "+pjActual.vida);
+    document.getElementById("ataquePj").textContent = ("Ataque: "+pjActual.ataque);
+    document.getElementById("defensaPj").textContent = ("Defensa: "+pjActual.defensa);
+    document.getElementById("manaPj").textContent = ("Tipo: "+pjActual.tipo);
 
 
 
@@ -189,7 +235,13 @@ function enemigoAc() {
     console.log("Ataque del enemigo:", enemigoActual.ataque);
 }
 
+function seleccionar(n){
 
+npj=n;
+
+enemigoAc()
+
+}
 
 function cargarDatos() {
     if (localStorage.getItem("oros") != null) { oros = Number(localStorage.getItem("oros")); }    
