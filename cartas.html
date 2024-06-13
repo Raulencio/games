@@ -25,36 +25,87 @@
 </div>
 <div class="inventario" id="listaPersonajes" hidden="true">
     <input class="cerrarInventario" type="button" value="cerrar" onclick="esconder('listaPersonajes')">
+    
+    <div class="personajeElegido" id="personajeElegido">
+        <p class="nombrePj" id="nombrePjI"> nombre </p>
+    <p class="ataquePJ" id="ataquePj"> ataque </p>
+    <p class="defensaPJ" id="defensaPj">defensa</p>
+    
+    <p class="vidaPj" id="vidaPj"> vida </p>
+    <p class="manaPj" id="manaPj"> mana </p>
+
+    <p class="probCrit" id="probCrit"> Critico </p>
+
+    </div>
+
+    <div class="listaPjs1" id="listaPjs1" onclick=seleccionar(1)>
+        <p class="nombrePj" id="nombrePj1"> nombre </p>
+        <p class="ataquePJ" id="ataquePj1"> ataque </p>
+        <p class="defensaPJ" id="defensaPj1">defensa</p>
+        
+        <p class="vidaPj" id="vidaPj1"> vida </p>
+        <p class="manaPj" id="manaPj1"> mana </p>
+
+    </div>
+    <div class="listaPjs2" id="listaPjs2" onclick=seleccionar(2)>
+        <p class="nombrePj" id="nombrePj2"> nombre </p>
+        <p class="ataquePJ" id="ataquePj2"> ataque </p>
+        <p class="defensaPJ" id="defensaPj2">defensa</p>
+        
+        <p class="vidaPj" id="vidaPj2"> vida </p>
+        <p class="manaPj" id="manaPj2"> mana </p>
+    </div>
+    <div class="listaPjs3" id="listaPjs3" onclick=seleccionar(3)>
+
+        <p class="nombrePj" id="nombrePj3"> nombre </p>
+    <p class="ataquePJ" id="ataquePj3"> ataque </p>
+    <p class="defensaPJ" id="defensaPj3">defensa</p>
+    
+    <p class="vidaPj" id="vidaPj3"> vida </p>
+    <p class="manaPj" id="manaPj3"> mana </p>
+
+    </div>
+    <div class="listaPjs4" id="listaPjs4" onclick=seleccionar(4)>
+
+        <p class="nombrePj" id="nombrePj4"> nombre </p>
+    <p class="ataquePJ" id="ataquePj4"> ataque </p>
+    <p class="defensaPJ" id="defensaPj4">defensa</p>
+    
+    <p class="vidaPj" id="vidaPj4"> vida </p>
+    <p class="manaPj" id="manaPj4"> mana </p>
+
+    </div>
+    
+</div> 
+
 
 </div>
 <div class="controles" id="controles" hidden="true">
     
     <input class="botonInventario" type="button" value="Inventario" onclick="mostrar('inventario')">
     
-    <input class="botonPjs" type="button" value="Personajes" onclick="mostrar('listaPersonajes')">
+    <input class="botonPjs" type="button" value="Personajes" onclick="listaPersonajes(),mostrar('listaPersonajes')">
   
     <div class="personaje" id="personaje">
         <p class="nombrePj" id="nombrePj"> nombre </p>
-        <p class="ataquePJ" id="ataquePj"> ataque </p>
-        <p class="defensaPJ" id="defensaPj">defensa</p>
         
-        <p class="vidaPj" id="vidaPj"> vida </p>
-        <p class="manaPj" id="manaPj"> mana </p>
-             
     </div>
 
 <div class="enemigo" id="enemigo">
     <p class="nivelE" id="nivelE">nivel</p>
-    <p class="nombreE" id="nombreE"> nombre </p>
-        <p class="vidaE" id="vidaE"> vida </p>
-        <p class="ataqueE" id="ataqueE"> ataque </p>
+ 
+    <div class="barradeVida" id="vidaE">   
+    <p class="vidaE" id="vidaE"> vida </p>
+    
+    </div> 
+    <p class="ataqueE" id="ataqueE"> ataque </p>
         <p class="defensaE" id="defensaE">defensa</p>
-        <p class="manaE" id="manaE"> mana </p>
+        <p class="nombreE" id="nombreE"> nombre </p>
       
 
 </div>
 </div>
-    <div class="mapa1" id="mapa1" hidden="true">
+    <div class="mapa1" id="mapa1" hidden="true">Entrenamiento   
         <input class="botonI"type="button" value="→" onclick="mostrar('mapa2'),esconder('mapa1'),enemigoAc()">
     </div>
     <div class="mapa2" id="mapa2" hidden =true>2
@@ -69,7 +120,7 @@
         <input class="botonAb"type="button" value="↓"onclick="mostrar('mapa7'),esconder('mapa3'),enemigoAc()">
 
     </div>
-    <div class="mapa4" id="mapa4" hidden=true>4
+    <div class="mapa4" id="mapa4" hidden=true>Fuente Magica
         <input class="botonAb"type="button" value="↓"onclick="mostrar('mapa8'),esconder('mapa4'),enemigoAc()">
     </div>
     <div class="mapa5" id="mapa5" hidden=true>5
