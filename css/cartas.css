@@ -32,6 +32,34 @@
     z-index: 10;
 
 }
+.personaje{
+    position:absolute;
+    top:60%;
+    left:10%;
+    width:40%;
+    height:20%;
+    background-color: rgba(208, 193, 193, 0.726);
+    z-index: 10;
+}
+.enemigo{
+    position:absolute;
+    top:10%;
+    left:50%;
+    width:40%;
+    height:20%;
+    background-color: rgba(96, 3, 3, 0.726);
+    z-index: 10;
+}
+
+.datosPj{
+    text-align: center;
+    position:absolute;
+    bottom:8%;
+    left:10%;
+    width: 80%;
+    z-index: 12;
+    background-color: azure;
+}
 
 .mapa1{
     position:absolute;
@@ -202,14 +230,14 @@
 .botonAr{
     position:absolute;
     top:-5% ;
-    right:50%;
+    right:45%;
     width:10%;
     height:10%;
 }
 .botonAb{
     position:absolute;
     bottom:-5% ;
-    right:50%;
+    right:45%;
     width:10%;
     height:10%;
 }
