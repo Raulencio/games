@@ -28,7 +28,7 @@
     left:10%;
     width:80%;
     height:80%;
-    background-color: rgba(0, 0, 0, 0.726);
+    background-color: rgba(235, 224, 224, 0.726);
     z-index: 10;
 
 }
@@ -38,7 +38,7 @@
     left:10%;
     width:40%;
     height:20%;
-    background-color: rgba(208, 193, 193, 0.726);
+    background-color: rgba(144, 245, 150, 0.726);
     z-index: 10;
 }
 .enemigo{
@@ -61,6 +61,51 @@
     background-color: azure;
 }
 
+.personajeElegido{
+    position:absolute;
+    top:10%;
+    right:10%;
+    width:30%;
+    height:40%;
+    z-index: 10;
+    background-color: rgb(255, 255, 255);
+}
+.listaPjs1{
+    position:absolute;
+    top:15%;
+    left:10%;
+    width:20%;
+    height:30%;
+    z-index: 10;
+    background-color: rgb(171, 5, 5);
+}
+.listaPjs2{
+    position:absolute;
+    top:55%;
+    left:10%;
+    width:20%;
+    height:30%;
+    z-index: 10;
+    background-color: rgb(53, 90, 223);
+}
+.listaPjs3{
+    position:absolute;
+    top:55%;
+    left:40%;
+    width:20%;
+    height:30%;
+    z-index: 10;
+    background-color: rgb(202, 200, 55);
+}
+.listaPjs4{
+    position:absolute;
+    top:55%;
+    left:70%;
+    width:20%;
+    height:30%;
+    z-index: 10;
+    background-color: rgb(22, 198, 19);
+}
 .mapa1{
     position:absolute;
     top:5% ;
@@ -209,8 +254,8 @@
 .botoninicio{
     position:absolute;
     top:80% ;
-    right:45%;
-    width:10%;
+    right:40%;
+width:20%;
     height:10%;
 }
 .botonD{
