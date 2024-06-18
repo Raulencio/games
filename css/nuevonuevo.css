@@ -475,6 +475,84 @@ text-align: center;
     text-align: center;
 }
 
+.tiendaVisible{
+    width: 100%;
+    /* Ancho del contenedor */
+    height: 90%;
+    /* Alto del contenedor */
+    overflow-y: auto;
+    /* Barra de desplazamiento vertical */
+    z-index: 2;
+    position: absolute;
+}
+
+.pjTienda1{
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 30%;
+    height: 50%;
+    background-color: rgba(179, 58, 24, 0.52);
+    transition: 1s;
+
+    text-align: center;
+}
+.pjTienda2{
+    position: absolute;
+    top: 80%;
+    left:10%;
+    width: 30%;
+    height: 50%;
+    background-color: rgba(179, 58, 24, 0.52);
+    transition: 1s;
+
+    text-align: center;
+}
+.pjTienda3{
+    position: absolute;
+    top: 140%;
+    left: 10%;
+    width: 30%;
+    height: 50%;
+    background-color: rgba(179, 58, 24, 0.52);
+    transition: 1s;
+
+    text-align: center;
+}
+.pjArma1{
+    position: absolute;
+    top: 200%;
+    left: 10%;
+    width: 50%;
+    height: 15%;
+    background-color: rgba(179, 58, 24, 0.52);
+    transition: 1s;
+
+    text-align: center;
+}
+.pjArma2{
+    position: absolute;
+    top: 225%;
+    left: 10%;
+    width: 50%;
+    height: 15%;
+    background-color: rgba(179, 58, 24, 0.52);
+    transition: 1s;
+
+    text-align: center;
+}
+.pjArma3{
+    position: absolute;
+    top: 250%;
+    left: 10%;
+    width: 50%;
+    height: 15%;
+    background-color: rgba(179, 58, 24, 0.52);
+    transition: 1s;
+
+    text-align: center;
+}
+
 .inventario {
 
     z-index: 1;
