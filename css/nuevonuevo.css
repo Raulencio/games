@@ -1,550 +1,923 @@
-.contenedor{
+.contenedor {
 
-    position:absolute;
-    top:0px;
-    left:0%;
-    width:100%;
-    height:100%;
+    position: absolute;
+    top: 0px;
+    left: 0%;
+    width: 100%;
+    height: 100%;
     background-color: rgba(87, 192, 55, 0.52);
-z-index: 1;
+    z-index: 1;
 }
 
-.fondo{
+.fondo {
 
-    position:absolute;
-    top:0px;
-    left:0%;
+    position: absolute;
+    top: 0px;
+    left: 0%;
     width: 100%;
-    height:100%;
+    height: 100%;
     background-color: rgba(87, 192, 55, 0.52);
- 
+
     z-index: 1;
 
 }
-.botoninicio{
+
+.botoninicio {
     position: absolute;
     z-index: 2;
-    top:90%;
-    left:0%;
-    width:25%;
-    height:10%;
+    top: 90%;
+    left: 0%;
+    width: 25%;
+    height: 10%;
 }
-.botontienda{
+
+.botontienda {
     position: absolute;
     z-index: 2;
-    top:90%;
-    left:25%;
-    width:25%;
-    height:10%;
+    top: 90%;
+    left: 25%;
+    width: 25%;
+    height: 10%;
 }
-.botoninventario{
+
+.botoninventario {
     position: absolute;
     z-index: 2;
-    top:90%;
-    left:50%;
-    width:25%;
-    height:10%;
+    top: 90%;
+    left: 50%;
+    width: 25%;
+    height: 10%;
 }
-.botonalgo{
+
+.botonalgo {
     position: absolute;
     z-index: 2;
-    top:90%;
-    left:75%;
-    width:25%;
-    height:10%;
+    top: 90%;
+    left: 75%;
+    width: 25%;
+    height: 10%;
 }
-.botoncerrarjuego{
-    z-index: 2;
-    position:absolute;
-    top:5%;
-    right:5%;
-    width:10%;
-    height:5%;
+
+.botoncerrarjuego {
+    z-index: 3;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    width: 10%;
+    height: 5%;
     background-color: rgba(100, 3, 3, 0.728);
     transition: 2s;
 
 }
-.juego{
+
+.juego {
     z-index: 1;
-    position:absolute;
-    top:0px;
-    left:0px;
-    width:100%;
-    height:100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
     background-color: rgba(255, 255, 255, 0.619);
     transition: 2s;
 
 }
-.inicio{
+
+.batalla {
+
+    z-index: 5;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+
+}
+
+.contieneImagen {
+
+    z-index: 5;
+    position: absolute;
+    top: 10%;
+    left: 25%;
+    width: 50%;
+    height: 50%
+}
+
+.contenedorEnemigo {
+
+    z-index: 5;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    background-color: rgba(219, 7, 7, 0.461);
+
+}
+
+.barraVidaE {
+
+    z-index: 5;
+    position: absolute;
+    top: -5%;
+    left: 0%;
+    width: 100%;
+    height: 5%;
+    background-color: rgb(164, 4, 4);
+
+
+}
+
+.barraVidaP {
+    z-index: 5;
+    position: absolute;
+    top: -5%;
+    left: 0%;
+    width: 100%;
+    height: 5%;
+    background-color: rgb(79, 93, 217);
+
+}
+
+.contenedorPersonaje {
+
+    z-index: 5;
+    position: absolute;
+    top: 15%;
+    left: 0%;
+    width: 50%;
+    height: 50%;
+    background-color: rgba(7, 60, 219, 0.639);
+
+}
+
+.habilidad1 {
+    z-index: 5;
+    position: absolute;
+    top: 75%;
+    left: 0%;
+    width: 25%;
+    height: 25%;
+    background-color: rgba(100, 208, 154, 0.639);
+
+}
+
+.habilidad2 {
+    z-index: 5;
+    position: absolute;
+    top: 75%;
+    left: 25%;
+    width: 25%;
+    height: 25%;
+    background-color: rgba(170, 208, 100, 0.639);
+
+}
+
+.habilidad3 {
+    z-index: 5;
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    width: 25%;
+    height: 25%;
+    background-color: rgba(26, 172, 177, 0.938);
+
+}
+
+.habilidad4 {
+    z-index: 5;
+    position: absolute;
+    top: 75%;
+    left: 75%;
+    width: 25%;
+    height: 25%;
+    background-color: rgba(157, 100, 120, 0.639);
+
+}
+
+.inicio {
 
     z-index: 1;
-    position:absolute;
-    top:0px;
-    left:0px;
-    width:100%;
-    height:100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
     background-color: rgba(24, 37, 179, 0.52);
     transition: 2s;
 
 }
-.fondopeque{
-    position:absolute;
-    top:25%;
-    left:10%;
-    width:80%;
-    height:40%;
+
+.fondopeque {
+    position: absolute;
+    top: 25%;
+    left: 10%;
+    width: 80%;
+    height: 40%;
     background-color: rgba(87, 192, 55, 0.313);
- text-align: center;
+    text-align: center;
 
 }
-.contenedorPj{
-    position:absolute;
-    top:0%;
-    left:0%;
-    width:30%;
-    height:100%;
+
+.contenedorPj {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 30%;
+    height: 100%;
     background-color: rgba(87, 192, 55, 0.313);
- text-align: center;
-}.contenedorArma{
-    position:absolute;
-    top:70%;
-    left:30%;
-    width:70%;
-    height:30%;
-    background-color: rgba(87, 192, 55, 0.313);
- text-align: center;
+    text-align: center;
 }
-.contenedornombre{
-    position:absolute;
-    top:5%;
-    left:5%;
-    width:90%;
-    height:10%;
+
+.contenedorArma {
+    position: absolute;
+    top: 70%;
+    left: 30%;
+    width: 70%;
+    height: 30%;
     background-color: rgba(87, 192, 55, 0.313);
- text-align: center;
+    text-align: center;
 }
-.botonjugar{
-    position:absolute;
-    top:75%;
-    left:30%;
-    width:40%;
-    height:10%;
+
+.contenedornombre {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 10%;
+    background-color: rgba(87, 192, 55, 0.313);
+    text-align: center;
+}
+
+.botonjugar {
+    position: absolute;
+    top: 75%;
+    left: 30%;
+    width: 40%;
+    height: 10%;
     background-color: rgba(208, 219, 204, 0.637);
- text-align: center;
+    text-align: center;
 
 }
-.tienda{
-    
+
+.mapa1 {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+
+}
+
+.mapa2 {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa3 {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa4 {
+    position: absolute;
+    top: 20%;
+    left: 70%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa8 {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa7 {
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa6 {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa5 {
+    position: absolute;
+    top: 40%;
+    left: 70%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa9 {
+    position: absolute;
+    top: 60%;
+    left: 10%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa10 {
+    position: absolute;
+    top: 60%;
+    left: 30%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa11 {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa12 {
+    position: absolute;
+    top: 60%;
+    left: 70%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa16 {
+    position: absolute;
+    top: 80%;
+    left: 10%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa15 {
+    position: absolute;
+    top: 80%;
+    left: 30%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa14 {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.mapa13 {
+    position: absolute;
+    top: 80%;
+    left: 70%;
+    width: 10%;
+    height: 10%;
+    background-color: rgb(112, 108, 108);
+    text-align: center;
+
+}
+
+.tienda {
+
     z-index: 1;
-    position:absolute;
-    top:0px;
-    left:0%;
-    width:100%;
-    height:100%;
+    position: absolute;
+    top: 0px;
+    left: 0%;
+    width: 100%;
+    height: 100%;
     background-color: rgba(179, 58, 24, 0.52);
     transition: 1s;
-    
- text-align: center;
- }
- .inventario{
+
+    text-align: center;
+}
+
+.inventario {
 
     z-index: 1;
-    position:absolute;
-    top:0px;
-    left:0%;
-    width:100%;
-    height:100%;
+    position: absolute;
+    top: 0px;
+    left: 0%;
+    width: 100%;
+    height: 100%;
     background-color: rgba(24, 179, 24, 0.52);
     transition: 1s;
-    
- text-align: center;
+
+    text-align: center;
 
 }
 
-.botonarmas{position:absolute;
-width:50%;left: 0%;top: 80%;height: 10%;z-index: 3;
-} 
-.botonpersonajes{position:absolute;
-width:50%;left: 50%;top:80%;height: 10%;z-index: 3;
+.botonarmas {
+    position: absolute;
+    width: 50%;
+    left: 0%;
+    top: 80%;
+    height: 10%;
+    z-index: 3;
 }
-.personajeElegido{position:absolute;
-    z-index: 1;
-    top:0%;
-    left:10%;
-    width:40%;
-    height:50%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center; overflow: hidden;
+
+.botonpersonajes {
+    position: absolute;
+    width: 50%;
+    left: 50%;
+    top: 80%;
+    height: 10%;
+    z-index: 3;
 }
-.personaje1{
- 
-    position:absolute;
+
+.personajeElegido {
+    position: absolute;
     z-index: 1;
-    top:60%;
-    left:10%;
-    width:20%;
-    height:20%;
+    top: 0%;
+    left: 10%;
+    width: 40%;
+    height: 50%;
     background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
     text-align: center;
     overflow: hidden;
 }
 
-.personaje2{position:absolute;
-    z-index: 1;
-    top:90%;
-    left:10%;
-    width:20%;
-    height:20%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
- overflow: hidden;
+.personaje1 {
 
-}.personaje3{position:absolute;
-    z-index: 1;
-    top: 120%;
-    left:10%;
-    width:20%;
-    height:20%;
-    background-color: rgba(255, 254, 254, 0.52);
-    transition: 1s;
- text-align: center;
- overflow: hidden;
-
-
-}
-.personaje4{position:absolute;
-    z-index: 1;
-    top: 150%;
-    left:10%;
-    width:20%;
-    height:20%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
- overflow: hidden;
-}
-
-
-
-.texto1personaje1{
-    position:absolute;
+    position: absolute;
     z-index: 1;
     top: 60%;
-    left:30%;
-    width:60%;
-    height:5%;
+    left: 10%;
+    width: 20%;
+    height: 20%;
     background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
- 
-}
-.texto2personaje1{
-    position:absolute;
-    z-index: 1;
-    top:65%;
-    left:30%;
-    width:60%;
-    height:5%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
- 
-}.texto3personaje1{
-    position:absolute;
-    z-index: 1;
-    top: 70%;
-    left:30%;
-    width:60%;
-    height:5%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
- 
+
+    text-align: center;
+    overflow: hidden;
 }
 
-
-
-.texto1personaje2{
-    position:absolute;
+.personaje2 {
+    position: absolute;
     z-index: 1;
     top: 90%;
-    left:30%;
-    width:60%;
-    height:5%;
+    left: 10%;
+    width: 20%;
+    height: 20%;
     background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
- 
+
+    text-align: center;
+    overflow: hidden;
+
 }
-.texto2personaje2{
-    position:absolute;
+
+.personaje3 {
+    position: absolute;
     z-index: 1;
-    top:95%;
-    left:30%;
-    width:60%;
-    height:5%;
+    top: 120%;
+    left: 10%;
+    width: 20%;
+    height: 20%;
+    background-color: rgba(255, 254, 254, 0.52);
+
+    text-align: center;
+    overflow: hidden;
+
+
+}
+
+.personaje4 {
+    position: absolute;
+    z-index: 1;
+    top: 150%;
+    left: 10%;
+    width: 20%;
+    height: 20%;
+    background-color: rgba(255, 255, 255, 0.52);
+
+    text-align: center;
+    overflow: hidden;
+}
+
+
+
+.texto1personaje1 {
+    position: absolute;
+    z-index: 1;
+    top: 60%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
     background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
- text-align: center;
- 
-}.texto3personaje2{
-    position:absolute;
+    text-align: center;
+
+}
+
+.texto2personaje1 {
+    position: absolute;
+    z-index: 1;
+    top: 65%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.texto3personaje1 {
+    position: absolute;
+    z-index: 1;
+    top: 70%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+
+
+.texto1personaje2 {
+    position: absolute;
+    z-index: 1;
+    top: 90%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.texto2personaje2 {
+    position: absolute;
+    z-index: 1;
+    top: 95%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.texto3personaje2 {
+    position: absolute;
     z-index: 1;
     top: 100%;
-    left:30%;
-    width:60%;
-    height:5%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
     background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
- text-align: center;
- 
+    text-align: center;
+
 }
 
-.texto1personaje3{
-    position:absolute;
+.texto1personaje3 {
+    position: absolute;
     z-index: 1;
     top: 120%;
-    left:30%;
-    width:60%;
-    height:5%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
     background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
- text-align: center;
- 
+    text-align: center;
+
 }
-.texto2personaje3{
-    position:absolute;
+
+.texto2personaje3 {
+    position: absolute;
     z-index: 1;
-    top:125%;
-    left:30%;
-    width:60%;
-    height:5%;
+    top: 125%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
     background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
- text-align: center;
- 
-}.texto3personaje3{
-    position:absolute;
+    text-align: center;
+
+}
+
+.texto3personaje3 {
+    position: absolute;
     z-index: 1;
     top: 130%;
-    left:30%;
-    width:60%;
-    height:5%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
     background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
- text-align: center;
- 
+    text-align: center;
+
 }
 
-.texto1personaje4{
-    position:absolute;
+.texto1personaje4 {
+    position: absolute;
     z-index: 1;
     top: 150%;
-    left:30%;
-    width:60%;
-    height:5%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
     background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
- text-align: center;
- 
+    text-align: center;
+
 }
-.texto2personaje4{
-    position:absolute;
+
+.texto2personaje4 {
+    position: absolute;
     z-index: 1;
-    top:155%;
-    left:30%;
-    width:60%;
-    height:5%;
+    top: 155%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
     background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
- text-align: center;
- 
-}.texto3personaje4{
-    position:absolute;
+    text-align: center;
+
+}
+
+.texto3personaje4 {
+    position: absolute;
     z-index: 1;
     top: 160%;
-    left:30%;
-    width:60%;
-    height:5%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
     background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
- text-align: center;
- 
-}
-.armaequipada{position:absolute;
-    z-index: 1;
-    top:10%;
-    left:10%;
-    width:80%;
-    height:30%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
+    text-align: center;
 
 }
 
-.texto1arma1{position:absolute;
+.armaequipada {
+    position: absolute;
     z-index: 1;
-    top:-10%;
-    left:100%;
-    width:40%;
-    height:30%;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 30%;
     background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
- text-align: center;
-
-}
-.texto2arma1{position:absolute;
-    z-index: 1;
-    top:20%;
-    left:100%;
-    width:40%;
-    height:30%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
-
-}
-.texto3arma1{position:absolute;
-    z-index: 1;
-    top:50%;
-    left:100%;
-    width:40%;
-    height:30%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
+    text-align: center;
 
 }
 
-.arma1{position:absolute;
+.texto1arma1 {
+    position: absolute;
     z-index: 1;
-    top:60%;
-    left:10%;
-    width:60%;
-    height:20%;
+    top: -10%;
+    left: 100%;
+    width: 40%;
+    height: 30%;
     background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
- text-align: center;
+    text-align: center;
 
 }
-.arma2{position:absolute;
+
+.texto2arma1 {
+    position: absolute;
     z-index: 1;
-    top:90%;
-    left:10%;
-    width:60%;
-    height:20%;
+    top: 20%;
+    left: 100%;
+    width: 40%;
+    height: 30%;
     background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
- text-align: center;
+    text-align: center;
 
-}.arma3{position:absolute;
+}
+
+.texto3arma1 {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 100%;
+    width: 40%;
+    height: 30%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.arma1 {
+    position: absolute;
+    z-index: 1;
+    top: 60%;
+    left: 10%;
+    width: 60%;
+    height: 20%;
+    background-color: rgba(255, 255, 255, 0.52);
+
+    text-align: center;
+
+}
+
+.arma2 {
+    position: absolute;
+    z-index: 1;
+    top: 90%;
+    left: 10%;
+    width: 60%;
+    height: 20%;
+    background-color: rgba(255, 255, 255, 0.52);
+
+    text-align: center;
+
+}
+
+.arma3 {
+    position: absolute;
     z-index: 1;
     top: 120%;
-    left:10%;
-    width:60%;
-    height:20%;
+    left: 10%;
+    width: 60%;
+    height: 20%;
     background-color: rgba(255, 254, 254, 0.52);
-    transition: 1s;
- text-align: center;
 
+    text-align: center;
 
-}.arma4{position:absolute;
-    z-index: 1;
-    top: 150%;
-    left:10%;
-    width:60%;
-    height:20%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
-
-}.arma5{position:absolute;
-    z-index: 1;
-    top: 180%;
-    left:10%;
-    width:60%;
-    height:20%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
-
-}.arma6{position:absolute;
-    z-index: 1;
-    top: 210%;
-    left:10%;
-    width:60%;
-    height:20%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
-
-}.arma7{position:absolute;
-    z-index: 1;
-    top: 240%;
-    left:10%;
-    width:60%;
-    height:20%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
-
-}.arma8{position:absolute;
-    z-index: 1;
-    top: 270%;
-    left:10%;
-    width:60%;
-    height:20%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
-
-}.arma9{position:absolute;
-    z-index: 1;
-    top: 300%;
-    left:10%;
-    width:60%;
-    height:20%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
-
-}.arma10{position:absolute;
-    z-index: 1;
-    top: 330%;
-    left:10%;
-    width:60%;
-    height:20%;
-    background-color: rgba(255, 255, 255, 0.52);
-    transition: 1s;
- text-align: center;
 
 }
-.arreglar{
+
+.arma4 {
+    position: absolute;
+    z-index: 1;
+    top: 150%;
+    left: 10%;
+    width: 60%;
+    height: 20%;
+    background-color: rgba(255, 255, 255, 0.52);
+
+    text-align: center;
+
+}
+
+.arma5 {
     position: absolute;
     z-index: 1;
     top: 180%;
-    left:10%;
-    width:60%;
-    height:20%;
-    background-color: rgba(181, 11, 11, 0);
+    left: 10%;
+    width: 60%;
+    height: 20%;
+    background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
- text-align: center;
+    text-align: center;
+
 }
 
-.algo{
+.arma6 {
+    position: absolute;
     z-index: 1;
-    position:absolute;
-    top:0px;
-    left:0%;
-    width:100%;
-    height:100%;
+    top: 210%;
+    left: 10%;
+    width: 60%;
+    height: 20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.arma7 {
+    position: absolute;
+    z-index: 1;
+    top: 240%;
+    left: 10%;
+    width: 60%;
+    height: 20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.arma8 {
+    position: absolute;
+    z-index: 1;
+    top: 270%;
+    left: 10%;
+    width: 60%;
+    height: 20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.arma9 {
+    position: absolute;
+    z-index: 1;
+    top: 300%;
+    left: 10%;
+    width: 60%;
+    height: 20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.arma10 {
+    position: absolute;
+    z-index: 1;
+    top: 330%;
+    left: 10%;
+    width: 60%;
+    height: 20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.arreglar {
+    position: absolute;
+    z-index: 1;
+    top: 180%;
+    left: 10%;
+    width: 60%;
+    height: 20%;
+    background-color: rgba(181, 11, 11, 0);
+    transition: 1s;
+    text-align: center;
+}
+
+.algo {
+    z-index: 1;
+    position: absolute;
+    top: 0px;
+    left: 0%;
+    width: 100%;
+    height: 100%;
     background-color: rgba(217, 236, 9, 0.795);
     transition: 1s;
-    
- text-align: center;
+
+    text-align: center;
 
 }
