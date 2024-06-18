@@ -1,0 +1,293 @@
+.contenedor{
+
+    position:absolute;
+    top:0px;
+    left:0%;
+    width:100%;
+    height:100%;
+    background-color: rgba(87, 192, 55, 0.52);
+z-index: 1;
+}
+
+.fondo{
+
+    position:absolute;
+    top:0px;
+    left:0%;
+    width: 100%;
+    height:100%;
+    background-color: rgba(87, 192, 55, 0.52);
+ 
+    z-index: 1;
+
+}
+.botoninicio{
+    position: absolute;
+    z-index: 2;
+    top:90%;
+    left:0%;
+    width:25%;
+    height:10%;
+}
+.botontienda{
+    position: absolute;
+    z-index: 2;
+    top:90%;
+    left:25%;
+    width:25%;
+    height:10%;
+}
+.botoninventario{
+    position: absolute;
+    z-index: 2;
+    top:90%;
+    left:50%;
+    width:25%;
+    height:10%;
+}
+.botonalgo{
+    position: absolute;
+    z-index: 2;
+    top:90%;
+    left:75%;
+    width:25%;
+    height:10%;
+}
+.botoncerrarjuego{
+    z-index: 2;
+    position:absolute;
+    top:5%;
+    right:5%;
+    width:10%;
+    height:5%;
+    background-color: rgba(100, 3, 3, 0.728);
+    transition: 2s;
+
+}
+.juego{
+    z-index: 1;
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    background-color: rgba(255, 255, 255, 0.619);
+    transition: 2s;
+
+}
+.inicio{
+
+    z-index: 1;
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    background-color: rgba(24, 37, 179, 0.52);
+    transition: 2s;
+
+}
+.fondopeque{
+    position:absolute;
+    top:25%;
+    left:10%;
+    width:80%;
+    height:40%;
+    background-color: rgba(87, 192, 55, 0.313);
+ text-align: center;
+
+}
+.contenedornombre{
+    position:absolute;
+    top:5%;
+    left:5%;
+    width:90%;
+    height:10%;
+    background-color: rgba(87, 192, 55, 0.313);
+ text-align: center;
+}
+.botonjugar{
+    position:absolute;
+    top:75%;
+    left:30%;
+    width:40%;
+    height:10%;
+    background-color: rgba(208, 219, 204, 0.637);
+ text-align: center;
+
+}
+.tienda{
+    
+    z-index: 1;
+    position:absolute;
+    top:0px;
+    left:0%;
+    width:100%;
+    height:100%;
+    background-color: rgba(179, 58, 24, 0.52);
+    transition: 1s;
+    
+ text-align: center;
+ }
+ .inventario{
+
+    z-index: 1;
+    position:absolute;
+    top:0px;
+    left:0%;
+    width:100%;
+    height:100%;
+    background-color: rgba(24, 179, 24, 0.52);
+    transition: 1s;
+    
+ text-align: center;
+
+}
+
+.botonarmas{position:absolute;
+width:50%;left: 0%;top: 80%;height: 10%;z-index: 3;
+} 
+.botonpersonajes{position:absolute;
+width:50%;left: 50%;top:80%;height: 10%;z-index: 3;
+}
+
+.armaequipada{position:absolute;
+    z-index: 1;
+    top:10%;
+    left:10%;
+    width:80%;
+    height:30%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+
+}
+
+.arma1{position:absolute;
+    z-index: 1;
+    top:60%;
+    left:10%;
+    width:60%;
+    height:20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+
+}
+.arma2{position:absolute;
+    z-index: 1;
+    top:90%;
+    left:10%;
+    width:60%;
+    height:20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+
+}.arma3{position:absolute;
+    z-index: 1;
+    top: 120%;
+    left:10%;
+    width:60%;
+    height:20%;
+    background-color: rgba(255, 254, 254, 0.52);
+    transition: 1s;
+ text-align: center;
+
+
+}.arma4{position:absolute;
+    z-index: 1;
+    top: 150%;
+    left:10%;
+    width:60%;
+    height:20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+
+}.arma5{position:absolute;
+    z-index: 1;
+    top: 180%;
+    left:10%;
+    width:60%;
+    height:20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+
+}.arma6{position:absolute;
+    z-index: 1;
+    top: 210%;
+    left:10%;
+    width:60%;
+    height:20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+
+}.arma7{position:absolute;
+    z-index: 1;
+    top: 240%;
+    left:10%;
+    width:60%;
+    height:20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+
+}.arma8{position:absolute;
+    z-index: 1;
+    top: 270%;
+    left:10%;
+    width:60%;
+    height:20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+
+}.arma9{position:absolute;
+    z-index: 1;
+    top: 300%;
+    left:10%;
+    width:60%;
+    height:20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+
+}.arma10{position:absolute;
+    z-index: 1;
+    top: 330%;
+    left:10%;
+    width:60%;
+    height:20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+
+}
+.arreglar{
+    position: absolute;
+    z-index: 1;
+    top: 180%;
+    left:10%;
+    width:60%;
+    height:20%;
+    background-color: rgba(181, 11, 11, 0);
+    transition: 1s;
+ text-align: center;
+}
+
+.algo{
+    z-index: 1;
+    position:absolute;
+    top:0px;
+    left:0%;
+    width:100%;
+    height:100%;
+    background-color: rgba(217, 236, 9, 0.795);
+    transition: 1s;
+    
+ text-align: center;
+
+}
