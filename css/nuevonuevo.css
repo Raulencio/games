@@ -97,6 +97,23 @@ z-index: 1;
  text-align: center;
 
 }
+.contenedorPj{
+    position:absolute;
+    top:0%;
+    left:0%;
+    width:30%;
+    height:100%;
+    background-color: rgba(87, 192, 55, 0.313);
+ text-align: center;
+}.contenedorArma{
+    position:absolute;
+    top:70%;
+    left:30%;
+    width:70%;
+    height:30%;
+    background-color: rgba(87, 192, 55, 0.313);
+ text-align: center;
+}
 .contenedornombre{
     position:absolute;
     top:5%;
@@ -210,11 +227,192 @@ width:50%;left: 50%;top:80%;height: 10%;z-index: 3;
  overflow: hidden;
 }
 
+
+
+.texto1personaje1{
+    position:absolute;
+    z-index: 1;
+    top: 60%;
+    left:30%;
+    width:60%;
+    height:5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ 
+}
+.texto2personaje1{
+    position:absolute;
+    z-index: 1;
+    top:65%;
+    left:30%;
+    width:60%;
+    height:5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ 
+}.texto3personaje1{
+    position:absolute;
+    z-index: 1;
+    top: 70%;
+    left:30%;
+    width:60%;
+    height:5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ 
+}
+
+
+
+.texto1personaje2{
+    position:absolute;
+    z-index: 1;
+    top: 90%;
+    left:30%;
+    width:60%;
+    height:5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ 
+}
+.texto2personaje2{
+    position:absolute;
+    z-index: 1;
+    top:95%;
+    left:30%;
+    width:60%;
+    height:5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ 
+}.texto3personaje2{
+    position:absolute;
+    z-index: 1;
+    top: 100%;
+    left:30%;
+    width:60%;
+    height:5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ 
+}
+
+.texto1personaje3{
+    position:absolute;
+    z-index: 1;
+    top: 120%;
+    left:30%;
+    width:60%;
+    height:5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ 
+}
+.texto2personaje3{
+    position:absolute;
+    z-index: 1;
+    top:125%;
+    left:30%;
+    width:60%;
+    height:5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ 
+}.texto3personaje3{
+    position:absolute;
+    z-index: 1;
+    top: 130%;
+    left:30%;
+    width:60%;
+    height:5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ 
+}
+
+.texto1personaje4{
+    position:absolute;
+    z-index: 1;
+    top: 150%;
+    left:30%;
+    width:60%;
+    height:5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ 
+}
+.texto2personaje4{
+    position:absolute;
+    z-index: 1;
+    top:155%;
+    left:30%;
+    width:60%;
+    height:5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ 
+}.texto3personaje4{
+    position:absolute;
+    z-index: 1;
+    top: 160%;
+    left:30%;
+    width:60%;
+    height:5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ 
+}
 .armaequipada{position:absolute;
     z-index: 1;
     top:10%;
     left:10%;
     width:80%;
+    height:30%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+
+}
+
+.texto1arma1{position:absolute;
+    z-index: 1;
+    top:-10%;
+    left:100%;
+    width:40%;
+    height:30%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+
+}
+.texto2arma1{position:absolute;
+    z-index: 1;
+    top:20%;
+    left:100%;
+    width:40%;
+    height:30%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+
+}
+.texto3arma1{position:absolute;
+    z-index: 1;
+    top:50%;
+    left:100%;
+    width:40%;
     height:30%;
     background-color: rgba(255, 255, 255, 0.52);
     transition: 1s;
