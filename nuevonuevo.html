@@ -1,164 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>titulo</title>
 
     <link rel="stylesheet" href="css/nuevonuevo.css">
-    
-  
+
+
 </head>
+
 <body>
     <div class="contenedor">
-<div class="fondo">
+        <div class="fondo">
 
-    <input class="botoninicio" id="botoninicio" type="button" value="Inicio" onclick="botones(1)">   
-    <input class="botontienda" id="botontienda" type="button" value="Tienda" onclick="botones(2)">
-    <input class="botoninventario" id="botoninventario" type="button" value="Inventario" onclick="botones(3)">
-    <input class="botonalgo" id="botonalgo" type="button" value="Algo" onclick="botones(4)">
-       
-    <div class="juego" id="juego" hidden="true">
-<h1>juego</h1>
+            <input class="botoninicio" id="botoninicio" type="button" value="Inicio" onclick="botones(1)">
+            <input class="botontienda" id="botontienda" type="button" value="Tienda" onclick="botones(2)">
+            <input class="botoninventario" id="botoninventario" type="button" value="Inventario" onclick="botones(3)">
+            <input class="botonalgo" id="botonalgo" type="button" value="Algo" onclick="botones(4)">
 
-<input class="botoncerrarjuego" id="botoncerrarjuego" type="button" value="cerrar" onclick="botones(6)">
-    
-
-    </div>
-
-    <div class="inicio" id="inicio" hidden="true">
-        <div class="contenedornombre" id="contenedornombre">
-
-            <h1 class="pnombre" id="pnombre">
-                nombre
-            </h1>
-
-        </div>
-
-        <div class="fondopeque" id="fondopeque">
-            <p class="nombrePjelegido" id="nombrePjelegido">
-                estadisticas 
-   
-            </p>
-            <p class="nombreArmaelegido" id="nombreArmaelegido">
-
-            </p>
-            <p class="ataquePj" id="ataquePj">
-
-            </p>
-            <p class="defensaPj" id="defensaPj">
-
-            </p>
-            <p class="probCritPj" id="probCritPj">
-
-            </p>
-
-<div class="contenedorPj" id="contenedorPj">
-
-</div>
-<div class="contenedorArma" id="contenedorArma">
-
-</div>
-
-        </div>
-
-        <input class="botonjugar" id="botonjugar" type="button" value="Jugar" onclick="botones(5)">   
-    
-    </div>
-    <div class="tienda" id="tienda" hidden="true">
-    <h1>Tienda</h1>
-    </div>
-    <div class="inventario" id="inventario" hidden="true">
-    
-       <h1>Invetario</h1>
-
-       <style>
-           /* Estilos para el contenedor con barra de desplazamiento */
-           #scrollContainer {
-               width: 100%;        /* Ancho del contenedor */
-               height: 90%;       /* Alto del contenedor */
-               overflow-y: auto;    /* Barra de desplazamiento vertical */
-               z-index: 2;
-               position: absolute;
-           }
-       </style>
-
-<input class="botonarmas" id="botonarmas" type="button" value="Armas" onclick="botones(7)">   
-
-<input class="botonpersonajes" id="botonpersonajes" type="button" value="Personajes" onclick="botones(8)"> 
-
-<div id="scrollContainer">
-    <!-- Contenido del contenedor -->
-
-<div class="personajes" id="personajes">
-
-<div class="personajeElegido" id="personajeElegido">
-
-</div>
-
-<div class="personaje1" id="personaje1" onclick="elegir(1)"></div>
-<p class="texto1personaje1" id="texto1personaje1"> Ataque</p>
-<p class="texto2personaje1" id="texto2personaje1"> Defensa</p>
-<p class="texto3personaje1" id="texto3personaje1"> Prob Crit</p>
+            <div class="juego" id="juego" hidden="true">
+                <h1>Mapa</h1>
+                <div class="batalla" id="batalla" hidden="true">
+                    <input class="botoncerrarjuego" id="botoncerrarjuego" type="button" value="atras"
+                        onclick="botones(9)">
 
 
-<div class="personaje2" id="personaje2" onclick="elegir(2)"></div>
-<p class="texto1personaje2" id="texto1personaje2"> Ataque</p>
-<p class="texto2personaje2" id="texto2personaje2"> Defensa</p>
-<p class="texto3personaje2" id="texto3personaje2"> Prob Crit</p>
-<div class="personaje3" id="personaje3" onclick="elegir(3)"></div>
-<p class="texto1personaje3" id="texto1personaje3"> Ataque</p>
-<p class="texto2personaje3" id="texto2personaje3"> Defensa</p>
-<p class="texto3personaje3" id="texto3personaje3"> Prob Crit</p>
-<div class="personaje4" id="personaje4" onclick="elegir(4)"></div>
-<p class="texto1personaje4" id="texto1personaje4"> Ataque</p>
-<p class="texto2personaje4" id="texto2personaje4"> Defensa</p>
-<p class="texto3personaje4" id="texto3personaje4"> Prob Crit</p>
+                    <div class="habilidad1" id="habilidad1">ataque 1
 
-<div class="arreglar">
-</div>
+                    </div>
+                    <div class="habilidad2" id="habilidad2"> ataque 2
 
-</div>
+                    </div>
+                    <div class="habilidad3" id="habilidad3"> ataque 3
 
-    <div class="armas" id="armas" hidden="true">
+                    </div>
+                    <div class="habilidad4" id="habilidad4"> ataque 4
 
-    
-    <div class="armaequipada" id="armaequipada">
+                    </div>
 
-    </div>
-   
+                    <div class="contenedorPersonaje" id="contenedorPersonaje">
 
-    
-    <div class="arma1" id="arma1" onclick="equipar(1)"> 
-<p></p>
-        <p class="texto1arma1" id="texto1arma1"> Ataque</p>
-        <p class="texto2arma1" id="texto2arma1"> Defensa</p>
-        <p class="texto3arma1" id="texto3arma1"> Prob Crit</p>
+                        <div class="contieneImagen" id="contieneImagenP">
 
-    </div>
-    <div class="arma2" id="arma2" onclick="equipar(2)"> 
+                        </div>
 
-        <p class="texto1arma1" id="texto1arma2"> Ataque</p>
-        <p class="texto2arma1" id="texto2arma2"> Defensa</p>
-        <p class="texto3arma1" id="texto3arma2"> Prob Crit</p>
+                        <div class="barraVidaP" id="barraVidaP"></div>
 
-    </div>
 
-    <div class="arma3" id="arma3" onclick="equipar(3)"> 
 
-        <p class="texto1arma1" id="texto1arma3"> Ataque</p>
-        <p class="texto2arma1" id="texto2arma3"> Defensa</p>
-        <p class="texto3arma1" id="texto3arma3"> Prob Crit</p>
+                        <p id="pnombreP">
+                            nombre
+                        </p>
 
-    </div>
-    <div class="arma4" id="arma4" onclick="equipar(4)"> 
+                        <p id="pvidaP">
+                            vida
+                        </p>
+                        <p id="pataqueP">
+                            ataque
+                        </p>
+                        <p id="pdefensaP">
+                            defensa
+                        </p>
+                    </div>
+                    <div class="contenedorEnemigo" id="contenedorEnemigo">
 
-        <p class="texto1arma1" id="texto1arma4"> Ataque</p>
-        <p class="texto2arma1" id="texto2arma4"> Defensa</p>
-        <p class="texto3arma1" id="texto3arma4"> Prob Crit</p>
 
-    </div>
-    <!-- y 
+                        <div class="contieneImagen" id="contieneImagenE">
+
+                        </div>
+                        <div class="barraVidaE" id="barraVidaE"></div>
+
+                        <p id="pnombreE">
+                            nombre
+                        </p>
+
+                        <p id="pvidaE">
+                            vida
+                        </p>
+                        <p id="pataqueE">
+                            ataque
+                        </p>
+                        <p id="pdefensaE">
+                            defensa
+                        </p>
+
+                    </div>
+                </div>
+                <div class="mapa1" id="mapa1" onclick="enemigo(1)">1
+
+                </div>
+                <div class="mapa2" id="mapa2" onclick="enemigo(2)">2
+
+                </div>
+                <div class="mapa3" id="mapa3" onclick="enemigo(3)">3
+
+                </div>
+                <div class="mapa4" id="mapa4" onclick="enemigo(4)">4
+
+                </div>
+                <div class="mapa5" id="mapa5" onclick="enemigo(5)">5
+
+                </div>
+                <div class="mapa6" id="mapa6" onclick="enemigo(6)">6
+
+                </div>
+                <div class="mapa7" id="mapa7" onclick="enemigo(7)">7
+
+                </div>
+                <div class="mapa8" id="mapa8" onclick="enemigo(8)">8
+
+                </div>
+                <div class="mapa9" id="mapa9" onclick="enemigo(9)">9
+
+                </div>
+                <div class="mapa10" id="mapa10" onclick="enemigo(10)">10
+
+                </div>
+                <div class="mapa11" id="mapa11" onclick="enemigo(11)">11
+
+                </div>
+                <div class="mapa12" id="mapa12" onclick="enemigo(12)">12
+
+                </div>
+
+                <div class="mapa13" id="mapa13" onclick="enemigo(13)">13
+
+                </div>
+                <div class="mapa14" id="mapa14" onclick="enemigo(14)">14
+
+                </div>
+                <div class="mapa15" id="mapa15" onclick="enemigo(15)">15
+
+                </div>
+                <div class="mapa16" id="mapa16" onclick="enemigo(16)">16
+
+                </div>
+
+
+
+
+                <input class="botoncerrarjuego" id="botoncerrarjuego" type="button" value="cerrar" onclick="botones(6)">
+
+            </div>
+
+            <div class="inicio" id="inicio" hidden="true">
+                <div class="contenedornombre" id="contenedornombre">
+
+                    <h1 class="pnombre" id="pnombre">
+                        nombre
+                    </h1>
+
+                </div>
+
+                <div class="fondopeque" id="fondopeque">
+                    <p class="nombrePjelegido" id="nombrePjelegido">
+                        estadisticas
+
+                    </p>
+                    <p class="nombreArmaelegido" id="nombreArmaelegido">
+
+                    </p>
+                    <p class="ataquePj" id="ataquePj">
+
+                    </p>
+                    <p class="defensaPj" id="defensaPj">
+
+                    </p>
+                    <p class="probCritPj" id="probCritPj">
+
+                    </p>
+
+                    <div class="contenedorPj" id="contenedorPj">
+
+                    </div>
+                    <div class="contenedorArma" id="contenedorArma">
+
+                    </div>
+
+                </div>
+
+                <input class="botonjugar" id="botonjugar" type="button" value="Jugar" onclick="botones(5)">
+
+            </div>
+            <div class="tienda" id="tienda" hidden="true">
+                <h1>Tienda</h1>
+            </div>
+            <div class="inventario" id="inventario" hidden="true">
+
+                <h1>Invetario</h1>
+
+                <style>
+                    /* Estilos para el contenedor con barra de desplazamiento */
+                    #scrollContainer {
+                        width: 100%;
+                        /* Ancho del contenedor */
+                        height: 90%;
+                        /* Alto del contenedor */
+                        overflow-y: auto;
+                        /* Barra de desplazamiento vertical */
+                        z-index: 2;
+                        position: absolute;
+                    }
+                </style>
+
+                <input class="botonarmas" id="botonarmas" type="button" value="Armas" onclick="botones(7)">
+
+                <input class="botonpersonajes" id="botonpersonajes" type="button" value="Personajes"
+                    onclick="botones(8)">
+
+                <div id="scrollContainer">
+                    <!-- Contenido del contenedor -->
+
+                    <div class="personajes" id="personajes">
+
+                        <div class="personajeElegido" id="personajeElegido">
+
+                        </div>
+
+                        <div class="personaje1" id="personaje1" onclick="elegir(1)"></div>
+                        <p class="texto1personaje1" id="texto1personaje1"> Ataque</p>
+                        <p class="texto2personaje1" id="texto2personaje1"> Defensa</p>
+                        <p class="texto3personaje1" id="texto3personaje1"> Prob Crit</p>
+
+
+                        <div class="personaje2" id="personaje2" onclick="elegir(2)"></div>
+                        <p class="texto1personaje2" id="texto1personaje2"> Ataque</p>
+                        <p class="texto2personaje2" id="texto2personaje2"> Defensa</p>
+                        <p class="texto3personaje2" id="texto3personaje2"> Prob Crit</p>
+                        <div class="personaje3" id="personaje3" onclick="elegir(3)"></div>
+                        <p class="texto1personaje3" id="texto1personaje3"> Ataque</p>
+                        <p class="texto2personaje3" id="texto2personaje3"> Defensa</p>
+                        <p class="texto3personaje3" id="texto3personaje3"> Prob Crit</p>
+                        <div class="personaje4" id="personaje4" onclick="elegir(4)"></div>
+                        <p class="texto1personaje4" id="texto1personaje4"> Ataque</p>
+                        <p class="texto2personaje4" id="texto2personaje4"> Defensa</p>
+                        <p class="texto3personaje4" id="texto3personaje4"> Prob Crit</p>
+
+                        <div class="arreglar">
+                        </div>
+
+                    </div>
+
+                    <div class="armas" id="armas" hidden="true">
+
+                        <div class="armaequipada" id="armaequipada">
+
+                        </div>
+
+
+                        <div class="arma1" id="arma1" onclick="equipar(1)">
+                            <p></p>
+                            <p class="texto1arma1" id="texto1arma1"> Ataque</p>
+                            <p class="texto2arma1" id="texto2arma1"> Defensa</p>
+                            <p class="texto3arma1" id="texto3arma1"> Prob Crit</p>
+
+                        </div>
+                        <div class="arma2" id="arma2" onclick="equipar(2)">
+
+                            <p class="texto1arma1" id="texto1arma2"> Ataque</p>
+                            <p class="texto2arma1" id="texto2arma2"> Defensa</p>
+                            <p class="texto3arma1" id="texto3arma2"> Prob Crit</p>
+
+                        </div>
+
+                        <div class="arma3" id="arma3" onclick="equipar(3)">
+
+                            <p class="texto1arma1" id="texto1arma3"> Ataque</p>
+                            <p class="texto2arma1" id="texto2arma3"> Defensa</p>
+                            <p class="texto3arma1" id="texto3arma3"> Prob Crit</p>
+
+                        </div>
+                        <div class="arma4" id="arma4" onclick="equipar(4)">
+
+                            <p class="texto1arma1" id="texto1arma4"> Ataque</p>
+                            <p class="texto2arma1" id="texto2arma4"> Defensa</p>
+                            <p class="texto3arma1" id="texto3arma4"> Prob Crit</p>
+
+                        </div>
+                        <!-- y 
     <div class="arma5" id="arma5" onclick="equipar(5)"> 
 
     </div>
@@ -179,29 +300,30 @@
 
     </div>
     -->
-<div class="arreglar">
-</div>
-</div>
-</div>
+                        <div class="arreglar">
+                        </div>
+                    </div>
+                </div>
 
 
+            </div>
+            <div class="algo" id="algo" hidden="true">
+                <h1>Algo</h1>
+
+            </div>
+
+        </div>
     </div>
-    <div class="algo" id="algo" hidden="true">
-    <h1>Algo</h1>
-
-    </div>
-
-    </div>
-</div>
 
 
 
-<script src="js/jquery-3.5.1.js"></script>
+    <script src="js/jquery-3.5.1.js"></script>
 
-<script src="js/skrips.js"></script>
+    <script src="js/skrips.js"></script>
 
-<script src="js/nuevonuevo.js"></script>
+    <script src="js/nuevonuevo.js"></script>
 
 
 </body>
+
 </html>
