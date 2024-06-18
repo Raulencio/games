@@ -23,20 +23,25 @@
             <div class="juego" id="juego" hidden="true">
                 <h1>Mapa</h1>
                 <div class="batalla" id="batalla" hidden="true">
+
+                    <div class="barra-contenedor">
+                        <div id="barra-energia" class="barra"></div>
+                    </div>
+
                     <input class="botoncerrarjuego" id="botoncerrarjuego" type="button" value="atras"
                         onclick="botones(9)">
 
 
-                    <div class="habilidad1" id="habilidad1">ataque 1
+                    <div class="habilidad1" id="habilidad1" onclick="consumirEnergia(25)">ataque  25
 
                     </div>
-                    <div class="habilidad2" id="habilidad2"> ataque 2
+                    <div class="habilidad2" id="habilidad2"onclick="consumirEnergia(50)"> ataque  50
 
                     </div>
-                    <div class="habilidad3" id="habilidad3"> ataque 3
+                    <div class="habilidad3" id="habilidad3"onclick="consumirEnergia(75)"> ataque  75
 
                     </div>
-                    <div class="habilidad4" id="habilidad4"> ataque 4
+                    <div class="habilidad4" id="habilidad4"onclick="consumirEnergia(100)"> ataque  100
 
                     </div>
 
