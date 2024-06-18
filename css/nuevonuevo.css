@@ -150,6 +150,65 @@ width:50%;left: 0%;top: 80%;height: 10%;z-index: 3;
 .botonpersonajes{position:absolute;
 width:50%;left: 50%;top:80%;height: 10%;z-index: 3;
 }
+.personajeElegido{position:absolute;
+    z-index: 1;
+    top:0%;
+    left:10%;
+    width:40%;
+    height:50%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center; overflow: hidden;
+}
+.personaje1{
+ 
+    position:absolute;
+    z-index: 1;
+    top:60%;
+    left:10%;
+    width:20%;
+    height:20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+    overflow: hidden;
+}
+
+.personaje2{position:absolute;
+    z-index: 1;
+    top:90%;
+    left:10%;
+    width:20%;
+    height:20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ overflow: hidden;
+
+}.personaje3{position:absolute;
+    z-index: 1;
+    top: 120%;
+    left:10%;
+    width:20%;
+    height:20%;
+    background-color: rgba(255, 254, 254, 0.52);
+    transition: 1s;
+ text-align: center;
+ overflow: hidden;
+
+
+}
+.personaje4{position:absolute;
+    z-index: 1;
+    top: 150%;
+    left:10%;
+    width:20%;
+    height:20%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+ text-align: center;
+ overflow: hidden;
+}
 
 .armaequipada{position:absolute;
     z-index: 1;
