@@ -310,7 +310,9 @@ function enemigo(n) {
         barraDeVida(estats.vidamax, estats.vidamax, "barraVidaE");
         mostrar("batalla"); personajeBatalla();
     }
-    eimagen()
+    eimagen();
+    consumirEnergia(width);
+    iniciarRelleno();
 }
 
 function personajeBatalla() {
@@ -354,3 +356,53 @@ function eimagen() {
     $("#contieneImagenE").empty().append("<img width='100%' src='" + enemigos[enemigoac - 1].url + "'>");
 
 }
+
+
+var width = 0;
+var maxWidth = 100;
+var intervalo;
+
+function iniciarRelleno() {
+    clearInterval(intervalo);
+    intervalo = setInterval(function() {
+        if (width >= maxWidth) {
+            clearInterval(intervalo);
+        } else {
+            width++;
+            actualizarBarra();
+        }
+    }, 100); // Ajusta el tiempo (100 ms) para cambiar la velocidad de relleno
+}
+
+function consumirEnergia(n) {
+    clearInterval(intervalo);
+    var consumo = n; // Cantidad de energía a consumir
+    if(width>=consumo){
+    width = Math.max(0, width - consumo);
+    document.getElementById('barra-energia').style.backgroundColor=colorRan();
+    }
+    actualizarBarra();
+    iniciarRelleno(); // Reinicia el relleno después de consumir
+}
+
+function actualizarBarra() {
+    var barra = document.getElementById('barra-energia');
+    barra.style.width = width + '%';
+
+    if(width==25){
+
+        barra.style.backgroundColor=colorRan();}
+
+    if(width==50){
+
+        barra.style.backgroundColor=colorRan();
+    }else if(width==75){
+
+        barra.style.backgroundColor=colorRan();
+    }else if(width==100){
+
+        barra.style.backgroundColor=colorRan();
+    }
+        barra.innerText = width + '/ 100';
+}
+
