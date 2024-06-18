@@ -1,7 +1,7 @@
 var nombre="";
 
 var narmaequipada=1;
-var pequipado=2;
+var pequipado=1;
 var nPjs=5;
 var nArmas=5;
 var cual=[
@@ -16,14 +16,15 @@ var cual=[
     ]
 
     var infoPjs=[
+        {nombre:"Yohiro",vidamax:3000
+            ,ataque:1200,defensa:700,probCrit:30
+            ,dmgCrit:170,recuperacion:50
+            ,url:"https://lh3.googleusercontent.com/2NIx7PqqMuUIF80LIXCuENNvXrR9T5h_fseWxTki35S4MHFbL2bESwBdKcCl6qkEJHw4Q-gibyGhBAbbu99ytUwb8ky_-RON4qV1FREet_Ca_8dzS10utCtQ3_AwSVWZ7B0E0o7xlNhOAwvC7yqc6YU4hXPQh79_djSLo23ELyXW6BUrviYI5_boayEiy9GbvLX8nbh9BwECpSGiKoPYUQTg2-YkNIBxujcICf0RlxIkrJqhgOt3VQp7sOuwVfktD4VxnZ-rLIVzJo9X-HOB4z3jHxU5n1AM5r5_0LYLSQEA1ftGRjdtDM3hTpXtP4q1ZgznC_4Ko9b6gbnm_owggiFCELwT6c1IEFoHVWE5Q2RgC45THP0dJWWqYBsI24j9uK4SUxtmY_Bf3asl654zI1CElMcEydxdOPwz3gjFOTnISXZvn6xcG3r9RiAwg2cuJAV2iC3LxoQ2aE0d4TeJpaodAqNnvspYFyYgwjV5lNbJKqyNR1BI2xtldrgdexa1dXBJzZCtMZcLydgnsreqRFqVxXRa_GPY-zx5KdEMHB5rlfIpbNdzejnjGoUxk9KFJpNiaRwu8x7tCBi_AG7aFuQjOezxlOtKhscbSiXdFu_c1u0wAgQtY77e9WVPrH6sYrnMX6FI2rbbOGEH8vydEwWGjYNBwRj_KyxEyypmmPIktrnI9beMLEef6ACBPqU=w50-h100-no?authuser=0"}
+            ,
         {nombre:"Rain",vidamax:1700
         ,ataque:1800,defensa:1000,probCrit:40
         ,dmgCrit:120,recuperacion:200
         ,url:"https://lh3.googleusercontent.com/rByffD1Yc82VjltG_o49spYycjq4v95PWUlhJ_558DSxd259v3kqLVOZOg95jqNUXx-SLC_Ig2WyhPn26JbaX6-4bVaDk9sc0BzMrsV__JQmU9MbvMUKGO_BuMsQ7TyDvj05QqljrOsLakph3FePUVXaBqDNC61zK0Me4dzs9J-tnuc6IFmtBAt5wqGEWURvdQne52SNVYiDRbWBA_zjOhI7YCBA9AfUVirlDR8MJa7txrkz0GLtlvsqbNL0iH8A9A1Q8tVp4J7LPIKIacotz-3_Vru4aaUZiVW2cGyGiiyPaTBLslzdCrvydYPRk060yWcpFFK3Lwg7kGZLxo6mwz9Vf6w7m2shggl8VDZb6ehMAeR-u_r1U3mnCgtvNL8U5FtYiOJkEp-Vj7Pa9trK90otMsE5iV4ZvOu-G-TjADDoAHHAruyQIfDn7Kh0_QkkdQ3dysPl0cfngFeNVV8oUdTpNJqvDw_mUHC06AqhGrXcXltcZLDzFXUDQy3ZcJiPci5eI2h4Fxg49xCWQUMCyFdxMBPZTHW9DyCcQvRSRszUu-SJKkbw1n5P3ajlKkbNRTJpUnOLOarh1iyPy3qppbwtg6Je5aNMspBLKEdG6fLMgzcbRY0ugrLgEqVcHuUO1KF-Qb7AK-2PRzZHfWroifgsFZpl-Jb9S6AThxwdx4x09iWt8ZH0iZFIERWCH44=w50-h100-no?authuser=0"}
-        ,{nombre:"Yohiro",vidamax:3000
-        ,ataque:1200,defensa:700,probCrit:30
-        ,dmgCrit:170,recuperacion:50
-        ,url:"https://lh3.googleusercontent.com/2NIx7PqqMuUIF80LIXCuENNvXrR9T5h_fseWxTki35S4MHFbL2bESwBdKcCl6qkEJHw4Q-gibyGhBAbbu99ytUwb8ky_-RON4qV1FREet_Ca_8dzS10utCtQ3_AwSVWZ7B0E0o7xlNhOAwvC7yqc6YU4hXPQh79_djSLo23ELyXW6BUrviYI5_boayEiy9GbvLX8nbh9BwECpSGiKoPYUQTg2-YkNIBxujcICf0RlxIkrJqhgOt3VQp7sOuwVfktD4VxnZ-rLIVzJo9X-HOB4z3jHxU5n1AM5r5_0LYLSQEA1ftGRjdtDM3hTpXtP4q1ZgznC_4Ko9b6gbnm_owggiFCELwT6c1IEFoHVWE5Q2RgC45THP0dJWWqYBsI24j9uK4SUxtmY_Bf3asl654zI1CElMcEydxdOPwz3gjFOTnISXZvn6xcG3r9RiAwg2cuJAV2iC3LxoQ2aE0d4TeJpaodAqNnvspYFyYgwjV5lNbJKqyNR1BI2xtldrgdexa1dXBJzZCtMZcLydgnsreqRFqVxXRa_GPY-zx5KdEMHB5rlfIpbNdzejnjGoUxk9KFJpNiaRwu8x7tCBi_AG7aFuQjOezxlOtKhscbSiXdFu_c1u0wAgQtY77e9WVPrH6sYrnMX6FI2rbbOGEH8vydEwWGjYNBwRj_KyxEyypmmPIktrnI9beMLEef6ACBPqU=w50-h100-no?authuser=0"}
         ,{nombre:"Ninja",vidamax:2500
         ,ataque:1500,defensa:500,probCrit:20
         ,dmgCrit:200,recuperacion:300
@@ -59,9 +60,25 @@ for(var e=1;e<nArmas;e++){
 }
 for(var e=1;e<nPjs;e++){
     
-    $("#personaje"+e).append("<p>'"+infoPjs[e-1].nombre+"'</p>");
+
     $("#personaje"+e).append("<img width='100%' src='"+infoPjs[e-1].url+"'>");
 }
+for(var e=1;e<nArmas;e++){
+
+    document.getElementById("texto1arma"+e).textContent=("Ataque: "+cual[e-1].ataque+"");
+    document.getElementById("texto2arma"+e).textContent=("Defensa: "+cual[e-1].defensa+"");
+    document.getElementById("texto3arma"+e).textContent=("Prob Crti: "+cual[e-1].probCrit+"");
+  
+}
+for(var e=1;e<nPjs;e++){
+    document.getElementById("texto1personaje"+e).textContent=("Ataque: "+infoPjs[e-1].ataque+"");
+    document.getElementById("texto2personaje"+e).textContent=("Defensa: "+infoPjs[e-1].defensa+"");
+    document.getElementById("texto3personaje"+e).textContent=("Prob Crit:  "+infoPjs[e-1].probCrit+"");
+    
+
+    
+}
+
 
 
 elegir(pequipado);
@@ -111,14 +128,33 @@ function equipar(n){
 
     $("#armaequipada").empty().append("<img width='100%' src='"+cual[narmaequipada-1].url+"'>");
     
-    $("#armaequipada").append('<p> arma equipada : '+cual[narmaequipada-1].nombre+"</p>");
+    $("#armaequipada").append('<p>'+cual[narmaequipada-1].nombre+" Ataque: "+cual[narmaequipada-1].ataque+" Defensa: "+cual[narmaequipada-1].defensa+" Prob Crti: "+cual[narmaequipada-1].probCrit+"</p>");
     
-        
+    
+    $("#contenedorArma").empty().append("<img width='100%' src='"+cual[narmaequipada-1].url+"'>");
+
+
+  estadisticas();
+     
 }
 function elegir(n){
     pequipado=n;
     localStorage.setItem("pequipado",pequipado);
     $("#personajeElegido").empty().append("<img width='100%' src='"+infoPjs[pequipado-1].url+"'>");
+    $("#contenedorPj").empty().append("<img width='100%' src='"+infoPjs[pequipado-1].url+"'>");
+   
+estadisticas();
+}
+function estadisticas(){
+  
+    nombreArmaelegido.textContent = ''+cual[narmaequipada-1].nombre;
 
+    nombrePjelegido.textContent = ''+infoPjs[pequipado-1].nombre;
+
+    defensaPj.textContent="Defensa: "+(parseInt(infoPjs[pequipado-1].defensa)+parseInt(cual[narmaequipada-1].defensa));
+    
+    ataquePj.textContent="Ataque: "+(parseInt(infoPjs[pequipado-1].ataque)+parseInt(cual[narmaequipada-1].ataque));
+
+    probCritPj.textContent="Prob Crit: "+(parseInt(infoPjs[pequipado-1].probCrit)+parseInt(cual[narmaequipada-1].probCrit));
 }
 
