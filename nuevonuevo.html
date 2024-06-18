@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>titulo</title>
+
+    <link rel="stylesheet" href="css/nuevonuevo.css">
+    
+  
+</head>
+<body>
+    <div class="contenedor">
+<div class="fondo">
+
+    <input class="botoninicio" id="botoninicio" type="button" value="Inicio" onclick="botones(1)">   
+    <input class="botontienda" id="botontienda" type="button" value="Tienda" onclick="botones(2)">
+    <input class="botoninventario" id="botoninventario" type="button" value="Inventario" onclick="botones(3)">
+    <input class="botonalgo" id="botonalgo" type="button" value="Algo" onclick="botones(4)">
+       
+    <div class="juego" id="juego" hidden="true">
+<h1>juego</h1>
+
+<input class="botoncerrarjuego" id="botoncerrarjuego" type="button" value="cerrar" onclick="botones(6)">
+    
+
+    </div>
+
+    <div class="inicio" id="inicio" hidden="true">
+        <div class="contenedornombre" id="contenedornombre">
+
+            <h1 class="pnombre" id="pnombre">
+                nombre
+            </h1>
+
+        </div>
+
+        <div class="fondopeque" id="fondopeque">
+
+        </div>
+
+        <input class="botonjugar" id="botonjugar" type="button" value="Jugar" onclick="botones(5)">   
+    
+    </div>
+    <div class="tienda" id="tienda" hidden="true">
+    <h1>Tienda</h1>
+    </div>
+    <div class="inventario" id="inventario" hidden="true">
+    
+       <h1>Invetario</h1>
+
+       <style>
+           /* Estilos para el contenedor con barra de desplazamiento */
+           #scrollContainer {
+               width: 100%;        /* Ancho del contenedor */
+               height: 90%;       /* Alto del contenedor */
+               overflow-y: auto;    /* Barra de desplazamiento vertical */
+               z-index: 2;
+               position: absolute;
+           }
+       </style>
+
+<input class="botonarmas" id="botonarmas" type="button" value="Armas" onclick="botones(7)">   
+
+<input class="botonpersonajes" id="botonpersonajes" type="button" value="Personajes" onclick="botones(8)"> 
+
+<div id="scrollContainer">
+    <!-- Contenido del contenedor -->
+
+<div class="personajes" id="personajes">
+
+</div>
+
+    <div class="armas" id="armas" hidden="true">
+
+    
+    <div class="armaequipada" id="armaequipada">
+
+    </div>
+   
+    <div class="arma1" id="arma1" onclick="equipar(1)"> 
+
+    </div>
+    <div class="arma2" id="arma2" onclick="equipar(2)"> 
+
+    </div>
+
+    <div class="arma3" id="arma3" onclick="equipar(3)"> 
+
+    </div>
+    <div class="arma4" id="arma4" onclick="equipar(4)"> 
+
+    </div>
+    <!-- y 
+    <div class="arma5" id="arma5" onclick="equipar(5)"> 
+
+    </div>
+    
+    <div class="arma6" id="arma6" onclick="equipar(6)">
+
+    </div>
+    <div class="arma7" id="arma7" onclick="equipar(7)">
+
+    </div>
+    <div class="arma8" id="arma8" onclick="equipar(8)"> 
+
+    </div>
+    <div class="arma9" id="arma9" onclick="equipar(9)"> 
+
+    </div>
+    <div class="arma10" id="arma10" onclick="equipar(10)"> 
+
+    </div>
+    -->
+<div class="arreglar">
+</div>
+</div>
+</div>
+
+
+    </div>
+    <div class="algo" id="algo" hidden="true">
+    <h1>Algo</h1>
+
+    </div>
+
+    </div>
+</div>
+
+
+
+<script src="js/jquery-3.5.1.js"></script>
+
+<script src="js/skrips.js"></script>
+
+<script src="js/nuevonuevo.js"></script>
+
+
+</body>
+</html>
