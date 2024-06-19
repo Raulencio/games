@@ -7,6 +7,7 @@ var nenemigo = 5;
 var nPjs = 5;
 var nArmas = 5;
 var dinero = 0;
+var preciocosas = 100;
 var personajeElegido = {
     nombre: "", vidamax: 0, vidaActual: 0, ataque: 0, defensa: 0, probCrit: 0, dmgCrit: 0, recuperacion: 0, vida: 0, alcance: 0, url: ""
 }
@@ -68,35 +69,35 @@ var infoPjs = [
 var enemigos = [
 
     {
-        nombre: "Practica", vidamax: 10000,vida:10000
+        nombre: "Practica", vidamax: 10000, vida: 10000
         , ataque: 0, defensa: 100, probCrit: 0
         , dmgCrit: 0, recuperacion: 5
         , url: "https://lh3.googleusercontent.com/d0u0cea5eiyOP9rLxeD2fC0qE7XhhqRozc5Gl18lAOs8y5nHBv0fH47bQwst6nsrGiCIHuaWaApSaRlRzaIc4eSFLoL1i32Qs3AOJe2Ai3Ic4lM0658WUWkiR3RtKY-WXkORsoCiF_yRkJsx_ZFUeNeN0_6CQKis6esawNRyKIzobezrvY1b507HSoCwatfaC8O0N-hvGH_2ZN3FBdnGOBx5sCXi_9eVClgYOVBTv77Eu6cIrxHZpUtmzOMK8vMrWy4BL07Ff86HBlLxHwxBkvHLRF4Gdc9e3FS1OOeAvHzNcCL-80SIlgophd2JcvC-WBVf5hYnOgsSZ60ZYht-zF053BNoHg6n7-T6DWUTDOBwjjk1crM_3yI3RgmAntNQQgpj_j6r0HfbSp_5t62lGC6atX-0GFzjmygqtWPRfFSBnkX9t9pNu-XhyiiVpUJibvv1PFpUddILwqkavGAsrW8e4KGFPQ96qdCl5t0_EjhA-zvv-LO_rvcJHuFIgh_CXpM7hJI7pem3IlkbsMHJ9Ytt6E7Y0gpw2b1JqHbuq81RlTig1CTV9lJ-RI22Zpry5o4wgttCpzMFsPmL7FRbJaGIROL_VjH_qKoDjy7pZ5yEthjohhoher_RruWvS4UnPtStT-UgfhXctc2ykUR0gtdwn2v17sPEH56XqNV4Y1ui75n23vZe4cxgWQpmzTQ=w50-h100-no?authuser=0"
     }
     ,
     {
-        nombre: "Fuego", vidamax: 30000,vida:30000
+        nombre: "Fuego", vidamax: 30000, vida: 30000
         , ataque: 2000, defensa: 500, probCrit: 50
         , dmgCrit: 200, recuperacion: 10
         , url: "https://lh3.googleusercontent.com/XNbptuKM4jkVz-DBvilq8pcr7pQemOLtbcAaPY_zrLREgasHW623vEJkrExCXhnEsg8jVLIgw-BaWFNOKd_lgL8G3VS4YwxHsXVP9AnPsrXvc0IGfkYpKjHQPdE7s2oSSP_MV9F4mRmqmzEmIs2vR8PMf4dtKh8NdHry97bjTvFGyf8br0r30qOfHXqLuAaZ7mTy0ktahJsDeN5TBr59gK5sNKuj4JTFs5hOZapmqYNgYl2TRpITaVUJXK7p6-sloCWnuVKNecp-_t97cY7i1Dg2Fw_7deLvlXUEDAP3KrQBfZ3B5CBaGUPD3_KN7sl1rSrTgb25fSKDft7gDmTHGaxL0u41zho0W0xluYhGJ8wUvjMdzHsyB4qNC7OYbH3yhYG9h2kVURZPUnICMarHgIYgjTNiyEre4P1O3Wy8352kM-jOTl04DuQ4Wy08supZzwtg_LIrSQi0xPF6Wn7cTJxrLwQeU3Cu7cNQjLEf_Mte9UaoR6CzxbTzNxFqrdaGRiJ9uTCNDtK0yOzDGTInf2hTaRoPQxLxknFDlAwT9e7u2vB0XbmUMME-U88zUhKnznbf0cCOATbatqmjycwo0ni_CJEHJVvgtYl1z1p14b3vKYlWfGF20aFpmaLyDB8CJACD9P_caTuZClX1yh_e9hemszhdYh6ONm9KQsCYCrDu39iOyGc5gVjs8BFyQ5E=w50-h100-no?authuser=0"
     }
     ,
     {
-        nombre: "Pantano", vidamax: 50000,vida:50000
+        nombre: "Pantano", vidamax: 50000, vida: 50000
         , ataque: 4000, defensa: 700, probCrit: 40
         , dmgCrit: 300, recuperacion: 40
         , url: "https://lh3.googleusercontent.com/PIMG-MQmi6pc8_dYScQktaqlzgjoCJi-SGmMG_Rrzug83We_vuGIzCR0a8o8EptDaQk-qqqQc6IwEtXeJLmInA3NDrTqnL3Kg0ptHjBsky9OxFH0PHfTrMCcjsOJS6YrGSCK7Eih6fChLlze7wHoDb3mzLd6MkXMzr2AjM-vmLCJzMNvgW9gOH7Sb0bLXzpL8sU9K25MmbcqBAgCP7QNL3ML9U023KHD7mdT1Yu29DNFjVVfAw89aCvICj8MucruA-0TyUZnEozRigNDXCtPKGu2B0JScUdQ1eS5tdwIBfTkOfeQ1FXvkTUcshSbcd2yv8obDpWPYOK5VJlsNKXx4E5Zv1CNDsOBUPypjIqGSvCquL_-eEe9ngSZHmGYjauQkaKwYTrnI8_uTQoumO39sw-3afsry24kfDH4VUu_l_UfoluYAvPRk__1SottoD5jmoaN8k2uoUu3RIGWIg28Q87FH_Kp9lQSDKW1oScWFBOa6Ud1MzqO78sjFQmcdApL1Fco5QxyRcTfH4GkdWNSPZIwxMV6DsH8iM2w5cub3a5x3nujXK6GE4CIyEHAKDBQws0cbymRYyEOOXPz9xmx2MTMNKTtvkTbturU75MTFz8goS2Gny7Ps4XApYozmHE8RBBtGxXK_BN50s_lmFFuy4RVueAfaKe0xB6WBksJjsRYqJSGkMrrQl9Y8ypBqpY=w50-h100-no?authuser=0"
     }
     ,
     {
-        nombre: "Agua", vidamax: 110000,vida:110000
+        nombre: "Agua", vidamax: 110000, vida: 110000
         , ataque: 7000, defensa: 400, probCrit: 10
         , dmgCrit: 700, recuperacion: 100
         , url: "https://lh3.googleusercontent.com/t45mlh1VIq3qWTKBkIIXtiLjklsh4Ovigw_VLAsCtNAavX-KHNsjVb3VTu3kJhSypvYpidzdB8-piDS7U1EJQHRMaw0IZsvqzmvcLMbX-ZqeYb0oD_lrrpuH9ygDwX7NU4WkqT59i8NAzNHN3-06KjJ0d_Ilk6GBPAFrU3TtFHwgHpFCKslLyIbBruU2is7e5-Goi4q19EQDMkc8J1KvhRmDWEBn1w8fqWq2Es4ihUjZdMfkKlEG_0reuDOI9POQm2iRYewVghhple8bM-H8fsPfMMPWRIuxzjftQ-uz9kPazuWao86HQW-XMCiQuMcZYJ3rQQ6nzF169SjgpGlkJVMzkhKR4FUg90DGa7RKhMYWzhL_itkjIBuGJkI3Tfv9gXaZ5Fv25J10-GMlFGx4cYcNUW3S_laqFHxEkT8IYmR7aDJnLxI7rKkMzjXRwouikfjMxk0aoFYKzUSfBiHY4CVQXNQg1Y_yafRT4o4ApFaJsXxElK9vjmB5hKZmMNsfRDoG2-dNE-N1LR-0TAYWT4YHsDjwwxJ8xZv3OZR8NfR7Yz5oWNp9f5gLzrbCcNvFMeDOAafOPyiqPZvVfNbdTLdT7j1dZp8eH9oViCAYXUBwLq1ezLxCr2l6i7bVTxL500CzGQLHP8DYS8qbUOQnhBLut3OpSV7wCqachGkvHKCjBigLlXq1PTxPOOXmQ7k=w50-h100-no?authuser=0"
     }
     ,
     {
-        nombre: "Trueno", vidamax: 200000,vida:200000
+        nombre: "Trueno", vidamax: 200000, vida: 200000
         , ataque: 12000, defensa: 1000, probCrit: 80
         , dmgCrit: 500, recuperacion: 50
         , url: "https://lh3.googleusercontent.com/gNX3yo-3ANKvhcFomG4ZqxKbmUp-Ls0Z7lOFAhEYqyKRGzbc3gWzcbJ9z1_2g1NUBtHkQ45AYSc3wRQRFlBV1y6E2AT3kqFanacYLCUkISd1QTfMl0BQ2AeGK1yixmVxRvcLGe9iuErlZG8VxUJ3IINNbpdor9UsSY_WyKof49DgpPKVx-YQdJQkG6fwnzxQDHC7qzINewlmqR8S9jbC2-X4_-iUTvHUu10Z_9cm99RHZpFr3zA9fA-kwHiO73mNTWnYD51FtHrptsJvGVar1PDPfq6iE8lWyRJpUG3pv2dYv-Qnwhayjq1wbfrFE6l-inB0dQyYfzfo-l1KAZwwcnLlZP_TI_pvA0RYyc2zF9nqbLyzX4KJC7uUdc9dsYsrGTdnUVMBZw_asVgz3WsygHeo1fvShNRVNQy9uQkWq-pGWnUmsoxGGuB_KMDi46rEcFqxlKb4rFnLVfL9I_o7K69WYwTaREwYG66NobgNm7pL9yOEh__iwpFW5yRDFdmJq06PuLrs00NStJCVlMpUxhDLk8WwZLOU4DlRdwS0SPx0Ojy1nKetTBfS8A8PyOI4WDQJNvU8UskiOknKvvrMMp-E31IBuDBEpaxiC3doeuZ0Ruqc-y5Efrwv19er-c6zQDS5DS6DWZyW6COGvRIjyRFuzok6q9qfbO0Kchh0-SiN8HnI9PgdokJCJcS3VEY=w50-h100-no?authuser=0"
@@ -123,53 +124,110 @@ var venemigo16 = false;
 var pequipados = 0;
 
 function actualizarTienda() {
+
+    for (var e = 1; e < 7; e++) {
+
+        document.getElementById("valorcosas" + e).textContent = "$" + preciocosas;
+
+    }
     document.getElementById("tiendaH").textContent = ("Tienda $" + dinero);
+    localStorage.setItem("dinero", dinero);
+
+    for (var e = 1; e < 4; e++) {
+        if (infoPjs[e].comprado) {
+            document.getElementById("botonCompra" + e).hidden = true;
+        }
+    } for (var e = 1; e < 4; e++) {
+        if (cual[e].comprado) {
+            document.getElementById("botonCompraA" + e).hidden = true;
+        }
+    }
+
 }
 
+
+function actualizarVisualizacion() {
+    // Actualizar la visualización de personajes comprados
+    for (var e = 1; e < nPjs; e++) {
+        var elementoPersonaje = document.getElementById("personaje" + (e));
+        if (infoPjs[e - 1].comprado) {
+            elementoPersonaje.style.backgroundColor = '#ffffff';
+        } else {
+            elementoPersonaje.style.backgroundColor = '#000000';
+        }
+    }
+
+    // Actualizar la visualización de armas compradas
+    for (var e = 1; e < nArmas; e++) {
+        var elementoArma = document.getElementById("arma" + (e));
+        if (cual[e - 1].comprado) {
+            elementoArma.style.backgroundColor = '#ffffff';
+        } else {
+            elementoArma.style.backgroundColor = '#000000';
+        }
+    }
+}
+
+// Función para comprar personajes o armas
 function comprar(o, n) {
+    if (o === 1) { // Comprar personaje
+        if (infoPjs[n - 1].comprado) {
 
-    if (o == 1) {
-        
-            infoPjs[n - 1].comprado = true;
-            localStorage.setItem("compradoPj" + n, true);
-            /*alert("objeto comprado "+infoPjs[n-1].nombre);*/
-    }
-    if (o == 2) {
-        cual[n - 1].comprado = true;
-        localStorage.setItem("compradoArma" + n, true);
-        /*alert("objeto comprado "+cual[n-1].nombre);*/
-    }
-
-    if (infoPjs[n - 1].comprado == true) {
-        for (var e = 1; e < nArmas; e++) {
-            document.getElementById("personaje" + e).style.backgroundColor = '#ffffff';
-
-            if (infoPjs[e - 1].comprado == true) {
-                document.getElementById("personaje" + e).style.backgroundColor = '#ffffff';
+        } else {
+            if (dinero >= preciocosas) {
+                dinero -= preciocosas;
+                infoPjs[n - 1].comprado = true;
+                localStorage.setItem("compradoP" + n, true);
+                alert("Has comprado " + infoPjs[n - 1].nombre);
             } else {
-                document.getElementById("personaje" + e).style.backgroundColor = '#000000';
-
-            }
-
-        }
-
-    } if (cual[n - 1].comprado == true) {
-
-        for (var e = 1; e < nArmas; e++) {
-            document.getElementById("arma" + e).style.backgroundColor = '#ffffff';
-            if (cual[e - 1].comprado == true) {
-                document.getElementById("arma" + e).style.backgroundColor = '#ffffff';
-            } else {
-                document.getElementById("arma" + e).style.backgroundColor = '#000000';
+                alert("No tienes suficiente dinero.");
             }
         }
+    } else if (o === 2) { // Comprar arma
+        if (cual[n - 1].comprado) {
 
+        } else {
+            if (dinero >= preciocosas) {
+                dinero -= preciocosas;
+                cual[n - 1].comprado = true;
+                localStorage.setItem("comprado" + n, true);
+                alert("Has comprado " + cual[n - 1].nombre);
+            } else {
+                alert("No tienes suficiente dinero.");
+            }
+        }
+    }
+
+    // Actualizar la visualización después de la compra
+    actualizarVisualizacion();
+    actualizarTienda();
+}
+
+
+function cosastienda() {
+    for (var e = 1; e < nArmas; e++) {
+        var comprada = localStorage.getItem("comprado" + (e));
+        if (comprada !== null) {
+            cual[e - 1].comprado = (comprada === 'true'); // Convertir string a booleano
+        } else {
+            localStorage.setItem("comprado" + (e), cual[e - 1].comprado);
+        }
+    }
+
+    for (var e = 1; e < nPjs; e++) {
+        var comprada = localStorage.getItem("compradoP" + (e));
+        if (comprada !== null) {
+            infoPjs[e - 1].comprado = (comprada === 'true'); // Convertir string a booleano
+        } else {
+            localStorage.setItem("compradoP" + (e), infoPjs[e - 1].comprado);
+        }
     }
 }
 
 
 window.onload = function () {
 
+    cosastienda();
 
     if (localStorage.getItem("nivelActual") != null) {
         nivelActual = parseInt(localStorage.getItem("nivelActual"));
@@ -201,8 +259,6 @@ window.onload = function () {
         }
     }
 
-
-
     nombre = localStorage.getItem("nombre");
     if (localStorage.getItem("nombre") == null) {
         nombre = prompt("Por favor, ingrese un nombre:")
@@ -232,15 +288,26 @@ window.onload = function () {
 
         document.getElementById("personaje" + e).style.backgroundColor = "#ffffff";
     }
-    for (var e = 1; e < nPjs - 1; e++) {
 
-        $("#pjTienda" + e).append("<img width='100%' src='" + infoPjs[e].url + "'>");
-
-    }
     for (var e = 1; e < nArmas - 1; e++) {
 
         $("#pjArma" + e).append("<img width='100%' src='" + cual[e].url + "'>");
 
+    }
+
+    for (var e = 1; e < nPjs - 1; e++) {
+
+        $("#pjTienda" + e).append("<img width='100%' src='" + infoPjs[e].url + "'>");
+        
+    }
+    for (var e = 1; e < 4; e++) {
+        if (infoPjs[e].comprado) {
+            document.getElementById("botonCompra" + e).hidden = true;
+        }
+    } for (var e = 1; e < 4; e++) {
+        if (cual[e].comprado) {
+            document.getElementById("botonCompraA" + e).hidden = true;
+        }
     }
 
 
@@ -265,7 +332,7 @@ window.onload = function () {
 
     infoMapa();
 }
-function infoMapa(){
+function infoMapa() {
 
     if (nivelActual >= 1) { venemigo1 = true; }
     if (nivelActual >= 2) { venemigo2 = true; document.getElementById("mapa2").style.backgroundColor = "#ffffff"; }
@@ -286,7 +353,6 @@ function infoMapa(){
     if (nivelActual >= 14) { venemigo14 = true; document.getElementById("mapa14").style.backgroundColor = "#ffffff"; }
     if (nivelActual >= 15) { venemigo15 = true; document.getElementById("mapa15").style.backgroundColor = "#ffffff"; }
     if (nivelActual >= 16) { venemigo16 = true; document.getElementById("mapa216").style.backgroundColor = "#ffffff"; }
-
 
 }
 function botones(n) {
@@ -327,7 +393,11 @@ function botones(n) {
     } else if (n == 6) { esconder("batalla"); mostrar('inicio'); esconder('juego'); mostrar('botoninicio'); mostrar('botoninventario'); mostrar('botontienda'); mostrar('botonalgo'); }
     else if (n == 7) { mostrar('armas'); esconder('personajes'); }
     else if (n == 8) { mostrar('personajes'); esconder('armas'); }
-    else if (n == 9) { mostrar('juego'), esconder('batalla') }
+    else if (n == 9) {
+        mostrar('juego'), esconder('batalla'); for (var e = 1; e < nenemigo; e++) {
+            enemigos[e - 1].vida = enemigos[e - 1].vidamax;
+        }
+    }
 
 }
 function equipar(n) {
@@ -431,13 +501,13 @@ function enemigo(n) {
     }
 
     if (confirmacion) {
-       cosa(n);
+        cosa(n);
     }
     eimagen();
-    consumirEnergia(width);consumirEnergiaB(widthB);
-    iniciarRelleno();iniciarRellenoB();
+    reiniciarConsumirEnergia(width); consumirEnergiaB(widthB);
+    iniciarRelleno(); iniciarRellenoB();
 }
-function cosa(n){
+function cosa(n) {
     enemigoac = n;
     var estats = enemigos[n - 1];
 
@@ -507,6 +577,7 @@ function iniciarRelleno() {
         }
     }, 100); // Ajusta el tiempo (100 ms) para cambiar la velocidad de relleno
 }
+var dineroganado = 0;
 
 function consumirEnergia(n) {
     clearInterval(intervalo);
@@ -514,18 +585,30 @@ function consumirEnergia(n) {
     if (width >= consumo) {
         width = Math.max(0, width - consumo);
         document.getElementById('barra-energia').style.backgroundColor = colorRan();
-       
+
         var estats = enemigos[enemigoac - 1];
 
+        estats.vida -= consumo / 100 * personajeElegido.ataque;
+
         document.getElementById("pnombreE").textContent = estats.nombre;
-        document.getElementById("pvidaE").textContent = estats.vidamax;
+        document.getElementById("pvidaE").textContent = estats.vida;
         document.getElementById("pataqueE").textContent = estats.ataque;
         document.getElementById("pdefensaE").textContent = estats.defensa;
-        estats.vida-=consumo*10;
+
         barraDeVida(estats.vidamax, estats.vida, "barraVidaE");
-        if(estats.vida<=0){
-            nivelActual++;
+        if (estats.vida <= 0) {
+            dineroganado = nivelActual * 100; dinero += nivelActual * 100;
+            actualizarTienda();
+            alert("Venciste a " + estats.nombre + " Dinero $" + dineroganado);
+            console.log("n " + enemigoac)
+            if (enemigoac >= nivelActual) {
+                nivelActual++;
+            }
             localStorage.setItem("nivelActual", nivelActual);
+            estats.vida = estats.vidamax;
+            infoMapa();
+            botones(9);
+            consumirEnergia(0);
         }
     }
     actualizarBarra();
@@ -570,6 +653,16 @@ function iniciarRellenoB() {
             actualizarBarraB();
         }
     }, 100); // Ajusta el tiempo (100 ms) para cambiar la velocidad de relleno
+}
+
+function reiniciarConsumirEnergia(n) {
+    clearInterval(intervalo);
+    var consumo = n; // Cantidad de energía a consumir
+    if (width >= consumo) {
+        width = Math.max(0, width - consumo);
+    }
+    actualizarBarra();
+    iniciarRelleno(); // Reinicia el relleno después de consumir
 }
 
 function consumirEnergiaB(n) {
