@@ -59,13 +59,24 @@
 }
 
 .botoncerrarjuego {
-    z-index: 3;
+    z-index: 2;
     position: absolute;
-    top: 5%;
+    bottom: 5%;
     right: 5%;
     width: 10%;
     height: 5%;
-    background-color: rgba(100, 3, 3, 0.728);
+    background-color: rgb(255, 255, 255);
+    transition: 2s;
+
+}
+.botoncerrarjuego2 {
+    z-index: 10;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    width: 10%;
+    height: 5%;
+    background-color: rgb(255, 255, 255);
     transition: 2s;
 
 }
@@ -94,7 +105,18 @@
 
 }
 
+.barra-contenedorB {
+    position: absolute;
+    width: 98%;
+    height:8%;
+    top: 1%;
+    left:1%;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    overflow: hidden;
 
+}
 
 .barra-contenedor {
     position: absolute;
@@ -485,43 +507,141 @@ text-align: center;
     z-index: 2;
     position: absolute;
 }
+.contenedorInfo1{
+
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    width: 50%;
+    height: 40%;
+    background-color: rgba(206, 166, 155, 0.52);
+    transition: 1s;
+    overflow: hidden;
+    text-align: center;
+
+}
+
+.contenedorInfo2{
+
+    position: absolute;
+    top: 70%;
+    left: 40%;
+    width: 50%;
+    height: 40%;
+    background-color: rgba(206, 166, 155, 0.52);
+    transition: 1s;
+    overflow: hidden;
+    text-align: center;
+
+}
+.contenedorInfo3{
+
+    position: absolute;
+    top: 120%;
+    left: 40%;
+    width: 50%;
+    height: 40%;
+    background-color: rgba(206, 166, 155, 0.52);
+    transition: 1s;
+    overflow: hidden;
+    text-align: center;
+
+}
+.botonComprar{
+    position: absolute;
+    bottom: 10%;
+    left: 35%;
+    width: 30%;
+    height: 10%;
+    background-color: rgb(250, 249, 249);
+    text-align: center;
+}
+.botonComprar2{
+    position: absolute;
+    bottom: 5%;
+    left: 30%;
+    width: 40%;
+    height: 30%;
+    background-color: rgb(250, 249, 249);
+    text-align: center;
+}
+
+.contenedorInfoA1{
+
+    position: absolute;
+    top: 170%;
+    left: 60%;
+    width: 30%;
+    height: 15%;
+    background-color: rgba(206, 166, 155, 0.52);
+    transition: 1s;
+    overflow: hidden;
+    text-align: center;
+
+}
+.contenedorInfoA2{
+
+    position: absolute;
+    top: 195%;
+    left: 60%;
+    width: 30%;
+    height: 15%;
+    background-color: rgba(206, 166, 155, 0.52);
+    transition: 1s;
+    overflow: hidden;
+    text-align: center;
+
+}
+.contenedorInfoA3{
+
+    position: absolute;
+    top: 220%;
+    left: 60%;
+    width: 30%;
+    height: 15%;
+    background-color: rgba(206, 166, 155, 0.52);
+    transition: 1s;
+    overflow: hidden;
+    text-align: center;
+
+}
 
 .pjTienda1{
     position: absolute;
     top: 20%;
     left: 10%;
     width: 30%;
-    height: 50%;
+    height: 40%;
     background-color: rgba(179, 58, 24, 0.52);
     transition: 1s;
-
+overflow: hidden;
     text-align: center;
 }
 .pjTienda2{
     position: absolute;
-    top: 80%;
+    top: 70%;
     left:10%;
     width: 30%;
-    height: 50%;
+    height: 40%;
     background-color: rgba(179, 58, 24, 0.52);
     transition: 1s;
-
+overflow: hidden;
     text-align: center;
 }
 .pjTienda3{
     position: absolute;
-    top: 140%;
+    top: 120%;
     left: 10%;
     width: 30%;
-    height: 50%;
+    height: 40%;
     background-color: rgba(179, 58, 24, 0.52);
     transition: 1s;
-
+overflow: hidden;
     text-align: center;
 }
 .pjArma1{
     position: absolute;
-    top: 200%;
+    top: 170%;
     left: 10%;
     width: 50%;
     height: 15%;
@@ -532,7 +652,7 @@ text-align: center;
 }
 .pjArma2{
     position: absolute;
-    top: 225%;
+    top: 195%;
     left: 10%;
     width: 50%;
     height: 15%;
@@ -543,7 +663,7 @@ text-align: center;
 }
 .pjArma3{
     position: absolute;
-    top: 250%;
+    top: 220%;
     left: 10%;
     width: 50%;
     height: 15%;
