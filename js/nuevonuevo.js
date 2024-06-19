@@ -7,7 +7,7 @@ var nenemigo = 5;
 var nPjs = 5;
 var nArmas = 5;
 var dinero = 0;
-var preciocosas = 100;
+var preciocosas = 10000;
 var personajeElegido = {
     nombre: "", vidamax: 0, vidaActual: 0, ataque: 0, defensa: 0, probCrit: 0, dmgCrit: 0, recuperacion: 0, vida: 0, alcance: 0, url: ""
 }
