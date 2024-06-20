@@ -52,30 +52,26 @@ var infoPjs = [
         nombre: "Yohiro", vidamax: 3000
         , ataque: 1200, defensa: 7000, probCrit: 30
         , dmgCrit: 170, recuperacion: 50, chabilidad1: 10, chabilidad2: 30, chabilidad3: 70, chabilidad4: 100
-        , url: "https://lh3.googleusercontent.com/2NIx7PqqMuUIF80LIXCuENNvXrR9T5h_fseWxTki35S4MHFbL2bESwBdKcCl6qkEJHw4Q-gibyGhBAbbu99ytUwb8ky_-RON4qV1FREet_Ca_8dzS10utCtQ3_AwSVWZ7B0E0o7xlNhOAwvC7yqc6YU4hXPQh79_djSLo23ELyXW6BUrviYI5_boayEiy9GbvLX8nbh9BwECpSGiKoPYUQTg2-YkNIBxujcICf0RlxIkrJqhgOt3VQp7sOuwVfktD4VxnZ-rLIVzJo9X-HOB4z3jHxU5n1AM5r5_0LYLSQEA1ftGRjdtDM3hTpXtP4q1ZgznC_4Ko9b6gbnm_owggiFCELwT6c1IEFoHVWE5Q2RgC45THP0dJWWqYBsI24j9uK4SUxtmY_Bf3asl654zI1CElMcEydxdOPwz3gjFOTnISXZvn6xcG3r9RiAwg2cuJAV2iC3LxoQ2aE0d4TeJpaodAqNnvspYFyYgwjV5lNbJKqyNR1BI2xtldrgdexa1dXBJzZCtMZcLydgnsreqRFqVxXRa_GPY-zx5KdEMHB5rlfIpbNdzejnjGoUxk9KFJpNiaRwu8x7tCBi_AG7aFuQjOezxlOtKhscbSiXdFu_c1u0wAgQtY77e9WVPrH6sYrnMX6FI2rbbOGEH8vydEwWGjYNBwRj_KyxEyypmmPIktrnI9beMLEef6ACBPqU=w50-h100-no?authuser=0"
-    }
+        , url: "yohirostand.png"}
     ,
     {
         comprado: false, armaduraF: 1000, congelar: 25, roboVida: 10,
         nombre: "Rain", vidamax: 17000
         , ataque: 1800, defensa: 1000, probCrit: 40
         , dmgCrit: 120, recuperacion: 20, chabilidad1: 20, chabilidad2: 40, chabilidad3: 60, chabilidad4: 80
-        , url: "https://lh3.googleusercontent.com/rByffD1Yc82VjltG_o49spYycjq4v95PWUlhJ_558DSxd259v3kqLVOZOg95jqNUXx-SLC_Ig2WyhPn26JbaX6-4bVaDk9sc0BzMrsV__JQmU9MbvMUKGO_BuMsQ7TyDvj05QqljrOsLakph3FePUVXaBqDNC61zK0Me4dzs9J-tnuc6IFmtBAt5wqGEWURvdQne52SNVYiDRbWBA_zjOhI7YCBA9AfUVirlDR8MJa7txrkz0GLtlvsqbNL0iH8A9A1Q8tVp4J7LPIKIacotz-3_Vru4aaUZiVW2cGyGiiyPaTBLslzdCrvydYPRk060yWcpFFK3Lwg7kGZLxo6mwz9Vf6w7m2shggl8VDZb6ehMAeR-u_r1U3mnCgtvNL8U5FtYiOJkEp-Vj7Pa9trK90otMsE5iV4ZvOu-G-TjADDoAHHAruyQIfDn7Kh0_QkkdQ3dysPl0cfngFeNVV8oUdTpNJqvDw_mUHC06AqhGrXcXltcZLDzFXUDQy3ZcJiPci5eI2h4Fxg49xCWQUMCyFdxMBPZTHW9DyCcQvRSRszUu-SJKkbw1n5P3ajlKkbNRTJpUnOLOarh1iyPy3qppbwtg6Je5aNMspBLKEdG6fLMgzcbRY0ugrLgEqVcHuUO1KF-Qb7AK-2PRzZHfWroifgsFZpl-Jb9S6AThxwdx4x09iWt8ZH0iZFIERWCH44=w50-h100-no?authuser=0"
-    }
+        , url: "rain.png"}
     , {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 40,
         nombre: "Ninja", vidamax: 25000
         , ataque: 1500, defensa: 500, probCrit: 20
         , dmgCrit: 200, recuperacion: 30, chabilidad1: 5, chabilidad2: 20, chabilidad3: 60, chabilidad4: 90
-        , url: "https://lh3.googleusercontent.com/mNrOQ3HaYykgJsLSzyAvJ1vQZtLmcdyVr1z1ZW4iP_a9l5bso6jojZZXNOlzj-_1uuvUqJysUJmsI9v7NPFOSK_8uHpDp-8NW1wrvEaisPqqg4LGpH2vIgNnSW3YIvB-_iuzIdxtSNb3ahMHTeMzv5D5N0PhbnvEI6ZoNBBPWaJeXqin8v02k3NHb8k23WGLNxJ0KC5ScBLoUjvDEYwPR13idgmX9r8H96qQNor1HGjoSAnM3j6GbKEMwDuwg1j-oMEmtqOSjenjQUaLk0Wl6jdt-SnqDcVgmWz2wNUqepwFm6VFo0aUEYUhXTMC99Z0cnZxbEfr3ftV2CJ7G8fjlFEPs8rHsS4WmO8g9DVlqOqILJwatFtPRTnE64K7D5Me5MT6Mhp37o8i1mh7sLwya3QI4Q_LPFxQ0JxqwhUPbHf5_DS866N1h2q-rQ7HPa7COglXDNanYJSuD8Okrqko13n_-FqaK1r_egxYzYqx5uvZP6aOyu-KB3FaPNBlACwkITnq0Gw8LjZl3PPTJsF3mvuspEO3nCNEF_H8gQPBYShdu8Knn08ope9r4dx3HLYsX7FOJgdwIpV1JJLQUUUKG-KEuL9uyp7R6BZlHJjbCl4l3BeuxGvpccPTfECVpkCbTfc3gmSViWzQPoie9EhU41dGIL1v_4n9QdzjRE5dN9it-qn4_szslEk5kjTL-F0=w50-h100-no?authuser=0"
-    }
+        , url: "ninja.png"}
     , {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 20,
         nombre: "Sol", vidamax: 15000
         , ataque: 1700, defensa: 400, probCrit: 70
         , dmgCrit: 250, recuperacion: 40, chabilidad1: 20, chabilidad2: 50, chabilidad3: 70, chabilidad4: 100
-        , url: "https://lh3.googleusercontent.com/QP0h71gLUmxyWVn708VUS2hemkcgVhSYo_pCFkZ97tZtWjmtr8v-WjKVGfF0hF83jSwswxwzMH--4nfYnpLE1gW_fEF3C4FcgIhChBFVR4Flosz-OaFftt3NVqUNZ2nvfGxNdiYdd24waysQhyF1atIw0z2cJ0nnsLEAf2tSmUfzCaaPlooLgHP_d2Vg0l00j1g8Wgc5W6QuKODbMMpejMzaKWOq7qbts53rdvG5PAAkNS0O7bVFGolR87hsoskCKnsfA3pHc0gPpdJFUyLffobtcWY6RVAduTn22xAJodkejGkxr2pIjWEJxuxRe1ssiWN-yXz78gmX3lvqSCTKV8ckUAOFPke__vUuBDLR50Rf04XJWUzGz661nW3epvMNBjzIUGvTPTMz7ttaVbze8MuDEkN2amn_lREp62Hvsm8q_ZdfD5IpMGdIofhx4JWH9mA5xC6OlggyPwz6uuBjxnLoCssiukNOoLVzBeGL7OsLFbnA17dsgx6RjgDoWCEiH6RTueWsiMwv13dMHHeIvG78yPPEBmEUVbNuFpRejKgJVvYPQh027iLqQiNdujQrL0XWxgfQFqa5tWK3cq4AtE2z5xI-YG3phpDoDIXfTOi0bNchFR3DrsxI5cCUYD-2jkapCBxCICUm4KePD5ntAKaiZMVK-F8T7O9pHWf7Qb2KTLr-cOjIx7x2eMsYcxs=w50-h100-no?authuser=0"
-    }
+        , url: "sol.png"}
 ];
 
 var enemigos = [
@@ -84,28 +80,25 @@ var enemigos = [
         nombre: "Practica", vidamax: 10000, vida: 10000
         , ataque: 0, defensa: 100, probCrit: 0
         , dmgCrit: 0, recuperacion: 5
-        , url: "https://lh3.googleusercontent.com/d0u0cea5eiyOP9rLxeD2fC0qE7XhhqRozc5Gl18lAOs8y5nHBv0fH47bQwst6nsrGiCIHuaWaApSaRlRzaIc4eSFLoL1i32Qs3AOJe2Ai3Ic4lM0658WUWkiR3RtKY-WXkORsoCiF_yRkJsx_ZFUeNeN0_6CQKis6esawNRyKIzobezrvY1b507HSoCwatfaC8O0N-hvGH_2ZN3FBdnGOBx5sCXi_9eVClgYOVBTv77Eu6cIrxHZpUtmzOMK8vMrWy4BL07Ff86HBlLxHwxBkvHLRF4Gdc9e3FS1OOeAvHzNcCL-80SIlgophd2JcvC-WBVf5hYnOgsSZ60ZYht-zF053BNoHg6n7-T6DWUTDOBwjjk1crM_3yI3RgmAntNQQgpj_j6r0HfbSp_5t62lGC6atX-0GFzjmygqtWPRfFSBnkX9t9pNu-XhyiiVpUJibvv1PFpUddILwqkavGAsrW8e4KGFPQ96qdCl5t0_EjhA-zvv-LO_rvcJHuFIgh_CXpM7hJI7pem3IlkbsMHJ9Ytt6E7Y0gpw2b1JqHbuq81RlTig1CTV9lJ-RI22Zpry5o4wgttCpzMFsPmL7FRbJaGIROL_VjH_qKoDjy7pZ5yEthjohhoher_RruWvS4UnPtStT-UgfhXctc2ykUR0gtdwn2v17sPEH56XqNV4Y1ui75n23vZe4cxgWQpmzTQ=w50-h100-no?authuser=0"
-    }
+        , url: "practica.png"}
     ,
     {
         nombre: "Fuego", vidamax: 30000, vida: 30000
         , ataque: 2000, defensa: 500, probCrit: 50
         , dmgCrit: 200, recuperacion: 10
-        , url: "https://lh3.googleusercontent.com/XNbptuKM4jkVz-DBvilq8pcr7pQemOLtbcAaPY_zrLREgasHW623vEJkrExCXhnEsg8jVLIgw-BaWFNOKd_lgL8G3VS4YwxHsXVP9AnPsrXvc0IGfkYpKjHQPdE7s2oSSP_MV9F4mRmqmzEmIs2vR8PMf4dtKh8NdHry97bjTvFGyf8br0r30qOfHXqLuAaZ7mTy0ktahJsDeN5TBr59gK5sNKuj4JTFs5hOZapmqYNgYl2TRpITaVUJXK7p6-sloCWnuVKNecp-_t97cY7i1Dg2Fw_7deLvlXUEDAP3KrQBfZ3B5CBaGUPD3_KN7sl1rSrTgb25fSKDft7gDmTHGaxL0u41zho0W0xluYhGJ8wUvjMdzHsyB4qNC7OYbH3yhYG9h2kVURZPUnICMarHgIYgjTNiyEre4P1O3Wy8352kM-jOTl04DuQ4Wy08supZzwtg_LIrSQi0xPF6Wn7cTJxrLwQeU3Cu7cNQjLEf_Mte9UaoR6CzxbTzNxFqrdaGRiJ9uTCNDtK0yOzDGTInf2hTaRoPQxLxknFDlAwT9e7u2vB0XbmUMME-U88zUhKnznbf0cCOATbatqmjycwo0ni_CJEHJVvgtYl1z1p14b3vKYlWfGF20aFpmaLyDB8CJACD9P_caTuZClX1yh_e9hemszhdYh6ONm9KQsCYCrDu39iOyGc5gVjs8BFyQ5E=w50-h100-no?authuser=0"
-    }
+        , url: "fuegoso.png"}
     ,
     {
         nombre: "Pantano", vidamax: 50000, vida: 50000
         , ataque: 4000, defensa: 700, probCrit: 40
         , dmgCrit: 300, recuperacion: 40
-        , url: "https://lh3.googleusercontent.com/PIMG-MQmi6pc8_dYScQktaqlzgjoCJi-SGmMG_Rrzug83We_vuGIzCR0a8o8EptDaQk-qqqQc6IwEtXeJLmInA3NDrTqnL3Kg0ptHjBsky9OxFH0PHfTrMCcjsOJS6YrGSCK7Eih6fChLlze7wHoDb3mzLd6MkXMzr2AjM-vmLCJzMNvgW9gOH7Sb0bLXzpL8sU9K25MmbcqBAgCP7QNL3ML9U023KHD7mdT1Yu29DNFjVVfAw89aCvICj8MucruA-0TyUZnEozRigNDXCtPKGu2B0JScUdQ1eS5tdwIBfTkOfeQ1FXvkTUcshSbcd2yv8obDpWPYOK5VJlsNKXx4E5Zv1CNDsOBUPypjIqGSvCquL_-eEe9ngSZHmGYjauQkaKwYTrnI8_uTQoumO39sw-3afsry24kfDH4VUu_l_UfoluYAvPRk__1SottoD5jmoaN8k2uoUu3RIGWIg28Q87FH_Kp9lQSDKW1oScWFBOa6Ud1MzqO78sjFQmcdApL1Fco5QxyRcTfH4GkdWNSPZIwxMV6DsH8iM2w5cub3a5x3nujXK6GE4CIyEHAKDBQws0cbymRYyEOOXPz9xmx2MTMNKTtvkTbturU75MTFz8goS2Gny7Ps4XApYozmHE8RBBtGxXK_BN50s_lmFFuy4RVueAfaKe0xB6WBksJjsRYqJSGkMrrQl9Y8ypBqpY=w50-h100-no?authuser=0"
-    }
+        , url: "baboso.png"}
     ,
     {
         nombre: "Agua", vidamax: 110000, vida: 110000
         , ataque: 7000, defensa: 400, probCrit: 10
         , dmgCrit: 700, recuperacion: 100
-        , url: "https://lh3.googleusercontent.com/t45mlh1VIq3qWTKBkIIXtiLjklsh4Ovigw_VLAsCtNAavX-KHNsjVb3VTu3kJhSypvYpidzdB8-piDS7U1EJQHRMaw0IZsvqzmvcLMbX-ZqeYb0oD_lrrpuH9ygDwX7NU4WkqT59i8NAzNHN3-06KjJ0d_Ilk6GBPAFrU3TtFHwgHpFCKslLyIbBruU2is7e5-Goi4q19EQDMkc8J1KvhRmDWEBn1w8fqWq2Es4ihUjZdMfkKlEG_0reuDOI9POQm2iRYewVghhple8bM-H8fsPfMMPWRIuxzjftQ-uz9kPazuWao86HQW-XMCiQuMcZYJ3rQQ6nzF169SjgpGlkJVMzkhKR4FUg90DGa7RKhMYWzhL_itkjIBuGJkI3Tfv9gXaZ5Fv25J10-GMlFGx4cYcNUW3S_laqFHxEkT8IYmR7aDJnLxI7rKkMzjXRwouikfjMxk0aoFYKzUSfBiHY4CVQXNQg1Y_yafRT4o4ApFaJsXxElK9vjmB5hKZmMNsfRDoG2-dNE-N1LR-0TAYWT4YHsDjwwxJ8xZv3OZR8NfR7Yz5oWNp9f5gLzrbCcNvFMeDOAafOPyiqPZvVfNbdTLdT7j1dZp8eH9oViCAYXUBwLq1ezLxCr2l6i7bVTxL500CzGQLHP8DYS8qbUOQnhBLut3OpSV7wCqachGkvHKCjBigLlXq1PTxPOOXmQ7k=w50-h100-no?authuser=0"
+        , url: "acuoso.png"
     }
     ,
     {
