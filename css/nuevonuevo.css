@@ -173,6 +173,7 @@
     height: 10%;
     background-color: #ff0000;
 text-align: center;
+transition: 0.5s;
 
 }
 
@@ -185,6 +186,7 @@ text-align: center;
     height: 10%;
     background-color: rgb(79, 93, 217);
     text-align: center;
+    transition: 0.5s;
 }
 
 .contenedorPersonaje {
