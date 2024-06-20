@@ -13,7 +13,7 @@ var personajeElegido = {
     nombre: "", vidamax: 0, vidaActual: 0,
     ataque: 0, defensa: 0, probCrit: 0,
     dmgCrit: 0, recuperacion: 0, vida: 0,
-    alcance: 0, url: ""
+    alcance: 0, url: "", chabilidad1: 0, chabilidad2: 0, chabilidad3: 0, chabilidad4: 0
 }
 var cual = [
     {
@@ -49,31 +49,31 @@ var cual = [
 var infoPjs = [
     {
         comprado: true, armaduraF: 3000, congelar: 0, roboVida: 0,
-        nombre: "Yohiro", vidamax: 30000
+        nombre: "Yohiro", vidamax: 3000
         , ataque: 1200, defensa: 7000, probCrit: 30
-        , dmgCrit: 170, recuperacion: 50
+        , dmgCrit: 170, recuperacion: 50, chabilidad1: 10, chabilidad2: 30, chabilidad3: 70, chabilidad4: 100
         , url: "https://lh3.googleusercontent.com/2NIx7PqqMuUIF80LIXCuENNvXrR9T5h_fseWxTki35S4MHFbL2bESwBdKcCl6qkEJHw4Q-gibyGhBAbbu99ytUwb8ky_-RON4qV1FREet_Ca_8dzS10utCtQ3_AwSVWZ7B0E0o7xlNhOAwvC7yqc6YU4hXPQh79_djSLo23ELyXW6BUrviYI5_boayEiy9GbvLX8nbh9BwECpSGiKoPYUQTg2-YkNIBxujcICf0RlxIkrJqhgOt3VQp7sOuwVfktD4VxnZ-rLIVzJo9X-HOB4z3jHxU5n1AM5r5_0LYLSQEA1ftGRjdtDM3hTpXtP4q1ZgznC_4Ko9b6gbnm_owggiFCELwT6c1IEFoHVWE5Q2RgC45THP0dJWWqYBsI24j9uK4SUxtmY_Bf3asl654zI1CElMcEydxdOPwz3gjFOTnISXZvn6xcG3r9RiAwg2cuJAV2iC3LxoQ2aE0d4TeJpaodAqNnvspYFyYgwjV5lNbJKqyNR1BI2xtldrgdexa1dXBJzZCtMZcLydgnsreqRFqVxXRa_GPY-zx5KdEMHB5rlfIpbNdzejnjGoUxk9KFJpNiaRwu8x7tCBi_AG7aFuQjOezxlOtKhscbSiXdFu_c1u0wAgQtY77e9WVPrH6sYrnMX6FI2rbbOGEH8vydEwWGjYNBwRj_KyxEyypmmPIktrnI9beMLEef6ACBPqU=w50-h100-no?authuser=0"
     }
     ,
     {
         comprado: false, armaduraF: 1000, congelar: 25, roboVida: 10,
         nombre: "Rain", vidamax: 17000
-        , ataque: 1800, defensa: 10000, probCrit: 40
-        , dmgCrit: 120, recuperacion: 20
+        , ataque: 1800, defensa: 1000, probCrit: 40
+        , dmgCrit: 120, recuperacion: 20, chabilidad1: 20, chabilidad2: 40, chabilidad3: 60, chabilidad4: 80
         , url: "https://lh3.googleusercontent.com/rByffD1Yc82VjltG_o49spYycjq4v95PWUlhJ_558DSxd259v3kqLVOZOg95jqNUXx-SLC_Ig2WyhPn26JbaX6-4bVaDk9sc0BzMrsV__JQmU9MbvMUKGO_BuMsQ7TyDvj05QqljrOsLakph3FePUVXaBqDNC61zK0Me4dzs9J-tnuc6IFmtBAt5wqGEWURvdQne52SNVYiDRbWBA_zjOhI7YCBA9AfUVirlDR8MJa7txrkz0GLtlvsqbNL0iH8A9A1Q8tVp4J7LPIKIacotz-3_Vru4aaUZiVW2cGyGiiyPaTBLslzdCrvydYPRk060yWcpFFK3Lwg7kGZLxo6mwz9Vf6w7m2shggl8VDZb6ehMAeR-u_r1U3mnCgtvNL8U5FtYiOJkEp-Vj7Pa9trK90otMsE5iV4ZvOu-G-TjADDoAHHAruyQIfDn7Kh0_QkkdQ3dysPl0cfngFeNVV8oUdTpNJqvDw_mUHC06AqhGrXcXltcZLDzFXUDQy3ZcJiPci5eI2h4Fxg49xCWQUMCyFdxMBPZTHW9DyCcQvRSRszUu-SJKkbw1n5P3ajlKkbNRTJpUnOLOarh1iyPy3qppbwtg6Je5aNMspBLKEdG6fLMgzcbRY0ugrLgEqVcHuUO1KF-Qb7AK-2PRzZHfWroifgsFZpl-Jb9S6AThxwdx4x09iWt8ZH0iZFIERWCH44=w50-h100-no?authuser=0"
     }
     , {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 40,
         nombre: "Ninja", vidamax: 25000
-        , ataque: 1500, defensa: 5000, probCrit: 20
-        , dmgCrit: 200, recuperacion: 30
+        , ataque: 1500, defensa: 500, probCrit: 20
+        , dmgCrit: 200, recuperacion: 30, chabilidad1: 5, chabilidad2: 20, chabilidad3: 60, chabilidad4: 90
         , url: "https://lh3.googleusercontent.com/mNrOQ3HaYykgJsLSzyAvJ1vQZtLmcdyVr1z1ZW4iP_a9l5bso6jojZZXNOlzj-_1uuvUqJysUJmsI9v7NPFOSK_8uHpDp-8NW1wrvEaisPqqg4LGpH2vIgNnSW3YIvB-_iuzIdxtSNb3ahMHTeMzv5D5N0PhbnvEI6ZoNBBPWaJeXqin8v02k3NHb8k23WGLNxJ0KC5ScBLoUjvDEYwPR13idgmX9r8H96qQNor1HGjoSAnM3j6GbKEMwDuwg1j-oMEmtqOSjenjQUaLk0Wl6jdt-SnqDcVgmWz2wNUqepwFm6VFo0aUEYUhXTMC99Z0cnZxbEfr3ftV2CJ7G8fjlFEPs8rHsS4WmO8g9DVlqOqILJwatFtPRTnE64K7D5Me5MT6Mhp37o8i1mh7sLwya3QI4Q_LPFxQ0JxqwhUPbHf5_DS866N1h2q-rQ7HPa7COglXDNanYJSuD8Okrqko13n_-FqaK1r_egxYzYqx5uvZP6aOyu-KB3FaPNBlACwkITnq0Gw8LjZl3PPTJsF3mvuspEO3nCNEF_H8gQPBYShdu8Knn08ope9r4dx3HLYsX7FOJgdwIpV1JJLQUUUKG-KEuL9uyp7R6BZlHJjbCl4l3BeuxGvpccPTfECVpkCbTfc3gmSViWzQPoie9EhU41dGIL1v_4n9QdzjRE5dN9it-qn4_szslEk5kjTL-F0=w50-h100-no?authuser=0"
     }
     , {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 20,
         nombre: "Sol", vidamax: 15000
-        , ataque: 1700, defensa: 4000, probCrit: 70
-        , dmgCrit: 250, recuperacion: 40
+        , ataque: 1700, defensa: 400, probCrit: 70
+        , dmgCrit: 250, recuperacion: 40, chabilidad1: 20, chabilidad2: 50, chabilidad3: 70, chabilidad4: 100
         , url: "https://lh3.googleusercontent.com/QP0h71gLUmxyWVn708VUS2hemkcgVhSYo_pCFkZ97tZtWjmtr8v-WjKVGfF0hF83jSwswxwzMH--4nfYnpLE1gW_fEF3C4FcgIhChBFVR4Flosz-OaFftt3NVqUNZ2nvfGxNdiYdd24waysQhyF1atIw0z2cJ0nnsLEAf2tSmUfzCaaPlooLgHP_d2Vg0l00j1g8Wgc5W6QuKODbMMpejMzaKWOq7qbts53rdvG5PAAkNS0O7bVFGolR87hsoskCKnsfA3pHc0gPpdJFUyLffobtcWY6RVAduTn22xAJodkejGkxr2pIjWEJxuxRe1ssiWN-yXz78gmX3lvqSCTKV8ckUAOFPke__vUuBDLR50Rf04XJWUzGz661nW3epvMNBjzIUGvTPTMz7ttaVbze8MuDEkN2amn_lREp62Hvsm8q_ZdfD5IpMGdIofhx4JWH9mA5xC6OlggyPwz6uuBjxnLoCssiukNOoLVzBeGL7OsLFbnA17dsgx6RjgDoWCEiH6RTueWsiMwv13dMHHeIvG78yPPEBmEUVbNuFpRejKgJVvYPQh027iLqQiNdujQrL0XWxgfQFqa5tWK3cq4AtE2z5xI-YG3phpDoDIXfTOi0bNchFR3DrsxI5cCUYD-2jkapCBxCICUm4KePD5ntAKaiZMVK-F8T7O9pHWf7Qb2KTLr-cOjIx7x2eMsYcxs=w50-h100-no?authuser=0"
     }
 ];
@@ -112,9 +112,13 @@ var enemigos = [
         nombre: "Trueno", vidamax: 200000, vida: 200000
         , ataque: 12000, defensa: 1000, probCrit: 80
         , dmgCrit: 500, recuperacion: 50
-        , url: "https://lh3.googleusercontent.com/gNX3yo-3ANKvhcFomG4ZqxKbmUp-Ls0Z7lOFAhEYqyKRGzbc3gWzcbJ9z1_2g1NUBtHkQ45AYSc3wRQRFlBV1y6E2AT3kqFanacYLCUkISd1QTfMl0BQ2AeGK1yixmVxRvcLGe9iuErlZG8VxUJ3IINNbpdor9UsSY_WyKof49DgpPKVx-YQdJQkG6fwnzxQDHC7qzINewlmqR8S9jbC2-X4_-iUTvHUu10Z_9cm99RHZpFr3zA9fA-kwHiO73mNTWnYD51FtHrptsJvGVar1PDPfq6iE8lWyRJpUG3pv2dYv-Qnwhayjq1wbfrFE6l-inB0dQyYfzfo-l1KAZwwcnLlZP_TI_pvA0RYyc2zF9nqbLyzX4KJC7uUdc9dsYsrGTdnUVMBZw_asVgz3WsygHeo1fvShNRVNQy9uQkWq-pGWnUmsoxGGuB_KMDi46rEcFqxlKb4rFnLVfL9I_o7K69WYwTaREwYG66NobgNm7pL9yOEh__iwpFW5yRDFdmJq06PuLrs00NStJCVlMpUxhDLk8WwZLOU4DlRdwS0SPx0Ojy1nKetTBfS8A8PyOI4WDQJNvU8UskiOknKvvrMMp-E31IBuDBEpaxiC3doeuZ0Ruqc-y5Efrwv19er-c6zQDS5DS6DWZyW6COGvRIjyRFuzok6q9qfbO0Kchh0-SiN8HnI9PgdokJCJcS3VEY=w50-h100-no?authuser=0"
-    }
+        , url: "electron.png"
+        
+        }
 ]
+
+/*https://lh3.googleusercontent.com/gNX3yo-3ANKvhcFomG4ZqxKbmUp-Ls0Z7lOFAhEYqyKRGzbc3gWzcbJ9z1_2g1NUBtHkQ45AYSc3wRQRFlBV1y6E2AT3kqFanacYLCUkISd1QTfMl0BQ2AeGK1yixmVxRvcLGe9iuErlZG8VxUJ3IINNbpdor9UsSY_WyKof49DgpPKVx-YQdJQkG6fwnzxQDHC7qzINewlmqR8S9jbC2-X4_-iUTvHUu10Z_9cm99RHZpFr3zA9fA-kwHiO73mNTWnYD51FtHrptsJvGVar1PDPfq6iE8lWyRJpUG3pv2dYv-Qnwhayjq1wbfrFE6l-inB0dQyYfzfo-l1KAZwwcnLlZP_TI_pvA0RYyc2zF9nqbLyzX4KJC7uUdc9dsYsrGTdnUVMBZw_asVgz3WsygHeo1fvShNRVNQy9uQkWq-pGWnUmsoxGGuB_KMDi46rEcFqxlKb4rFnLVfL9I_o7K69WYwTaREwYG66NobgNm7pL9yOEh__iwpFW5yRDFdmJq06PuLrs00NStJCVlMpUxhDLk8WwZLOU4DlRdwS0SPx0Ojy1nKetTBfS8A8PyOI4WDQJNvU8UskiOknKvvrMMp-E31IBuDBEpaxiC3doeuZ0Ruqc-y5Efrwv19er-c6zQDS5DS6DWZyW6COGvRIjyRFuzok6q9qfbO0Kchh0-SiN8HnI9PgdokJCJcS3VEY=w50-h100-no?authuser=0"
+     */
 
 var venemigo1 = false;
 var venemigo2 = false;
@@ -528,6 +532,9 @@ function enemigo(n) {
     reiniciarConsumirEnergia(width); consumirEnergiaB(widthB); consumirEnergiaC(width);
     iniciarRelleno(); iniciarRellenoB(); iniciarAtaquesIA();
 }
+
+/* mostrar estadisticas del enemigo*/
+
 function cosa(n) {
     enemigoac = n;
     var estats = enemigos[n - 1];
@@ -575,6 +582,13 @@ function estadisticas() {
 
     personajeElegido.roboVida = parseInt(infoPjs[pequipado - 1].roboVida) + parseInt(cual[narmaequipada - 1].roboVida);
 
+    personajeElegido.chabilidad1 = parseInt(infoPjs[pequipado - 1].chabilidad1);
+    personajeElegido.chabilidad2 = parseInt(infoPjs[pequipado - 1].chabilidad2);
+
+    personajeElegido.chabilidad3 = parseInt(infoPjs[pequipado - 1].chabilidad3);
+
+    personajeElegido.chabilidad4 = parseInt(infoPjs[pequipado - 1].chabilidad4);
+
     nombreArmaelegido.textContent = '' + cual[narmaequipada - 1].nombre;
 
     nombrePjelegido.textContent = '' + infoPjs[pequipado - 1].nombre;
@@ -584,6 +598,14 @@ function estadisticas() {
     ataquePj.textContent = "Ataque: " + personajeElegido.ataque;
 
     probCritPj.textContent = "Vida: " + personajeElegido.vidamax;
+
+    document.getElementById("thabilidad1").textContent = personajeElegido.chabilidad1;
+
+    document.getElementById("thabilidad2").textContent = personajeElegido.chabilidad2;
+
+    document.getElementById("thabilidad3").textContent = personajeElegido.chabilidad3;
+
+    document.getElementById("thabilidad4").textContent = personajeElegido.chabilidad4;
 
 }
 
@@ -612,7 +634,7 @@ function iniciarRelleno() {
         }
     }, personajeElegido.recuperacion); // Ajusta el tiempo (100 ms) para cambiar la velocidad de relleno
 }
-var dineroganado = 0; "pnombre"
+var dineroganado = 0;
 function consumirEnergiaC(n) {
     clearInterval(intervaloB);
     var consumo = n; // Cantidad de energía a consumir
@@ -671,7 +693,7 @@ function consumirEnergia(n) {
             }
         }
 
-        
+
         // Llamada a la función para verificar y aplicar congelación
         verificarCongelacion();
 
@@ -689,7 +711,7 @@ function consumirEnergia(n) {
             actualizarTienda();
             alert("Venciste a " + estats.nombre + " Dinero $" + dineroganado);
             console.log("n " + enemigoac)
-            if (enemigoac >= nivelActual) {
+            if (enemigoac >= nivelActual && nivelActual < 5) {
                 nivelActual++;
             }
             localStorage.setItem("nivelActual", nivelActual);
@@ -708,18 +730,18 @@ function actualizarBarra() {
     var barra = document.getElementById('barra-energia');
     barra.style.width = width + '%';
 
-    if (width == 25) {
+    if (width == personajeElegido.chabilidad1) {
 
         barra.style.backgroundColor = colorRan();
     }
 
-    if (width == 50) {
+    if (width == personajeElegido.chabilidad2) {
 
         barra.style.backgroundColor = colorRan();
-    } else if (width == 75) {
+    } else if (width == personajeElegido.chabilidad3) {
 
         barra.style.backgroundColor = colorRan();
-    } else if (width == 100) {
+    } else if (width == personajeElegido.chabilidad4) {
 
         barra.style.backgroundColor = colorRan();
     }
@@ -870,45 +892,26 @@ function atacarIA() {
     }
     var estats = enemigos[enemigoac - 1];
 
-    if(estats.vida<=0){
+    if (estats.vida <= 0) {
         consumirEnergia(0);
+    }
+    if (personajeElegido.vida > personajeElegido.vidamax) {
+        personajeElegido.vida = personajeElegido.vidamax;
     }
 
     barraDeVida(estats.vidamax, estats.vida, "barraVidaE");
-    
+
 }
 
-/*
-function atacarIA() {
-    // Generar un número aleatorio entre 0 y 1 para decidir si atacar o esperar
-    var probabilidadAtaque = Math.random();
-
-    if (widthB >= ataques.nivel4.energia && probabilidadAtaque <= 0.25) {
-        // Realizar ataque de nivel 4 (100%)
-        realizarAtaque('nivel4', ataques.nivel4.daño);
-        consumirEnergiaB(ataques.nivel4.energia);
-    } else if (widthB >= ataques.nivel3.energia && probabilidadAtaque <= 0.50) {
-        // Realizar ataque de nivel 3 (75%)
-        realizarAtaque('nivel3', ataques.nivel3.daño);
-        consumirEnergiaB(ataques.nivel3.energia);
-    } else if (widthB >= ataques.nivel2.energia && probabilidadAtaque <= 0.75) {
-        // Realizar ataque de nivel 2 (50%)
-        realizarAtaque('nivel2', ataques.nivel2.daño);
-        consumirEnergiaB(ataques.nivel2.energia);
-    } else if (widthB >= ataques.nivel1.energia) {
-        // Realizar ataque de nivel 1 (25%)
-        realizarAtaque('nivel1', ataques.nivel1.daño);
-        consumirEnergiaB(ataques.nivel1.energia);
-    } else {
-        console.log('No hay suficiente energía para atacar');
-    }
-}
-*/
 function realizarAtaque(nivel, daño) {
 
     personajeElegido.vida -= (enemigos[enemigoac - 1].ataque / 100 * daño);
     if (personajeElegido.vida < personajeElegido.vidamax) {
-         personajeElegido.vida += +(personajeElegido.defensa / 10); }
+        personajeElegido.vida += +(personajeElegido.defensa / 100);
+        if (personajeElegido.vida > personajeElegido.vidamax) {
+            personajeElegido.vida = personajeElegido.vidamax;
+        }
+    }
 
     barraDeVida(personajeElegido.vidamax, personajeElegido.vida, "barraVidaP");
 
