@@ -9,6 +9,7 @@ var nArmas = 5;
 var dinero = 0;
 var preciocosas = 1000;
 var personajeElegido = {
+    armaduraF: 0, congelar: 0, roboVida: 0,
     nombre: "", vidamax: 0, vidaActual: 0,
     ataque: 0, defensa: 0, probCrit: 0,
     dmgCrit: 0, recuperacion: 0, vida: 0,
@@ -16,7 +17,7 @@ var personajeElegido = {
 }
 var cual = [
     {
-        comprado: true,
+        comprado: true, armaduraF: 2000, congelar: 0, roboVida: 0,
         nombre: "espada de fuego", ataque: 4200,
         defensa: 400, probCrit: 10, dmgCrit: 30,
         recuperacion: 10, vida: 5000, alcance: 2
@@ -24,22 +25,22 @@ var cual = [
     }
     , {
         comprado: false,
-        nombre: "espada de hielo", ataque: 3000,
+        nombre: "espada de hielo", ataque: 3000, armaduraF: 1000, congelar: 25, roboVida: 0,
         defensa: 200, probCrit: 40, dmgCrit: 20,
         recuperacion: 50, vida: 2000, alcance: 4
         , url: "https://lh3.googleusercontent.com/qTCY8Ts0_fFUaKAqg1Oo06RTbTKzYlZ-_hcfPTzxD2xfsvYUeGZu_YKWcILimayHQAO8J8KZvAWTagCNQjgN8-hvAamRomecbQZF93zXVXYo_y7vx1bOIqrkYKJa9JhfPbxgUn83jKWeRtPgzGMkm4M1E2qkSZrdRbPxWbScj6LD4XN65mpY2xG1IZgz7NHyn_Dm-okw5h0nYKXVqCRcj1Thzg6jj_R04x2lur9WIAKHEim-z1ZizYODKQL5qwWbZRTisGw4FWe3ArbqV1lWkWkzLIFZ0DbvyraByL05BpYZ0KBSiyaHegTrDao0jxZBQ3F0BThbYEROM1lFqNkzPONvPh7ueNUPT-7JuZCk2qmKHwibYt_Aipa9Dwy-jLQrhrGFNF_GLmdVs65WbsDGOGdMNJ28Mvx2fyMhG_44pMI-R1nS9twy-CZUEgHHNlvaSsQU8McxmX3RuxTMgVEthq8lLIarp8BQJvwwUdgIsH2NOg7_qzwXXA1wdBD0eapyQ3LaLa-CZTq3Le8DXfLaH-ZX-2LjFIJh7bx5Zasro2xq3MPoqDDj65f6C2QtYusg5BKNIscWSQSIr-neqPqHVODwwEmEtNI120aVEh-9J71CB0Db3noYsfOqqZn1TPjqh28tfIAeLtsNzH-t9g5ufA2swXTokMQyvzMHn6_gb8LW92FjaMX4yZ79yI8MLic=w450-h150-no?authuser=0"
     }
     , {
-        comprado: false,
+        comprado: false, armaduraF: 0, congelar: 0, roboVida: 25,
         nombre: "espada del bosque", ataque: 2500,
         defensa: 1500, probCrit: 20, dmgCrit: 100,
         recuperacion: 60, vida: 3000, alcance: 1
         , url: "https://lh3.googleusercontent.com/A6zMcmD1AF3VW_pG9GVY3vm6Nuf2W9FZ3MPoRyXi875mgJLghHq-QLjnqm-UYmjkJQ0fsALVCOItgN_GLR2xLEwiYy8WL5LJmmQSgrsdJR02SGvQK_CoyRgX0aGjdJ8t18H5Yed-EGmQD3SowgZWJkWl7JSJdOH1K0Mq6V-RM589IlYT5BlZDdhPvzcPRrRQXapOG-QOj93gpJ9IZi0nLmSbQNLL2_XneuEw3_XSivJj1_cBnpupVWcx-qDgCzJQNkxoMU57p1uV4dZV65rasaySrS6rpE0vkGXS-ZG8gU41IKHuLEo9UiqhDTTxvZSi0pqDUmMIFMFkjfZYdUT0kLhveZ4xgNuwfFsj35-RSF1C4VTBlDGGQzP_7SxTlrwz_pe04i7BewXf9Ecz1eqhqnNjKCjY8YhrI6HkFoogqHVPSURohfHEvy4Y1HWqCDTHQXPgB1qEugvMdeTMaSseq3kE0m7qIMLVaMT2UO7QbjEMRO3P5o2ku-cHs6Ps8ZY_cfuV0vw9TQeV9F6Ad9ieXlw-noeW9Gbug1dY0uMyzRJjQdwCaJ68coDneUJi082xljoDr_saPzpzKy3wancbk1rSXgWOf9iS45skqYdvp5HOhVrqudnAPvozJhyQKpY2FJRLZpomGEZ12_tusGOz-lPX3Hb4csR8d9Tq2Ytf4or5sX98yXK0KcYbB6oy4T0=w450-h150-no?authuser=0"
     }
     , {
-        comprado: false,
+        comprado: false, armaduraF: 0, congelar: 0, roboVida: 0,
         nombre: "katana filosa", ataque: 3500,
-        defensa: 0, probCrit: 50, dmgCrit: 150,
+        defensa: 0, probCrit: 50, dmgCrit: 200,
         recuperacion: 30, vida: 1500, alcance: 1
         , url: "https://lh3.googleusercontent.com/UC3xiyNXJ4-jhQJCIJtuL_h9rtdr1pk-F0yDvvQIAhB9VffPsNbw5h4U9IMr-URpjaq3gKlr4MkApbGODS_cY31V7k6R2M5ytifGjr6ca3Mja8rihoNfvdsR8z_kyeFAAvkFbqCoujPLlEAOtHPmXpHheYSYn79JKYNhdT0yv7mFgt118e-O0-bqO5NYXUPz-W2VOT_X-fNzTLk-zAtI-laJklmGEqwP9xiOd-6cVkSR1Ljckjo8KT9CsR4dMF4Tz4hsmBUak6y9WbmgggSZzdvYcr22aP0pvSYijxzQ3Fw3A7e8yRImDeRaTnEaRyHteL9x29_1xjwfDRACse6yKNZuRfDzu_8j6m0BW6dnV8GtOjMlP5piq82JYEguiSYkOveW63bNfyBjobBixDgtbui-IEacWlxkMndcnqJ0Ql-XKMMb7hCJRgYZSJ04qo5tuMWFfSEIYYDsYBd08onmlRAbGQlFunKIyvRIOcmK9IqKT6vqDK5BT0auvNGaou7E4fjLe2E9RUEgVK53mYS7J5ws3GY_EHkdawSorGYANr0GiuVMDSChlcNPlWcBs5MY6Gx5W4BJySdIffySCPY4H1h-GMVk0DG14n4oplMP2ue9oPw83nmTLNLDc4vuWg9eDyRTaJ6P_MJHgPrO1pKhEEuUCSf_ngKDGRPFvOEjduyHWOMeUlhVW3-po8NgcZo=w450-h150-no?authuser=0"
     }
@@ -47,7 +48,7 @@ var cual = [
 
 var infoPjs = [
     {
-        comprado: true,
+        comprado: true, armaduraF: 3000, congelar: 0, roboVida: 0,
         nombre: "Yohiro", vidamax: 3000
         , ataque: 1200, defensa: 700, probCrit: 30
         , dmgCrit: 170, recuperacion: 50
@@ -55,21 +56,21 @@ var infoPjs = [
     }
     ,
     {
-        comprado: false,
+        comprado: false, armaduraF: 1000, congelar: 25, roboVida: 10,
         nombre: "Rain", vidamax: 1700
         , ataque: 1800, defensa: 1000, probCrit: 40
         , dmgCrit: 120, recuperacion: 20
         , url: "https://lh3.googleusercontent.com/rByffD1Yc82VjltG_o49spYycjq4v95PWUlhJ_558DSxd259v3kqLVOZOg95jqNUXx-SLC_Ig2WyhPn26JbaX6-4bVaDk9sc0BzMrsV__JQmU9MbvMUKGO_BuMsQ7TyDvj05QqljrOsLakph3FePUVXaBqDNC61zK0Me4dzs9J-tnuc6IFmtBAt5wqGEWURvdQne52SNVYiDRbWBA_zjOhI7YCBA9AfUVirlDR8MJa7txrkz0GLtlvsqbNL0iH8A9A1Q8tVp4J7LPIKIacotz-3_Vru4aaUZiVW2cGyGiiyPaTBLslzdCrvydYPRk060yWcpFFK3Lwg7kGZLxo6mwz9Vf6w7m2shggl8VDZb6ehMAeR-u_r1U3mnCgtvNL8U5FtYiOJkEp-Vj7Pa9trK90otMsE5iV4ZvOu-G-TjADDoAHHAruyQIfDn7Kh0_QkkdQ3dysPl0cfngFeNVV8oUdTpNJqvDw_mUHC06AqhGrXcXltcZLDzFXUDQy3ZcJiPci5eI2h4Fxg49xCWQUMCyFdxMBPZTHW9DyCcQvRSRszUu-SJKkbw1n5P3ajlKkbNRTJpUnOLOarh1iyPy3qppbwtg6Je5aNMspBLKEdG6fLMgzcbRY0ugrLgEqVcHuUO1KF-Qb7AK-2PRzZHfWroifgsFZpl-Jb9S6AThxwdx4x09iWt8ZH0iZFIERWCH44=w50-h100-no?authuser=0"
     }
     , {
-        comprado: false,
+        comprado: false, armaduraF: 0, congelar: 0, roboVida: 30,
         nombre: "Ninja", vidamax: 2500
         , ataque: 1500, defensa: 500, probCrit: 20
         , dmgCrit: 200, recuperacion: 30
         , url: "https://lh3.googleusercontent.com/mNrOQ3HaYykgJsLSzyAvJ1vQZtLmcdyVr1z1ZW4iP_a9l5bso6jojZZXNOlzj-_1uuvUqJysUJmsI9v7NPFOSK_8uHpDp-8NW1wrvEaisPqqg4LGpH2vIgNnSW3YIvB-_iuzIdxtSNb3ahMHTeMzv5D5N0PhbnvEI6ZoNBBPWaJeXqin8v02k3NHb8k23WGLNxJ0KC5ScBLoUjvDEYwPR13idgmX9r8H96qQNor1HGjoSAnM3j6GbKEMwDuwg1j-oMEmtqOSjenjQUaLk0Wl6jdt-SnqDcVgmWz2wNUqepwFm6VFo0aUEYUhXTMC99Z0cnZxbEfr3ftV2CJ7G8fjlFEPs8rHsS4WmO8g9DVlqOqILJwatFtPRTnE64K7D5Me5MT6Mhp37o8i1mh7sLwya3QI4Q_LPFxQ0JxqwhUPbHf5_DS866N1h2q-rQ7HPa7COglXDNanYJSuD8Okrqko13n_-FqaK1r_egxYzYqx5uvZP6aOyu-KB3FaPNBlACwkITnq0Gw8LjZl3PPTJsF3mvuspEO3nCNEF_H8gQPBYShdu8Knn08ope9r4dx3HLYsX7FOJgdwIpV1JJLQUUUKG-KEuL9uyp7R6BZlHJjbCl4l3BeuxGvpccPTfECVpkCbTfc3gmSViWzQPoie9EhU41dGIL1v_4n9QdzjRE5dN9it-qn4_szslEk5kjTL-F0=w50-h100-no?authuser=0"
     }
     , {
-        comprado: false,
+        comprado: false, armaduraF: 0, congelar: 0, roboVida: 20,
         nombre: "Sol", vidamax: 1500
         , ataque: 1700, defensa: 400, probCrit: 10
         , dmgCrit: 250, recuperacion: 40
@@ -524,7 +525,7 @@ function enemigo(n) {
         cosa(n);
     }
     eimagen();
-    reiniciarConsumirEnergia(width); consumirEnergiaB(widthB);consumirEnergiaC(width);
+    reiniciarConsumirEnergia(width); consumirEnergiaB(widthB); consumirEnergiaC(width);
     iniciarRelleno(); iniciarRellenoB(); iniciarAtaquesIA();
 }
 function cosa(n) {
@@ -550,6 +551,11 @@ function personajeBatalla() {
 
 }
 
+
+/*funcion de cargar estadisticas base para el personaje elegido en base al arma equipada*/
+
+
+
 function estadisticas() {
 
     personajeElegido.nombre = infoPjs[pequipado - 1].nombre;
@@ -562,6 +568,12 @@ function estadisticas() {
     personajeElegido.recuperacion = infoPjs[pequipado - 1].recuperacion;
     personajeElegido.dmgCrit = parseInt(infoPjs[pequipado - 1].dmgCrit) + parseInt(cual[narmaequipada - 1].dmgCrit);
     personajeElegido.recuperacion = parseInt(infoPjs[pequipado - 1].recuperacion) + parseInt(cual[narmaequipada - 1].recuperacion);
+
+    personajeElegido.armaduraF = parseInt(infoPjs[pequipado - 1].armaduraF) + parseInt(cual[narmaequipada - 1].armaduraF);
+
+    personajeElegido.congelar = parseInt(infoPjs[pequipado - 1].congelar) + parseInt(cual[narmaequipada - 1].congelar);
+
+    personajeElegido.roboVida = parseInt(infoPjs[pequipado - 1].roboVida) + parseInt(cual[narmaequipada - 1].roboVida);
 
     nombreArmaelegido.textContent = '' + cual[narmaequipada - 1].nombre;
 
@@ -611,6 +623,23 @@ function consumirEnergiaC(n) {
     actualizarBarra();
     iniciarRelleno(); // Reinicia el relleno después de consumir
 }
+function verificarCongelacion() {
+    if (eCongelado) {
+        // Si el enemigo está congelado, entonces lo descongelamos
+        eCongelado = false;
+        document.getElementById("barraVidaE").style.backgroundColor = "#ff0000"; // Rojo para descongelado
+    } else {
+        // Si no está congelado, calculamos si debe congelarse
+        eCongelado = Math.random() * 100 < personajeElegido.congelar;
+        if (eCongelado) {
+            document.getElementById("barraVidaE").style.backgroundColor = "#00bbff"; // Azul para congelado
+        } else {
+            document.getElementById("barraVidaE").style.backgroundColor = "#ff0000"; // Rojo para descongelado (por si acaso)
+        }
+    }
+}
+
+
 function consumirEnergia(n) {
     clearInterval(intervalo);
     var consumo = n; // Cantidad de energía a consumir
@@ -619,18 +648,36 @@ function consumirEnergia(n) {
         document.getElementById('barra-energia').style.backgroundColor = colorRan();
 
         var estats = enemigos[enemigoac - 1];
-
+        var golpe = 0;
         var esCritico = Math.random() * 100 < personajeElegido.probCrit;
         if (esCritico) {
 
-            var golpe = Math.ceil(consumo / 100 * personajeElegido.ataque * ((consumo / 100) * personajeElegido.dmgCrit / 100))
+            golpe = Math.ceil(consumo / 100 * personajeElegido.ataque * ((consumo / 100) * personajeElegido.dmgCrit / 100))
             estats.vida -= golpe;
 
             console.log(golpe);
         } else {
-            estats.vida -= consumo / 100 * personajeElegido.ataque;
+
+            golpe = consumo / 100 * personajeElegido.ataque;
+            estats.vida -= golpe;
             console.log(consumo / 100 * personajeElegido.ataque);
         }
+        // Aplicar robo de vida al personaje
+        var roboDeVida = Math.ceil(golpe * (personajeElegido.roboVida / 100));
+        if (personajeElegido.vida < personajeElegido.vidamax) {
+            personajeElegido.vida += roboDeVida;
+            if (personajeElegido.vida > personajeElegido.vidamax) {
+                personajeElegido.vida = personajeElegido.vidamax;
+            }
+        }
+
+        
+        // Llamada a la función para verificar y aplicar congelación
+        verificarCongelacion();
+
+
+        // Asegurarse de que la vida del personaje no exceda su vida máxima
+
         document.getElementById("pnombreE").textContent = estats.nombre;
         document.getElementById("pvidaE").textContent = estats.vida;
         document.getElementById("pataqueE").textContent = estats.ataque;
@@ -651,7 +698,8 @@ function consumirEnergia(n) {
             botones(9);
             consumirEnergia(0);
         }
-    }
+    } barraDeVida(personajeElegido.vidamax, personajeElegido.vida, "barraVidaP");
+
     actualizarBarra();
     iniciarRelleno(); // Reinicia el relleno después de consumir
 }
@@ -738,6 +786,99 @@ function actualizarBarraB() {
     barra.innerText = widthB + '/ 100';
 }
 
+var eCongelado = false;
+
+function atacarIA() {
+    // Generar un número aleatorio entre 0 y 1 para decidir si atacar o esperar
+
+    if (!eCongelado) {
+
+        var probabilidadAtaque = Math.random();
+
+        if (widthB >= ataques.nivel4.energia && probabilidadAtaque <= 0.25) {
+            // Realizar ataque de nivel 4 (100%)
+            var daño = ataques.nivel4.daño;
+            var consumoEnergia = ataques.nivel4.energia;
+            realizarAtaque('nivel4', daño);
+            consumirEnergiaB(consumoEnergia);
+
+            // Verificar si el personaje elegido tiene armadura de fuego y aplicar rebote de daño
+            if (personajeElegido.armaduraF > 0) {
+                var dañoRebotado = Math.ceil(daño * (personajeElegido.armaduraF / 100));
+                enemigos[enemigoac - 1].vida -= dañoRebotado;
+                console.log('¡El personaje elegido tiene armadura de fuego! Rebote de daño: ' + dañoRebotado);
+
+                // Asegurar que la vida del enemigo no sea menor que 0
+                if (enemigos[enemigoac - 1].vida <= 0) {
+                    // Manejar la derrota del enemigo
+                    // Puedes implementar aquí la lógica necesaria cuando el enemigo muere
+                }
+            }
+        } else if (widthB >= ataques.nivel3.energia && probabilidadAtaque <= 0.50) {
+            // Realizar ataque de nivel 3 (75%)
+            var daño = ataques.nivel3.daño;
+            var consumoEnergia = ataques.nivel3.energia;
+            realizarAtaque('nivel3', daño);
+            consumirEnergiaB(consumoEnergia);
+
+            if (personajeElegido.armaduraF > 0) {
+                var dañoRebotado = Math.ceil(daño * (personajeElegido.armaduraF / 100));
+                enemigos[enemigoac - 1].vida -= dañoRebotado;
+                console.log('¡El personaje elegido tiene armadura de fuego! Rebote de daño: ' + dañoRebotado);
+
+                if (enemigos[enemigoac - 1].vida <= 0) {
+                    // Manejar la derrota del enemigo
+                }
+            }
+        } else if (widthB >= ataques.nivel2.energia && probabilidadAtaque <= 0.75) {
+            // Realizar ataque de nivel 2 (50%)
+            var daño = ataques.nivel2.daño;
+            var consumoEnergia = ataques.nivel2.energia;
+            realizarAtaque('nivel2', daño);
+            consumirEnergiaB(consumoEnergia);
+
+            if (personajeElegido.armaduraF > 0) {
+                var dañoRebotado = Math.ceil(daño * (personajeElegido.armaduraF / 100));
+                enemigos[enemigoac - 1].vida -= dañoRebotado;
+                console.log('¡El personaje elegido tiene armadura de fuego! Rebote de daño: ' + dañoRebotado);
+
+                if (enemigos[enemigoac - 1].vida <= 0) {
+                    // Manejar la derrota del enemigo
+                }
+            }
+        } else if (widthB >= ataques.nivel1.energia) {
+            // Realizar ataque de nivel 1 (25%)
+            var daño = ataques.nivel1.daño;
+            var consumoEnergia = ataques.nivel1.energia;
+            realizarAtaque('nivel1', daño);
+            consumirEnergiaB(consumoEnergia);
+
+            if (personajeElegido.armaduraF > 0) {
+                var dañoRebotado = Math.ceil(daño * (personajeElegido.armaduraF / 100));
+                enemigos[enemigoac - 1].vida -= dañoRebotado;
+                console.log('¡El personaje elegido tiene armadura de fuego! Rebote de daño: ' + dañoRebotado);
+
+                if (enemigos[enemigoac - 1].vida <= 0) {
+                    // Manejar la derrota del enemigo
+                }
+            }
+        } else {
+            console.log('No hay suficiente energía para atacar');
+        }
+    } else {
+        console.log("enemigo congelado");
+    }
+    var estats = enemigos[enemigoac - 1];
+
+    if(estats.vida<=0){
+        consumirEnergia(0);
+    }
+
+    barraDeVida(estats.vidamax, estats.vida, "barraVidaE");
+    
+}
+
+/*
 function atacarIA() {
     // Generar un número aleatorio entre 0 y 1 para decidir si atacar o esperar
     var probabilidadAtaque = Math.random();
@@ -762,13 +903,12 @@ function atacarIA() {
         console.log('No hay suficiente energía para atacar');
     }
 }
-
+*/
 function realizarAtaque(nivel, daño) {
 
     personajeElegido.vida -= (enemigos[enemigoac - 1].ataque / 100 * daño);
-    if (personajeElegido.vida < personajeElegido.vidamax) { personajeElegido.vida += +(personajeElegido.defensa / 10); }
-
-
+    if (personajeElegido.vida < personajeElegido.vidamax) {
+         personajeElegido.vida += +(personajeElegido.defensa / 10); }
 
     barraDeVida(personajeElegido.vidamax, personajeElegido.vida, "barraVidaP");
 
