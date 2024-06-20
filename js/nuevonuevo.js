@@ -21,29 +21,25 @@ var cual = [
         nombre: "espada de fuego", ataque: 4200,
         defensa: 4000, probCrit: 10, dmgCrit: 100,
         recuperacion: 10, vida: 5000, alcance: 2
-        , url: "https://lh3.googleusercontent.com/9AbUcqcOyLnUcp76PoldOwKDzlpZQg9yUA7HUxBmB0stbQyV1CEYhwgiX6wQvBZ55BU1pVLzytt6Hj8dhqmJhXuzTn0jjObMh0ND68FruMZUJALsYWEcPDBk_w6d2AkDGtzLQ3BnqkjlBPHv5re0DBGeoP0-QBzvEjXWyODtUzoCV-_Bot-7KYwltFYGASNa7TgxRP9ixA5Z8xn7ZpPxp-XRPtOI1NH7nqKJVTd0usz0cz7sQehJTxiCcpeKYvWZUI0zy7LXzu3ErZbs1v7q2pGrsN8I2T6PMovhxxE1_LL9xCS4XhhoD7mTJOxOcIhyjKqX7UpMjZ_iGj4AZE1nDqiUqet5VID5y8tu4exYgJRahJD0qn3ClHyo85Qt-yKhuJYpqp3O0mzt6ctQsuEE3PT_cNQXmEclqY-kogtb0K7JguWyAkNptC6mvyAyQcREzKDOblfVCa4YEAoyLWf-aJUXcOE7_xyEwCB6S-N2L-6TODn2rELVmEy8aLWckKGrTSsl3qTrSgPzo8TF3d-vQ1UxUvotFPEDdjhn0-qxNV_s72gqcyNPCzBrrDPtJ70iOvfQREcy0zbPJ0hwC3Y0iefXjxfJlhWe5PVJzLmhHFl_PltAuHpRFRUF3KvZtBNyXPRblwnMsXCPTbaAzUmQSeATrC-6gSMCndq5iOCZgnr5dwA_kJHf04TQVJBxAzg=w450-h150-no?authuser=0"
-    }
+        , url: "espadaFuego.png"}
     , {
         comprado: false,
         nombre: "espada de hielo", ataque: 3000, armaduraF: 1000, congelar: 30, roboVida: 0,
         defensa: 2000, probCrit: 40, dmgCrit: 100,
         recuperacion: 50, vida: 2000, alcance: 4
-        , url: "https://lh3.googleusercontent.com/qTCY8Ts0_fFUaKAqg1Oo06RTbTKzYlZ-_hcfPTzxD2xfsvYUeGZu_YKWcILimayHQAO8J8KZvAWTagCNQjgN8-hvAamRomecbQZF93zXVXYo_y7vx1bOIqrkYKJa9JhfPbxgUn83jKWeRtPgzGMkm4M1E2qkSZrdRbPxWbScj6LD4XN65mpY2xG1IZgz7NHyn_Dm-okw5h0nYKXVqCRcj1Thzg6jj_R04x2lur9WIAKHEim-z1ZizYODKQL5qwWbZRTisGw4FWe3ArbqV1lWkWkzLIFZ0DbvyraByL05BpYZ0KBSiyaHegTrDao0jxZBQ3F0BThbYEROM1lFqNkzPONvPh7ueNUPT-7JuZCk2qmKHwibYt_Aipa9Dwy-jLQrhrGFNF_GLmdVs65WbsDGOGdMNJ28Mvx2fyMhG_44pMI-R1nS9twy-CZUEgHHNlvaSsQU8McxmX3RuxTMgVEthq8lLIarp8BQJvwwUdgIsH2NOg7_qzwXXA1wdBD0eapyQ3LaLa-CZTq3Le8DXfLaH-ZX-2LjFIJh7bx5Zasro2xq3MPoqDDj65f6C2QtYusg5BKNIscWSQSIr-neqPqHVODwwEmEtNI120aVEh-9J71CB0Db3noYsfOqqZn1TPjqh28tfIAeLtsNzH-t9g5ufA2swXTokMQyvzMHn6_gb8LW92FjaMX4yZ79yI8MLic=w450-h150-no?authuser=0"
-    }
+        , url: "espadaHielo.png"}
     , {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 30,
         nombre: "espada del bosque", ataque: 2500,
         defensa: 1500, probCrit: 20, dmgCrit: 100,
         recuperacion: 30, vida: 3000, alcance: 1
-        , url: "https://lh3.googleusercontent.com/A6zMcmD1AF3VW_pG9GVY3vm6Nuf2W9FZ3MPoRyXi875mgJLghHq-QLjnqm-UYmjkJQ0fsALVCOItgN_GLR2xLEwiYy8WL5LJmmQSgrsdJR02SGvQK_CoyRgX0aGjdJ8t18H5Yed-EGmQD3SowgZWJkWl7JSJdOH1K0Mq6V-RM589IlYT5BlZDdhPvzcPRrRQXapOG-QOj93gpJ9IZi0nLmSbQNLL2_XneuEw3_XSivJj1_cBnpupVWcx-qDgCzJQNkxoMU57p1uV4dZV65rasaySrS6rpE0vkGXS-ZG8gU41IKHuLEo9UiqhDTTxvZSi0pqDUmMIFMFkjfZYdUT0kLhveZ4xgNuwfFsj35-RSF1C4VTBlDGGQzP_7SxTlrwz_pe04i7BewXf9Ecz1eqhqnNjKCjY8YhrI6HkFoogqHVPSURohfHEvy4Y1HWqCDTHQXPgB1qEugvMdeTMaSseq3kE0m7qIMLVaMT2UO7QbjEMRO3P5o2ku-cHs6Ps8ZY_cfuV0vw9TQeV9F6Ad9ieXlw-noeW9Gbug1dY0uMyzRJjQdwCaJ68coDneUJi082xljoDr_saPzpzKy3wancbk1rSXgWOf9iS45skqYdvp5HOhVrqudnAPvozJhyQKpY2FJRLZpomGEZ12_tusGOz-lPX3Hb4csR8d9Tq2Ytf4or5sX98yXK0KcYbB6oy4T0=w450-h150-no?authuser=0"
-    }
+        , url: "espadaPasto.png"}
     , {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 0,
         nombre: "katana filosa", ataque: 3500,
         defensa: 1000, probCrit: 50, dmgCrit: 200,
         recuperacion: 30, vida: 1500, alcance: 1
-        , url: "https://lh3.googleusercontent.com/UC3xiyNXJ4-jhQJCIJtuL_h9rtdr1pk-F0yDvvQIAhB9VffPsNbw5h4U9IMr-URpjaq3gKlr4MkApbGODS_cY31V7k6R2M5ytifGjr6ca3Mja8rihoNfvdsR8z_kyeFAAvkFbqCoujPLlEAOtHPmXpHheYSYn79JKYNhdT0yv7mFgt118e-O0-bqO5NYXUPz-W2VOT_X-fNzTLk-zAtI-laJklmGEqwP9xiOd-6cVkSR1Ljckjo8KT9CsR4dMF4Tz4hsmBUak6y9WbmgggSZzdvYcr22aP0pvSYijxzQ3Fw3A7e8yRImDeRaTnEaRyHteL9x29_1xjwfDRACse6yKNZuRfDzu_8j6m0BW6dnV8GtOjMlP5piq82JYEguiSYkOveW63bNfyBjobBixDgtbui-IEacWlxkMndcnqJ0Ql-XKMMb7hCJRgYZSJ04qo5tuMWFfSEIYYDsYBd08onmlRAbGQlFunKIyvRIOcmK9IqKT6vqDK5BT0auvNGaou7E4fjLe2E9RUEgVK53mYS7J5ws3GY_EHkdawSorGYANr0GiuVMDSChlcNPlWcBs5MY6Gx5W4BJySdIffySCPY4H1h-GMVk0DG14n4oplMP2ue9oPw83nmTLNLDc4vuWg9eDyRTaJ6P_MJHgPrO1pKhEEuUCSf_ngKDGRPFvOEjduyHWOMeUlhVW3-po8NgcZo=w450-h150-no?authuser=0"
-    }
+        , url: "espadaOtra.png"}
 ]
 
 var infoPjs = [
@@ -52,26 +48,30 @@ var infoPjs = [
         nombre: "Yohiro", vidamax: 3000
         , ataque: 1200, defensa: 7000, probCrit: 30
         , dmgCrit: 170, recuperacion: 50, chabilidad1: 10, chabilidad2: 30, chabilidad3: 70, chabilidad4: 100
-        , url: "yohirostand.png"}
+        , url: "yohirostand.png"
+    }
     ,
     {
         comprado: false, armaduraF: 1000, congelar: 25, roboVida: 10,
         nombre: "Rain", vidamax: 17000
         , ataque: 1800, defensa: 1000, probCrit: 40
         , dmgCrit: 120, recuperacion: 20, chabilidad1: 20, chabilidad2: 40, chabilidad3: 60, chabilidad4: 80
-        , url: "rain.png"}
+        , url: "rain.png"
+    }
     , {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 40,
         nombre: "Ninja", vidamax: 25000
         , ataque: 1500, defensa: 500, probCrit: 20
         , dmgCrit: 200, recuperacion: 30, chabilidad1: 5, chabilidad2: 20, chabilidad3: 60, chabilidad4: 90
-        , url: "ninja.png"}
+        , url: "ninja.png"
+    }
     , {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 20,
         nombre: "Sol", vidamax: 15000
         , ataque: 1700, defensa: 400, probCrit: 70
         , dmgCrit: 250, recuperacion: 40, chabilidad1: 20, chabilidad2: 50, chabilidad3: 70, chabilidad4: 100
-        , url: "sol.png"}
+        , url: "sol.png"
+    }
 ];
 
 var enemigos = [
@@ -80,19 +80,22 @@ var enemigos = [
         nombre: "Practica", vidamax: 10000, vida: 10000
         , ataque: 0, defensa: 100, probCrit: 0
         , dmgCrit: 0, recuperacion: 5
-        , url: "practica.png"}
+        , url: "practica.png"
+    }
     ,
     {
         nombre: "Fuego", vidamax: 30000, vida: 30000
         , ataque: 2000, defensa: 500, probCrit: 50
         , dmgCrit: 200, recuperacion: 10
-        , url: "fuegoso.png"}
+        , url: "fuegoso.png"
+    }
     ,
     {
         nombre: "Pantano", vidamax: 50000, vida: 50000
         , ataque: 4000, defensa: 700, probCrit: 40
         , dmgCrit: 300, recuperacion: 40
-        , url: "baboso.png"}
+        , url: "baboso.png"
+    }
     ,
     {
         nombre: "Agua", vidamax: 110000, vida: 110000
@@ -106,12 +109,9 @@ var enemigos = [
         , ataque: 12000, defensa: 1000, probCrit: 80
         , dmgCrit: 500, recuperacion: 50
         , url: "electron.png"
-        
-        }
-]
 
-/*https://lh3.googleusercontent.com/gNX3yo-3ANKvhcFomG4ZqxKbmUp-Ls0Z7lOFAhEYqyKRGzbc3gWzcbJ9z1_2g1NUBtHkQ45AYSc3wRQRFlBV1y6E2AT3kqFanacYLCUkISd1QTfMl0BQ2AeGK1yixmVxRvcLGe9iuErlZG8VxUJ3IINNbpdor9UsSY_WyKof49DgpPKVx-YQdJQkG6fwnzxQDHC7qzINewlmqR8S9jbC2-X4_-iUTvHUu10Z_9cm99RHZpFr3zA9fA-kwHiO73mNTWnYD51FtHrptsJvGVar1PDPfq6iE8lWyRJpUG3pv2dYv-Qnwhayjq1wbfrFE6l-inB0dQyYfzfo-l1KAZwwcnLlZP_TI_pvA0RYyc2zF9nqbLyzX4KJC7uUdc9dsYsrGTdnUVMBZw_asVgz3WsygHeo1fvShNRVNQy9uQkWq-pGWnUmsoxGGuB_KMDi46rEcFqxlKb4rFnLVfL9I_o7K69WYwTaREwYG66NobgNm7pL9yOEh__iwpFW5yRDFdmJq06PuLrs00NStJCVlMpUxhDLk8WwZLOU4DlRdwS0SPx0Ojy1nKetTBfS8A8PyOI4WDQJNvU8UskiOknKvvrMMp-E31IBuDBEpaxiC3doeuZ0Ruqc-y5Efrwv19er-c6zQDS5DS6DWZyW6COGvRIjyRFuzok6q9qfbO0Kchh0-SiN8HnI9PgdokJCJcS3VEY=w50-h100-no?authuser=0"
-     */
+    }
+]
 
 var venemigo1 = false;
 var venemigo2 = false;
