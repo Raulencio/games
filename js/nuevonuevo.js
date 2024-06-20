@@ -12,7 +12,7 @@ var personajeElegido = {
     armaduraF: 0, congelar: 0, roboVida: 0,
     nombre: "", vidamax: 0, vidaActual: 0,
     ataque: 0, defensa: 0, probCrit: 0,
-    dmgCrit: 0, recuperacion: 0, vida: 0,
+    dmgCrit: 0, recuperacion: 0, vida: 0, cenergia: 0,
     alcance: 0, url: "", chabilidad1: 0, chabilidad2: 0, chabilidad3: 0, chabilidad4: 0
 }
 var cual = [
@@ -20,34 +20,38 @@ var cual = [
         comprado: true, armaduraF: 2000, congelar: 0, roboVida: 0,
         nombre: "espada de fuego", ataque: 4200,
         defensa: 4000, probCrit: 10, dmgCrit: 100,
-        recuperacion: 10, vida: 5000, alcance: 2
-        , url: "espadaFuego.png"}
+        recuperacion: 10, vida: 5000, alcance: 2, cenergia: 200
+        , url: "espadaFuego.png"
+    }
     , {
         comprado: false,
         nombre: "espada de hielo", ataque: 3000, armaduraF: 1000, congelar: 30, roboVida: 0,
         defensa: 2000, probCrit: 40, dmgCrit: 100,
-        recuperacion: 50, vida: 2000, alcance: 4
-        , url: "espadaHielo.png"}
+        recuperacion: 50, vida: 2000, alcance: 4, cenergia: 100
+        , url: "espadaHielo.png"
+    }
     , {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 30,
         nombre: "espada del bosque", ataque: 2500,
         defensa: 1500, probCrit: 20, dmgCrit: 100,
-        recuperacion: 30, vida: 3000, alcance: 1
-        , url: "espadaPasto.png"}
+        recuperacion: 30, vida: 3000, alcance: 1, cenergia: 150
+        , url: "espadaPasto.png"
+    }
     , {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 0,
         nombre: "katana filosa", ataque: 3500,
         defensa: 1000, probCrit: 50, dmgCrit: 200,
-        recuperacion: 30, vida: 1500, alcance: 1
-        , url: "espadaOtra.png"}
+        recuperacion: 30, vida: 1500, alcance: 1, cenergia: 300
+        , url: "espadaOtra.png"
+    }
 ]
 
 var infoPjs = [
     {
         comprado: true, armaduraF: 3000, congelar: 0, roboVida: 0,
-        nombre: "Yohiro", vidamax: 3000
+        nombre: "Yohiro", vidamax: 30000
         , ataque: 1200, defensa: 7000, probCrit: 30
-        , dmgCrit: 170, recuperacion: 50, chabilidad1: 10, chabilidad2: 30, chabilidad3: 70, chabilidad4: 100
+        , dmgCrit: 170, recuperacion: 50, chabilidad1: 25, chabilidad2: 50, chabilidad3: 75, chabilidad4: 100
         , url: "yohirostand.png"
     }
     ,
@@ -79,27 +83,27 @@ var enemigos = [
     {
         nombre: "Practica", vidamax: 10000, vida: 10000
         , ataque: 0, defensa: 100, probCrit: 0
-        , dmgCrit: 0, recuperacion: 5
+        , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 20000
         , url: "practica.png"
     }
     ,
     {
         nombre: "Fuego", vidamax: 30000, vida: 30000
         , ataque: 2000, defensa: 500, probCrit: 50
-        , dmgCrit: 200, recuperacion: 10
+        , dmgCrit: 200, recuperacion: 10, velocidadAtaque: 1500
         , url: "fuegoso.png"
     }
     ,
     {
         nombre: "Pantano", vidamax: 50000, vida: 50000
-        , ataque: 4000, defensa: 700, probCrit: 40
+        , ataque: 4000, defensa: 700, probCrit: 40, velocidadAtaque: 3000
         , dmgCrit: 300, recuperacion: 40
         , url: "baboso.png"
     }
     ,
     {
         nombre: "Agua", vidamax: 110000, vida: 110000
-        , ataque: 7000, defensa: 400, probCrit: 10
+        , ataque: 7000, defensa: 400, probCrit: 10, velocidadAtaque: 1000
         , dmgCrit: 700, recuperacion: 100
         , url: "acuoso.png"
     }
@@ -107,7 +111,7 @@ var enemigos = [
     {
         nombre: "Trueno", vidamax: 200000, vida: 200000
         , ataque: 12000, defensa: 1000, probCrit: 80
-        , dmgCrit: 500, recuperacion: 50
+        , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2500
         , url: "electron.png"
 
     }
@@ -409,10 +413,12 @@ function botones(n) {
     else if (n == 7) { mostrar('armas'); esconder('personajes'); }
     else if (n == 8) { mostrar('personajes'); esconder('armas'); }
     else if (n == 9) {
-
+        eCongelado = false;
         mostrar('juego'), esconder('batalla'); for (var e = 1; e < nenemigo; e++) {
             enemigos[e - 1].vida = enemigos[e - 1].vidamax;
-        } personajeElegido.vida = personajeElegido.vidamax; detenerAtaquesIA(); consumirEnergia(width);
+        } personajeElegido.vida = personajeElegido.vidamax;
+        enemigos[nenemigo - 1].vida = enemigos[nenemigo - 1].vidamax;
+        detenerAtaquesIA();
     }
 
     document.getElementById("pnombre").textContent = nombre + " nivel: " + nivelActual;
@@ -518,24 +524,28 @@ function enemigo(n) {
         }
     }
 
-    if (confirmacion) {
-        cosa(n);
-    }
+    eCongelado = false;
     eimagen();
     reiniciarConsumirEnergia(width); consumirEnergiaB(widthB); consumirEnergiaC(width);
     iniciarRelleno(); iniciarRellenoB(); iniciarAtaquesIA();
+    if (confirmacion) {
+        cosa(n);
+    }
 }
 
 /* mostrar estadisticas del enemigo*/
 
 function cosa(n) {
     enemigoac = n;
+    enemigos[nenemigo - 1].vida = enemigos[nenemigo - 1].vidamax;
     var estats = enemigos[n - 1];
 
     document.getElementById("pnombreE").textContent = estats.nombre;
     document.getElementById("pvidaE").textContent = estats.vidamax;
     document.getElementById("pataqueE").textContent = estats.ataque;
     document.getElementById("pdefensaE").textContent = estats.defensa;
+
+
     barraDeVida(estats.vidamax, estats.vida, "barraVidaE");
     mostrar("batalla"); personajeBatalla();
 }
@@ -582,6 +592,8 @@ function estadisticas() {
 
     personajeElegido.chabilidad4 = parseInt(infoPjs[pequipado - 1].chabilidad4);
 
+    personajeElegido.cenergia = cual[narmaequipada - 1].cenergia;
+
     nombreArmaelegido.textContent = '' + cual[narmaequipada - 1].nombre;
 
     nombrePjelegido.textContent = '' + infoPjs[pequipado - 1].nombre;
@@ -591,6 +603,7 @@ function estadisticas() {
     ataquePj.textContent = "Ataque: " + personajeElegido.ataque;
 
     probCritPj.textContent = "Vida: " + personajeElegido.vidamax;
+
 
     document.getElementById("thabilidad1").textContent = personajeElegido.chabilidad1;
 
@@ -617,6 +630,7 @@ var intervalo;
 
 
 function iniciarRelleno() {
+    maxWidth = personajeElegido.cenergia;
     clearInterval(intervalo);
     intervalo = setInterval(function () {
         if (width >= maxWidth) {
@@ -710,8 +724,9 @@ function consumirEnergia(n) {
             localStorage.setItem("nivelActual", nivelActual);
             estats.vida = estats.vidamax;
             infoMapa();
+
             botones(9);
-            consumirEnergia(0);
+
         }
     } barraDeVida(personajeElegido.vidamax, personajeElegido.vida, "barraVidaP");
 
@@ -721,26 +736,17 @@ function consumirEnergia(n) {
 
 function actualizarBarra() {
     var barra = document.getElementById('barra-energia');
-    barra.style.width = width + '%';
+    var porcentaje = (width / personajeElegido.cenergia) * 100;
+    barra.style.width = porcentaje + '%';
 
-    if (width == personajeElegido.chabilidad1) {
-
+    if (width == personajeElegido.chabilidad1 ||
+        width == personajeElegido.chabilidad2 ||
+        width == personajeElegido.chabilidad3 ||
+        width == personajeElegido.chabilidad4) {
         barra.style.backgroundColor = colorRan();
     }
-
-    if (width == personajeElegido.chabilidad2) {
-
-        barra.style.backgroundColor = colorRan();
-    } else if (width == personajeElegido.chabilidad3) {
-
-        barra.style.backgroundColor = colorRan();
-    } else if (width == personajeElegido.chabilidad4) {
-
-        barra.style.backgroundColor = colorRan();
-    }
-    barra.innerText = width + '/ 100';
+    barra.innerText = width + ' / ' + personajeElegido.cenergia;
 }
-
 
 var widthB = 0;
 var maxWidthB = 100;
@@ -802,12 +808,9 @@ function actualizarBarraB() {
 }
 
 var eCongelado = false;
-
 function atacarIA() {
     // Generar un número aleatorio entre 0 y 1 para decidir si atacar o esperar
-
     if (!eCongelado) {
-
         var probabilidadAtaque = Math.random();
 
         if (widthB >= ataques.nivel4.energia && probabilidadAtaque <= 0.25) {
@@ -817,8 +820,8 @@ function atacarIA() {
             realizarAtaque('nivel4', daño);
             consumirEnergiaB(consumoEnergia);
 
-            // Verificar si el personaje elegido tiene armadura de fuego y aplicar rebote de daño
-            if (personajeElegido.armaduraF > 0) {
+            // Verificar si el personaje elegido tiene armadura de fuego y aplicar rebote de daño si el ataque es mayor que 0
+            if (personajeElegido.armaduraF > 0 && daño > 0) {
                 var dañoRebotado = Math.ceil(daño * (personajeElegido.armaduraF / 100));
                 enemigos[enemigoac - 1].vida -= dañoRebotado;
                 console.log('¡El personaje elegido tiene armadura de fuego! Rebote de daño: ' + dañoRebotado);
@@ -826,7 +829,6 @@ function atacarIA() {
                 // Asegurar que la vida del enemigo no sea menor que 0
                 if (enemigos[enemigoac - 1].vida <= 0) {
                     // Manejar la derrota del enemigo
-                    // Puedes implementar aquí la lógica necesaria cuando el enemigo muere
                 }
             }
         } else if (widthB >= ataques.nivel3.energia && probabilidadAtaque <= 0.50) {
@@ -836,7 +838,7 @@ function atacarIA() {
             realizarAtaque('nivel3', daño);
             consumirEnergiaB(consumoEnergia);
 
-            if (personajeElegido.armaduraF > 0) {
+            if (personajeElegido.armaduraF > 0 && daño > 0) {
                 var dañoRebotado = Math.ceil(daño * (personajeElegido.armaduraF / 100));
                 enemigos[enemigoac - 1].vida -= dañoRebotado;
                 console.log('¡El personaje elegido tiene armadura de fuego! Rebote de daño: ' + dañoRebotado);
@@ -852,7 +854,7 @@ function atacarIA() {
             realizarAtaque('nivel2', daño);
             consumirEnergiaB(consumoEnergia);
 
-            if (personajeElegido.armaduraF > 0) {
+            if (personajeElegido.armaduraF > 0 && daño > 0) {
                 var dañoRebotado = Math.ceil(daño * (personajeElegido.armaduraF / 100));
                 enemigos[enemigoac - 1].vida -= dañoRebotado;
                 console.log('¡El personaje elegido tiene armadura de fuego! Rebote de daño: ' + dañoRebotado);
@@ -868,7 +870,7 @@ function atacarIA() {
             realizarAtaque('nivel1', daño);
             consumirEnergiaB(consumoEnergia);
 
-            if (personajeElegido.armaduraF > 0) {
+            if (personajeElegido.armaduraF > 0 && daño > 0) {
                 var dañoRebotado = Math.ceil(daño * (personajeElegido.armaduraF / 100));
                 enemigos[enemigoac - 1].vida -= dañoRebotado;
                 console.log('¡El personaje elegido tiene armadura de fuego! Rebote de daño: ' + dañoRebotado);
@@ -883,18 +885,21 @@ function atacarIA() {
     } else {
         console.log("enemigo congelado");
     }
+
     var estats = enemigos[enemigoac - 1];
 
     if (estats.vida <= 0) {
         consumirEnergia(0);
     }
+
     if (personajeElegido.vida > personajeElegido.vidamax) {
         personajeElegido.vida = personajeElegido.vidamax;
     }
 
     barraDeVida(estats.vidamax, estats.vida, "barraVidaE");
-
 }
+
+
 
 function realizarAtaque(nivel, daño) {
 
@@ -909,7 +914,7 @@ function realizarAtaque(nivel, daño) {
     barraDeVida(personajeElegido.vidamax, personajeElegido.vida, "barraVidaP");
 
     if (personajeElegido.vida <= 0) {
-        alert("Derrotado"); botones(9);
+        alert("Derrotado"); enemigos[nenemigo - 1].vida = enemigos[nenemigo - 1].vidamax; botones(9);
     }
 
     console.log(`La IA realiza un ataque ${nivel} causando ${daño} de daño`);
@@ -919,7 +924,10 @@ function realizarAtaque(nivel, daño) {
 var intervaloAtaquesIA; // Variable para guardar el intervalo de ataques de la IA
 
 function iniciarAtaquesIA() {
-    intervaloAtaquesIA = setInterval(atacarIA, 2000); // La IA intenta atacar cada 2 segundos
+    console.log(enemigoac);
+    if (enemigoac>1) {
+        intervaloAtaquesIA = setInterval(atacarIA, enemigos[nenemigo - 1].velocidadAtaque); // La IA intenta atacar cada 2 segundos
+    }
 }
 
 
