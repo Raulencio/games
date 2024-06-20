@@ -298,7 +298,7 @@ window.onload = function () {
     for (var e = 1; e < nPjs - 1; e++) {
 
         $("#pjTienda" + e).append("<img width='100%' src='" + infoPjs[e].url + "'>");
-        
+
     }
     for (var e = 1; e < 4; e++) {
         if (infoPjs[e].comprado) {
@@ -394,10 +394,13 @@ function botones(n) {
     else if (n == 7) { mostrar('armas'); esconder('personajes'); }
     else if (n == 8) { mostrar('personajes'); esconder('armas'); }
     else if (n == 9) {
+
         mostrar('juego'), esconder('batalla'); for (var e = 1; e < nenemigo; e++) {
             enemigos[e - 1].vida = enemigos[e - 1].vidamax;
-        }
+        } personajeElegido.vida = personajeElegido.vidamax; detenerAtaquesIA();consumirEnergia(width);
     }
+
+    document.getElementById("pnombre").textContent = nombre + " nivel: " + nivelActual;
 
 }
 function equipar(n) {
@@ -505,7 +508,7 @@ function enemigo(n) {
     }
     eimagen();
     reiniciarConsumirEnergia(width); consumirEnergiaB(widthB);
-    iniciarRelleno(); iniciarRellenoB();
+    iniciarRelleno(); iniciarRellenoB(); iniciarAtaquesIA();
 }
 function cosa(n) {
     enemigoac = n;
@@ -528,7 +531,6 @@ function personajeBatalla() {
 
     barraDeVida(personajeElegido.vidamax, personajeElegido.vida, "barraVidaP");
 
-
 }
 
 function estadisticas() {
@@ -541,6 +543,8 @@ function estadisticas() {
     personajeElegido.probCrit = (parseInt(infoPjs[pequipado - 1].probCrit) + parseInt(cual[narmaequipada - 1].probCrit));
     personajeElegido.url = infoPjs[pequipado - 1].url;
     personajeElegido.recuperacion = infoPjs[pequipado - 1].recuperacion;
+    personajeElegido.dmgCrit= parseInt(infoPjs[pequipado - 1].dmgCrit) + parseInt(cual[narmaequipada - 1].dmgCrit);
+    personajeElegido.recuperacion=parseInt(infoPjs[pequipado - 1].recuperacion) + parseInt(cual[narmaequipada - 1].recuperacion);
 
     nombreArmaelegido.textContent = '' + cual[narmaequipada - 1].nombre;
 
@@ -566,6 +570,8 @@ var width = 0;
 var maxWidth = 100;
 var intervalo;
 
+
+
 function iniciarRelleno() {
     clearInterval(intervalo);
     intervalo = setInterval(function () {
@@ -575,9 +581,9 @@ function iniciarRelleno() {
             width++;
             actualizarBarra();
         }
-    }, 100); // Ajusta el tiempo (100 ms) para cambiar la velocidad de relleno
+    }, personajeElegido.recuperacion); // Ajusta el tiempo (100 ms) para cambiar la velocidad de relleno
 }
-var dineroganado = 0;
+var dineroganado = 0; "pnombre"
 
 function consumirEnergia(n) {
     clearInterval(intervalo);
@@ -588,8 +594,17 @@ function consumirEnergia(n) {
 
         var estats = enemigos[enemigoac - 1];
 
-        estats.vida -= consumo / 100 * personajeElegido.ataque;
+        var esCritico = Math.random() * 100 < personajeElegido.probCrit;
+        if (esCritico) {
 
+            var golpe = Math.ceil(consumo / 100 * personajeElegido.ataque * ((consumo / 100) * personajeElegido.dmgCrit/100))
+            estats.vida -= golpe;
+
+            console.log(golpe);
+        } else {
+            estats.vida -= consumo / 100 * personajeElegido.ataque;
+            console.log(consumo / 100 * personajeElegido.ataque);
+        }
         document.getElementById("pnombreE").textContent = estats.nombre;
         document.getElementById("pvidaE").textContent = estats.vida;
         document.getElementById("pataqueE").textContent = estats.ataque;
@@ -597,7 +612,7 @@ function consumirEnergia(n) {
 
         barraDeVida(estats.vidamax, estats.vida, "barraVidaE");
         if (estats.vida <= 0) {
-            dineroganado = nivelActual * 100; dinero += nivelActual * 100;
+            dineroganado = nivelActual * 100 * enemigoac; dinero += nivelActual * 100 * enemigoac;
             actualizarTienda();
             alert("Venciste a " + estats.nombre + " Dinero $" + dineroganado);
             console.log("n " + enemigoac)
@@ -638,10 +653,15 @@ function actualizarBarra() {
 }
 
 
-
 var widthB = 0;
 var maxWidthB = 100;
 var intervaloB;
+var ataques = {
+    nivel1: { energia: 25, daño: 25 },
+    nivel2: { energia: 50, daño: 50 },
+    nivel3: { energia: 75, daño: 75 },
+    nivel4: { energia: 100, daño: 100 }
+};
 
 function iniciarRellenoB() {
     clearInterval(intervaloB);
@@ -658,11 +678,11 @@ function iniciarRellenoB() {
 function reiniciarConsumirEnergia(n) {
     clearInterval(intervalo);
     var consumo = n; // Cantidad de energía a consumir
-    if (width >= consumo) {
-        width = Math.max(0, width - consumo);
+    if (widthB >= consumo) {
+        widthB = Math.max(0, widthB - consumo);
     }
-    actualizarBarra();
-    iniciarRelleno(); // Reinicia el relleno después de consumir
+    actualizarBarraB();
+    iniciarRellenoB(); // Reinicia el relleno después de consumir
 }
 
 function consumirEnergiaB(n) {
@@ -681,20 +701,66 @@ function actualizarBarraB() {
     barra.style.width = widthB + '%';
 
     if (widthB == 25) {
-
         barra.style.backgroundColor = colorRan();
-    }
-
-    if (widthB == 50) {
-
+    } else if (widthB == 50) {
         barra.style.backgroundColor = colorRan();
     } else if (widthB == 75) {
-
         barra.style.backgroundColor = colorRan();
     } else if (widthB == 100) {
-
         barra.style.backgroundColor = colorRan();
     }
     barra.innerText = widthB + '/ 100';
 }
 
+function atacarIA() {
+    // Generar un número aleatorio entre 0 y 1 para decidir si atacar o esperar
+    var probabilidadAtaque = Math.random();
+
+    if (widthB >= ataques.nivel4.energia && probabilidadAtaque <= 0.25) {
+        // Realizar ataque de nivel 4 (100%)
+        realizarAtaque('nivel4', ataques.nivel4.daño);
+        consumirEnergiaB(ataques.nivel4.energia);
+    } else if (widthB >= ataques.nivel3.energia && probabilidadAtaque <= 0.50) {
+        // Realizar ataque de nivel 3 (75%)
+        realizarAtaque('nivel3', ataques.nivel3.daño);
+        consumirEnergiaB(ataques.nivel3.energia);
+    } else if (widthB >= ataques.nivel2.energia && probabilidadAtaque <= 0.75) {
+        // Realizar ataque de nivel 2 (50%)
+        realizarAtaque('nivel2', ataques.nivel2.daño);
+        consumirEnergiaB(ataques.nivel2.energia);
+    } else if (widthB >= ataques.nivel1.energia) {
+        // Realizar ataque de nivel 1 (25%)
+        realizarAtaque('nivel1', ataques.nivel1.daño);
+        consumirEnergiaB(ataques.nivel1.energia);
+    } else {
+        console.log('No hay suficiente energía para atacar');
+    }
+}
+
+function realizarAtaque(nivel, daño) {
+
+    personajeElegido.vida -= (enemigos[enemigoac - 1].ataque / 100 * daño);
+    if (personajeElegido.vida < personajeElegido.vidamax) { personajeElegido.vida += +(personajeElegido.defensa / 10); }
+
+
+
+    barraDeVida(personajeElegido.vidamax, personajeElegido.vida, "barraVidaP");
+
+    if (personajeElegido.vida <= 0) {
+        alert("Derrotado"); botones(9);
+    }
+
+    console.log(`La IA realiza un ataque ${nivel} causando ${daño} de daño`);
+    // Aquí puedes agregar la lógica para aplicar el daño al enemigo
+}
+
+var intervaloAtaquesIA; // Variable para guardar el intervalo de ataques de la IA
+
+function iniciarAtaquesIA() {
+    intervaloAtaquesIA = setInterval(atacarIA, 2000); // La IA intenta atacar cada 2 segundos
+}
+
+
+function detenerAtaquesIA() {
+    clearInterval(intervaloAtaquesIA);
+}
