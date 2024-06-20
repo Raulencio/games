@@ -147,7 +147,8 @@
     top: 10%;
     left: 25%;
     width: 50%;
-    height: 50%
+    height: 50%;
+
 }
 
 .contenedorEnemigo {
@@ -159,14 +160,14 @@
     width: 50%;
     height: 50%;
     background-color: rgba(219, 7, 7, 0.461);
-
+    overflow: hidden;
 }
 
 .barraVidaE {
 
     z-index: 5;
     position: absolute;
-    top: -10%;
+    top: 0%;
     left: 0%;
     width: 100%;
     height: 10%;
@@ -178,7 +179,7 @@ text-align: center;
 .barraVidaP {
     z-index: 5;
     position: absolute;
-    top: -10%;
+    top: 0%;
     left: 0%;
     width: 100%;
     height: 10%;
@@ -195,6 +196,7 @@ text-align: center;
     width: 50%;
     height: 50%;
     background-color: rgba(7, 60, 219, 0.639);
+    overflow: hidden;
 
 }
 
@@ -274,6 +276,7 @@ text-align: center;
     height: 100%;
     background-color: rgba(87, 192, 55, 0.313);
     text-align: center;
+    overflow: hidden;
 }
 
 .contenedorArma {
@@ -284,6 +287,7 @@ text-align: center;
     height: 30%;
     background-color: rgba(87, 192, 55, 0.313);
     text-align: center;
+     overflow: hidden;
 }
 
 .contenedornombre {
@@ -307,7 +311,7 @@ text-align: center;
 
 }
 
-.mapa1 {
+.mapa1 {  overflow: hidden;
     position: absolute;
     top: 20%;
     left: 10%;
@@ -318,7 +322,7 @@ text-align: center;
 
 }
 
-.mapa2 {
+.mapa2 {  overflow: hidden;
     position: absolute;
     top: 20%;
     left: 30%;
@@ -329,7 +333,7 @@ text-align: center;
 
 }
 
-.mapa3 {
+.mapa3 {  overflow: hidden;
     position: absolute;
     top: 20%;
     left: 50%;
@@ -340,7 +344,7 @@ text-align: center;
 
 }
 
-.mapa4 {
+.mapa4 {  overflow: hidden;
     position: absolute;
     top: 20%;
     left: 70%;
@@ -351,7 +355,7 @@ text-align: center;
 
 }
 
-.mapa8 {
+.mapa8 {  overflow: hidden;
     position: absolute;
     top: 40%;
     left: 10%;
@@ -362,7 +366,7 @@ text-align: center;
 
 }
 
-.mapa7 {
+.mapa7 {  overflow: hidden;
     position: absolute;
     top: 40%;
     left: 30%;
@@ -373,7 +377,7 @@ text-align: center;
 
 }
 
-.mapa6 {
+.mapa6 {  overflow: hidden;
     position: absolute;
     top: 40%;
     left: 50%;
@@ -384,7 +388,7 @@ text-align: center;
 
 }
 
-.mapa5 {
+.mapa5 {  overflow: hidden;
     position: absolute;
     top: 40%;
     left: 70%;
@@ -395,7 +399,7 @@ text-align: center;
 
 }
 
-.mapa9 {
+.mapa9 {  overflow: hidden;
     position: absolute;
     top: 60%;
     left: 10%;
@@ -406,7 +410,7 @@ text-align: center;
 
 }
 
-.mapa10 {
+.mapa10 {  overflow: hidden;
     position: absolute;
     top: 60%;
     left: 30%;
@@ -417,7 +421,7 @@ text-align: center;
 
 }
 
-.mapa11 {
+.mapa11 {  overflow: hidden;
     position: absolute;
     top: 60%;
     left: 50%;
@@ -428,7 +432,7 @@ text-align: center;
 
 }
 
-.mapa12 {
+.mapa12 {  overflow: hidden;
     position: absolute;
     top: 60%;
     left: 70%;
@@ -439,7 +443,7 @@ text-align: center;
 
 }
 
-.mapa16 {
+.mapa16 {  overflow: hidden;
     position: absolute;
     top: 80%;
     left: 10%;
@@ -450,7 +454,7 @@ text-align: center;
 
 }
 
-.mapa15 {
+.mapa15 {  overflow: hidden;
     position: absolute;
     top: 80%;
     left: 30%;
@@ -461,7 +465,7 @@ text-align: center;
 
 }
 
-.mapa14 {
+.mapa14 {  overflow: hidden;
     position: absolute;
     top: 80%;
     left: 50%;
@@ -472,7 +476,7 @@ text-align: center;
 
 }
 
-.mapa13 {
+.mapa13 {  overflow: hidden;
     position: absolute;
     top: 80%;
     left: 70%;
