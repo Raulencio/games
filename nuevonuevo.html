@@ -18,7 +18,7 @@
             <input class="botoninicio" id="botoninicio" type="button" value="Inicio" onclick="botones(1)">
             <input class="botontienda" id="botontienda" type="button" value="Tienda" onclick="botones(2)">
             <input class="botoninventario" id="botoninventario" type="button" value="Inventario" onclick="botones(3)">
-            <input class="botonalgo" id="botonalgo" type="button" value="Algo" onclick="botones(4)">
+            <input class="botonalgo" id="botonalgo" type="button" value="Comida" onclick="botones(4)">
 
             <div class="juego" id="juego" hidden="true">
                 <h1>Mapa</h1>
@@ -36,16 +36,20 @@
                         onclick="botones(9)">
 
 
-                    <div class="habilidad1" id="habilidad1" onclick="consumirEnergia(personajeElegido.chabilidad1)"><p class="thabilidad1" id="thabilidad1"></p>
+                    <div class="habilidad1" id="habilidad1" onclick="consumirEnergia(personajeElegido.chabilidad1)">
+                        <p class="thabilidad1" id="thabilidad1"></p>
 
                     </div>
-                    <div class="habilidad2" id="habilidad2" onclick="consumirEnergia(personajeElegido.chabilidad2)"> <p class="thabilidad2" id="thabilidad2"></p>
+                    <div class="habilidad2" id="habilidad2" onclick="consumirEnergia(personajeElegido.chabilidad2)">
+                        <p class="thabilidad2" id="thabilidad2"></p>
 
                     </div>
-                    <div class="habilidad3" id="habilidad3" onclick="consumirEnergia(personajeElegido.chabilidad3)"> <p class="thabilidad3" id="thabilidad3"></p>
+                    <div class="habilidad3" id="habilidad3" onclick="consumirEnergia(personajeElegido.chabilidad3)">
+                        <p class="thabilidad3" id="thabilidad3"></p>
 
                     </div>
-                    <div class="habilidad4" id="habilidad4" onclick="consumirEnergia(personajeElegido.chabilidad4)"> <p class="thabilidad4" id="thabilidad4"></p>
+                    <div class="habilidad4" id="habilidad4" onclick="consumirEnergia(personajeElegido.chabilidad4)">
+                        <p class="thabilidad4" id="thabilidad4"></p>
 
                     </div>
 
@@ -147,7 +151,8 @@
 
                 </div>
 
-                <input class="botoncerrarjuego" id="botoncerrarjuego2" type="button" value="cerrar" onclick="botones(6)">
+                <input class="botoncerrarjuego" id="botoncerrarjuego2" type="button" value="cerrar"
+                    onclick="botones(6)">
 
             </div>
 
@@ -197,41 +202,53 @@
 
                     </div>
 
-                    <div class="contenedorInfo1" id="contenedorInfo1"><p id="valorcosas1">$0</p>
-                        <input id="botonCompra1"class="botonComprar" type="button" value="Comprar" onclick="comprar(1,2)">
+                    <div class="contenedorInfo1" id="contenedorInfo1">
+                        <p id="valorcosas1">$0</p>
+                        <input id="botonCompra1" class="botonComprar" type="button" value="Comprar"
+                            onclick="comprar(1,2)">
                     </div>
 
                     <div class="pjTienda2" id="pjTienda2">
 
                     </div>
-                    <div class="contenedorInfo2" id="contenedorInfo2"><p id="valorcosas2">$0</p>
-                        <input id="botonCompra2"class="botonComprar" type="button" value="Comprar" onclick="comprar(1,3)">
+                    <div class="contenedorInfo2" id="contenedorInfo2">
+                        <p id="valorcosas2">$0</p>
+                        <input id="botonCompra2" class="botonComprar" type="button" value="Comprar"
+                            onclick="comprar(1,3)">
                     </div>
                     <div class="pjTienda3" id="pjTienda3">
 
                     </div>
-                    <div class="contenedorInfo3" id="contenedorInfo3"><p id="valorcosas3">$0</p>
-                        <input id="botonCompra3"class="botonComprar" type="button" value="Comprar" onclick="comprar(1,4)">
+                    <div class="contenedorInfo3" id="contenedorInfo3">
+                        <p id="valorcosas3">$0</p>
+                        <input id="botonCompra3" class="botonComprar" type="button" value="Comprar"
+                            onclick="comprar(1,4)">
                     </div>
 
                     <div class="pjArma1" id="pjArma1">
 
                     </div>
-                     <div class="contenedorInfoA1" id="contenedorInfoA1"><p id="valorcosas4">$0</p>
-                        <input id="botonCompraA1"class="botonComprar2" type="button" value="Comprar" onclick="comprar(2,2)">
+                    <div class="contenedorInfoA1" id="contenedorInfoA1">
+                        <p id="valorcosas4">$0</p>
+                        <input id="botonCompraA1" class="botonComprar2" type="button" value="Comprar"
+                            onclick="comprar(2,2)">
                     </div>
                     <div class="pjArma2" id="pjArma2">
 
                     </div>
-                    <div class="contenedorInfoA2" id="contenedorInfoA2"><p id="valorcosas5">$0</p>
-                       <input id="botonCompraA2"class="botonComprar2" type="button" value="Comprar" onclick="comprar(2,3)">
-                   </div>
+                    <div class="contenedorInfoA2" id="contenedorInfoA2">
+                        <p id="valorcosas5">$0</p>
+                        <input id="botonCompraA2" class="botonComprar2" type="button" value="Comprar"
+                            onclick="comprar(2,3)">
+                    </div>
                     <div class="pjArma3" id="pjArma3">
 
                     </div>
-                    <div class="contenedorInfoA3" id="contenedorInfoA3"><p id="valorcosas6">$0</p>
-                       <input id="botonCompraA3"class="botonComprar2" type="button" value="Comprar" onclick="comprar(2,4)">
-                   </div>
+                    <div class="contenedorInfoA3" id="contenedorInfoA3">
+                        <p id="valorcosas6">$0</p>
+                        <input id="botonCompraA3" class="botonComprar2" type="button" value="Comprar"
+                            onclick="comprar(2,4)">
+                    </div>
 
                     <div class="arreglar"></div>
                 </div>
@@ -358,8 +375,17 @@
 
             </div>
             <div class="algo" id="algo" hidden="true">
-                <h1>Algo</h1>
-
+                <h1 id="tComida">Comida</h1>
+                <div class="tiendaVisible">
+                    <input type="button" id="mejoraAtaque" value="Mejora de ataque 10% x $100" onclick="comprarMejora('ataque')">
+                    <input type="button" id="mejoraDefensa" value="Mejora de defensa 10% x $100" onclick="comprarMejora('defensa')">
+                    <input type="button" id="mejoraVidaMax" value="Mejora de vida maxima 10% x $100" onclick="comprarMejora('vidamax')">
+                    <input type="button" id="mejoraProbCrit" value="Mejora de prob golpe critico 10% x $100" onclick="comprarMejora('probCrit')">
+                    <input type="button" id="mejoraDmgCrit" value="Mejora de daño critico 10% x $100" onclick="comprarMejora('dmgCrit')">
+                    <input type="button" id="mejoraProbCongelar" value="Mejora de prob congelar 10% x $100" onclick="comprarMejora('congelar')">
+                    <input type="button" id="mejoraRoboVida" value="Mejora de robo de vida 10% x $100" onclick="comprarMejora('roboVida')">
+                    <input type="button" id="mejoraArmaduraF" value="Mejora de armadura de fuego 10% x $100" onclick="comprarMejora('armaduraF')">
+                </div>
             </div>
 
         </div>
