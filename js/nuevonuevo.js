@@ -998,9 +998,9 @@ function comprarMejora(mejora) {
 
 
 
-function comprarMejora(tipo) {
-    if (dinero >= 100) {
-        dinero -= 100;
+function comprarMejora(tipo,valor) {
+    if (dinero >= valor) {
+        dinero -= valor;
         switch(tipo) {
             case 'ataque':
                 personajeElegido.ataque = personajeElegido.ataque ? personajeElegido.ataque + Math.ceil(personajeElegido.ataque * 0.1) : 1;
