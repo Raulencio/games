@@ -3,7 +3,7 @@ var nivelActual = 1;
 var narmaequipada = 1;
 var pequipado = 1;
 var enemigoac = 2;
-var nenemigo = 5;
+var nenemigo = 7;
 var nPjs = 5;
 var nArmas = 5;
 var dinero = 0;
@@ -25,7 +25,7 @@ var cual = [
     }
     , {
         comprado: false,
-        nombre: "espada de hielo", ataque: 3000, armaduraF: 1000, congelar: 30, roboVida: 0,
+        nombre: "espada de hielo", ataque: 3000, armaduraF: 500, congelar: 30, roboVida: 0,
         defensa: 2000, probCrit: 40, dmgCrit: 100,
         recuperacion: 50, vida: 2000, alcance: 4, cenergia: 100
         , url: "espadaHielo.png"
@@ -48,8 +48,8 @@ var cual = [
 
 var infoPjs = [
     {
-        comprado: true, armaduraF: 3000, congelar: 0, roboVida: 0,
-        nombre: "Yohiro", vidamax: 30000
+        comprado: true, armaduraF: 1500, congelar: 0, roboVida: 0,
+        nombre: "Samurai", vidamax: 30000
         , ataque: 1200, defensa: 7000, probCrit: 30
         , dmgCrit: 170, recuperacion: 50, chabilidad1: 25, chabilidad2: 50, chabilidad3: 75, chabilidad4: 100
         , url: "yohirostand.png"
@@ -85,6 +85,18 @@ var enemigos = [
         , ataque: 0, defensa: 100, probCrit: 0
         , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 20000
         , url: "practica.png"
+    }
+    ,{
+        nombre: "Toribio", vidamax: 20000, vida: 20000
+        , ataque: 1000, defensa: 100, probCrit: 0
+        , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 1000
+        , url: "toribio.png"
+    }
+    ,{
+        nombre: "Rino", vidamax: 25000, vida: 25000
+        , ataque: 1500, defensa: 100, probCrit: 0
+        , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 1500
+        , url: "rino.png"
     }
     ,
     {
