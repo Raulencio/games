@@ -144,6 +144,9 @@ function actualizarTienda() {
 
     }
     document.getElementById("tiendaH").textContent = ("Tienda $" + dinero);
+    document.getElementById("tComida").textContent = ("Comida $" + dinero);
+
+
     localStorage.setItem("dinero", dinero);
 
     for (var e = 1; e < 4; e++) {
@@ -424,7 +427,22 @@ function botones(n) {
     document.getElementById("pnombre").textContent = nombre + " nivel: " + nivelActual;
 
 }
+
+function habilitarMejoras() {
+    var mejoras = [
+        "mejoraAtaque", "mejoraDefensa", "mejoraVidaMax", "mejoraProbCrit",
+        "mejoraDmgCrit", "mejoraProbCongelar", "mejoraRoboVida", "mejoraArmaduraF"
+    ];
+
+    mejoras.forEach(function(mejoraId) {
+        var boton = document.getElementById(mejoraId);
+        boton.disabled = false;
+        boton.style.backgroundColor = ""; // Restablece el color de fondo al valor por defecto
+    });
+}
+
 function equipar(n) {
+    habilitarMejoras()
     narmaequipada = n;
 
     if (cual[n - 1].comprado == true) {
@@ -451,6 +469,7 @@ function equipar(n) {
 
 }
 function elegir(n) {
+    habilitarMejoras()
     pequipados = localStorage.getItem("pequipado");
     pequipado = n;
 
@@ -545,7 +564,7 @@ function cosa(n) {
     document.getElementById("pataqueE").textContent = estats.ataque;
     document.getElementById("pdefensaE").textContent = estats.defensa;
 
-
+    eCongelado = false;
     barraDeVida(estats.vidamax, estats.vida, "barraVidaE");
     mostrar("batalla"); personajeBatalla();
 }
@@ -564,7 +583,13 @@ function personajeBatalla() {
 
 /*funcion de cargar estadisticas base para el personaje elegido en base al arma equipada*/
 
+function datospj(){
+    defensaPj.textContent = "Defensa: " + personajeElegido.defensa;
 
+    ataquePj.textContent = "Ataque: " + personajeElegido.ataque;
+
+    probCritPj.textContent = "Vida: " + personajeElegido.vidamax;
+}
 
 function estadisticas() {
 
@@ -598,11 +623,7 @@ function estadisticas() {
 
     nombrePjelegido.textContent = '' + infoPjs[pequipado - 1].nombre;
 
-    defensaPj.textContent = "Defensa: " + personajeElegido.defensa;
-
-    ataquePj.textContent = "Ataque: " + personajeElegido.ataque;
-
-    probCritPj.textContent = "Vida: " + personajeElegido.vidamax;
+    datospj();
 
 
     document.getElementById("thabilidad1").textContent = personajeElegido.chabilidad1;
@@ -687,7 +708,7 @@ function consumirEnergia(n) {
             console.log(golpe);
         } else {
 
-            golpe = consumo / 100 * personajeElegido.ataque;
+            golpe = Math.ceil(consumo / 100 * personajeElegido.ataque);
             estats.vida -= golpe;
             console.log(consumo / 100 * personajeElegido.ataque);
         }
@@ -933,4 +954,101 @@ function iniciarAtaquesIA() {
 
 function detenerAtaquesIA() {
     clearInterval(intervaloAtaquesIA);
+}
+
+function comprarMejora(mejora) {
+    const costo = 100;
+    if (dinero >= costo) {
+        dinero -= costo;
+        switch (mejora) {
+            case 'ataque':
+                personajeElegido.ataque *= 1.1;
+                break;
+            case 'defensa':
+                personajeElegido.defensa *= 1.1;
+                break;
+            case 'vidamax':
+                personajeElegido.vidamax *= 1.1;
+                personajeElegido.vida = personajeElegido.vidamax; // Restaurar vida al máximo
+                break;
+            case 'probCrit':
+                personajeElegido.probCrit *= 1.1;
+                break;
+            case 'dmgCrit':
+                personajeElegido.dmgCrit *= 1.1;
+                break;
+            case 'congelar':
+                personajeElegido.congelar *= 1.1;
+                break;
+            case 'roboVida':
+                personajeElegido.roboVida *= 1.1;
+                break;
+            case 'armaduraF':
+                personajeElegido.armaduraF *= 1.1;
+                break;
+            default:
+                console.log('Mejora no válida');
+        }
+        actualizarTienda();
+    } else {
+        alert('No tienes suficiente dinero para comprar esta mejora.');
+    }
+}
+
+
+
+
+function comprarMejora(tipo) {
+    if (dinero >= 100) {
+        dinero -= 100;
+        switch(tipo) {
+            case 'ataque':
+                personajeElegido.ataque = personajeElegido.ataque ? personajeElegido.ataque + Math.ceil(personajeElegido.ataque * 0.1) : 1;
+                document.getElementById("mejoraAtaque").disabled = true;
+                document.getElementById("mejoraAtaque").style.backgroundColor = "black";
+                break;
+            case 'defensa':
+                personajeElegido.defensa = personajeElegido.defensa ? personajeElegido.defensa + Math.ceil(personajeElegido.defensa * 0.1) : 1;
+                document.getElementById("mejoraDefensa").disabled = true;
+                document.getElementById("mejoraDefensa").style.backgroundColor = "black";
+                break;
+            case 'vidamax':
+                personajeElegido.vidamax = personajeElegido.vidamax ? personajeElegido.vidamax + Math.ceil(personajeElegido.vidamax * 0.1) : 1;
+                document.getElementById("mejoraVidaMax").disabled = true;
+                document.getElementById("mejoraVidaMax").style.backgroundColor = "black";
+                break;
+            case 'probCrit':
+                personajeElegido.probCrit+=10;
+                document.getElementById("mejoraProbCrit").disabled = true;
+                document.getElementById("mejoraProbCrit").style.backgroundColor = "black";
+                break;
+            case 'dmgCrit':
+                personajeElegido.dmgCrit+=10;
+                document.getElementById("mejoraDmgCrit").disabled = true;
+                document.getElementById("mejoraDmgCrit").style.backgroundColor = "black";
+                break;
+            case 'congelar':
+                personajeElegido.congelar +=10;
+                document.getElementById("mejoraProbCongelar").disabled = true;
+                document.getElementById("mejoraProbCongelar").style.backgroundColor = "black";
+                break;
+            case 'roboVida':
+                personajeElegido.roboVida +=10; 
+                document.getElementById("mejoraRoboVida").disabled = true;
+                document.getElementById("mejoraRoboVida").style.backgroundColor = "black";
+                break;
+            case 'armaduraF':
+                personajeElegido.armaduraF +=10;
+                document.getElementById("mejoraArmaduraF").disabled = true;
+                document.getElementById("mejoraArmaduraF").style.backgroundColor = "black";
+                break;
+            default:
+                console.log("Tipo de mejora desconocido");
+        }
+        actualizarTienda();
+    } else {
+        alert("No tienes suficiente dinero para comprar esta mejora.");
+    }
+    alert("las mejoras son temporalas, No cambies de personaje ni de arma!!!");
+    datospj();
 }
