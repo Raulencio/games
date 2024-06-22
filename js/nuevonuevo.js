@@ -86,13 +86,13 @@ var enemigos = [
         , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 20000
         , url: "practica.png"
     }
-    ,{
+    , {
         nombre: "Toribio", vidamax: 20000, vida: 20000
         , ataque: 1000, defensa: 100, probCrit: 0
         , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 1000
         , url: "toribio.png"
     }
-    ,{
+    , {
         nombre: "Rino", vidamax: 25000, vida: 25000
         , ataque: 1500, defensa: 100, probCrit: 0
         , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 1500
@@ -446,19 +446,85 @@ function habilitarMejoras() {
         "mejoraDmgCrit", "mejoraProbCongelar", "mejoraRoboVida", "mejoraArmaduraF"
     ];
 
-    mejoras.forEach(function(mejoraId) {
+    mejoras.forEach(function (mejoraId) {
         var boton = document.getElementById(mejoraId);
         boton.disabled = false;
         boton.style.backgroundColor = ""; // Restablece el color de fondo al valor por defecto
     });
 }
-
+/*
 function equipar(n) {
-    habilitarMejoras()
+
+
+        habilitarMejoras();
+        narmaequipada = n;
+
+        if (cual[n - 1].comprado == true) {
+
+            localStorage.setItem("armaequipada", narmaequipada);
+
+            $("#armaequipada").empty().append("<img width='100%' src='" + cual[narmaequipada - 1].url + "'>");
+            $("#armaequipada").append('<p>' + cual[narmaequipada - 1].nombre + " Ataque: " + cual[narmaequipada - 1].ataque + " Defensa: " + cual[narmaequipada - 1].defensa + " Prob Crti: " + cual[narmaequipada - 1].probCrit + "</p>");
+            $("#contenedorArma").empty().append("<img width='100%' src='" + cual[narmaequipada - 1].url + "'>");
+
+            for (var e = 1; e < nArmas; e++) {
+                if (cual[e - 1].comprado == true) {
+                    document.getElementById("arma" + e).style.backgroundColor = '#ffffff';
+                } else {
+                    document.getElementById("arma" + e).style.backgroundColor = '#000000';
+
+                }
+            }
+
+            document.getElementById("arma" + narmaequipada).style.backgroundColor = '#ffff00';
+
+        }
+        estadisticas();
+    
+}
+function elegir(n) {
+
+        habilitarMejoras();
+        pequipados = localStorage.getItem("pequipado");
+        pequipado = n;
+
+        if (infoPjs[n - 1].comprado == true) {
+
+            localStorage.setItem("pequipado", pequipado);
+            $("#personajeElegido").empty().append("<img width='100%' src='" + infoPjs[pequipado - 1].url + "'>");
+            $("#contenedorPj").empty().append("<img width='100%' src='" + infoPjs[pequipado - 1].url + "'>");
+
+
+            for (var e = 1; e < nArmas; e++) {
+                document.getElementById("personaje" + e).style.backgroundColor = '#ffffff';
+
+                if (infoPjs[e - 1].comprado == true) {
+                    document.getElementById("personaje" + e).style.backgroundColor = '#ffffff';
+                } else {
+                    document.getElementById("personaje" + e).style.backgroundColor = '#000000';
+
+                }
+
+            }
+            document.getElementById("personaje" + pequipado).style.backgroundColor = '#ffff00';
+
+        }
+        estadisticas();
+    
+}
+*/function equipar(n) {
+    // Verifica si el arma ya está equipada
+    let armaActual = localStorage.getItem("armaequipada");
+    if (armaActual && parseInt(armaActual) === n) {
+        // Si el arma ya está equipada, no hacer nada y salir de la función
+        return;
+    }
+
+    // Si el arma no está equipada, proceder con la equipación
+    habilitarMejoras();
     narmaequipada = n;
 
     if (cual[n - 1].comprado == true) {
-
         localStorage.setItem("armaequipada", narmaequipada);
 
         $("#armaequipada").empty().append("<img width='100%' src='" + cual[narmaequipada - 1].url + "'>");
@@ -470,27 +536,30 @@ function equipar(n) {
                 document.getElementById("arma" + e).style.backgroundColor = '#ffffff';
             } else {
                 document.getElementById("arma" + e).style.backgroundColor = '#000000';
-
             }
         }
 
         document.getElementById("arma" + narmaequipada).style.backgroundColor = '#ffff00';
-
     }
     estadisticas();
-
 }
+
 function elegir(n) {
-    habilitarMejoras()
-    pequipados = localStorage.getItem("pequipado");
+    // Verifica si el personaje ya está equipado
+    let pjActual = localStorage.getItem("pequipado");
+    if (pjActual && parseInt(pjActual) === n) {
+        // Si el personaje ya está equipado, no hacer nada y salir de la función
+        return;
+    }
+
+    // Si el personaje no está equipado, proceder con la equipación
+    habilitarMejoras();
     pequipado = n;
 
     if (infoPjs[n - 1].comprado == true) {
-
         localStorage.setItem("pequipado", pequipado);
         $("#personajeElegido").empty().append("<img width='100%' src='" + infoPjs[pequipado - 1].url + "'>");
         $("#contenedorPj").empty().append("<img width='100%' src='" + infoPjs[pequipado - 1].url + "'>");
-
 
         for (var e = 1; e < nArmas; e++) {
             document.getElementById("personaje" + e).style.backgroundColor = '#ffffff';
@@ -499,12 +568,9 @@ function elegir(n) {
                 document.getElementById("personaje" + e).style.backgroundColor = '#ffffff';
             } else {
                 document.getElementById("personaje" + e).style.backgroundColor = '#000000';
-
             }
-
         }
         document.getElementById("personaje" + pequipado).style.backgroundColor = '#ffff00';
-
     }
     estadisticas();
 }
@@ -556,11 +622,11 @@ function enemigo(n) {
     }
 
     eCongelado = false;
-    eimagen();
-    reiniciarConsumirEnergia(width); consumirEnergiaB(widthB); consumirEnergiaC(width);
-    iniciarRelleno(); iniciarRellenoB(); iniciarAtaquesIA();
     if (confirmacion) {
         cosa(n);
+        eimagen();
+        reiniciarConsumirEnergia(width); consumirEnergiaB(widthB); consumirEnergiaC(width);
+        iniciarRelleno(); iniciarRellenoB(); iniciarAtaquesIA();
     }
 }
 
@@ -595,7 +661,7 @@ function personajeBatalla() {
 
 /*funcion de cargar estadisticas base para el personaje elegido en base al arma equipada*/
 
-function datospj(){
+function datospj() {
     defensaPj.textContent = "Defensa: " + personajeElegido.defensa;
 
     ataquePj.textContent = "Ataque: " + personajeElegido.ataque;
@@ -751,7 +817,7 @@ function consumirEnergia(n) {
             actualizarTienda();
             alert("Venciste a " + estats.nombre + " Dinero $" + dineroganado);
             console.log("n " + enemigoac)
-            if (enemigoac >= nivelActual && nivelActual < 5) {
+            if (enemigoac >= nivelActual && nivelActual < nenemigo) {
                 nivelActual++;
             }
             localStorage.setItem("nivelActual", nivelActual);
@@ -958,7 +1024,7 @@ var intervaloAtaquesIA; // Variable para guardar el intervalo de ataques de la I
 
 function iniciarAtaquesIA() {
     console.log(enemigoac);
-    if (enemigoac>1) {
+    if (enemigoac > 1) {
         intervaloAtaquesIA = setInterval(atacarIA, enemigos[nenemigo - 1].velocidadAtaque); // La IA intenta atacar cada 2 segundos
     }
 }
@@ -968,91 +1034,50 @@ function detenerAtaquesIA() {
     clearInterval(intervaloAtaquesIA);
 }
 
-function comprarMejora(mejora) {
-    const costo = 100;
-    if (dinero >= costo) {
-        dinero -= costo;
-        switch (mejora) {
-            case 'ataque':
-                personajeElegido.ataque *= 1.1;
-                break;
-            case 'defensa':
-                personajeElegido.defensa *= 1.1;
-                break;
-            case 'vidamax':
-                personajeElegido.vidamax *= 1.1;
-                personajeElegido.vida = personajeElegido.vidamax; // Restaurar vida al máximo
-                break;
-            case 'probCrit':
-                personajeElegido.probCrit *= 1.1;
-                break;
-            case 'dmgCrit':
-                personajeElegido.dmgCrit *= 1.1;
-                break;
-            case 'congelar':
-                personajeElegido.congelar *= 1.1;
-                break;
-            case 'roboVida':
-                personajeElegido.roboVida *= 1.1;
-                break;
-            case 'armaduraF':
-                personajeElegido.armaduraF *= 1.1;
-                break;
-            default:
-                console.log('Mejora no válida');
-        }
-        actualizarTienda();
-    } else {
-        alert('No tienes suficiente dinero para comprar esta mejora.');
-    }
-}
-
-
-
-
-function comprarMejora(tipo,valor) {
+function comprarMejora(tipo, valor) {
     if (dinero >= valor) {
         dinero -= valor;
-        switch(tipo) {
+        switch (tipo) {
             case 'ataque':
                 personajeElegido.ataque = personajeElegido.ataque ? personajeElegido.ataque + Math.ceil(personajeElegido.ataque * 0.1) : 1;
                 document.getElementById("mejoraAtaque").disabled = true;
-                document.getElementById("mejoraAtaque").style.backgroundColor = "black";
+                document.getElementById("mejoraAtaque").style.backgroundColor = "gray";
                 break;
             case 'defensa':
                 personajeElegido.defensa = personajeElegido.defensa ? personajeElegido.defensa + Math.ceil(personajeElegido.defensa * 0.1) : 1;
                 document.getElementById("mejoraDefensa").disabled = true;
-                document.getElementById("mejoraDefensa").style.backgroundColor = "black";
+                document.getElementById("mejoraDefensa").style.backgroundColor = "gray";
                 break;
             case 'vidamax':
                 personajeElegido.vidamax = personajeElegido.vidamax ? personajeElegido.vidamax + Math.ceil(personajeElegido.vidamax * 0.1) : 1;
                 document.getElementById("mejoraVidaMax").disabled = true;
-                document.getElementById("mejoraVidaMax").style.backgroundColor = "black";
+                document.getElementById("mejoraVidaMax").style.backgroundColor = "gray";
                 break;
             case 'probCrit':
-                personajeElegido.probCrit+=10;
+                personajeElegido.probCrit += 10;
                 document.getElementById("mejoraProbCrit").disabled = true;
-                document.getElementById("mejoraProbCrit").style.backgroundColor = "black";
+                document.getElementById("mejoraProbCrit").style.backgroundColor = "gray";
                 break;
             case 'dmgCrit':
-                personajeElegido.dmgCrit+=10;
+                personajeElegido.dmgCrit += 10;
                 document.getElementById("mejoraDmgCrit").disabled = true;
-                document.getElementById("mejoraDmgCrit").style.backgroundColor = "black";
+                document.getElementById("mejoraDmgCrit").style.backgroundColor = "gray";
                 break;
             case 'congelar':
-                personajeElegido.congelar +=10;
+                personajeElegido.congelar += 10;
                 document.getElementById("mejoraProbCongelar").disabled = true;
-                document.getElementById("mejoraProbCongelar").style.backgroundColor = "black";
+                document.getElementById("mejoraProbCongelar").style.backgroundColor = "gray";
                 break;
             case 'roboVida':
-                personajeElegido.roboVida +=10; 
+                personajeElegido.roboVida += 10;
                 document.getElementById("mejoraRoboVida").disabled = true;
-                document.getElementById("mejoraRoboVida").style.backgroundColor = "black";
+                document.getElementById("mejoraRoboVida").style.backgroundColor = "gray";
                 break;
             case 'armaduraF':
-                personajeElegido.armaduraF +=10;
+
+                personajeElegido.armaduraF = personajeElegido.armaduraF ? personajeElegido.armaduraF + Math.ceil(personajeElegido.armaduraF * 0.1) : 1;
                 document.getElementById("mejoraArmaduraF").disabled = true;
-                document.getElementById("mejoraArmaduraF").style.backgroundColor = "black";
+                document.getElementById("mejoraArmaduraF").style.backgroundColor = "gray";
                 break;
             default:
                 console.log("Tipo de mejora desconocido");
