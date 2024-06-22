@@ -393,7 +393,8 @@ function botones(n) {
 
     if (n == 1) {
         mostrar('inicio'); esconder('tienda'); esconder('inventario'); esconder('algo');
-        document.getElementById("botoninicio").style.backgroundColor = colorRan();
+
+        document.getElementById("botoninicio").style.backgroundColor = "gray";
 
         document.getElementById("botontienda").style.backgroundColor = "#ffffff";
         document.getElementById("botoninventario").style.backgroundColor = "#ffffff";
@@ -401,7 +402,7 @@ function botones(n) {
     } else if (n == 2) {
         mostrar('tienda'); esconder('inicio'); esconder('inventario'); esconder('algo');
 
-        document.getElementById("botontienda").style.backgroundColor = colorRan();
+        document.getElementById("botontienda").style.backgroundColor = "gray";
         document.getElementById("botoninicio").style.backgroundColor = "#ffffff";
         document.getElementById("botoninventario").style.backgroundColor = "#ffffff";
         document.getElementById("botonalgo").style.backgroundColor = "#ffffff";
@@ -409,7 +410,7 @@ function botones(n) {
     } else if (n == 3) {
         mostrar('inventario'); esconder('inicio'); esconder('tienda'); esconder('algo');
 
-        document.getElementById("botoninventario").style.backgroundColor = colorRan();
+        document.getElementById("botoninventario").style.backgroundColor = "gray";
         document.getElementById("botontienda").style.backgroundColor = "#ffffff";
         document.getElementById("botoninicio").style.backgroundColor = "#ffffff";
         document.getElementById("botonalgo").style.backgroundColor = "#ffffff";
@@ -417,7 +418,7 @@ function botones(n) {
     } else if (n == 4) {
         mostrar('algo'); esconder('inicio'); esconder('tienda'); esconder('inventario');
 
-        document.getElementById("botonalgo").style.backgroundColor = colorRan();
+        document.getElementById("botonalgo").style.backgroundColor = "gray";
         document.getElementById("botontienda").style.backgroundColor = "#ffffff";
         document.getElementById("botoninventario").style.backgroundColor = "#ffffff";
         document.getElementById("botoninicio").style.backgroundColor = "#ffffff";
@@ -425,8 +426,12 @@ function botones(n) {
     } else if (n == 5) {
         esconder('inicio'); mostrar('juego'); esconder('botoninicio'); esconder('botoninventario'); esconder('botontienda'); esconder('botonalgo');
     } else if (n == 6) { esconder("batalla"); mostrar('inicio'); esconder('juego'); mostrar('botoninicio'); mostrar('botoninventario'); mostrar('botontienda'); mostrar('botonalgo'); }
-    else if (n == 7) { mostrar('armas'); esconder('personajes'); }
-    else if (n == 8) { mostrar('personajes'); esconder('armas'); }
+    else if (n == 7) { mostrar('armas'); esconder('personajes'); 
+        document.getElementById("botonpersonajes").style.backgroundColor="#ffffff";
+        document.getElementById("botonarmas").style.backgroundColor="gray";}
+    else if (n == 8) { mostrar('personajes'); esconder('armas');
+        document.getElementById("botonarmas").style.backgroundColor="#ffffff";
+        document.getElementById("botonpersonajes").style.backgroundColor="gray"; }
     else if (n == 9) {
         eCongelado = false;
         mostrar('juego'), esconder('batalla'); for (var e = 1; e < nenemigo; e++) {
@@ -452,67 +457,7 @@ function habilitarMejoras() {
         boton.style.backgroundColor = ""; // Restablece el color de fondo al valor por defecto
     });
 }
-/*
 function equipar(n) {
-
-
-        habilitarMejoras();
-        narmaequipada = n;
-
-        if (cual[n - 1].comprado == true) {
-
-            localStorage.setItem("armaequipada", narmaequipada);
-
-            $("#armaequipada").empty().append("<img width='100%' src='" + cual[narmaequipada - 1].url + "'>");
-            $("#armaequipada").append('<p>' + cual[narmaequipada - 1].nombre + " Ataque: " + cual[narmaequipada - 1].ataque + " Defensa: " + cual[narmaequipada - 1].defensa + " Prob Crti: " + cual[narmaequipada - 1].probCrit + "</p>");
-            $("#contenedorArma").empty().append("<img width='100%' src='" + cual[narmaequipada - 1].url + "'>");
-
-            for (var e = 1; e < nArmas; e++) {
-                if (cual[e - 1].comprado == true) {
-                    document.getElementById("arma" + e).style.backgroundColor = '#ffffff';
-                } else {
-                    document.getElementById("arma" + e).style.backgroundColor = '#000000';
-
-                }
-            }
-
-            document.getElementById("arma" + narmaequipada).style.backgroundColor = '#ffff00';
-
-        }
-        estadisticas();
-    
-}
-function elegir(n) {
-
-        habilitarMejoras();
-        pequipados = localStorage.getItem("pequipado");
-        pequipado = n;
-
-        if (infoPjs[n - 1].comprado == true) {
-
-            localStorage.setItem("pequipado", pequipado);
-            $("#personajeElegido").empty().append("<img width='100%' src='" + infoPjs[pequipado - 1].url + "'>");
-            $("#contenedorPj").empty().append("<img width='100%' src='" + infoPjs[pequipado - 1].url + "'>");
-
-
-            for (var e = 1; e < nArmas; e++) {
-                document.getElementById("personaje" + e).style.backgroundColor = '#ffffff';
-
-                if (infoPjs[e - 1].comprado == true) {
-                    document.getElementById("personaje" + e).style.backgroundColor = '#ffffff';
-                } else {
-                    document.getElementById("personaje" + e).style.backgroundColor = '#000000';
-
-                }
-
-            }
-            document.getElementById("personaje" + pequipado).style.backgroundColor = '#ffff00';
-
-        }
-        estadisticas();
-    
-}
-*/function equipar(n) {
     // Verifica si el arma ya está equipada
     let armaActual = localStorage.getItem("armaequipada");
     if (armaActual && parseInt(armaActual) === n) {
@@ -773,7 +718,7 @@ function consumirEnergia(n) {
     var consumo = n; // Cantidad de energía a consumir
     if (width >= consumo) {
         width = Math.max(0, width - consumo);
-        document.getElementById('barra-energia').style.backgroundColor = colorRan();
+        document.getElementById('barra-energia').style.backgroundColor = "";
 
         var estats = enemigos[enemigoac - 1];
         var golpe = 0;
@@ -842,7 +787,7 @@ function actualizarBarra() {
         width == personajeElegido.chabilidad2 ||
         width == personajeElegido.chabilidad3 ||
         width == personajeElegido.chabilidad4) {
-        barra.style.backgroundColor = colorRan();
+        barra.style.backgroundColor = "";
     }
     barra.innerText = width + ' / ' + personajeElegido.cenergia;
 }
@@ -884,7 +829,7 @@ function consumirEnergiaB(n) {
     var consumo = n; // Cantidad de energía a consumir
     if (widthB >= consumo) {
         widthB = Math.max(0, widthB - consumo);
-        document.getElementById('barra-energiaB').style.backgroundColor = colorRan();
+        document.getElementById('barra-energiaB').style.backgroundColor = "";
     }
     actualizarBarraB();
     iniciarRellenoB(); // Reinicia el relleno después de consumir
@@ -895,13 +840,13 @@ function actualizarBarraB() {
     barra.style.width = widthB + '%';
 
     if (widthB == 25) {
-        barra.style.backgroundColor = colorRan();
+        barra.style.backgroundColor = "";
     } else if (widthB == 50) {
-        barra.style.backgroundColor = colorRan();
+        barra.style.backgroundColor = "";
     } else if (widthB == 75) {
-        barra.style.backgroundColor = colorRan();
+        barra.style.backgroundColor = "";
     } else if (widthB == 100) {
-        barra.style.backgroundColor = colorRan();
+        barra.style.backgroundColor = "";
     }
     barra.innerText = widthB + '/ 100';
 }
