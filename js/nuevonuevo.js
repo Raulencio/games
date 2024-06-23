@@ -43,13 +43,13 @@ var cual = [
         defensa: 1000, probCrit: 50, dmgCrit: 200,
         recuperacion: 30, vida: 1500, alcance: 1, cenergia: 300
         , url: "espadaOtra.png"
-    } , {
+    }, {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 0,
         nombre: "Arco", ataque: 3500,
         defensa: 1000, probCrit: 50, dmgCrit: 150,
         recuperacion: 30, vida: 1500, alcance: 1, cenergia: 300
         , url: "arco.png"
-    } , {
+    }, {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 0,
         nombre: "Baculo", ataque: 3500,
         defensa: 1000, probCrit: 50, dmgCrit: 100,
@@ -112,13 +112,13 @@ var enemigos = [
         , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 20000
         , url: "practica.png"
     }
-    ,  {
+    , {
         nombre: "Esqueleto", vidamax: 10000, vida: 10000
         , ataque: 500, defensa: 100, probCrit: 0
         , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 1000
         , url: "esqueleto.png"
     }
-    ,{
+    , {
         nombre: "Toribio", vidamax: 20000, vida: 20000
         , ataque: 1000, defensa: 100, probCrit: 0
         , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 1000
@@ -166,21 +166,21 @@ var enemigos = [
         , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2000
         , url: "kayn.png"
 
-    } ,
+    },
     {
         nombre: "Yohiro", vidamax: 300000, vida: 300000
         , ataque: 15000, defensa: 1500, probCrit: 80
         , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2000
         , url: "yohirostand.png"
 
-    } ,
+    },
     {
         nombre: "Rain", vidamax: 400000, vida: 400000
         , ataque: 17000, defensa: 1000, probCrit: 80
         , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2000
         , url: "rain.png"
 
-    } ,
+    },
     {
         nombre: "sol", vidamax: 500000, vida: 300000
         , ataque: 15000, defensa: 1000, probCrit: 80
@@ -210,29 +210,29 @@ var venemigo16 = false;
 var pequipados = 0;
 
 
-var npersonajesti=6;
+var npersonajesti = 6;
 function actualizarTienda() {
 
     for (var e = 1; e < npersonajesti; e++) {
         document.getElementById("botonCompra" + e).value = "$" + preciocosas;
-     
-        document.getElementById("nombrepj"+e).textContent = (infoPjs[e].nombre);
 
-        document.getElementById("ataquepj"+e).textContent = ("ataque: "+infoPjs[e].ataque);
-        
-        document.getElementById("defensapj"+e).textContent = ("defensa: "+infoPjs[e].defensa);
-        
-        document.getElementById("probcritpj"+e).textContent = ("prob Crit: "+infoPjs[e].probCrit+"%");
-        
-        document.getElementById("dmgcritpj"+e).textContent = ("dmg Crit: "+infoPjs[e].dmgCrit);
-        
-        document.getElementById("probconglearpj"+e).textContent = ("porbabilidad congelar: "+infoPjs[e].congelar+"%");
-        
-        document.getElementById("armadurafuegopj"+e).textContent = ("armadura de fuego: "+infoPjs[e].armaduraF);
-        
-        document.getElementById("robovidapj"+e).textContent = ("robo de vida: "+infoPjs[e].roboVida+"%");
-        
-     
+        document.getElementById("nombrepj" + e).textContent = (infoPjs[e].nombre);
+
+        document.getElementById("ataquepj" + e).textContent = ("ataque: " + infoPjs[e].ataque);
+
+        document.getElementById("defensapj" + e).textContent = ("defensa: " + infoPjs[e].defensa);
+
+        document.getElementById("probcritpj" + e).textContent = ("prob Crit: " + infoPjs[e].probCrit + "%");
+
+        document.getElementById("dmgcritpj" + e).textContent = ("dmg Crit: " + infoPjs[e].dmgCrit);
+
+        document.getElementById("probconglearpj" + e).textContent = ("porbabilidad congelar: " + infoPjs[e].congelar + "%");
+
+        document.getElementById("armadurafuegopj" + e).textContent = ("armadura de fuego: " + infoPjs[e].armaduraF);
+
+        document.getElementById("robovidapj" + e).textContent = ("robo de vida: " + infoPjs[e].roboVida + "%");
+
+
     }
 
 
@@ -473,46 +473,60 @@ function infoMapa() {
 function botones(n) {
 
     if (n == 1) {
-        mostrar('inicio'); esconder('tienda'); esconder('inventario'); esconder('algo');
+        mostrar('inicio'); esconder('tienda'); esconder('inventario'); esconder('algo'); esconder("modo1v1");
 
         document.getElementById("botoninicio").style.backgroundColor = "gray";
 
         document.getElementById("botontienda").style.backgroundColor = "#ffffff";
         document.getElementById("botoninventario").style.backgroundColor = "#ffffff";
         document.getElementById("botonalgo").style.backgroundColor = "#ffffff";
+        document.getElementById("boton1v1").style.backgroundColor = "#ffffff";
     } else if (n == 2) {
-        mostrar('tienda'); esconder('inicio'); esconder('inventario'); esconder('algo');
+        mostrar('tienda'); esconder('inicio'); esconder('inventario'); esconder('algo'); esconder("modo1v1");
 
         document.getElementById("botontienda").style.backgroundColor = "gray";
         document.getElementById("botoninicio").style.backgroundColor = "#ffffff";
         document.getElementById("botoninventario").style.backgroundColor = "#ffffff";
         document.getElementById("botonalgo").style.backgroundColor = "#ffffff";
+        document.getElementById("boton1v1").style.backgroundColor = "#ffffff";
 
     } else if (n == 3) {
-        mostrar('inventario'); esconder('inicio'); esconder('tienda'); esconder('algo');
+        mostrar('inventario'); esconder('inicio'); esconder('tienda'); esconder('algo'); esconder("modo1v1");
 
         document.getElementById("botoninventario").style.backgroundColor = "gray";
         document.getElementById("botontienda").style.backgroundColor = "#ffffff";
         document.getElementById("botoninicio").style.backgroundColor = "#ffffff";
         document.getElementById("botonalgo").style.backgroundColor = "#ffffff";
+        document.getElementById("boton1v1").style.backgroundColor = "#ffffff";
 
     } else if (n == 4) {
-        mostrar('algo'); esconder('inicio'); esconder('tienda'); esconder('inventario');
+        mostrar('algo'); esconder('inicio'); esconder('tienda'); esconder('inventario'); esconder("modo1v1");
 
         document.getElementById("botonalgo").style.backgroundColor = "gray";
         document.getElementById("botontienda").style.backgroundColor = "#ffffff";
         document.getElementById("botoninventario").style.backgroundColor = "#ffffff";
         document.getElementById("botoninicio").style.backgroundColor = "#ffffff";
+        document.getElementById("boton1v1").style.backgroundColor = "#ffffff";
 
     } else if (n == 5) {
-        esconder('inicio'); mostrar('juego'); esconder('botoninicio'); esconder('botoninventario'); esconder('botontienda'); esconder('botonalgo');
-    } else if (n == 6) { esconder("batalla"); mostrar('inicio'); esconder('juego'); mostrar('botoninicio'); mostrar('botoninventario'); mostrar('botontienda'); mostrar('botonalgo'); }
-    else if (n == 7) { mostrar('armas'); esconder('personajes'); 
-        document.getElementById("botonpersonajes").style.backgroundColor="#ffffff";
-        document.getElementById("botonarmas").style.backgroundColor="gray";}
-    else if (n == 8) { mostrar('personajes'); esconder('armas');
-        document.getElementById("botonarmas").style.backgroundColor="#ffffff";
-        document.getElementById("botonpersonajes").style.backgroundColor="gray"; }
+        esconder('inicio'); mostrar('juego');
+        esconder('botoninicio'); esconder('botoninventario');
+        esconder('botontienda'); esconder('botonalgo'); esconder("boton1v1");
+    } else if (n == 6) {
+        esconder("batalla"); mostrar('inicio'); esconder('juego');
+        mostrar('botoninicio'); mostrar('botoninventario'); mostrar('botontienda');
+        mostrar('botonalgo'); mostrar("boton1v1");
+    }
+    else if (n == 7) {
+        mostrar('armas'); esconder('personajes');
+        document.getElementById("botonpersonajes").style.backgroundColor = "#ffffff";
+        document.getElementById("botonarmas").style.backgroundColor = "gray";
+    }
+    else if (n == 8) {
+        mostrar('personajes'); esconder('armas');
+        document.getElementById("botonarmas").style.backgroundColor = "#ffffff";
+        document.getElementById("botonpersonajes").style.backgroundColor = "gray";
+    }
     else if (n == 9) {
         eCongelado = false;
         mostrar('juego'), esconder('batalla'); for (var e = 1; e < nenemigo; e++) {
@@ -520,6 +534,20 @@ function botones(n) {
         } personajeElegido.vida = personajeElegido.vidamax;
         enemigos[nenemigo - 1].vida = enemigos[nenemigo - 1].vidamax;
         detenerAtaquesIA();
+    } else if (n == 10) {
+
+
+        mostrar("modo1v1"); esconder('inicio'); esconder('tienda'); esconder('inventario'); esconder('algo');
+
+
+        document.getElementById("botonalgo").style.backgroundColor = "#ffffff";
+        document.getElementById("botontienda").style.backgroundColor = "#ffffff";
+        document.getElementById("botoninventario").style.backgroundColor = "#ffffff";
+        document.getElementById("botoninicio").style.backgroundColor = "#ffffff";
+        document.getElementById("boton1v1").style.backgroundColor = "gray";
+
+        document.getElementById('mitadroja').innerHTML = generarDiv(10, 11, "fila", "cuadro");
+        document.getElementById('mitadazul').innerHTML = generarDiv(10, 11, "fila", "cuadro");
     }
 
     document.getElementById("pnombre").textContent = nombre + " nivel: " + nivelActual;
@@ -561,7 +589,7 @@ function equipar(n) {
             if (cual[e - 1].comprado == true) {
                 document.getElementById("arma" + e).style.backgroundColor = '#ffffff';
             } else {
-                document.getElementById("arma" + e).style.backgroundColor ="gray";
+                document.getElementById("arma" + e).style.backgroundColor = "gray";
             }
         }
 
