@@ -12,14 +12,15 @@
 </head>
 
 <body>
-    <div class="contenedor"> <input class="botoninicio" id="botoninicio" type="button" value="Inicio" onclick="botones(1)">
+    <div class="contenedor"> <input class="botoninicio" id="botoninicio" type="button" value="Inicio"
+            onclick="botones(1)">
         <input class="botontienda" id="botontienda" type="button" value="Tienda" onclick="botones(2)">
         <input class="botoninventario" id="botoninventario" type="button" value="Inventario" onclick="botones(3)">
         <input class="botonalgo" id="botonalgo" type="button" value="Comida" onclick="botones(4)">
 
         <div class="fondo">
 
-           
+
             <div class="juego" id="juego" hidden="true">
                 <h1>Mapa</h1>
                 <div class="batalla" id="batalla" hidden="true">
@@ -225,11 +226,31 @@
                             onclick="comprar(1,4)">
                     </div>
 
+                    <div class="pjTienda4" id="pjTienda4">
+
+                    </div>
+                    <div class="contenedorInfo4" id="contenedorInfo4">
+                        <p id="valorcosas4">$0</p>
+                        <input id="botonCompra4" class="botonComprar" type="button" value="Comprar"
+                            onclick="comprar(1,5)">
+                    </div>
+
+                    <div class="pjTienda5" id="pjTienda5">
+
+                    </div>
+
+                    <div class="contenedorInfo5" id="contenedorInfo5">
+                        <p id="valorcosas5">$0</p>
+                        <input id="botonCompra5" class="botonComprar" type="button" value="Comprar"
+                            onclick="comprar(1,6)">
+                    </div>
+
+
                     <div class="pjArma1" id="pjArma1">
 
                     </div>
                     <div class="contenedorInfoA1" id="contenedorInfoA1">
-                        <p id="valorcosas4">$0</p>
+                        <p id="valorcosas4">$1000</p>
                         <input id="botonCompraA1" class="botonComprar2" type="button" value="Comprar"
                             onclick="comprar(2,2)">
                     </div>
@@ -237,7 +258,7 @@
 
                     </div>
                     <div class="contenedorInfoA2" id="contenedorInfoA2">
-                        <p id="valorcosas5">$0</p>
+                        <p id="valorcosas5">$1000</p>
                         <input id="botonCompraA2" class="botonComprar2" type="button" value="Comprar"
                             onclick="comprar(2,3)">
                     </div>
@@ -245,9 +266,26 @@
 
                     </div>
                     <div class="contenedorInfoA3" id="contenedorInfoA3">
-                        <p id="valorcosas6">$0</p>
+                        <p id="valorcosas6">$1000</p>
                         <input id="botonCompraA3" class="botonComprar2" type="button" value="Comprar"
                             onclick="comprar(2,4)">
+                    </div>
+                    
+                    <div class="pjArma4" id="pjArma4">
+
+                    </div>
+                    <div class="contenedorInfoA4" id="contenedorInfoA4">
+                        <p id="valorcosas7">$1000</p>
+                        <input id="botonCompraA4" class="botonComprar2" type="button" value="Comprar"
+                            onclick="comprar(2,5)">
+                    </div>
+                    <div class="pjArma5" id="pjArma5">
+
+                    </div>
+                    <div class="contenedorInfoA5" id="contenedorInfoA5">
+                        <p id="valorcosas8">$1000</p>
+                        <input id="botonCompraA5" class="botonComprar2" type="button" value="Comprar"
+                            onclick="comprar(2,6)">
                     </div>
 
                     <div class="arreglar"></div>
@@ -256,7 +294,7 @@
             </div>
             <div class="inventario" id="inventario" hidden="true">
 
-                <h1>Invetario</h1>
+                <h1>Inventario</h1>
 
                 <style>
                     /* Estilos para el contenedor con barra de desplazamiento */
@@ -305,7 +343,20 @@
                         <p class="texto2personaje4" id="texto2personaje4"> Defensa</p>
                         <p class="texto3personaje4" id="texto3personaje4"> Prob Crit</p>
 
-                        <div class="arreglar">
+                        <div class="personaje5" id="personaje5" onclick="elegir(5)"></div>
+                        <p class="texto1personaje5" id="texto1personaje5"> Ataque</p>
+                        <p class="texto2personaje5" id="texto2personaje5"> Defensa</p>
+                        <p class="texto3personaje5" id="texto3personaje5"> Prob Crit</p>
+
+
+                        <div class="personaje6" id="personaje6" onclick="elegir(6)"></div>
+                        <p class="texto1personaje6" id="texto1personaje6"> Ataque</p>
+                        <p class="texto2personaje6" id="texto2personaje6"> Defensa</p>
+                        <p class="texto3personaje6" id="texto3personaje6"> Prob Crit</p>
+
+
+
+                        <div class="arreglar3">
                         </div>
 
                     </div>
@@ -346,10 +397,25 @@
                             <p class="texto3arma1" id="texto3arma4"> Prob Crit</p>
 
                         </div>
-                        <!-- y 
-    <div class="arma5" id="arma5" onclick="equipar(5)"> 
+                        <div class="arma5" id="arma5" onclick="equipar(5)">
+                            <p class="texto1arma1" id="texto1arma5"> Ataque</p>
+                            <p class="texto2arma1" id="texto2arma5"> Defensa</p>
+                            <p class="texto3arma1" id="texto3arma5"> Prob Crit</p>
 
-    </div>
+                        </div>
+                        <div class="arma6" id="arma6" onclick="equipar(6)">
+
+                            <p class="texto1arma1" id="texto1arma6"> Ataque</p>
+                            <p class="texto2arma1" id="texto2arma6"> Defensa</p>
+                            <p class="texto3arma1" id="texto3arma6"> Prob Crit</p>
+
+
+
+                        </div>
+
+                    </div>
+                    <!-- y 
+    
     
     <div class="arma6" id="arma6" onclick="equipar(6)">
 
@@ -367,61 +433,61 @@
 
     </div>
     -->
-                        <div class="arreglar">
-                        </div>
+                    <div class="arreglar">
                     </div>
                 </div>
-
-
             </div>
-            <div class="algo" id="algo" hidden="true">
-                <h1 id="tComida">Comida</h1>
-                <div class="tiendaVisible">
 
-                    <img src="carneconverduras.png" alt="">
-
-                    <input type="button" id="mejoraAtaque" value="Mejora de ataque 10% x $500"
-                        onclick="comprarMejora('ataque',500)">
-
-                    <img src="queso.png" alt="">
-
-                    <input type="button" id="mejoraDefensa" value="Mejora de defensa 10% x $200"
-                        onclick="comprarMejora('defensa',200)">
-
-                    <img src="manzana.png" alt="">
-
-                    <input type="button" id="mejoraVidaMax" value="Mejora de vida maxima 10% x $200"
-                        onclick="comprarMejora('vidamax',200)">
-
-                    <img src="sopadepollo.png" alt="">
-
-                    <input type="button" id="mejoraProbCrit" value="Mejora de prob golpe critico 10% x $300"
-                        onclick="comprarMejora('probCrit',300)">
-
-                    <img src="polloconpapas.png" alt="">
-
-                    <input type="button" id="mejoraDmgCrit" value="Mejora de daño critico 10% x $300"
-                        onclick="comprarMejora('dmgCrit',300)">
-
-                    <img src="aguafria.png" alt="">
-
-                    <input type="button" id="mejoraProbCongelar" value="Mejora de prob congelar 10% x $400"
-                        onclick="comprarMejora('congelar',400)">
-
-                    <img src="jugodenaranja.png" alt="">
-
-                    <input type="button" id="mejoraRoboVida" value="Mejora de robo de vida 10% x $400"
-                        onclick="comprarMejora('roboVida',400)">
-
-                    <img src="teverde.png" alt="">
-
-                    <input type="button" id="mejoraArmaduraF" value="Mejora de armadura de fuego 10% x $400"
-                        onclick="comprarMejora('armaduraF',400)">
-                    <div class="arreglar2"></div>
-                </div>
-            </div>
 
         </div>
+        <div class="algo" id="algo" hidden="true">
+            <h1 id="tComida">Comida</h1>
+            <div class="tiendaVisible">
+
+                <img src="carneconverduras.png" alt="">
+
+                <input type="button" id="mejoraAtaque" value="Mejora de ataque 10% x $500"
+                    onclick="comprarMejora('ataque',500)">
+
+                <img src="queso.png" alt="">
+
+                <input type="button" id="mejoraDefensa" value="Mejora de defensa 10% x $200"
+                    onclick="comprarMejora('defensa',200)">
+
+                <img src="manzana.png" alt="">
+
+                <input type="button" id="mejoraVidaMax" value="Mejora de vida maxima 10% x $200"
+                    onclick="comprarMejora('vidamax',200)">
+
+                <img src="sopadepollo.png" alt="">
+
+                <input type="button" id="mejoraProbCrit" value="Mejora de prob golpe critico 10% x $300"
+                    onclick="comprarMejora('probCrit',300)">
+
+                <img src="polloconpapas.png" alt="">
+
+                <input type="button" id="mejoraDmgCrit" value="Mejora de daño critico 10% x $300"
+                    onclick="comprarMejora('dmgCrit',300)">
+
+                <img src="aguafria.png" alt="">
+
+                <input type="button" id="mejoraProbCongelar" value="Mejora de prob congelar 10% x $400"
+                    onclick="comprarMejora('congelar',400)">
+
+                <img src="jugodenaranja.png" alt="">
+
+                <input type="button" id="mejoraRoboVida" value="Mejora de robo de vida 10% x $400"
+                    onclick="comprarMejora('roboVida',400)">
+
+                <img src="teverde.png" alt="">
+
+                <input type="button" id="mejoraArmaduraF" value="Mejora de armadura de fuego 10% x $400"
+                    onclick="comprarMejora('armaduraF',400)">
+                <div class="arreglar2"></div>
+            </div>
+        </div>
+
+    </div>
     </div>
 
 
