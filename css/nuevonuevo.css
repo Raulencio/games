@@ -15,7 +15,7 @@
     top: 0px;
     left: 0%;
     width: 100%;
-    height: 100%;
+    height:90%;
     background-color: rgba(87, 192, 55, 0.52);
 
     z-index: 1;
@@ -698,7 +698,7 @@ overflow: hidden;
     position: absolute;
     width: 50%;
     left: 0%;
-    top: 80%;
+    top: 90%;
     height: 10%;
     z-index: 3;
 }
@@ -707,7 +707,7 @@ overflow: hidden;
     position: absolute;
     width: 50%;
     left: 50%;
-    top: 80%;
+    top: 90%;
     height: 10%;
     z-index: 3;
 }
@@ -1138,7 +1138,7 @@ overflow: hidden;
 .arreglar2 {
     position: absolute;
     z-index: 1;
-    top: 200%;
+    top: 220%;
     left: 10%;
     width: 60%;
     height: 20%;
