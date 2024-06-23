@@ -78,6 +78,13 @@
     height: 10%;
 }
 
+.carta1v1, .carta1v2 {
+    cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+}
+
+.carta1v1.seleccionada, .carta1v2.seleccionada {
+    background-color: white; /* Cambia el color de fondo al seleccionar */
+}
 .mitadroja{
     position: absolute;
     top: 15%;
