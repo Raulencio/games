@@ -3,7 +3,7 @@ var nivelActual = 1;
 var narmaequipada = 1;
 var pequipado = 1;
 var enemigoac = 2;
-var nenemigo = 8;
+var nenemigo = 12;
 var nPjs = 7;
 var nArmas = 7;
 var dinero = 0;
@@ -157,6 +157,35 @@ var enemigos = [
         , ataque: 12000, defensa: 1000, probCrit: 80
         , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2500
         , url: "electron.png"
+
+    }
+    ,
+    {
+        nombre: "Kayn", vidamax: 300000, vida: 300000
+        , ataque: 12000, defensa: 1000, probCrit: 80
+        , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2000
+        , url: "kayn.png"
+
+    } ,
+    {
+        nombre: "Yohiro", vidamax: 300000, vida: 300000
+        , ataque: 15000, defensa: 1500, probCrit: 80
+        , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2000
+        , url: "yohirostand.png"
+
+    } ,
+    {
+        nombre: "Rain", vidamax: 400000, vida: 400000
+        , ataque: 17000, defensa: 1000, probCrit: 80
+        , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2000
+        , url: "rain.png"
+
+    } ,
+    {
+        nombre: "sol", vidamax: 500000, vida: 300000
+        , ataque: 15000, defensa: 1000, probCrit: 80
+        , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2000
+        , url: "sol.png"
 
     }
 ]
