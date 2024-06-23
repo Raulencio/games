@@ -1185,7 +1185,7 @@ function iniciarRecarga() {
     energiaD = 0;
     document.getElementById('barra-energiaC').style.width = energiaC + '%';
     document.getElementById('barra-energiaD').style.width = energiaD + '%';
-    
+
     // Iniciar el intervalo de recarga
     intervaloRecarga = setInterval(incrementarEnergia, energiaInterval);
 }
@@ -1213,3 +1213,37 @@ function jugarCarta(player, costo) {
         }
     }
 }
+
+// Función para manejar el cambio de fondo y color de fondo en los contenedores 'fondos' y 'contenedorimg'
+function cambiarFondoYColor(img) {
+    // Obtener el contenedor padre de la imagen
+    var contenedor = img.parentNode;
+
+    // Obtener todas las imágenes dentro del contenedor
+    var imagenes = contenedor.querySelectorAll('img');
+
+    // Iterar sobre todas las imágenes
+    imagenes.forEach(function (imagen) {
+        if (imagen === img) {
+            // Si la imagen clickeada es la misma, toggle de la clase 'seleccionada'
+            imagen.classList.toggle('seleccionada');
+        } else {
+            // Si no es la imagen clickeada, remover la clase 'seleccionada'
+            imagen.classList.remove('seleccionada');
+        }
+    });
+}
+
+// Asignar evento clic a todas las imágenes con clase 'carta1v1' dentro de 'fondos'
+document.querySelectorAll('.fondos .carta1v1').forEach(function (img) {
+    img.addEventListener('click', function () {
+        cambiarFondoYColor(this); // Llamar a la función cambiarFondoYColor con la imagen clickeada
+    });
+});
+
+// Asignar evento clic a todas las imágenes con clase 'carta1v2' dentro de 'contenedorimg'
+document.querySelectorAll('.contenedorimg .carta1v2').forEach(function (img) {
+    img.addEventListener('click', function () {
+        cambiarFondoYColor(this); // Llamar a la función cambiarFondoYColor con la imagen clickeada
+    });
+});
