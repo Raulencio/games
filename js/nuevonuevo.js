@@ -554,8 +554,8 @@ function botones(n) {
         document.getElementById("botoninicio").style.backgroundColor = "#ffffff";
         document.getElementById("boton1v1").style.backgroundColor = "gray";
 
-        document.getElementById('mitadroja').innerHTML = generarDiv(10, 11, "fila", "cuadro");
-        document.getElementById('mitadazul').innerHTML = generarDiv(10, 11, "fila", "cuadro");
+        document.getElementById('mitadroja').innerHTML = generarDiv(10, 8, "fila", "cuadro");
+        document.getElementById('mitadazul').innerHTML = generarDiv(10, 8, "fila", "cuadro");
     } else if (n == 11) {
 
         detenerRecarga();
