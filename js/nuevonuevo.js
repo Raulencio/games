@@ -46,13 +46,13 @@ var cual = [
     } , {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 0,
         nombre: "Arco", ataque: 3500,
-        defensa: 1000, probCrit: 50, dmgCrit: 200,
+        defensa: 1000, probCrit: 50, dmgCrit: 150,
         recuperacion: 30, vida: 1500, alcance: 1, cenergia: 300
         , url: "arco.png"
     } , {
         comprado: false, armaduraF: 0, congelar: 0, roboVida: 0,
         nombre: "Baculo", ataque: 3500,
-        defensa: 1000, probCrit: 50, dmgCrit: 200,
+        defensa: 1000, probCrit: 50, dmgCrit: 100,
         recuperacion: 30, vida: 1500, alcance: 1, cenergia: 300
         , url: "baculo.png"
     }
@@ -99,7 +99,7 @@ var infoPjs = [
         comprado: false, armaduraF: 0, congelar: 20, roboVida: 30,
         nombre: "Kayn", vidamax: 20000
         , ataque: 2000, defensa: 500, probCrit: 50
-        , dmgCrit: 250, recuperacion: 20, chabilidad1: 10, chabilidad2: 60, chabilidad3: 90, chabilidad4: 150
+        , dmgCrit: 250, recuperacion: 10, chabilidad1: 30, chabilidad2: 60, chabilidad3: 90, chabilidad4: 100
         , url: "kayn.png"
     }
 ];
