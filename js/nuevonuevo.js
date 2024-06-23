@@ -4,8 +4,8 @@ var narmaequipada = 1;
 var pequipado = 1;
 var enemigoac = 2;
 var nenemigo = 7;
-var nPjs = 5;
-var nArmas = 5;
+var nPjs = 7;
+var nArmas = 7;
 var dinero = 0;
 var preciocosas = 1000;
 var personajeElegido = {
@@ -43,6 +43,18 @@ var cual = [
         defensa: 1000, probCrit: 50, dmgCrit: 200,
         recuperacion: 30, vida: 1500, alcance: 1, cenergia: 300
         , url: "espadaOtra.png"
+    } , {
+        comprado: false, armaduraF: 0, congelar: 0, roboVida: 0,
+        nombre: "Arco", ataque: 3500,
+        defensa: 1000, probCrit: 50, dmgCrit: 200,
+        recuperacion: 30, vida: 1500, alcance: 1, cenergia: 300
+        , url: "arco.png"
+    } , {
+        comprado: false, armaduraF: 0, congelar: 0, roboVida: 0,
+        nombre: "Baculo", ataque: 3500,
+        defensa: 1000, probCrit: 50, dmgCrit: 200,
+        recuperacion: 30, vida: 1500, alcance: 1, cenergia: 300
+        , url: "baculo.png"
     }
 ]
 
@@ -75,6 +87,20 @@ var infoPjs = [
         , ataque: 1700, defensa: 400, probCrit: 70
         , dmgCrit: 250, recuperacion: 40, chabilidad1: 20, chabilidad2: 50, chabilidad3: 70, chabilidad4: 100
         , url: "sol.png"
+    }
+    , {
+        comprado: false, armaduraF: 0, congelar: 0, roboVida: 50,
+        nombre: "Bolto", vidamax: 13000
+        , ataque: 2500, defensa: 300, probCrit: 80
+        , dmgCrit: 200, recuperacion: 30, chabilidad1: 15, chabilidad2: 25, chabilidad3: 60, chabilidad4: 85
+        , url: "bolto.png"
+    }
+    , {
+        comprado: false, armaduraF: 0, congelar: 20, roboVida: 30,
+        nombre: "Kayn", vidamax: 20000
+        , ataque: 2000, defensa: 500, probCrit: 50
+        , dmgCrit: 300, recuperacion: 20, chabilidad1: 10, chabilidad2: 60, chabilidad3: 90, chabilidad4: 150
+        , url: "kayn.png"
     }
 ];
 
@@ -150,7 +176,7 @@ var pequipados = 0;
 
 function actualizarTienda() {
 
-    for (var e = 1; e < 7; e++) {
+    for (var e = 1; e < nPjs; e++) {
 
         document.getElementById("valorcosas" + e).textContent = "$" + preciocosas;
 
@@ -161,11 +187,11 @@ function actualizarTienda() {
 
     localStorage.setItem("dinero", dinero);
 
-    for (var e = 1; e < 4; e++) {
+    for (var e = 1; e < 6; e++) {
         if (infoPjs[e].comprado) {
             document.getElementById("botonCompra" + e).hidden = true;
         }
-    } for (var e = 1; e < 4; e++) {
+    } for (var e = 1; e < 6; e++) {
         if (cual[e].comprado) {
             document.getElementById("botonCompraA" + e).hidden = true;
         }
@@ -480,7 +506,7 @@ function equipar(n) {
             if (cual[e - 1].comprado == true) {
                 document.getElementById("arma" + e).style.backgroundColor = '#ffffff';
             } else {
-                document.getElementById("arma" + e).style.backgroundColor = '#000000';
+                document.getElementById("arma" + e).style.backgroundColor ="gray";
             }
         }
 
@@ -506,7 +532,7 @@ function elegir(n) {
         $("#personajeElegido").empty().append("<img width='100%' src='" + infoPjs[pequipado - 1].url + "'>");
         $("#contenedorPj").empty().append("<img width='100%' src='" + infoPjs[pequipado - 1].url + "'>");
 
-        for (var e = 1; e < nArmas; e++) {
+        for (var e = 1; e < nPjs; e++) {
             document.getElementById("personaje" + e).style.backgroundColor = '#ffffff';
 
             if (infoPjs[e - 1].comprado == true) {
