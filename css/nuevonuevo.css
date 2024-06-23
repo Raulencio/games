@@ -506,7 +506,7 @@ text-align: center;
 .tiendaVisible{
     width: 100%;
     /* Ancho del contenedor */
-    height: 90%;
+    height: 100%;
     /* Alto del contenedor */
     overflow-y: auto;
     /* Barra de desplazamiento vertical */
@@ -582,9 +582,9 @@ text-align: center;
 
 .botonComprar{
     position: absolute;
-    bottom: 10%;
-    left: 35%;
-    width: 30%;
+    top:90%;
+    left: 25%;
+    width: 50%;
     height: 10%;
     background-color: rgb(250, 249, 249);
     text-align: center;
