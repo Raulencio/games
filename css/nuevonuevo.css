@@ -553,6 +553,33 @@ text-align: center;
     text-align: center;
 
 }
+
+.contenedorInfo4{
+
+    position: absolute;
+    top: 170%;
+    left: 40%;
+    width: 50%;
+    height: 40%;
+    background-color: rgba(206, 166, 155, 0.52);
+    transition: 1s;
+    overflow: hidden;
+    text-align: center;
+
+}.contenedorInfo5{
+
+    position: absolute;
+    top: 220%;
+    left: 40%;
+    width: 50%;
+    height: 40%;
+    background-color: rgba(206, 166, 155, 0.52);
+    transition: 1s;
+    overflow: hidden;
+    text-align: center;
+
+}
+
 .botonComprar{
     position: absolute;
     bottom: 10%;
@@ -575,7 +602,7 @@ text-align: center;
 .contenedorInfoA1{
 
     position: absolute;
-    top: 170%;
+    top: 270%;
     left: 60%;
     width: 30%;
     height: 15%;
@@ -588,7 +615,7 @@ text-align: center;
 .contenedorInfoA2{
 
     position: absolute;
-    top: 195%;
+    top: 295%;
     left: 60%;
     width: 30%;
     height: 15%;
@@ -601,7 +628,32 @@ text-align: center;
 .contenedorInfoA3{
 
     position: absolute;
-    top: 220%;
+    top: 320%;
+    left: 60%;
+    width: 30%;
+    height: 15%;
+    background-color: rgba(206, 166, 155, 0.52);
+    transition: 1s;
+    overflow: hidden;
+    text-align: center;
+
+}
+.contenedorInfoA4{
+
+    position: absolute;
+    top: 345%;
+    left: 60%;
+    width: 30%;
+    height: 15%;
+    background-color: rgba(206, 166, 155, 0.52);
+    transition: 1s;
+    overflow: hidden;
+    text-align: center;
+
+}.contenedorInfoA5{
+
+    position: absolute;
+    top: 370%;
     left: 60%;
     width: 30%;
     height: 15%;
@@ -645,9 +697,32 @@ overflow: hidden;
 overflow: hidden;
     text-align: center;
 }
-.pjArma1{
+
+.pjTienda4{
     position: absolute;
     top: 170%;
+    left: 10%;
+    width: 30%;
+    height: 40%;
+    background-color: rgba(179, 58, 24, 0.52);
+    transition: 1s;
+overflow: hidden;
+    text-align: center;
+}
+.pjTienda5{
+    position: absolute;
+    top: 220%;
+    left: 10%;
+    width: 30%;
+    height: 40%;
+    background-color: rgba(179, 58, 24, 0.52);
+    transition: 1s;
+overflow: hidden;
+    text-align: center;
+}
+.pjArma1{
+    position: absolute;
+    top: 270%;
     left: 10%;
     width: 50%;
     height: 15%;
@@ -658,7 +733,7 @@ overflow: hidden;
 }
 .pjArma2{
     position: absolute;
-    top: 195%;
+    top: 295%;
     left: 10%;
     width: 50%;
     height: 15%;
@@ -669,7 +744,28 @@ overflow: hidden;
 }
 .pjArma3{
     position: absolute;
-    top: 220%;
+    top: 320%;
+    left: 10%;
+    width: 50%;
+    height: 15%;
+    background-color: rgba(179, 58, 24, 0.52);
+    transition: 1s;
+
+    text-align: center;
+}
+.pjArma4{
+    position: absolute;
+    top: 345%;
+    left: 10%;
+    width: 50%;
+    height: 15%;
+    background-color: rgba(179, 58, 24, 0.52);
+    transition: 1s;
+
+    text-align: center;
+}.pjArma5{
+    position: absolute;
+    top: 370%;
     left: 10%;
     width: 50%;
     height: 15%;
@@ -781,6 +877,32 @@ overflow: hidden;
     overflow: hidden;
 }
 
+.personaje5 {
+    position: absolute;
+    z-index: 1;
+    top: 180%;
+    left: 10%;
+    width: 20%;
+    height: 20%;
+    background-color: rgba(255, 255, 255, 0.52);
+
+    text-align: center;
+    overflow: hidden;
+}
+
+
+.personaje6 {
+    position: absolute;
+    z-index: 1;
+    top: 210%;
+    left: 10%;
+    width: 20%;
+    height: 20%;
+    background-color: rgba(255, 255, 255, 0.52);
+
+    text-align: center;
+    overflow: hidden;
+}
 
 
 .texto1personaje1 {
@@ -932,6 +1054,85 @@ overflow: hidden;
     position: absolute;
     z-index: 1;
     top: 160%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+
+.texto1personaje5 {
+    position: absolute;
+    z-index: 1;
+    top: 180%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.texto2personaje5 {
+    position: absolute;
+    z-index: 1;
+    top: 185%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.texto3personaje5 {
+    position: absolute;
+    z-index: 1;
+    top: 190%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.texto1personaje6 {
+    position: absolute;
+    z-index: 1;
+    top: 210%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.texto2personaje6 {
+    position: absolute;
+    z-index: 1;
+    top: 215%;
+    left: 30%;
+    width: 60%;
+    height: 5%;
+    background-color: rgba(255, 255, 255, 0.52);
+    transition: 1s;
+    text-align: center;
+
+}
+
+.texto3personaje6 {
+    position: absolute;
+    z-index: 1;
+    top: 220%;
     left: 30%;
     width: 60%;
     height: 5%;
@@ -1127,7 +1328,7 @@ overflow: hidden;
 .arreglar {
     position: absolute;
     z-index: 1;
-    top: 180%;
+    top: 230%;
     left: 10%;
     width: 60%;
     height: 20%;
@@ -1139,6 +1340,17 @@ overflow: hidden;
     position: absolute;
     z-index: 1;
     top: 220%;
+    left: 10%;
+    width: 60%;
+    height: 20%;
+    background-color: rgba(181, 11, 11, 0);
+    transition: 1s;
+    text-align: center;
+}
+.arreglar3 {
+    position: absolute;
+    z-index: 1;
+    top: 200%;
     left: 10%;
     width: 60%;
     height: 20%;
