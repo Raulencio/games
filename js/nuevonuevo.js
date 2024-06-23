@@ -3,7 +3,7 @@ var nivelActual = 1;
 var narmaequipada = 1;
 var pequipado = 1;
 var enemigoac = 2;
-var nenemigo = 7;
+var nenemigo = 8;
 var nPjs = 7;
 var nArmas = 7;
 var dinero = 0;
@@ -68,7 +68,7 @@ var infoPjs = [
     }
     ,
     {
-        comprado: false, armaduraF: 1000, congelar: 25, roboVida: 10,
+        comprado: false, armaduraF: 1000, congelar: 30, roboVida: 10,
         nombre: "Rain", vidamax: 17000
         , ataque: 1800, defensa: 1000, probCrit: 40
         , dmgCrit: 120, recuperacion: 20, chabilidad1: 20, chabilidad2: 40, chabilidad3: 60, chabilidad4: 80
@@ -99,7 +99,7 @@ var infoPjs = [
         comprado: false, armaduraF: 0, congelar: 20, roboVida: 30,
         nombre: "Kayn", vidamax: 20000
         , ataque: 2000, defensa: 500, probCrit: 50
-        , dmgCrit: 300, recuperacion: 20, chabilidad1: 10, chabilidad2: 60, chabilidad3: 90, chabilidad4: 150
+        , dmgCrit: 250, recuperacion: 20, chabilidad1: 10, chabilidad2: 60, chabilidad3: 90, chabilidad4: 150
         , url: "kayn.png"
     }
 ];
@@ -112,7 +112,13 @@ var enemigos = [
         , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 20000
         , url: "practica.png"
     }
-    , {
+    ,  {
+        nombre: "Esqueleto", vidamax: 10000, vida: 10000
+        , ataque: 500, defensa: 100, probCrit: 0
+        , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 1000
+        , url: "esqueleto.png"
+    }
+    ,{
         nombre: "Toribio", vidamax: 20000, vida: 20000
         , ataque: 1000, defensa: 100, probCrit: 0
         , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 1000
@@ -174,13 +180,33 @@ var venemigo16 = false;
 
 var pequipados = 0;
 
+
+var npersonajesti=6;
 function actualizarTienda() {
 
-    for (var e = 1; e < nPjs; e++) {
+    for (var e = 1; e < npersonajesti; e++) {
+        document.getElementById("botonCompra" + e).value = "Comprar $" + preciocosas;
+     
+        document.getElementById("nombrepj"+e).textContent = (infoPjs[e].nombre);
 
-        document.getElementById("valorcosas" + e).textContent = "$" + preciocosas;
-
+        document.getElementById("ataquepj"+e).textContent = ("ataque: "+infoPjs[e].ataque);
+        
+        document.getElementById("defensapj"+e).textContent = ("defensa: "+infoPjs[e].defensa);
+        
+        document.getElementById("probcritpj"+e).textContent = ("prob Crit: "+infoPjs[e].probCrit+"%");
+        
+        document.getElementById("dmgcritpj"+e).textContent = ("dmg Crit: "+infoPjs[e].dmgCrit);
+        
+        document.getElementById("probconglearpj"+e).textContent = ("porbabilidad congelar: "+infoPjs[e].congelar+"%");
+        
+        document.getElementById("armadurafuegopj"+e).textContent = ("armadura de fuego: "+infoPjs[e].armaduraF);
+        
+        document.getElementById("robovidapj"+e).textContent = ("robo de vida: "+infoPjs[e].roboVida+"%");
+        
+     
     }
+
+
     document.getElementById("tiendaH").textContent = ("Tienda $" + dinero);
     document.getElementById("tComida").textContent = ("Comida $" + dinero);
 
