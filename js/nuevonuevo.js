@@ -509,9 +509,13 @@ function botones(n) {
         document.getElementById("boton1v1").style.backgroundColor = "#ffffff";
 
     } else if (n == 5) {
+
+
         esconder('inicio'); mostrar('juego');
         esconder('botoninicio'); esconder('botoninventario');
         esconder('botontienda'); esconder('botonalgo'); esconder("boton1v1");
+
+
     } else if (n == 6) {
         esconder("batalla"); mostrar('inicio'); esconder('juego');
         mostrar('botoninicio'); mostrar('botoninventario'); mostrar('botontienda');
@@ -536,8 +540,12 @@ function botones(n) {
         detenerAtaquesIA();
     } else if (n == 10) {
 
-
+        iniciarRecarga();
         mostrar("modo1v1"); esconder('inicio'); esconder('tienda'); esconder('inventario'); esconder('algo');
+
+        esconder('botoninicio'); esconder('botoninventario');
+        esconder('botontienda'); esconder('botonalgo'); esconder("boton1v1");
+
 
 
         document.getElementById("botonalgo").style.backgroundColor = "#ffffff";
@@ -548,6 +556,13 @@ function botones(n) {
 
         document.getElementById('mitadroja').innerHTML = generarDiv(10, 11, "fila", "cuadro");
         document.getElementById('mitadazul').innerHTML = generarDiv(10, 11, "fila", "cuadro");
+    } else if (n == 11) {
+
+        detenerRecarga();
+
+        esconder("modo1v1");
+        mostrar('botoninicio'); mostrar('botoninventario'); mostrar('botontienda');
+        mostrar('botonalgo'); mostrar("boton1v1"); botones(1);
     }
 
     document.getElementById("pnombre").textContent = nombre + " nivel: " + nivelActual;
@@ -901,6 +916,7 @@ function actualizarBarra() {
     barra.innerText = width + ' / ' + personajeElegido.cenergia;
 }
 
+
 var widthB = 0;
 var maxWidthB = 100;
 var intervaloB;
@@ -1142,4 +1158,58 @@ function comprarMejora(tipo, valor) {
     }
     alert("las mejoras son temporalas, No cambies de personaje ni de arma!!!");
     datospj();
+}
+
+let energiaC = 0;
+let energiaD = 0;
+const maxEnergia = 100;
+const energiaIncrement = 1;
+const energiaInterval = 100; // Intervalo en milisegundos
+let intervaloRecarga;
+
+function incrementarEnergia() {
+    if (energiaC < maxEnergia) {
+        energiaC += energiaIncrement;
+        document.getElementById('barra-energiaC').style.width = energiaC + '%';
+    }
+
+    if (energiaD < maxEnergia) {
+        energiaD += energiaIncrement;
+        document.getElementById('barra-energiaD').style.width = energiaD + '%';
+    }
+}
+
+function iniciarRecarga() {
+    // Reiniciar energía a cero
+    energiaC = 0;
+    energiaD = 0;
+    document.getElementById('barra-energiaC').style.width = energiaC + '%';
+    document.getElementById('barra-energiaD').style.width = energiaD + '%';
+    
+    // Iniciar el intervalo de recarga
+    intervaloRecarga = setInterval(incrementarEnergia, energiaInterval);
+}
+
+function detenerRecarga() {
+    clearInterval(intervaloRecarga);
+}
+
+function jugarCarta(player, costo) {
+    if (player === 'C') {
+        if (energiaC >= costo) {
+            energiaC -= costo;
+            document.getElementById('barra-energiaC').style.width = energiaC + '%';
+            console.log(`Carta jugada por el jugador C. Costo: ${costo}. Energía restante: ${energiaC}.`);
+        } else {
+            console.log(`No hay suficiente energía para el jugador C. Energía actual: ${energiaC}, Costo: ${costo}.`);
+        }
+    } else if (player === 'D') {
+        if (energiaD >= costo) {
+            energiaD -= costo;
+            document.getElementById('barra-energiaD').style.width = energiaD + '%';
+            console.log(`Carta jugada por el jugador D. Costo: ${costo}. Energía restante: ${energiaD}.`);
+        } else {
+            console.log(`No hay suficiente energía para el jugador D. Energía actual: ${energiaD}, Costo: ${costo}.`);
+        }
+    }
 }
