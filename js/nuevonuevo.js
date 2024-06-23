@@ -214,7 +214,7 @@ var npersonajesti=6;
 function actualizarTienda() {
 
     for (var e = 1; e < npersonajesti; e++) {
-        document.getElementById("botonCompra" + e).value = "Comprar $" + preciocosas;
+        document.getElementById("botonCompra" + e).value = "$" + preciocosas;
      
         document.getElementById("nombrepj"+e).textContent = (infoPjs[e].nombre);
 
