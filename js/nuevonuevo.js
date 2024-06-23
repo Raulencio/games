@@ -1213,17 +1213,30 @@ function jugarCarta(player, costo) {
         }
     }
 }
+// Función para manejar el cambio de fondo y color de fondo en el contenedor 'fondos'
+function cambiarFondoYColorFondos(img) {
+    // Obtener todas las imágenes dentro de 'fondos'
+    var imagenes = document.querySelectorAll('.fondos .carta1v1');
+    
+    // Iterar sobre todas las imágenes dentro de 'fondos'
+    imagenes.forEach(function(imagen) {
+        if (imagen === img) {
+            // Si la imagen clickeada es la misma, toggle de la clase 'seleccionada'
+            imagen.classList.toggle('seleccionada');
+        } else {
+            // Si no es la imagen clickeada, remover la clase 'seleccionada'
+            imagen.classList.remove('seleccionada');
+        }
+    });
+}
 
-// Función para manejar el cambio de fondo y color de fondo en los contenedores 'fondos' y 'contenedorimg'
-function cambiarFondoYColor(img) {
-    // Obtener el contenedor padre de la imagen
-    var contenedor = img.parentNode;
-
-    // Obtener todas las imágenes dentro del contenedor
-    var imagenes = contenedor.querySelectorAll('img');
-
-    // Iterar sobre todas las imágenes
-    imagenes.forEach(function (imagen) {
+// Función para manejar el cambio de fondo y color de fondo en el contenedor 'contenedorimg'
+function cambiarFondoYColorContenedor(img) {
+    // Obtener todas las imágenes dentro de 'contenedorimg'
+    var imagenes = document.querySelectorAll('.contenedorimg .carta1v2');
+    
+    // Iterar sobre todas las imágenes dentro de 'contenedorimg'
+    imagenes.forEach(function(imagen) {
         if (imagen === img) {
             // Si la imagen clickeada es la misma, toggle de la clase 'seleccionada'
             imagen.classList.toggle('seleccionada');
@@ -1235,15 +1248,15 @@ function cambiarFondoYColor(img) {
 }
 
 // Asignar evento clic a todas las imágenes con clase 'carta1v1' dentro de 'fondos'
-document.querySelectorAll('.fondos .carta1v1').forEach(function (img) {
-    img.addEventListener('click', function () {
-        cambiarFondoYColor(this); // Llamar a la función cambiarFondoYColor con la imagen clickeada
+document.querySelectorAll('.fondos .carta1v1').forEach(function(img) {
+    img.addEventListener('click', function() {
+        cambiarFondoYColorFondos(this); // Llamar a la función cambiarFondoYColorFondos con la imagen clickeada
     });
 });
 
 // Asignar evento clic a todas las imágenes con clase 'carta1v2' dentro de 'contenedorimg'
-document.querySelectorAll('.contenedorimg .carta1v2').forEach(function (img) {
-    img.addEventListener('click', function () {
-        cambiarFondoYColor(this); // Llamar a la función cambiarFondoYColor con la imagen clickeada
+document.querySelectorAll('.contenedorimg .carta1v2').forEach(function(img) {
+    img.addEventListener('click', function() {
+        cambiarFondoYColorContenedor(this); // Llamar a la función cambiarFondoYColorContenedor con la imagen clickeada
     });
 });
