@@ -1,6 +1,8 @@
 // Obtener referencias a los elementos
 var mapa = document.getElementById('mapa');
 var fondo = document.getElementById('fondo');
+var personaje = document.getElementById('personaje');
+var enemigo = document.getElementById('enemigo');
 var moverIzquierda = document.getElementById('moverIzquierda');
 var moverDerecha = document.getElementById('moverDerecha');
 var moverArriba = document.getElementById('moverArriba');
@@ -9,6 +11,9 @@ var moverAbajo = document.getElementById('moverAbajo');
 // Variables para controlar el movimiento
 var moviendo = false;
 var intervalo;
+
+// Posiciones iniciales del personaje
+var personajePos = { top: 225, left: 225 };
 
 // Función para mover el fondo del mapa
 function moverFondo(direccion) {
@@ -40,6 +45,31 @@ function moverFondo(direccion) {
                 fondo.style.top = Math.max(top - 5, -(fondoHeight - mapaHeight)) + 'px';
             }
             break;
+    }
+
+    // Actualizar la posición del personaje
+    actualizarPosicionPersonaje();
+    // Verificar colisiones
+    verificarColision();
+}
+
+// Función para actualizar la posición del personaje
+function actualizarPosicionPersonaje() {
+    personajePos.top = 225 - parseInt(fondo.style.top);
+    personajePos.left = 225 - parseInt(fondo.style.left);
+}
+
+// Función para verificar colisiones
+function verificarColision() {
+    var enemigoRect = enemigo.getBoundingClientRect();
+    var personajeRect = personaje.getBoundingClientRect();
+
+    if (personajeRect.left < enemigoRect.left + enemigoRect.width &&
+        personajeRect.left + personajeRect.width > enemigoRect.left &&
+        personajeRect.top < enemigoRect.top + enemigoRect.height &&
+        personajeRect.top + personajeRect.height > enemigoRect.top) {
+        // Colisión detectada
+        console.log('Colisión detectada');
     }
 }
 
