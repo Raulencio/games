@@ -1,5 +1,6 @@
 // Obtener referencias a los elementos
-var personaje = document.getElementById('personaje');
+var mapa = document.getElementById('mapa');
+var fondo = document.getElementById('fondo');
 var moverIzquierda = document.getElementById('moverIzquierda');
 var moverDerecha = document.getElementById('moverDerecha');
 var moverArriba = document.getElementById('moverArriba');
@@ -9,38 +10,50 @@ var moverAbajo = document.getElementById('moverAbajo');
 var moviendo = false;
 var intervalo;
 
-// Función para mover el personaje
-function moverPersonaje(direccion) {
-    var top = parseInt(personaje.style.top);
-    var left = parseInt(personaje.style.left);
+// Función para mover el fondo del mapa
+function moverFondo(direccion) {
+    var top = parseInt(fondo.style.top) || 0;
+    var left = parseInt(fondo.style.left) || 0;
+    var fondoWidth = fondo.offsetWidth;
+    var fondoHeight = fondo.offsetHeight;
+    var mapaWidth = mapa.offsetWidth;
+    var mapaHeight = mapa.offsetHeight;
 
     switch (direccion) {
         case 'izquierda':
-            personaje.style.left = (left - 5) + 'px';
+            if (left < 0) {
+                fondo.style.left = Math.min(left + 5, 0) + 'px';
+            }
             break;
         case 'derecha':
-            personaje.style.left = (left + 5) + 'px';
+            if (left > -(fondoWidth - mapaWidth)) {
+                fondo.style.left = Math.max(left - 5, -(fondoWidth - mapaWidth)) + 'px';
+            }
             break;
         case 'arriba':
-            personaje.style.top = (top - 5) + 'px';
+            if (top < 0) {
+                fondo.style.top = Math.min(top + 5, 0) + 'px';
+            }
             break;
         case 'abajo':
-            personaje.style.top = (top + 5) + 'px';
+            if (top > -(fondoHeight - mapaHeight)) {
+                fondo.style.top = Math.max(top - 5, -(fondoHeight - mapaHeight)) + 'px';
+            }
             break;
     }
 }
 
-// Función para empezar a mover el personaje
+// Función para empezar a mover el fondo del mapa
 function empezarMover(direccion) {
     if (!moviendo) {
         moviendo = true;
         intervalo = setInterval(function() {
-            moverPersonaje(direccion);
+            moverFondo(direccion);
         }, 100);
     }
 }
 
-// Función para parar de mover el personaje
+// Función para parar de mover el fondo del mapa
 function pararMover() {
     moviendo = false;
     clearInterval(intervalo);
