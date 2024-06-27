@@ -1,253 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="css/ddpss.css">
-    <link rel="stylesheet" href="css/ddpssbtns.css">
-    <title>DDPSS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DdPs</title>
 </head>
+
 <body>
-<div class="fondo" id="fondo">
-    
-    <div class="pantalla" id="pantalla" hidden="true">
 
-        <div class="personaje" id="personaje">
-            <img src="" alt="" id="ipersonaje" width='100%'>
-            <!--<div class="barraVida"></div>
-            <div class="barraMuerte" id="saludP"></div>-->
-        </div>
-
-        <div class="personaje" id="opersonaje">
-            <p class="rop" id="pdmgo">0</p>
-            <p class="rop" id="pdmgo2">0</p>
-            <img class="borrarse"src="" alt="" id="iopersonaje" width='100%'>
-            <div class="barraVida" id="barraenemigo"></div>
-            <div class="barraMuerte" id="saludOP"></div>
-        </div>
-
-        <div class="linea1"></div>
-        <div class="linea2"></div>
-        <div class="linea3"></div>
-
-        <div class="controles" id="controles">
-
-            <div id="botones">
-            <div class="boton1" editable="no" id="btn1"><div class="izquierda" editable="no"></div></div>
-            <div class="boton2" editable="no" id="btn2"><div class="derecha" editable="no"></div></div>
-            <div class="boton3" editable="no" id="btn3"><div class="arriba" editable="no"></div></div>
-            <div class="boton4" editable="no" id="btn4"><div class="abajo" editable="no"></div></div>
-
-            <div class="boton5" editable="no" id="btn5" hidden="true"><div class="circulo" editable="no"></div></div>
-            <div class="boton6" editable="no" id="btn6" hidden="true"><div class="circulo" editable="no"></div></div>
-            <div class="boton7" editable="no" id="btn7" onClick="ataque()" ><div class="circulo" editable="no"></div></div>
-            <div class="boton8" editable="no" id="btn8" hidden="true"><div class="circulo" editable="no"></div></div>
-<!--  <input type="button" value="Perfil" id="btns1" class="btns1">
-            <input type="button" value="Equipo" id="btns2" class="btns2" >
-            <input type="button" value="Objetivo" id="btns3" class="btns3">  
-            
-            <input type="button" value="x" id="btns6" class="btns6" >
-            <input type="button" value="y" id="btns7" class="btns7">  
-            <input type="button" value="z" id="btns8" class="btns8" >            
-            <input type="button" value="Practica" id="btns4" class="btns4" onClick="apareceEnemigo()">
-            <input type="button" value="Reiniciar" id="btns8" class="btns5" onClick="aumentarDMG(0)">
-      -->
-            <input type="button" value="Perfil" id="btns1" class="btns1">
-            <input type="button" value="Equipo" id="btns2" class="btns2" >
-            <input type="button" value="Objetivo" id="btns3" class="btns3">  
-            
-            <input type="button" value="x" id="btns6" class="btns6" >
-            <input type="button" value="y" id="btns7" class="btns7">  
-            <input type="button" value="z" id="btns8" class="btns8" >            
-            <input type="button" value="Practica" id="ab" class="btns4" onClick="apareceEnemigo()">
-            <input type="button" value="Reiniciar" id="todo" class="btns5">
-        </div>
-        <div id="menuesCaja">
-            <div class="menues" id="menu1" hidden="true">
-                <br>
-                <p id="pi1">informacion</p>
-                <p id="pi2">informacion</p>
-                <p id="pi3">informacion</p>
-        
-            </div>
-
-            <div class="menues" id="menu2" hidden="true">
-                <br>
-                <p id="op"></p>
-                <img src="" alt="" width="60%" id="impg" class="imagenEspada">
-            </div>
-
-            <div class="menues" id="menu3" hidden="true">
-                <br>
-                <p id="pe1">informacion</p>
-                <p id="pe2">informacion</p>
-                <p id="pe3">informacion</p>
-        
-            </div>
-            <div class="menues" id="menu6" hidden="true">
-                <br>
-                <p id="pMenu6"></p>
-              <div class="cosa" onClick="aumentarDMG(0)">
-                  <p id="paumAt">ataque++</p>
-              </div>
-              
-            </div>
-            <div class="menues" id="menu7" hidden="true">
-                <br>
-                <p id="pMenu7"></p>
-                <div class="cosa" onClick="aumentarDMG(1)">
-                    <p id="paumCri">Crit++</p>
-                </div>
-            </div>
-            <div class="menues" id="menu8" hidden="true">
-                <br><br>
-                <p id="pMenu8"></p>
-            </div>
-        </div>
-
-        </div>        
-
-    </div>
-<style>
-    .cosa{
-        display: flexbox;
-        width:100%;
-        height:50px;
-        background-color: red;
-    }
-</style>
-
-    <div class="pantalla" id="pantalla2" hidden="true">
-        
-        <br><br>
-
-        <div class="cPersonajes">
-            <div class="cuadrado" onClick="seleccionarP(1)" id="cuadroP1"></div>
-            <div class="cuadrado" onClick="seleccionarP(2)" id="cuadroP2"></div>
-            <div class="cuadrado" onClick="seleccionarP(3)" id="cuadroP3"></div>
-            <div class="cuadrado" onClick="seleccionarP(4)" id="cuadroP4"></div>
-        </div>
-        <p id="infoP">Selecciona un personaje</p>
-        <div class="cArmas">
-            <div class="cuadra2" onClick="seleccionarA(1)" id="cuadroA1"></div>
-            <div class="cuadra2" onClick="seleccionarA(2)" id="cuadroA2"></div>
-            <div class="cuadra2" onClick="seleccionarA(3)" id="cuadroA3"></div>
-            <div class="cuadra2" onClick="seleccionarA(4)" id="cuadroA4"></div>
-        </div>
-        <p id="infoA">Selecciona un arma</p>
-
-            <input type="button" value="elegir" onClick="prosiga()">
-    
+    div id="mapa">
+    <div id="personaje"
+        style="position: absolute; width: 50px; height: 50px; background-color: red; top: 100px; left: 100px;"></div>
     </div>
 
-    <div class="pantalla" id="pantalla1">
-        
-        <img width="90%" src="https://lh3.googleusercontent.com/XkF64E-5NktyKld5LzlLUqXmuuu_CDeJfD4H7imuJ5WdaKBVIM5ppUGU5LzE3SoSPbKVwZXLW0zasx-ovSJV6UUZOf0auBCvsKyqNFBHoAEOYnxPOqt7RRa-rzp0LCMUrxlgWJ02IsXYlUElYYQh99dCszjM7WXgGVaVqSAJE8p5A1bEn-P2S5Xg4Ob2iPYpnOkTwf8-bnsN0tooLXTA3eUbj4pdeUJDaENHITZXe-2tgCbBQL3JLk-EksdVnbZl9owLqXycDsw0W5WbXCV86DFYZjXfVIvHzjAvlpYdx9iSJmLN9TybXvEXYOOq5BkyIvG_bIHedQ_5HFSJr2ijRrHq3eKpPpoxRrcDHKMyeMJmZdauOTk_4ro6NoTqtc87SuRb-PK4sWgjbhM-0pcfjqsWC3M8zyp8LLYaARZWF5dFV_L2crHiUNdETHMSDEvXfWbbp2gxQ1AwPHhVG17vH6B5Cv-u7u9M-jJJ-82Q1MvC2-zu-fUg1Ba9saX2wUOoN2ha5S2fxBetX47vl5nI6q22OmPjQassVcEnD3zfOUV9aKVBrwvCJs688oLkI-zLKkDcfYY8rXY8oC2qlmXQ8UiUTb5KTOwdnHo8hluNp8dkpVxde3kmWPbFItIRQBKfPCsjmsnh0r88b2WEv1iqHWVKPp3BknTCLVRPhvFi5RYFUs6r5n6VXFB4-iE2GLdXDtG8QLy85OkPOVUa-5UVqz__wg=w1000-h500-no?authuser=0" alt="">
-       
-      
-    
-        <div class="pclick">
-            <p id="pContinuar">...</p>
-        </div>
-        <div class="ache">
-            <img src="" alt="" id="iFP">
-        </div>
-    </div>    
+    <button id="moverIzquierda">Izquierda</button>
+    <button id="moverDerecha">Derecha</button>
+    <button id="moverArriba">Arriba</button>
+    <button id="moverAbajo">Abajo</button>
 
 
-</div>  
-
-<style >
-
-</style>
-<script src="js/jquery-3.5.1.js"></script>
-<script src="js/skrips.js"></script>
-<!--<script src="js/funyvar.js"></script>-->
-<script src="js/otraprueba.js"></script>
-<script src="js/cargar.js"></script>
-
-<script>
-setInterval("mensaje()","500");
-</script>
-
+    <script src="js/ddps.js"></script>
 </body>
+
 </html>
-
-
-
-<!--
-
-
-
-var btnIzquierda = document.getElementById('iz');
-var btnDerecha = document.getElementById('de');
-var btnArriba = document.getElementById('ar');
-var btnAbajo = document.getElementById('ab');
-
-//izquierda
-
-//btnIzquierda.onmousedown = function() {izquierda=true;};
-//btnIzquierda.onmouseup = function() {izquierda=false;};
-
-btnDerecha.hover = function() {derecha=true;};
-btnDerecha.onmouseup = function() {derecha=false;};
-
-btnArriba.onmousedown = function() {arriba=true;};
-btnArriba.onmouseup = function() {arriba=false;};
-
-btnAbajo.onmousedown = function() {abajo=true;};
-btnAbajo.onmouseup = function() {abajo=false;};
-
-function algo(){
-    izquierda=true;
-}
-$("#izquierda").hover(algo);
-
-var myBtn= document.getElementById('iz');       
-var timer, timePressed = 0;
-
-myBtn.addEventListener('touchstart', function(e){
-        timePressed = 0;
-        timer = setInterval(function(){
-            //aqui tienes el control de cuanto tiempo el boton esta presionado
-            timePressed += 100;
-            if (timePressed > 500){
-               alert('Largo click!');
-               clearInterval(timer);
-            }
-        }, 100);
-        izquierda=true;
-    });
-
-    myBtn.addEventListener('touchend', function(e){
-        clearInterval(timer);
-        izquierda=false;
-    });
-
-myBtn.addEventListener('click', function(e){
-        alert('Corto click!');
-    });
-
-
-
-/*Cuando se haga clic*/
-btnClick.onmousedown = async function() {
-  startTime = new Date();
-  console.log("Estoy presionado, haz lo que necesites...");
-  abajo=true;    
-
-};
-
-/*Cuando se deje de hacer clic*/
-btnClick.onmouseup = function() {
-    abajo=false;
-  endTime = new Date();
-  var timeDiff = endTime - startTime; //en ms
-  console.log("Se hizo clic:\n" + startTime);
-  console.log("Se levantó el clic:\n" + endTime);
-  console.log("Tiempo transcurrido:\n" + timeDiff + " ms");
-}
-
-
--->
