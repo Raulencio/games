@@ -7,6 +7,7 @@ var moverIzquierda = document.getElementById('moverIzquierda');
 var moverDerecha = document.getElementById('moverDerecha');
 var moverArriba = document.getElementById('moverArriba');
 var moverAbajo = document.getElementById('moverAbajo');
+var atacar = document.getElementById('atacar');
 
 // Variables para controlar el movimiento
 var moviendo = false;
@@ -14,6 +15,9 @@ var intervalo;
 
 // Posiciones iniciales del personaje
 var personajePos = { top: 225, left: 225 };
+
+// Tamaño del rango de colisión del personaje (ajustar según el arma)
+var rangoColision = 50; // Ejemplo: rango de colisión de 20 píxeles alrededor del personaje
 
 // Función para mover el fondo del mapa
 function moverFondo(direccion) {
@@ -64,12 +68,26 @@ function verificarColision() {
     var enemigoRect = enemigo.getBoundingClientRect();
     var personajeRect = personaje.getBoundingClientRect();
 
+    // Calcular el área de colisión con el rango del arma
+    var areaColision = {
+        top: personajeRect.top - rangoColision,
+        bottom: personajeRect.bottom + rangoColision,
+        left: personajeRect.left - rangoColision,
+        right: personajeRect.right + rangoColision
+    };
+
     if (personajeRect.left < enemigoRect.left + enemigoRect.width &&
         personajeRect.left + personajeRect.width > enemigoRect.left &&
         personajeRect.top < enemigoRect.top + enemigoRect.height &&
         personajeRect.top + personajeRect.height > enemigoRect.top) {
         // Colisión detectada
         console.log('Colisión detectada');
+        enemigo.style.backgroundColor = 'white'; // Cambiar color de fondo a blanco
+        return true;
+    } else {
+        // No hay colisión
+        enemigo.style.backgroundColor = 'transparent'; // Restaurar color de fondo transparente
+        return false;
     }
 }
 
@@ -89,7 +107,17 @@ function pararMover() {
     clearInterval(intervalo);
 }
 
-// Asignar eventos a los divs
+// Función de ataque
+function atacarEnemigo() {
+    if (verificarColision()) {
+        console.log('Ataque realizado!');
+        // Aquí puedes agregar la lógica para el ataque, como reducir la vida del enemigo, mostrar efectos, etc.
+    } else {
+        console.log('No hay colisión, no se puede atacar.');
+    }
+}
+
+// Asignar eventos a los divs de movimiento
 moverIzquierda.addEventListener('touchstart', function() { empezarMover('izquierda'); });
 moverDerecha.addEventListener('touchstart', function() { empezarMover('derecha'); });
 moverArriba.addEventListener('touchstart', function() { empezarMover('arriba'); });
@@ -100,7 +128,6 @@ moverDerecha.addEventListener('touchend', pararMover);
 moverArriba.addEventListener('touchend', pararMover);
 moverAbajo.addEventListener('touchend', pararMover);
 
-// También agregar eventos para 'mousedown' y 'mouseup' para soportar la interacción con el ratón
 moverIzquierda.addEventListener('mousedown', function() { empezarMover('izquierda'); });
 moverDerecha.addEventListener('mousedown', function() { empezarMover('derecha'); });
 moverArriba.addEventListener('mousedown', function() { empezarMover('arriba'); });
@@ -111,8 +138,10 @@ moverDerecha.addEventListener('mouseup', pararMover);
 moverArriba.addEventListener('mouseup', pararMover);
 moverAbajo.addEventListener('mouseup', pararMover);
 
-// Para asegurarse de que también se detenga el movimiento si el ratón sale del área del botón mientras se mantiene presionado
 moverIzquierda.addEventListener('mouseleave', pararMover);
 moverDerecha.addEventListener('mouseleave', pararMover);
 moverArriba.addEventListener('mouseleave', pararMover);
 moverAbajo.addEventListener('mouseleave', pararMover);
+
+// Asignar evento al botón de ataque
+atacar.addEventListener('click', atacarEnemigo);
