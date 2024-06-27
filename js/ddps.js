@@ -46,7 +46,7 @@ function pararMover() {
     clearInterval(intervalo);
 }
 
-// Asignar eventos a los botones
+// Asignar eventos a los divs
 moverIzquierda.addEventListener('touchstart', function() { empezarMover('izquierda'); });
 moverDerecha.addEventListener('touchstart', function() { empezarMover('derecha'); });
 moverArriba.addEventListener('touchstart', function() { empezarMover('arriba'); });
@@ -56,3 +56,20 @@ moverIzquierda.addEventListener('touchend', pararMover);
 moverDerecha.addEventListener('touchend', pararMover);
 moverArriba.addEventListener('touchend', pararMover);
 moverAbajo.addEventListener('touchend', pararMover);
+
+// También agregar eventos para 'mousedown' y 'mouseup' para soportar la interacción con el ratón
+moverIzquierda.addEventListener('mousedown', function() { empezarMover('izquierda'); });
+moverDerecha.addEventListener('mousedown', function() { empezarMover('derecha'); });
+moverArriba.addEventListener('mousedown', function() { empezarMover('arriba'); });
+moverAbajo.addEventListener('mousedown', function() { empezarMover('abajo'); });
+
+moverIzquierda.addEventListener('mouseup', pararMover);
+moverDerecha.addEventListener('mouseup', pararMover);
+moverArriba.addEventListener('mouseup', pararMover);
+moverAbajo.addEventListener('mouseup', pararMover);
+
+// Para asegurarse de que también se detenga el movimiento si el ratón sale del área del botón mientras se mantiene presionado
+moverIzquierda.addEventListener('mouseleave', pararMover);
+moverDerecha.addEventListener('mouseleave', pararMover);
+moverArriba.addEventListener('mouseleave', pararMover);
+moverAbajo.addEventListener('mouseleave', pararMover);
