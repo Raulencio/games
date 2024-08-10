@@ -16,8 +16,6 @@
     position: absolute;
     z-index: 2;
     transition: 0.5s;
-    /* Cambia la duración de la transición a 1 segundo */
-
 }
 
 .inicio {
@@ -48,10 +46,10 @@
 
 .botonJuego {
     position: absolute;
-    top: 65%;
+    top: 60%;
     left: 35%;
     width: 30%;
-    height: 20%;
+    height: 25%;
     z-index: 4;
 }
 
@@ -69,6 +67,69 @@
     background-color: gray;
     box-sizing: border-box;
 }
+
+.filaA{
+    display: flex;
+    width: 100%;
+    height: 38%;
+}
+
+.cuadroA {
+    transition: 0.5s;
+    padding-left: 5px;
+    width: 20%;height: 100%;
+    border: 1px solid #fff;
+    background-color: gray;
+    box-sizing: border-box;
+}
+
+.filaP{
+    display: flex;
+    width: 100%;
+    height: 25%;
+}
+
+.cuadroP {
+    transition: 0.5s;
+    padding-left: 5px;
+    width: 20%;height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+}
+.filaE{
+    display: flex;
+    width: 100%;
+    height: 25%;
+}
+
+.cuadroE {
+    transition: 0.5s;
+    padding-left: 5px;
+    width: 20%;height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+}
+.barra-contenedor {
+    position: absolute;
+    width: 99%;
+    height:8%;
+    top: 91%;
+    left:0.5%;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: width 0.2s;
+}
+
+.barra {
+    height: 100%;
+    width: 0;
+    background-color: #76c7c0;
+    border-radius: 5px 0 0 5px;
+    transition: width 0.1s;
+}
+
 .infimo {
     transition: 0.5s;
     position: absolute;
@@ -76,15 +137,44 @@
     left: 100%;
     z-index: 5;
 }
+
+.personajes{
+    background-color: #ffffff42;
+    position: absolute;
+    top: 20%;
+    left: 0%;
+    width: 50%;
+    height: 40%;
+    z-index: 5;
+}
+.enemigos{
+    background-color: #ffffff42;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 50%;
+    height: 40%;
+    z-index: 5;
+}
+.acciones{
+    background-color: #ffffffbb;
+    position: absolute;
+    top: 60%;
+    left: 0%;
+    width: 100%;
+    height: 40%;
+    z-index: 5;
+}
 .botonCerrar {
     position: absolute;
     top: 1%;
     left: 1%;
     width: 5%;
-    height: 5%;
+    height: 10%;
     z-index: 5;
 }
 .boton {
+    transition: 0.5s;
     position: absolute;
     top: 90%;
     width: 25%;
