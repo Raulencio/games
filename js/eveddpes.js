@@ -1,4 +1,8 @@
 
+var width = 0;
+var maxWidth = 100;
+var intervalo;
+
 function mostrarMenu(menuId) {
     switch (menuId) {
         case 1:
@@ -36,7 +40,7 @@ function mostrarMenu(menuId) {
 
             break;
 
-        case 6:
+        case 6://boton cerrar
             document.getElementById("infimo").style.width = "0%";
             document.getElementById("infimo").style.height = "0%";
             document.getElementById("infimo").style.left = randomAr(1, 0) * 100 + "%";
@@ -47,13 +51,21 @@ function mostrarMenu(menuId) {
                     document.getElementById(e + "cuadro" + i).style.backgroundColor = "gray";
                 }
             }
-
-
+            for (var j = 1; j < 5; j++) {
+                document.getElementById("boton" + j).style.top = "90%";
+            } reiniciarConsumirEnergia(width);clearInterval(intervalo);
             break;
+
     }
 }
 
 document.getElementById('mapa').innerHTML = generarDiv(4, 5, "fila", "cuadro");
+
+document.getElementById('acciones').innerHTML = generarDiv(2, 5, "filaA", "cuadroA");
+
+document.getElementById('personajes').innerHTML = generarDiv(4, 5, "filaP", "cuadroP");
+
+document.getElementById('enemigos').innerHTML = generarDiv(4, 5, "filaE", "cuadroE");
 
 
 window.onload = function () {
@@ -67,8 +79,56 @@ window.onload = function () {
                     document.getElementById("infimo").style.top = "0%";
                     document.getElementById("infimo").style.left = "0%";
                     document.getElementById("infimo").style.backgroundColor = "white";
+                    iniciarRelleno();
+                    for (var j = 1; j < 5; j++) {
+                        document.getElementById("boton" + j).style.top = "100%";
+                    }
                 });
             })(e, i);
         }
     }
 }
+
+
+
+
+function iniciarRelleno() {
+    clearInterval(intervalo);
+    intervalo = setInterval(function () {
+        if (width >= maxWidth) {
+            clearInterval(intervalo);
+        } else {
+            width++;
+            actualizarBarra();
+        }
+    }, 100); // Ajusta el tiempo (100 ms) para cambiar la velocidad de relleno
+}
+
+function reiniciarConsumirEnergia(n) {
+    clearInterval(intervalo);
+    var consumo = n; // Cantidad de energía a consumir
+    if (width >= consumo) {
+        width = Math.max(0, width - consumo);
+    }
+    actualizarBarra();
+    iniciarRelleno(); // Reinicia el relleno después de consumir
+}
+
+function consumirEnergia(n) {
+    clearInterval(intervalo);
+    var consumo = n; // Cantidad de energía a consumir
+    if (width >= consumo) {
+        width = Math.max(0, width - consumo);
+        document.getElementById('barra-energia').style.backgroundColor = "red";
+    }
+    actualizarBarra();
+    iniciarRelleno(); // Reinicia el relleno después de consumir
+}
+
+function actualizarBarra() {
+    var barra = document.getElementById('barra-energia');
+    barra.style.width = width + '%';
+    barra.innerText = width + '/ 100';
+    barra.style.backgroundColor = "red";
+}
+
