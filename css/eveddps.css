@@ -1,0 +1,109 @@
+.fondo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(30, 120, 3);
+    top: 0%;
+    left: 0%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.pantalla {
+    top: 0%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    transition: 0.5s;
+    /* Cambia la duración de la transición a 1 segundo */
+
+}
+
+.inicio {
+    background-color: rgba(27, 51, 0, 0.979);
+    left: 0%;
+}
+
+.juego {
+    background-color: rgb(115, 147, 79);
+    left: 0%;
+    top: -100%;
+}
+
+.mejoras {
+    background-color: rgb(87, 87, 87);
+    left: 100%;
+}
+
+.inventario {
+    background-color: rgb(121, 3, 3);
+    left: 200%;
+}
+
+.tienda {
+    background-color: rgb(3, 7, 91);
+    left: 300%;
+}
+
+.botonJuego {
+    position: absolute;
+    top: 65%;
+    left: 35%;
+    width: 30%;
+    height: 20%;
+    z-index: 4;
+}
+
+.fila {
+    display: flex;
+    width: 100%;
+    height: 22.5%;
+}
+
+.cuadro {
+    transition: 0.5s;
+    padding-left: 5px;
+    width: 20%;height: 100%;
+    border: 5px solid #fff;
+    background-color: gray;
+    box-sizing: border-box;
+}
+.infimo {
+    transition: 0.5s;
+    position: absolute;
+    top: 0%;
+    left: 100%;
+    z-index: 5;
+}
+.botonCerrar {
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    width: 5%;
+    height: 5%;
+    z-index: 5;
+}
+.boton {
+    position: absolute;
+    top: 90%;
+    width: 25%;
+    height: 10%;
+    z-index: 3;
+}
+
+.boton1 {
+    left: 0%;
+}
+
+.boton2 {
+    left: 25%;
+}
+
+.boton3 {
+    left: 50%;
+}
+
+.boton4 {
+    left: 75%;
+}
