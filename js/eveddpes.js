@@ -205,7 +205,7 @@ window.onload = function () {
                 document.getElementById(e + "cuadroP" + i).addEventListener("click", function () {
                     var stecuadro = document.getElementById(e + "cuadroP" + i);
 
-                    stecuadro.style.border = "2px solid red";
+                    stecuadro.style.border = "1px solid red";
                     numeroCuadroP=(e + "cuadroP" + i);
                     console.log(numeroCuadroP);
 
