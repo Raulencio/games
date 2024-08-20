@@ -2,8 +2,8 @@
 var width = 0;
 var maxWidth = 100;
 var intervalo;
-var numeroCuadroP="0";
-var verificador=false;
+var numeroCuadroP = "0";
+var verificador = false;
 
 var personajeElegido = {
     armaduraF: 0, congelar: 0, roboVida: 0,
@@ -54,12 +54,23 @@ var infoPjs = [
 ];
 
 
-function agregarimagen(e,i){
-$("#"+numeroCuadroP+"").empty().append("<img width='100%' src='" + personajeElegido.url + "'>");
+function agregarimagen(e, i) {
+    $("#" + numeroCuadroP + "").empty().append("<img width='100%' src='" + personajeElegido.url + "'>");
 
 
 }
+function borrarimagenes() {
 
+    for (var e = 1; e < 5; e++) {
+        for (var i = 1; i < 6; i++) {
+
+            $("#"+e+ "cuadroP" +i+ "").empty();
+
+        }
+    }
+
+   
+}
 function mostrarMenu(menuId) {
     switch (menuId) {
         case 1:
@@ -111,7 +122,12 @@ function mostrarMenu(menuId) {
             for (var j = 1; j < 5; j++) {
                 document.getElementById("boton" + j).style.top = "90%";
             } reiniciarConsumirEnergia(width); clearInterval(intervalo);
+
+
+            borrarimagenes();
             break;
+
+
 
     }
 }
@@ -152,45 +168,45 @@ window.onload = function () {
             (function (e, i) {
                 document.getElementById(e + "cuadroA" + i).addEventListener("click", function () {
 
-                    if (i == 1&&e==1) {
-                        
+                    if (i == 1 && e == 1) {
+
                         consumirEnergia(20);
-                        
-
-                        personajeElegido=infoPjs[0];
 
 
-                        agregarimagen(e,i);
-                    } else if (i == 2&&e==1) {
-                        
-                        personajeElegido=infoPjs[1];
+                        personajeElegido = infoPjs[0];
 
 
-                        agregarimagen(e,i);
+                        agregarimagen(e, i);
+                    } else if (i == 2 && e == 1) {
+
+                        personajeElegido = infoPjs[1];
+
+
+                        agregarimagen(e, i);
                         consumirEnergia(30);
-                    } else if (i == 3&&e==1) {
+                    } else if (i == 3 && e == 1) {
                         consumirEnergia(40);
-                        
-                        personajeElegido=infoPjs[2];
+
+                        personajeElegido = infoPjs[2];
 
 
-                        agregarimagen(e,i);
-                    } else if (i == 4&&e==1) {
-                        
+                        agregarimagen(e, i);
+                    } else if (i == 4 && e == 1) {
+
 
                         consumirEnergia(60);
 
-                        if(verificador){
-                        personajeElegido=infoPjs[3];
-                        agregarimagen(e,i);
+                        if (verificador) {
+                            personajeElegido = infoPjs[3];
+                            agregarimagen(e, i);
                         }
                     }
-                    else if (i == 5&&e==1) {
-                        
-                        personajeElegido=infoPjs[4];
+                    else if (i == 5 && e == 1) {
+
+                        personajeElegido = infoPjs[4];
 
 
-                        agregarimagen(e,i);
+                        agregarimagen(e, i);
                         consumirEnergia(70);
                     }
                 });
@@ -203,12 +219,19 @@ window.onload = function () {
         for (var i = 1; i < 6; i++) {
             (function (e, i) {
                 document.getElementById(e + "cuadroP" + i).addEventListener("click", function () {
-                    var stecuadro = document.getElementById(e + "cuadroP" + i);
-
-                    stecuadro.style.border = "1px solid red";
-                    numeroCuadroP=(e + "cuadroP" + i);
+                
+                    numeroCuadroP = (e + "cuadroP" + i);
                     console.log(numeroCuadroP);
 
+                });
+                document.getElementById(e + "cuadroP" + i).addEventListener("mousedown", function () {
+                    stecuadro = document.getElementById(e + "cuadroP" + i);
+                    stecuadro.style.border = "1px solid red";
+                });
+                
+                document.getElementById(e + "cuadroP" + i).addEventListener("mouseup", function () {
+                    stecuadro = document.getElementById(e + "cuadroP" + i);
+                    stecuadro.style.border = "none";
                 });
             })(e, i);
         }
@@ -254,7 +277,7 @@ function consumirEnergia(n) {
     if (width >= consumo) {
         width = Math.max(0, width - consumo);
         document.getElementById('barra-energia').style.backgroundColor = "red";
-        verificador=true;
+        verificador = true;
     }
     actualizarBarra();
     iniciarRelleno(); // Reinicia el relleno después de consumir
