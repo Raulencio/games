@@ -54,6 +54,92 @@ var infoPjs = [
 ];
 
 
+var enemigos = [
+
+    {
+        nombre: "Practica", vidamax: 10000, vida: 10000
+        , ataque: 0, defensa: 100, probCrit: 0
+        , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 20000
+        , url: "practica.png"
+    }
+    , {
+        nombre: "Esqueleto", vidamax: 10000, vida: 10000
+        , ataque: 500, defensa: 100, probCrit: 0
+        , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 1000
+        , url: "esqueleto.png"
+    }
+    , {
+        nombre: "Toribio", vidamax: 20000, vida: 20000
+        , ataque: 1000, defensa: 100, probCrit: 0
+        , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 1000
+        , url: "toribio.png"
+    }
+    , {
+        nombre: "Rino", vidamax: 25000, vida: 25000
+        , ataque: 1500, defensa: 100, probCrit: 0
+        , dmgCrit: 0, recuperacion: 5, velocidadAtaque: 1500
+        , url: "rino.png"
+    }
+    ,
+    {
+        nombre: "Fuego", vidamax: 30000, vida: 30000
+        , ataque: 2000, defensa: 500, probCrit: 50
+        , dmgCrit: 200, recuperacion: 10, velocidadAtaque: 1500
+        , url: "fuegoso.png"
+    }
+    ,
+    {
+        nombre: "Pantano", vidamax: 50000, vida: 50000
+        , ataque: 4000, defensa: 700, probCrit: 40, velocidadAtaque: 3000
+        , dmgCrit: 300, recuperacion: 40
+        , url: "baboso.png"
+    }
+    ,
+    {
+        nombre: "Agua", vidamax: 110000, vida: 110000
+        , ataque: 7000, defensa: 400, probCrit: 10, velocidadAtaque: 1000
+        , dmgCrit: 700, recuperacion: 100
+        , url: "acuoso.png"
+    }
+    ,
+    {
+        nombre: "Trueno", vidamax: 200000, vida: 200000
+        , ataque: 12000, defensa: 1000, probCrit: 80
+        , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2500
+        , url: "electron.png"
+
+    }
+    ,
+    {
+        nombre: "Kayn", vidamax: 300000, vida: 300000
+        , ataque: 12000, defensa: 1000, probCrit: 80
+        , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2000
+        , url: "kayn.png"
+
+    },
+    {
+        nombre: "Yohiro", vidamax: 300000, vida: 300000
+        , ataque: 15000, defensa: 1500, probCrit: 80
+        , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2000
+        , url: "yohirostand.png"
+
+    },
+    {
+        nombre: "Rain", vidamax: 400000, vida: 400000
+        , ataque: 17000, defensa: 1000, probCrit: 80
+        , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2000
+        , url: "rain.png"
+
+    },
+    {
+        nombre: "sol", vidamax: 500000, vida: 300000
+        , ataque: 15000, defensa: 1000, probCrit: 80
+        , dmgCrit: 500, recuperacion: 50, velocidadAtaque: 2000
+        , url: "sol.png"
+
+    }
+]
+
 function agregarimagen(e, i) {
     $("#" + numeroCuadroP + "").empty().append("<img width='100%' src='" + personajeElegido.url + "'>");
 
@@ -64,12 +150,17 @@ function borrarimagenes() {
     for (var e = 1; e < 5; e++) {
         for (var i = 1; i < 6; i++) {
 
-            $("#"+e+ "cuadroP" +i+ "").empty();
+            $("#" + e + "cuadroP" + i + "").empty();
+
+            $("#"+e + "cuadroE"+i+ "").empty();
+
+
+
 
         }
     }
 
-   
+
 }
 function mostrarMenu(menuId) {
     switch (menuId) {
@@ -147,11 +238,20 @@ window.onload = function () {
             (function (e, i) {
                 document.getElementById(e + "cuadro" + i).addEventListener("click", function () {
                     document.getElementById(e + "cuadro" + i).style.backgroundColor = "black";
+
                     document.getElementById("infimo").style.width = "100%";
                     document.getElementById("infimo").style.height = "100%";
                     document.getElementById("infimo").style.top = "0%";
                     document.getElementById("infimo").style.left = "0%";
                     document.getElementById("infimo").style.backgroundColor = "white";
+
+                    console.log(enemigos[i-1].url);
+
+
+                    $("#"+e + "cuadroE"+i+ "").empty().append("<img width='100%' src='" + enemigos[i-1].url + "'>");
+
+
+
                     iniciarRelleno();
                     for (var j = 1; j < 5; j++) {
                         document.getElementById("boton" + j).style.top = "100%";
@@ -218,20 +318,13 @@ window.onload = function () {
     for (var e = 1; e < 5; e++) {
         for (var i = 1; i < 6; i++) {
             (function (e, i) {
+
+
                 document.getElementById(e + "cuadroP" + i).addEventListener("click", function () {
-                
+
                     numeroCuadroP = (e + "cuadroP" + i);
                     console.log(numeroCuadroP);
 
-                });
-                document.getElementById(e + "cuadroP" + i).addEventListener("mousedown", function () {
-                    stecuadro = document.getElementById(e + "cuadroP" + i);
-                    stecuadro.style.border = "1px solid red";
-                });
-                
-                document.getElementById(e + "cuadroP" + i).addEventListener("mouseup", function () {
-                    stecuadro = document.getElementById(e + "cuadroP" + i);
-                    stecuadro.style.border = "none";
                 });
             })(e, i);
         }
