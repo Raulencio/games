@@ -2,6 +2,63 @@
 var width = 0;
 var maxWidth = 100;
 var intervalo;
+var numeroCuadroP="0";
+var verificador=false;
+
+var personajeElegido = {
+    armaduraF: 0, congelar: 0, roboVida: 0,
+    nombre: "", vidamax: 0, vidaActual: 0,
+    ataque: 0, defensa: 0, probCrit: 0,
+    dmgCrit: 0, recuperacion: 0, vida: 0, cenergia: 0,
+    alcance: 0, url: "yohirostand.png", chabilidad1: 0, chabilidad2: 0, chabilidad3: 0, chabilidad4: 0
+}
+
+
+var infoPjs = [
+    {
+        comprado: true, armaduraF: 1500, congelar: 0, roboVida: 0,
+        nombre: "Samurai", vidamax: 30000
+        , ataque: 1200, defensa: 7000, probCrit: 30
+        , dmgCrit: 170, recuperacion: 50, chabilidad1: 25, chabilidad2: 50, chabilidad3: 75, chabilidad4: 100
+        , url: "yohirostand.png"
+    }
+    ,
+    {
+        comprado: false, armaduraF: 1000, congelar: 30, roboVida: 10,
+        nombre: "Rain", vidamax: 17000
+        , ataque: 1800, defensa: 1000, probCrit: 40
+        , dmgCrit: 120, recuperacion: 20, chabilidad1: 20, chabilidad2: 40, chabilidad3: 60, chabilidad4: 80
+        , url: "rain.png"
+    }
+    , {
+        comprado: false, armaduraF: 0, congelar: 0, roboVida: 40,
+        nombre: "Ninja", vidamax: 25000
+        , ataque: 1500, defensa: 500, probCrit: 20
+        , dmgCrit: 200, recuperacion: 30, chabilidad1: 5, chabilidad2: 20, chabilidad3: 60, chabilidad4: 90
+        , url: "ninja.png"
+    }
+    , {
+        comprado: false, armaduraF: 0, congelar: 0, roboVida: 20,
+        nombre: "Sol", vidamax: 15000
+        , ataque: 1700, defensa: 400, probCrit: 70
+        , dmgCrit: 250, recuperacion: 40, chabilidad1: 20, chabilidad2: 50, chabilidad3: 70, chabilidad4: 100
+        , url: "sol.png"
+    }
+    , {
+        comprado: false, armaduraF: 0, congelar: 20, roboVida: 30,
+        nombre: "Kayn", vidamax: 20000
+        , ataque: 2000, defensa: 500, probCrit: 50
+        , dmgCrit: 250, recuperacion: 10, chabilidad1: 30, chabilidad2: 60, chabilidad3: 90, chabilidad4: 100
+        , url: "kayn.png"
+    }
+];
+
+
+function agregarimagen(e,i){
+$("#"+numeroCuadroP+"").empty().append("<img width='100%' src='" + personajeElegido.url + "'>");
+
+
+}
 
 function mostrarMenu(menuId) {
     switch (menuId) {
@@ -53,7 +110,7 @@ function mostrarMenu(menuId) {
             }
             for (var j = 1; j < 5; j++) {
                 document.getElementById("boton" + j).style.top = "90%";
-            } reiniciarConsumirEnergia(width);clearInterval(intervalo);
+            } reiniciarConsumirEnergia(width); clearInterval(intervalo);
             break;
 
     }
@@ -87,6 +144,83 @@ window.onload = function () {
             })(e, i);
         }
     }
+
+
+
+    for (var e = 1; e < 3; e++) {
+        for (var i = 1; i < 6; i++) {
+            (function (e, i) {
+                document.getElementById(e + "cuadroA" + i).addEventListener("click", function () {
+
+                    if (i == 1&&e==1) {
+                        
+                        consumirEnergia(20);
+                        
+
+                        personajeElegido=infoPjs[0];
+
+
+                        agregarimagen(e,i);
+                    } else if (i == 2&&e==1) {
+                        
+                        personajeElegido=infoPjs[1];
+
+
+                        agregarimagen(e,i);
+                        consumirEnergia(30);
+                    } else if (i == 3&&e==1) {
+                        consumirEnergia(40);
+                        
+                        personajeElegido=infoPjs[2];
+
+
+                        agregarimagen(e,i);
+                    } else if (i == 4&&e==1) {
+                        
+
+                        consumirEnergia(60);
+
+                        if(verificador){
+                        personajeElegido=infoPjs[3];
+                        agregarimagen(e,i);
+                        }
+                    }
+                    else if (i == 5&&e==1) {
+                        
+                        personajeElegido=infoPjs[4];
+
+
+                        agregarimagen(e,i);
+                        consumirEnergia(70);
+                    }
+                });
+            })(e, i);
+        }
+    }
+
+
+    for (var e = 1; e < 5; e++) {
+        for (var i = 1; i < 6; i++) {
+            (function (e, i) {
+                document.getElementById(e + "cuadroP" + i).addEventListener("click", function () {
+                    var stecuadro = document.getElementById(e + "cuadroP" + i);
+
+                    stecuadro.style.border = "2px solid red";
+                    numeroCuadroP=(e + "cuadroP" + i);
+                    console.log(numeroCuadroP);
+
+                });
+            })(e, i);
+        }
+    }
+
+
+
+
+
+
+
+
 }
 
 
@@ -120,6 +254,7 @@ function consumirEnergia(n) {
     if (width >= consumo) {
         width = Math.max(0, width - consumo);
         document.getElementById('barra-energia').style.backgroundColor = "red";
+        verificador=true;
     }
     actualizarBarra();
     iniciarRelleno(); // Reinicia el relleno después de consumir
