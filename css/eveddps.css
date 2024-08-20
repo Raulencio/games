@@ -89,12 +89,13 @@
     height: 25%;
 }
 
+
 .cuadroP {
     transition: 0.5s;
     padding-left: 5px;
     width: 20%;height: 100%;
-    background-color: rgba(255, 255, 255, 0.1);
-    box-sizing: border-box;
+    background-color: #dddddd30;
+    box-sizing: borderrgba(167, 11, 11, 0.847)
 }
 .filaE{
     display: flex;
