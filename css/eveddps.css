@@ -97,6 +97,12 @@
     background-color: #dddddd30;
     box-sizing: borderrgba(167, 11, 11, 0.847)
 }
+
+.cuadroP:active {
+    border: 1px solid red; /* Borde cuando se mantiene presionado */
+}
+
+
 .filaE{
     display: flex;
     width: 100%;
