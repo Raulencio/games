@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+
+	<head>
+	<title> Uno entr3 cu4tro </title>
+	
+	<link rel="stylesheet" href="estilos.css"
+
+	</head>
+
+	<body>
+	
+
+	<div class="contenedor" id=contenedor1>
+	
+		<div class="imagen"><img src="134.png"></div>
+	
+		<div class="btnJugar" onclick="esconder(1)"> Jugar	</div>
+
+	</div>
+
+
+	<div class="contenedor" id=contenedor2 hidden=true>
+	
+		<div class="imagen2"><img src="134.png" width=100% onclick="esconder(2)"></div>
+	
+
+		<div class="scroll">
+	
+			<div class="btnNivel" onclick="esconder(3),nivel(1)"> Sumas Nivel 1</div>
+			<div class="btnNivel" onclick="esconder(3),nivel(2)"> Sumas Nivel 2</div>
+
+			<div class="btnNivel" onclick="esconder(3),nivel(5)"> Sumas Nivel 3</div>
+			<div class="btnNivel" onclick="esconder(3),nivel(6)"> Sumas Nivel 4</div>
+
+			<div class="btnNivel" onclick="esconder(3),nivel(3)"> Restas Nivel 1</div>
+			<div class="btnNivel" onclick="esconder(3),nivel(4)"> Restas Nivel 2</div>
+
+			
+
+			<div class="btnNivel" onclick="esconder(3),nivel(7)"> Restas Nivel 3</div>
+			<div class="btnNivel" onclick="esconder(3),nivel(8)"> Restas Nivel 4</div>
+
+
+
+			<div class="btnNivel" onclick="esconder(3),nivel(9)"> Sumas Nivel 5</div>
+			<div class="btnNivel" onclick="esconder(3),nivel(10)"> Sumas Nivel 6</div>
+
+			<div class="btnNivel" onclick="esconder(3),nivel(11)"> Multiplicaciones Nivel 1</div>
+			<div class="btnNivel" onclick="esconder(3),nivel(12)"> Divisiones Nivel 1</div>
+
+			<div class="btnNivel" onclick="esconder(3),nivel(13)"> Restas Nivel 5</div>
+			<div class="btnNivel" onclick="esconder(3),nivel(14)"> Restas Nivel 6</div>
+
+			<div class="btnNivel" onclick="esconder(3),nivel(15)"> Multiplicaciones Nivel 2</div>
+			<div class="btnNivel" onclick="esconder(3),nivel(16)"> Divisiones Nivel 2</div>
+
+
+
+
+		</div>
+
+	</div>
+
+
+	<div class="contenedor" id=contenedor3 hidden=true>
+		<div class="btnAtras" onclick="esconder(4)"> Atras </div>
+		<p id="np">1+0=?</p>
+
+		<div class="pantalla" onclick="pregunta()">
+
+	
+			<p id="tp">1+1=?</p>
+
+
+		</div>
+
+		<div class="btnRespuesta1"onclick="comparar(1)"id="btnR1"hidden=true>
+		<p id=r1> 1 </p>
+		</div>
+		<div class="btnRespuesta2"onclick="comparar(2)"id="btnR2"hidden=true>
+		<p id=r2> 2 </p>
+		</div>
+		<div class="btnRespuesta3"onclick="comparar(3)" id="btnR3"hidden=true>
+		<p id=r3> 3 </p>
+		</div>
+		<div class="btnRespuesta4"onclick="comparar(4)"id="btnR4"hidden=true>
+		<p id=r4> 4 </p>
+		</div>
+
+<div class="textoAbajo">
+<p id="pm">incorrectas</p>
+<p id="pb">correctas</p>
+</div>
+	</div>
+
+
+
+	<script src="script.js"></script>
+
+
+	</body>
+
+
+</html>
