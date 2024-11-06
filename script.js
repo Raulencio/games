@@ -76,21 +76,18 @@ function respuestas() {
     }
     if (x == 2) {
         document.getElementById("r2").textContent = respuestaC;
-
         document.getElementById("r1").textContent = respuestaC + 1;
         document.getElementById("r3").textContent = respuestaC - 1;
         document.getElementById("r4").textContent = respuestaC + 2;
 
     } if (x == 3) {
         document.getElementById("r3").textContent = respuestaC;
-
         document.getElementById("r2").textContent = respuestaC + 1;
         document.getElementById("r1").textContent = respuestaC - 1;
         document.getElementById("r4").textContent = respuestaC + 2;
 
     } if (x == 4) {
         document.getElementById("r4").textContent = respuestaC;
-
         document.getElementById("r3").textContent = respuestaC + 1;
         document.getElementById("r1").textContent = respuestaC - 1;
         document.getElementById("r2").textContent = respuestaC + 2;
@@ -106,21 +103,18 @@ function respuestas() {
     }
     if (x == 6) {
         document.getElementById("r2").textContent = respuestaC;
-
         document.getElementById("r1").textContent = respuestaC - 1;
         document.getElementById("r3").textContent = respuestaC + 1;
         document.getElementById("r4").textContent = respuestaC - 2;
 
     } if (x == 7) {
         document.getElementById("r3").textContent = respuestaC;
-
         document.getElementById("r2").textContent = respuestaC - 1;
         document.getElementById("r1").textContent = respuestaC + 1;
         document.getElementById("r4").textContent = respuestaC - 2;
 
     } if (x == 8) {
         document.getElementById("r4").textContent = respuestaC;
-
         document.getElementById("r3").textContent = respuestaC - 1;
         document.getElementById("r1").textContent = respuestaC + 1;
         document.getElementById("r2").textContent = respuestaC - 2;
@@ -135,21 +129,18 @@ function respuestas() {
     }
     if (x == 10) {
         document.getElementById("r2").textContent = respuestaC;
-
         document.getElementById("r1").textContent = respuestaC + 1;
         document.getElementById("r3").textContent = respuestaC + 2;
         document.getElementById("r4").textContent = respuestaC + 3;
 
     } if (x == 11) {
         document.getElementById("r3").textContent = respuestaC;
-
         document.getElementById("r2").textContent = respuestaC + 1;
         document.getElementById("r1").textContent = respuestaC + 3;
         document.getElementById("r4").textContent = respuestaC + 2;
 
     } if (x == 12) {
         document.getElementById("r4").textContent = respuestaC;
-
         document.getElementById("r3").textContent = respuestaC + 2;
         document.getElementById("r1").textContent = respuestaC + 3;
         document.getElementById("r2").textContent = respuestaC + 1;
@@ -165,21 +156,18 @@ function respuestas() {
     }
     if (x == 14) {
         document.getElementById("r2").textContent = respuestaC;
-
         document.getElementById("r1").textContent = respuestaC - 3;
         document.getElementById("r3").textContent = respuestaC - 1;
         document.getElementById("r4").textContent = respuestaC - 2;
 
     } if (x == 15) {
         document.getElementById("r3").textContent = respuestaC;
-
         document.getElementById("r2").textContent = respuestaC - 1;
         document.getElementById("r1").textContent = respuestaC - 2;
         document.getElementById("r4").textContent = respuestaC - 3;
 
     } if (x == 16) {
         document.getElementById("r4").textContent = respuestaC;
-
         document.getElementById("r3").textContent = respuestaC - 2;
         document.getElementById("r1").textContent = respuestaC - 1;
         document.getElementById("r2").textContent = respuestaC - 3;
@@ -365,7 +353,7 @@ function comparar(n) {
 
         // Obtener el color de fondo computado
         const colorFondo = window.getComputedStyle(boton).backgroundColor;
-        
+
         // Comparar con el color deseado
         if (colorFondo !== "rgb(255, 0, 0)") { // "#ff0000" en notación RGB
             boton.style.backgroundColor = "#ff0000";
