@@ -7,7 +7,7 @@ height:100%;
 .imagen{
 background-color:#654321;
 width:80%;
-height:33.3%;
+height:35%;
 position:absolute;
 left:10%;
 top:10%;
@@ -29,18 +29,18 @@ width:60%;
 height:5%;
 position:absolute;
 left:20%;
-top:53.3%;
+top:55%;
 padding-top:15px;
-text-align:center;
+text-align:center;font-size:50px;
 }
 
 .btnNivel{
 background-color:#6543ff;
-width:100%;
+width:99.9%;
 height:10%;
 text-align:center;
 padding-top:5px;
-border:1px solid #000;
+border:1px solid #000;font-size:50px;
 }
 
 .scroll{
@@ -65,11 +65,11 @@ left:0px;
 .pantalla{
 background-color:#65ff21;
 width:60%;
-height:20%;
+height:15%;
 position:absolute;
 left:20%;
 top:15%;
-padding-top:20%;
+padding-top:15%;
 text-align:center;
 font-size:50px;
 }
@@ -81,7 +81,7 @@ left:20%;
 background-color:#12f5f6;
 width:30%;
 height:15%;
-text-align:center;font-size:30px;
+text-align:center;font-size:50px;
 }
 .btnRespuesta2{
 position:absolute;
@@ -90,7 +90,7 @@ left:50%;
 background-color:#12f5f6;
 width:30%;
 height:15%;
-text-align:center;font-size:30px;
+text-align:center;font-size:50px;
 }
 .btnRespuesta3{
 position:absolute;
@@ -99,7 +99,7 @@ left:20%;
 background-color:#12f5f6;
 width:30%;
 height:15%;
-text-align:center;font-size:30px;
+text-align:center;font-size:50px;
 }
 .btnRespuesta4{
 position:absolute;
@@ -108,7 +108,7 @@ left:50%;
 background-color:#12f5f6;
 width:30%;
 height:15%;
-text-align:center;font-size:30px;
+text-align:center;font-size:50px;
 }
 .btnAtras{
 background-color:#654321;
