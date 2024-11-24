@@ -180,9 +180,17 @@ guardarDatos();
 
 function moverEstrellas(){    
     if(nEstrellas<51){nEstrellas+=1;}
-    if(nEstrellas>1500){cargo="almirante";}
-    else if(nEstrellas>1000){cargo="capitan";}
-    else if(nEstrellas>500){cargo="marinero";}
+
+
+
+    if(nEstrellas>15000){cargo="almirante";}
+    else if(nEstrellas>5000){cargo="capitan";}
+    else if(nEstrellas>1000){cargo="marinero";}
+    else if(nEstrellas>100){cargo="recluta";}
+
+
+
+
     var nes=0;
     if(nEstrellas>100){nes=99;
     }else{nes=nEstrellas;}
@@ -222,6 +230,9 @@ $("#pCargoNombre").text(cargo+" - "+nombre);
 
 
 var menuPerfil=true;
+
+
+
 function menudesp(){
 
 if(menuPerfil){
@@ -369,19 +380,19 @@ do{
 function mover(x) {
     switch (x) {
         case 1: // Subir (pequeño incremento hacia arriba)
-            divs[0][2] += 500; // Incrementar
+            divs[0][2] += 400; // Incrementar
             if (divs[0][2] > 0) divs[0][2] = 0; // Límite superior
             break;
         case 2: // Bajar (pequeño decremento hacia abajo)
-            divs[0][2] -= 500; // Decrementar
+            divs[0][2] -= 400; // Decrementar
             if (divs[0][2] < -3400) divs[0][2] = -3400; // Límite inferior
             break;
         case 3: // Subir (mayor incremento hacia arriba)
-            divs[0][2] += 1500; // Incrementar más rápido
+            divs[0][2] += 1600; // Incrementar más rápido
             if (divs[0][2] > 0) divs[0][2] = 0; // Límite superior
             break;
         case 4: // Bajar (mayor decremento hacia abajo)
-            divs[0][2] -= 1500; // Decrementar más rápido
+            divs[0][2] -= 1600; // Decrementar más rápido
             if (divs[0][2] < -3400) divs[0][2] = -3400; // Límite inferior
             break;
     }
