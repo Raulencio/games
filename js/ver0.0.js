@@ -2,9 +2,12 @@ var nombre="";var cargo="grumete";var dPlaneta=randomAr(80,40);var nEstrellas=0;
 var ttiempo=0;var povni=randomAr(35,10);var nOvnis=0;var portesol=randomAr(400,240);var planetasVisitados=1;
 var coloressol=["whitesmoke","white","yellow","red","lightblue","#040414","#5353ff","#0000b1","#e9f360","#deee00","#ee5700","#e20b0b","#cccaca","#f7ff8d","#00ffd5","#ff9d00","#fffb04","#ff0404","#39ffde"];
 var coloresPlaneta="linear-gradient(blue,brown,blue)";var colorSol="yellow";
+
 function esconder(id){document.getElementById(id).hidden=true;}
 function mostrar(id){document.getElementById(id).hidden=false;}
+
 function tiempo(){ttiempo+=nEstrellas;}
+
 function verificarDatos(){
 
     if((localStorage.getItem("nombre"))!=null){nombre=(localStorage.getItem("nombre"));}
@@ -329,16 +332,21 @@ do{
 
 
 
-function mover(x){
-    switch(x){        
-        case 1:divs[0][2]=0;break;
-        case 2:divs[0][2]=-3400;break;
+function mover(x) {
+    switch (x) {
+        case 1:
+            // Mover menos hacia arriba (pequeño incremento hacia 0)
+            divs[0][2] += 500; // Incremento positivo (hacia abajo) si estaba en -3400
+            if (divs[0][2] > 0) divs[0][2] = 0; // Límite superior en 0
+            break;
+        case 2:
+            // Mover menos hacia abajo (pequeño decremento desde 0 hacia -3400)
+            divs[0][2] -= 500; // Incremento negativo (hacia arriba)
+            if (divs[0][2] < -3400) divs[0][2] = -3400; // Límite inferior
+            break;
     }
-    verDivs();
+    verDivs(); // Actualizar los cambios visualmente
 }
-
-
-
 
 setInterval("rote()",5000);
 
@@ -382,4 +390,3 @@ function sumar(a,b,c){
 let{num1,num2,num3,num4,num5}=arrre;
 
 //console.log(num1);
-
