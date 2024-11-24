@@ -98,8 +98,8 @@ function viajar(){
     //planeta
     coloresPlaneta="linear-gradient("+colorRan()+","+colorRan()+","+colorRan()+")";  
     dPlaneta=randomAr(80,40);
-    //divs[6][2]=randomAr(660,540);//top;
-    //divs[6][3]=randomAr(240,70);//left;
+    divs[6][2]=randomAr(3660,540);//top;
+    divs[6][3]=randomAr(240,70);//left;
     divs[6][4]=dPlaneta*2;//width;
     divs[6][5]=dPlaneta*2//height;
     divs[6][7]="0px 0px "+randomAr(7,2)+"px "+randomAr(3,1)+"px";//sombra;
@@ -148,17 +148,22 @@ function verDivs(){
     //console.log(coloresPlaneta);
 }
 var giros=1;
+
+
+
 function rote(){$("#planeta").css("transform","rotate("+giros*3+"deg)");giros++;
 if(document.getElementById("ovni").hidden&&contador>12){
     if(randomAr(9,0)==2){
         mostrar("ovni");
     }else{
-        //console.log("Buscando..");
+        //console.log("Buscando...");
         $("#ovni").css("transform","rotate("+giros*6+"deg)");
     }
 }contador++;nEstrellas+=planetasVisitados;
 //agregarOvni();
 }
+
+
 
 function moverEstrellas(){    
     if(nEstrellas<51){nEstrellas+=1;}
@@ -318,7 +323,7 @@ do{
     }
 }else{
     povni=randomAr(35,10);
-    divs[7][2]=randomAr(800,220);//top;
+    divs[7][2]=randomAr(3800,220);//top;
     divs[7][3]=randomAr(350,50);//left;
     divs[7][4]=povni;//width;
     divs[7][5]=povni;//height;
@@ -363,7 +368,7 @@ document.querySelector("#fondo").innerHTML+=e;
 let estrellita=document.getElementById("ovni"+numO);
 estrellita.style.position=("absolute");
 estrellita.style.left=randomAr(409,1)+"px";
-estrellita.style.top=randomAr(899,21)+"px";
+estrellita.style.top=randomAr(3899,21)+"px";
 estrellita.style.width=povni+"px";
 estrellita.style.height=povni+"px";
 estrellita.style.backgroundColor=colorRan()+"20";
