@@ -85,7 +85,15 @@ var divs=[
     "#ffffff00","0px 0px 0px 0px ","white"],
 
     [$("#bajar"),"absolute",420,360,0,0,
+    "#ffffff00","0px 0px 0px 0px ","white"],
+
+
+    [$("#subir2"),"absolute",310,360,0,0,
+        "#ffffff00","0px 0px 0px 0px ","white"],
+    
+    [$("#bajar2"),"absolute",470,360,0,0,
     "#ffffff00","0px 0px 0px 0px ","white"]
+    
 
 
 ]
@@ -172,9 +180,9 @@ guardarDatos();
 
 function moverEstrellas(){    
     if(nEstrellas<51){nEstrellas+=1;}
-    if(nEstrellas>150){cargo="almirante";}
-    else if(nEstrellas>100){cargo="capitan";}
-    else if(nEstrellas>50){cargo="marinero";}
+    if(nEstrellas>1500){cargo="almirante";}
+    else if(nEstrellas>1000){cargo="capitan";}
+    else if(nEstrellas>500){cargo="marinero";}
     var nes=0;
     if(nEstrellas>100){nes=99;
     }else{nes=nEstrellas;}
@@ -248,6 +256,8 @@ if(menuPerfil){
 $(document).ready(function(){
     $("#fondo").css("overflow","hidden");
     $("#perfil").css("overflow","hidden");
+
+
     
     $("#subir").css("border-left","20px solid transparent");
     $("#subir").css("border-right","20px solid transparent");
@@ -256,6 +266,21 @@ $(document).ready(function(){
     $("#bajar").css("border-left","20px solid transparent");
     $("#bajar").css("border-right","20px solid transparent");
     $("#bajar").css("border-top","30px solid whitesmoke");
+
+
+
+  
+    $("#subir2").css("border-left","20px solid transparent");
+    $("#subir2").css("border-right","20px solid transparent");
+    $("#subir2").css("border-bottom","30px solid whitesmoke");
+    
+    $("#bajar2").css("border-left","20px solid transparent");
+    $("#bajar2").css("border-right","20px solid transparent");
+    $("#bajar2").css("border-top","30px solid whitesmoke");
+
+
+
+
 
     document.getElementById("fondo").style.transition="all 1s"; 
     document.getElementById("perfil").style.transition="all 0.5s"; 
@@ -354,6 +379,19 @@ function mover(x) {
             divs[0][2] -= 500; // Incremento negativo (hacia arriba)
             if (divs[0][2] < -3400) divs[0][2] = -3400; // Límite inferior
             break;
+
+            case 3:
+                // Mover menos hacia arriba (pequeño incremento hacia 0)
+                divs[0][2] += 1500; // Incremento positivo (hacia abajo) si estaba en -3400
+                if (divs[0][2] > 0) divs[0][2] = 0; // Límite superior en 0
+                break;
+            case 4:
+                // Mover menos hacia abajo (pequeño decremento desde 0 hacia -3400)
+                divs[0][2] -= 1500; // Incremento negativo (hacia arriba)
+                if (divs[0][2] < -3400) divs[0][2] = -3400; // Límite inferior
+                break;
+
+
     }
     verDivs(); // Actualizar los cambios visualmente
 }
