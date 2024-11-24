@@ -26,24 +26,28 @@ function verificarDatos(){
     guardarDatos();
 }
 
-function guardarDatos(){
-    localStorage.setItem("nombre",nombre); 
-    localStorage.setItem("cargo",cargo); 
-    localStorage.setItem("nEstrellas",nEstrellas); 
-    localStorage.setItem("nOvnis",nOvnis);
-    localStorage.setItem("coloresPlaneta",coloresPlaneta); 
-    localStorage.setItem("colorSol",colorSol);
-    localStorage.setItem("planetasVisitados",planetasVisitados);
-//console.log(localStorage.getItem("colorSol"));
-/*
-    console.log("nombre : "+nombre);
-    console.log("cargo : "+cargo);
-    console.log("estrellas : "+nEstrellas);
-    console.log("ovnis : "+nOvnis); */   
-    //alert("Guardado");
+// Variable global para controlar si el mensaje ya se mostró
+let mensajeMostrado = false;
+
+function guardarDatos() {
+    localStorage.setItem("nombre", nombre);
+    localStorage.setItem("cargo", cargo);
+    localStorage.setItem("nEstrellas", nEstrellas);
+    localStorage.setItem("nOvnis", nOvnis);
+    localStorage.setItem("coloresPlaneta", coloresPlaneta);
+    localStorage.setItem("colorSol", colorSol);
+    localStorage.setItem("planetasVisitados", planetasVisitados);
+
+    // Actualizar textos o realizar acciones necesarias
     textos();
-    mostrar("mensaje"); 
+
+    // Mostrar mensaje solo si no se ha mostrado antes
+    if (!mensajeMostrado) {
+        mostrar("mensaje");
+        mensajeMostrado = true; // Marcar como mostrado
+    }
 }
+
 
 var divs=[
     //0
@@ -106,7 +110,7 @@ function viajar(){
     divs[6][8]=colorRan();//colorsombra;
     //ovni
     povni=randomAr(35,10);
-    divs[7][2]=randomAr(800,220);//top;
+    divs[7][2]=randomAr(3800,220);//top;
     divs[7][3]=randomAr(350,50);//left;
     divs[7][4]=povni;//width;
     divs[7][5]=povni;//height;
@@ -161,6 +165,7 @@ if(document.getElementById("ovni").hidden&&contador>12){
     }
 }contador++;nEstrellas+=planetasVisitados;
 //agregarOvni();
+guardarDatos();
 }
 
 
