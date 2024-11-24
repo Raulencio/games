@@ -366,35 +366,47 @@ do{
 
 
 
-
 function mover(x) {
     switch (x) {
-        case 1:
-            // Mover menos hacia arriba (pequeño incremento hacia 0)
-            divs[0][2] += 500; // Incremento positivo (hacia abajo) si estaba en -3400
-            if (divs[0][2] > 0) divs[0][2] = 0; // Límite superior en 0
+        case 1: // Subir (pequeño incremento hacia arriba)
+            divs[0][2] += 500; // Incrementar
+            if (divs[0][2] > 0) divs[0][2] = 0; // Límite superior
             break;
-        case 2:
-            // Mover menos hacia abajo (pequeño decremento desde 0 hacia -3400)
-            divs[0][2] -= 500; // Incremento negativo (hacia arriba)
+        case 2: // Bajar (pequeño decremento hacia abajo)
+            divs[0][2] -= 500; // Decrementar
             if (divs[0][2] < -3400) divs[0][2] = -3400; // Límite inferior
             break;
-
-            case 3:
-                // Mover menos hacia arriba (pequeño incremento hacia 0)
-                divs[0][2] += 1500; // Incremento positivo (hacia abajo) si estaba en -3400
-                if (divs[0][2] > 0) divs[0][2] = 0; // Límite superior en 0
-                break;
-            case 4:
-                // Mover menos hacia abajo (pequeño decremento desde 0 hacia -3400)
-                divs[0][2] -= 1500; // Incremento negativo (hacia arriba)
-                if (divs[0][2] < -3400) divs[0][2] = -3400; // Límite inferior
-                break;
-
-
+        case 3: // Subir (mayor incremento hacia arriba)
+            divs[0][2] += 1500; // Incrementar más rápido
+            if (divs[0][2] > 0) divs[0][2] = 0; // Límite superior
+            break;
+        case 4: // Bajar (mayor decremento hacia abajo)
+            divs[0][2] -= 1500; // Decrementar más rápido
+            if (divs[0][2] < -3400) divs[0][2] = -3400; // Límite inferior
+            break;
     }
+
+    // Actualizar visibilidad de los botones según los límites
+    if (divs[0][2] >= 0) {
+        document.getElementById("subir").style.visibility = "hidden"; // Ocultar botón interno
+        document.getElementById("subir2").style.visibility = "hidden"; // Ocultar botón externo
+    } else {
+        document.getElementById("subir").style.visibility = "visible"; // Mostrar botón interno
+        document.getElementById("subir2").style.visibility = "visible"; // Mostrar botón externo
+    }
+
+    // Control de visibilidad para bajar
+    if (divs[0][2] <= -3400) {
+        document.getElementById("bajar").style.visibility = "hidden"; // Ocultar botón interno
+        document.getElementById("bajar2").style.visibility = "hidden"; // Ocultar botón externo
+    } else {
+        document.getElementById("bajar").style.visibility = "visible"; // Mostrar botón interno
+        document.getElementById("bajar2").style.visibility = "visible"; // Mostrar botón externo
+    }
+
     verDivs(); // Actualizar los cambios visualmente
 }
+
 
 setInterval("rote()",5000);
 
@@ -438,3 +450,5 @@ function sumar(a,b,c){
 let{num1,num2,num3,num4,num5}=arrre;
 
 //console.log(num1);
+
+mover(1);
