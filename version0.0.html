@@ -1,70 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.95">
-    <link rel="stylesheet" href="css/ve0.0.css">    
+    <link rel="stylesheet" href="css/ve0.0.css">
     <title>Space</title>
 </head>
+
 <body>
-<div id="pantalla" class="pantalla">
-    <div id="subir" onClick="mover(1)">
-    
+    <div id="pantalla" class="pantalla">
+
+
+        <div id="subir" onClick="mover(1)">
+
+        </div>
+        <div id="bajar" onClick="mover(2)">
+
+        </div>
+
+
+
+        <div id="subir2" onClick="mover(3)">
+
+        </div>
+        <div id="bajar2" onClick="mover(4)">
+
+        </div>
+
+
+        <div id="fondo" onClick="">
+
+            <div id="sol" onClick="tiempo()"></div>
+
+            <div id="ovni" onClick="alertaOvni()" editable="false"></div>
+
+            <div id="mensaje" onClick="esconder('mensaje')">
+
+                <h1 id="titulomensaje">
+
+                </h1>
+                <p id="muchoTexto"></p>
+
+            </div>
+
+
+            <div id="planeta" class="planeta" onClick="rote()"></div>
+        </div>
+        <div id="cargo" onClick="menudesp()">
+
+        </div>
+        <div id="perfil" onClick="menudesp()">
+
+            <div id="cabeza"></div>
+            <div id="cuerpo"></div>
+            <p id="pCargoNombre"> </p>
+
+            <div id="datos">
+                <p id="textomensaje1" hidden="true">
+
+                </p>
+                <p id="textomensaje2">
+
+                </p>
+                <p id="textomensaje3">
+
+                </p>
+                <p id="textomensaje4">
+
+                </p>
+                <p id="textomensaje4">
+
+                </p>
+            </div>
+
+        </div>
     </div>
-    <div id="bajar" onClick="mover(2)">
-    
-    </div>
-<div id="fondo" onClick="">
-
-    <div id="sol" onClick="tiempo()"></div>
-
-    <div id="ovni" onClick="alertaOvni()" editable="false"></div>
-
-    <div id="mensaje" onClick="esconder('mensaje')">
-
-        <h1 id="titulomensaje">
-            
-        </h1>
-        <p id="muchoTexto"></p>    
-    
-    </div>
-
-    
-<div id="planeta" class="planeta" onClick="rote()"></div>
-</div>
-<div id="cargo" onClick="menudesp()">
-
-</div>
-<div id="perfil" onClick="menudesp()">
-    
-    <div id="cabeza"></div>
-    <div id="cuerpo"></div>
-    <p id="pCargoNombre"> </p>
-
-    <div id="datos">
-        <p id="textomensaje1" hidden="true">
-                    
-        </p>
-        <p id="textomensaje2">
-                       
-        </p>
-        <p id="textomensaje3">
-                      
-        </p>
-        <p id="textomensaje4">
-                     
-        </p>
-        <p id="textomensaje4">
-                       
-        </p>
-    </div>
-
-</div>
-</div>
 
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/skrips.js"></script>
     <script src="js/ver0.0.js"></script>
 </body>
+
 </html>
