@@ -6,7 +6,7 @@ var coloresPlaneta="linear-gradient(blue,brown,blue)";var colorSol="yellow";
 function esconder(id){document.getElementById(id).hidden=true;}
 function mostrar(id){document.getElementById(id).hidden=false;}
 
-function tiempo(){ttiempo+=nEstrellas;}
+function tiempo(){ttiempo+=nEstrellas;console.log(ttiempo);}
 
 function verificarDatos(){
 
@@ -161,12 +161,19 @@ function verDivs(){
 }
 var giros=1;
 
+var mensajeOvni = "... ... ...";
+
+var mensajes = ["Hay algo afuera", "Abre bien los ojos", "Creo que vi algo", "Ahí están", "Ya llegaron"];
+
+function mensajeNave() {
+    mensajeOvni = mensajes[randomAr(mensajes.length,0)];
+}
 
 
 function rote(){$("#planeta").css("transform","rotate("+giros*3+"deg)");giros++;
 if(document.getElementById("ovni").hidden&&contador>12){
-    if(randomAr(9,0)==2){
-        mostrar("ovni");
+    if(randomAr(9,0)==2){mensajeNave();
+        mostrar("ovni"); alert(mensajeOvni);
     }else{
         //console.log("Buscando...");
         $("#ovni").css("transform","rotate("+giros*6+"deg)");
@@ -380,19 +387,19 @@ do{
 function mover(x) {
     switch (x) {
         case 1: // Subir (pequeño incremento hacia arriba)
-            divs[0][2] += 400; // Incrementar
+            divs[0][2] += 350; // Incrementar
             if (divs[0][2] > 0) divs[0][2] = 0; // Límite superior
             break;
         case 2: // Bajar (pequeño decremento hacia abajo)
-            divs[0][2] -= 400; // Decrementar
+            divs[0][2] -= 350; // Decrementar
             if (divs[0][2] < -3400) divs[0][2] = -3400; // Límite inferior
             break;
         case 3: // Subir (mayor incremento hacia arriba)
-            divs[0][2] += 1600; // Incrementar más rápido
+            divs[0][2] += 1750; // Incrementar más rápido
             if (divs[0][2] > 0) divs[0][2] = 0; // Límite superior
             break;
         case 4: // Bajar (mayor decremento hacia abajo)
-            divs[0][2] -= 1600; // Decrementar más rápido
+            divs[0][2] -= 1750; // Decrementar más rápido
             if (divs[0][2] < -3400) divs[0][2] = -3400; // Límite inferior
             break;
     }
