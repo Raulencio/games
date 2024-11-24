@@ -228,7 +228,7 @@ var muchoTexto=["Aqui esta la lista ","La informacion del dia ","Sus datos ","Me
 function textos(){
 $("#titulomensaje").text(saludo[randomAr(saludo.length-1,0)]+cargo+" "+nombre);//set 
 $("#textomensaje1").text(muchoTexto[randomAr(muchoTexto.length-1,0)]);
-$("#textomensaje2").text(" numero de Estrellas: "+nEstrellas);//set 
+$("#textomensaje2").text(" Energia de Estrellas: "+nEstrellas);//set 
 $("#textomensaje3").text(" Ovnis avistados: "+nOvnis);
 $("#textomensaje4").text("  Planetas visitados: "+planetasVisitados);
 $("#pCargoNombre").text(cargo+" - "+nombre);
