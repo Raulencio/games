@@ -1,9 +1,90 @@
+
+
+const menu = document.getElementById('menu');
+const gameOver = document.getElementById('gameOver');
+const startButton = document.getElementById('startButton');
+const restartButton = document.getElementById('restartButton');
+const backToMenuButton = document.getElementById('backToMenuButton');
+
+
+// Obtener el canvas y el contexto
 const canvas = document.getElementById('arena');
 const ctx = canvas.getContext('2d');
 
-// Imágenes
+// Ajustar el tamaño del canvas para que coincida con el tamaño de la pantalla del dispositivo
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// Función para redibujar el canvas al cambiar el tamaño de la ventana
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+// Ajustar el fondo
 const backgroundImg = new Image();
 backgroundImg.src = 'volcano.png';
+
+// Función para limpiar el canvas y redibujar el fondo
+function clearCanvas() {
+    ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
+}
+
+
+// Variables para el juego (usadas en el código anterior)
+let gameRunning = false; // Para saber si el juego está en curso
+
+// Función para iniciar el juego
+function startGame() {
+    menu.style.display = 'none';  // Ocultar el menú
+    gameOver.style.display = 'none'; // Ocultar la pantalla de Game Over
+    gameRunning = true;
+    gameLoop(); // Iniciar el ciclo del juego
+}
+
+// Función para reiniciar el juego
+function restartGame() {
+    // Reiniciar las variables del juego y los enemigos, etc.
+    player.health = player.maxHealth;
+    enemies.length = 0;  // Limpiar enemigos
+    gameRunning = true;
+    spawnEnemy(); // Generar enemigos al reiniciar
+    gameLoop(); // Iniciar el ciclo del juego
+    gameOver.style.display = 'none';  // Ocultar pantalla de Game Over
+}
+
+// Función para volver al menú
+function backToMenu() {
+    menu.style.display = 'block'; // Mostrar el menú de inicio
+    gameOver.style.display = 'none'; // Ocultar la pantalla de Game Over
+    gameRunning = false;
+}
+
+// Función para manejar cuando el jugador pierde toda su vida
+function handlePlayerDeath() {
+    if (player.health <= 0) {
+        gameRunning = false;  // Detener el juego
+        ctx.font = '30px Arial';
+        ctx.fillStyle = 'red';
+        ctx.textAlign = 'center';
+        ctx.fillText('¡Derrotado!', canvas.width / 2, canvas.height / 2);  // Mensaje de derrota
+
+        // Mostrar la pantalla de Game Over
+        gameOver.style.display = 'block';
+
+        // Detener el ciclo de animación (detener el juego)
+        cancelAnimationFrame(gameLoop);
+    }
+}
+
+// Evento para el botón de volver al menú
+backToMenuButton.addEventListener('click', backToMenu);
+
+// Eventos para los botones
+startButton.addEventListener('click', startGame);
+restartButton.addEventListener('click', restartGame);
+
+// Imágenes
 
 const playerImg = new Image();
 playerImg.src = 'yohirostand.png';
@@ -341,11 +422,16 @@ function checkProjectileCollision() {
         });
     });
 }
+
+// Lógica del juego aquí
 function gameLoop() {
+    if (!gameRunning) return;  // Si no está en curso, no hacer nada
+
     clearCanvas();
     updatePlayer();
-    updateProjectiles(); // Mover los proyectiles
-    checkProjectileCollision(); // Verificar las colisiones
+    updateProjectiles();
+    checkProjectileCollision();
+    updateEnemies();
 
     drawHealthBar(player.x, player.y - 10, 50, 5, player.health, player.maxHealth);
     ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
@@ -362,10 +448,11 @@ function gameLoop() {
         ctx.fillRect(projectile.x, projectile.y, projectile.width, projectile.height);
     });
 
-    updateEnemies(); // Actualizar enemigos
-    handlePlayerDeath(); // Verificar si el jugador ha muerto
+    handlePlayerDeath();  // Verificar si el jugador ha muerto
 
-    requestAnimationFrame(gameLoop);
+    if (gameRunning) {
+        requestAnimationFrame(gameLoop); // Continuar el ciclo del juego
+    }
 }
 
 

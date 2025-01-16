@@ -4,24 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arena</title>
-
     <style>
-          canvas {
+        canvas {
             display: block;
             margin: auto;
             border: 2px solid black;
         }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            color: #fff;
+        }
+        #arena {
+            border: 1px solid #fff;
+            display: block;
+            margin: 0 auto;
+            background-color: #000;
+        }
+        #menu {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 24px;
+        }
+        #menu button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        #gameOver {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            color: red;
+            display: none;
+        }
     </style>
-
 </head>
 <body>
-    
-
-
     <canvas id="arena" width="800" height="600"></canvas>
+
+    <!-- Menú de inicio -->
+    <div id="menu">
+        <h1>Juego de Gladiadores</h1>
+        <button id="startButton">Iniciar Juego</button>
+    </div>
+
+    <!-- Pantalla de Game Over -->
+    <div id="gameOver">
+        <h2>¡Perdiste!</h2>
+        <button id="restartButton">Reiniciar</button>
+        <button id="backToMenuButton">Volver al Menú</button>
+    </div>
+
     <script src="game.js"></script>
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/skrips.js"></script>
 </body>
 </html>
-
