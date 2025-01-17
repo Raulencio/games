@@ -128,10 +128,85 @@ const weapons = {
     5: { name: 'Ballesta', damage:15+player.level, range: 1000, speed: 60, color: 'red', isMelee: false },
 };
 
-
 let currentWeapon = 1; // Arma seleccionada por defecto
 
+// Evento para cambiar el arma con los botones
+document.getElementById('weapon1Button').addEventListener('click', () => {
+    currentWeapon = 1;
+    console.log(`Arma cambiada a: ${weapons[currentWeapon].name}`);
+});
+
+document.getElementById('weapon2Button').addEventListener('click', () => {
+    currentWeapon = 2;
+    console.log(`Arma cambiada a: ${weapons[currentWeapon].name}`);
+});
+
+document.getElementById('weapon3Button').addEventListener('click', () => {
+    currentWeapon = 3;
+    console.log(`Arma cambiada a: ${weapons[currentWeapon].name}`);
+});
+
+document.getElementById('weapon4Button').addEventListener('click', () => {
+    currentWeapon = 4;
+    console.log(`Arma cambiada a: ${weapons[currentWeapon].name}`);
+});
+
+document.getElementById('weapon5Button').addEventListener('click', () => {
+    currentWeapon = 5;
+    console.log(`Arma cambiada a: ${weapons[currentWeapon].name}`);
+});
+
 // === EVENTOS Y CONTROLES ===
+
+// Joystick
+let joystickBase = document.getElementById('joystick-base');
+let joystickStick = document.getElementById('joystick-stick');
+let isJoystickMoving = false;
+let joystickStartPos = { x: 0, y: 0 };
+
+// Variables de movimiento
+let joystickDirection = { x: 0, y: 0 };
+
+// Configuración de la posición del joystick
+joystickBase.addEventListener('touchstart', (e) => {
+    isJoystickMoving = true;
+    joystickStartPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    joystickStick.style.transition = 'none'; // Desactivamos transición cuando el joystick comienza a moverse
+});
+
+joystickBase.addEventListener('touchmove', (e) => {
+    if (!isJoystickMoving) return;
+
+    let movePos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    let deltaX = movePos.x - joystickStartPos.x;
+    let deltaY = movePos.y - joystickStartPos.y;
+
+    // Limitamos el movimiento del stick al radio de la base
+    let distance = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), joystickBase.offsetWidth / 2);
+
+    // Calculamos el ángulo y la nueva posición del stick
+    let angle = Math.atan2(deltaY, deltaX);
+    joystickStick.style.transform = `translate(${distance * Math.cos(angle)}px, ${distance * Math.sin(angle)}px)`;
+
+    // Asignamos las direcciones
+    joystickDirection.x = deltaX / (joystickBase.offsetWidth / 2);
+    joystickDirection.y = deltaY / (joystickBase.offsetHeight / 2);
+
+    // Actualizamos el movimiento del jugador
+    player.dx = joystickDirection.x * player.speed;
+    player.dy = joystickDirection.y * player.speed;
+});
+
+joystickBase.addEventListener('touchend', () => {
+    isJoystickMoving = false;
+    joystickStick.style.transition = 'transform 0.3s ease'; // Habilitamos la transición al soltar el joystick
+    joystickStick.style.transform = 'translate(0px, 0px)'; // Volvemos al centro
+    player.dx = 0;
+    player.dy = 0;
+});
+
+
+
 // Movimiento
 document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowLeft' || event.key.toLowerCase() === 'a') player.dx = -player.speed;
