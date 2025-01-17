@@ -121,10 +121,10 @@ function applyDamageToPlayer(amount) {
 
 // === CONFIGURACIÓN DE ARMAS ===
 const weapons = {
-    1: { name: 'Daga', damage: 30+player.level, range: 200, speed: 20, color: 'gray', isMelee: false },
+    1:  { name: 'Arco', damage: 20+player.level, range: 600, speed: 14, color: 'orange', isMelee: false },
     2: { name: 'Espada', damage:75+player.level, range: 50, speed: 10, color: 'blue', isMelee: true },
     3: { name: 'Lanza', damage: 50+player.level, range: 100, speed: 8, color: 'green', isMelee: true },
-    4: { name: 'Arco', damage: 20+player.level, range: 600, speed: 14, color: 'orange', isMelee: false },
+    4:{ name: 'Daga', damage: 30+player.level, range: 200, speed: 20, color: 'gray', isMelee: false },
     5: { name: 'Ballesta', damage:15+player.level, range: 1000, speed: 60, color: 'red', isMelee: false },
 };
 
