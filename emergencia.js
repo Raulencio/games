@@ -125,7 +125,7 @@ const weapons = {
     2: { name: 'Espada', damage:75+player.level, range: 50, speed: 10, color: 'blue', isMelee: true },
     3: { name: 'Lanza', damage: 50+player.level, range: 100, speed: 8, color: 'green', isMelee: true },
     4: { name: 'Arco', damage: 20+player.level, range: 600, speed: 14, color: 'orange', isMelee: false },
-    5: { name: 'Ballesta', damage:15+player.level, range: 800, speed: 60, color: 'red', isMelee: false },
+    5: { name: 'Ballesta', damage:15+player.level, range: 1000, speed: 60, color: 'red', isMelee: false },
 };
 
 
@@ -178,56 +178,74 @@ function drawMeleeAttack(range) {
 
 
 // Ataque con clic del mouse
+
+
+
 canvas.addEventListener('click', (event) => {
-    const weapon = weapons[currentWeapon];
+    if (weaponEquipped) {
+        // Si el arma está equipada, se puede atacar
+        const weapon = weapons[currentWeapon];
 
-    if (weapon.isMelee) {
-        // Ataque melee: verificar enemigos en el rango cercano
-        enemies.forEach((enemy, index) => {
-            const dx = player.x - enemy.x;
-            const dy = player.y - enemy.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
+        if (weapon.isMelee) {
+            // Ataque melee: verificar enemigos en el rango cercano
+            enemies.forEach((enemy, index) => {
+                const dx = player.x - enemy.x;
+                const dy = player.y - enemy.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance <= weapon.range) {
-                // Aplicar daño al enemigo
-                enemy.health -= weapon.damage;
+                if (distance <= weapon.range) {
+                    // Aplicar daño al enemigo
+                    enemy.health -= weapon.damage;
 
-                // Mostrar daño en pantalla
-                enemy.damageIndicators.push({
-                    value: weapon.damage,
-                    x: enemy.x + enemy.width / 2,
-                    y: enemy.y,
-                    opacity: 1,
-                });
+                    // Mostrar daño en pantalla
+                    enemy.damageIndicators.push({
+                        value: weapon.damage,
+                        x: enemy.x + enemy.width / 2,
+                        y: enemy.y,
+                        opacity: 1,
+                    });
 
-                // Eliminar enemigo si la salud llega a 0
-                if (enemy.health <= 0) {
-                    enemies.splice(index, 1);
-                    gainXP(10)
+                    // Eliminar enemigo si la salud llega a 0
+                    if (enemy.health <= 0) {
+                        enemies.splice(index, 1);
+                        gainXP(10)
+                    }
                 }
+            });
+            if (weapon.isMelee) {
+                drawMeleeAttack(weapon.range);
             }
-        });if (weapon.isMelee) {
-            drawMeleeAttack(weapon.range);
+        } else {
+            // Ataque a distancia: crear proyectiles
+            const angle = Math.atan2(event.offsetY - player.y, event.offsetX - player.x);
+            projectiles.push({
+                x: player.x + player.width / 2,
+                y: player.y + player.height / 2,
+                width: 10,
+                height: 5,
+                speed: weapon.speed,
+                damage: weapon.damage,
+                range: weapon.range,
+                angle,
+                color: weapon.color,
+                distanceTraveled: 0,
+            });
         }
-        
     } else {
-        // Ataque a distancia: crear proyectiles
-        const angle = Math.atan2(event.offsetY - player.y, event.offsetX - player.x);
-        projectiles.push({
-            x: player.x + player.width / 2,
-            y: player.y + player.height / 2,
-            width: 10,
-            height: 5,
-            speed: weapon.speed,
-            damage: weapon.damage,
-            range: weapon.range,
-            angle,
-            color: weapon.color,
-            distanceTraveled: 0,
-        });
+        // Si el arma no está equipada, mover hacia el punto de clic
+        const targetX = event.offsetX;
+        const targetY = event.offsetY;
+
+        // Calcular el vector de movimiento
+        const dx = targetX - player.x;
+        const dy = targetY - player.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        // Normalizar el vector para mover al jugador
+        player.dx = (dx / distance) * player.speed;
+        player.dy = (dy / distance) * player.speed;
     }
 });
-
 
 // === ACTUALIZAR PROYECTILES ===
 // === ACTUALIZAR PROYECTILES ===
@@ -406,6 +424,24 @@ function drawPlayerDamageIndicators() {
         ctx.globalAlpha = 1;  // Restaurar opacidad
     });
 }
+
+
+
+let weaponEquipped = true; // Empezamos con el arma equipada por defecto
+
+// Evento para el botón de equipar/desequipar arma
+document.getElementById('equipButton').addEventListener('click', () => {
+    weaponEquipped = !weaponEquipped; // Cambiar el estado del arma
+
+    // Cambiar el texto del botón según el estado
+    if (weaponEquipped) {
+        document.getElementById('equipButton').textContent = 'Desequipar Arma';
+    } else {
+        document.getElementById('equipButton').textContent = 'Equipar Arma';
+    }
+});
+
+
 
 // === BUCLE PRINCIPAL ===
 function gameLoop() {

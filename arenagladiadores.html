@@ -85,10 +85,27 @@
         #player.damage {
             animation: flashRed 0.5s ease-in-out;
         }
+
+        /* Nuevo estilo para el botón de equipar */
+        #equipButton {
+            position: absolute;
+            top: 10%; /* Ajusta la posición según tus necesidades */
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 2; /* Asegura que el botón esté por encima del canvas */
+        }
     </style>
 </head>
 
 <body>
+    <button id="equipButton">Equipar Arma</button>
     <canvas id="arena" width="800" height="600"></canvas>
 
     <!-- Menú de inicio -->
@@ -105,10 +122,9 @@
     </div>
     <div id="overlay" hidden="true"></div>
 
-
-<script src="partecero.js"></script>
-    <script src="parteuno.js"></script>  
-    <script src="partedos.js"></script> 
+    <script src="partecero.js"></script>
+    <script src="parteuno.js"></script>
+    <script src="partedos.js"></script>
     <script src="partetres.js"></script>
     <script src="partecuatro.js"></script>
     <script src="emergencia.js"></script>
