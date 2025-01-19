@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Animations with Controls</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #222;
+      color: white;
+    }
+
+    canvas {
+      display: block;
+      background-color: #000;
+      border: 2px solid #fff;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="640" height="480"></canvas>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Cargar fondo
+    const background = new Image();
+    background.src = 'volcano.png'; // Asegúrate de tener este fondo
+
+    // Configuración de animaciones
+    const animations = {
+      idle: { image: 'sprites/samurai/samurai/Idle.png', frameCount: 6, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+      attack1: { image: 'sprites/samurai/samurai/Attack_1.png', frameCount: 4, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+      attack2: { image: 'sprites/samurai/samurai/Attack_3.png', frameCount: 4, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+      walk: { image: 'sprites/samurai/samurai/Walk.png', frameCount: 9, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+    };
+
+    let currentAnimation = 'idle';
+    let currentFrame = 0;
+    let frameTimer = 0;
+    const character = {
+      x: canvas.width / 2 - 64,
+      y: canvas.height / 2 - 64,
+      width: 128,
+      height: 128,
+      speed: 2,
+      flip: false, // Esto controlará la dirección de la imagen
+    };
+
+    // Cargar imágenes de animaciones
+    const images = {};
+    for (let anim in animations) {
+      images[anim] = new Image();
+      images[anim].src = animations[anim].image;
+    }
+
+    // Dibujo del joystick
+    const joystick = {
+      x: 60,
+      y: canvas.height - 120,
+      radius: 40,
+      innerX: 60,
+      innerY: canvas.height - 120,
+      innerRadius: 20,
+      active: false,
+    };
+
+    function drawJoystick() {
+      // Base del joystick
+      ctx.beginPath();
+      ctx.arc(joystick.x, joystick.y, joystick.radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'gray';
+      ctx.fill();
+
+      // Botón del joystick
+      ctx.beginPath();
+      ctx.arc(joystick.innerX, joystick.innerY, joystick.innerRadius, 0, Math.PI * 2);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+    }
+
+    // Dibujo de botones
+    const buttons = [
+      { name: 'Attack 1', x: canvas.width - 120, y: canvas.height - 140, width: 100, height: 30, action: () => startAnimation('attack1') },
+      { name: 'Attack 2', x: canvas.width - 120, y: canvas.height - 100, width: 100, height: 30, action: () => startAnimation('attack2') },
+    ];
+
+    function drawButtons() {
+      buttons.forEach(button => {
+        ctx.fillStyle = 'gray';
+        ctx.fillRect(button.x, button.y, button.width, button.height);
+        ctx.fillStyle = 'white';
+        ctx.textAlign = 'center';
+        ctx.fillText(button.name, button.x + button.width / 2, button.y + 20);
+      });
+    }
+
+    // Control de animaciones
+    function startAnimation(animationName) {
+      if (currentAnimation !== animationName) {
+        currentAnimation = animationName;
+        currentFrame = 0;
+        frameTimer = 0;
+      }
+    }
+
+    function dale() {
+      if (currentAnimation !== 'idle') startAnimation('idle'); // Volver a la animación de inactividad
+    }
+
+    function updateAnimation(deltaTime) {
+      const anim = animations[currentAnimation];
+      frameTimer += deltaTime;
+      if (frameTimer > anim.speed * 1000) {
+        frameTimer = 0;
+        currentFrame = (currentFrame + 1) % anim.frameCount;
+
+        // Si la animación no es de bucle, al terminar volvemos a 'idle'
+        if (!anim.loop && currentFrame === anim.frameCount - 1) {
+          dale();
+        }
+      }
+    }
+
+    function drawCharacter() {
+      const anim = animations[currentAnimation];
+      const img = images[currentAnimation];
+      const sx = currentFrame * anim.frameWidth;
+
+      // Voltear el personaje dependiendo de la dirección del joystick
+      ctx.save();
+      if (character.flip) {
+        ctx.scale(-1, 1); // Voltear horizontalmente
+        ctx.drawImage(img, sx, 0, anim.frameWidth, anim.frameHeight, -character.x - anim.frameWidth, character.y, anim.frameWidth, anim.frameHeight);
+      } else {
+        ctx.drawImage(img, sx, 0, anim.frameWidth, anim.frameHeight, character.x, character.y, anim.frameWidth, anim.frameHeight);
+      }
+      ctx.restore();
+    }
+
+    // Movimiento con joystick
+    function updateJoystickMovement() {
+      if (!joystick.active) return; // Solo actualiza si el joystick está activo
+
+      const dx = joystick.innerX - joystick.x;
+      const dy = joystick.innerY - joystick.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance > joystick.radius) {
+        const angle = Math.atan2(dy, dx);
+        joystick.innerX = joystick.x + Math.cos(angle) * joystick.radius;
+        joystick.innerY = joystick.y + Math.sin(angle) * joystick.radius;
+      }
+
+      if (distance > 0) {
+        // Mover al personaje, pero sin que salga del canvas ni pase de la mitad de la pantalla
+        character.x += (dx / distance) * character.speed;
+        character.y += (dy / distance) * character.speed;
+
+        // Evitar que el personaje salga del canvas o pase de la mitad de la pantalla
+        character.x = Math.max(0, Math.min(character.x, canvas.width - character.width));
+        character.y = Math.max(0, Math.min(character.y, canvas.height / 2 - character.height));
+
+        // Si el joystick está hacia la izquierda, voltear el personaje
+        character.flip = dx < 0;
+
+        startAnimation('walk'); // Cambiar a animación de caminar
+      } else {
+        startAnimation('idle'); // Cambiar a animación de inactividad cuando no se mueva
+      }
+    }
+
+    // Eventos de interacción
+    canvas.addEventListener('mousedown', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Joystick
+      if (Math.hypot(x - joystick.x, y - joystick.y) < joystick.radius) {
+        joystick.active = true;
+      }
+
+      // Botones
+      buttons.forEach(button => {
+        if (x >= button.x && x <= button.x + button.width && y >= button.y && y <= button.y + button.height) {
+          button.action();
+        }
+      });
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (joystick.active) {
+        const rect = canvas.getBoundingClientRect();
+        joystick.innerX = e.clientX - rect.left;
+        joystick.innerY = e.clientY - rect.top;
+      }
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      joystick.active = false;
+      joystick.innerX = joystick.x;
+      joystick.innerY = joystick.y;
+
+      // Volver a la animación idle cuando el joystick ya no está activo
+      if (currentAnimation !== 'idle') {
+        startAnimation('idle');
+      }
+    });
+
+    // Game loop
+    let lastTime = 0;
+    function gameLoop(timestamp) {
+      const deltaTime = timestamp - lastTime;
+      lastTime = timestamp;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Dibujar el fondo
+      ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+      updateJoystickMovement();
+      updateAnimation(deltaTime);
+      drawCharacter();
+      drawJoystick();
+      drawButtons();
+
+      requestAnimationFrame(gameLoop);
+    }
+
+    requestAnimationFrame(gameLoop);
+  </script>
+</body>
+</html>
