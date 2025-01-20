@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tierra Antigua</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      overflow: hidden;
+    }
+
+    canvas {
+      border: 2px solid black;
+    }
+
+    .joystick {
+      position: absolute;
+      bottom: 50px;
+      left: 50px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .joystick-inner {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.7);
+      pointer-events: none;
+    }
+
+    /* Contenedor para los botones de ataque */
+    .attack-buttons {
+      position: absolute;
+      bottom: 50px;
+      right: 50px;
+      display: flex;
+      gap: 10px;
+      /* Espacio entre los botones */
+    }
+
+    .attack-button {
+      width: 100px;
+      height: 50px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="miCanvas" width="800" height="600"></canvas>
+  <div class="joystick">
+    <div class="joystick-inner" id="joystick"></div>
+  </div>
+
+  <!-- Contenedor para los botones de ataque -->
+  <div class="attack-buttons">
+    <button class="attack-button" id="attackButton">Atacar 1</button>
+    <button class="attack-button" id="attackButton2">Atacar 2</button>
+  </div>
+
+
+  <script>
+
+
+
+
+
+
+
+
+
+    const animaciones = {
+      samurai: {
+        idle: { image: 'sprites/samurai/samurai/Idle.png', frameCount: 6, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+        attack1: { image: 'sprites/samurai/samurai/Attack_1.png', frameCount: 4, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        attack2: { image: 'sprites/samurai/samurai/Attack_2.png', frameCount: 5, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        attack3: { image: 'sprites/samurai/samurai/Attack_3.png', frameCount: 4, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        walk: { image: 'sprites/samurai/samurai/Walk.png', frameCount: 9, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+      },
+
+
+      samurai_commander: {
+        idle: { image: 'sprites/samurai/samurai_commander/Idle.png', frameCount: 5, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+        attack1: { image: 'sprites/samurai/samurai_commander/Attack_1.png', frameCount: 4, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        attack2: { image: 'sprites/samurai/samurai_commander/Attack_2.png', frameCount: 5, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        attack3: { image: 'sprites/samurai/samurai_commander/Attack_3.png', frameCount: 4, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        walk: { image: 'sprites/samurai/samurai_commander/Walk.png', frameCount: 9, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+      },
+
+      samurai_archer: {
+        idle: { image: 'sprites/samurai/samurai_archer/Idle.png', frameCount: 9, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+        attack1: { image: 'sprites/samurai/samurai_archer/Attack_1.png', frameCount: 5, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        attack2: { image: 'sprites/samurai/samurai_archer/Attack_2.png', frameCount: 5, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        attack3: { image: 'sprites/samurai/samurai_archer/Attack_3.png', frameCount: 6, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        walk: { image: 'sprites/samurai/samurai_archer/Walk.png', frameCount: 8, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+      },
+      skeleton_warrior: {
+        idle: { image: 'sprites/skeleton/skeleton_warrior/Idle.png', frameCount: 7, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+        attack1: { image: 'sprites/skeleton/skeleton_warrior/Attack_1.png', frameCount: 5, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        attack2: { image: 'sprites/skeleton/skeleton_warrior/Attack_2.png', frameCount: 6, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        attack3: { image: 'sprites/skeleton/skeleton_warrior/Attack_3.png', frameCount: 4, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        walk: { image: 'sprites/skeleton/skeleton_warrior/Walk.png', frameCount: 7, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+      },
+      skeleton_spearman: {
+        idle: { image: 'sprites/skeleton/skeleton_spearman/Idle.png', frameCount: 7, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+        attack1: { image: 'sprites/skeleton/skeleton_spearman/Attack_1.png', frameCount: 4, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        attack2: { image: 'sprites/skeleton/skeleton_spearman/Attack_2.png', frameCount: 4, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        attack3: { image: 'sprites/skeleton/skeleton_spearman/Attack_2.png', frameCount: 4, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        walk: { image: 'sprites/skeleton/skeleton_spearman/Walk.png', frameCount: 7, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+      },
+      kitsune: {
+        idle: { image: 'sprites/yokai/kitsune/Idle.png', frameCount: 8, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+        attack1: { image: 'sprites/yokai/kitsune/Attack_1.png', frameCount: 10, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        attack2: { image: 'sprites/yokai/kitsune/Attack_2.png', frameCount: 9, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        attack3: { image: 'sprites/yokai/kitsune/Attack_2.png', frameCount: 7, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: false },
+        walk: { image: 'sprites/yokai/kitsune/Walk.png', frameCount: 8, frameWidth: 128, frameHeight: 128, speed: 0.2, loop: true },
+      }
+
+
+
+    };
+
+
+
+
+    const estadisticasPersonajes = {
+      samurai: {
+        vida: 100,
+        daño: 20,
+        velocidad: 5,
+        defensa: 10
+      },
+      samurai_commander: {
+        vida: 150,
+        daño: 25,
+        velocidad: 4,
+        defensa: 15
+      },
+      samurai_archer: {
+        vida: 80,
+        daño: 18,
+        velocidad: 5,
+        defensa: 8
+      },
+      skeleton_warrior: {
+        vida: 120,
+        daño: 22,
+        velocidad: 4,
+        defensa: 12
+      },
+      skeleton_spearman: {
+        vida: 110,
+        daño: 20,
+        velocidad: 5,
+        defensa: 10
+      },
+      kitsune: {
+        vida: 90,
+        daño: 25,
+        velocidad: 8,
+        defensa: 5
+      }
+    };
+
+
+    const canvas = document.getElementById("miCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let personajeActivo = null;
+    let animacionFrame = 0;
+    let tiempoUltimaActualizacion = 0;
+    const intervaloAnimacion = 1000 / 10;
+    let velocidad = 5;
+    let posX = canvas.width / 2;
+    let posY = canvas.height / 2;
+    let movX = 0;
+    let movY = 0;
+    let joystickActivo = false;
+    let ataqueActivo = false;
+
+    const imagenesCargadas = {};
+
+    function cargarImagen(src) {
+      if (imagenesCargadas[src]) return imagenesCargadas[src];
+      const img = new Image();
+      img.src = src;
+      imagenesCargadas[src] = img;
+      return img;
+    }
+
+    let estadisticasActivas = null;
+
+    function cambiarPersonaje(personaje) {
+      personajeActivo = personaje;
+      // Cambiar las estadísticas activas según el personaje
+      estadisticasActivas = estadisticasPersonajes[personaje];
+
+      animacionFrame = 0;
+      tiempoUltimaActualizacion = 0;
+      animarPersonaje();
+      actualizarEstadisticasEnPantalla();
+    }
+
+    function actualizarEstadisticasEnPantalla() {
+      // Crear un área para mostrar las estadísticas
+      const statsArea = document.getElementById("estadisticas");
+
+      if (!statsArea) {
+        // Si no existe, crear el área
+        const newStatsArea = document.createElement("div");
+        newStatsArea.id = "estadisticas";
+        newStatsArea.style.position = "absolute";
+        newStatsArea.style.top = "20px";
+        newStatsArea.style.right = "20px";
+        newStatsArea.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        newStatsArea.style.color = "white";
+        newStatsArea.style.padding = "10px";
+        newStatsArea.style.fontSize = "18px";
+        document.body.appendChild(newStatsArea);
+      }
+
+      const stats = `
+    Vida: ${estadisticasActivas.vida}
+    Daño: ${estadisticasActivas.daño}
+    Velocidad: ${estadisticasActivas.velocidad}
+    Defensa: ${estadisticasActivas.defensa}
+  `;
+
+      document.getElementById("estadisticas").innerText = stats;
+    }
+
+    function animarPersonaje() {
+      if (!personajeActivo) return;
+
+      let personajeAnim;
+
+      // Si se activa el ataque, usar la animación de ataque según el tipo de ataque
+      if (ataqueActivo) {
+        switch (ataqueTipo) {
+          case 1:
+            personajeAnim = animaciones[personajeActivo].attack1; // Ataque 1
+            break;
+          case 2:
+            personajeAnim = animaciones[personajeActivo].attack2; // Ataque 2
+            break;
+          case 3:
+            personajeAnim = animaciones[personajeActivo].attack3; // Ataque 3
+            break;
+          default:
+            personajeAnim = animaciones[personajeActivo].attack1; // Por defecto, ataque 1
+        }
+
+        if (animacionFrame >= personajeAnim.frameCount) {
+          ataqueActivo = false; // Detener el ataque cuando termine la animación
+        }
+      } else if (movX !== 0 || movY !== 0) {
+        personajeAnim = animaciones[personajeActivo].walk; // Animación de caminar
+      } else {
+        personajeAnim = animaciones[personajeActivo].idle; // Animación de estar en reposo
+      }
+
+      const img = cargarImagen(personajeAnim.image);
+      const frameX = (animacionFrame % personajeAnim.frameCount) * personajeAnim.frameWidth;
+      const frameY = 0;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Control de dirección del personaje
+      ctx.save(); // Guardamos el estado del contexto
+      if (movX < 0) {
+        ctx.scale(-1, 1); // Voltea la dirección de la imagen
+      }
+
+      ctx.drawImage(
+        img,
+        frameX, frameY,
+        personajeAnim.frameWidth, personajeAnim.frameHeight,
+        (movX < 0 ? -posX : posX) - personajeAnim.frameWidth / 2,
+        posY - personajeAnim.frameHeight / 2,
+        personajeAnim.frameWidth,
+        personajeAnim.frameHeight
+      );
+
+      ctx.restore(); // Restauramos el estado del contexto
+
+      if (animacionFrame >= personajeAnim.frameCount && personajeAnim.loop) {
+        animacionFrame = 0;
+      }
+
+      const tiempoActual = Date.now();
+      if (tiempoActual - tiempoUltimaActualizacion >= intervaloAnimacion) {
+        tiempoUltimaActualizacion = tiempoActual;
+        animacionFrame++;
+      }
+
+      if (personajeAnim.loop) {
+        requestAnimationFrame(animarPersonaje);
+      }
+    }
+
+    function moverPersonaje() {
+      // Calcular márgenes de seguridad (5% de la pantalla)
+      const margenX = canvas.width * 0.10;
+      const margenY = canvas.height * 0.12;
+
+      if (movX === 0 && movY === 0) {
+        animarPersonaje();
+        return;
+      }
+
+      posX += movX * velocidad;
+      posY += movY * velocidad;
+
+      // Asegurarse de que el personaje se quede dentro del mapa con márgenes de 5%
+      posX = Math.max(margenX, Math.min(canvas.width - margenX, posX));
+      posY = Math.max(margenY, Math.min(canvas.height - margenY, posY));
+
+      animarPersonaje();
+    }
+
+    // Crear joystick
+    const joystick = document.getElementById("joystick");
+    const joystickArea = document.querySelector(".joystick");
+
+    joystickArea.addEventListener("mousedown", (e) => {
+      joystickActivo = true;
+      updateJoystickPosition(e);
+    });
+
+    window.addEventListener("mousemove", (e) => {
+      if (joystickActivo) {
+        updateJoystickPosition(e);
+      }
+    });
+
+    window.addEventListener("mouseup", () => {
+      joystickActivo = false;
+      movX = 0;
+      movY = 0;
+      joystick.style.transform = "translate(0, 0)";
+      animarPersonaje();
+    });
+
+    function updateJoystickPosition(event) {
+      const offsetX = joystickArea.offsetLeft;
+      const offsetY = joystickArea.offsetTop;
+      const width = joystickArea.offsetWidth;
+      const height = joystickArea.offsetHeight;
+
+      let joystickPosX = event.clientX - offsetX - width / 2;
+      let joystickPosY = event.clientY - offsetY - height / 2;
+
+      const distancia = Math.sqrt(joystickPosX ** 2 + joystickPosY ** 2);
+      const maxDist = width / 2;
+      if (distancia > maxDist) {
+        const angulo = Math.atan2(joystickPosY, joystickPosX);
+        joystickPosX = Math.cos(angulo) * maxDist;
+        joystickPosY = Math.sin(angulo) * maxDist;
+      }
+
+      joystick.style.transform = `translate(${joystickPosX}px, ${joystickPosY}px)`;
+
+      movX = joystickPosX / (width / 2);
+      movY = joystickPosY / (height / 2);
+    }
+
+    // Función para manejar el botón de ataque
+    document.getElementById("attackButton").addEventListener("click", () => {
+      ataqueActivo = true; ataqueTipo = 1;
+      animarPersonaje(); // Cambia a la animación de ataque inmediatamente
+    });
+
+
+    // Función para manejar el botón de ataque
+    document.getElementById("attackButton2").addEventListener("click", () => {
+      ataqueActivo = true; ataqueTipo = 2;
+      animarPersonaje(); // Cambia a la animación de ataque inmediatamente
+    });
+
+    // Crear botones para cambiar personajes
+    // Crear botones para cambiar personajes
+    const botones = document.createElement("div");
+    botones.style.position = "fixed";
+    botones.style.top = "10px";
+    botones.style.left = "10px";
+    botones.style.zIndex = 10;
+    botones.style.display = "flex";
+    botones.style.flexDirection = "column";
+    document.body.appendChild(botones);
+
+    function crearBoton(personaje) {
+      const boton = document.createElement("button");
+      boton.innerText = personaje;
+      boton.onclick = function () {
+        cambiarPersonaje(personaje);
+      };
+      botones.appendChild(boton);
+    }
+
+    // Crear botones para los personajes
+    //["samurai", "samurai_commander", "samurai_archer", "skeleton_warrior", "skeleton_spearman"].forEach(crearBoton);
+
+
+    // Crear botones para cada personaje
+    crearBoton('samurai');
+
+    crearBoton('samurai_commander');
+    crearBoton('samurai_archer');
+    crearBoton('skeleton_warrior');
+    crearBoton('skeleton_spearman');
+    crearBoton('kitsune');
+
+
+    // Iniciar el personaje por defecto
+    cambiarPersonaje('samurai');
+
+
+
+
+
+
+
+
+
+
+    
+    // Bucle de actualización del juego
+    function actualizarJuego() {
+      moverPersonaje();
+      requestAnimationFrame(actualizarJuego);
+    }
+
+
+
+
+
+
+
+
+    actualizarJuego();
+  </script>
+</body>
+
+</html>
+
