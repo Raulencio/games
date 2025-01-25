@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandbox Game</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+
+        #controls {
+            margin-top: 10px;
+        }
+
+        .health-bar {
+            position: absolute;
+            background-color: red;
+            height: 5px;
+        }
+
+
+
+
+
+
+
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        canvas {
+            flex: 1;
+            display: block;
+        }
+
+        .player-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .player-buttons.top {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .player-buttons.bottom {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        button {
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 10px;
+            font-size: 16px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #ddd;
+        }
+
+        #energy-container {
+            width: 100%;
+            height: 20px;
+            background-color: #ddd;
+        }
+
+        #energy-bar {
+            height: 100%;
+            background-color: green;
+            width: 100%;
+            /* Empieza con la energía llena */
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="gameCanvas" width="1900" height="800"></canvas>
+
+
+
+    <div id="energy-container">
+        <div id="energy-bar-top"></div> <!-- Barra de energía del jugador de arriba -->
+    </div>
+
+    <div id="energy-container">
+        <div id="energy-bar-bottom"></div> <!-- Barra de energía del jugador de abajo -->
+    </div>
+
+
+
+
+
+    <div class="player-buttons top">
+        <button onclick="addEntities('samurai',  30, 'top')">Samurai</button>
+        <button onclick="addEntities('samurai_commander', 30, 'top')">Commander</button>
+        <button onclick="addEntities('samurai_archer', 30, 'top')">Archer</button>
+        <button onclick="entities.push(boss2),addEntities('skeleton_spearman',  120, 'top')">Boss</button>
+
+    </div>
+
+    <div class="player-buttons bottom">
+        <button onclick="addEntities('samurai',  30, 'bottom')">Samurai</button>
+        <button onclick="addEntities('samurai_commander', 30, 'bottom')">Commander</button>
+        <button onclick="addEntities('samurai_archer',  30, 'bottom')">Archer</button>
+        <button onclick="entities.push(boss),addEntities('skeleton_warrior',  20, 'bottom')">Boss</button>
+    </div>
+
+
+
+
+
+
+    <script src="idea.js"></script>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const entities = [];
+
+        class Animation {
+            constructor({ image, frameCount, frameWidth, frameHeight, speed, loop }) {
+                this.image = new Image();
+                this.image.src = image;
+                this.frameCount = frameCount;
+                this.frameWidth = frameWidth;
+                this.frameHeight = frameHeight;
+                this.speed = speed;
+                this.loop = loop;
+                this.currentFrame = 0;
+                this.timer = 0;
+            }
+
+            draw(ctx, x, y, size) {
+                const frameX = Math.floor(this.currentFrame) * this.frameWidth;
+                ctx.drawImage(this.image, frameX, 0, this.frameWidth, this.frameHeight, x, y, size, size);
+                this.timer += this.speed;
+                if (this.timer >= 1) {
+                    this.currentFrame++;
+                    this.timer = 0;
+                }
+                if (this.currentFrame >= this.frameCount) {
+                    if (this.loop) {
+                        this.currentFrame = 0;
+                    } else {
+                        this.currentFrame = this.frameCount - 1; // Stop at the last frame
+                    }
+                }
+            }
+        }
+        const animations = {
+            samurai: {
+                idle: new Animation({
+                    image: 'sprites/samurai/samurai/Idle.png',
+                    frameCount: 6,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                run: new Animation({
+                    image: 'sprites/samurai/samurai/run.png',
+                    frameCount: 8,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                attack1: new Animation({
+                    image: 'sprites/samurai/samurai/Attack_1.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack2: new Animation({
+                    image: 'sprites/samurai/samurai/Attack_2.png',
+                    frameCount: 5,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack3: new Animation({
+                    image: 'sprites/samurai/samurai/Attack_3.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+            },
+            samurai_archer: {
+                idle: new Animation({
+                    image: 'sprites/samurai/samurai_archer/Idle.png',
+                    frameCount: 9,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                run: new Animation({
+                    image: 'sprites/samurai/samurai_archer/run.png',
+                    frameCount: 8,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                attack1: new Animation({
+                    image: 'sprites/samurai/samurai_archer/Attack_1.png',
+                    frameCount: 5,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack2: new Animation({
+                    image: 'sprites/samurai/samurai_archer/Attack_2.png',
+                    frameCount: 5,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack3: new Animation({
+                    image: 'sprites/samurai/samurai_archer/Attack_3.png',
+                    frameCount: 6,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+            },
+            samurai_commander: {
+                idle: new Animation({
+                    image: 'sprites/samurai/samurai_commander/Idle.png',
+                    frameCount: 5,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                run: new Animation({
+                    image: 'sprites/samurai/samurai_commander/run.png',
+                    frameCount: 8,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                attack1: new Animation({
+                    image: 'sprites/samurai/samurai_commander/Attack_1.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack2: new Animation({
+                    image: 'sprites/samurai/samurai_commander/Attack_2.png',
+                    frameCount: 5,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack3: new Animation({
+                    image: 'sprites/samurai/samurai_commander/Attack_3.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+            }, knight_1: {
+                idle: new Animation({
+                    image: 'sprites/knight/knight_1/Idle.png',
+                    frameCount: 4,
+                    frameWidth: 86,
+                    frameHeight: 86,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                run: new Animation({
+                    image: 'sprites/knight/knight_1/run.png',
+                    frameCount: 7,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                attack1: new Animation({
+                    image: 'sprites/knight/knight_1/Attack 1.png',
+                    frameCount: 5,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack2: new Animation({
+                    image: 'sprites/knight/knight_1/Attack 2.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack3: new Animation({
+                    image: 'sprites/knight/knight_1/Attack 3.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+            }, knight_2: {
+                idle: new Animation({
+                    image: 'sprites/knight/knight_2/Idle.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                run: new Animation({
+                    image: 'sprites/knight/knight_2/run.png',
+                    frameCount: 7,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                attack1: new Animation({
+                    image: 'sprites/knight/knight_2/Attack 1.png',
+                    frameCount: 5,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack2: new Animation({
+                    image: 'sprites/knight/knight_2/Attack 2.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack3: new Animation({
+                    image: 'sprites/knight/knight_2/Attack 3.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+            }, knight_3: {
+                idle: new Animation({
+                    image: 'sprites/knight/knight_3/Idle.png',
+                    frameCount: 4,
+                    frameWidth: 86,
+                    frameHeight: 86,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                run: new Animation({
+                    image: 'sprites/knight/knight_3/run.png',
+                    frameCount: 7,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                attack1: new Animation({
+                    image: 'sprites/knight/knight_3/Attack 1.png',
+                    frameCount: 5,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack2: new Animation({
+                    image: 'sprites/knight/knight_3/Attack 2.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack3: new Animation({
+                    image: 'sprites/knight/knight_3/Attack 3.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+            },
+            skeleton_spearman: {
+                idle: new Animation({
+                    image: 'sprites/skeleton/skeleton_spearman/Idle.png',
+                    frameCount: 7,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                run: new Animation({
+                    image: 'sprites/skeleton/skeleton_spearman/run.png',
+                    frameCount: 6,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                attack1: new Animation({
+                    image: 'sprites/skeleton/skeleton_spearman/Attack_1.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack2: new Animation({
+                    image: 'sprites/skeleton/skeleton_spearman/Attack_2.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack3: new Animation({
+                    image: 'sprites/skeleton/skeleton_spearman/Attack_2.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+            },
+            skeleton_warrior: {
+                idle: new Animation({
+                    image: 'sprites/skeleton/skeleton_warrior/Idle.png',
+                    frameCount: 7,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                run: new Animation({
+                    image: 'sprites/skeleton/skeleton_warrior/run.png',
+                    frameCount: 6,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                attack1: new Animation({
+                    image: 'sprites/skeleton/skeleton_warrior/Attack_1.png',
+                    frameCount: 5,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack2: new Animation({
+                    image: 'sprites/skeleton/skeleton_warrior/Attack_2.png',
+                    frameCount: 6,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }), attack3: new Animation({
+                    image: 'sprites/skeleton/skeleton_warrior/Attack_2.png',
+                    frameCount: 4,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+            },
+            kitsune: {
+                idle: new Animation({
+                    image: 'sprites/yokai/kitsune/Idle.png',
+                    frameCount: 7,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                run: new Animation({
+                    image: 'sprites/yokai/kitsune/run.png',
+                    frameCount: 8,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: true,
+                }),
+                attack1: new Animation({
+                    image: 'sprites/yokai/kitsune/Attack_1.png',
+                    frameCount: 6,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+                attack2: new Animation({
+                    image: 'sprites/yokai/kitsune/Attack_2.png',
+                    frameCount: 7,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }), attack3: new Animation({
+                    image: 'sprites/yokai/kitsune/Attack_3.png',
+                    frameCount: 7,
+                    frameWidth: 128,
+                    frameHeight: 128,
+                    speed: 0.2,
+                    loop: false,
+                }),
+            },
+        };
+
+
+
+
+
+
+
+
+
+        let energyTop = 100;  // Energía del jugador de arriba
+        let energyBottom = 100;  // Energía del jugador de abajo
+
+        const energyCost = {
+            'samurai': 25,
+            'samurai_commander': 25,
+            'samurai_archer': 25,
+            'skeleton_warrior': 100,
+            'skeleton_spearman':100,
+            'boss': 50
+        };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        let chatMessages = []; // Array para almacenar los mensajes del chat
+        function drawChatMessages(ctx) {
+    const chatWidth = 300; // Ancho del área del chat
+    const chatHeight = 200; // Alto del área del chat
+    const margin = 10; // Margen entre los mensajes
+
+    // Establecer el fondo del chat
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+    ctx.fillRect(10, 10, chatWidth, chatHeight);
+
+    // Establecer el estilo de texto
+    ctx.fillStyle = 'white';
+    ctx.font = '14px Arial';
+    
+    // Dibujar los mensajes
+    let yOffset = 20; // Posición inicial del primer mensaje
+    for (let i = chatMessages.length - 1; i >= 0 && yOffset < chatHeight - 10; i--) {
+        ctx.fillText(chatMessages[i], 20, yOffset);
+        yOffset += 20; // Espaciado entre los mensajes
+    }
+}
+
+        //////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////
+        class Entity {
+            constructor(x, y, type) {
+                this.x = x;
+                this.y = y;
+                this.type = type;
+                this.size = 120;
+                this.health = 100;
+                this.maxHealth = 100; // Vida máxima para restaurar al subir de nivel
+                this.damage = 10; // Daño base
+                this.speed = 2;
+                this.target = null;
+                this.isAttacking = false;
+
+                // Sistema de experiencia y nivel
+                this.level = 1;
+                this.experience = 0;
+                this.experienceToNextLevel = 100; // Experiencia necesaria para subir al siguiente nivel
+
+                this.damageTexts = [];
+                this.animations = animations[type];
+                this.currentAnimation = this.animations.idle;
+            }
+
+          
+
+            // Buscar el objetivo más cercano
+            findTarget() {
+                // Filtrar enemigos (oponentes)
+                const potentialTargets = entities.filter(e => e !== this && e.type !== this.type);
+
+                if (potentialTargets.length > 0) {
+                    // Encontrar el enemigo más cercano
+                    let closestTarget = null;
+                    let shortestDistance = Infinity;
+
+                    potentialTargets.forEach(target => {
+                        const dx = target.x - this.x;
+                        const dy = target.y - this.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < shortestDistance) {
+                            shortestDistance = distance;
+                            closestTarget = target;
+                        }
+                    });
+
+                    this.target = closestTarget; // Asignar el objetivo más cercano
+                } else {
+                    this.target = null; // No hay objetivos
+                }
+            }
+
+
+              // Ganar experiencia al derrotar enemigos
+              gainExperience(amount) {
+                this.experience += amount;
+                if (this.experience >= this.experienceToNextLevel) {
+                    this.levelUp();
+                }
+            }
+            // Subir de nivel
+           
+
+levelUp() {
+    this.level++;
+    this.experience -= this.experienceToNextLevel; // Resta la experiencia usada
+    this.experienceToNextLevel = Math.floor(this.experienceToNextLevel * 1.5); // Incremento progresivo
+
+    // Mejora según el tipo
+    if (this.type === 'samurai') {
+        this.damage += 5; // Incremento de daño para samurai normal
+        this.health = this.maxHealth; // Restaurar salud al máximo
+    } else if (this.type === 'commander') {
+        this.maxHealth += 20; // Incremento de vida máxima para commander
+        this.health = this.maxHealth; // Restaurar salud al máximo
+    } else if (this.type === 'skeleton_warrior') {
+        this.damage += 3; // Incremento de daño para skeleton_warrior
+        this.maxHealth += 10; // Incremento de vida máxima para skeleton_warrior
+        this.health = this.maxHealth-10; // Restaurar salud al máximo
+
+        // Crear una nueva unidad skeleton_warrior
+        const newSkeletonWarrior = new Entity(this.x + 100, this.y + 100, 'skeleton_warrior');
+        entities.push(newSkeletonWarrior); // Agregar la nueva unidad a la lista de entidades
+        chatMessages.push(`Un nuevo skeleton_warrior ha sido invocado por ${this.type}`);
+    }
+
+    chatMessages.push(`${this.type} subió al nivel ${this.level}`);
+    console.log(`${this.type} subió al nivel ${this.level}`);
+}
+
+
+            receiveDamage(damage) {
+                this.health -= damage;
+                this.damageTexts = [{ value: `-${damage}`, timer: 60 }];
+                if (this.health <= 0) {
+                    const index = entities.indexOf(this);
+                    if (index !== -1) {
+                        entities.splice(index, 1);
+                        // Otorgar experiencia al que derrotó a esta entidad
+                        if (this.target) {
+                            this.target.gainExperience(420); // Ajusta la cantidad de experiencia según sea necesario
+                        }
+                    }
+                }
+            }
+
+            move() {
+                if (this.isAttacking) return; // No moverse si está atacando
+
+                this.findTarget(); // Buscar el objetivo más cercano
+
+                if (this.target) {
+                    const dx = this.target.x - this.x;
+                    const dy = this.target.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance > this.size) {
+                        this.currentAnimation = this.animations.run;
+                        this.x += (dx / distance) * this.speed;
+                        this.y += (dy / distance) * this.speed;
+                    } else {
+                        this.startAttacking(this.target);
+                    }
+                } else {
+                    this.currentAnimation = this.animations.idle;
+                }
+            }
+
+            startAttacking(target) {
+                if (!this.isAttacking) {
+                    this.isAttacking = true;
+
+                    const attackLoop = () => {
+                        if (this.health <= 0 || target.health <= 0) {
+                            this.isAttacking = false;
+                            this.currentAnimation = this.animations.idle;
+                            this.damageTexts = []; // Borrar los textos de daño al volver a idle
+                            return;
+                        }
+
+                        // Seleccionar una animación de ataque aleatoria
+                        const attackAnimations = [this.animations.attack1, this.animations.attack2, this.animations.attack3];
+                        this.currentAnimation = attackAnimations[Math.floor(Math.random() * attackAnimations.length)];
+
+                        // Aplicar daño al objetivo
+                        setTimeout(() => {
+                            const damage = Math.floor(Math.random() * 7) + this.damage; // Daño ajustado según nivel
+                            target.receiveDamage(damage);
+
+                            // Reiniciar el ataque si ambos están vivos
+                            if (this.isAttacking) {
+                                attackLoop();
+                            } else {
+                                this.currentAnimation = this.animations.idle;
+                                this.damageTexts = []; // Borrar los textos de daño al volver a idle
+                            }
+                        }, 240); // Intervalo reducido para ataques más rápidos
+                    };
+
+                    attackLoop();
+                }
+            }
+
+            draw() {
+                this.currentAnimation.draw(ctx, this.x, this.y, this.size);
+
+                // Barra de vida
+                const healthBarWidth = this.type === 'boss' ? 200 : 100;
+                const healthPercentage = this.health / this.maxHealth;
+                ctx.fillStyle = 'red';
+                ctx.fillRect(this.x, this.y - 10, healthBarWidth, 5);
+                ctx.fillStyle = 'green';
+                ctx.fillRect(this.x, this.y - 10, healthBarWidth * healthPercentage, 5);
+
+                // Texto de nivel
+                ctx.fillStyle = 'gray';
+                ctx.font = '12px Arial';
+                ctx.fillText(`Lv ${this.level}`, this.x, this.y - 20);
+
+                // Mostrar daño recibido
+                if (this.damageTexts.length > 0) {
+                    const damageText = this.damageTexts[0];
+                    ctx.fillStyle = 'blue';
+                    ctx.font = '14px Arial';
+                    ctx.fillText(damageText.value, this.x + this.size / 2, this.y - 20);
+                }
+            }
+        }
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        // Clase Boss que extiende Entity
+        class Boss extends Entity {
+            constructor(x, y, type) {
+                super(x, y, type); // Llama al constructor de la clase padre (Entity)
+                this.health = 420; // Más vida
+                this.speed = 1.5; // Menor velocidad para un boss
+                this.attackPower = 15; // Más ataque
+                this.size = 200; // Más grande visualmente
+                this.isBoss = true; // Propiedad para identificarlo como jefe
+            }
+
+            // Sobrescribir el método startAttacking para ataques más fuertes
+            startAttacking(target) {
+                if (!this.isAttacking) {
+                    this.isAttacking = true;
+
+                    const attackLoop = () => {
+                        if (this.health <= 0 || target.health <= 0) {
+                            this.isAttacking = false;
+                            this.currentAnimation = this.animations.idle;
+                            return;
+                        }
+
+                        // Selección de animación de ataque
+                        const attackAnimations = [this.animations.attack1, this.animations.attack2];
+                        this.currentAnimation = attackAnimations[Math.floor(Math.random() * attackAnimations.length)];
+
+                        // Aplicar daño al objetivo
+                        setTimeout(() => {
+                            const damage = Math.floor(Math.random() * 15) + this.attackPower; // Daño aumentado
+                            target.receiveDamage(damage);
+
+                            // Reiniciar ataque si ambos siguen vivos
+                            if (this.isAttacking) {
+                                attackLoop();
+                            } else {
+                                this.currentAnimation = this.animations.idle;
+                            }
+                        }, 500); // Tiempo de ataque más lento
+                    };
+
+                    attackLoop();
+                }
+            }
+
+            // Habilidad especial opcional
+            specialAbility() {
+                console.log(`${this.type} está usando una habilidad especial.`);
+                // Ejemplo: Regeneración o daño en área
+            }
+        }
+
+
+
+
+
+        const boss = new Boss(300, 150, 'skeleton_warrior'); // Crear una instancia de Boss
+        const boss2 = new Boss(600, 450, 'skeleton_spearman'); // Crear una instancia de Boss    
+
+
+
+        /////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////
+
+
+        function updateEnergyBar() {
+            const energyBar = document.getElementById('energy-bar');  // Suponiendo que tienes un elemento con id 'energy-bar'
+            energyBar.style.width = energy + '%';  // Actualiza la barra de energía
+        }
+
+
+
+        function addEntities(type, count = 1, player = 'top') {
+            let energy = player === 'top' ? energyTop : energyBottom;  // Determinamos qué barra de energía usar
+            const energyBar = player === 'top' ? document.getElementById('energy-bar-top') : document.getElementById('energy-bar-bottom');  // La barra correspondiente
+
+            if (energy < energyCost[type]) {
+                alert('¡No tienes suficiente energía!');
+                return;  // No hace nada si no hay suficiente energía
+            }
+
+            for (let i = 0; i < count; i++) {
+                let x = Math.random() * (canvas.width - 42);  // Posición aleatoria en X
+                let y;
+
+                // Si el jugador es 'top', genera la entidad en la parte superior
+                if (player === 'top') {
+                    y = Math.random() * (canvas.height / 2 - 42);  // Parte superior
+                }
+                // Si el jugador es 'bottom', genera la entidad en la parte inferior
+                else if (player === 'bottom') {
+                    y = Math.random() * (canvas.height / 2 - 42) + (canvas.height / 2);  // Parte inferior
+                }
+
+                const entity = new Entity(x, y, type);
+                entities.push(entity);
+            }
+
+            // Descontamos la energía y actualizamos la interfaz
+            if (player === 'top') {
+                energyTop -= energyCost[type];
+            } else {
+                energyBottom -= energyCost[type];
+            }
+
+            // Actualizamos la barra de energía correspondiente
+            energyBar.style.width = (player === 'top' ? energyTop : energyBottom) + '%';
+        }
+
+
+        /*/ Event listeners for adding multiple entities
+        document.getElementById('addSquare').addEventListener('click', () => addEntities('samurai', 18)); // Añade 7 samuráis
+        document.getElementById('addCircle').addEventListener('click', () => addEntities('samurai_commander', 18)); // Añade 7 comandantes
+        document.getElementById('addArcher').addEventListener('click', () => addEntities('samurai_archer', 18)); // Añade 7 arqueros
+        document.getElementById('addBoss').addEventListener('click', () => entities.push(boss)); // Añade 7 arqueros
+
+
+
+
+
+    <div id="controls">
+        <button id="addSquare">Add Samurai</button>
+        <button id="addCircle">Add Samurai Commander</button>
+        <button id="addArcher">Add Samurai Archer</button>
+        <button id="addBoss">Add Boss</button>
+    </div>
+
+
+*/
+
+        let lastTime = 0;
+
+        function gameLoop(timestamp) {
+            // Si el tiempo transcurrido es superior a 0.5 segundos, ejecutamos el código de la animación
+            if (timestamp - lastTime >= 60) {
+                lastTime = timestamp;
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                entities.forEach(entity => {
+                    entity.findTarget();
+                    entity.move();
+                    entity.draw();
+                });
+                drawChatMessages(ctx);
+            }
+
+            // Volver a llamar a la función en el siguiente frame
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Inicia la animación
+        requestAnimationFrame(gameLoop);
+
+    </script>
+
+
+</body>
+
+</html>
