@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <title>Bosque Mágico</title>
     <style>
         body,
@@ -14,17 +15,14 @@
             overflow: hidden;
         }
 
-
         #fondo {
             position: absolute;
             top: 0;
             left: 0;
-            width: 400%;
-            
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             background: url('fondobusqueda.png') repeat-x;
-            background-size: cover;
-            transition: transform 0.2s linear;
+            background-size: auto 100%;
         }
 
         #menuInicio {
@@ -43,7 +41,8 @@
             top: 0;
             left: 0;
             width: 400%;
-            height: 100vh;
+            height: 100%;
+            min-height: 100vh;
             pointer-events: none;
             /* permite clickear fondo sin bloquear */
         }
@@ -51,17 +50,14 @@
         .objeto {
             position: absolute;
             pointer-events: auto;
-            /* habilita interactividad si la agregas */
+            /* habilita interactividad */
+            transition: transform 0.2s ease, filter 0.2s ease;
         }
 
         .objeto:hover {
             filter: drop-shadow(0 0 10px rgba(255, 255, 200, 0.8));
             transform: scale(1.1);
-            transition: transform 0.2s ease, filter 0.2s ease;
         }
-
-
-      
 
         #sol {
             position: absolute;
@@ -69,17 +65,16 @@
             height: 80px;
         }
 
-
         @media (max-width: 768px) {
-    #fondo {
-        width: 800%;
-    }
+            #fondo {
+                width: 800%;
+            }
 
-    .objeto {
-        /* Ajusta si deseas tamaños mínimos para que no desaparezcan */
-        min-width: 20px;
-    }
-}
+            .objeto {
+                min-width: 20px;
+                /* evita desaparición en móviles */
+            }
+        }
     </style>
 </head>
 
@@ -108,62 +103,47 @@
         let solPosY = 50;
         let solDirection = 1;
 
-
-
         function moverEstrellas() {
-
-
-            var nes = 150;
-
-
-            for (var u = 0; u < nes; u++) {
-                var w = randomAr(2, 1);
-                var estrellita = document.createElement("div");
-                estrellita.style.position = ("absolute");
-                estrellita.style.left = randomAr(42000, 2200) + "px";
-                estrellita.style.top = randomAr(24,1) + "%";
+            let nes = 150;
+            for (let u = 0; u < nes; u++) {
+                let w = randomAr(2, 1);
+                let estrellita = document.createElement("div");
+                estrellita.style.position = "absolute";
+                estrellita.style.left = randomAr(42000, 20) + "px";
+                estrellita.style.top = randomAr(24, 1) + "%";
                 estrellita.style.width = w + "px";
                 estrellita.style.height = w + "px";
                 estrellita.style.backgroundColor = colorRan();
-                estrellita.style.borderRadius = w + "px " + w + "px " + w + "px " + w + "px ";
+                estrellita.style.borderRadius = w + "px";
                 estrellita.className = "estrellita";
-                if (randomAr(2, 1) == 2) {
-                    estrellita.style.boxShadow = " 0px 0px " + randomAr(4, 2) + "px " + randomAr(1, 0) + "px " + colorRan();
-                } else {
-                    estrellita.style.boxShadow = " 0px 0px " + randomAr(4, 2) + "px 1px whitesmoke";
-                }
-                document.querySelector("#fondo").appendChild(estrellita);
+                estrellita.style.boxShadow = "0 0 " + randomAr(4, 2) + "px " + randomAr(1, 0) + "px " + colorRan();
+                document.querySelector("#objetos").appendChild(estrellita); // cambia de #fondo a #objetos
             }
         }
 
 
-
         function moverFondo() {
             if (animando) {
-                desplazamiento -= 2; // velocidad de movimiento
-                fondo.style.transform = `translateX(${desplazamiento}px)`;
+                desplazamiento -= 2;
+                fondo.style.backgroundPositionX = desplazamiento + 'px';
+                // Mueve también #objetos (donde están las estrellas)
                 objetos.style.transform = `translateX(${desplazamiento}px)`;
                 animationFrame = requestAnimationFrame(moverFondo);
             }
         }
 
+
         menuInicio.addEventListener('click', () => {
             menuInicio.style.display = 'none';
-
             crearObjetosAleatorios();
             crearSol();
-
             moverEstrellas();
-
             animando = true;
-
             moverFondo();
-
-
         });
 
         document.body.addEventListener('click', () => {
-            if (menuInicio.style.display === 'none') { // solo si ya inició
+            if (menuInicio.style.display === 'none') {
                 animando = !animando;
                 if (animando) {
                     moverFondo();
@@ -173,38 +153,36 @@
             }
         });
 
+        function crearObjetosAleatorios() {
+            const tipos = ['floramarilla', 'hongogris', 'hongorojo', 'arbolito'];
+            let fondoHeight = window.innerHeight;
+            let minTop = fondoHeight * 0.65; // genera desde 65% hacia abajo
+            let maxTop = fondoHeight - 50;
 
-       
-    function crearObjetosAleatorios() {
-      const tipos = ['floramarilla', 'hongogris', 'hongorojo', 'arbolito'];
-      let fondoHeight = window.innerHeight;
-      let minTop = fondoHeight * 0.65; // 65% hacia abajo
-      let maxTop = fondoHeight - 50;
+            for (let i = 0; i < 42; i++) {
+                let tipo = tipos[Math.floor(Math.random() * tipos.length)];
+                let img = document.createElement('img');
+                img.src = `${tipo}.png`;
+                img.className = 'objeto';
+                img.style.left = 28 + (Math.random() * 800) + '%';
 
-      for (let i = 0; i < 200; i++) {
-        let tipo = tipos[Math.floor(Math.random() * tipos.length)];
-        let img = document.createElement('img');
-        img.src = `${tipo}.png`;
-        img.className = 'objeto';
-        img.style.left = 28 + (Math.random() * 800) + '%';
+                let topPx = minTop + Math.random() * (maxTop - minTop);
+                img.style.top = topPx + 'px';
 
-        let topPx = minTop + Math.random() * (maxTop - minTop);
-        img.style.top = topPx + 'px';
+                img.style.zIndex = Math.floor(topPx);
 
-        img.style.zIndex = Math.floor(topPx);
+                img.onload = function () {
+                    let anchoOriginal = img.naturalWidth;
+                    let porcentaje = (topPx - minTop) / (maxTop - minTop);
+                    porcentaje = 0.2 + porcentaje * 0.8;
+                    let anchoCalculado = anchoOriginal * porcentaje;
+                    img.style.width = anchoCalculado + 'px';
+                };
 
-        img.onload = function () {
-          let anchoOriginal = img.naturalWidth;
-          let porcentaje = (topPx - minTop) / (maxTop - minTop);
-          porcentaje = 0.2 + porcentaje * 0.8;
-          let anchoCalculado = anchoOriginal * porcentaje;
-          img.style.width = anchoCalculado + 'px';
-        };
+                objetos.appendChild(img);
+            }
+        }
 
-        objetos.appendChild(img);
-      }
-    }
-        // Crea el sol y lo mueve suavemente
         function crearSol() {
             let sol = document.createElement('img');
             sol.src = 'solcongafas.png';
@@ -218,7 +196,7 @@
                 solPosY += 0.2 * solDirection;
 
                 if (solPosX > window.innerWidth - 80 || solPosX < 0) {
-                    solDirection *= -1; // cambia dirección
+                    solDirection *= -1;
                 }
 
                 sol.style.left = solPosX + 'px';
@@ -226,7 +204,19 @@
             }, 50);
         }
 
+        // 🌟 Funciones randomAr y colorRan (si no están en skrips.js, agrégalas)
+        function randomAr(max, min) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
 
+        function colorRan() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
 
     </script>
 
