@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bosque Mágico</title>
+    <style>
+        body,
+        html {
+            cursor: url('cursor2.png'), auto;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+
+        #fondo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400%;
+            /* ajusta al tamaño de tu imagen */
+            height: 100vh;
+            background: url('fondobusqueda.png') repeat-x;
+            background-size: cover;
+            transition: transform 0.2s linear;
+        }
+
+        #menuInicio {
+            position: absolute;
+            top: 60%;
+            left: 40%;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: sans-serif;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #objetos {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400%;
+            height: 100vh;
+            pointer-events: none;
+            /* permite clickear fondo sin bloquear */
+        }
+
+        .objeto {
+            position: absolute;
+            pointer-events: auto;
+            /* habilita interactividad si la agregas */
+        }
+
+        #sol {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="fondo"></div>
+
+    <div id="menuInicio">
+        <h1>Iniciar</h1>
+    </div>
+
+    <div id="objetos"></div>
+
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/skrips.js"></script>
+
+    <script>
+        const menuInicio = document.getElementById('menuInicio');
+        const fondo = document.getElementById('fondo');
+        const objetos = document.getElementById('objetos');
+
+        let desplazamiento = 0;
+        let animando = false;
+        let animationFrame;
+        let solPosX = 2400;
+        let solPosY = 50;
+        let solDirection = 1;
+
+
+
+        function moverEstrellas() {
+
+
+            var nes = 150;
+
+
+            for (var u = 0; u < nes; u++) {
+                var w = randomAr(2, 1);
+                var estrellita = document.createElement("div");
+                estrellita.style.position = ("absolute");
+                estrellita.style.left = randomAr(42000, 2200) + "px";
+                estrellita.style.top = randomAr(520, 21) + "px";
+                estrellita.style.width = w + "px";
+                estrellita.style.height = w + "px";
+                estrellita.style.backgroundColor = colorRan();
+                estrellita.style.borderRadius = w + "px " + w + "px " + w + "px " + w + "px ";
+                estrellita.className = "estrellita";
+                if (randomAr(2, 1) == 2) {
+                    estrellita.style.boxShadow = " 0px 0px " + randomAr(4, 2) + "px " + randomAr(1, 0) + "px " + colorRan();
+                } else {
+                    estrellita.style.boxShadow = " 0px 0px " + randomAr(4, 2) + "px 1px whitesmoke";
+                }
+                document.querySelector("#fondo").appendChild(estrellita);
+            }
+        }
+
+
+
+        function moverFondo() {
+            if (animando) {
+                desplazamiento -= 2; // velocidad de movimiento
+                fondo.style.transform = `translateX(${desplazamiento}px)`;
+                objetos.style.transform = `translateX(${desplazamiento}px)`;
+                animationFrame = requestAnimationFrame(moverFondo);
+            }
+        }
+
+        menuInicio.addEventListener('click', () => {
+            menuInicio.style.display = 'none';
+
+            crearObjetosAleatorios();
+            crearSol();
+
+            moverEstrellas();
+
+            animando = true;
+
+            moverFondo();
+
+
+        });
+
+        document.body.addEventListener('click', () => {
+            if (menuInicio.style.display === 'none') { // solo si ya inició
+                animando = !animando;
+                if (animando) {
+                    moverFondo();
+                } else {
+                    cancelAnimationFrame(animationFrame);
+                }
+            }
+        });
+
+
+        // Genera los objetos aleatorios
+        function crearObjetosAleatorios() {
+            const tipos = ['floramarilla', 'hongogris', 'hongorojo', 'arbolito'];
+            for (let i = 0; i < 200; i++) {
+                let tipo = tipos[Math.floor(Math.random() * tipos.length)];
+                let img = document.createElement('img');
+                img.src = `${tipo}.png`;
+                img.className = 'objeto';
+                img.style.left = 28 + (Math.random() * 800) + '%';
+
+                // 🌟 Genera posición top aleatoria desde 650px hacia abajo
+                let minTop = 420; // px
+                let maxTop = window.innerHeight - 50; // por ejemplo, hasta 50px antes del borde inferior
+                let topPx = minTop + Math.random() * (maxTop - minTop);
+                img.style.top = topPx + 'px';
+
+                // 🌟 Calcula z-index: cuanto más abajo (mayor topPx), más al frente
+                img.style.zIndex = Math.floor(topPx);
+
+                // 🌟 Espera a que la imagen cargue para conocer su tamaño real
+                img.onload = function () {
+                    let anchoOriginal = img.naturalWidth;
+
+                    // 🌱 Calcula porcentaje basado en la posición: más abajo, más grande
+                    let porcentaje = (topPx - minTop) / (maxTop - minTop); // 0 a 1
+                    porcentaje = 0.2 + porcentaje * 0.8; // ajusta a rango entre 0.2 y 1.0
+
+                    let anchoCalculado = anchoOriginal * porcentaje;
+                    img.style.width = anchoCalculado + 'px';
+                };
+
+                objetos.appendChild(img);
+            }
+        }
+        // Crea el sol y lo mueve suavemente
+        function crearSol() {
+            let sol = document.createElement('img');
+            sol.src = 'solcongafas.png';
+            sol.id = 'sol';
+            sol.style.left = solPosX + 'px';
+            sol.style.top = solPosY + 'px';
+            objetos.appendChild(sol);
+
+            setInterval(() => {
+                solPosX += 1 * solDirection;
+                solPosY += 0.2 * solDirection;
+
+                if (solPosX > window.innerWidth - 80 || solPosX < 0) {
+                    solDirection *= -1; // cambia dirección
+                }
+
+                sol.style.left = solPosX + 'px';
+                sol.style.top = solPosY + 'px';
+            }, 50);
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
