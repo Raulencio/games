@@ -20,8 +20,8 @@
             top: 0;
             left: 0;
             width: 400%;
-            /* ajusta al tamaño de tu imagen */
-            height: 100vh;
+            
+            height: 100%;
             background: url('fondobusqueda.png') repeat-x;
             background-size: cover;
             transition: transform 0.2s linear;
@@ -54,11 +54,32 @@
             /* habilita interactividad si la agregas */
         }
 
+        .objeto:hover {
+            filter: drop-shadow(0 0 10px rgba(255, 255, 200, 0.8));
+            transform: scale(1.1);
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+
+      
+
         #sol {
             position: absolute;
             width: 80px;
             height: 80px;
         }
+
+
+        @media (max-width: 768px) {
+    #fondo {
+        width: 800%;
+    }
+
+    .objeto {
+        /* Ajusta si deseas tamaños mínimos para que no desaparezcan */
+        min-width: 20px;
+    }
+}
     </style>
 </head>
 
@@ -100,7 +121,7 @@
                 var estrellita = document.createElement("div");
                 estrellita.style.position = ("absolute");
                 estrellita.style.left = randomAr(42000, 2200) + "px";
-                estrellita.style.top = randomAr(520, 21) + "px";
+                estrellita.style.top = randomAr(24,1) + "%";
                 estrellita.style.width = w + "px";
                 estrellita.style.height = w + "px";
                 estrellita.style.backgroundColor = colorRan();
@@ -153,40 +174,36 @@
         });
 
 
-        // Genera los objetos aleatorios
-        function crearObjetosAleatorios() {
-            const tipos = ['floramarilla', 'hongogris', 'hongorojo', 'arbolito'];
-            for (let i = 0; i < 200; i++) {
-                let tipo = tipos[Math.floor(Math.random() * tipos.length)];
-                let img = document.createElement('img');
-                img.src = `${tipo}.png`;
-                img.className = 'objeto';
-                img.style.left = 28 + (Math.random() * 800) + '%';
+       
+    function crearObjetosAleatorios() {
+      const tipos = ['floramarilla', 'hongogris', 'hongorojo', 'arbolito'];
+      let fondoHeight = window.innerHeight;
+      let minTop = fondoHeight * 0.65; // 65% hacia abajo
+      let maxTop = fondoHeight - 50;
 
-                // 🌟 Genera posición top aleatoria desde 650px hacia abajo
-                let minTop = 420; // px
-                let maxTop = window.innerHeight - 50; // por ejemplo, hasta 50px antes del borde inferior
-                let topPx = minTop + Math.random() * (maxTop - minTop);
-                img.style.top = topPx + 'px';
+      for (let i = 0; i < 200; i++) {
+        let tipo = tipos[Math.floor(Math.random() * tipos.length)];
+        let img = document.createElement('img');
+        img.src = `${tipo}.png`;
+        img.className = 'objeto';
+        img.style.left = 28 + (Math.random() * 800) + '%';
 
-                // 🌟 Calcula z-index: cuanto más abajo (mayor topPx), más al frente
-                img.style.zIndex = Math.floor(topPx);
+        let topPx = minTop + Math.random() * (maxTop - minTop);
+        img.style.top = topPx + 'px';
 
-                // 🌟 Espera a que la imagen cargue para conocer su tamaño real
-                img.onload = function () {
-                    let anchoOriginal = img.naturalWidth;
+        img.style.zIndex = Math.floor(topPx);
 
-                    // 🌱 Calcula porcentaje basado en la posición: más abajo, más grande
-                    let porcentaje = (topPx - minTop) / (maxTop - minTop); // 0 a 1
-                    porcentaje = 0.2 + porcentaje * 0.8; // ajusta a rango entre 0.2 y 1.0
+        img.onload = function () {
+          let anchoOriginal = img.naturalWidth;
+          let porcentaje = (topPx - minTop) / (maxTop - minTop);
+          porcentaje = 0.2 + porcentaje * 0.8;
+          let anchoCalculado = anchoOriginal * porcentaje;
+          img.style.width = anchoCalculado + 'px';
+        };
 
-                    let anchoCalculado = anchoOriginal * porcentaje;
-                    img.style.width = anchoCalculado + 'px';
-                };
-
-                objetos.appendChild(img);
-            }
-        }
+        objetos.appendChild(img);
+      }
+    }
         // Crea el sol y lo mueve suavemente
         function crearSol() {
             let sol = document.createElement('img');
