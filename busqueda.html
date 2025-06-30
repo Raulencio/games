@@ -21,7 +21,17 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: url('fondobusqueda.png') repeat-x;
+            background: url('fondobusqueda2.png') repeat-x;
+            background-size: auto 100%;
+        }
+
+        #fondofondo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
             background-size: auto 100%;
         }
 
@@ -34,6 +44,7 @@
             font-family: sans-serif;
             text-align: center;
             cursor: pointer;
+             text-shadow: 0 0 8px white, 0 0 12px white;
         }
 
         #objetos {
@@ -65,6 +76,38 @@
             height: 80px;
         }
 
+
+        .botonFlecha {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            user-select: none;
+            z-index: 9999;
+        }
+
+        #botonIzquierda {
+            left: 10px;
+        }
+
+        #botonDerecha {
+            right: 10px;
+        }
+
+        .botonFlecha:active {
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+
+        .nube {
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+
         @media (max-width: 768px) {
             #fondo {
                 width: 800%;
@@ -79,6 +122,14 @@
 </head>
 
 <body>
+
+
+
+    <div id="botonIzquierda" class="botonFlecha">⬅️</div>
+    <div id="botonDerecha" class="botonFlecha">➡️</div>
+
+
+<div id="fondofondo"></div>
 
     <div id="fondo"></div>
 
@@ -96,12 +147,96 @@
         const fondo = document.getElementById('fondo');
         const objetos = document.getElementById('objetos');
 
+var cantidadObjetos=50;
+
+const tiposNubes = ['nube1', 'nube2', 'nube3'];
+
+function crearNubesAleatorias(cantidad) {
+  for (let i = 0; i < cantidad; i++) {
+    let tipo = tiposNubes[Math.floor(Math.random() * tiposNubes.length)];
+    let nube = document.createElement('img');
+    nube.src = `${tipo}.png`;
+    nube.className = 'nube';
+
+    // Posición horizontal aleatoria (fuera de pantalla o dentro)
+    nube.style.left = (Math.random() * 2400) + 'px';
+
+    // Posición vertical aleatoria en el cielo (por ejemplo, de 0 a 200px)
+    nube.style.top = (Math.random() * 20) + 'px';
+
+    nube.style.position = 'absolute';
+    nube.style.pointerEvents = 'none'; // si no quieres interacción
+    nube.style.opacity = 0.9;
+
+    // Tamaño aleatorio proporcional si deseas variedad
+    let escala = 0.1 + Math.random() * 0.1;
+    nube.style.transform = `scale(${escala})`;
+
+    objetos.appendChild(nube);
+  }
+}
+crearNubesAleatorias(8); // crea 10 nubes al iniciar
+
+function moverNubes() {
+  let nubes = document.querySelectorAll('.nube');
+  nubes.forEach(nube => {
+    let left = parseFloat(nube.style.left);
+    left += 0.3; // velocidad suave hacia la izquierda
+    if (left < -200) { // si sale de pantalla, reaparece al otro lado
+      left = window.innerWidth + 200;
+    }
+    nube.style.left = left + 'px';
+  });
+  requestAnimationFrame(moverNubes);
+}
+
+
         let desplazamiento = 0;
         let animando = false;
         let animationFrame;
-        let solPosX = 2400;
-        let solPosY = 50;
-        let solDirection = 1;
+
+
+
+
+
+const botonIzquierda = document.getElementById('botonIzquierda');
+const botonDerecha = document.getElementById('botonDerecha');
+
+let moverIzquierda = false;
+let moverDerecha = false;
+
+botonIzquierda.addEventListener('mousedown', () => {
+  moverIzquierda = true;
+  moverDerecha = false; // para que no se muevan ambas direcciones al mismo tiempo
+});
+
+botonDerecha.addEventListener('mousedown', () => {
+  moverDerecha = true;
+  moverIzquierda = false;
+});
+
+document.addEventListener('mouseup', () => {
+  moverIzquierda = false;
+  moverDerecha = false;
+});
+
+// Para touch en móviles:
+botonIzquierda.addEventListener('touchstart', e => {
+  moverIzquierda = true;
+  moverDerecha = false;
+  e.preventDefault();
+});
+botonDerecha.addEventListener('touchstart', e => {
+  moverDerecha = true;
+  moverIzquierda = false;
+  e.preventDefault();
+});
+
+document.addEventListener('touchend', () => {
+  moverIzquierda = false;
+  moverDerecha = false;
+});
+
 
         function moverEstrellas() {
             let nes = 150;
@@ -122,24 +257,30 @@
         }
 
 
-        function moverFondo() {
-            if (animando) {
-                desplazamiento -= 2;
-                fondo.style.backgroundPositionX = desplazamiento + 'px';
-                // Mueve también #objetos (donde están las estrellas)
-                objetos.style.transform = `translateX(${desplazamiento}px)`;
-                animationFrame = requestAnimationFrame(moverFondo);
-            }
-        }
+     function moverFondo() {
+  if (animando) {
+    if (moverIzquierda) {
+      desplazamiento += 4; // mueve a la derecha visualmente
+    }
+    if (moverDerecha) {
+      desplazamiento -= 4; // mueve a la izquierda visualmente
+    }
 
+    fondo.style.backgroundPositionX = desplazamiento + 'px';
+    objetos.style.transform = `translateX(${desplazamiento}px)`;
+    animationFrame = requestAnimationFrame(moverFondo);
+  }
+}
 
         menuInicio.addEventListener('click', () => {
             menuInicio.style.display = 'none';
             crearObjetosAleatorios();
             crearSol();
             moverEstrellas();
+            
             animando = true;
             moverFondo();
+            moverNubes();
         });
 
         document.body.addEventListener('click', () => {
@@ -154,12 +295,12 @@
         });
 
         function crearObjetosAleatorios() {
-            const tipos = ['floramarilla', 'hongogris', 'hongorojo', 'arbolito'];
+            const tipos = ['floramarilla', 'florblanca', 'hongogris', 'hongorojo', 'arbolito', 'cursor'];
             let fondoHeight = window.innerHeight;
-            let minTop = fondoHeight * 0.65; // genera desde 65% hacia abajo
-            let maxTop = fondoHeight - 50;
+            let minTop = fondoHeight * 0.70; // genera desde 65% hacia abajo
+            let maxTop = fondoHeight - 250;
 
-            for (let i = 0; i < 42; i++) {
+            for (let i = 0; i < cantidadObjetos; i++) {
                 let tipo = tipos[Math.floor(Math.random() * tipos.length)];
                 let img = document.createElement('img');
                 img.src = `${tipo}.png`;
@@ -183,26 +324,34 @@
             }
         }
 
-        function crearSol() {
-            let sol = document.createElement('img');
-            sol.src = 'solcongafas.png';
-            sol.id = 'sol';
-            sol.style.left = solPosX + 'px';
-            sol.style.top = solPosY + 'px';
-            objetos.appendChild(sol);
+    function crearSol() {
+    let sol = document.createElement('img');
+    sol.src = 'solcongafas.png';
+    sol.id = 'sol';
 
-            setInterval(() => {
-                solPosX += 1 * solDirection;
-                solPosY += 0.2 * solDirection;
+    // Posición inicial visible
+    let solPosX = window.innerWidth / 2;
+    let solPosY = 50;
+    let solDirection = 0.1;
 
-                if (solPosX > window.innerWidth - 80 || solPosX < 0) {
-                    solDirection *= -1;
-                }
+    sol.style.position = 'absolute';
+    sol.style.left = solPosX + 'px';
+    sol.style.top = solPosY + 'px';
+    objetos.appendChild(sol);
 
-                sol.style.left = solPosX + 'px';
-                sol.style.top = solPosY + 'px';
-            }, 50);
+    setInterval(() => {
+        solPosX += 1 * solDirection;
+
+
+        if (solPosX > window.innerWidth - 80 || solPosX < 0) {
+            solDirection *= -1;
         }
+
+        sol.style.left = solPosX + 'px';
+
+    }, 50);
+}
+
 
         // 🌟 Funciones randomAr y colorRan (si no están en skrips.js, agrégalas)
         function randomAr(max, min) {
