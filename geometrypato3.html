@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Geometry Dash Gravedad Invertida Mejorada</title>
+    <style>
+        body {
+            margin: 0;
+            background: #111;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background: linear-gradient(#111, #222);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="game" width="800" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById("game");
+        const ctx = canvas.getContext("2d");
+
+        let player = { x: 50, y: 300, width: 20, height: 20, dy: 0, jumps: 0, maxJumps: 2 };
+        let gravity = 0.8;
+        let jumpStrength = -12;
+
+        let obstacles = [];
+        let orbs = [];
+        let frame = 0;
+        let gameOver = false;
+        let inverted = false;
+
+        const groundY = 320;
+        const ceilingY = 0;
+
+        document.addEventListener("keydown", e => {
+            if (e.code === "Space" && player.jumps < player.maxJumps && !gameOver) {
+                player.dy = inverted ? -jumpStrength : jumpStrength;
+                player.jumps++;
+            }
+            if (e.code === "Enter" && gameOver) {
+                location.reload();
+            }
+        });
+
+
+        canvas.addEventListener("mousedown", () => {
+            if (!gameOver && player.jumps < player.maxJumps) {
+                player.dy = inverted ? -jumpStrength : jumpStrength;
+                player.jumps++;
+            }
+            if (gameOver) {
+                location.reload();
+            }
+        });
+
+        canvas.addEventListener("touchstart", e => {
+            e.preventDefault(); // evitar scroll al tocar
+            if (!gameOver && player.jumps < player.maxJumps) {
+                player.dy = inverted ? -jumpStrength : jumpStrength;
+                player.jumps++;
+            }
+            if (gameOver) {
+                location.reload();
+            }
+        }, { passive: false });
+
+
+
+
+        function drawTriangle(x, y, width, height) {
+            ctx.beginPath();
+            ctx.moveTo(x, y + height);
+            ctx.lineTo(x + width / 2, y);
+            ctx.lineTo(x + width, y + height);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function update() {
+            if (gameOver) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Dibujar suelo y techo
+            ctx.strokeStyle = "#888";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, groundY);
+            ctx.lineTo(canvas.width, groundY);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(0, ceilingY);
+            ctx.lineTo(canvas.width, ceilingY);
+            ctx.stroke();
+
+            // Actualizar player física
+            player.dy += inverted ? -gravity : gravity;
+            player.y += player.dy;
+
+            // Límite suelo y techo según gravedad
+            if (!inverted && player.y + player.height > groundY) {
+                player.y = groundY - player.height;
+                player.dy = 0;
+                player.jumps = 0;
+            } else if (inverted && player.y < ceilingY) {
+                player.y = ceilingY;
+                player.dy = 0;
+                player.jumps = 0;
+            }
+
+            ctx.fillStyle = "green";
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+
+            // Generar obstáculos consecutivos en suelo y techo
+            if (frame % 60 === 0) {
+                let cantidad = Math.floor(Math.random() * 3) + 1;
+                for (let c = 0; c < cantidad; c++) {
+                    let distancia = c * 60;
+                    let type = Math.floor(Math.random() * 6);
+                    if (type === 0) {
+                        // Pincho en suelo
+                        obstacles.push({ x: canvas.width + distancia, y: groundY - 40, width: 20, height: 40, type: "spike" });
+                    } else if (type === 1) {
+                        // Pincho en techo
+                        obstacles.push({ x: canvas.width + distancia, y: ceilingY, width: 20, height: 40, type: "spikeTop" });
+                    } else if (type === 2 || type === 3) {
+                        let height = type === 2 ? 20 : 60;
+                        // Bloque en suelo
+                        obstacles.push({ x: canvas.width + distancia, y: groundY - height, width: 30, height: height, type: "block" });
+                    } else {
+                        let height = 20 + Math.floor(Math.random() * 40);
+                        // Bloque en techo
+                        obstacles.push({ x: canvas.width + distancia, y: ceilingY, width: 30, height: height, type: "blockTop" });
+                    }
+                }
+            }
+
+
+            // Generar orbes de gravedad
+            if (frame % 180 === 0) {
+                // Orbe a mitad de altura, pero que se adapte a la gravedad (arriba o abajo)
+                let orbY = inverted ? 100 : 150;
+                orbs.push({ x: canvas.width, y: orbY, radius: 10 });
+            }
+
+            // Dibujar y actualizar orbes
+            ctx.fillStyle = "cyan";
+            for (let i = 0; i < orbs.length; i++) {
+                let orb = orbs[i];
+                orb.x -= 5;
+                ctx.beginPath();
+                ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Colisión con jugador (círculo-rectángulo simple)
+                if (player.x < orb.x + orb.radius &&
+                    player.x + player.width > orb.x - orb.radius &&
+                    player.y < orb.y + orb.radius &&
+                    player.y + player.height > orb.y - orb.radius) {
+                    inverted = !inverted;
+                    orbs.splice(i, 1);
+                    i--;
+                    // Ajustar player posición para evitar quedar pegado fuera del límite
+                    if (inverted) {
+                        if (player.y < ceilingY) player.y = ceilingY;
+                    } else {
+                        if (player.y + player.height > groundY) player.y = groundY - player.height;
+                    }
+                    // Resetear velocidad y saltos al cambiar gravedad
+                    player.dy = 0;
+                    player.jumps = 0;
+                }
+            }
+
+            // Dibujar y actualizar obstáculos
+            for (let i = 0; i < obstacles.length; i++) {
+                let obs = obstacles[i];
+                obs.x -= 5;
+
+                if (obs.type === "spike") {
+                    ctx.fillStyle = "lime";
+                    drawTriangle(obs.x, obs.y, obs.width, obs.height);
+
+                    if (player.x < obs.x + obs.width &&
+                        player.x + player.width > obs.x &&
+                        player.y < obs.y + obs.height &&
+                        player.y + player.height > obs.y) {
+                        gameOver = true;
+                    }
+
+                } else if (obs.type === "spikeTop") {
+                    ctx.fillStyle = "lime";
+                    // Dibuja el triángulo invertido para pincho en techo
+                    ctx.beginPath();
+                    ctx.moveTo(obs.x, obs.y);
+                    ctx.lineTo(obs.x + obs.width / 2, obs.y + obs.height);
+                    ctx.lineTo(obs.x + obs.width, obs.y);
+                    ctx.closePath();
+                    ctx.fill();
+
+                    if (player.x < obs.x + obs.width &&
+                        player.x + player.width > obs.x &&
+                        player.y < obs.y + obs.height &&
+                        player.y + player.height > obs.y) {
+                        gameOver = true;
+                    }
+
+                } else if (obs.type === "block") {
+                    ctx.fillStyle = "orange";
+                    ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+
+                    if (player.x + player.width > obs.x &&
+                        player.x < obs.x + obs.width) {
+
+                        if (!inverted) {
+                            if (player.y + player.height > obs.y && player.y + player.height <= obs.y + player.dy + gravity) {
+                                player.y = obs.y - player.height;
+                                player.dy = 0;
+                                player.jumps = 0;
+                            } else if (player.y + player.height > obs.y) {
+                                gameOver = true;
+                            }
+                        } else {
+                            if (player.y < obs.y + obs.height && player.y >= obs.y + obs.height + player.dy - gravity) {
+                                player.y = obs.y + obs.height;
+                                player.dy = 0;
+                                player.jumps = 0;
+                            } else if (player.y < obs.y + obs.height && player.y + player.height > obs.y + obs.height) {
+                                gameOver = true;
+                            }
+                        }
+                    }
+
+                } else if (obs.type === "blockTop") {
+                    ctx.fillStyle = "orange";
+                    // Dibuja bloque en techo
+                    ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+
+                    if (player.x + player.width > obs.x &&
+                        player.x < obs.x + obs.width) {
+
+                        if (!inverted) {
+                            // En gravedad normal, colisión si jugador toca bloque de arriba
+                            if (player.y < obs.y + obs.height &&
+                                player.y + player.height > obs.y) {
+                                gameOver = true;
+                            }
+                        } else {
+                            // En gravedad invertida, puede "aterrizar" debajo del bloque
+                            if (player.y <= obs.y + obs.height && player.y >= obs.y + obs.height + player.dy - gravity) {
+                                player.y = obs.y + obs.height;
+                                player.dy = 0;
+                                player.jumps = 0;
+                            } else if (player.y < obs.y + obs.height) {
+                                gameOver = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            // Mensaje de muerte
+            if (gameOver) {
+                ctx.fillStyle = "red";
+                ctx.font = "48px sans-serif";
+                ctx.fillText("GAME OVER", 280, 200);
+                ctx.font = "24px sans-serif";
+                ctx.fillText("Presiona Enter para renacer", 260, 250);
+            }
+
+            frame++;
+            if (!gameOver) requestAnimationFrame(update);
+        }
+
+        update();
+    </script>
+</body>
+
+</html>
