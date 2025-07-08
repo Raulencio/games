@@ -49,6 +49,11 @@
         let particles = [];
         let speedOrbs = [];
 
+        let monedas = 0;
+        let coins = []; // lista de monedas
+
+
+
         let frame = 0;
         let gameOver = false;
         let inverted = false;
@@ -133,6 +138,56 @@
 
         let bestScore = localStorage.getItem("bestScore") || 0;
 
+        let bestCoins = localStorage.getItem("bestCoins") || 0;
+
+
+
+
+        let rainDrops = [];
+
+        function createRain() {
+            // Crear gotas de lluvia al azar a lo ancho del canvas
+            for (let i = 0; i < 15; i++) {
+                rainDrops.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * -canvas.height, // empezar arriba fuera de pantalla
+                    length: 10 + Math.random() * 10,
+                    speed: 4 + Math.random() * 4
+                });
+            }
+        }
+
+        function updateRain() {
+            ctx.strokeStyle = "rgba(174,194,224,0.5)";
+            ctx.lineWidth = 1;
+            ctx.lineCap = "round";
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                let drop = rainDrops[i];
+                ctx.beginPath();
+                ctx.moveTo(drop.x, drop.y);
+                ctx.lineTo(drop.x, drop.y + drop.length);
+                ctx.stroke();
+
+                drop.y += drop.speed;
+
+                if (drop.y > groundY) {
+                    drop.y = Math.random() * -canvas.height; // reaparece arriba
+                    drop.x = Math.random() * canvas.width;
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
         function update() {
             if (gameOver) return;
 
@@ -176,6 +231,9 @@
                 player.jumps = 0;
             }
 
+            updateRain();
+
+
             ctx.fillStyle = tripleJumpActive ? "gold" : "green";
             ctx.fillRect(player.x, player.y, player.width, player.height);
 
@@ -213,18 +271,49 @@
                 }
             }
 
-            if (frame % 200 === 0) {
+
+
+            if (frame % 250 === 0) { // una moneda
+                let coinY = Math.random() * (groundY - canvas.height * 0.1) + canvas.height * 0.05; // posición Y aleatoria entre algo arriba del suelo y un poco arriba
+                coins.push({ x: canvas.width + 600, y: coinY, radius: 15 });
+            }
+
+
+            if (frame % 200 === 0) { //orbe de gravedad
                 let orbY = (canvas.height / 2) - 40;
                 orbs.push({ x: canvas.width, y: orbY, radius: 10 });
             }
-            if (frame % 500 === 0) {
+            if (frame % 500 === 0) { //orbe de velocidad
                 let orbY = (canvas.height / 2) - 40;
                 speedOrbs.push({ x: canvas.width + 200, y: orbY, radius: 10 });
             }
-            if (frame % 800 === 0) {
+            if (frame % 800 === 0) { //power up triple salto
                 let orbY = (canvas.height / 2) - 40;
                 tripleJumpOrbs.push({ x: canvas.width + 400, y: orbY, radius: 10 });
             }
+
+
+            ctx.fillStyle = "yellow";
+            for (let i = 0; i < coins.length; i++) {
+                let coin = coins[i];
+                coin.x -= gameSpeed;
+                ctx.beginPath();
+                ctx.arc(coin.x, coin.y, coin.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (
+                    player.x < coin.x + coin.radius &&
+                    player.x + player.width > coin.x - coin.radius &&
+                    player.y < coin.y + coin.radius &&
+                    player.y + player.height > coin.y - coin.radius
+                ) {
+                    monedas++;
+                    coins.splice(i, 1);
+                    i--;
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "yellow");
+                }
+            }
+
 
             ctx.fillStyle = "gold";
             for (let i = 0; i < tripleJumpOrbs.length; i++) {
@@ -394,9 +483,20 @@
             ctx.textAlign = "left";
             ctx.fillStyle = "white";
             ctx.font = canvas.height * 0.03 + "px sans-serif";
-            ctx.fillText("Puntaje: " + score + " Saltos: " + saltos, 20, groundY + canvas.height * 0.05);
+            ctx.fillText("Puntaje: " + score + " Saltos: " + saltos + " Monedas: " + monedas, 20, groundY + canvas.height * 0.05);
 
             if (gameOver) {
+                if (score > bestScore) {
+                    bestScore = score;
+                    localStorage.setItem("bestScore", bestScore);
+                }
+
+                if (monedas > bestCoins) {
+                    bestCoins = monedas;
+                    localStorage.setItem("bestCoins", bestCoins);
+                }
+
+
                 ctx.textAlign = "center";
                 ctx.fillStyle = "red";
                 ctx.font = canvas.height * 0.08 + "px sans-serif";
@@ -405,14 +505,17 @@
                 ctx.fillText("Presiona Patos para Iniciar", canvas.width / 2, canvas.height / 2);
                 ctx.fillStyle = "white";
                 ctx.fillText("Puntaje máximo: " + bestScore, canvas.width / 2, canvas.height / 2 + canvas.height * 0.05);
+                ctx.fillText("Monedas máximas: " + bestCoins, canvas.width / 2, canvas.height / 2 + canvas.height * 0.10);
+
             }
+
 
             frame++;
             if (!gameOver) requestAnimationFrame(update);
         }
 
         update();
-
+        createRain();
     </script>
 
 </body>
