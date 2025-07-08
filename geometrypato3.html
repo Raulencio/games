@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <title>Geometry Dash Gravedad Invertida Mejorada</title>
     <style>
         body {
@@ -22,6 +25,7 @@
 <body>
     <canvas id="game" width="800" height="400"></canvas>
     <script>
+
         const canvas = document.getElementById("game");
         const ctx = canvas.getContext("2d");
 
@@ -31,9 +35,21 @@
 
         let obstacles = [];
         let orbs = [];
+        let particles = [];
+
+        let speedOrbs = [];
+
+
         let frame = 0;
         let gameOver = false;
         let inverted = false;
+
+        let score = 0; // ⭐ Nuevo: puntaje inicializado en 0
+
+        var saltos = 0;
+        var gameSpeed = 5;
+
+
 
         const groundY = 320;
         const ceilingY = 0;
@@ -41,7 +57,7 @@
         document.addEventListener("keydown", e => {
             if (e.code === "Space" && player.jumps < player.maxJumps && !gameOver) {
                 player.dy = inverted ? -jumpStrength : jumpStrength;
-                player.jumps++;
+                player.jumps++; saltos++;
             }
             if (e.code === "Enter" && gameOver) {
                 location.reload();
@@ -52,7 +68,7 @@
         canvas.addEventListener("mousedown", () => {
             if (!gameOver && player.jumps < player.maxJumps) {
                 player.dy = inverted ? -jumpStrength : jumpStrength;
-                player.jumps++;
+                player.jumps++; saltos++;
             }
             if (gameOver) {
                 location.reload();
@@ -63,7 +79,7 @@
             e.preventDefault(); // evitar scroll al tocar
             if (!gameOver && player.jumps < player.maxJumps) {
                 player.dy = inverted ? -jumpStrength : jumpStrength;
-                player.jumps++;
+                player.jumps++; saltos++;
             }
             if (gameOver) {
                 location.reload();
@@ -82,6 +98,21 @@
             ctx.fill();
         }
 
+
+        function createParticles(x, y, color) {
+            for (let i = 0; i < 10; i++) {
+                particles.push({
+                    x: x,
+                    y: y,
+                    dx: Math.random() * 4 - 2,
+                    dy: Math.random() * 4 - 2,
+                    life: 30,
+                    color: color
+                });
+            }
+        }
+
+
         function update() {
             if (gameOver) return;
 
@@ -99,6 +130,22 @@
             ctx.moveTo(0, ceilingY);
             ctx.lineTo(canvas.width, ceilingY);
             ctx.stroke();
+
+
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                ctx.fillStyle = p.color;
+                ctx.fillRect(p.x, p.y, 2, 2);
+                p.x += p.dx;
+                p.y += p.dy;
+                p.life--;
+                if (p.life <= 0) {
+                    particles.splice(i, 1);
+                    i--;
+                }
+            }
+
+
 
             // Actualizar player física
             player.dy += inverted ? -gravity : gravity;
@@ -120,10 +167,10 @@
 
             // Generar obstáculos consecutivos en suelo y techo
             if (frame % 60 === 0) {
-                let cantidad = Math.floor(Math.random() * 3) + 1;
+                let cantidad = Math.floor(Math.random() * 3) + 3;
                 for (let c = 0; c < cantidad; c++) {
                     let distancia = c * 60;
-                    let type = Math.floor(Math.random() * 6);
+                    let type = Math.floor(Math.random() * 8);
                     if (type === 0) {
                         // Pincho en suelo
                         obstacles.push({ x: canvas.width + distancia, y: groundY - 40, width: 20, height: 40, type: "spike" });
@@ -134,27 +181,41 @@
                         let height = type === 2 ? 20 : 60;
                         // Bloque en suelo
                         obstacles.push({ x: canvas.width + distancia, y: groundY - height, width: 30, height: height, type: "block" });
-                    } else {
+                    } else if (type === 4) {
+                        // Pad de salto
+                        obstacles.push({ x: canvas.width + distancia, y: groundY - 10, width: 40, height: 10, type: "jumpPad" });
+                    } else if (type === 5) {
+                        // Pad de salto
+                        obstacles.push({ x: canvas.width + distancia, y: ceilingY, width: 40, height: 10, type: "jumpPadTop" });
+                    }
+                    else if (type === 6 || type === 7) {
                         let height = 20 + Math.floor(Math.random() * 40);
                         // Bloque en techo
                         obstacles.push({ x: canvas.width + distancia, y: ceilingY, width: 30, height: height, type: "blockTop" });
                     }
+
                 }
             }
 
 
             // Generar orbes de gravedad
-            if (frame % 180 === 0) {
-                // Orbe a mitad de altura, pero que se adapte a la gravedad (arriba o abajo)
-                let orbY = inverted ? 100 : 150;
+            if (frame % 200 === 0) {
+                // Orbe siempre en el centro vertical del canvas
+                let orbY = (canvas.height / 2) - 40;
                 orbs.push({ x: canvas.width, y: orbY, radius: 10 });
             }
+            if (frame % 500 === 0) { // cada 600 frames (~10s)
+                let orbY = (canvas.height / 2) - 40; 
+                speedOrbs.push({ x: canvas.width + 200, y: orbY, radius: 10 });
+            }
+
+
 
             // Dibujar y actualizar orbes
             ctx.fillStyle = "cyan";
             for (let i = 0; i < orbs.length; i++) {
                 let orb = orbs[i];
-                orb.x -= 5;
+                orb.x -= gameSpeed;
                 ctx.beginPath();
                 ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
                 ctx.fill();
@@ -176,13 +237,40 @@
                     // Resetear velocidad y saltos al cambiar gravedad
                     player.dy = 0;
                     player.jumps = 0;
+
+                    createParticles(player.x + player.width, player.y + player.height, "cyan");
                 }
             }
+
+
+            ctx.fillStyle = "magenta";
+            for (let i = 0; i < speedOrbs.length; i++) {
+                let orb = speedOrbs[i];
+                orb.x -= gameSpeed;
+                ctx.beginPath();
+                ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Colisión con jugador
+                if (player.x < orb.x + orb.radius &&
+                    player.x + player.width > orb.x - orb.radius &&
+                    player.y < orb.y + orb.radius &&
+                    player.y + player.height > orb.y - orb.radius) {
+                    gameSpeed += 1; // aumenta la velocidad en +1
+                    speedOrbs.splice(i, 1);
+                    i--;
+
+                    // 🌠 Efecto de partículas al recogerlo
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "magenta");
+                }
+            }
+
+
 
             // Dibujar y actualizar obstáculos
             for (let i = 0; i < obstacles.length; i++) {
                 let obs = obstacles[i];
-                obs.x -= 5;
+                obs.x -= gameSpeed;
 
                 if (obs.type === "spike") {
                     ctx.fillStyle = "lime";
@@ -264,23 +352,70 @@
                         }
                     }
                 }
-            }
+                else if (obs.type === "jumpPad") {
+                    ctx.fillStyle = "yellow";
+                    ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
 
+                    // Efecto de salto alto al tocar
+                    if (player.x + player.width > obs.x &&
+                        player.x < obs.x + obs.width &&
+                        player.y + player.height > obs.y &&
+                        player.y + player.height < obs.y + obs.height + 10) {
+                        player.dy = -20; // impulso de salto más alto
+                        player.jumps = 2; // cuenta como un salto usado para no poder saltar infinitamente
+                    }
+                } else if (obs.type === "jumpPadTop") {
+                    ctx.fillStyle = "yellow";
+                    ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+
+                    // Efecto de salto alto al tocar
+                    if (player.x + player.width > obs.x &&
+                        player.x < obs.x + obs.width &&
+                        player.y < obs.y + obs.height &&
+                        player.y + player.height > obs.y) {
+
+                        if (inverted) {
+                            player.dy = 20; // impulso hacia abajo si la gravedad está invertida
+                        } else {
+                            player.dy = -20; // impulso hacia arriba si la gravedad es normal
+                        }
+                        player.jumps = 2; // cuenta como un salto usado para evitar saltos infinitos
+                    }
+                }
+
+
+
+
+                if (obs.x + obs.width < 0) {
+                    obstacles.splice(i, 1);
+                    i--;
+                    score+=gameSpeed;
+                }
+
+            }
+            ctx.fillStyle = "white";
+            ctx.font = "20px sans-serif";
+            ctx.fillText("Puntaje: " + score + " Saltos: " + saltos, 20, 370);
 
             // Mensaje de muerte
             if (gameOver) {
                 ctx.fillStyle = "red";
                 ctx.font = "48px sans-serif";
-                ctx.fillText("GAME OVER", 280, 200);
+                ctx.fillText("Geometry Duck", 240, 200);
                 ctx.font = "24px sans-serif";
-                ctx.fillText("Presiona Enter para renacer", 260, 250);
+                ctx.fillText("Presiona Enter para Iniciar", 260, 250);
             }
 
             frame++;
             if (!gameOver) requestAnimationFrame(update);
         }
 
+
+
         update();
+
+
+
     </script>
 </body>
 
