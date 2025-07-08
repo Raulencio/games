@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>Geometry Duck III</title>
+
+    <link rel="icon" href="pato.png" type="image/png">
+
     <style>
         html,
         body {
@@ -20,7 +23,34 @@
 
         canvas {
             display: block;
-            background: linear-gradient(#001216, #242424);
+            background: linear-gradient(#005163, #026159);
+        }
+
+        #botonera {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        #botonera button {
+            background: #04a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #botonera button:hover {
+            background: #07c;
         }
     </style>
 </head>
@@ -28,7 +58,18 @@
 <body>
     <canvas id="game"></canvas>
 
-
+    <div id="botonera">
+        <button id="btn1" onclick="togglePause()">Pausa </button>
+        <button id="btn2" onclick="gravedad()">Gravedad ↑↓</button>
+        <button id="btn3" onclick="velocidad()">Velocidad →→</button>
+        <button id="btn4">♥</button>
+        <button id="btn5">♦</button>
+        <button id="btn6">♣</button>
+        <button id="btn7">♠</button>
+        <button id="btn8">•</button>
+        <button id="btn9">◘</button>
+        <button id="btn10">○</button>
+    </div>
 
     <script src="js/skrips.js"></script>
     <script>
@@ -63,7 +104,8 @@
 
 
         let frame = 0;
-        let gameOver = false;
+
+        let gameOver = true;
         let inverted = false;
 
         let score = 0;
@@ -72,6 +114,20 @@
 
         let groundY = 0;
         const ceilingY = 0;
+
+
+        let paused = false;
+
+        function togglePause() {
+            paused = !paused;
+        }
+
+        function gravedad() {
+            inverted = !inverted;
+        }
+        function velocidad() {
+            gameSpeed += 1;
+        }
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -92,35 +148,39 @@
         window.addEventListener('resize', resizeCanvas);
 
         document.addEventListener("keydown", e => {
-            if (e.code === "Space" && player.jumps < player.maxJumps && !gameOver) {
+            if (gameOver && e.code === "Space") {
+                resetGame();
+                return;
+            }
+            if (e.code === "Space" && player.jumps < player.maxJumps) {
                 player.dy = inverted ? -jumpStrength : jumpStrength;
                 player.jumps++; saltos++;
-            }
-            if (e.code === "Space" && gameOver) {
-                location.reload();
             }
         });
 
         canvas.addEventListener("mousedown", () => {
-            if (!gameOver && player.jumps < player.maxJumps) {
+            if (gameOver) {
+                resetGame();
+                return;
+            }
+            if (player.jumps < player.maxJumps) {
                 player.dy = inverted ? -jumpStrength : jumpStrength;
                 player.jumps++; saltos++;
-            }
-            if (gameOver) {
-                location.reload();
             }
         });
 
         canvas.addEventListener("touchstart", e => {
             e.preventDefault();
-            if (!gameOver && player.jumps < player.maxJumps) {
+            if (gameOver) {
+                resetGame();
+                return;
+            }
+            if (player.jumps < player.maxJumps) {
                 player.dy = inverted ? -jumpStrength : jumpStrength;
                 player.jumps++; saltos++;
             }
-            if (gameOver) {
-                location.reload();
-            }
         }, { passive: false });
+
 
         function drawTriangle(x, y, width, height) {
             ctx.beginPath();
@@ -147,6 +207,8 @@
         let bestScore = localStorage.getItem("bestScore") || 0;
 
         let bestCoins = localStorage.getItem("bestCoins") || 0;
+
+        let bestSaltos = localStorage.getItem("bestSaltos") || 0;
 
 
 
@@ -248,14 +310,74 @@
 
 
 
+
+        function resetGame() {
+            player.y = groundY - player.height;
+            player.dy = 0;
+            player.jumps = 0;
+            inverted = false;
+            tripleJumpActive = false;
+            tripleJumpTimer = 0;
+
+            obstacles = [];
+            coins = [];
+            orbs = [];
+            speedOrbs = [];
+            tripleJumpOrbs = [];
+            heartOrbs = [];
+            shieldOrbs = [];
+            particles = [];
+            floatingTexts = [];
+
+            gameSpeed = 5;
+            score = 0;
+            saltos = 0;
+            monedas = 0;
+            vidas = 0;
+
+            frame = 0;
+            gameOver = false;
+        }
+
+
+
         const patoImg = new Image();
         patoImg.src = "pato.png";
 
 
+
+
+
         function update() {
-            if (gameOver) return;
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (gameOver) {
+                ctx.textAlign = "center";
+                ctx.fillStyle = "red";
+                ctx.font = canvas.height * 0.08 + "px sans-serif";
+                ctx.fillText("Geometry Duck III", canvas.width / 2, canvas.height / 2 - canvas.height * 0.1);
+                ctx.font = canvas.height * 0.04 + "px sans-serif";
+                ctx.fillText("Presiona para Iniciar", canvas.width / 2, canvas.height / 2 + canvas.height * 0.05);
+                ctx.fillStyle = "white";
+                ctx.fillText("Puntaje máximo: " + bestScore, canvas.width / 2, canvas.height / 2 + canvas.height * 0.20);
+                ctx.fillText("Monedas máximas: " + bestCoins, canvas.width / 2, canvas.height / 2 + canvas.height * 0.25);
+                ctx.fillText("Maximo de Saltos: " + bestSaltos, canvas.width / 2, canvas.height / 2 + canvas.height * 0.30);
+
+                requestAnimationFrame(update);
+                return; // importante para no continuar procesando el juego
+            }
+
+            if (paused) {
+                // Mostrar texto de "Pausado" en el centro
+                ctx.textAlign = "center";
+                ctx.fillStyle = "yellow";
+                ctx.font = canvas.height * 0.06 + "px sans-serif";
+                ctx.fillText("PAUSA", canvas.width / 2, canvas.height / 2);
+
+                requestAnimationFrame(update);
+                return;
+            }
 
             ctx.strokeStyle = "#888";
             ctx.lineWidth = 2;
@@ -326,9 +448,6 @@
             } else {
                 ctx.drawImage(patoImg, player.x, player.y, player.width, player.height);
             }
-
-            ctx.restore();
-
 
             ctx.restore();
 
@@ -695,40 +814,39 @@
             ctx.textAlign = "left";
             ctx.fillStyle = "white";
             ctx.font = canvas.height * 0.03 + "px sans-serif";
-            ctx.fillText("Puntaje: " + score + " Saltos: " + saltos + " Monedas: " + monedas + " Vidas Extra: " + vidas, 20, groundY + canvas.height * 0.05);
-
-
-            if (gameOver) {
-                if (score > bestScore) {
-                    bestScore = score;
-                    localStorage.setItem("bestScore", bestScore);
-                }
-
-                if (monedas > bestCoins) {
-                    bestCoins = monedas;
-                    localStorage.setItem("bestCoins", bestCoins);
-                }
-
-
-                ctx.textAlign = "center";
-                ctx.fillStyle = "red";
-                ctx.font = canvas.height * 0.08 + "px sans-serif";
-                ctx.fillText("Geometry Duck", canvas.width / 2, canvas.height / 2 - canvas.height * 0.05);
-                ctx.font = canvas.height * 0.04 + "px sans-serif";
-                ctx.fillText("Presiona Patos para Iniciar", canvas.width / 2, canvas.height / 2);
-                ctx.fillStyle = "white";
-                ctx.fillText("Puntaje máximo: " + bestScore, canvas.width / 2, canvas.height / 2 + canvas.height * 0.05);
-                ctx.fillText("Monedas máximas: " + bestCoins, canvas.width / 2, canvas.height / 2 + canvas.height * 0.10);
-
-            }
+            ctx.fillText("Puntaje: " + Math.floor(score) + " Saltos: " + saltos + " Monedas: " + monedas + " Vidas Extra: " + vidas, 20, groundY + canvas.height * 0.05);
 
 
             frame++;
-            if (!gameOver) updateFloatingTexts(); requestAnimationFrame(update);
+            updateFloatingTexts();
+            requestAnimationFrame(update);
+            score += 0.042;
+
+            // Guarda el mejor puntaje
+            if (score > bestScore) {
+                bestScore = Math.floor(score);
+                localStorage.setItem("bestScore", bestScore);
+            }
+
+            // Guarda la mejor cantidad de monedas también
+            if (monedas > bestCoins) {
+                bestCoins = monedas;
+                localStorage.setItem("bestCoins", bestCoins);
+            }
+
+            if (saltos > bestSaltos) {
+                bestSaltos = saltos;
+                localStorage.setItem("bestSaltos", bestSaltos);
+            }
+
+
         }
 
         update();
         createRain();
+
+
+
     </script>
 
 </body>
