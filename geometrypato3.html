@@ -189,12 +189,61 @@
 
 
 
+        let floatingTexts = [];
 
+        function addFloatingText(text, x, y, color = "white", duration = 60) {
+            floatingTexts.push({ text, x, y, alpha: 1, duration, color });
+        }
 
+        function updateFloatingTexts() {
+            for (let i = 0; i < floatingTexts.length; i++) {
+                let ft = floatingTexts[i];
+                ft.y -= 1; // asciende suavemente
+                ft.alpha -= 1 / ft.duration; // desvanece
+                ft.duration--;
 
+                ctx.fillStyle = ft.color.includes("#")
+                    ? hexToRgba(ft.color, ft.alpha)
+                    : nameToRgba(ft.color, ft.alpha);
 
+                ctx.font = "20px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText(ft.text, ft.x, ft.y);
 
+                if (ft.duration <= 0) {
+                    floatingTexts.splice(i, 1);
+                    i--;
+                }
+            }
+        }
 
+        function hexToRgba(hex, alpha) {
+            let shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+            hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+                return r + r + g + g + b + b;
+            });
+
+            let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ?
+                `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}, ${alpha.toFixed(2)})` :
+                `rgba(255,255,255,${alpha.toFixed(2)})`;
+        }
+
+        function nameToRgba(name, alpha) {
+            // Crea un elemento temporal para obtener el color computado
+            let temp = document.createElement("div");
+            temp.style.color = name;
+            document.body.appendChild(temp);
+
+            let rgb = getComputedStyle(temp).color;
+            document.body.removeChild(temp);
+
+            // rgb puede ser "rgb(r, g, b)" o "rgba(r, g, b, a)"
+            let rgbValues = rgb.match(/\d+/g);
+            return rgbValues ?
+                `rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, ${alpha.toFixed(2)})` :
+                `rgba(255,255,255,${alpha.toFixed(2)})`;
+        }
 
         function update() {
             if (gameOver) return;
@@ -348,6 +397,7 @@
                     i--;
                     score += gameSpeed;
                     createParticles(player.x + player.width / 2, player.y + player.height / 2, "blue");
+                    addFloatingText("+" + gameSpeed, player.x + player.width / 2, player.y, "blue");
                 }
             }
 
@@ -371,6 +421,7 @@
                     i--;
                     score += 50;
                     createParticles(player.x + player.width / 2, player.y + player.height / 2, "red");
+                    addFloatingText("+50", player.x + player.width / 2, player.y, "red");
                 }
             }
 
@@ -394,6 +445,7 @@
                     i--;
                     score += 100;
                     createParticles(player.x + player.width / 2, player.y + player.height / 2, "yellow");
+                    addFloatingText("+100", player.x + player.width / 2, player.y, "yellow");
                 }
             }
 
@@ -414,6 +466,7 @@
                     i--;
                     score += gameSpeed * 3;
                     createParticles(player.x + player.width / 2, player.y + player.height / 2, "gold");
+                    addFloatingText("+" + gameSpeed * 3, player.x + player.width / 2, player.y, "gold");
                 }
             }
 
@@ -433,6 +486,9 @@
                     player.jumps = 0;
                     score += 10;
                     createParticles(player.x + player.width, player.y + player.height, "cyan");
+                    addFloatingText("+10", player.x + player.width / 2, player.y, "cyan");
+
+
                 }
             }
 
@@ -452,6 +508,7 @@
                     score += 10 * gameSpeed;
 
                     createParticles(player.x + player.width / 2, player.y + player.height / 2, "magenta");
+                    addFloatingText("+" + 10 * gameSpeed, player.x + player.width / 2, player.y, "magenta");
                 }
             }
 
@@ -642,7 +699,7 @@
 
 
             frame++;
-            if (!gameOver) requestAnimationFrame(update);
+            if (!gameOver) updateFloatingTexts(); requestAnimationFrame(update);
         }
 
         update();
