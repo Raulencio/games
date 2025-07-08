@@ -6,7 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Geometry Dash Gravedad Invertida Mejorada</title>
+    <title>Geometry Duck III</title>
     <style>
         body {
             margin: 0;
@@ -24,6 +24,11 @@
 
 <body>
     <canvas id="game" width="800" height="400"></canvas>
+
+
+
+    <script src="js/skrips.js"></script>
+
     <script>
 
         const canvas = document.getElementById("game");
@@ -33,10 +38,15 @@
         let gravity = 0.8;
         let jumpStrength = -12;
 
+
+        let tripleJumpActive = false;
+        let tripleJumpTimer = 0;
+        let tripleJumpOrbs = []; // lista de orbes de triple salto
+
+
         let obstacles = [];
         let orbs = [];
         let particles = [];
-
         let speedOrbs = [];
 
 
@@ -59,7 +69,7 @@
                 player.dy = inverted ? -jumpStrength : jumpStrength;
                 player.jumps++; saltos++;
             }
-            if (e.code === "Enter" && gameOver) {
+            if (e.code === "Space" && gameOver) {
                 location.reload();
             }
         });
@@ -100,7 +110,7 @@
 
 
         function createParticles(x, y, color) {
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 24; i++) {
                 particles.push({
                     x: x,
                     y: y,
@@ -111,6 +121,10 @@
                 });
             }
         }
+
+
+        let bestScore = localStorage.getItem("bestScore") || 0;
+
 
 
         function update() {
@@ -162,7 +176,23 @@
                 player.jumps = 0;
             }
 
-            ctx.fillStyle = "green";
+            if (tripleJumpActive) {
+                ctx.fillStyle = "gold"; // color dorado mientras triple salto está activo
+            } else {
+                ctx.fillStyle = "green"; // color normal
+            }
+
+
+            if (tripleJumpActive) {
+                tripleJumpTimer--;
+                if (tripleJumpTimer <= 0) {
+                    tripleJumpActive = false;
+                    player.maxJumps = 2; // volver a doble salto normal
+                }
+            }
+
+
+
             ctx.fillRect(player.x, player.y, player.width, player.height);
 
             // Generar obstáculos consecutivos en suelo y techo
@@ -205,13 +235,47 @@
                 orbs.push({ x: canvas.width, y: orbY, radius: 10 });
             }
             if (frame % 500 === 0) { // cada 600 frames (~10s)
-                let orbY = (canvas.height / 2) - 40; 
+                let orbY = (canvas.height / 2) - 40;
                 speedOrbs.push({ x: canvas.width + 200, y: orbY, radius: 10 });
+            }
+            // Generar orbe de triple salto cada 800 frames (~13s)
+            if (frame % 800 === 0) {
+                let orbY = (canvas.height / 2) - 40;
+                tripleJumpOrbs.push({ x: canvas.width + 400, y: orbY, radius: 10 });
             }
 
 
 
+
             // Dibujar y actualizar orbes
+
+
+            ctx.fillStyle = "gold";
+            for (let i = 0; i < tripleJumpOrbs.length; i++) {
+                let orb = tripleJumpOrbs[i];
+                orb.x -= gameSpeed;
+                ctx.beginPath();
+                ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Colisión con jugador
+                if (player.x < orb.x + orb.radius &&
+                    player.x + player.width > orb.x - orb.radius &&
+                    player.y < orb.y + orb.radius &&
+                    player.y + player.height > orb.y - orb.radius) {
+
+                    tripleJumpActive = true;
+                    tripleJumpTimer = 800; // 20 segundos si tu juego corre a 60fps
+                    player.maxJumps = 3; // activar triple salto
+
+                    tripleJumpOrbs.splice(i, 1);
+                    i--;
+
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "gold");
+                }
+            }
+
+
             ctx.fillStyle = "cyan";
             for (let i = 0; i < orbs.length; i++) {
                 let orb = orbs[i];
@@ -240,6 +304,7 @@
 
                     createParticles(player.x + player.width, player.y + player.height, "cyan");
                 }
+
             }
 
 
@@ -389,13 +454,13 @@
                 if (obs.x + obs.width < 0) {
                     obstacles.splice(i, 1);
                     i--;
-                    score+=gameSpeed;
+                    score += gameSpeed;
                 }
 
             }
             ctx.fillStyle = "white";
             ctx.font = "20px sans-serif";
-            ctx.fillText("Puntaje: " + score + " Saltos: " + saltos, 20, 370);
+            ctx.fillText("Puntaje: " + score + " Saltos: " + saltos, 20, 350);
 
             // Mensaje de muerte
             if (gameOver) {
@@ -403,7 +468,13 @@
                 ctx.font = "48px sans-serif";
                 ctx.fillText("Geometry Duck", 240, 200);
                 ctx.font = "24px sans-serif";
-                ctx.fillText("Presiona Enter para Iniciar", 260, 250);
+                ctx.fillText("Presiona Patos para Iniciar", 260, 250);
+                if (score > bestScore) {
+                    bestScore = score;
+                    localStorage.setItem("bestScore", bestScore);
+                }
+                ctx.fillStyle = "white";
+                ctx.fillText("Puntaje máximo: " + bestScore, 280, 290);
             }
 
             frame++;
