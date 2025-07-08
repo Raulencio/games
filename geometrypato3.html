@@ -52,6 +52,14 @@
         let monedas = 0;
         let coins = []; // lista de monedas
 
+        let vidas = 0;
+        let heartOrbs = [];
+
+
+        let invincible = false;
+        let invincibleTimer = 0;
+        let shieldOrbs = [];
+
 
 
         let frame = 0;
@@ -234,7 +242,20 @@
             updateRain();
 
 
-            ctx.fillStyle = tripleJumpActive ? "gold" : "green";
+
+            if (invincible) {
+                invincibleTimer--;
+                if (invincibleTimer <= 0) {
+                    invincible = false;
+                }
+            }
+
+
+
+
+
+            ctx.fillStyle = invincible ? "blue" : (tripleJumpActive ? "gold" : "green");
+
             ctx.fillRect(player.x, player.y, player.width, player.height);
 
             if (tripleJumpActive) {
@@ -245,8 +266,21 @@
                 }
             }
 
+
+            if (frame % 1000 === 0) {
+                let heartY = (canvas.height / 2) - 40;
+                heartOrbs.push({ x: canvas.width+1200, y: heartY, radius: 15 });
+            }
+
+            if (frame % 1200 === 0) {
+                let shieldY = (canvas.height / 2) - 40;
+                shieldOrbs.push({ x: canvas.width+800, y: shieldY, radius: 15 });
+            }
+
+
+
             if (frame % 60 === 0) {
-                let cantidad = Math.floor(Math.random() * 3) + 3;
+                let cantidad = Math.floor(Math.random() * 7);
                 for (let c = 0; c < cantidad; c++) {
                     let distancia = c * canvas.width * 0.075;
                     let type = Math.floor(Math.random() * 8);
@@ -290,6 +324,54 @@
             if (frame % 800 === 0) { //power up triple salto
                 let orbY = (canvas.height / 2) - 40;
                 tripleJumpOrbs.push({ x: canvas.width + 400, y: orbY, radius: 10 });
+            }
+
+
+
+
+            ctx.fillStyle = "blue";
+            for (let i = 0; i < shieldOrbs.length; i++) {
+                let orb = shieldOrbs[i];
+                orb.x -= gameSpeed;
+                ctx.beginPath();
+                ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (player.x < orb.x + orb.radius &&
+                    player.x + player.width > orb.x - orb.radius &&
+                    player.y < orb.y + orb.radius &&
+                    player.y + player.height > orb.y - orb.radius) {
+
+                    invincible = true;
+                    invincibleTimer = 600; // dura 10 segundos si el juego corre a 60 fps
+                    shieldOrbs.splice(i, 1);
+                    i--;
+
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "blue");
+                }
+            }
+
+
+
+            ctx.fillStyle = "red";
+            for (let i = 0; i < heartOrbs.length; i++) {
+                let orb = heartOrbs[i];
+                orb.x -= gameSpeed;
+                ctx.beginPath();
+                ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (player.x < orb.x + orb.radius &&
+                    player.x + player.width > orb.x - orb.radius &&
+                    player.y < orb.y + orb.radius &&
+                    player.y + player.height > orb.y - orb.radius) {
+
+                    vidas++;
+                    heartOrbs.splice(i, 1);
+                    i--;
+
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "red");
+                }
             }
 
 
@@ -397,7 +479,19 @@
                         player.x + player.width > obs.x &&
                         player.y < obs.y + obs.height &&
                         player.y + player.height > obs.y) {
-                        gameOver = true;
+
+
+                        if (!invincible) {
+                            if (vidas > 0) {
+                                vidas--;
+                                invincible = true;
+                                invincibleTimer = 60; // dura 1 segundo
+                            } else {
+                                gameOver = true;
+                            }
+                        }
+
+
                     }
 
                 } else if (obs.type === "block") {
@@ -412,7 +506,16 @@
                                 player.dy = 0;
                                 player.jumps = 0;
                             } else if (player.y + player.height > obs.y) {
-                                gameOver = true;
+                                if (!invincible) {
+                                    if (vidas > 0) {
+                                        vidas--;
+                                        invincible = true;
+                                        invincibleTimer = 60; // dura 1 segundo
+                                    } else {
+                                        gameOver = true;
+                                    }
+                                }
+
                             }
                         } else {
                             // Deslizar sobre bloque techo (gravedad invertida)
@@ -421,7 +524,16 @@
                                 player.dy = 0;
                                 player.jumps = 0;
                             } else if (player.y < obs.y + obs.height && player.y + player.height > obs.y + obs.height) {
-                                gameOver = true;
+                                if (!invincible) {
+                                    if (vidas > 0) {
+                                        vidas--;
+                                        invincible = true;
+                                        invincibleTimer = 60; // dura 1 segundo
+                                    } else {
+                                        gameOver = true;
+                                    }
+                                }
+
                             }
                         }
                     }
@@ -445,7 +557,16 @@
                                 player.dy = 0;
                                 player.jumps = 0;
                             } else if (player.y < obs.y + obs.height) {
-                                gameOver = true;
+                                if (!invincible) {
+                                    if (vidas > 0) {
+                                        vidas--;
+                                        invincible = true;
+                                        invincibleTimer = 60; // dura 1 segundo
+                                    } else {
+                                        gameOver = true;
+                                    }
+                                }
+
                             }
                         }
                     }
@@ -483,7 +604,8 @@
             ctx.textAlign = "left";
             ctx.fillStyle = "white";
             ctx.font = canvas.height * 0.03 + "px sans-serif";
-            ctx.fillText("Puntaje: " + score + " Saltos: " + saltos + " Monedas: " + monedas, 20, groundY + canvas.height * 0.05);
+            ctx.fillText("Puntaje: " + score + " Saltos: " + saltos + " Monedas: " + monedas + " ❤️ Vidas Extra: " + vidas, 20, groundY + canvas.height * 0.05);
+
 
             if (gameOver) {
                 if (score > bestScore) {
