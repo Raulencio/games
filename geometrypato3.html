@@ -20,7 +20,7 @@
 
         canvas {
             display: block;
-            background: linear-gradient(#111, #222);
+            background: linear-gradient(#001216, #242424);
         }
     </style>
 </head>
@@ -245,6 +245,13 @@
                 `rgba(255,255,255,${alpha.toFixed(2)})`;
         }
 
+
+
+
+        const patoImg = new Image();
+        patoImg.src = "pato.png";
+
+
         function update() {
             if (gameOver) return;
 
@@ -266,6 +273,9 @@
                 let p = particles[i];
                 ctx.fillStyle = p.color;
                 ctx.fillRect(p.x, p.y, 2, 2);
+
+
+
                 p.x += p.dx;
                 p.y += p.dy;
                 p.life--;
@@ -302,10 +312,25 @@
 
 
 
+            ctx.save();
 
-            ctx.fillStyle = invincible ? "blue" : (tripleJumpActive ? "gold" : "green");
+            ctx.shadowColor = invincible ? "gold" : (tripleJumpActive ? "blue" : "green");
+            ctx.shadowBlur = 4; // intensidad de la sombra
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
 
-            ctx.fillRect(player.x, player.y, player.width, player.height);
+            if (inverted) {
+                ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
+                ctx.scale(1, -1);
+                ctx.drawImage(patoImg, -player.width / 2, -player.height / 2, player.width, player.height);
+            } else {
+                ctx.drawImage(patoImg, player.x, player.y, player.width, player.height);
+            }
+
+            ctx.restore();
+
+
+            ctx.restore();
 
             if (tripleJumpActive) {
                 tripleJumpTimer--;
@@ -378,7 +403,7 @@
 
 
 
-            ctx.fillStyle = "blue";
+            ctx.fillStyle = "gold";
             for (let i = 0; i < shieldOrbs.length; i++) {
                 let orb = shieldOrbs[i];
                 orb.x -= gameSpeed;
@@ -396,8 +421,8 @@
                     shieldOrbs.splice(i, 1);
                     i--;
                     score += gameSpeed;
-                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "blue");
-                    addFloatingText("+" + gameSpeed, player.x + player.width / 2, player.y, "blue");
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "gold");
+                    addFloatingText("+" + gameSpeed, player.x + player.width / 2, player.y, "gold");
                 }
             }
 
@@ -450,7 +475,7 @@
             }
 
 
-            ctx.fillStyle = "gold";
+            ctx.fillStyle = "blue";
             for (let i = 0; i < tripleJumpOrbs.length; i++) {
                 let orb = tripleJumpOrbs[i];
                 orb.x -= gameSpeed;
@@ -465,8 +490,8 @@
                     tripleJumpOrbs.splice(i, 1);
                     i--;
                     score += gameSpeed * 3;
-                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "gold");
-                    addFloatingText("+" + gameSpeed * 3, player.x + player.width / 2, player.y, "gold");
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "blue");
+                    addFloatingText("+" + gameSpeed * 3, player.x + player.width / 2, player.y, "blue");
                 }
             }
 
