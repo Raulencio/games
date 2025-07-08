@@ -269,12 +269,12 @@
 
             if (frame % 1000 === 0) {
                 let heartY = (canvas.height / 2) - 40;
-                heartOrbs.push({ x: canvas.width+1200, y: heartY, radius: 15 });
+                heartOrbs.push({ x: canvas.width + 1200, y: heartY, radius: 15 });
             }
 
             if (frame % 1200 === 0) {
                 let shieldY = (canvas.height / 2) - 40;
-                shieldOrbs.push({ x: canvas.width+800, y: shieldY, radius: 15 });
+                shieldOrbs.push({ x: canvas.width + 800, y: shieldY, radius: 15 });
             }
 
 
@@ -575,12 +575,14 @@
                     ctx.fillStyle = "yellow";
                     ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
 
+                    let padStrength = canvas.height * 0.045; // ⭐ fuerza proporcional al alto de pantalla
+
                     if (obs.type === "jumpPad") {
                         if (player.x + player.width > obs.x &&
                             player.x < obs.x + obs.width &&
                             player.y + player.height > obs.y &&
                             player.y + player.height < obs.y + obs.height + 10) {
-                            player.dy = -20;
+                            player.dy = -padStrength; // salto hacia arriba proporcional
                             player.jumps = 2;
                         }
                     } else {
@@ -588,11 +590,12 @@
                             player.x < obs.x + obs.width &&
                             player.y < obs.y + obs.height &&
                             player.y + player.height > obs.y) {
-                            player.dy = inverted ? 20 : -20;
+                            player.dy = inverted ? padStrength : -padStrength; // hacia abajo o arriba según gravedad
                             player.jumps = 2;
                         }
                     }
                 }
+
 
                 if (obs.x + obs.width < 0) {
                     obstacles.splice(i, 1);
