@@ -346,7 +346,7 @@
                     invincibleTimer = 600; // dura 10 segundos si el juego corre a 60 fps
                     shieldOrbs.splice(i, 1);
                     i--;
-
+                    score += gameSpeed;
                     createParticles(player.x + player.width / 2, player.y + player.height / 2, "blue");
                 }
             }
@@ -369,7 +369,7 @@
                     vidas++;
                     heartOrbs.splice(i, 1);
                     i--;
-
+                    score += 50;
                     createParticles(player.x + player.width / 2, player.y + player.height / 2, "red");
                 }
             }
@@ -392,6 +392,7 @@
                     monedas++;
                     coins.splice(i, 1);
                     i--;
+                    score += 100;
                     createParticles(player.x + player.width / 2, player.y + player.height / 2, "yellow");
                 }
             }
@@ -411,6 +412,7 @@
                     player.maxJumps = 3;
                     tripleJumpOrbs.splice(i, 1);
                     i--;
+                    score += gameSpeed * 3;
                     createParticles(player.x + player.width / 2, player.y + player.height / 2, "gold");
                 }
             }
@@ -429,6 +431,7 @@
                     i--;
                     player.dy = 0;
                     player.jumps = 0;
+                    score += 10;
                     createParticles(player.x + player.width, player.y + player.height, "cyan");
                 }
             }
@@ -445,6 +448,9 @@
                     gameSpeed += 1;
                     speedOrbs.splice(i, 1);
                     i--;
+
+                    score += 10 * gameSpeed;
+
                     createParticles(player.x + player.width / 2, player.y + player.height / 2, "magenta");
                 }
             }
@@ -607,7 +613,7 @@
             ctx.textAlign = "left";
             ctx.fillStyle = "white";
             ctx.font = canvas.height * 0.03 + "px sans-serif";
-            ctx.fillText("Puntaje: " + score + " Saltos: " + saltos + " Monedas: " + monedas + " ❤️ Vidas Extra: " + vidas, 20, groundY + canvas.height * 0.05);
+            ctx.fillText("Puntaje: " + score + " Saltos: " + saltos + " Monedas: " + monedas + " Vidas Extra: " + vidas, 20, groundY + canvas.height * 0.05);
 
 
             if (gameOver) {
