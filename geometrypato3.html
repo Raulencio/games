@@ -525,7 +525,7 @@
                 name: "Estanque Tranquilo",
                 obstacleFrequency: 80,
                 obstacleTypes: [2],
-                orbTypes: ["coin","speed"],
+                orbTypes: ["coin", "speed"],
                 hasRain: false,
                 rainAmount: 0,
                 gameSpeed: 5,
@@ -742,6 +742,8 @@
                 obstacleColors: {
                     spike: "orange",
                     spikeTop: "orange",
+                    block: "saddlebrown",
+                    blockTop: "saddlebrown",
                     bigRock: "saddlebrown",
                     bigRockTop: "saddlebrown",
                     jumpPad: "goldenrod",
@@ -1608,13 +1610,14 @@
                     player.y + player.height > orb.y - orb.radius
                 ) {
                     gameSpeed += 1;
+
                     speedOrbs.splice(i, 1);
                     i--;
 
                     score += 10 * gameSpeed;
 
                     createParticles(player.x + player.width / 2, player.y + player.height / 2, "white");
-                    addFloatingText("+" + 10 * gameSpeed, player.x + player.width / 2, player.y, "white");
+                    addFloatingText("+" + 10 * Math.floor(gameSpeed), player.x + player.width / 2, player.y, "white");
                 }
             }
 
@@ -1955,7 +1958,7 @@
             updateFloatingTexts();
             requestAnimationFrame(update);
             score += 0.042;
-
+            gameSpeed += 0.00042;
             // Guarda el mejor puntaje
             if (score > bestScore) {
                 bestScore = Math.floor(score);
