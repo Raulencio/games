@@ -63,7 +63,7 @@
         <button id="btn2" onclick="gravedad()">Gravedad</button>
         <button id="btn3" onclick="velocidad()">Velocidad</button>
         <button id="btn4" onclick="invencibilidad()">Invencibilidad</button>
-        <button id="btn5">♦</button>
+        <button id="btn5" onclick="tripleSaltoActivo()">Triple Salto</button>
         <button id="btn6">♣</button>
         <button id="btn7">♠</button>
         <button id="btn8">•</button>
@@ -137,9 +137,23 @@
         function invencibilidad() {
             invincible = !invincible;
             if (invincible) {
-                invincibleTimer = 30000;
+                invincibleTimer = 300000;
             } else {
                 invincibleTimer = 0;
+            }
+
+        }
+
+        function tripleSaltoActivo() {
+
+            tripleJumpActive = !tripleJumpActive;
+
+            if (tripleJumpActive) {
+                tripleJumpTimer = 300000;
+                player.maxJumps = 3;
+            } else {
+                tripleJumpTimer = 0;
+                player.maxJumps = 2;
             }
 
         }
@@ -231,17 +245,18 @@
 
         let rainDrops = [];
 
-        function createRain() {
-            // Crear gotas de lluvia al azar a lo ancho del canvas
-            for (let i = 0; i < 15; i++) {
+        function createRain(cantidad) {
+            rainDrops = []; // Reiniciar el arreglo para no acumular gotas viejas
+            for (let i = 0; i < cantidad; i++) {
                 rainDrops.push({
                     x: Math.random() * canvas.width,
-                    y: Math.random() * -canvas.height, // empezar arriba fuera de pantalla
+                    y: Math.random() * -canvas.height,
                     length: 10 + Math.random() * 10,
                     speed: 4 + Math.random() * 4
                 });
             }
         }
+
 
         function updateRain() {
             ctx.strokeStyle = "rgba(174,194,224,0.5)";
@@ -406,7 +421,6 @@
             floatingTexts.push({ text, x: adjustedX, y: adjustedY, alpha: 1, duration, color });
         }
 
-
         function updateFloatingTexts() {
             for (let i = 0; i < floatingTexts.length; i++) {
                 let ft = floatingTexts[i];
@@ -422,7 +436,20 @@
 
                 ctx.font = "20px sans-serif";
                 ctx.textAlign = "center";
+
+                // Configurar sombra negra suave
+                ctx.shadowColor = "rgba(0, 0, 0, 0.7)";
+                ctx.shadowBlur = 4;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+
                 ctx.fillText(ft.text, ft.x, ft.y);
+
+                // Limpiar sombra para no afectar otros dibujos
+                ctx.shadowColor = "transparent";
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
 
                 if (ft.duration <= 0) {
                     floatingTexts.splice(i, 1);
@@ -469,6 +496,463 @@
 
 
 
+
+
+
+
+
+
+
+        /*
+        
+                    // Ahora usas typeIndex para crear el obstáculo según tu lógica previa
+                            === 0 "spike" 
+                            === 1 "spikeTop" 
+                            === 2 ||  === 3 "block" 
+                            === 4 "jumpPad" 
+                            === 5 "jumpPadTop"
+                            === 6 ||  === 7 "blockTop" 
+                            === 8 "bigRock"
+                            === 9  "bigRockTop"
+                            === 10 "floatingPlatform"
+                            === 11 "doubleSpike"
+                            === 12 "doubleSpikeTop"
+
+             orbTypes: ["coin", "speed", "heart", "gravity", "shield", "tripleJump"],
+        */
+
+        var puntos = 0;
+
+
+        let niveles = [
+            {
+                name: "Estanque Tranquilo",
+                obstacleFrequency: 80,
+                obstacleTypes: [2],
+                orbTypes: ["coin","speed"],
+                hasRain: false,
+                rainAmount: 0,
+                gameSpeed: 5,
+                requiredScore: 0,
+                backgroundColors: [
+                    { top: { r: 255, g: 153, b: 51 }, bottom: { r: 102, g: 204, b: 255 } },
+                    { top: { r: 51, g: 153, b: 255 }, bottom: { r: 0, g: 102, b: 204 } },
+                    { top: { r: 255, g: 102, b: 102 }, bottom: { r: 51, g: 51, b: 102 } },
+                    { top: { r: 10, g: 10, b: 40 }, bottom: { r: 0, g: 0, b: 20 } }
+                ],
+                orbFrequency: {
+                    heart: 1000,
+                    shield: 1200,
+                    coin: 250,
+                    gravity: 200,
+                    speed: 500,
+                    tripleJump: 800
+                },
+                obstacleColors: {
+                    spike: "green",
+                    spikeTop: "green",
+                    block: "sienna",
+                    blockTop: "sienna",
+                    jumpPad: "yellow",
+                    jumpPadTop: "yellow"
+                }
+            },
+            {
+                name: "Lluvia de Medianoche",
+                obstacleFrequency: 60,
+                obstacleTypes: [2, 3],
+                orbTypes: ["coin", "speed", "heart"],
+                hasRain: true,
+                rainAmount: 15,
+                gameSpeed: 6,
+                requiredScore: 500,
+                backgroundColors: [
+                    { top: { r: 20, g: 20, b: 40 }, bottom: { r: 0, g: 0, b: 20 } },
+                    { top: { r: 30, g: 30, b: 60 }, bottom: { r: 10, g: 10, b: 30 } },
+                    { top: { r: 20, g: 20, b: 40 }, bottom: { r: 0, g: 0, b: 20 } },
+                    { top: { r: 10, g: 10, b: 20 }, bottom: { r: 0, g: 0, b: 10 } }
+                ],
+                orbFrequency: {
+                    heart: 1000,
+                    shield: 1200,
+                    coin: 250,
+                    gravity: 200,
+                    speed: 500,
+                    tripleJump: 800
+                },
+                obstacleColors: {
+                    spike: "lightblue",
+                    spikeTop: "lightblue",
+                    block: "grey",
+                    blockTop: "grey",
+                    jumpPad: "yellow",
+                    jumpPadTop: "yellow"
+                }
+            },
+            {
+                name: "Niebla Encantada",
+                obstacleFrequency: 55,
+                obstacleTypes: [2, 3, 6, 7],
+                orbTypes: ["coin", "gravity", "speed", "heart"],
+                hasRain: false,
+                rainAmount: 0,
+                gameSpeed: 7,
+                requiredScore: 1500,
+                backgroundColors: [
+                    { top: { r: 180, g: 180, b: 200 }, bottom: { r: 150, g: 150, b: 170 } },
+                    { top: { r: 140, g: 140, b: 160 }, bottom: { r: 100, g: 100, b: 120 } },
+                    { top: { r: 120, g: 120, b: 140 }, bottom: { r: 80, g: 80, b: 100 } },
+                    { top: { r: 60, g: 60, b: 80 }, bottom: { r: 30, g: 30, b: 50 } }
+                ],
+                orbFrequency: {
+                    heart: 1000,
+                    shield: 1200,
+                    coin: 250,
+                    gravity: 200,
+                    speed: 500,
+                    tripleJump: 800
+                },
+                obstacleColors: {
+                    spike: "silver",
+                    spikeTop: "silver",
+                    block: "darkgrey",
+                    blockTop: "darkgrey",
+                    jumpPad: "yellow",
+                    jumpPadTop: "yellow"
+                }
+            },
+            {
+                name: "Tormenta Eléctrica",
+                obstacleFrequency: 50,
+                obstacleTypes: [4, 5, 2, 3, 6, 7],
+                orbTypes: ["coin", "gravity", "speed", "heart"],
+                hasRain: true,
+                rainAmount: 80,
+                gameSpeed: 8,
+                requiredScore: 2200,
+                backgroundColors: [
+                    { top: { r: 40, g: 40, b: 60 }, bottom: { r: 10, g: 10, b: 20 } },
+                    { top: { r: 60, g: 60, b: 90 }, bottom: { r: 20, g: 20, b: 30 } },
+                    { top: { r: 30, g: 30, b: 50 }, bottom: { r: 5, g: 5, b: 10 } },
+                    { top: { r: 80, g: 80, b: 110 }, bottom: { r: 40, g: 40, b: 60 } }
+                ],
+                orbFrequency: {
+                    heart: 1000,
+                    shield: 1200,
+                    coin: 250,
+                    gravity: 200,
+                    speed: 500,
+                    tripleJump: 800
+                },
+                obstacleColors: {
+                    spike: "white",
+                    spikeTop: "white",
+                    block: "darkslategray",
+                    blockTop: "darkslategray",
+                    jumpPad: "yellow",
+                    jumpPadTop: "yellow"
+                }
+            },
+            {
+                name: "Selva Profunda",
+                obstacleFrequency: 60,
+                obstacleTypes: [2, 3, 4, 5, 6, 7, 10],
+                orbTypes: ["coin", "gravity", "speed", "heart", "shield", "tripleJump"],
+                hasRain: true,
+                rainAmount: 30,
+                gameSpeed: 7,
+                requiredScore: 3500,
+                backgroundColors: [
+                    { top: { r: 0, g: 100, b: 40 }, bottom: { r: 0, g: 60, b: 20 } },
+                    { top: { r: 10, g: 110, b: 50 }, bottom: { r: 10, g: 70, b: 30 } },
+                    { top: { r: 0, g: 90, b: 35 }, bottom: { r: 0, g: 50, b: 15 } },
+                    { top: { r: 0, g: 40, b: 20 }, bottom: { r: 0, g: 20, b: 10 } }
+                ],
+                orbFrequency: {
+                    heart: 1000,
+                    shield: 1200,
+                    coin: 250,
+                    gravity: 200,
+                    speed: 500,
+                    tripleJump: 800
+                },
+                obstacleColors: {
+                    spike: "darkgreen",
+                    spikeTop: "darkgreen",
+                    block: "forestgreen",
+                    blockTop: "forestgreen",
+                    jumpPad: "brown",
+                    jumpPadTop: "brown",
+                    floatingPlatform: "darkgreen"
+                }
+            },
+            {
+                name: "Volcán en Erupción",
+                obstacleFrequency: 40,
+                obstacleTypes: [0, 1, 4, 5, 12, 11],
+                orbTypes: ["coin", "gravity", "speed", "heart", "shield", "tripleJump"],
+                hasRain: false,
+                rainAmount: 0,
+                gameSpeed: 9,
+                requiredScore: 5000,
+                backgroundColors: [
+                    { top: { r: 150, g: 50, b: 30 }, bottom: { r: 80, g: 20, b: 10 } },
+                    { top: { r: 180, g: 70, b: 40 }, bottom: { r: 100, g: 40, b: 20 } },
+                    { top: { r: 130, g: 40, b: 20 }, bottom: { r: 70, g: 20, b: 10 } },
+                    { top: { r: 90, g: 30, b: 15 }, bottom: { r: 40, g: 10, b: 5 } }
+                ],
+                orbFrequency: {
+                    heart: 1000,
+                    shield: 1200,
+                    coin: 250,
+                    gravity: 200,
+                    speed: 500,
+                    tripleJump: 800
+                },
+                obstacleColors: {
+                    spike: "black",
+                    spikeTop: "black",
+                    doubleSpike: "black",
+                    doubleSpikeTop: "black",
+                    block: "dimgray",
+                    blockTop: "dimgray",
+                    jumpPad: "gray",
+                    jumpPadTop: "gray"
+                }
+            },
+            {
+                name: "Desierto de Fuego",
+                obstacleFrequency: 70,
+                obstacleTypes: [2, 3, 8, 9],
+                orbTypes: ["coin", "gravity", "speed", "heart", "shield", "tripleJump"],
+                hasRain: false,
+                rainAmount: 0,
+                gameSpeed: 10,
+                requiredScore: 6500,
+                backgroundColors: [
+                    { top: { r: 255, g: 140, b: 0 }, bottom: { r: 150, g: 70, b: 0 } },
+                    { top: { r: 255, g: 160, b: 30 }, bottom: { r: 170, g: 90, b: 20 } },
+                    { top: { r: 220, g: 100, b: 10 }, bottom: { r: 130, g: 60, b: 10 } },
+                    { top: { r: 180, g: 80, b: 0 }, bottom: { r: 100, g: 40, b: 0 } }
+                ],
+                orbFrequency: {
+                    heart: 1000,
+                    shield: 1200,
+                    coin: 250,
+                    gravity: 200,
+                    speed: 500,
+                    tripleJump: 800
+                },
+                obstacleColors: {
+                    spike: "orange",
+                    spikeTop: "orange",
+                    bigRock: "saddlebrown",
+                    bigRockTop: "saddlebrown",
+                    jumpPad: "goldenrod",
+                    jumpPadTop: "goldenrod"
+                }
+            },
+            {
+                name: "Cielo Estrellado",
+                obstacleFrequency: 50,
+                obstacleTypes: [2, 3, 4, 5, 6, 7, 8, 9, 10],
+                orbTypes: ["coin", "gravity", "speed", "heart", "shield", "tripleJump"],
+                hasRain: false,
+                rainAmount: 0,
+                gameSpeed: 6,
+                requiredScore: 8500,
+                backgroundColors: [
+                    { top: { r: 10, g: 10, b: 30 }, bottom: { r: 0, g: 0, b: 10 } },
+                    { top: { r: 20, g: 20, b: 50 }, bottom: { r: 10, g: 10, b: 30 } },
+                    { top: { r: 15, g: 15, b: 40 }, bottom: { r: 5, g: 5, b: 20 } },
+                    { top: { r: 5, g: 5, b: 20 }, bottom: { r: 0, g: 0, b: 10 } }
+                ],
+                orbFrequency: {
+                    heart: 1000,
+                    shield: 1200,
+                    coin: 250,
+                    gravity: 200,
+                    speed: 500,
+                    tripleJump: 800
+                },
+                obstacleColors: {
+                    spike: "white",
+                    spikeTop: "white",
+                    block: "midnightblue",
+                    blockTop: "midnightblue",
+                    bigRock: "midnightblue",
+                    bigRockTop: "midnightblue",
+                    jumpPad: "silver",
+                    jumpPadTop: "silver",
+                    floatingPlatform: "white"
+                }
+            },
+
+            {
+                name: "Ruinas de Hielo",
+                obstacleFrequency: 65,
+                obstacleTypes: [0, 1, 2, 3, 6, 7, 11, 12],
+                orbTypes: ["coin", "gravity", "speed", "heart", "shield", "tripleJump"],
+                hasRain: false,
+                rainAmount: 0,
+                gameSpeed: 9,
+                requiredScore: 10500,
+                backgroundColors: [
+                    { top: { r: 180, g: 240, b: 255 }, bottom: { r: 120, g: 200, b: 230 } },
+                    { top: { r: 150, g: 220, b: 255 }, bottom: { r: 100, g: 190, b: 220 } },
+                    { top: { r: 130, g: 200, b: 240 }, bottom: { r: 80, g: 170, b: 210 } },
+                    { top: { r: 100, g: 180, b: 220 }, bottom: { r: 60, g: 150, b: 190 } }
+                ],
+                orbFrequency: {
+                    heart: 1000,
+                    shield: 1200,
+                    coin: 250,
+                    gravity: 200,
+                    speed: 500,
+                    tripleJump: 800
+                },
+                obstacleColors: {
+                    spike: "lightcyan",
+                    spikeTop: "lightcyan",
+                    doubleSpike: "lightcyan",
+                    doubleSpikeTop: "lightcyan",
+                    block: "powderblue",
+                    blockTop: "powderblue",
+                    bigRock: "powderblue",
+                    bigRockTop: "powderblue",
+                    jumpPad: "aliceblue",
+                    jumpPadTop: "aliceblue"
+                }
+            },
+
+            {
+                name: "Abismo Carmesí",
+                obstacleFrequency: 55,
+                obstacleTypes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                orbTypes: ["coin", "gravity", "speed", "heart", "shield", "tripleJump"],
+                hasRain: false,
+                rainAmount: 0,
+                gameSpeed: 11,
+                requiredScore: 13000,
+                backgroundColors: [
+                    { top: { r: 120, g: 0, b: 0 }, bottom: { r: 60, g: 0, b: 0 } },
+                    { top: { r: 150, g: 0, b: 0 }, bottom: { r: 90, g: 0, b: 0 } },
+                    { top: { r: 180, g: 0, b: 0 }, bottom: { r: 120, g: 0, b: 0 } },
+                    { top: { r: 100, g: 0, b: 0 }, bottom: { r: 50, g: 0, b: 0 } }
+                ],
+                orbFrequency: {
+                    heart: 1000,
+                    shield: 1200,
+                    coin: 250,
+                    gravity: 200,
+                    speed: 500,
+                    tripleJump: 800
+                },
+                obstacleColors: {
+                    spike: "crimson",
+                    spikeTop: "crimson",
+                    doubleSpike: "crimson",
+                    doubleSpikeTop: "crimson",
+                    block: "darkred",
+                    blockTop: "darkred",
+                    bigRockTop: "darkred",
+                    bigRock: "darkred",
+                    jumpPad: "firebrick",
+                    jumpPadTop: "firebrick",
+                    floatingPlatform: "crimson"
+                }
+            }
+        ];
+
+
+
+        // Variables para mostrar el nombre del nivel
+        let showLevelName = false;
+        let levelNameOpacity = 0;
+        let levelNameTimer = 0;
+        const levelNameDisplayTime = 180; // frames que dura visible (por ejemplo 3 segundos a 60fps)
+        const fadeSpeed = 0.02; // velocidad de aparición y desaparición
+
+        function startLevelNameDisplay() {
+            showLevelName = true;
+            levelNameOpacity = 0;
+            levelNameTimer = 0;
+        }
+
+        function updateLevelName() {
+            if (!showLevelName) return;
+
+            if (levelNameTimer < levelNameDisplayTime) {
+                // Fade in
+                if (levelNameOpacity < 1) {
+                    levelNameOpacity += fadeSpeed;
+                    if (levelNameOpacity > 1) levelNameOpacity = 1;
+                }
+            } else {
+                // Fade out
+                levelNameOpacity -= fadeSpeed;
+                if (levelNameOpacity <= 0) {
+                    levelNameOpacity = 0;
+                    showLevelName = false;
+                }
+            }
+
+            levelNameTimer++;
+        }
+
+        function drawLevelName() {
+            if (!showLevelName) return;
+
+            ctx.save();
+            ctx.globalAlpha = levelNameOpacity;
+            ctx.fillStyle = "#fff";
+            ctx.font = "bold 33px Arial";
+            ctx.textAlign = "center";
+            ctx.shadowColor = "rgba(0,0,0,0.7)";
+            ctx.shadowBlur = 8;
+            ctx.fillText(niveles[nivelActual].name, canvas.width / 2, 60);
+            ctx.restore();
+        }
+
+
+        let nivelActual = 0;
+        let nivelTimer = niveles[nivelActual].duration;
+
+        let transitionActive = false;
+        let transitionProgress = 0;
+        let prevBackgroundColors = niveles[0].backgroundColors;
+        let nextBackgroundColors = niveles[0].backgroundColors;
+
+
+
+        function checkLevelAdvance() {
+            // Si hay un siguiente nivel
+            if (nivelActual + 1 < niveles.length) {
+                let nextLevel = niveles[nivelActual + 1];
+                if (score >= nextLevel.requiredScore) {
+                    startTransitionToLevel(nivelActual + 1);
+
+                    console.log("Nivel avanzado a:", niveles[nivelActual].name);
+
+
+                    startLevelNameDisplay();
+
+                    // Reiniciar parámetros según el nuevo nivel
+                    gameSpeed = niveles[nivelActual].gameSpeed;
+                    if (niveles[nivelActual].hasRain) {
+                        createRain(niveles[nivelActual].rainAmount || 15); // 15 por defecto para lluvias normales
+                    } else {
+                        rainDrops = [];
+                    }
+
+                    // Si quieres mostrar mensaje de transición en pantalla, podemos añadirlo aquí.
+                }
+            }
+        }
+
+
+
+
         function resetGame() {
             player.y = groundY - player.height;
             player.dy = 0;
@@ -488,14 +972,58 @@
             floatingTexts = [];
 
             gameSpeed = 5;
-            score = 0;
+            score = puntos;
             saltos = 0;
             monedas = 0;
-            vidas = 0;
+            vidas = 1;
 
             frame = 0;
             gameOver = false;
+
+            nivelActual = 0;
+
+            if (niveles[nivelActual].hasRain) {
+                createRain();
+            } else {
+                rainDrops = [];
+            }
+
         }
+
+
+        function startTransitionToLevel(levelIndex) {
+            transitionActive = true;
+            transitionProgress = 0;
+            prevBackgroundColors = niveles[nivelActual].backgroundColors;
+            nextBackgroundColors = niveles[levelIndex].backgroundColors;
+            nivelActual = levelIndex;
+
+            // Ajusta otros parámetros según el nuevo nivel
+            gameSpeed = niveles[nivelActual].gameSpeed;
+            if (niveles[nivelActual].hasRain) createRain();
+            else rainDrops = [];
+        }
+
+
+        function lerpColor(a, b, t) {
+            return {
+                r: a.r + (b.r - a.r) * t,
+                g: a.g + (b.g - a.g) * t,
+                b: a.b + (b.b - a.b) * t,
+            };
+        }
+
+        function getBlendedColors(t) {
+            let blended = [];
+            for (let i = 0; i < prevBackgroundColors.length; i++) {
+                blended.push({
+                    top: lerpColor(prevBackgroundColors[i].top, nextBackgroundColors[i].top, t),
+                    bottom: lerpColor(prevBackgroundColors[i].bottom, nextBackgroundColors[i].bottom, t),
+                });
+            }
+            return blended;
+        }
+
 
 
 
@@ -507,6 +1035,9 @@
 
 
         function update() {
+
+
+            checkLevelAdvance();
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -528,28 +1059,41 @@
                 return `rgb(${Math.round(c.r)},${Math.round(c.g)},${Math.round(c.b)})`;
             }
 
-            const colors = [
-                { top: { r: 255, g: 153, b: 51 }, bottom: { r: 102, g: 204, b: 255 } },  // Amanecer
-                { top: { r: 51, g: 153, b: 255 }, bottom: { r: 0, g: 102, b: 204 } },    // Día
-                { top: { r: 255, g: 102, b: 102 }, bottom: { r: 51, g: 51, b: 102 } },   // Atardecer
-                { top: { r: 10, g: 10, b: 40 }, bottom: { r: 0, g: 0, b: 20 } }          // Noche
-            ];
 
-            const phase = timeOfDay * colors.length;
-            const index = Math.floor(phase) % colors.length;
-            const nextIndex = (index + 1) % colors.length;
-            const t = phase - Math.floor(phase);
+            const nivelConfig = niveles[nivelActual];
 
-            const topColor = lerpColor(colors[index].top, colors[nextIndex].top, t);
-            const bottomColor = lerpColor(colors[index].bottom, colors[nextIndex].bottom, t);
+            const colors = niveles[nivelActual].backgroundColors;
 
-            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            gradient.addColorStop(0, rgbToString(topColor));
-            gradient.addColorStop(1, rgbToString(bottomColor));
 
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            if (transitionActive) {
+                transitionProgress += 0.01; // Ajusta la velocidad de transición aquí
+                if (transitionProgress >= 1) {
+                    transitionProgress = 1;
+                    transitionActive = false;
+                }
+                const colorsToUse = getBlendedColors(transitionProgress);
+                pintarFondoConColors(colorsToUse);
+            } else {
+                pintarFondoConColors(niveles[nivelActual].backgroundColors);
+            }
+
+            function pintarFondoConColors(colors) {
+                const phase = timeOfDay * colors.length;
+                const index = Math.floor(phase) % colors.length;
+                const nextIndex = (index + 1) % colors.length;
+                const t = phase - Math.floor(phase);
+
+                const topColor = lerpColor(colors[index].top, colors[nextIndex].top, t);
+                const bottomColor = lerpColor(colors[index].bottom, colors[nextIndex].bottom, t);
+
+                const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+                gradient.addColorStop(0, `rgb(${Math.round(topColor.r)},${Math.round(topColor.g)},${Math.round(topColor.b)})`);
+                gradient.addColorStop(1, `rgb(${Math.round(bottomColor.r)},${Math.round(bottomColor.g)},${Math.round(bottomColor.b)})`);
+
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
 
 
             if (gameOver) {
@@ -667,61 +1211,44 @@
             }
 
 
-            if (frame % 1000 === 0) {
+
+
+
+            if (nivelConfig.orbTypes.includes("heart") && frame % nivelConfig.orbFrequency.heart === 0) {
                 let heartY = (canvas.height / 2) - 40;
                 heartOrbs.push({ x: canvas.width + 1200, y: heartY, radius: 15 });
             }
 
-            if (frame % 1200 === 0) {
+            if (nivelConfig.orbTypes.includes("shield") && frame % nivelConfig.orbFrequency.shield === 0) {
                 let shieldY = (canvas.height / 2) - 40;
                 shieldOrbs.push({ x: canvas.width + 800, y: shieldY, radius: 15 });
             }
 
+            if (nivelConfig.orbTypes.includes("coin") && frame % nivelConfig.orbFrequency.coin === 0) {
+                let coinY;
 
-
-            if (frame % 60 === 0) {
-                let cantidad = Math.floor(Math.random() * 7);
-                for (let c = 0; c < cantidad; c++) {
-                    let distancia = c * canvas.width * 0.075;
-                    let type = Math.floor(Math.random() * 8);
-                    let width = canvas.width * 0.025;
-                    let height = canvas.height * 0.1;
-
-                    if (type === 0) {
-                        obstacles.push({ x: canvas.width + distancia, y: groundY - height, width, height, type: "spike" });
-                    } else if (type === 1) {
-                        obstacles.push({ x: canvas.width + distancia, y: ceilingY, width, height, type: "spikeTop" });
-                    } else if (type === 2 || type === 3) {
-                        let blockHeight = type === 2 ? canvas.height * 0.05 : canvas.height * 0.15;
-                        obstacles.push({ x: canvas.width + distancia, y: groundY - blockHeight, width: width * 1.5, height: blockHeight, type: "block" });
-                    } else if (type === 4) {
-                        obstacles.push({ x: canvas.width + distancia, y: groundY - canvas.height * 0.025, width: width * 2, height: canvas.height * 0.025, type: "jumpPad" });
-                    } else if (type === 5) {
-                        obstacles.push({ x: canvas.width + distancia, y: ceilingY, width: width * 2, height: canvas.height * 0.025, type: "jumpPadTop" });
-                    } else if (type === 6 || type === 7) {
-                        let blockHeight = canvas.height * (0.05 + Math.random() * 0.05);
-                        obstacles.push({ x: canvas.width + distancia, y: ceilingY, width: width * 1.5, height: blockHeight, type: "blockTop" });
-                    }
+                if (inverted) {
+                    // Aparecen en la mitad superior
+                    coinY = canvas.height * 0.05 + Math.random() * ((canvas.height / 2) - canvas.height * 0.1);
+                } else {
+                    // Aparecen en la mitad inferior
+                    coinY = (canvas.height / 2) + Math.random() * (groundY - canvas.height / 2 - canvas.height * 0.1);
                 }
-            }
 
-
-
-            if (frame % 250 === 0) { // una moneda
-                let coinY = Math.random() * (groundY - canvas.height * 0.1) + canvas.height * 0.05; // posición Y aleatoria entre algo arriba del suelo y un poco arriba
                 coins.push({ x: canvas.width + 600, y: coinY, radius: 15 });
             }
 
-
-            if (frame % 200 === 0) { //orbe de gravedad
+            if (nivelConfig.orbTypes.includes("gravity") && frame % nivelConfig.orbFrequency.gravity === 0) {
                 let orbY = (canvas.height / 2) - 40;
                 orbs.push({ x: canvas.width, y: orbY, radius: 10 });
             }
-            if (frame % 500 === 0) { //orbe de velocidad
+
+            if (nivelConfig.orbTypes.includes("speed") && frame % nivelConfig.orbFrequency.speed === 0) {
                 let orbY = (canvas.height / 2) - 40;
-                speedOrbs.push({ x: canvas.width + 200, y: orbY, radius: 10 });
+                speedOrbs.push({ x: canvas.width + 200, y: orbY, radius: 20 });
             }
-            if (frame % 800 === 0) { //power up triple salto
+
+            if (nivelConfig.orbTypes.includes("tripleJump") && frame % nivelConfig.orbFrequency.tripleJump === 0) {
                 let orbY = (canvas.height / 2) - 40;
                 tripleJumpOrbs.push({ x: canvas.width + 400, y: orbY, radius: 10 });
             }
@@ -729,39 +1256,102 @@
 
 
 
-            ctx.fillStyle = "gold";
-            for (let i = 0; i < shieldOrbs.length; i++) {
-                let orb = shieldOrbs[i];
-                orb.x -= gameSpeed;
-                ctx.beginPath();
-                ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
-                ctx.fill();
 
-                if (player.x < orb.x + orb.radius &&
-                    player.x + player.width > orb.x - orb.radius &&
-                    player.y < orb.y + orb.radius &&
-                    player.y + player.height > orb.y - orb.radius) {
 
-                    invincible = true;
-                    invincibleTimer = 600; // dura 10 segundos si el juego corre a 60 fps
-                    shieldOrbs.splice(i, 1);
-                    i--;
-                    score += gameSpeed;
-                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "gold");
-                    addFloatingText("+" + gameSpeed, player.x + player.width / 2, player.y, "gold");
+
+            if (frame % nivelConfig.obstacleFrequency === 0) {
+                let cantidad = Math.floor(Math.random() * 7);
+                for (let c = 0; c < cantidad; c++) {
+                    let distancia = c * canvas.width * 0.075;
+
+                    let typeIndex = nivelConfig.obstacleTypes[Math.floor(Math.random() * nivelConfig.obstacleTypes.length)];
+
+                    let width = canvas.width * 0.025;
+                    let height = canvas.height * 0.1;
+
+                    if (typeIndex === 0) {
+                        obstacles.push({ x: canvas.width + distancia, y: groundY - height, width, height, type: "spike" });
+                    } else if (typeIndex === 1) {
+                        obstacles.push({ x: canvas.width + distancia, y: ceilingY, width, height, type: "spikeTop" });
+                    } else if (typeIndex === 2 || typeIndex === 3) {
+                        let blockHeight = typeIndex === 2 ? canvas.height * 0.05 : canvas.height * 0.15;
+                        obstacles.push({ x: canvas.width + distancia, y: groundY - blockHeight, width: width * 1.5, height: blockHeight, type: "block" });
+                    } else if (typeIndex === 4) {
+                        obstacles.push({ x: canvas.width + distancia, y: groundY - canvas.height * 0.025, width: width * 2, height: canvas.height * 0.025, type: "jumpPad" });
+                    } else if (typeIndex === 5) {
+                        obstacles.push({ x: canvas.width + distancia, y: ceilingY, width: width * 2, height: canvas.height * 0.025, type: "jumpPadTop" });
+                    } else if (typeIndex === 6 || typeIndex === 7) {
+                        let blockHeight = canvas.height * (0.05 + Math.random() * 0.05);
+                        obstacles.push({ x: canvas.width + distancia, y: ceilingY, width: width * 1.5, height: blockHeight, type: "blockTop" });
+                    }
+                    // ✨ Nuevo tipo: roca grande que bloquea casi todo el suelo
+                    else if (typeIndex === 8) {
+                        let bigHeight = canvas.height * 0.25;
+                        obstacles.push({ x: canvas.width + distancia, y: groundY - bigHeight, width: width * 3, height: bigHeight, type: "bigRock" });
+                    }
+                    // ✨ Nuevo tipo: roca colgante grande en el techo
+                    else if (typeIndex === 9) {
+                        let bigHeight = canvas.height * 0.25;
+                        obstacles.push({ x: canvas.width + distancia, y: ceilingY, width: width * 3, height: bigHeight, type: "bigRockTop" });
+                    }
+                    // ✨ Nuevo tipo: plataforma flotante pequeña (para futuros saltos dobles u orbes)
+                    else if (typeIndex === 10) {
+                        let platHeight = canvas.height * 0.025;
+                        let platY = ceilingY + Math.random() * (groundY - ceilingY - platHeight);
+                        obstacles.push({ x: canvas.width + distancia, y: platY, width: width * 2, height: platHeight, type: "floatingPlatform" });
+                    }
+                    // ✨ Nuevo tipo: pincho doble alto (obstáculo peligroso)
+                    else if (typeIndex === 11) {
+                        let spikeHeight = canvas.height * 0.2;
+                        obstacles.push({ x: canvas.width + distancia, y: groundY - spikeHeight, width, height: spikeHeight, type: "doubleSpike" });
+                    } else if (typeIndex === 12) {
+                        let spikeHeight = canvas.height * 0.2;
+                        obstacles.push({ x: canvas.width + distancia, y: ceilingY, width, height: spikeHeight, type: "doubleSpikeTop" });
+                    }
+
                 }
             }
-
 
 
             ctx.fillStyle = "red";
             for (let i = 0; i < heartOrbs.length; i++) {
                 let orb = heartOrbs[i];
                 orb.x -= gameSpeed;
+
+                ctx.save();
+                ctx.translate(orb.x, orb.y);
+                ctx.scale(orb.radius / 10, orb.radius / 10); // Ajusta tamaño relativo (base: 10px de referencia)
+
+
+
+
+
+                ctx.shadowColor = "rgba(0, 0, 0, 0.7)";
+                ctx.shadowBlur = 6;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
                 ctx.beginPath();
-                ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-5, -5, -10, 2.5, 0, 10);
+                ctx.bezierCurveTo(10, 2.5, 5, -5, 0, 0);
+                ctx.closePath();
                 ctx.fill();
 
+                ctx.shadowColor = "transparent";
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+
+
+                ctx.restore();
+
+
+
+
+
+
+
+                // Colisión (la misma lógica, usando bounding box del radio)
                 if (player.x < orb.x + orb.radius &&
                     player.x + player.width > orb.x - orb.radius &&
                     player.y < orb.y + orb.radius &&
@@ -777,13 +1367,81 @@
             }
 
 
+
             ctx.fillStyle = "yellow";
+            for (let i = 0; i < shieldOrbs.length; i++) {
+                let orb = shieldOrbs[i];
+                orb.x -= gameSpeed;
+
+                ctx.shadowColor = "rgba(0, 0, 0, 0.7)";
+                ctx.shadowBlur = 6;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+
+                ctx.beginPath();
+
+                ctx.moveTo(orb.x, orb.y - orb.radius);
+                ctx.lineTo(orb.x + orb.radius, orb.y);
+                ctx.lineTo(orb.x, orb.y + orb.radius);
+                ctx.lineTo(orb.x - orb.radius, orb.y);
+
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.shadowColor = "transparent";
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+
+
+
+                if (player.x < orb.x + orb.radius &&
+                    player.x + player.width > orb.x - orb.radius &&
+                    player.y < orb.y + orb.radius &&
+                    player.y + player.height > orb.y - orb.radius) {
+
+                    invincible = true;
+                    invincibleTimer = 600; // dura 10 segundos si el juego corre a 60 fps
+                    shieldOrbs.splice(i, 1);
+                    i--;
+                    score += gameSpeed;
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "yellow");
+                    addFloatingText("+" + gameSpeed, player.x + player.width / 2, player.y, "yellow");
+                }
+            }
+
+
+
+
+            ctx.fillStyle = "gold";
             for (let i = 0; i < coins.length; i++) {
                 let coin = coins[i];
                 coin.x -= gameSpeed;
+
+
+
+                ctx.shadowColor = "rgba(0, 0, 0, 0.7)";
+                ctx.shadowBlur = 6;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+
                 ctx.beginPath();
+
+
+
                 ctx.arc(coin.x, coin.y, coin.radius, 0, Math.PI * 2);
+
+
+
+                ctx.closePath();
                 ctx.fill();
+
+                ctx.shadowColor = "transparent";
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+
+
 
                 if (
                     player.x < coin.x + coin.radius &&
@@ -797,8 +1455,8 @@
                     coins.splice(i, 1);
                     i--;
                     score += 100;
-                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "yellow");
-                    addFloatingText("+100", player.x + player.width / 2, player.y, "yellow");
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "gold");
+                    addFloatingText("+100", player.x + player.width / 2, player.y, "gold");
                 }
             }
 
@@ -807,11 +1465,44 @@
             for (let i = 0; i < tripleJumpOrbs.length; i++) {
                 let orb = tripleJumpOrbs[i];
                 orb.x -= gameSpeed;
+
+                let r = orb.radius;
+                // Dibujar un triángulo equilátero apuntando hacia arriba para simbolizar salto extra
+
+
+
+
+
+                ctx.shadowColor = "rgba(0, 0, 0, 0.7)";
+                ctx.shadowBlur = 6;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+
                 ctx.beginPath();
-                ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+
+
+                ctx.moveTo(orb.x, orb.y - r);                // punta arriba
+                ctx.lineTo(orb.x - r * Math.sin(Math.PI / 3), orb.y + r * 0.5); // abajo izquierda
+                ctx.lineTo(orb.x + r * Math.sin(Math.PI / 3), orb.y + r * 0.5); // abajo derecha
+
+                ctx.closePath();
                 ctx.fill();
 
-                if (player.x < orb.x + orb.radius && player.x + player.width > orb.x - orb.radius && player.y < orb.y + orb.radius && player.y + player.height > orb.y - orb.radius) {
+                ctx.shadowColor = "transparent";
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+
+
+
+
+                // Colisión
+                if (
+                    player.x < orb.x + orb.radius &&
+                    player.x + player.width > orb.x - orb.radius &&
+                    player.y < orb.y + orb.radius &&
+                    player.y + player.height > orb.y - orb.radius
+                ) {
                     tripleJumpActive = true;
                     tripleJumpTimer = 800;
                     player.maxJumps = 3;
@@ -823,15 +1514,55 @@
                 }
             }
 
+
             ctx.fillStyle = "cyan";
             for (let i = 0; i < orbs.length; i++) {
                 let orb = orbs[i];
                 orb.x -= gameSpeed;
+
+                let r = orb.radius;
+                // Dibujar un hexágono simple para simbolizar cambio de gravedad
+
+
+
+                ctx.shadowColor = "rgba(0, 0, 0, 0.7)";
+                ctx.shadowBlur = 6;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+
                 ctx.beginPath();
-                ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+
+
+
+
+                for (let j = 0; j < 6; j++) {
+                    let angle = (Math.PI / 3) * j - Math.PI / 2; // iniciar punta arriba
+                    let x = orb.x + r * Math.cos(angle);
+                    let y = orb.y + r * Math.sin(angle);
+                    if (j === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+
+
+
+                ctx.closePath();
                 ctx.fill();
 
-                if (player.x < orb.x + orb.radius && player.x + player.width > orb.x - orb.radius && player.y < orb.y + orb.radius && player.y + player.height > orb.y - orb.radius) {
+                ctx.shadowColor = "transparent";
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+
+
+
+
+                // Colisión
+                if (
+                    player.x < orb.x + orb.radius &&
+                    player.x + player.width > orb.x - orb.radius &&
+                    player.y < orb.y + orb.radius &&
+                    player.y + player.height > orb.y - orb.radius
+                ) {
                     inverted = !inverted;
                     orbs.splice(i, 1);
                     i--;
@@ -840,65 +1571,112 @@
                     score += 10;
                     createParticles(player.x + player.width, player.y + player.height, "cyan");
                     addFloatingText("+10", player.x + player.width / 2, player.y, "cyan");
-
-
                 }
             }
 
-            ctx.fillStyle = "magenta";
+
+
+
+            ctx.fillStyle = "white";
             for (let i = 0; i < speedOrbs.length; i++) {
                 let orb = speedOrbs[i];
                 orb.x -= gameSpeed;
+
+                let r = orb.radius;
+
+                ctx.shadowColor = "rgba(0, 0, 0, 0.7)";
+                ctx.shadowBlur = 6;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+
                 ctx.beginPath();
-                ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+                ctx.moveTo(orb.x - r * 0.9, orb.y - r * 0.5);  // inicio arriba-izq (menos alto)
+                ctx.lineTo(orb.x - r * 0.2, orb.y);            // parte media-izq (más al centro)
+                ctx.lineTo(orb.x - r * 0.5, orb.y);            // retroceso hacia la izquierda
+                ctx.lineTo(orb.x + r * 0.9, orb.y + r * 0.6);  // extremo derecho abajo
+                ctx.lineTo(orb.x + r * 0.2, orb.y);            // parte media-derecha
+                ctx.lineTo(orb.x + r * 0.5, orb.y);            // avance a derecha
+                ctx.closePath();
                 ctx.fill();
 
-                if (player.x < orb.x + orb.radius && player.x + player.width > orb.x - orb.radius && player.y < orb.y + orb.radius && player.y + player.height > orb.y - orb.radius) {
+                ctx.shadowColor = "transparent";
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+
+
+                if (
+                    player.x < orb.x + orb.radius &&
+                    player.x + player.width > orb.x - orb.radius &&
+                    player.y < orb.y + orb.radius &&
+                    player.y + player.height > orb.y - orb.radius
+                ) {
                     gameSpeed += 1;
                     speedOrbs.splice(i, 1);
                     i--;
 
                     score += 10 * gameSpeed;
 
-                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "magenta");
-                    addFloatingText("+" + 10 * gameSpeed, player.x + player.width / 2, player.y, "magenta");
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "white");
+                    addFloatingText("+" + 10 * gameSpeed, player.x + player.width / 2, player.y, "white");
                 }
             }
+
+
+
+
+
+
+
+
+
+
             for (let i = 0; i < obstacles.length; i++) {
                 let obs = obstacles[i];
                 obs.x -= gameSpeed;
 
-                if (obs.type === "spike" || obs.type === "spikeTop") {
-                    ctx.fillStyle = "lime";
+                let nivelConfig = niveles[nivelActual];
+                let color = nivelConfig.obstacleColors[obs.type] || "white";
 
+                ctx.save(); // Guarda el estado antes de aplicar sombra y estilos
+
+                // 🌑 Configura sombra y stroke para máxima visibilidad
+                ctx.fillStyle = color;
+                ctx.shadowColor = "black";
+                ctx.shadowBlur = 2;
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 1;
+
+                ctx.strokeStyle = "black";
+                ctx.lineWidth = 1;
+
+                if (obs.type === "spike" || obs.type === "spikeTop") {
+                    ctx.beginPath();
                     if (obs.type === "spike") {
-                        ctx.beginPath();
                         ctx.moveTo(obs.x, obs.y + obs.height);
                         ctx.lineTo(obs.x + obs.width / 2, obs.y);
                         ctx.lineTo(obs.x + obs.width, obs.y + obs.height);
-                        ctx.closePath();
-                        ctx.fill();
                     } else {
-                        ctx.beginPath();
                         ctx.moveTo(obs.x, obs.y);
                         ctx.lineTo(obs.x + obs.width / 2, obs.y + obs.height);
                         ctx.lineTo(obs.x + obs.width, obs.y);
-                        ctx.closePath();
-                        ctx.fill();
                     }
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
 
+                    // ✨ Colisiones y efectos
                     if (player.x < obs.x + obs.width &&
                         player.x + player.width > obs.x &&
                         player.y < obs.y + obs.height &&
                         player.y + player.height > obs.y) {
 
                         if (invincible) {
-                            // ✨ Destruye pincho con partículas esmeralda
-                            createParticles(obs.x + obs.width / 2, obs.y + obs.height / 2, "lime");
+                            createParticles(obs.x + obs.width / 2, obs.y + obs.height / 2, color);
                             obstacles.splice(i, 1);
                             i--;
                             score += 50;
-                            addFloatingText("+50", player.x + player.width / 2, player.y, "lime");
+                            addFloatingText("+50", player.x + player.width / 2, player.y, color);
                         } else {
                             if (vidas > 0) {
                                 vidas--;
@@ -909,96 +1687,145 @@
                             }
                         }
                     }
+                }
 
-                } else if (obs.type === "block") {
-                    ctx.fillStyle = "orange";
+                else if (obs.type === "block" || obs.type === "blockTop") {
                     ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                    ctx.strokeRect(obs.x, obs.y, obs.width, obs.height);
+
+
 
                     if (player.x + player.width > obs.x && player.x < obs.x + obs.width) {
-                        // 🛡️ Destruye solo si en gravedad normal y tocando
                         if (invincible &&
-                            !inverted &&
+                            ((obs.type === "block" && !inverted) ||
+                                (obs.type === "blockTop" && inverted)) &&
                             player.y + player.height > obs.y &&
                             player.y < obs.y + obs.height) {
-                            createParticles(obs.x + obs.width / 2, obs.y + obs.height / 2, "orange");
+
+                            createParticles(obs.x + obs.width / 2, obs.y + obs.height / 2, color);
                             obstacles.splice(i, 1);
                             i--;
                             score += 50;
-                            addFloatingText("+50", player.x + player.width / 2, player.y, "orange");
+                            addFloatingText("+50", player.x + player.width / 2, player.y, color);
                         } else {
-                            if (!inverted) {
-                                if (player.y + player.height > obs.y && player.y + player.height <= obs.y + player.dy + gravity) {
-                                    player.y = obs.y - player.height;
-                                    player.dy = 0;
-                                    player.jumps = 0;
-                                } else if (player.y + player.height > obs.y) {
-                                    if (vidas > 0) {
-                                        vidas--;
-                                        invincible = true;
-                                        invincibleTimer = 60;
-                                    } else {
-                                        gameOver = true;
+                            if (obs.type === "block") {
+                                if (!inverted) {
+                                    if (player.y + player.height > obs.y && player.y + player.height <= obs.y + player.dy + gravity) {
+                                        player.y = obs.y - player.height;
+                                        player.dy = 0;
+                                        player.jumps = 0;
+                                    } else if (player.y + player.height > obs.y) {
+                                        if (vidas > 0) {
+                                            vidas--;
+                                            invincible = true;
+                                            invincibleTimer = 60;
+                                        } else {
+                                            gameOver = true;
+                                        }
+                                    }
+                                } else {
+                                    if (player.y < obs.y + obs.height && player.y >= obs.y + obs.height + player.dy - gravity) {
+                                        player.y = obs.y + obs.height;
+                                        player.dy = 0;
+                                        player.jumps = 0;
+                                    } else if (player.y < obs.y + obs.height && player.y + player.height > obs.y + obs.height) {
+                                        if (vidas > 0) {
+                                            vidas--;
+                                            invincible = true;
+                                            invincibleTimer = 60;
+                                        } else {
+                                            gameOver = true;
+                                        }
                                     }
                                 }
-                            } else {
-                                if (player.y < obs.y + obs.height && player.y >= obs.y + obs.height + player.dy - gravity) {
-                                    player.y = obs.y + obs.height;
-                                    player.dy = 0;
-                                    player.jumps = 0;
-                                } else if (player.y < obs.y + obs.height && player.y + player.height > obs.y + obs.height) {
-                                    if (vidas > 0) {
-                                        vidas--;
-                                        invincible = true;
-                                        invincibleTimer = 60;
-                                    } else {
-                                        gameOver = true;
+                            } else if (obs.type === "blockTop") {
+                                if (!inverted) {
+                                    if (player.y < obs.y + obs.height && player.y + player.height > obs.y) {
+                                        player.y = obs.y + obs.height;
+                                        player.dy = 0;
+                                        player.jumps = 0;
+                                    }
+                                } else {
+                                    if (player.y <= obs.y + obs.height && player.y >= obs.y + obs.height + player.dy - gravity) {
+                                        player.y = obs.y + obs.height;
+                                        player.dy = 0;
+                                        player.jumps = 0;
+                                    } else if (player.y < obs.y + obs.height) {
+                                        if (vidas > 0) {
+                                            vidas--;
+                                            invincible = true;
+                                            invincibleTimer = 60;
+                                        } else {
+                                            gameOver = true;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                } else if (obs.type === "blockTop") {
-                    ctx.fillStyle = "orange";
+                }
+
+
+                else if (obs.type === "bigRock" || obs.type === "bigRockTop") {
                     ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                    ctx.strokeRect(obs.x, obs.y, obs.width, obs.height);
 
                     if (player.x + player.width > obs.x && player.x < obs.x + obs.width) {
-                        // 🛡️ Destruye solo si en gravedad invertida y tocando
                         if (invincible &&
-                            inverted &&
+                            ((obs.type === "bigRock" && !inverted) ||
+                                (obs.type === "bigRockTop" && inverted)) &&
                             player.y + player.height > obs.y &&
                             player.y < obs.y + obs.height) {
-                            createParticles(obs.x + obs.width / 2, obs.y + obs.height / 2, "orange");
+
+                            createParticles(obs.x + obs.width / 2, obs.y + obs.height / 2, color);
                             obstacles.splice(i, 1);
                             i--;
                             score += 50;
-                            addFloatingText("+50", player.x + player.width / 2, player.y, "orange");
+                            addFloatingText("+50", player.x + player.width / 2, player.y, color);
+
                         } else {
-                            if (!inverted) {
-                                if (player.y < obs.y + obs.height && player.y + player.height > obs.y) {
-                                    player.y = obs.y + obs.height;
-                                    player.dy = 0;
-                                    player.jumps = 0;
+                            if (obs.type === "bigRock") {
+                                if (!inverted) {
+                                    if (player.y + player.height > obs.y && player.y + player.height <= obs.y + player.dy + gravity) {
+                                        player.y = obs.y - player.height;
+                                        player.dy = 0;
+                                        player.jumps = 0;
+                                    } else if (player.y + player.height > obs.y) {
+                                        if (vidas > 0) {
+                                            vidas--;
+                                            invincible = true;
+                                            invincibleTimer = 60;
+                                        } else {
+                                            gameOver = true;
+                                        }
+                                    }
                                 }
-                            } else {
-                                if (player.y <= obs.y + obs.height && player.y >= obs.y + obs.height + player.dy - gravity) {
-                                    player.y = obs.y + obs.height;
-                                    player.dy = 0;
-                                    player.jumps = 0;
-                                } else if (player.y < obs.y + obs.height) {
-                                    if (vidas > 0) {
-                                        vidas--;
-                                        invincible = true;
-                                        invincibleTimer = 60;
-                                    } else {
-                                        gameOver = true;
+                            } else if (obs.type === "bigRockTop") {
+                                if (inverted) {
+                                    if (player.y < obs.y + obs.height && player.y >= obs.y + obs.height + player.dy - gravity) {
+                                        player.y = obs.y + obs.height;
+                                        player.dy = 0;
+                                        player.jumps = 0;
+                                    } else if (player.y < obs.y + obs.height) {
+                                        if (vidas > 0) {
+                                            vidas--;
+                                            invincible = true;
+                                            invincibleTimer = 60;
+                                        } else {
+                                            gameOver = true;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                } else if (obs.type === "jumpPad" || obs.type === "jumpPadTop") {
-                    ctx.fillStyle = "yellow";
+                }
+
+
+
+                else if (obs.type === "jumpPad" || obs.type === "jumpPadTop") {
                     ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                    ctx.strokeRect(obs.x, obs.y, obs.width, obs.height);
 
                     let padStrength = canvas.height * 0.045;
 
@@ -1023,7 +1850,79 @@
 
 
 
+                // ✨ Nuevo: floatingPlatform (plataforma flotante)
+                else if (obs.type === "floatingPlatform") {
+                    //ctx.fillStyle = "#7FDBFF"; // Un color distinto para distinguirla
+                    ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                    ctx.strokeRect(obs.x, obs.y, obs.width, obs.height);
 
+                    if (player.x + player.width > obs.x && player.x < obs.x + obs.width) {
+                        if (!inverted) {
+                            // Gravedad normal: el jugador se apoya desde arriba
+                            if (player.y + player.height > obs.y && player.y + player.height <= obs.y + player.dy + gravity) {
+                                player.y = obs.y - player.height;
+                                player.dy = 0;
+                                player.jumps = 0;
+                            }
+                        } else {
+                            // Gravedad invertida: el jugador se apoya desde abajo
+                            if (player.y < obs.y + obs.height && player.y >= obs.y + obs.height + player.dy - gravity) {
+                                player.y = obs.y + obs.height;
+                                player.dy = 0;
+                                player.jumps = 0;
+                            }
+                        }
+                    }
+                }
+
+                // ✨ Nuevo: doubleSpike (pincho alto único)
+                else if (obs.type === "doubleSpike" || obs.type === "doubleSpikeTop") {
+                    ctx.beginPath();
+
+
+                    if (obs.type === "doubleSpike") {
+
+                        ctx.moveTo(obs.x, obs.y + obs.height); // base izquierda
+                        ctx.lineTo(obs.x + obs.width / 2, obs.y); // punta arriba
+                        ctx.lineTo(obs.x + obs.width, obs.y + obs.height); // base derecha
+                    } else {
+                        ctx.moveTo(obs.x, obs.y);
+                        ctx.lineTo(obs.x + obs.width / 2, obs.y + obs.height);
+                        ctx.lineTo(obs.x + obs.width, obs.y);
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+
+
+                    // Colisión igual que con spikes normales pero más alto
+                    if (player.x < obs.x + obs.width &&
+                        player.x + player.width > obs.x &&
+                        player.y < obs.y + obs.height &&
+                        player.y + player.height > obs.y) {
+
+                        if (invincible) {
+                            createParticles(obs.x + obs.width / 2, obs.y + obs.height / 2, color);
+                            obstacles.splice(i, 1);
+                            i--;
+                            score += 50;
+                            addFloatingText("+50", player.x + player.width / 2, player.y, color);
+                        } else {
+                            if (vidas > 0) {
+                                vidas--;
+                                invincible = true;
+                                invincibleTimer = 60;
+                            } else {
+                                gameOver = true;
+                            }
+                        }
+                    }
+                }
+
+
+
+
+                ctx.restore(); // Restaura para que otros elementos no hereden sombra y stroke
 
                 if (obs.x + obs.width < 0) {
                     obstacles.splice(i, 1);
@@ -1032,10 +1931,11 @@
                 }
             }
 
+
             ctx.textAlign = "left";
             ctx.fillStyle = "white";
             ctx.font = canvas.height * 0.03 + "px sans-serif";
-            ctx.fillText("Puntaje: " + Math.floor(score) + " Saltos: " + saltos + " Monedas: " + monedas + " Vidas Extra: " + vidas + " Monedas Totales: " + dinero, 20, groundY + canvas.height * 0.05);
+            ctx.fillText("Puntaje: " + Math.floor(score) + " Saltos: " + saltos + " Monedas: " + monedas + " Vidas: " + vidas + " Monedas Totales: " + dinero + " | " + niveles[nivelActual].name + " |", 20, groundY + canvas.height * 0.05);
 
             if (invincible) {
                 let alpha = getBlinkAlpha(invincibleTimer);
@@ -1076,6 +1976,23 @@
                 bestSaltos = saltos;
                 localStorage.setItem("bestSaltos", bestSaltos);
             }
+
+
+
+
+            nivelTimer--;
+            if (nivelTimer <= 0) {
+                nivelActual = (nivelActual + 1) % niveles.length;
+                nivelTimer = niveles[nivelActual].duration;
+
+                // actualizar gameSpeed y otras propiedades
+                gameSpeed = niveles[nivelActual].gameSpeed;
+            }
+
+            updateLevelName();
+
+
+            drawLevelName();
 
 
         }
