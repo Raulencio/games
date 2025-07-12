@@ -1404,7 +1404,7 @@
                     i--;
                     score += gameSpeed;
                     createParticles(player.x + player.width / 2, player.y + player.height / 2, "yellow");
-                    addFloatingText("+" + gameSpeed, player.x + player.width / 2, player.y, "yellow");
+                    addFloatingText("+" + Math.floor(gameSpeed), player.x + player.width / 2, player.y, "yellow");
                 }
             }
 
@@ -1508,7 +1508,7 @@
                     i--;
                     score += gameSpeed * 3;
                     createParticles(player.x + player.width / 2, player.y + player.height / 2, "blue");
-                    addFloatingText("+" + gameSpeed * 3, player.x + player.width / 2, player.y, "blue");
+                    addFloatingText("+" + Math.floor(gameSpeed) * 3, player.x + player.width / 2, player.y, "blue");
                 }
             }
 
