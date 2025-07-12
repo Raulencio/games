@@ -34,7 +34,7 @@
             background: rgba(0, 0, 0, 0.7);
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
+            padding: 1px 0;
             z-index: 10;
         }
 
@@ -254,13 +254,20 @@
         let floatingTexts = [];
 
         function addFloatingText(text, x, y, color = "white", duration = 60) {
-            floatingTexts.push({ text, x, y, alpha: 1, duration, color });
+            // Ajustamos x y y para que el texto aparezca a la izquierda y un poco más abajo
+            const adjustedX = x - 20; // 20 píxeles a la izquierda
+            const adjustedY = y + 10; // 10 píxeles más abajo
+
+            floatingTexts.push({ text, x: adjustedX, y: adjustedY, alpha: 1, duration, color });
         }
+
 
         function updateFloatingTexts() {
             for (let i = 0; i < floatingTexts.length; i++) {
                 let ft = floatingTexts[i];
                 ft.y -= 1; // asciende suavemente
+                if (ft.y < 20) ft.y = 20; // evita que suba demasiado
+
                 ft.alpha -= 1 / ft.duration; // desvanece
                 ft.duration--;
 
@@ -308,6 +315,12 @@
         }
 
 
+        // Función para calcular la opacidad parpadeante según el tiempo restante
+        function getBlinkAlpha(timer, threshold = 180, blinkSpeed = 10) {
+            if (timer > threshold) return 1; // opacidad total si queda mucho tiempo
+            // parpadeo entre 0.2 y 1 con ciclo de blinkSpeed frames
+            return 0.6 + 0.4 * Math.abs(Math.sin(timer / blinkSpeed));
+        }
 
 
 
@@ -437,9 +450,9 @@
             ctx.save();
 
             ctx.shadowColor = invincible ? "gold" : (tripleJumpActive ? "blue" : "green");
-            ctx.shadowBlur = 4; // intensidad de la sombra
-            ctx.shadowOffsetX = 0;
-            ctx.shadowOffsetY = 0;
+            ctx.shadowBlur = 8; // intensidad de la sombra
+            ctx.shadowOffsetX = 1;
+            ctx.shadowOffsetY = 1;
 
             if (inverted) {
                 ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
@@ -655,7 +668,6 @@
                     addFloatingText("+" + 10 * gameSpeed, player.x + player.width / 2, player.y, "magenta");
                 }
             }
-
             for (let i = 0; i < obstacles.length; i++) {
                 let obs = obstacles[i];
                 obs.x -= gameSpeed;
@@ -664,7 +676,6 @@
                     ctx.fillStyle = "lime";
 
                     if (obs.type === "spike") {
-                        // Triángulo en suelo
                         ctx.beginPath();
                         ctx.moveTo(obs.x, obs.y + obs.height);
                         ctx.lineTo(obs.x + obs.width / 2, obs.y);
@@ -672,7 +683,6 @@
                         ctx.closePath();
                         ctx.fill();
                     } else {
-                        // Triángulo invertido en techo
                         ctx.beginPath();
                         ctx.moveTo(obs.x, obs.y);
                         ctx.lineTo(obs.x + obs.width / 2, obs.y + obs.height);
@@ -681,24 +691,27 @@
                         ctx.fill();
                     }
 
-                    // Si toca pincho, pierde
                     if (player.x < obs.x + obs.width &&
                         player.x + player.width > obs.x &&
                         player.y < obs.y + obs.height &&
                         player.y + player.height > obs.y) {
 
-
-                        if (!invincible) {
+                        if (invincible) {
+                            // ✨ Destruye pincho con partículas esmeralda
+                            createParticles(obs.x + obs.width / 2, obs.y + obs.height / 2, "lime");
+                            obstacles.splice(i, 1);
+                            i--;
+                            score += 50;
+                            addFloatingText("+50", player.x + player.width / 2, player.y, "lime");
+                        } else {
                             if (vidas > 0) {
                                 vidas--;
                                 invincible = true;
-                                invincibleTimer = 60; // dura 1 segundo
+                                invincibleTimer = 60;
                             } else {
                                 gameOver = true;
                             }
                         }
-
-
                     }
 
                 } else if (obs.type === "block") {
@@ -706,90 +719,99 @@
                     ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
 
                     if (player.x + player.width > obs.x && player.x < obs.x + obs.width) {
-                        if (!inverted) {
-                            // Deslizar sobre bloque suelo
-                            if (player.y + player.height > obs.y && player.y + player.height <= obs.y + player.dy + gravity) {
-                                player.y = obs.y - player.height;
-                                player.dy = 0;
-                                player.jumps = 0;
-                            } else if (player.y + player.height > obs.y) {
-                                if (!invincible) {
-                                    if (vidas > 0) {
-                                        vidas--;
-                                        invincible = true;
-                                        invincibleTimer = 60; // dura 1 segundo
-                                    } else {
-                                        gameOver = true;
-                                    }
-                                }
-
-                            }
+                        // 🛡️ Destruye solo si en gravedad normal y tocando
+                        if (invincible &&
+                            !inverted &&
+                            player.y + player.height > obs.y &&
+                            player.y < obs.y + obs.height) {
+                            createParticles(obs.x + obs.width / 2, obs.y + obs.height / 2, "orange");
+                            obstacles.splice(i, 1);
+                            i--;
+                            score += 50;
+                            addFloatingText("+50", player.x + player.width / 2, player.y, "orange");
                         } else {
-                            // Deslizar sobre bloque techo (gravedad invertida)
-                            if (player.y < obs.y + obs.height && player.y >= obs.y + obs.height + player.dy - gravity) {
-                                player.y = obs.y + obs.height;
-                                player.dy = 0;
-                                player.jumps = 0;
-                            } else if (player.y < obs.y + obs.height && player.y + player.height > obs.y + obs.height) {
-                                if (!invincible) {
+                            if (!inverted) {
+                                if (player.y + player.height > obs.y && player.y + player.height <= obs.y + player.dy + gravity) {
+                                    player.y = obs.y - player.height;
+                                    player.dy = 0;
+                                    player.jumps = 0;
+                                } else if (player.y + player.height > obs.y) {
                                     if (vidas > 0) {
                                         vidas--;
                                         invincible = true;
-                                        invincibleTimer = 60; // dura 1 segundo
+                                        invincibleTimer = 60;
                                     } else {
                                         gameOver = true;
                                     }
                                 }
-
+                            } else {
+                                if (player.y < obs.y + obs.height && player.y >= obs.y + obs.height + player.dy - gravity) {
+                                    player.y = obs.y + obs.height;
+                                    player.dy = 0;
+                                    player.jumps = 0;
+                                } else if (player.y < obs.y + obs.height && player.y + player.height > obs.y + obs.height) {
+                                    if (vidas > 0) {
+                                        vidas--;
+                                        invincible = true;
+                                        invincibleTimer = 60;
+                                    } else {
+                                        gameOver = true;
+                                    }
+                                }
                             }
                         }
                     }
-
                 } else if (obs.type === "blockTop") {
                     ctx.fillStyle = "orange";
                     ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
 
                     if (player.x + player.width > obs.x && player.x < obs.x + obs.width) {
-                        if (!inverted) {
-                            // Deslizar sobre bloque techo en gravedad normal
-                            if (player.y < obs.y + obs.height && player.y + player.height > obs.y) {
-                                player.y = obs.y + obs.height;
-                                player.dy = 0;
-                                player.jumps = 0;
-                            }
+                        // 🛡️ Destruye solo si en gravedad invertida y tocando
+                        if (invincible &&
+                            inverted &&
+                            player.y + player.height > obs.y &&
+                            player.y < obs.y + obs.height) {
+                            createParticles(obs.x + obs.width / 2, obs.y + obs.height / 2, "orange");
+                            obstacles.splice(i, 1);
+                            i--;
+                            score += 50;
+                            addFloatingText("+50", player.x + player.width / 2, player.y, "orange");
                         } else {
-                            // Deslizar sobre bloque suelo en gravedad invertida
-                            if (player.y <= obs.y + obs.height && player.y >= obs.y + obs.height + player.dy - gravity) {
-                                player.y = obs.y + obs.height;
-                                player.dy = 0;
-                                player.jumps = 0;
-                            } else if (player.y < obs.y + obs.height) {
-                                if (!invincible) {
+                            if (!inverted) {
+                                if (player.y < obs.y + obs.height && player.y + player.height > obs.y) {
+                                    player.y = obs.y + obs.height;
+                                    player.dy = 0;
+                                    player.jumps = 0;
+                                }
+                            } else {
+                                if (player.y <= obs.y + obs.height && player.y >= obs.y + obs.height + player.dy - gravity) {
+                                    player.y = obs.y + obs.height;
+                                    player.dy = 0;
+                                    player.jumps = 0;
+                                } else if (player.y < obs.y + obs.height) {
                                     if (vidas > 0) {
                                         vidas--;
                                         invincible = true;
-                                        invincibleTimer = 60; // dura 1 segundo
+                                        invincibleTimer = 60;
                                     } else {
                                         gameOver = true;
                                     }
                                 }
-
                             }
                         }
                     }
-
                 } else if (obs.type === "jumpPad" || obs.type === "jumpPadTop") {
                     ctx.fillStyle = "yellow";
                     ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
 
-                    let padStrength = canvas.height * 0.045; // ⭐ fuerza proporcional al alto de pantalla
+                    let padStrength = canvas.height * 0.045;
 
                     if (obs.type === "jumpPad") {
                         if (player.x + player.width > obs.x &&
                             player.x < obs.x + obs.width &&
                             player.y + player.height > obs.y &&
                             player.y + player.height < obs.y + obs.height + 10) {
-                            player.dy = -padStrength; // salto hacia arriba proporcional
+                            player.dy = -padStrength;
                             player.jumps = 2;
                         }
                     } else {
@@ -797,11 +819,14 @@
                             player.x < obs.x + obs.width &&
                             player.y < obs.y + obs.height &&
                             player.y + player.height > obs.y) {
-                            player.dy = inverted ? padStrength : -padStrength; // hacia abajo o arriba según gravedad
+                            player.dy = inverted ? padStrength : -padStrength;
                             player.jumps = 2;
                         }
                     }
                 }
+
+
+
 
 
                 if (obs.x + obs.width < 0) {
@@ -815,6 +840,23 @@
             ctx.fillStyle = "white";
             ctx.font = canvas.height * 0.03 + "px sans-serif";
             ctx.fillText("Puntaje: " + Math.floor(score) + " Saltos: " + saltos + " Monedas: " + monedas + " Vidas Extra: " + vidas, 20, groundY + canvas.height * 0.05);
+
+            if (invincible) {
+                let alpha = getBlinkAlpha(invincibleTimer);
+                ctx.fillStyle = `rgba(255, 215, 0, ${alpha.toFixed(2)})`; // gold con alpha variable
+                ctx.font = canvas.height * 0.035 + "px sans-serif";
+                ctx.textAlign = "right";
+                ctx.fillText("Invencible: " + (invincibleTimer / 60).toFixed(1) + "s", canvas.width - 20, 30);
+            }
+
+            if (tripleJumpActive) {
+                let alpha = getBlinkAlpha(tripleJumpTimer);
+                ctx.fillStyle = `rgba(0, 191, 255, ${alpha.toFixed(2)})`; // deepskyblue con alpha variable
+                ctx.font = canvas.height * 0.035 + "px sans-serif";
+                ctx.textAlign = "right";
+                ctx.fillText("Triple Salto: " + (tripleJumpTimer / 60).toFixed(1) + "s", canvas.width - 20, 60);
+            }
+
 
 
             frame++;
