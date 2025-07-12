@@ -43,7 +43,7 @@
             color: white;
             border: none;
             border-radius: 5px;
-            padding: 10px 15px;
+            padding: 5px 10px;
             font-size: 16px;
             cursor: pointer;
             transition: background 0.3s;
@@ -60,15 +60,15 @@
 
     <div id="botonera">
         <button id="btn1" onclick="togglePause()">Pausa </button>
-        <button id="btn2" onclick="gravedad()">Gravedad ↑↓</button>
-        <button id="btn3" onclick="velocidad()">Velocidad →→</button>
-        <button id="btn4">♥</button>
+        <button id="btn2" onclick="gravedad()">Gravedad</button>
+        <button id="btn3" onclick="velocidad()">Velocidad</button>
+        <button id="btn4" onclick="invencibilidad()">Invencibilidad</button>
         <button id="btn5">♦</button>
         <button id="btn6">♣</button>
         <button id="btn7">♠</button>
         <button id="btn8">•</button>
         <button id="btn9">◘</button>
-        <button id="btn10">○</button>
+        <button id="btn10" onclick="abrirtienda()">Tienda</button>
     </div>
 
     <script src="js/skrips.js"></script>
@@ -76,6 +76,9 @@
 
         const canvas = document.getElementById("game");
         const ctx = canvas.getContext("2d");
+
+
+        let timeOfDay = 0;
 
         let player = { x: 0, y: 0, width: 0, height: 0, dy: 0, jumps: 0, maxJumps: 2 };
         let gravity = 0;
@@ -103,6 +106,7 @@
 
 
 
+
         let frame = 0;
 
         let gameOver = true;
@@ -124,9 +128,20 @@
 
         function gravedad() {
             inverted = !inverted;
+
         }
         function velocidad() {
             gameSpeed += 1;
+        }
+
+        function invencibilidad() {
+            invincible = !invincible;
+            if(invincible){
+                invincibleTimer = 30000;
+            }else{
+                invincibleTimer = 0;
+            }
+            
         }
 
         function resizeCanvas() {
@@ -210,6 +225,7 @@
 
         let bestSaltos = localStorage.getItem("bestSaltos") || 0;
 
+        let dinero = parseInt(localStorage.getItem("dinero")) || 0;
 
 
 
@@ -249,13 +265,121 @@
         }
 
 
+        let botonesTienda = [];
+
+        function comprarVida() {
+            if (dinero >= 1) {
+                dinero -= 1;
+                vidas++;
+                localStorage.setItem("dinero", dinero);
+            }
+        }
+
+        function comprarInvencibilidad() {
+            if (dinero >= 3) {
+                dinero -= 3;
+                invincible = true;
+                invincibleTimer = 600;
+                localStorage.setItem("dinero", dinero);
+            }
+        }
+
+        function comprarTripleSalto() {
+            if (dinero >= 2) {
+                dinero -= 2;
+                tripleJumpActive = true;
+                tripleJumpTimer = 800;
+                player.maxJumps = 3;
+                localStorage.setItem("dinero", dinero);
+            }
+        }
+
+
+
+        let tiendaAbierta = false;
+        function abrirtienda() {
+
+            if (!gameOver) {
+                tiendaAbierta = !tiendaAbierta;
+            }
+
+        }
+
+
+        document.addEventListener("keydown", (e) => {
+            if (e.code === "KeyT" && !gameOver) {
+                tiendaAbierta = !tiendaAbierta;
+            }
+        });
+
+
+
+
+
+
+        function dibujarTienda() {
+            // Fondo semitransparente para destacar la tienda
+            ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "white";
+            ctx.font = "30px sans-serif";
+            ctx.textAlign = "center";
+            ctx.fillText("TIENDA", canvas.width / 2, 50);
+
+            // Mostrar monedas actuales
+            ctx.fillText("Monedas: " + dinero, canvas.width / 2, 100);
+
+            // Opciones de compra como botones
+            const botones = [
+                { texto: "+1 Vida Extra (1 monedas)", x: canvas.width / 2 - 150, y: 150, w: 300, h: 40, precio: 1, accion: comprarVida },
+                { texto: "Invencibilidad (3 monedas)", x: canvas.width / 2 - 150, y: 200, w: 300, h: 40, precio: 3, accion: comprarInvencibilidad },
+                { texto: "Triple Salto (2 monedas)", x: canvas.width / 2 - 150, y: 250, w: 300, h: 40, precio: 2, accion: comprarTripleSalto },
+            ];
+
+            ctx.font = "20px sans-serif";
+            ctx.textAlign = "center";
+
+            botones.forEach(b => {
+                // Botón fondo
+                ctx.fillStyle = dinero >= b.precio ? "green" : "gray";
+                ctx.fillRect(b.x, b.y, b.w, b.h);
+
+                // Texto del botón
+                ctx.fillStyle = "white";
+                ctx.fillText(b.texto, b.x + b.w / 2, b.y + b.h / 2 + 7);
+            });
+
+            // Guardar botones en global para detectar clicks
+            botonesTienda = botones;
+        }
+
+
+        canvas.addEventListener("click", e => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            console.log("Click en", x, y);
+
+            if (botonesTienda) {
+                console.log(botonesTienda);
+                botonesTienda.forEach(b => {
+                    console.log("Botón:", b);
+                    if (x >= b.x && x <= b.x + b.w && y >= b.y && y <= b.y + b.h) {
+                        console.log("Click en botón:", b.texto);
+                        b.accion();
+                    }
+                });
+            }
+        });
 
 
         let floatingTexts = [];
 
         function addFloatingText(text, x, y, color = "white", duration = 60) {
             // Ajustamos x y y para que el texto aparezca a la izquierda y un poco más abajo
-            const adjustedX = x - 20; // 20 píxeles a la izquierda
+            const adjustedX = x - 25; // 20 píxeles a la izquierda
             const adjustedY = y + 10; // 10 píxeles más abajo
 
             floatingTexts.push({ text, x: adjustedX, y: adjustedY, alpha: 1, duration, color });
@@ -365,6 +489,48 @@
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+
+            // Avanza lentamente el tiempo para el ciclo día-noche
+            timeOfDay += 0.0001;
+            if (timeOfDay > 1) timeOfDay = 0; // ciclo infinito
+
+            function lerpColor(a, b, t) {
+                const lerp = (v0, v1, t) => v0 + (v1 - v0) * t;
+                return {
+                    r: lerp(a.r, b.r, t),
+                    g: lerp(a.g, b.g, t),
+                    b: lerp(a.b, b.b, t)
+                };
+            }
+
+            function rgbToString(c) {
+                return `rgb(${Math.round(c.r)},${Math.round(c.g)},${Math.round(c.b)})`;
+            }
+
+            const colors = [
+                { top: { r: 255, g: 153, b: 51 }, bottom: { r: 102, g: 204, b: 255 } },  // Amanecer
+                { top: { r: 51, g: 153, b: 255 }, bottom: { r: 0, g: 102, b: 204 } },    // Día
+                { top: { r: 255, g: 102, b: 102 }, bottom: { r: 51, g: 51, b: 102 } },   // Atardecer
+                { top: { r: 10, g: 10, b: 40 }, bottom: { r: 0, g: 0, b: 20 } }          // Noche
+            ];
+
+            const phase = timeOfDay * colors.length;
+            const index = Math.floor(phase) % colors.length;
+            const nextIndex = (index + 1) % colors.length;
+            const t = phase - Math.floor(phase);
+
+            const topColor = lerpColor(colors[index].top, colors[nextIndex].top, t);
+            const bottomColor = lerpColor(colors[index].bottom, colors[nextIndex].bottom, t);
+
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, rgbToString(topColor));
+            gradient.addColorStop(1, rgbToString(bottomColor));
+
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+
+
             if (gameOver) {
                 ctx.textAlign = "center";
                 ctx.fillStyle = "red";
@@ -379,6 +545,13 @@
 
                 requestAnimationFrame(update);
                 return; // importante para no continuar procesando el juego
+            }
+
+            if (tiendaAbierta) {
+                // Pintar la tienda y no actualizar el juego mientras la tienda está abierta
+                dibujarTienda();
+                requestAnimationFrame(update);
+                return;
             }
 
             if (paused) {
@@ -598,6 +771,8 @@
                     player.y + player.height > coin.y - coin.radius
                 ) {
                     monedas++;
+                    dinero++;
+                    localStorage.setItem("dinero", dinero);
                     coins.splice(i, 1);
                     i--;
                     score += 100;
@@ -839,7 +1014,7 @@
             ctx.textAlign = "left";
             ctx.fillStyle = "white";
             ctx.font = canvas.height * 0.03 + "px sans-serif";
-            ctx.fillText("Puntaje: " + Math.floor(score) + " Saltos: " + saltos + " Monedas: " + monedas + " Vidas Extra: " + vidas, 20, groundY + canvas.height * 0.05);
+            ctx.fillText("Puntaje: " + Math.floor(score) + " Saltos: " + saltos + " Monedas: " + monedas + " Vidas Extra: " + vidas + " Monedas Totales: " + dinero, 20, groundY + canvas.height * 0.05);
 
             if (invincible) {
                 let alpha = getBlinkAlpha(invincibleTimer);
@@ -886,6 +1061,11 @@
 
         update();
         createRain();
+
+
+
+
+
 
 
 
