@@ -136,12 +136,12 @@
 
         function invencibilidad() {
             invincible = !invincible;
-            if(invincible){
+            if (invincible) {
                 invincibleTimer = 30000;
-            }else{
+            } else {
                 invincibleTimer = 0;
             }
-            
+
         }
 
         function resizeCanvas() {
@@ -373,6 +373,27 @@
                 });
             }
         });
+
+
+
+
+        canvas.addEventListener("touchstart", e => {
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+
+            if (botonesTienda) {
+                botonesTienda.forEach(b => {
+                    if (x >= b.x && x <= b.x + b.w && y >= b.y && y <= b.y + b.h) {
+                        b.accion();
+                        dibujarTienda(); // refresca la tienda tras la compra
+                    }
+                });
+            }
+            e.preventDefault(); // para que no haga scroll o zoom
+        });
+
 
 
         let floatingTexts = [];
