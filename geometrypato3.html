@@ -185,7 +185,7 @@
                 if (isEgg) {
                     isEgg = false;
                     console.log("El huevo se rompió y nació el pato.");
-                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "white");
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, skins[skinActual].colorHuevo);
                 }
             }
         });
@@ -203,7 +203,7 @@
                 if (isEgg) {
                     isEgg = false; // 🐣 Romper huevo al primer salto
                     console.log("El huevo se rompió y nació el pato.");
-                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "white");
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, skins[skinActual].colorHuevo);
                 }
             }
         });
@@ -222,7 +222,7 @@
                 if (isEgg) {
                     isEgg = false;
                     console.log("El huevo se rompió y nació el pato.");
-                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "white");
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, skins[skinActual].colorHuevo);
                 }
             }
         }, { passive: false });
@@ -346,9 +346,49 @@
 
 
 
+        let isEgg = true; // 🥚 El personaje inicia como huevo
+        let eggRotation = 0;
+
+
+        const skins = [
+            { id: 0, nombre: "Pato clásico", imgSrc: "pato.png", precio: 0, comprado: true, colorHuevo: "white", colorPato: "yellow" },
+            { id: 1, nombre: "Pato ninja", imgSrc: "pato_ninja.png", precio: 15, comprado: false, colorHuevo: "black", colorPato: "lightgray" },
+            { id: 2, nombre: "Pato robot", imgSrc: "pato_robot.png", precio: 20, comprado: false, colorHuevo: "lightgray", colorPato: "black" },
+            { id: 3, nombre: "Pato pirata", imgSrc: "pato_pirata.png", precio: 30, comprado: false, colorHuevo: "saddlebrown", colorPato: "goldenrod" },
+            { id: 4, nombre: "Pato zombie", imgSrc: "pato_zombie.png", precio: 50, comprado: false, colorHuevo: "olive", colorPato: "green" },
+        ];
+
+
+
+        skins.forEach(skin => {
+            skin.img = new Image();
+            skin.img.src = skin.imgSrc;
+        });
+
+
+
+        // Cargar skins compradas desde localStorage
+        const skinsGuardadas = JSON.parse(localStorage.getItem("skinsCompradas"));
+        if (skinsGuardadas) {
+            skins.forEach((s, i) => s.comprado = skinsGuardadas[i]);
+        }
+
+        // Cargar skin seleccionada
+        let skinActual = parseInt(localStorage.getItem("skinActual")) || 0;
+
+        // Solo guarda si aún no existía en el almacenamiento
+        if (!skinsGuardadas) {
+            localStorage.setItem("skinsCompradas", JSON.stringify(skins.map(s => s.comprado)));
+        }
+        if (!localStorage.getItem("skinActual")) {
+            localStorage.setItem("skinActual", skinActual);
+        }
+
 
         function dibujarTienda() {
-            // Fondo semitransparente para destacar la tienda
+            botonesTienda = [];
+
+            // Fondo semitransparente
             ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -359,15 +399,21 @@
             ctx.font = `${Math.floor(canvas.height * 0.06)}px sans-serif`;
             ctx.fillText("TIENDA", canvas.width / 2, canvas.height * 0.1);
 
-            // Monedas disponibles
+            // Monedas
             ctx.font = `${Math.floor(canvas.height * 0.04)}px sans-serif`;
             ctx.fillText(`Monedas: ${dinero}`, canvas.width / 2, canvas.height * 0.17);
 
-            // Botones más grandes y centrados con espacio vertical
-            const buttonWidth = canvas.width * 0.7;
+            // Configuración de columnas
+            const mitadAncho = canvas.width / 2;
+            const margen = canvas.width * 0.05;
+            const buttonWidth = mitadAncho - margen * 2;
             const buttonHeight = canvas.height * 0.08;
             const startY = canvas.height * 0.25;
             const gap = canvas.height * 0.12;
+
+            // 🎯 MEJORAS – columna izquierda
+            ctx.font = `${Math.floor(canvas.height * 0.035)}px sans-serif`;
+            ctx.fillText("Mejoras", mitadAncho / 2, startY - canvas.height * 0.05);
 
             const botones = [
                 { texto: "+1 Vida Extra (1 moneda)", precio: 1, accion: comprarVida },
@@ -375,29 +421,86 @@
                 { texto: "Triple Salto (2 monedas)", precio: 2, accion: comprarTripleSalto },
             ];
 
-            ctx.font = `${Math.floor(canvas.height * 0.035)}px sans-serif`;
-
             botones.forEach((b, i) => {
-                const x = (canvas.width - buttonWidth) / 2;
+                const x = margen;
                 const y = startY + i * gap;
 
-                // Fondo botón
-                ctx.fillStyle = dinero >= b.precio ? "#2ecc71" : "#7f8c8d"; // verde si puedes comprar, gris si no
+                ctx.fillStyle = dinero >= b.precio ? "#2ecc71" : "#7f8c8d";
                 ctx.fillRect(x, y, buttonWidth, buttonHeight);
 
-                // Texto botón
                 ctx.fillStyle = "white";
                 ctx.textBaseline = "middle";
-                ctx.textAlign = "center";
-                ctx.fillText(b.texto, canvas.width / 2, y + buttonHeight / 2);
+                ctx.fillText(b.texto, x + buttonWidth / 2, y + buttonHeight / 2);
 
-                // Guardamos para detección de clics
-                botonesTienda[i] = { x, y, w: buttonWidth, h: buttonHeight, accion: b.accion, precio: b.precio };
+                botonesTienda.push({ x, y, w: buttonWidth, h: buttonHeight, accion: b.accion, precio: b.precio });
+            });
+
+            // 🎯 SKINS – columna derecha
+            ctx.font = `${Math.floor(canvas.height * 0.035)}px sans-serif`;
+            ctx.fillText("Skins", mitadAncho + mitadAncho / 2, startY - canvas.height * 0.05);
+
+            skins.forEach((skin, i) => {
+                const x = mitadAncho + margen;
+                const y = startY + i * gap;
+                const w = buttonWidth;
+                const h = buttonHeight;
+
+                // Fondo según estado
+                if (skinActual === skin.id) {
+                    ctx.fillStyle = "#f39c12"; // naranja si seleccionada
+                } else if (skin.comprado) {
+                    ctx.fillStyle = "#2980b9"; // azul si comprada
+                } else if (dinero >= skin.precio) {
+                    ctx.fillStyle = "#27ae60"; // verde si se puede comprar
+                } else {
+                    ctx.fillStyle = "#7f8c8d"; // gris si no se puede comprar
+                }
+
+                ctx.fillRect(x, y, w, h);
+
+                // Imagen pequeña de la skin
+                const imgSize = h * 0.8;
+                ctx.drawImage(skin.img, x + 5, y + (h - imgSize) / 2, imgSize, imgSize);
+
+                // Texto
+                ctx.fillStyle = "white";
+                ctx.textAlign = "left";
+                let textoSkin = skin.nombre;
+                if (skinActual === skin.id) {
+                    textoSkin += " (Seleccionada)";
+                } else if (skin.comprado) {
+                    textoSkin += " (Usar)";
+                } else {
+                    textoSkin += ` (${skin.precio} monedas)`;
+                }
+
+                ctx.fillText(textoSkin, x + imgSize + 15, y + h / 2 + 7);
+
+                botonesTienda.push({
+                    x, y, w, h,
+                    accion: () => {
+                        if (!skin.comprado && dinero >= skin.precio) {
+                            dinero -= skin.precio;
+                            skin.comprado = true;
+                            isEgg = true;
+                        }
+                        if (skin.comprado) {
+                            skinActual = skin.id;
+                            isEgg = true;
+                        }
+
+                        localStorage.setItem("skinsCompradas", JSON.stringify(skins.map(s => s.comprado)));
+                        localStorage.setItem("skinActual", skinActual);
+                        localStorage.setItem("dinero", dinero);
+                    }
+                });
             });
         }
 
-
         canvas.addEventListener("click", e => {
+
+            if (!tiendaAbierta) return;
+
             const rect = canvas.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -418,8 +521,10 @@
 
 
 
-
         canvas.addEventListener("touchstart", e => {
+
+            if (!tiendaAbierta) return;
+
             const rect = canvas.getBoundingClientRect();
             const touch = e.touches[0];
             const x = touch.clientX - rect.left;
@@ -1055,14 +1160,6 @@
 
 
 
-
-        const patoImg = new Image();
-        patoImg.src = "pato.png";
-        let isEgg = true; // 🥚 El personaje inicia como huevo
-        let eggRotation = 0;
-
-
-
         function update() {
 
 
@@ -1233,7 +1330,7 @@
 
             ctx.save();
 
-            ctx.shadowColor = invincible ? "gold" : (tripleJumpActive ? "blue" : "green");
+            ctx.shadowColor = invincible ? "red" : (tripleJumpActive ? "blue" : skins[skinActual].colorPato);
             ctx.shadowBlur = 8;
             ctx.shadowOffsetX = 1;
             ctx.shadowOffsetY = 1;
@@ -1247,7 +1344,9 @@
                 ctx.rotate(eggRotation); // eggRotation es una variable global que vamos a actualizar
 
                 // Dibujar el huevo centrado en 0,0 (porque ya traducimos)
-                ctx.fillStyle = "white";
+
+
+                ctx.fillStyle = skins[skinActual].colorHuevo;
                 ctx.beginPath();
                 ctx.ellipse(0, 0, player.width / 2, player.height / 2, 0, 0, Math.PI * 2);
                 ctx.fill();
@@ -1263,9 +1362,10 @@
                 if (inverted) {
                     ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
                     ctx.scale(1, -1);
-                    ctx.drawImage(patoImg, -player.width / 2, -player.height / 2, player.width, player.height);
+
+                    ctx.drawImage(skins[skinActual].img, -player.width / 2, -player.height / 2, player.width, player.height);
                 } else {
-                    ctx.drawImage(patoImg, player.x, player.y, player.width, player.height);
+                    ctx.drawImage(skins[skinActual].img, player.x, player.y, player.width, player.height);
                 }
 
                 ctx.restore();
