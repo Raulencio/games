@@ -172,17 +172,6 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        document.addEventListener("keydown", e => {
-            if (gameOver && e.code === "Space") {
-                resetGame();
-                return;
-            }
-            if (e.code === "Space" && player.jumps < player.maxJumps) {
-                player.dy = inverted ? -jumpStrength : jumpStrength;
-                player.jumps++; saltos++;
-            }
-        });
-
         canvas.addEventListener("mousedown", () => {
             if (gameOver) {
                 resetGame();
@@ -190,7 +179,32 @@
             }
             if (player.jumps < player.maxJumps) {
                 player.dy = inverted ? -jumpStrength : jumpStrength;
-                player.jumps++; saltos++;
+                player.jumps++;
+                saltos++;
+
+                if (isEgg) {
+                    isEgg = false;
+                    console.log("El huevo se rompió y nació el pato.");
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "white");
+                }
+            }
+        });
+
+        document.addEventListener("keydown", e => {
+            if (gameOver && e.code === "Space") {
+                resetGame();
+                return;
+            }
+            if (e.code === "Space" && player.jumps < player.maxJumps) {
+                player.dy = inverted ? -jumpStrength : jumpStrength;
+                player.jumps++;
+                saltos++;
+
+                if (isEgg) {
+                    isEgg = false; // 🐣 Romper huevo al primer salto
+                    console.log("El huevo se rompió y nació el pato.");
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "white");
+                }
             }
         });
 
@@ -202,7 +216,14 @@
             }
             if (player.jumps < player.maxJumps) {
                 player.dy = inverted ? -jumpStrength : jumpStrength;
-                player.jumps++; saltos++;
+                player.jumps++;
+                saltos++;
+
+                if (isEgg) {
+                    isEgg = false;
+                    console.log("El huevo se rompió y nació el pato.");
+                    createParticles(player.x + player.width / 2, player.y + player.height / 2, "white");
+                }
             }
         }, { passive: false });
 
@@ -326,43 +347,53 @@
 
 
 
-
-
         function dibujarTienda() {
             // Fondo semitransparente para destacar la tienda
-            ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
+            ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             ctx.fillStyle = "white";
-            ctx.font = "30px sans-serif";
             ctx.textAlign = "center";
-            ctx.fillText("TIENDA", canvas.width / 2, 50);
 
-            // Mostrar monedas actuales
-            ctx.fillText("Monedas: " + dinero, canvas.width / 2, 100);
+            // Título
+            ctx.font = `${Math.floor(canvas.height * 0.06)}px sans-serif`;
+            ctx.fillText("TIENDA", canvas.width / 2, canvas.height * 0.1);
 
-            // Opciones de compra como botones
+            // Monedas disponibles
+            ctx.font = `${Math.floor(canvas.height * 0.04)}px sans-serif`;
+            ctx.fillText(`Monedas: ${dinero}`, canvas.width / 2, canvas.height * 0.17);
+
+            // Botones más grandes y centrados con espacio vertical
+            const buttonWidth = canvas.width * 0.7;
+            const buttonHeight = canvas.height * 0.08;
+            const startY = canvas.height * 0.25;
+            const gap = canvas.height * 0.12;
+
             const botones = [
-                { texto: "+1 Vida Extra (1 monedas)", x: canvas.width / 2 - 150, y: 150, w: 300, h: 40, precio: 1, accion: comprarVida },
-                { texto: "Invencibilidad (3 monedas)", x: canvas.width / 2 - 150, y: 200, w: 300, h: 40, precio: 3, accion: comprarInvencibilidad },
-                { texto: "Triple Salto (2 monedas)", x: canvas.width / 2 - 150, y: 250, w: 300, h: 40, precio: 2, accion: comprarTripleSalto },
+                { texto: "+1 Vida Extra (1 moneda)", precio: 1, accion: comprarVida },
+                { texto: "Invencibilidad (3 monedas)", precio: 3, accion: comprarInvencibilidad },
+                { texto: "Triple Salto (2 monedas)", precio: 2, accion: comprarTripleSalto },
             ];
 
-            ctx.font = "20px sans-serif";
-            ctx.textAlign = "center";
+            ctx.font = `${Math.floor(canvas.height * 0.035)}px sans-serif`;
 
-            botones.forEach(b => {
-                // Botón fondo
-                ctx.fillStyle = dinero >= b.precio ? "green" : "gray";
-                ctx.fillRect(b.x, b.y, b.w, b.h);
+            botones.forEach((b, i) => {
+                const x = (canvas.width - buttonWidth) / 2;
+                const y = startY + i * gap;
 
-                // Texto del botón
+                // Fondo botón
+                ctx.fillStyle = dinero >= b.precio ? "#2ecc71" : "#7f8c8d"; // verde si puedes comprar, gris si no
+                ctx.fillRect(x, y, buttonWidth, buttonHeight);
+
+                // Texto botón
                 ctx.fillStyle = "white";
-                ctx.fillText(b.texto, b.x + b.w / 2, b.y + b.h / 2 + 7);
-            });
+                ctx.textBaseline = "middle";
+                ctx.textAlign = "center";
+                ctx.fillText(b.texto, canvas.width / 2, y + buttonHeight / 2);
 
-            // Guardar botones en global para detectar clicks
-            botonesTienda = botones;
+                // Guardamos para detección de clics
+                botonesTienda[i] = { x, y, w: buttonWidth, h: buttonHeight, accion: b.accion, precio: b.precio };
+            });
         }
 
 
@@ -930,7 +961,7 @@
                 if (score >= nextLevel.requiredScore) {
                     startTransitionToLevel(nivelActual + 1);
 
-                    console.log("Nivel avanzado a:", niveles[nivelActual].name);
+                    console.log("Nivel: ", niveles[nivelActual].name);
 
 
                     startLevelNameDisplay();
@@ -977,7 +1008,7 @@
 
             frame = 0;
             gameOver = false;
-
+            isEgg = true;
             nivelActual = 0;
 
             if (niveles[nivelActual].hasRain) {
@@ -985,7 +1016,7 @@
             } else {
                 rainDrops = [];
             }
-
+            startLevelNameDisplay();
         }
 
 
@@ -1027,8 +1058,8 @@
 
         const patoImg = new Image();
         patoImg.src = "pato.png";
-
-
+        let isEgg = true; // 🥚 El personaje inicia como huevo
+        let eggRotation = 0;
 
 
 
@@ -1096,19 +1127,38 @@
 
             if (gameOver) {
                 ctx.textAlign = "center";
-                ctx.fillStyle = "red";
-                ctx.font = canvas.height * 0.08 + "px sans-serif";
+
+                // Configura la sombra para todo el texto
+                ctx.shadowColor = "rgba(0, 0, 0, 0.7)";  // sombra negra semitransparente
+                ctx.shadowBlur = 8;
+                ctx.shadowOffsetX = 3;
+                ctx.shadowOffsetY = 3;
+
+                // Texto grande en rojo con sombra
+                ctx.fillStyle = "yellow";
+                ctx.font = canvas.height * 0.2 + "px sans-serif";
                 ctx.fillText("Geometry Duck III", canvas.width / 2, canvas.height / 2 - canvas.height * 0.1);
-                ctx.font = canvas.height * 0.04 + "px sans-serif";
-                ctx.fillText("Presiona para Iniciar", canvas.width / 2, canvas.height / 2 + canvas.height * 0.05);
+
+                // Texto pequeño en blanco con sombra
                 ctx.fillStyle = "white";
-                ctx.fillText("Puntaje máximo: " + bestScore, canvas.width / 2, canvas.height / 2 + canvas.height * 0.20);
-                ctx.fillText("Monedas máximas: " + bestCoins, canvas.width / 2, canvas.height / 2 + canvas.height * 0.25);
-                ctx.fillText("Maximo de Saltos: " + bestSaltos, canvas.width / 2, canvas.height / 2 + canvas.height * 0.30);
+                ctx.font = canvas.height * 0.04 + "px sans-serif";
+                ctx.fillText("Puntaje máximo: " + bestScore, canvas.width / 2, canvas.height / 2 + canvas.height * 0.10);
+                ctx.fillText("Monedas máximas: " + bestCoins, canvas.width / 2, canvas.height / 2 + canvas.height * 0.15);
+                ctx.fillText("Maximo de Saltos: " + bestSaltos, canvas.width / 2, canvas.height / 2 + canvas.height * 0.20);
+
+                ctx.fillStyle = "red";
+                ctx.fillText("Pulsa para Iniciar", canvas.width / 2, canvas.height / 2 + canvas.height * 0.30);
+
+                // Opcional: limpia sombra después si dibujas otros elementos sin sombra
+                ctx.shadowColor = "transparent";
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
 
                 requestAnimationFrame(update);
-                return; // importante para no continuar procesando el juego
+                return;
             }
+
 
             if (tiendaAbierta) {
                 // Pintar la tienda y no actualizar el juego mientras la tienda está abierta
@@ -1181,35 +1231,49 @@
             }
 
 
-
-
             ctx.save();
 
             ctx.shadowColor = invincible ? "gold" : (tripleJumpActive ? "blue" : "green");
-            ctx.shadowBlur = 8; // intensidad de la sombra
+            ctx.shadowBlur = 8;
             ctx.shadowOffsetX = 1;
             ctx.shadowOffsetY = 1;
+            if (isEgg) {
+                ctx.save();
 
-            if (inverted) {
+                // Mover el contexto al centro del huevo
                 ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
-                ctx.scale(1, -1);
-                ctx.drawImage(patoImg, -player.width / 2, -player.height / 2, player.width, player.height);
+
+                // Aplicar la rotación
+                ctx.rotate(eggRotation); // eggRotation es una variable global que vamos a actualizar
+
+                // Dibujar el huevo centrado en 0,0 (porque ya traducimos)
+                ctx.fillStyle = "white";
+                ctx.beginPath();
+                ctx.ellipse(0, 0, player.width / 2, player.height / 2, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.strokeStyle = "gray";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                ctx.restore();
             } else {
-                ctx.drawImage(patoImg, player.x, player.y, player.width, player.height);
-            }
+                ctx.save();
 
-            ctx.restore();
-
-            if (tripleJumpActive) {
-                tripleJumpTimer--;
-                if (tripleJumpTimer <= 0) {
-                    tripleJumpActive = false;
-                    player.maxJumps = 2;
+                if (inverted) {
+                    ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
+                    ctx.scale(1, -1);
+                    ctx.drawImage(patoImg, -player.width / 2, -player.height / 2, player.width, player.height);
+                } else {
+                    ctx.drawImage(patoImg, player.x, player.y, player.width, player.height);
                 }
+
+                ctx.restore();
             }
 
-
-
+            if (isEgg) {
+                eggRotation += 0.1; // Ajusta velocidad de rotación aquí
+            }
 
 
             if (nivelConfig.orbTypes.includes("heart") && frame % nivelConfig.orbFrequency.heart === 0) {
@@ -1933,8 +1997,8 @@
 
             ctx.textAlign = "left";
             ctx.fillStyle = "white";
-            ctx.font = canvas.height * 0.04 + "px sans-serif";
-            ctx.fillText("Puntaje: " + Math.floor(score) + " Saltos: " + saltos + " Monedas: " + monedas + " Vidas: " + vidas + " Monedas Totales: " + dinero + " | " + niveles[nivelActual].name + " |", 20, groundY + canvas.height * 0.05);
+            ctx.font = canvas.height * 0.05 + "px sans-serif";
+            ctx.fillText("Puntaje: " + Math.floor(score) + " Saltos: " + saltos + " Monedas: " + monedas + " Vidas: " + vidas + " Monedas Totales: " + dinero, 20, groundY + canvas.height * 0.05);
 
             if (invincible) {
                 let alpha = getBlinkAlpha(invincibleTimer);
