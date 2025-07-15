@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Tierra Antigua - Samurai RPG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="stylettt.css" />
+</head>
+
+<body>
+    <div id="menuInicio">
+        <h1>Tierra Antigua</h1>
+        <button id="btnJugar">Jugar</button>
+    </div>
+
+    <div id="menuSeleccion" style="display: none;">
+        <h2>Selecciona tu personaje</h2>
+        <div id="listaPersonajes"></div>
+    </div>
+
+
+    <canvas id="gameCanvas" width="2200" height="1600" style="border:1px solid black;"></canvas>
+
+    <div id="hud" hidden="true">
+        <div id="barraVida">
+            <div id="vidaActual"></div>
+        </div>
+        <div id="textoVida"></div>
+
+        <div id="barraExp">
+            <div id="expActual"></div>
+        </div>
+        <div id="textoExp"></div>
+
+        <div id="nivel"></div>
+    </div>
+
+
+    <script src="mainttt.js"></script>
+</body>
+
+</html>

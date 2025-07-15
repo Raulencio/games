@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    background: #111;
+    color: #fff;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+}
+
+canvas {
+    background: #333;
+    display: block;
+    margin: 0 auto;
+}
+#hud {
+    position: fixed; /* o absolute si prefieres */
+    top: 20px;
+    left: 20px;
+    width: 220px;
+    color: white;
+    font-family: Arial, sans-serif;
+    z-index: 10;
+}
+
+#barraVida, #barraExp {
+    background: black;
+    border: 2px solid #333;
+    width: 200px;
+    height: 20px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+#vidaActual {
+    background: green;
+    height: 100%;
+    width: 100%; /* se ajusta con JS */
+}
+
+#expActual {
+    background: yellow;
+    height: 100%;
+    width: 100%; /* se ajusta con JS */
+}
+
+#textoVida, #textoExp, #nivel {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
