@@ -1,33 +1,133 @@
-body {
+/* ✅ RESET Y BASE */
+* {
+    box-sizing: border-box;
     margin: 0;
-    background: #111;
-    color: #fff;
-    font-family: sans-serif;
-    text-align: center;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+html,
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* ✅ ESTILO GLOBAL DE BOTONES (básico, sin padding/margin global para evitar conflictos) */
 button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 10px;
+    font-family: inherit;
+    cursor: pointer;
 }
 
-canvas {
-    background: #333;
-    display: block;
-    margin: 0 auto;
+/* ✅ MENÚ DE INICIO */
+#menuInicio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(#222, #111);
 }
+
+#menuInicio h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #ffcc00;
+    text-shadow: 2px 2px #000;
+}
+
+#menuInicio button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 8px;
+    background: #ffcc00;
+    color: #222;
+    transition: background 0.3s;
+}
+
+#menuInicio button:hover {
+    background: #e6b800;
+}
+
+/* ✅ MENÚ DE SELECCIÓN DE PERSONAJES */
+#menuSeleccion {
+    min-height: 100vh;
+    /* ocupa al menos toda la pantalla */
+    box-sizing: border-box;
+    background-color: #333;
+}
+
+
+#menuSeleccion h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #ffcc00;
+}
+
+#listaPersonajes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* ✅ CONTENEDOR DE CADA PERSONAJE */
+#listaPersonajes div {
+    background: #333;
+    border-radius: 10px;
+    padding: 15px;
+    width: 160px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+#listaPersonajes h3 {
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #ffcc00;
+}
+
+#listaPersonajes p {
+    font-size: 0.9em;
+    color: #ddd;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+#listaPersonajes button {
+    padding: 8px 15px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    background: #ffcc00;
+    color: #222;
+    width: 100%;
+    transition: background 0.3s;
+}
+
+#listaPersonajes button:hover {
+    background: #e6b800;
+}
+
+/* ✅ CANVAS Y HUD */
+#gameCanvas {
+    display: block;
+    background: #000;
+    width: 100vw;
+    height: 100vh;
+}
+
 #hud {
-    position: fixed; /* o absolute si prefieres */
-    top: 20px;
-    left: 20px;
-    width: 220px;
-    color: white;
-    font-family: Arial, sans-serif;
+    position: fixed;
+    /* cambiado de absolute a fixed para mantenerse visible */
+    top: 10px;
+    left: 10px;
+    color: #fff;
     z-index: 10;
 }
 
-#barraVida, #barraExp {
+/* ✅ BARRAS DE VIDA Y EXP */
+#barraVida,
+#barraExp {
     background: black;
     border: 2px solid #333;
     width: 200px;
@@ -39,16 +139,52 @@ canvas {
 #vidaActual {
     background: green;
     height: 100%;
-    width: 100%; /* se ajusta con JS */
+    width: 100%;
+    /* se ajusta con JS */
 }
 
 #expActual {
     background: yellow;
     height: 100%;
-    width: 100%; /* se ajusta con JS */
+    width: 100%;
+    /* se ajusta con JS */
 }
 
-#textoVida, #textoExp, #nivel {
+#textoVida,
+#textoExp,
+#nivel {
     margin-bottom: 5px;
     font-size: 14px;
+}
+
+/* ✅ RESPONSIVO */
+@media (max-width: 600px) {
+    #menuInicio h1 {
+        font-size: 2em;
+    }
+
+    #menuInicio button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+
+    #menuSeleccion {
+        min-height: 100vh;
+    }
+
+    #listaPersonajes {
+        display: flex;
+        overflow-x: auto;
+        gap: 15px;
+        padding-bottom: 10px;
+        /* espacio para scrollbar si aparece */
+        -webkit-overflow-scrolling: touch;
+        /* suaviza en iOS */
+    }
+
+    #listaPersonajes div {
+        flex: 0 0 auto;
+        /* no se encogen, ancho automático */
+    }
+
 }
