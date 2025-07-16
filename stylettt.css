@@ -121,7 +121,8 @@ button {
     /* cambiado de absolute a fixed para mantenerse visible */
     top: 10px;
     left: 10px;
-    color: #fff;
+
+    pointer-events: none;
     z-index: 10;
 }
 
@@ -187,4 +188,8 @@ button {
         /* no se encogen, ancho automático */
     }
 
+}
+
+#tienda {
+    transition: opacity 0.3s ease;
 }

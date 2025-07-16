@@ -18,9 +18,12 @@
         <div id="listaPersonajes"></div>
     </div>
 
-<canvas id="gameCanvas"></canvas>
+    <canvas id="gameCanvas"></canvas>
 
     <div id="hud" hidden="true">
+
+        <div id="textoPj"></div>
+
         <div id="barraVida">
             <div id="vidaActual"></div>
         </div>
@@ -31,17 +34,46 @@
         </div>
         <div id="textoExp"></div>
 
-        <div id="nivel"></div>
+        <div id="dinero"></div>
+
     </div>
 
-<canvas id="miniMapa" width="200" height="200" 
-    style="position: fixed; top: 10px; right: 10px; 
+    <canvas id="miniMapa" width="200" height="200" style="position: fixed; top: 10px; right: 10px; 
            border: 1px solid rgba(255,255,255,0.2); 
            background: rgba(0,0,0,0.15); 
            z-index: 1000; 
            pointer-events: none;">
-</canvas>
+    </canvas>
+
+    <div id="gameOverMensaje"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); color:white; font-size:24px; text-align:center; padding-top:20%; z-index:9999;">
+        <p>Game Over</p>
+        <button id="btnVolverMenu">Volver al menú principal</button>
+    </div>
+
+    <button id="btnTienda" style="position:absolute; bottom:10px; right:10px; z-index:2;">🛒 Tienda</button>
+
+    <div id="tienda" style="
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: sans-serif;
+    display: none; /* oculto por defecto */
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+"></div>
+    <script src="tienda.js"></script>
+    <script src="clasest.js"></script>
     <script src="mainttt.js"></script>
+    <script src="funcionesu.js"></script>
+    <script src="looprincipal.js"></script>
 </body>
 
 </html>
