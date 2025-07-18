@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tierra Antigua 1v1</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #333;
+        }
+
+        #gameCanvas {
+            display: none;
+            background: linear-gradient(#34495e, #2c3e50);
+        }
+
+        #menuInicio,
+        #pantallaSeleccion {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            z-index: 2;
+        }
+
+        #pantallaSeleccion {
+            display: none;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .jugadorSeleccion {
+            width: 45%;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cartasDisponibles,
+        .cartasElegidas {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .carta {
+            width: 64px;
+            height: 64px;
+            margin: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+            border: none;
+            transition: border 0.3s ease;
+        }
+
+        .carta img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carta.seleccionada {
+            border: 3px solid #27ae60;
+        }
+
+        .jugadorSeleccion button {
+            margin-top: 10px;
+            padding: 5px 15px;
+            font-size: 1em;
+            background: #2980b9;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .jugadorSeleccion button:hover {
+            background: #3498db;
+        }
+
+        /* Paneles de cartas en batalla */
+        .panelCartas {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 3;
+        }
+
+        #panel1 {
+            left: 10px;
+        }
+
+        #panel2 {
+            right: 10px;
+        }
+
+        /* Barras de energía */
+        .barraEnergia {
+            position: absolute;
+            width: 40%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            display: none;
+        }
+
+
+        .energia {
+            height: 100%;
+            width: 0%;
+            background: #27ae60;
+            transition: width 0.2s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .previewEnergia {
+            height: 100%;
+            width: 0%;
+            background: rgba(255, 255, 0, 0.5);
+            /* amarillo semitransparente */
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            pointer-events: none;
+            transition: width 0.2s;
+        }
+
+
+        #barraEnergia1 {
+            bottom: 10px;
+            left: 5%;
+        }
+
+        #barraEnergia2 {
+            transform: scaleX(-1);
+            top: 10px;
+            right: 5%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Menú inicio -->
+    <div id="menuInicio">
+        <h1>🌌 Tierra Antigua 1v1 🌌</h1>
+        <button onclick="iniciarSeleccion()">⚔️ Click para jugar ⚔️</button>
+    </div>
+
+    <!-- Pantalla selección -->
+    <div id="pantallaSeleccion">
+        <div class="jugadorSeleccion" id="jugador1">
+            <h2>Jugador 1</h2>
+            <div class="cartasDisponibles" id="cartasDisponibles1"></div>
+            <h3>Elegidas:</h3>
+            <div class="cartasElegidas" id="cartasElegidas1"></div>
+            <button onclick="jugadorListo(1)">Listo</button>
+        </div>
+        <div class="jugadorSeleccion" id="jugador2">
+            <h2>Jugador 2</h2>
+            <div class="cartasDisponibles" id="cartasDisponibles2"></div>
+            <h3>Elegidas:</h3>
+            <div class="cartasElegidas" id="cartasElegidas2"></div>
+            <button onclick="jugadorListo(2)">Listo</button>
+        </div>
+    </div>
+
+    <!-- Canvas de batalla -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Paneles de cartas en batalla -->
+    <div id="panel1" class="panelCartas"></div>
+    <div id="panel2" class="panelCartas"></div>
+
+    <!-- Barras de energía -->
+    <div id="barraEnergia1" class="barraEnergia">
+        <div id="energia1" class="energia"></div>
+        <div id="previewEnergia1" class="previewEnergia"></div>
+    </div>
+    <div id="barraEnergia2" class="barraEnergia">
+        <div id="energia2" class="energia"></div>
+        <div id="previewEnergia2" class="previewEnergia"></div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        const personajes = [
+            {
+                nombre: "Samurai",
+                idleSrc: "Samurai/Idle.png",
+                walkSrc: "Samurai/Walk.png",
+                runSrc: "Samurai/Run.png",
+                attack1Src: "Samurai/Attack_1.png",
+                attack2Src: "Samurai/Attack_2.png",
+                deathSrc: "Samurai/Dead.png",
+                deathFrames: 6,
+                frameWidth: 128,
+                frameHeight: 128,
+                idleFrames: 5,
+                walkFrames: 9,
+                runFrames: 8,
+                attack1Frames: 4,
+                attack2Frames: 5,
+                peso: 25,
+                hpMax: 150,
+                damage: 35,
+                regenRate: 4,
+                ataqueDistancia: false,
+                costo: 3,
+                speed: 2,
+            },
+            {
+                nombre: "Commandante",
+                idleSrc: "Samurai_Commander/Idle.png",
+                walkSrc: "Samurai_Commander/Walk.png",
+                runSrc: "Samurai_Commander/Run.png",
+                attack1Src: "Samurai_Commander/Attack_1.png",
+                attack2Src: "Samurai_Commander/Attack_2.png",
+                deathSrc: "Samurai_Commander/Dead.png",
+                deathFrames: 6,
+                frameWidth: 128,
+                frameHeight: 128,
+                idleFrames: 5,
+                walkFrames: 9,
+                runFrames: 8,
+                attack1Frames: 4,
+                attack2Frames: 5,
+                peso: 35,
+                hpMax: 180,
+                damage: 28,
+                regenRate: 3,
+                ataqueDistancia: false,
+                costo: 4,
+                speed: 1.8,
+            },
+            {
+                nombre: "Kunoichi",
+                idleSrc: "Kunoichi/Idle.png",
+                walkSrc: "Kunoichi/Walk.png",
+                runSrc: "Kunoichi/Run.png",
+                attack1Src: "Kunoichi/Attack_1.png",
+                attack2Src: "Kunoichi/Attack_2.png",
+                deathSrc: "Kunoichi/Dead.png",
+                deathFrames: 5,
+                frameWidth: 128,
+                frameHeight: 128,
+                idleFrames: 9,
+                walkFrames: 8,
+                runFrames: 8,
+                attack1Frames: 6,
+                attack2Frames: 8,
+                peso: 20,
+                hpMax: 110,
+                damage: 45,
+                regenRate: 3,
+                ataqueDistancia: false,
+                costo: 2,
+                speed: 3,
+            },
+            {
+                nombre: "Mago Errante",
+                idleSrc: "Wanderer Magican/Idle.png",
+                walkSrc: "Wanderer Magican/Walk.png",
+                runSrc: "Wanderer Magican/Run.png",
+                attack1Src: "Wanderer Magican/Attack_1.png",
+                attack2Src: "Wanderer Magican/Attack_2.png",
+                deathSrc: "Wanderer Magican/Dead.png",
+                deathFrames: 4,
+                frameWidth: 128,
+                frameHeight: 128,
+                idleFrames: 8,
+                walkFrames: 7,
+                runFrames: 8,
+                attack1Frames: 7,
+                attack2Frames: 9,
+                peso: 20,
+                hpMax: 90,
+                damage: 40,
+                regenRate: 6,
+                ataqueDistancia: false,
+                costo: 4,
+                speed: 1.8,
+            },
+            {
+                nombre: "Mago Eléctrico",
+                idleSrc: "Lightning Mage/Idle.png",
+                walkSrc: "Lightning Mage/Walk.png",
+                runSrc: "Lightning Mage/Run.png",
+                attack1Src: "Lightning Mage/Attack_1.png",
+                attack2Src: "Lightning Mage/Attack_2.png",
+                deathSrc: "Lightning Mage/Dead.png",
+                deathFrames: 5,
+                frameWidth: 128,
+                frameHeight: 128,
+                idleFrames: 7,
+                walkFrames: 7,
+                runFrames: 8,
+                attack1Frames: 10,
+                attack2Frames: 4,
+                peso: 20,
+                hpMax: 100,
+                damage: 55,
+                regenRate: 2,
+                ataqueDistancia: false,
+                costo: 2,
+                speed: 3,
+            },
+            {
+                nombre: "Esqueleto Lancero",
+                idleSrc: "Skeleton_Spearman/Idle.png",
+                walkSrc: "Skeleton_Spearman/Walk.png",
+                runSrc: "Skeleton_Spearman/Run.png",
+                attack1Src: "Skeleton_Spearman/Attack_1.png",
+                attack2Src: "Skeleton_Spearman/Attack_2.png",
+                deathSrc: "Skeleton_Spearman/Dead.png",
+                deathFrames: 5,
+                frameWidth: 128,
+                frameHeight: 128,
+                idleFrames: 7,
+                walkFrames: 7,
+                runFrames: 8,
+                attack1Frames: 4,
+                attack2Frames: 4,
+                peso: 20,
+                hpMax: 150,
+                damage: 25,
+                regenRate: 4,
+                ataqueDistancia: false,
+                costo: 1,
+                speed: 2,
+            },
+            {
+                nombre: "Esqueleto Guerrero",
+                idleSrc: "Skeleton_Warrior/Idle.png",
+                walkSrc: "Skeleton_Warrior/Walk.png",
+                runSrc: "Skeleton_Warrior/Run.png",
+                attack1Src: "Skeleton_Warrior/Attack_1.png",
+                attack2Src: "Skeleton_Warrior/Attack_2.png",
+                deathSrc: "Skeleton_Warrior/Dead.png",
+                deathFrames: 4,
+                frameWidth: 128,
+                frameHeight: 128,
+                idleFrames: 7,
+                walkFrames: 7,
+                runFrames: 8,
+                attack1Frames: 5,
+                attack2Frames: 6,
+                peso: 30,
+                hpMax: 250,
+                damage: 15,
+                regenRate: 5,
+                ataqueDistancia: false,
+                costo: 2,
+                speed: 3,
+            }
+            ,
+            {
+                nombre: "Minotauro",
+                idleSrc: "Minotaur_2/Idle.png",
+                walkSrc: "Minotaur_2/Walk.png",
+                runSrc: "Minotaur_2/Walk.png",
+                attack1Src: "Minotaur_2/Attack.png",
+                attack2Src: "Minotaur_2/Attack.png",
+                deathSrc: "Minotaur_2/Dead.png",
+                deathFrames: 5,
+                frameWidth: 128,
+                frameHeight: 128,
+                idleFrames: 10,
+                walkFrames: 12,
+                runFrames: 8,
+                attack1Frames: 5,
+                attack2Frames: 5,
+                peso: 30,
+                hpMax: 300,
+                damage: 15,
+                regenRate: 5,
+                ataqueDistancia: false,
+                costo: 3,
+                speed: 3,
+            },
+             {
+                nombre: "Minotauro Jefe",
+                idleSrc: "Minotaur_1/Idle.png",
+                walkSrc: "Minotaur_1/Walk.png",
+                runSrc: "Minotaur_1/Walk.png",
+                attack1Src: "Minotaur_1/Attack.png",
+                attack2Src: "Minotaur_1/Attack.png",
+                deathSrc: "Minotaur_1/Dead.png",
+                deathFrames: 5,
+                frameWidth: 128,
+                frameHeight: 128,
+                idleFrames: 10,
+                walkFrames: 12,
+                runFrames: 8,
+                attack1Frames: 5,
+                attack2Frames: 5,
+                peso: 30,
+                hpMax: 300,
+                damage: 15,
+                regenRate: 5,
+                ataqueDistancia: false,
+                costo: 3,
+                speed: 3,
+            },
+             {
+                nombre: "Minotauro Jefa",
+                idleSrc: "Minotaur_3/Idle.png",
+                walkSrc: "Minotaur_3/Walk.png",
+                runSrc: "Minotaur_3/Walk.png",
+                attack1Src: "Minotaur_3/Attack.png",
+                attack2Src: "Minotaur_3/Attack.png",
+                deathSrc: "Minotaur_3/Dead.png",
+                deathFrames: 5,
+                frameWidth: 128,
+                frameHeight: 128,
+                idleFrames: 10,
+                walkFrames: 12,
+                runFrames: 8,
+                attack1Frames: 4,
+                attack2Frames: 4,
+                peso: 30,
+                hpMax: 300,
+                damage: 15,
+                regenRate: 5,
+                ataqueDistancia: false,
+                costo: 3,
+                speed: 3,
+            }
+        ];
+
+        let mazo1 = [], mazo2 = [];
+        let listo1 = false, listo2 = false;
+
+        let energia1 = 0, energia2 = 0;
+        const energiaMax = 10;
+        let unidades = [];
+        let seleccionada1 = null, seleccionada2 = null;
+
+        let lastTimestamp = 0;
+        const energiaPorSegundo = 1; // energía que se genera por segundo
+
+
+        let escalaPersonaje = 1.0;
+
+        function actualizarEscalaPersonaje() {
+            if (window.innerWidth <= 768) {
+                escalaPersonaje = 0.5; // en celular son 60% del tamaño original
+            } else {
+                escalaPersonaje = 1.0; // en PC tamaño normal
+            }
+        }
+
+        actualizarEscalaPersonaje();
+        window.addEventListener('resize', actualizarEscalaPersonaje);
+
+
+
+        // --- Inicio de selección ---
+        function iniciarSeleccion() {
+            document.getElementById("menuInicio").style.display = "none";
+            document.getElementById("pantallaSeleccion").style.display = "flex";
+            cargarCartasDisponibles();
+
+            // 👇 Mostrar las cartas ya elegidas de cada jugador al entrar
+            actualizarMazo(1);
+            actualizarMazo(2);
+        }
+        function crearCartaAnimada(personaje, jugador) {
+            const escala = 0.5;
+            const fw = personaje.frameWidth;
+            const fh = personaje.frameHeight;
+            const w = fw * escala;
+            const h = fh * escala;
+
+            // 1) contenedor
+            const container = document.createElement("div");
+            container.className = "carta";
+            container.style.width = w + "px";
+            container.style.height = h + "px";
+            container.style.background = "transparent";
+
+            // 2) canvas
+            const canvasCarta = document.createElement("canvas");
+            canvasCarta.width = w;
+            canvasCarta.height = h;
+            container.appendChild(canvasCarta);
+            const ctxCarta = canvasCarta.getContext("2d");
+
+            // 3) animación idle
+            const img = new Image();
+            img.src = personaje.idleSrc;
+            let frame = 0;
+            const total = personaje.idleFrames;
+            const dur = 100;
+            let last = performance.now();
+
+            function animar() {
+                if (img.complete) {
+                    const now = performance.now();
+                    if (now - last > dur) {
+                        frame = (frame + 1) % total;
+                        last = now;
+                    }
+                    ctxCarta.clearRect(0, 0, w, h);
+                    ctxCarta.drawImage(
+                        img,
+                        frame * fw, 0, fw, fh,
+                        0, 0, w, h
+                    );
+                }
+                requestAnimationFrame(animar);
+            }
+            img.onload = animar;
+            img.onerror = () => console.error("Error cargando", img.src);
+
+            // 4) click para agregar
+            container.onclick = () => {
+                const mazo = jugador === 1 ? mazo1 : mazo2;
+                if (mazo.length < 8) {
+                    mazo.push(personaje);
+                    actualizarMazo(jugador);
+                }
+            };
+
+            return container;
+        }
+
+        function crearCartaAnimadaSinClick(personaje) {
+            const escala = 0.5;
+            const fw = personaje.frameWidth;
+            const fh = personaje.frameHeight;
+            const w = fw * escala;
+            const h = fh * escala;
+
+            const container = document.createElement("div");
+            container.className = "carta";
+            container.style.width = w + "px";
+            container.style.height = h + "px";
+            container.style.background = "transparent";
+
+            const canvasCarta = document.createElement("canvas");
+            canvasCarta.width = w;
+            canvasCarta.height = h;
+            container.appendChild(canvasCarta);
+            const ctxCarta = canvasCarta.getContext("2d");
+
+            const img = new Image();
+            img.src = personaje.idleSrc;
+            let frame = 0;
+            const total = personaje.idleFrames;
+            const dur = 100;
+            let last = performance.now();
+
+            function animar() {
+                if (img.complete) {
+                    const now = performance.now();
+                    if (now - last > dur) {
+                        frame = (frame + 1) % total;
+                        last = now;
+                    }
+                    ctxCarta.clearRect(0, 0, w, h);
+                    ctxCarta.drawImage(
+                        img,
+                        frame * fw, 0, fw, fh,
+                        0, 0, w, h
+                    );
+                }
+                requestAnimationFrame(animar);
+            }
+            img.onload = animar;
+            img.onerror = () => console.error("Error cargando", img.src);
+
+            return container;
+        }
+
+
+
+        function crearCartaAnimadaSinClick(personaje) {
+            const container = document.createElement("div");
+            container.className = "carta";
+
+            const escala = 0.5;
+            const canvasCarta = document.createElement("canvas");
+            const ctxCarta = canvasCarta.getContext("2d");
+            canvasCarta.width = personaje.frameWidth * escala;
+            canvasCarta.height = personaje.frameHeight * escala;
+
+            container.appendChild(canvasCarta);
+
+            const img = new Image();
+            img.src = personaje.idleSrc;
+
+            let frameActual = 0;
+            const totalFrames = personaje.idleFrames;
+            const frameWidth = personaje.frameWidth;
+            const frameHeight = personaje.frameHeight;
+            let lastTime = performance.now();
+            const frameDuration = 100;
+
+            function animar() {
+                const now = performance.now();
+                if (now - lastTime > frameDuration) {
+                    frameActual = (frameActual + 1) % totalFrames;
+                    lastTime = now;
+                }
+                ctxCarta.clearRect(0, 0, canvasCarta.width, canvasCarta.height);
+                ctxCarta.drawImage(
+                    img,
+                    frameActual * frameWidth, 0, frameWidth, frameHeight,
+                    0, 0, frameWidth * escala, frameHeight * escala
+                );
+                requestAnimationFrame(animar);
+            }
+
+            // Si la imagen ya está cargada (por caché), inicia de inmediato
+            if (img.complete) {
+                animar();
+            } else {
+                img.onload = () => {
+                    animar();
+                };
+            }
+
+            img.onerror = () => {
+                console.error("❌ Error cargando imagen:", img.src);
+            };
+
+            return container;
+        }
+
+        function crearCartaAnimada(personaje, jugador) {
+            const container = document.createElement("div");
+            container.className = "carta";
+
+            const escala = 0.5; // escala para mini canvas en cartas
+            const canvasCarta = document.createElement("canvas");
+            const ctxCarta = canvasCarta.getContext("2d");
+            canvasCarta.width = personaje.frameWidth * escala;
+            canvasCarta.height = personaje.frameHeight * escala;
+
+            container.appendChild(canvasCarta);
+
+            const img = new Image();
+            img.src = personaje.idleSrc;
+
+            let frameActual = 0;
+            const totalFrames = personaje.idleFrames;
+            const frameWidth = personaje.frameWidth;
+            const frameHeight = personaje.frameHeight;
+            let lastTime = performance.now();
+            const frameDuration = 100; // ms por frame para animación idle
+
+            img.onload = () => {
+                console.log("✅ Imagen cargada para animación:", img.src);
+                animar();
+            };
+
+            img.onerror = () => {
+                console.error("❌ Error cargando imagen:", img.src);
+            };
+
+            function animar() {
+                if (!img.complete) {
+                    // Si la imagen aún no está cargada, espera otro frame
+                    requestAnimationFrame(animar);
+                    return;
+                }
+
+                const now = performance.now();
+                if (now - lastTime > frameDuration) {
+                    frameActual = (frameActual + 1) % totalFrames;
+                    lastTime = now;
+                }
+                ctxCarta.clearRect(0, 0, canvasCarta.width, canvasCarta.height);
+                ctxCarta.drawImage(
+                    img,
+                    frameActual * frameWidth, 0, frameWidth, frameHeight,
+                    0, 0, frameWidth * escala, frameHeight * escala
+                );
+                requestAnimationFrame(animar);
+            }
+
+            container.onclick = () => {
+                if (jugador === 1) {
+                    if (mazo1.length < 8) {
+                        mazo1.push(personaje);
+                        actualizarMazo(1);
+                    }
+                } else {
+                    if (mazo2.length < 8) {
+                        mazo2.push(personaje);
+                        actualizarMazo(2);
+                    }
+                }
+            };
+
+            return container;
+        }
+
+
+
+
+
+        // Se muestran todas las cartas disponibles para ambos jugadores
+        // Cambiar la función de carga de cartas disponibles para usar animación idle
+        function cargarCartasDisponibles() {
+            const cont1 = document.getElementById("cartasDisponibles1");
+            const cont2 = document.getElementById("cartasDisponibles2");
+            cont1.innerHTML = "";
+            cont2.innerHTML = "";
+            personajes.forEach(p => {
+                cont1.appendChild(crearCartaAnimada(p, 1));
+                cont2.appendChild(crearCartaAnimada(p, 2));
+            });
+        }
+
+
+        // Crear carta con imagen y evento para agregar al mazo (máximo 8)
+        function crearCartaSeleccion(personaje, jugador) {
+            const div = document.createElement("div");
+            div.className = "carta";
+            const img = document.createElement("img");
+            img.src = personaje.idleSrc;
+            if (jugador === 2) img.style.transform = "scaleX(-1)"; // Voltear imagen para jugador 2
+            div.appendChild(img);
+
+            div.onclick = () => {
+                if (jugador === 1) {
+                    if (mazo1.length < 8) {
+                        mazo1.push(personaje);
+                        actualizarMazo(1);
+                    }
+                } else {
+                    if (mazo2.length < 8) {
+                        mazo2.push(personaje);
+                        actualizarMazo(2);
+                    }
+                }
+            };
+            return div;
+        }
+
+        // Cambiar actualizarMazo para mostrar animaciones idle en vez de imagen estática
+        function actualizarMazo(jugador) {
+            const cont = document.getElementById(`cartasElegidas${jugador}`);
+            cont.innerHTML = "";
+            const mazo = jugador === 1 ? mazo1 : mazo2;
+            mazo.forEach(p => {
+                const cartaAnimada = crearCartaAnimadaSinClick(p);
+                // Si es jugador 2, voltea horizontalmente
+                if (jugador === 2) {
+                    const canvas = cartaAnimada.querySelector("canvas");
+                    if (canvas) canvas.style.transform = "scaleX(-1)";
+                }
+                cont.appendChild(cartaAnimada);
+            });
+        }
+
+        function jugadorListo(jugador) {
+            if (jugador === 1) listo1 = true;
+            else listo2 = true;
+            if (listo1 && listo2) iniciarJuego();
+        }
+
+        // --- Inicio de juego ---
+        function iniciarJuego() {
+            document.getElementById("pantallaSeleccion").style.display = "none";
+            canvas.style.display = "block";
+            document.getElementById("barraEnergia1").style.display = "block";
+            document.getElementById("barraEnergia2").style.display = "block";
+
+            cargarPanelesCartas();
+
+            // Eliminar setInterval para energía: se actualizará en loop
+
+            // Evento único para invocar unidades según mitad y selección
+            canvas.addEventListener("click", e => {
+                const mitad = window.innerWidth / 2;
+                const x = e.clientX;
+                const y = e.clientY;
+
+                if (x < mitad && seleccionada1) invocarUnidad(1, x, y, seleccionada1);
+                else if (x >= mitad && seleccionada2) invocarUnidad(2, x, y, seleccionada2);
+            });
+
+            requestAnimationFrame(loop);
+        }
+
+
+        function cargarPanelesCartas() {
+            const panel1 = document.getElementById("panel1");
+            const panel2 = document.getElementById("panel2");
+            panel1.innerHTML = "";
+            panel2.innerHTML = "";
+
+            mazo1.forEach(p => {
+                const div = document.createElement("div");
+                div.className = "carta";
+                div.dataset.personajeNombre = p.nombre;
+
+                const escala = 0.5;
+                const canvasCarta = document.createElement("canvas");
+                const ctxCarta = canvasCarta.getContext("2d");
+                canvasCarta.width = p.frameWidth * escala;
+                canvasCarta.height = p.frameHeight * escala;
+                div.appendChild(canvasCarta);
+
+                const img = new Image();
+                img.src = p.idleSrc;
+
+                let frameActual = 0;
+                const totalFrames = p.idleFrames;
+                const frameWidth = p.frameWidth;
+                const frameHeight = p.frameHeight;
+                let lastTime = performance.now();
+                const frameDuration = 100;
+
+                function animar() {
+                    const now = performance.now();
+                    if (now - lastTime > frameDuration) {
+                        frameActual = (frameActual + 1) % totalFrames;
+                        lastTime = now;
+                    }
+                    ctxCarta.clearRect(0, 0, canvasCarta.width, canvasCarta.height);
+                    ctxCarta.drawImage(
+                        img,
+                        frameActual * frameWidth, 0, frameWidth, frameHeight,
+                        0, 0, frameWidth * escala, frameHeight * escala
+                    );
+                    requestAnimationFrame(animar);
+                }
+
+                img.onload = () => {
+                    animar();
+                };
+
+                div.onclick = () => {
+                    if (seleccionada1 === p) seleccionada1 = null;
+                    else seleccionada1 = p;
+                    actualizarVisualSeleccionPanel(1);
+                };
+
+                panel1.appendChild(div);
+            });
+
+            mazo2.forEach(p => {
+                const div = document.createElement("div");
+                div.className = "carta";
+                div.dataset.personajeNombre = p.nombre;
+
+                const escala = 0.5;
+                const canvasCarta = document.createElement("canvas");
+                const ctxCarta = canvasCarta.getContext("2d");
+                canvasCarta.width = p.frameWidth * escala;
+                canvasCarta.height = p.frameHeight * escala;
+                canvasCarta.style.transform = "scaleX(-1)";
+                div.appendChild(canvasCarta);
+
+                const img = new Image();
+                img.src = p.idleSrc;
+
+                let frameActual = 0;
+                const totalFrames = p.idleFrames;
+                const frameWidth = p.frameWidth;
+                const frameHeight = p.frameHeight;
+                let lastTime = performance.now();
+                const frameDuration = 100;
+
+                function animar() {
+                    const now = performance.now();
+                    if (now - lastTime > frameDuration) {
+                        frameActual = (frameActual + 1) % totalFrames;
+                        lastTime = now;
+                    }
+                    ctxCarta.clearRect(0, 0, canvasCarta.width, canvasCarta.height);
+                    ctxCarta.drawImage(
+                        img,
+                        frameActual * frameWidth, 0, frameWidth, frameHeight,
+                        0, 0, frameWidth * escala, frameHeight * escala
+                    );
+                    requestAnimationFrame(animar);
+                }
+
+                img.onload = () => {
+                    animar();
+                };
+
+                div.onclick = () => {
+                    if (seleccionada2 === p) seleccionada2 = null;
+                    else seleccionada2 = p;
+                    actualizarVisualSeleccionPanel(2);
+                };
+
+                panel2.appendChild(div);
+            });
+        }
+
+
+        // Actualiza la visualización para mostrar qué carta está seleccionada en el panel
+        function actualizarVisualSeleccionPanel(jugador) {
+            const panel = jugador === 1 ? document.getElementById("panel1") : document.getElementById("panel2");
+            const seleccionada = jugador === 1 ? seleccionada1 : seleccionada2;
+            const energiaActual = jugador === 1 ? energia1 : energia2;
+
+            let cambio = false;
+
+            Array.from(panel.children).forEach(div => {
+                const antes = div.classList.contains("seleccionada");
+                if (seleccionada && div.dataset.personajeNombre === seleccionada.nombre) {
+                    div.classList.add("seleccionada");
+                    if (!antes) cambio = true;
+                } else {
+                    div.classList.remove("seleccionada");
+                    if (antes) cambio = true;
+                }
+            });
+
+            if (cambio) {
+                if (seleccionada) {
+                    mostrarPreviewEnergia(jugador, seleccionada.costo, energiaActual, energiaMax);
+                } else {
+                    ocultarPreviewEnergia(jugador);
+                }
+            }
+        }
+
+
+        // Invocación de unidades respetando energía y lado
+        function invocarUnidad(jugador, x, y, personaje) {
+            if (jugador === 1 && energia1 >= personaje.costo) {
+                energia1 -= personaje.costo;
+                unidades.push({
+                    jugador: 1,
+                    x,
+                    y,
+                    hp: personaje.hpMax,
+                    damage: personaje.damage,
+                    peso: personaje.peso,
+                    speed: Math.abs(personaje.speed),
+                    personaje: personaje,
+                    animFrame: 0,
+                    animTime: 0,
+                    animSpeed: 100,
+                    animType: "idle",
+                    img: new Image()
+                });
+                unidades[unidades.length - 1].img.src = personaje.idleSrc;
+                document.getElementById("energia1").style.width = (energia1 / energiaMax * 100) + "%";
+            } else if (jugador === 2 && energia2 >= personaje.costo) {
+                energia2 -= personaje.costo;
+                unidades.push({
+                    jugador: 2,
+                    x,
+                    y,
+                    hp: personaje.hpMax,
+                    damage: personaje.damage,
+                    peso: personaje.peso,
+                    speed: -Math.abs(personaje.speed),
+                    personaje: personaje,
+                    animFrame: 0,
+                    animTime: 0,
+                    animSpeed: 100,
+                    animType: "idle",
+                    img: new Image()
+                });
+                unidades[unidades.length - 1].img.src = personaje.idleSrc;
+                document.getElementById("energia2").style.width = (energia2 / energiaMax * 100) + "%";
+            }
+        }
+
+        function mostrarPreviewEnergia(jugador, costoUnidad, energiaActual, energiaMax) {
+            const preview = document.getElementById(`previewEnergia${jugador}`);
+            let previewWidth = 0;
+
+            // Si ya está en máximo, el preview debe reflejar el costo total
+            if (energiaActual >= energiaMax) {
+                previewWidth = (costoUnidad / energiaMax) * 100;
+            }
+            // Si al sumar el costo no supera el máximo, muestra el costo real
+            else if (energiaActual + costoUnidad <= energiaMax) {
+                previewWidth = (costoUnidad / energiaMax) * 100;
+            }
+            // Si el costo supera el máximo, muestra el espacio restante como preview
+            else {
+                previewWidth = ((energiaMax - energiaActual) / energiaMax) * 100;
+            }
+
+            preview.style.width = previewWidth + "%";
+        }
+
+        function ocultarPreviewEnergia(jugador) {
+            const preview = document.getElementById(`previewEnergia${jugador}`);
+            preview.style.width = "0%";
+        }
+
+        function loop(timestamp = 0) {
+            const delta = timestamp - lastTimestamp;
+            lastTimestamp = timestamp;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Línea divisoria central
+            ctx.fillStyle = "black";
+            ctx.fillRect(canvas.width / 2 - 1, 0, 2, canvas.height);
+
+            // Actualizar energías suavemente
+            if (energia1 < energiaMax) {
+                energia1 += energiaPorSegundo * (delta / 1000);
+                if (energia1 > energiaMax) energia1 = energiaMax;
+                document.getElementById("energia1").style.width = (energia1 / energiaMax * 100) + "%";
+            }
+
+            if (energia2 < energiaMax) {
+                energia2 += energiaPorSegundo * (delta / 1000);
+                if (energia2 > energiaMax) energia2 = energiaMax;
+                document.getElementById("energia2").style.width = (energia2 / energiaMax * 100) + "%";
+            }
+
+            unidades.forEach(u => {
+                if (u.alpha === undefined) u.alpha = 1;
+
+                // Inicializar u.img si no existe
+                if (!u.img) {
+                    u.img = new Image();
+                    u.img.src = u.personaje.idleSrc;
+                    u.img.onerror = () => {
+                        console.error("❌ Error cargando imagen:", u.img.src);
+                    };
+                }
+
+                if (u.hp > 0 && u.estado !== "morir") {
+                    let enemigos = unidades.filter(e => e.jugador !== u.jugador && e.hp > 0);
+                    let objetivo = enemigos.find(e => Math.abs(e.x - u.x) < 50 && Math.abs(e.y - u.y) < 50);
+
+                    if (objetivo) {
+                        u.estado = "atacar";
+                        u.objetivoActual = objetivo;
+                    } else {
+                        // Si ya llegó a la posición deseada o no tiene a dónde ir, idle
+                        // Aquí podrías definir un destino si usas pathfinding.
+                        // De momento, si no hay enemigos cerca y no camina, idle.
+                        if (Math.abs(u.speed) < 0.1) {
+                            u.estado = "idle";
+                        } else {
+                            u.estado = "caminar";
+                            u.objetivoActual = null;
+                        }
+                    }
+                } else if (u.hp <= 0 && u.estado !== "morir") {
+                    u.estado = "morir";
+                    u.animType = "death";
+                    u.animFrame = 0;
+                    u.animTime = 0;
+                    u.img.src = u.personaje.deathSrc;
+                }
+
+                // Cambiar animType según estado
+                let newAnimType = u.animType;
+                if (u.estado === "caminar") {
+                    newAnimType = Math.abs(u.speed) > 2.5 ? "run" : "walk";
+                } else if (u.estado === "atacar") {
+                    newAnimType = "attack1";
+                } else if (u.estado === "morir") {
+                    newAnimType = "death";
+                }
+
+                if (u.animType !== newAnimType) {
+                    u.animType = newAnimType;
+                    u.animFrame = 0;
+                    u.animTime = 0;
+                    switch (newAnimType) {
+                        case "idle": u.img.src = u.personaje.idleSrc; break;
+                        case "walk": u.img.src = u.personaje.walkSrc; break;
+                        case "run": u.img.src = u.personaje.runSrc; break;
+                        case "attack1": u.img.src = u.personaje.attack1Src; break;
+                        case "death": u.img.src = u.personaje.deathSrc; break;
+                    }
+                }
+
+                u.animTime += delta;
+
+                if (u.animTime >= u.animSpeed) {
+                    u.animFrame++;
+                    u.animTime = 0;
+                    const maxFrames = {
+                        idle: u.personaje.idleFrames,
+                        walk: u.personaje.walkFrames,
+                        run: u.personaje.runFrames,
+                        attack1: u.personaje.attack1Frames,
+                        death: u.personaje.deathFrames
+                    }[u.animType];
+                    if (u.animFrame >= maxFrames) {
+                        if (u.estado === "morir") {
+                            u.animFrame = maxFrames - 1; // Mantiene último frame
+                        } else {
+                            if (u.estado === "atacar" && u.objetivoActual && u.objetivoActual.hp > 0) {
+                                u.objetivoActual.hp -= u.damage;
+                            }
+                            u.animFrame = 0;
+                        }
+                    }
+                }
+
+                if (u.img.complete) {
+                    const sx = u.animFrame * u.personaje.frameWidth;
+                    const sy = 0;
+                    const sw = u.personaje.frameWidth;
+                    const sh = u.personaje.frameHeight;
+                    const dw = sw * escalaPersonaje;
+                    const dh = sh * escalaPersonaje;
+                    const dx = u.x - dw / 2;
+                    const dy = u.y - dh / 2;
+
+                    ctx.save();
+                    ctx.globalAlpha = u.alpha;
+
+                    if (u.jugador === 2) {
+                        ctx.translate(dx + dw / 2, dy + dh / 2);
+                        ctx.scale(-1, 1);
+                        ctx.translate(-(dx + dw / 2), -(dy + dh / 2));
+                    }
+
+                    ctx.drawImage(u.img, sx, sy, sw, sh, dx, dy, dw, dh);
+                    ctx.restore();
+
+                    // Barra de vida
+                    if (u.hp > 0) {
+                        const vidaPercent = u.hp / u.personaje.hpMax;
+                        ctx.fillStyle = "red";
+                        ctx.fillRect(u.x - 20, u.y - sh / 2 - 10, 40, 5);
+                        ctx.fillStyle = "green";
+                        ctx.fillRect(u.x - 20, u.y - sh / 2 - 10, 40 * vidaPercent, 5);
+                        ctx.strokeStyle = "black";
+                        ctx.strokeRect(u.x - 20, u.y - sh / 2 - 10, 40, 5);
+                    }
+                }
+
+                if (u.estado === "caminar") {
+                    u.x += u.speed;
+                }
+
+                if (u.estado === "morir") {
+                    u.alpha -= 0.5 * (delta / 1000);
+                }
+            });
+
+            unidades = unidades.filter(u => u.alpha > 0);
+
+            requestAnimationFrame(loop);
+        }
+
+    </script>
+
+
+</body>
+
+</html>
