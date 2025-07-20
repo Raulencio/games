@@ -12,13 +12,14 @@
             background: #333;
         }
 
+        /* Canvas oculto hasta iniciar juego */
         #gameCanvas {
             display: none;
             background: linear-gradient(#34495e, #2c3e50);
         }
 
-        #menuInicio,
-        #pantallaSeleccion {
+        /* Menú de inicio visible por defecto */
+        #menuInicio {
             position: absolute;
             top: 0;
             left: 0;
@@ -32,12 +33,21 @@
             z-index: 2;
         }
 
+        /* Pantalla de selección oculta hasta hacer click en “jugar” */
         #pantallaSeleccion {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: none;
+            /* ¡mantiene oculta! */
+            z-index: 2;
             flex-direction: row;
             justify-content: space-around;
             align-items: flex-start;
             padding: 20px;
+            overflow-y: auto;
         }
 
         .jugadorSeleccion {
@@ -77,8 +87,10 @@
         }
 
         .carta.seleccionada {
-            border: 3px solid #27ae60;
+            background: rgba(39, 174, 96, 0.5) !important;
+            /* destaca la carta */
         }
+
 
         .jugadorSeleccion button {
             margin-top: 10px;
@@ -125,7 +137,6 @@
             display: none;
         }
 
-
         .energia {
             height: 100%;
             width: 0%;
@@ -139,7 +150,6 @@
             height: 100%;
             width: 0%;
             background: rgba(255, 255, 0, 0.5);
-            /* amarillo semitransparente */
             position: absolute;
             top: 0;
             left: 0;
@@ -148,18 +158,66 @@
             transition: width 0.2s;
         }
 
-
         #barraEnergia1 {
             bottom: 10px;
             left: 5%;
         }
 
         #barraEnergia2 {
-            transform: scaleX(-1);
             top: 10px;
             right: 5%;
+            transform: scaleX(-1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #pantallaSeleccion {
+                flex-direction: column;
+                padding: 10px;
+                align-items: center;
+            }
+
+            .jugadorSeleccion {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+
+            .carta {
+                width: 20vw !important;
+                aspect-ratio: 1/1;
+            }
+
+            .jugadorSeleccion button {
+                width: 80%;
+                font-size: 1.2em;
+                padding: 12px 0;
+            }
+        }
+
+        /* Ajustes para las cartas en los paneles de batalla */
+        .panelCartas {
+            /* Máximo alto para no salirse de pantalla y permitir scroll */
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Carta dentro del panel: tamaño fijo en PC, proporcional en móvil */
+        .panelCartas .carta canvas {
+            width: auto !important;
+            height: 100% !important;
+            display: block;
+        }
+
+
+        @media (max-width: 768px) {
+            .panelCartas .carta {
+                /* 12% del ancho de la pantalla */
+                width: 12vw !important;
+                height: auto;
+            }
         }
     </style>
+
 </head>
 
 <body>
@@ -409,7 +467,7 @@
                 costo: 3,
                 speed: 3,
             },
-             {
+            {
                 nombre: "Minotauro Jefe",
                 idleSrc: "Minotaur_1/Idle.png",
                 walkSrc: "Minotaur_1/Walk.png",
@@ -433,7 +491,7 @@
                 costo: 3,
                 speed: 3,
             },
-             {
+            {
                 nombre: "Minotauro Jefa",
                 idleSrc: "Minotaur_3/Idle.png",
                 walkSrc: "Minotaur_3/Walk.png",
@@ -547,10 +605,19 @@
             // 4) click para agregar
             container.onclick = () => {
                 const mazo = jugador === 1 ? mazo1 : mazo2;
-                if (mazo.length < 8) {
+                const idx = mazo.indexOf(personaje);
+
+                if (idx === -1 && mazo.length < 5) {
+                    // no estaba en el mazo: lo añadimos
                     mazo.push(personaje);
-                    actualizarMazo(jugador);
+                    container.classList.add("seleccionada");
+                } else if (idx !== -1) {
+                    // ya estaba: lo quitamos
+                    mazo.splice(idx, 1);
+                    container.classList.remove("seleccionada");
                 }
+
+                actualizarMazo(jugador);
             };
 
             return container;
@@ -605,133 +672,6 @@
         }
 
 
-
-        function crearCartaAnimadaSinClick(personaje) {
-            const container = document.createElement("div");
-            container.className = "carta";
-
-            const escala = 0.5;
-            const canvasCarta = document.createElement("canvas");
-            const ctxCarta = canvasCarta.getContext("2d");
-            canvasCarta.width = personaje.frameWidth * escala;
-            canvasCarta.height = personaje.frameHeight * escala;
-
-            container.appendChild(canvasCarta);
-
-            const img = new Image();
-            img.src = personaje.idleSrc;
-
-            let frameActual = 0;
-            const totalFrames = personaje.idleFrames;
-            const frameWidth = personaje.frameWidth;
-            const frameHeight = personaje.frameHeight;
-            let lastTime = performance.now();
-            const frameDuration = 100;
-
-            function animar() {
-                const now = performance.now();
-                if (now - lastTime > frameDuration) {
-                    frameActual = (frameActual + 1) % totalFrames;
-                    lastTime = now;
-                }
-                ctxCarta.clearRect(0, 0, canvasCarta.width, canvasCarta.height);
-                ctxCarta.drawImage(
-                    img,
-                    frameActual * frameWidth, 0, frameWidth, frameHeight,
-                    0, 0, frameWidth * escala, frameHeight * escala
-                );
-                requestAnimationFrame(animar);
-            }
-
-            // Si la imagen ya está cargada (por caché), inicia de inmediato
-            if (img.complete) {
-                animar();
-            } else {
-                img.onload = () => {
-                    animar();
-                };
-            }
-
-            img.onerror = () => {
-                console.error("❌ Error cargando imagen:", img.src);
-            };
-
-            return container;
-        }
-
-        function crearCartaAnimada(personaje, jugador) {
-            const container = document.createElement("div");
-            container.className = "carta";
-
-            const escala = 0.5; // escala para mini canvas en cartas
-            const canvasCarta = document.createElement("canvas");
-            const ctxCarta = canvasCarta.getContext("2d");
-            canvasCarta.width = personaje.frameWidth * escala;
-            canvasCarta.height = personaje.frameHeight * escala;
-
-            container.appendChild(canvasCarta);
-
-            const img = new Image();
-            img.src = personaje.idleSrc;
-
-            let frameActual = 0;
-            const totalFrames = personaje.idleFrames;
-            const frameWidth = personaje.frameWidth;
-            const frameHeight = personaje.frameHeight;
-            let lastTime = performance.now();
-            const frameDuration = 100; // ms por frame para animación idle
-
-            img.onload = () => {
-                console.log("✅ Imagen cargada para animación:", img.src);
-                animar();
-            };
-
-            img.onerror = () => {
-                console.error("❌ Error cargando imagen:", img.src);
-            };
-
-            function animar() {
-                if (!img.complete) {
-                    // Si la imagen aún no está cargada, espera otro frame
-                    requestAnimationFrame(animar);
-                    return;
-                }
-
-                const now = performance.now();
-                if (now - lastTime > frameDuration) {
-                    frameActual = (frameActual + 1) % totalFrames;
-                    lastTime = now;
-                }
-                ctxCarta.clearRect(0, 0, canvasCarta.width, canvasCarta.height);
-                ctxCarta.drawImage(
-                    img,
-                    frameActual * frameWidth, 0, frameWidth, frameHeight,
-                    0, 0, frameWidth * escala, frameHeight * escala
-                );
-                requestAnimationFrame(animar);
-            }
-
-            container.onclick = () => {
-                if (jugador === 1) {
-                    if (mazo1.length < 8) {
-                        mazo1.push(personaje);
-                        actualizarMazo(1);
-                    }
-                } else {
-                    if (mazo2.length < 8) {
-                        mazo2.push(personaje);
-                        actualizarMazo(2);
-                    }
-                }
-            };
-
-            return container;
-        }
-
-
-
-
-
         // Se muestran todas las cartas disponibles para ambos jugadores
         // Cambiar la función de carga de cartas disponibles para usar animación idle
         function cargarCartasDisponibles() {
@@ -739,11 +679,18 @@
             const cont2 = document.getElementById("cartasDisponibles2");
             cont1.innerHTML = "";
             cont2.innerHTML = "";
+
             personajes.forEach(p => {
-                cont1.appendChild(crearCartaAnimada(p, 1));
-                cont2.appendChild(crearCartaAnimada(p, 2));
+                const carta1 = crearCartaAnimada(p, 1);
+                const carta2 = crearCartaAnimada(p, 2);
+                // si ya está en el mazo, marcamos selección
+                if (mazo1.includes(p)) carta1.classList.add("seleccionada");
+                if (mazo2.includes(p)) carta2.classList.add("seleccionada");
+                cont1.appendChild(carta1);
+                cont2.appendChild(carta2);
             });
         }
+
 
 
         // Crear carta con imagen y evento para agregar al mazo (máximo 8)
@@ -757,12 +704,12 @@
 
             div.onclick = () => {
                 if (jugador === 1) {
-                    if (mazo1.length < 8) {
+                    if (mazo1.length < 5) {
                         mazo1.push(personaje);
                         actualizarMazo(1);
                     }
                 } else {
-                    if (mazo2.length < 8) {
+                    if (mazo2.length < 5) {
                         mazo2.push(personaje);
                         actualizarMazo(2);
                     }
@@ -779,10 +726,7 @@
             mazo.forEach(p => {
                 const cartaAnimada = crearCartaAnimadaSinClick(p);
                 // Si es jugador 2, voltea horizontalmente
-                if (jugador === 2) {
-                    const canvas = cartaAnimada.querySelector("canvas");
-                    if (canvas) canvas.style.transform = "scaleX(-1)";
-                }
+
                 cont.appendChild(cartaAnimada);
             });
         }
@@ -1024,6 +968,54 @@
             preview.style.width = "0%";
         }
 
+
+        const fortaleza1 = {
+            x: 150, // Ajusta según ancho de panel1
+            y: canvas.height / 2,
+            width: 50,
+            height: 200,
+            hp: 4200,
+            maxHp: 4200
+        };
+
+        const fortaleza2 = {
+            x: canvas.width - 150, // Ajusta según ancho de panel2
+            y: canvas.height / 2,
+            width: 50,
+            height: 200,
+            hp: 4200,
+            maxHp: 4200
+        };
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            fortaleza1.y = canvas.height / 2;
+            fortaleza2.x = canvas.width - 150;
+            fortaleza2.y = canvas.height / 2;
+        });
+        function dibujarFortaleza(f) {
+            ctx.fillStyle = "gray";
+            ctx.fillRect(
+                f.x - f.width / 2,
+                f.y - f.height / 2,
+                f.width,
+                f.height
+            );
+
+            // Barra de vida
+            const vidaPercent = f.hp / f.maxHp;
+            ctx.fillStyle = "red";
+            ctx.fillRect(f.x - 25, f.y - f.height / 2 - 20, 50, 5);
+            ctx.fillStyle = "green";
+            ctx.fillRect(f.x - 25, f.y - f.height / 2 - 20, 50 * vidaPercent, 5);
+            ctx.strokeStyle = "black";
+            ctx.strokeRect(f.x - 25, f.y - f.height / 2 - 20, 50, 5);
+        }
+
+
+
         function loop(timestamp = 0) {
             const delta = timestamp - lastTimestamp;
             lastTimestamp = timestamp;
@@ -1047,6 +1039,9 @@
                 document.getElementById("energia2").style.width = (energia2 / energiaMax * 100) + "%";
             }
 
+            dibujarFortaleza(fortaleza1);
+            dibujarFortaleza(fortaleza2);
+
             unidades.forEach(u => {
                 if (u.alpha === undefined) u.alpha = 1;
 
@@ -1063,13 +1058,18 @@
                     let enemigos = unidades.filter(e => e.jugador !== u.jugador && e.hp > 0);
                     let objetivo = enemigos.find(e => Math.abs(e.x - u.x) < 50 && Math.abs(e.y - u.y) < 50);
 
+                    if (!objetivo) {
+                        // Si no hay enemigos cerca, ataca la fortaleza enemiga si está cerca
+                        const f = u.jugador === 1 ? fortaleza2 : fortaleza1;
+                        if (Math.abs(u.x - f.x) < 50) {
+                            objetivo = f;
+                        }
+                    }
+
                     if (objetivo) {
                         u.estado = "atacar";
                         u.objetivoActual = objetivo;
                     } else {
-                        // Si ya llegó a la posición deseada o no tiene a dónde ir, idle
-                        // Aquí podrías definir un destino si usas pathfinding.
-                        // De momento, si no hay enemigos cerca y no camina, idle.
                         if (Math.abs(u.speed) < 0.1) {
                             u.estado = "idle";
                         } else {
@@ -1113,6 +1113,7 @@
                 if (u.animTime >= u.animSpeed) {
                     u.animFrame++;
                     u.animTime = 0;
+
                     const maxFrames = {
                         idle: u.personaje.idleFrames,
                         walk: u.personaje.walkFrames,
@@ -1120,18 +1121,26 @@
                         attack1: u.personaje.attack1Frames,
                         death: u.personaje.deathFrames
                     }[u.animType];
+
                     if (u.animFrame >= maxFrames) {
                         if (u.estado === "morir") {
-                            u.animFrame = maxFrames - 1; // Mantiene último frame
+                            u.animFrame = maxFrames - 1; // Mantiene último frame de muerte
                         } else {
-                            if (u.estado === "atacar" && u.objetivoActual && u.objetivoActual.hp > 0) {
+                            // 🗡️ Aplica daño al finalizar la animación de ataque
+                            if (u.estado === "atacar" && u.objetivoActual && u.objetivoActual.hp !== undefined) {
                                 u.objetivoActual.hp -= u.damage;
+
+                                // Si destruye la fortaleza enemiga
+                                if (u.objetivoActual.maxHp && u.objetivoActual.hp <= 0) {
+                                    gameOver(u.jugador);
+                                }
                             }
-                            u.animFrame = 0;
+                            u.animFrame = 0; // Reinicia animación para siguiente ataque o ciclo
                         }
                     }
                 }
 
+                // Dibujar personaje
                 if (u.img.complete) {
                     const sx = u.animFrame * u.personaje.frameWidth;
                     const sy = 0;
@@ -1178,6 +1187,10 @@
             unidades = unidades.filter(u => u.alpha > 0);
 
             requestAnimationFrame(loop);
+        }
+
+        function gameOver(ganador) {            
+            location.reload(); // reinicia el juego
         }
 
     </script>
