@@ -5,6 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tierra Antigua 1v1</title>
+
+    <link rel="icon" href="tt.png" type="image/png">
+
     <style>
         body {
             margin: 0;
@@ -159,7 +162,7 @@
         }
 
         #barraEnergia1 {
-            bottom: 10px;
+            top: 10px;
             left: 5%;
         }
 
@@ -216,6 +219,29 @@
                 height: auto;
             }
         }
+
+        .pantallaGameOver {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+            z-index: 9999;
+        }
+
+        button.listo {
+            background-color: #4CAF50;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #00ff00;
+        }
     </style>
 
 </head>
@@ -235,14 +261,14 @@
             <div class="cartasDisponibles" id="cartasDisponibles1"></div>
             <h3>Elegidas:</h3>
             <div class="cartasElegidas" id="cartasElegidas1"></div>
-            <button onclick="jugadorListo(1)">Listo</button>
+            <button id="btnListo1" onclick="jugadorListo(1)">Listo</button>
         </div>
         <div class="jugadorSeleccion" id="jugador2">
             <h2>Jugador 2</h2>
             <div class="cartasDisponibles" id="cartasDisponibles2"></div>
             <h3>Elegidas:</h3>
             <div class="cartasElegidas" id="cartasElegidas2"></div>
-            <button onclick="jugadorListo(2)">Listo</button>
+            <button id="btnListo2" onclick="jugadorListo(2)">Listo</button>
         </div>
     </div>
 
@@ -295,7 +321,7 @@
                 damage: 35,
                 regenRate: 4,
                 ataqueDistancia: false,
-                costo: 3,
+                costo: 2,
                 speed: 2,
             },
             {
@@ -316,11 +342,11 @@
                 attack2Frames: 5,
                 peso: 35,
                 hpMax: 180,
-                damage: 28,
+                damage: 30,
                 regenRate: 3,
                 ataqueDistancia: false,
-                costo: 4,
-                speed: 1.8,
+                costo: 2,
+                speed: 2,
             },
             {
                 nombre: "Kunoichi",
@@ -343,7 +369,7 @@
                 damage: 45,
                 regenRate: 3,
                 ataqueDistancia: false,
-                costo: 2,
+                costo: 1,
                 speed: 3,
             },
             {
@@ -367,11 +393,11 @@
                 damage: 40,
                 regenRate: 6,
                 ataqueDistancia: false,
-                costo: 4,
+                costo: 2,
                 speed: 1.8,
             },
             {
-                nombre: "Mago Eléctrico",
+                nombre: "Maga Eléctrica",
                 idleSrc: "Lightning Mage/Idle.png",
                 walkSrc: "Lightning Mage/Walk.png",
                 runSrc: "Lightning Mage/Run.png",
@@ -392,7 +418,7 @@
                 regenRate: 2,
                 ataqueDistancia: false,
                 costo: 2,
-                speed: 3,
+                speed: 4,
             },
             {
                 nombre: "Esqueleto Lancero",
@@ -436,10 +462,10 @@
                 attack2Frames: 6,
                 peso: 30,
                 hpMax: 250,
-                damage: 15,
+                damage: 20,
                 regenRate: 5,
                 ataqueDistancia: false,
-                costo: 2,
+                costo: 1,
                 speed: 3,
             }
             ,
@@ -460,11 +486,11 @@
                 attack1Frames: 5,
                 attack2Frames: 5,
                 peso: 30,
-                hpMax: 300,
-                damage: 15,
+                hpMax: 350,
+                damage: 20,
                 regenRate: 5,
                 ataqueDistancia: false,
-                costo: 3,
+                costo: 2,
                 speed: 3,
             },
             {
@@ -485,10 +511,10 @@
                 attack2Frames: 5,
                 peso: 30,
                 hpMax: 300,
-                damage: 15,
+                damage: 30,
                 regenRate: 5,
                 ataqueDistancia: false,
-                costo: 3,
+                costo: 2,
                 speed: 3,
             },
             {
@@ -508,12 +534,12 @@
                 attack1Frames: 4,
                 attack2Frames: 4,
                 peso: 30,
-                hpMax: 300,
-                damage: 15,
+                hpMax: 400,
+                damage: 24,
                 regenRate: 5,
                 ataqueDistancia: false,
                 costo: 3,
-                speed: 3,
+                speed: 4,
             }
         ];
 
@@ -732,10 +758,30 @@
         }
 
         function jugadorListo(jugador) {
-            if (jugador === 1) listo1 = true;
-            else listo2 = true;
+            const mazo = jugador === 1 ? mazo1 : mazo2;
+            const btn = document.getElementById(jugador === 1 ? "btnListo1" : "btnListo2");
+
+            // 🚫 Verificamos si el jugador no ha elegido cartas
+            if (mazo.length === 0) {
+                alert(`Jugador ${jugador}, debes elegir al menos una carta antes de estar listo.`);
+                return;
+            }
+
+            // ✅ Alternamos estado "listo"
+            if (jugador === 1) {
+                listo1 = !listo1;
+                btn.classList.toggle("listo", listo1);
+                btn.innerText = listo1 ? "Cancelar" : "Listo";
+            } else {
+                listo2 = !listo2;
+                btn.classList.toggle("listo", listo2);
+                btn.innerText = listo2 ? "Cancelar" : "Listo";
+            }
+
+            // 🚀 Iniciar el juego solo si ambos están listos
             if (listo1 && listo2) iniciarJuego();
         }
+
 
         // --- Inicio de juego ---
         function iniciarJuego() {
@@ -1189,9 +1235,16 @@
             requestAnimationFrame(loop);
         }
 
-        function gameOver(ganador) {            
-            location.reload(); // reinicia el juego
+        function gameOver(ganador) {
+            const mensaje = document.createElement("div");
+            mensaje.className = "pantallaGameOver";
+            mensaje.innerHTML = `
+      <h1>¡Jugador ${ganador} gana!</h1>
+      <button onclick="location.reload()">Reiniciar</button>
+    `;
+            document.body.appendChild(mensaje);
         }
+
 
     </script>
 
