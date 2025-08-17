@@ -1,0 +1,43 @@
+.carta {
+    width: 420px;
+    height: 670px;
+    background-color: aquamarine;
+    position: absolute;    
+}
+.monedas{font-size: 42px;}
+.ataque {
+    position: absolute;
+    top: 20px;
+    left: 26px;
+    font-size: 42px;
+
+}
+
+.vida {
+    position: absolute;
+    top: 20px;
+    right: 26px;
+    font-size: 42px;
+
+}
+.btnamas{
+    position: absolute;
+    top: 120px;
+    left: 11px;
+}
+.btnamenos{
+    position: absolute;
+    top: 120px;
+    left: 56px;
+}
+
+.btnvmas{
+    position: absolute;
+    top: 120px;
+    left: 346px;
+}
+.btnvmenos{
+    position: absolute;
+    top: 120px;
+    left: 391px;
+}

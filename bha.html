@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Beast Hunter Auxiliar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="tt.png" type="image/png">
+    <link rel="stylesheet" href="bha.css" />
+</head>
+
+<body>
+
+    <div class="carta" id="carta">
+        <img src="bhcazadoradebestias.png" alt="">
+
+        <p class="ataque" id="ataque">0</p>
+        <button class="btnamas" id="btnamas" onclick="btns(1)">+</button>
+        <button class="btnamenos" id="btnamenos" onclick="btns(2)">-</button>
+        <p class="vida" id="vida">0</p>
+        <button class="btnvmas" id="btnvmas" onclick="btns(3)">+</button>
+        <button class="btnvmenos" id="btnvmenos" onclick="btns(4)">-</button>
+        <button class="btnmmas" id="btnmmas" onclick="btns(5)"> + </button>
+        <button class="btnmmenos" id="btnmenos" onclick="btns(6)"> - </button>
+        <p class="monedas" id="monedas">Monedas : 0</p>
+        <button onclick="mostrar('c1')">tirar dados</button>
+    </div>
+    <div class="carta" id="c1" >
+<div></div>
+<button onclick="esconder('c1')">x</button>
+    </div>
+    <script src="skrips.js"></script>
+    <script src="bha.js"></script>
+    
+</body>
+
+</html>
