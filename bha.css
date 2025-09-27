@@ -1,43 +1,211 @@
-.carta {
-    width: 420px;
-    height: 670px;
-    background-color: aquamarine;
-    position: absolute;    
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #222;
+    padding: 10px;
+    font-family: sans-serif;
 }
-.monedas{font-size: 42px;}
+
+.carta {
+    width: 90vw;
+    max-width: 420px;
+    background-color: rgb(0, 119, 79);
+    position: relative;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.carta img {
+    width: 100%;
+    display: block;
+}
+
+
+
+
+
+
+#menu-inicial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #222;
+    color: white;
+}
+
+#menu-inicial h2 {
+    margin-bottom: 20px;
+}
+
+.personajes {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.personaje {
+    cursor: pointer;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 12px;
+    padding: 10px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.personaje:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.personaje img {
+    width: 120px;
+    height: auto;
+    border-radius: 8px;
+}
+
+
+
+
+.ataque,
+.vida,
+.monedas {
+    font-size: clamp(24px, 6vw, 42px);
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+}
+
 .ataque {
     position: absolute;
-    top: 20px;
-    left: 26px;
-    font-size: 42px;
-
+    top: 5%;
+    left: 5%;
 }
 
 .vida {
     position: absolute;
-    top: 20px;
-    right: 26px;
-    font-size: 42px;
-
-}
-.btnamas{
-    position: absolute;
-    top: 120px;
-    left: 11px;
-}
-.btnamenos{
-    position: absolute;
-    top: 120px;
-    left: 56px;
+    top: 5%;
+    right: 5%;
 }
 
-.btnvmas{
-    position: absolute;
-    top: 120px;
-    left: 346px;
+.monedas {
+    text-align: center;
+    margin-top: 10px;
 }
-.btnvmenos{
-    position: absolute;
-    top: 120px;
-    left: 391px;
+
+.botones {
+    display: flex;
+    justify-content: space-between; /* + a la izquierda, - a la derecha */
+    align-items: center;
+    margin: 10px 20px;
+    flex-wrap: wrap; /* para que se adapte a móviles */
+    gap: 10px;
+}
+
+/* Mantener colores diferenciados */
+.atk { background: #b91515; color: white; }
+.hp { background: #1f8f2e; color: white; }
+.gold { background: #c9a20b; color: black; }
+.dice { background: #444; color: white; }
+
+button {
+    cursor: pointer;
+}
+
+/* Modo modal */
+#c1 {
+    position: fixed;
+    /* Se mantiene encima */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(136, 175, 162);
+    z-index: 1000;
+    display: none;
+    /* Oculto por defecto */
+    width: 80vw;
+    max-width: 420px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    padding: 20px;
+}
+
+/* Fondo oscuro cuando modal está activo */
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 900;
+    display: none;
+}
+
+.dados-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.dado {
+    font-family: monospace;
+    font-size: 20px;
+    line-height: 1.2;
+    text-align: center;
+    white-space: pre;
+}
+
+
+/* Animación de sacudida */
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    20% {
+        transform: translate(-1px, -2px) rotate(-2deg);
+    }
+
+    40% {
+        transform: translate(-1px, 1px) rotate(1deg);
+    }
+
+    60% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    80% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+.dado.shake {
+    animation: shake 0.2s infinite;
+}
+
+#btn-borrar:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+#carta {
+    display: none;
+    /* se mostrará después de elegir personaje */
+}
+
+.personaje p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #eee;
 }
