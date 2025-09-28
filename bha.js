@@ -64,7 +64,7 @@ function borrarDado() {
         actualizarBotonBorrar();
     }
 }
-
+var resultado = 0;
 function lanzarDados() {
     const dados = document.querySelectorAll(".dado");
 
@@ -74,11 +74,13 @@ function lanzarDados() {
     });
 
     // Después de 1 segundo, parar animación y mostrar número aleatorio
-    setTimeout(() => {
+    setTimeout(() => {resultado=0;
         dados.forEach(dado => {
             dado.classList.remove("shake");
             let random = Math.floor(Math.random() * 6) + 1;
             dado.textContent = generarCara(random);
+            resultado+=random;
+            document.getElementById("resultado").textContent="Resultado: "+resultado;
         });
     }, 1000);
 }
@@ -108,19 +110,20 @@ function seleccionarPersonaje(imagen) {
 
 
 const personajes = {
-    "bhcazadoradebestias.png": {
-        nombre: "Cazadora de Bestias",
-        ataque: 5,
-        vida: 10,
-        monedas: 3
-    },
-    "bhninja.png": {
-        nombre: "Ninja",
-        ataque: 8,
-        vida: 8,
-        monedas: 1
-    }
-    // Puedes agregar más personajes aquí
+    "bhcazadoradebestias.png": { nombre: "Cazadora de Bestias", ataque: 4, vida: 6, monedas: 5 },
+    "bhninja.png": { nombre: "Ninja", ataque: 4, vida: 4, monedas: 7 },
+    "bhguerrero.png": { nombre: "Guerrero", ataque: 3, vida: 7, monedas: 5 },
+    "bhcazador.png": { nombre: "Cazador", ataque: 2, vida: 5, monedas: 8 },
+    "bhasesino.png": { nombre: "Asesino", ataque: 5, vida: 4, monedas: 6 },
+    "bhatrotamundos.png": { nombre: "Trotamundos", ataque: 2, vida: 6, monedas: 7 },
+    "bhabarbaro.png": { nombre: "Barbaro", ataque: 3, vida: 6, monedas: 6 },
+    "bhcomerciante.png": { nombre: "Comerciante", ataque: 2, vida: 3, monedas: 10 },
+    "bhmercenario.png": { nombre: "Mercenario", ataque: 3, vida: 6, monedas: 6 },
+    "bhleñador.png": { nombre: "Leñador", ataque: 3, vida: 5, monedas: 7 },
+    "bhbardo.png": { nombre: "Bardo Valiente", ataque: 1, vida: 3, monedas: 11 },
+    "bhgladiador.png": { nombre: "Gladiador", ataque: 4, vida: 4, monedas: 7 },
+    "bhsamurai.png": { nombre: "Samurai Errante", ataque: 4, vida: 6, monedas: 5 },
+    "bhmonje.png": { nombre: "Monje de Batalla", ataque: 5, vida: 4, monedas: 6 }
 };
 const contenedor = document.querySelector(".personajes");
 contenedor.innerHTML = ""; // limpiar si hay algo

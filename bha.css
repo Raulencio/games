@@ -30,9 +30,8 @@ body {
 
 #menu-inicial {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;    
+
     height: 100vh;
     background: #222;
     color: white;

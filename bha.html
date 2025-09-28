@@ -14,69 +14,61 @@
 
     <div class="modal-bg" id="modal-bg"></div>
 
-
+    <button class="dice" onclick="mostrar('c1')">🎲</button>
 
     <div id="menu-inicial">
         <h2>Elige tu personaje</h2>
         <div class="personajes">
-            <div class="personaje" onclick="seleccionarPersonaje('bhcazadoradebestias.png')">
-                <img src="bhcazadoradebestias.png" alt="Cazadora de Bestias">
-                <p>Cazadora de Bestias</p>
-                <p>⚔ Ataque: 5 | ❤️ Vida: 10 | 🪙 Monedas: 3</p>
-            </div>
-            <div class="personaje" onclick="seleccionarPersonaje('bhninja.png')">
-                <img src="bhninja.png" alt="Ninja">
-                <p>Ninja</p>
-                <p>⚔ Ataque: 8 | ❤️ Vida: 8 | 🪙 Monedas: 1</p>
-            </div>
+
             <!-- Más personajes -->
         </div>
-        </div>
-
-
-        <button class="dice" onclick="mostrar('c1')">🎲</button>
-        <div class="carta" id="carta">
-            <img src="bhcazadoradebestias.png" alt="">
-
-            <p class="ataque" id="ataque">0</p>
-            <p class="vida" id="vida">0</p>
-
-            <div class="botones">
-                <!-- Ataque -->
-                <button class="atk" onclick="btns(1)">A+</button>
-                <button class="atk" onclick="btns(2)">A-</button>
-
-                <!-- Vida -->
-                <button class="hp" onclick="btns(3)">V+</button>
-                <button class="hp" onclick="btns(4)">V-</button>
-
-                <!-- Monedas -->
-                <button class="gold" onclick="btns(5)">M+</button>
-                <button class="gold" onclick="btns(6)">M-</button>
-
-                <!-- Dados -->
-
-            </div>
+    </div>
 
 
 
-            <p class="monedas" id="monedas">Monedas : 0</p>
-        </div>
+    <div class="carta" id="carta">
+        <img src="bhcazadoradebestias.png" alt="">
 
-        <div class="carta" id="c1">
-            <div id="dados-container" class="dados-container"></div>
+        <p class="ataque" id="ataque">0</p>
+        <p class="vida" id="vida">0</p>
 
-            <div class="botones-dados">
-                <button onclick="agregarDado()">+ Dado</button>
-                <button id="btn-borrar" onclick="borrarDado()">- Dado</button>
-                <button onclick="lanzarDados()">Lanzar</button>
-                <button onclick="esconder('c1')">x</button>
-            </div>
+        <div class="botones">
+            <!-- Ataque -->
+            <button class="atk" onclick="btns(1)">A+</button>
+            <button class="atk" onclick="btns(2)">A-</button>
+
+            <!-- Vida -->
+            <button class="hp" onclick="btns(3)">V+</button>
+            <button class="hp" onclick="btns(4)">V-</button>
+
+            <!-- Monedas -->
+            <button class="gold" onclick="btns(5)">M+</button>
+            <button class="gold" onclick="btns(6)">M-</button>
+
+            <!-- Dados -->
 
         </div>
 
-        <script src="skrips.js"></script>
-        <script src="bha.js"></script>
+
+
+        <p class="monedas" id="monedas">Monedas : 0</p>
+    </div>
+
+    <div class="carta" id="c1">
+        <div id="dados-container" class="dados-container"></div>
+
+        <div class="botones-dados">
+            <button onclick="agregarDado()">+ Dado</button>
+            <button id="btn-borrar" onclick="borrarDado()">- Dado</button>
+            <button onclick="lanzarDados()">Lanzar</button>
+            <button onclick="esconder('c1')">x</button>
+            <p id="resultado"></p>
+        </div>
+
+    </div>
+
+    <script src="skrips.js"></script>
+    <script src="bha.js"></script>
 
 </body>
 
