@@ -48,18 +48,21 @@ function generarCara(num) {
     };
     return dadosAscii[num];
 }
-
+var cantidadDados = 0;
 function agregarDado() {
-    let dado = document.createElement("pre");
-    dado.className = "dado";
-    dado.textContent = generarCara(0);
-    document.getElementById("dados-container").appendChild(dado);
-    actualizarBotonBorrar();
+    if (cantidadDados < 9) {
+        cantidadDados++;
+        let dado = document.createElement("pre");
+        dado.className = "dado";
+        dado.textContent = generarCara(0);
+        document.getElementById("dados-container").appendChild(dado);
+        actualizarBotonBorrar();
+    }
 }
 
 function borrarDado() {
     const dados = document.querySelectorAll(".dado");
-    if (dados.length > 0) {
+    if (dados.length > 0) {cantidadDados--;
         dados[dados.length - 1].remove();
         actualizarBotonBorrar();
     }
@@ -74,13 +77,14 @@ function lanzarDados() {
     });
 
     // Después de 1 segundo, parar animación y mostrar número aleatorio
-    setTimeout(() => {resultado=0;
+    setTimeout(() => {
+        resultado = 0;
         dados.forEach(dado => {
             dado.classList.remove("shake");
             let random = Math.floor(Math.random() * 6) + 1;
             dado.textContent = generarCara(random);
-            resultado+=random;
-            document.getElementById("resultado").textContent="Resultado: "+resultado;
+            resultado += random;
+            document.getElementById("resultado").textContent = "Resultado: " + resultado;
         });
     }, 1000);
 }
