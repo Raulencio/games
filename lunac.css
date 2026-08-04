@@ -1,0 +1,213 @@
+.botonJugar {
+    position: absolute;
+
+    left: 50%;
+    top: 65%;
+
+    width: 30%;
+
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.imgBJ {
+    width: 100%;
+    display: block;
+}
+
+.botonOpciones {
+    position: absolute;
+
+    left: 50%;
+    top: 85%;
+
+    width: 30%;
+    z-index: 3;
+    transform: translate(-50%, -50%);
+}
+
+.imgBO {
+    width: 100%;
+    display: block;
+}
+
+.menuPrincipal {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(#8fd9ff, #dff7ff);
+}
+
+.seleccionDificultad {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(#8fd9ff, #dff7ff);
+}
+
+.barco {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    animation: flotar 4s ease-in-out infinite;
+}
+
+@keyframes flotar {
+
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+
+}
+
+#cielo {
+
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+.nube {
+
+    position: absolute;
+
+    right: -300px;
+
+    animation-name: moverNube;
+
+    animation-timing-function: linear;
+
+    animation-iteration-count: infinite;
+}
+
+.nube img {
+
+    width: 100%;
+}
+
+@keyframes moverNube {
+
+    from {
+
+        transform: translateX(0);
+
+    }
+
+    to {
+
+        transform: translateX(-150vw);
+
+    }
+
+}
+
+.imgP {
+
+    position: relative;
+    z-index: 2;
+
+}
+
+.contenedorTexto1 {
+    position: absolute;
+    width: 60%;
+    height: 20%;
+    left: 30%;
+    top: 10%;
+    background-color: rgba(127, 255, 212, 0.178);
+}
+
+.contenedorTexto2 {
+    position: absolute;
+    width: 60%;
+    height: 20%;
+    left: 30%;
+    top: 45%;
+    background-color: rgba(127, 255, 212, 0.178);
+}
+
+.contenedorTexto3 {
+    position: absolute;
+    width: 60%;
+    height: 20%;
+    left: 30%;
+    top: 75%;
+    background-color: rgba(127, 255, 212, 0.178);
+}
+
+.dif {
+    width: 100%;
+    height: 35%;
+
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.c {
+    color: #048f2ed5;
+}
+
+.g {
+    color: #0337a8d5;
+}
+
+.l {
+    color: #8f0404d5;
+}
+
+.juego {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(#97c3da, #75bfd8);
+
+}
+
+.btnInventario {
+    background-color: rgba(185, 59, 0, 0.74);
+    position: absolute;
+    top: 85%;
+    width: 30%;
+    height: 15%;
+
+}
+
+.textos {
+    background-color: #1b66048c;
+    position: absolute;
+    width: 70%;
+    height: 15%;
+    top: 85%;
+    left: 30%
+}
+
+.iconoPersonaje {
+    background-color: #1049c494;
+    position: absolute;
+    top: 1%;
+    left: 1;
+    width: 25%;
+    height: 25%;
+    z-index: 1;
+}

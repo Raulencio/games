@@ -1,0 +1,106 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Luna´s Adventures</title>
+    <link rel="stylesheet" href="lunac.css">
+
+</head>
+
+<body>
+
+    <div id="pantalla1">
+        <div id="cielo"></div>
+        <div class="menuPrincipal">
+            <img class="imgP barco" src="barco1.png" alt="">
+
+            <div class="botonJugar" onclick="esconder('pantalla1'),mostrar('pantalla2')">
+                <img class="imgBJ" src="botonjugar.png" width="100%" alt="">
+            </div>
+            <div class="botonOpciones" onclick="esconder('pantalla1'),mostrar('pantalla3')">
+                <img class="imgBO" src="botonopciones.png" width="100%" alt="">
+            </div>
+
+        </div>
+    </div>
+    <div class="menuPrincipal" id="pantalla3" hidden="true"></div>
+    <div class="seleccionDificultad" id="pantalla2" hidden="true">
+
+
+
+        <div id="dif1" class="dif" onclick="esconder('pantalla2'),mostrar('pantalla4'),juego(1)">
+            <img src="capitana1.png" alt="">
+            <div class="contenedorTexto1">
+
+                <h1 class="g">Grumete
+                </h1>
+                <h2>❤️❤️❤️❤️❤️❤️❤️❤️ 🪙5000
+                </h2>
+                <h2>💧💧💧💧💧💧💧💧
+                    🍗🍗🍗🍗🍗🍗🍗🍗</h2>
+
+
+            </div>
+        </div>
+
+
+
+        <div id="dif2" class="dif" onclick="esconder('pantalla2'),mostrar('pantalla4'),juego(2)">
+            <img src="capitana2.png" alt="">
+            <div class="contenedorTexto2">
+                <h1 class="c">Capitan
+                </h1>
+                <h2> ❤️❤️❤️❤️❤️❤️❤️‍🩹🖤 🪙10000
+                </h2>
+                <h2>💧💧💧💧💧💧
+                    🍗🍗🍗🍗🍗</h2>
+            </div>
+
+        </div>
+
+
+
+        <div id="dif3" class="dif" onclick="esconder('pantalla2'),mostrar('pantalla4'),juego(3)">
+            <img src="capitana3.png" alt="">
+            <div class="contenedorTexto3">
+                <h1 class="l">Leyenda
+
+
+                </h1>
+                <h2> ❤️❤️‍🩹❤️‍🩹❤️‍🩹🖤🖤🖤🖤 🪙20000
+
+                </h2>
+                <h2>💧💧💧💧🍗🍗🍗</h2>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="juego" id="pantalla4" hidden="true">
+
+        <img id="imgfondo" src="" alt="" width="100%">
+        <div class="hud">
+            <div class="iconoPersonaje">
+                <img id="iconoP"src="" alt="" width="100%">
+
+            </div>
+            <div class="textos">
+                <h2 id="monedas">🪙0</h2>
+                <h3 id="tvida">Vida: ❤️</h3>
+            </div>
+
+            <div class="btnInventario" onclick="abrirInventario()">
+                <h1>Inventario 💼</h1>
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <script src="lunas.js"></script>
+</body>
+
+</html>
