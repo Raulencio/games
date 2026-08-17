@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Juego de Combate Táctico - Misiones y Arena</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -13,19 +13,14 @@
         }
 
         .view-section.active {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         @keyframes subtle-glow {
-
-            0%,
-            100% {
-                box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
-            }
-
-            50% {
-                box-shadow: 0 0 20px rgba(6, 182, 212, 0.8);
-            }
+            0%, 100% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.4); }
+            50% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.8); }
         }
 
         .active-turn-glow {
@@ -33,15 +28,8 @@
         }
 
         @keyframes enemy-glow {
-
-            0%,
-            100% {
-                box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
-            }
-
-            50% {
-                box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
-            }
+            0%, 100% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.8); }
         }
 
         .enemy-turn-glow {
@@ -49,20 +37,9 @@
         }
 
         @keyframes float-up {
-            0% {
-                transform: translateY(0) scale(0.8);
-                opacity: 0;
-            }
-
-            20% {
-                transform: translateY(-10px) scale(1.2);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-45px) scale(1);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            20% { transform: translateY(-10px) scale(1.2); opacity: 1; }
+            100% { transform: translateY(-45px) scale(1); opacity: 0; }
         }
 
         .floating-number {
@@ -76,13 +53,8 @@
         }
 
         @keyframes bg-flash-damage {
-            0% {
-                background-color: rgba(127, 29, 29, 0.4);
-            }
-
-            100% {
-                background-color: rgba(15, 23, 42, 0.95);
-            }
+            0% { background-color: rgba(127, 29, 29, 0.4); }
+            100% { background-color: rgba(15, 23, 42, 0.95); }
         }
 
         .flash-damage-bg {
@@ -90,13 +62,8 @@
         }
 
         @keyframes bg-flash-heal {
-            0% {
-                background-color: rgba(6, 95, 70, 0.4);
-            }
-
-            100% {
-                background-color: rgba(15, 23, 42, 0.95);
-            }
+            0% { background-color: rgba(6, 95, 70, 0.4); }
+            100% { background-color: rgba(15, 23, 42, 0.95); }
         }
 
         .flash-heal-bg {
@@ -105,15 +72,13 @@
     </style>
 </head>
 
-<body class="bg-gray-950 text-white font-sans flex justify-center items-center h-screen m-0 overflow-hidden">
+<body class="bg-gray-950 text-white font-sans flex justify-center items-center h-dvh w-screen m-0 overflow-hidden select-none">
 
-    <!-- Contenedor Principal -->
-    <div
-        class="w-full max-w-md h-full md:h-[85vh] md:rounded-2xl bg-gray-900 shadow-2xl flex flex-col relative border border-gray-800 overflow-hidden">
+    <!-- Contenedor Principal (Flexible para cualquier pantalla de celular) -->
+    <div class="w-full max-w-md h-dvh md:h-[90dvh] md:max-h-[850px] md:rounded-2xl bg-gray-900 shadow-2xl flex flex-col relative border border-gray-800 overflow-hidden">
 
         <!-- ================= BARRA SUPERIOR ================= -->
-        <div
-            class="bg-gray-950/90 px-4 py-2.5 border-b border-gray-800 flex justify-between items-center text-xs font-bold z-40 backdrop-blur">
+        <div class="bg-gray-950/90 px-4 py-2.5 border-b border-gray-800 flex justify-between items-center text-xs font-bold z-40 backdrop-blur shrink-0">
             <div class="flex items-center space-x-1.5 text-amber-400">
                 <span>🪙 Oro:</span>
                 <span id="player-gold">3000</span>
@@ -122,95 +87,89 @@
                 <span>💎 Gemas:</span>
                 <span id="player-gems">200</span>
             </div>
-            <button onclick="resetData()"
-                class="text-gray-500 hover:text-red-400 text-[10px] underline transition">Reiniciar</button>
+            <button onclick="resetData()" class="text-gray-500 hover:text-red-400 text-[10px] underline transition">Reiniciar</button>
         </div>
 
-        <!-- ================= CONTENIDO DE LAS PÁGINAS ================= -->
-        <div class="flex-1 overflow-y-auto p-4 pb-20">
+        <!-- ================= CONTENIDO DE LAS PÁGINAS (Scrollable) ================= -->
+        <div class="flex-1 min-h-0 overflow-y-auto p-4">
 
             <!-- 1. TIENDA -->
             <div id="view-tienda" class="view-section active">
-                <h2 class="text-2xl font-bold mb-1 text-amber-400">🛍️ Tienda de Invocaciones</h2>
-                <p class="text-gray-400 text-xs mb-4">Invoca guerreros y consigue copias para subir de nivel.</p>
-                <div id="shop-container" class="grid grid-cols-1 gap-3"></div>
+                <h2 class="text-xl font-bold mb-0.5 text-amber-400">🛍️ Tienda de Invocaciones</h2>
+                <p class="text-gray-400 text-[11px] mb-3">Invoca guerreros y consigue copias para subir de nivel.</p>
+                <div id="shop-container" class="grid grid-cols-1 gap-2.5"></div>
             </div>
 
             <!-- 2. EQUIPO -->
             <div id="view-equipo" class="view-section">
-                <h2 class="text-2xl font-bold mb-1 text-cyan-400">🛡️ Cuartel de Ninjas</h2>
-                <p class="text-gray-400 text-xs mb-4">Gestiona tu alineación y mejora tus cartas con copias y oro.</p>
+                <h2 class="text-xl font-bold mb-0.5 text-cyan-400">🛡️ Cuartel de Ninjas</h2>
+                <p class="text-gray-400 text-[11px] mb-3">Gestiona tu alineación y mejora tus cartas con copias y oro.</p>
 
-                <h3 class="text-sm font-bold text-gray-300 mb-2">Alineación Activa</h3>
-                <div id="active-slots" class="grid grid-cols-3 gap-2 mb-4"></div>
+                <h3 class="text-xs font-bold text-gray-300 mb-1.5">Alineación Activa</h3>
+                <div id="active-slots" class="grid grid-cols-3 gap-2 mb-3"></div>
 
-                <h3 class="text-sm font-bold text-gray-300 mb-2">Colección Completa</h3>
+                <h3 class="text-xs font-bold text-gray-300 mb-1.5">Colección Completa</h3>
                 <div id="roster-container" class="grid grid-cols-1 gap-2"></div>
             </div>
 
             <!-- 3. COMBATE (ARENA) -->
             <div id="view-combate" class="view-section">
-                <div class="flex flex-col items-center text-center py-1">
-                    <div
-                        class="bg-gradient-to-r from-red-600/20 via-orange-600/20 to-red-600/20 border border-red-500/40 px-4 py-3 rounded-2xl mb-3 w-full shadow-lg">
-                        <h2
-                            class="text-2xl font-black text-red-500 tracking-wide flex items-center justify-center gap-2">
-                            <span>⚔️</span> ARENA TÁCTICA <span>⚔️</span>
-                        </h2>
-                        <p class="text-gray-300 text-[11px] mt-0.5">Combate por turnos de velocidad con curas y ataques
-                            de área.</p>
+                <div class="flex flex-col items-center text-center justify-between h-full">
+                    <div class="w-full">
+                        <div class="bg-gradient-to-r from-red-600/20 via-orange-600/20 to-red-600/20 border border-red-500/40 px-3 py-2.5 rounded-2xl mb-2.5 shadow-lg">
+                            <h2 class="text-xl font-black text-red-500 tracking-wide flex items-center justify-center gap-2">
+                                <span>⚔️</span> ARENA TÁCTICA <span>⚔️</span>
+                            </h2>
+                            <p class="text-gray-300 text-[10px] mt-0.5">Combate por turnos de velocidad con curas y ataques de área.</p>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2 w-full mb-2.5 text-center">
+                            <div class="bg-gray-800/80 border border-gray-700/60 p-1.5 rounded-xl">
+                                <span class="text-[9px] text-gray-400 block">Rango</span>
+                                <span class="text-xs font-bold text-amber-400">Genin Elite</span>
+                            </div>
+                            <div class="bg-gray-800/80 border border-gray-700/60 p-1.5 rounded-xl">
+                                <span class="text-[9px] text-gray-400 block">Victorias</span>
+                                <span id="stat-victorias-menu" class="text-xs font-bold text-cyan-400">0</span>
+                            </div>
+                            <div class="bg-gray-800/80 border border-gray-700/60 p-1.5 rounded-xl">
+                                <span class="text-[9px] text-gray-400 block">Estado</span>
+                                <span class="text-xs font-bold text-emerald-400">Listo</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-b from-gray-900 to-gray-950 p-3 rounded-2xl border border-gray-800 mb-3 w-full shadow-lg text-left">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-[11px] font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
+                                    <span>🛡️</span> Escuadrón Activo
+                                </h3>
+                                <button onclick="switchTab('equipo', document.querySelectorAll('.nav-btn')[1])" class="text-[10px] text-gray-400 hover:text-cyan-300 underline">Modificar</button>
+                            </div>
+                            <div id="combat-active-slots" class="grid grid-cols-3 gap-2"></div>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-2 w-full mb-3 text-center">
-                        <div class="bg-gray-800/80 border border-gray-700/60 p-2 rounded-xl">
-                            <span class="text-[10px] text-gray-400 block">Rango Actual</span>
-                            <span class="text-xs font-bold text-amber-400">Genin Elite</span>
-                        </div>
-                        <div class="bg-gray-800/80 border border-gray-700/60 p-2 rounded-xl">
-                            <span class="text-[10px] text-gray-400 block">Victorias</span>
-                            <span id="stat-victorias-menu" class="text-xs font-bold text-cyan-400">0</span>
-                        </div>
-                        <div class="bg-gray-800/80 border border-gray-700/60 p-2 rounded-xl">
-                            <span class="text-[10px] text-gray-400 block">Estado</span>
-                            <span class="text-xs font-bold text-emerald-400">Listo</span>
-                        </div>
-                    </div>
-
-                    <div
-                        class="bg-gradient-to-b from-gray-900 to-gray-950 p-3.5 rounded-2xl border border-gray-800 mb-4 w-full shadow-lg text-left">
-                        <div class="flex items-center justify-between mb-2.5">
-                            <h3
-                                class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
-                                <span>🛡️</span> Escuadrón Activo
-                            </h3>
-                            <button onclick="switchTab('equipo', document.querySelectorAll('.nav-btn')[1])"
-                                class="text-[10px] text-gray-400 hover:text-cyan-300 underline">Modificar</button>
-                        </div>
-                        <div id="combat-active-slots" class="grid grid-cols-3 gap-2"></div>
-                    </div>
-
-                    <button onclick="abrirSelectorRival()"
-                        class="w-full bg-gradient-to-r from-red-600 via-orange-500 to-red-600 hover:from-red-500 hover:to-orange-400 text-white font-black text-base py-3.5 rounded-2xl shadow-xl shadow-red-950/60 transition transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 border border-red-400/30">
-                        <span class="text-xl">🔥</span> BUSCAR OPONENTE EN LA ARENA
+                    <button onclick="abrirSelectorRival()" class="w-full bg-gradient-to-r from-red-600 via-orange-500 to-red-600 hover:from-red-500 hover:to-orange-400 text-white font-black text-sm py-3 rounded-2xl shadow-xl shadow-red-950/60 transition transform active:scale-[0.98] flex items-center justify-center gap-2 border border-red-400/30 mb-1">
+                        <span class="text-lg">🔥</span> BUSCAR OPONENTE
                     </button>
                 </div>
             </div>
 
             <!-- 4. MISIONES -->
             <div id="view-misiones" class="view-section">
-                <h2 class="text-2xl font-bold mb-1 text-purple-400">📜 Misiones Diarias</h2>
-                <p class="text-gray-400 text-xs mb-4">Completa logros para obtener abundantes recursos.</p>
-                <div id="missions-container" class="grid grid-cols-1 gap-3"></div>
+                <h2 class="text-xl font-bold mb-0.5 text-purple-400">📜 Misiones Diarias</h2>
+                <p class="text-gray-400 text-[11px] mb-3">Completa logros para obtener abundantes recursos.</p>
+                <div id="missions-container" class="grid grid-cols-1 gap-2.5"></div>
             </div>
 
             <!-- 5. AJUSTES -->
             <div id="view-ajustes" class="view-section">
-                <h2 class="text-2xl font-bold mb-4 text-emerald-400">⚙️ Perfil y Ajustes</h2>
-                <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 mb-4 flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center text-xl">👤</div>
+                <h2 class="text-xl font-bold mb-3 text-emerald-400">⚙️ Perfil y Ajustes</h2>
+                <div class="bg-gray-800 p-3 rounded-xl border border-gray-700 mb-3 flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-lg">👤</div>
                     <div>
-                        <h3 class="font-bold">Jugador Genin</h3>
-                        <p class="text-xs text-gray-400">Rango: Maestro Táctico</p>
+                        <h3 class="font-bold text-sm">Jugador Genin</h3>
+                        <p class="text-[10px] text-gray-400">Rango: Maestro Táctico</p>
                     </div>
                 </div>
             </div>
@@ -218,98 +177,74 @@
         </div>
 
         <!-- ================= BARRA INFERIOR ================= -->
-        <nav
-            class="absolute bottom-0 left-0 right-0 h-16 bg-gray-900 border-t border-gray-800 flex justify-around items-center px-2 z-50">
-            <button onclick="switchTab('tienda', this)"
-                class="nav-btn flex flex-col items-center justify-center w-1/5 text-amber-400 font-bold scale-110 transition">
-                <span class="text-xl">🛍️</span>
-                <span class="text-[10px] mt-1">Tienda</span>
+        <nav class="h-14 bg-gray-950 border-t border-gray-800 flex justify-around items-center px-1 z-40 shrink-0">
+            <button onclick="switchTab('tienda', this)" class="nav-btn flex flex-col items-center justify-center w-1/5 text-amber-400 font-bold scale-105 transition">
+                <span class="text-lg">🛍️</span>
+                <span class="text-[9px] mt-0.5">Tienda</span>
             </button>
-            <button onclick="switchTab('equipo', this)"
-                class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-cyan-400 transition">
-                <span class="text-xl">🛡️</span>
-                <span class="text-[10px] mt-1">Equipo</span>
+            <button onclick="switchTab('equipo', this)" class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-cyan-400 transition">
+                <span class="text-lg">🛡️</span>
+                <span class="text-[9px] mt-0.5">Equipo</span>
             </button>
-            <button onclick="switchTab('combate', this)"
-                class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-red-500 transition">
-                <span class="text-2xl">⚔️</span>
-                <span class="text-[10px] mt-1">Combate</span>
+            <button onclick="switchTab('combate', this)" class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-red-500 transition">
+                <span class="text-xl">⚔️</span>
+                <span class="text-[9px] mt-0.5">Combate</span>
             </button>
-            <button onclick="switchTab('misiones', this)"
-                class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-purple-400 transition">
-                <span class="text-xl">📜</span>
-                <span class="text-[10px] mt-1">Misiones</span>
+            <button onclick="switchTab('misiones', this)" class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-purple-400 transition">
+                <span class="text-lg">📜</span>
+                <span class="text-[9px] mt-0.5">Misiones</span>
             </button>
-            <button onclick="switchTab('ajustes', this)"
-                class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-emerald-400 transition">
-                <span class="text-xl">⚙️</span>
-                <span class="text-[10px] mt-1">Ajustes</span>
+            <button onclick="switchTab('ajustes', this)" class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-emerald-400 transition">
+                <span class="text-lg">⚙️</span>
+                <span class="text-[9px] mt-0.5">Ajustes</span>
             </button>
         </nav>
 
     </div>
 
     <!-- ================= MODAL RIVALES ================= -->
-    <div id="modal-rivales"
-        class="fixed inset-0 bg-black/80 z-50 hidden flex justify-center items-center p-4 backdrop-blur-sm">
-        <div
-            class="bg-gray-900 border border-gray-700 w-full max-w-sm rounded-2xl p-4 flex flex-col space-y-3 shadow-2xl">
-            <div class="flex justify-between items-center border-b border-gray-800 pb-2">
-                <h3 class="font-bold text-sm text-red-400">⚔️ Selecciona tu Oponente</h3>
-                <button onclick="cerrarSelectorRival()"
-                    class="text-gray-400 hover:text-white text-xs font-bold">✕</button>
+    <div id="modal-rivales" class="fixed inset-0 bg-black/80 z-50 hidden flex justify-center items-center p-3 backdrop-blur-sm">
+        <div class="bg-gray-900 border border-gray-700 w-full max-w-sm max-h-[85dvh] rounded-2xl p-3 flex flex-col space-y-2.5 shadow-2xl overflow-hidden">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-2 shrink-0">
+                <h3 class="font-bold text-xs text-red-400">⚔️ Selecciona tu Oponente</h3>
+                <button onclick="cerrarSelectorRival()" class="text-gray-400 hover:text-white text-xs font-bold px-1">✕</button>
             </div>
-            <div id="lista-rivales" class="flex flex-col space-y-2"></div>
+            <div id="lista-rivales" class="flex flex-col space-y-2 overflow-y-auto min-h-0"></div>
         </div>
     </div>
 
     <!-- ================= MODAL DE COMBATE TÁCTICO ================= -->
-    <div id="modal-combate"
-        class="fixed inset-0 bg-gray-950/95 z-50 hidden flex flex-col justify-between p-4 backdrop-blur-md transition-colors duration-300">
-        <div
-            class="bg-gray-900/90 border border-gray-800 p-3 rounded-2xl flex justify-between items-center text-xs shadow-md z-20">
-            <span id="combate-turno-texto" class="font-bold text-cyan-400 flex items-center gap-1">⚡ Turno Activo</span>
-            <span id="combate-estado-texto" class="font-bold text-amber-400">Esperando orden...</span>
+    <div id="modal-combate" class="fixed inset-0 bg-gray-950/95 z-50 hidden flex flex-col justify-between p-3 backdrop-blur-md transition-colors duration-300 overflow-hidden">
+        <div class="bg-gray-900/90 border border-gray-800 p-2.5 rounded-2xl flex justify-between items-center text-xs shadow-md z-20 shrink-0">
+            <span id="combate-turno-texto" class="font-bold text-cyan-400 flex items-center gap-1 text-[11px]">⚡ Turno Activo</span>
+            <span id="combate-estado-texto" class="font-bold text-amber-400 text-[10px]">Esperando orden...</span>
         </div>
 
-        <div class="grid grid-cols-2 gap-3 flex-1 my-3 overflow-y-auto z-20">
+        <div class="grid grid-cols-2 gap-2 flex-1 my-2 overflow-y-auto min-h-0 z-20">
             <!-- Panel del Rival -->
-            <div
-                class="bg-red-950/20 border border-red-900/40 p-3 rounded-2xl flex flex-col justify-between shadow-inner">
-                <div>
-                    <h4 id="rival-nombre"
-                        class="text-xs font-bold text-red-400 mb-2 pb-1 border-b border-red-900/30 flex justify-between items-center">
-                        <span>Rival</span>
-                        <span id="label-modo-objetivo"
-                            class="text-[9px] bg-red-900 text-white px-1.5 py-0.5 rounded animate-pulse hidden">¡Elige
-                            Enemigo!</span>
-                    </h4>
-                    <div id="rival-team-slots" class="flex flex-col space-y-2"></div>
-                </div>
+            <div class="bg-red-950/20 border border-red-900/40 p-2 rounded-2xl flex flex-col justify-start shadow-inner overflow-y-auto">
+                <h4 id="rival-nombre" class="text-[11px] font-bold text-red-400 mb-1.5 pb-1 border-b border-red-900/30 flex justify-between items-center shrink-0">
+                    <span>Rival</span>
+                    <span id="label-modo-objetivo" class="text-[8px] bg-red-900 text-white px-1 py-0.5 rounded animate-pulse hidden">¡Elige Enemigo!</span>
+                </h4>
+                <div id="rival-team-slots" class="flex flex-col space-y-1.5"></div>
             </div>
 
             <!-- Panel del Jugador -->
-            <div
-                class="bg-cyan-950/20 border border-cyan-900/40 p-3 rounded-2xl flex flex-col justify-between shadow-inner">
-                <div>
-                    <h4
-                        class="text-xs font-bold text-cyan-400 mb-2 pb-1 border-b border-cyan-900/30 flex justify-between items-center">
-                        <span>Tus Ninjas</span>
-                        <span id="label-modo-aliado"
-                            class="text-[9px] bg-cyan-800 text-white px-1.5 py-0.5 rounded animate-pulse hidden">¡Elige
-                            Aliado!</span>
-                    </h4>
-                    <div id="player-team-slots-battle" class="flex flex-col space-y-2"></div>
-                </div>
+            <div class="bg-cyan-950/20 border border-cyan-900/40 p-2 rounded-2xl flex flex-col justify-start shadow-inner overflow-y-auto">
+                <h4 class="text-[11px] font-bold text-cyan-400 mb-1.5 pb-1 border-b border-cyan-900/30 flex justify-between items-center shrink-0">
+                    <span>Tus Ninjas</span>
+                    <span id="label-modo-aliado" class="text-[8px] bg-cyan-800 text-white px-1 py-0.5 rounded animate-pulse hidden">¡Elige Aliado!</span>
+                </h4>
+                <div id="player-team-slots-battle" class="flex flex-col space-y-1.5"></div>
             </div>
         </div>
 
-        <div class="bg-gray-900 border border-gray-800 p-3 rounded-2xl flex flex-col space-y-2.5 shadow-2xl z-20">
-            <div id="combate-log"
-                class="bg-gray-950 p-2.5 rounded-xl text-[10px] text-gray-300 h-20 overflow-y-auto font-mono border border-gray-800">
+        <div class="bg-gray-900 border border-gray-800 p-2.5 rounded-2xl flex flex-col space-y-2 shadow-2xl z-20 shrink-0">
+            <div id="combate-log" class="bg-gray-950 p-2 rounded-xl text-[9px] text-gray-300 h-16 overflow-y-auto font-mono border border-gray-800">
                 ¡La batalla ha comenzado en la Arena!
             </div>
-            <div id="combate-controles" class="grid grid-cols-2 gap-2"></div>
+            <div id="combate-controles" class="grid grid-cols-2 gap-1.5"></div>
         </div>
     </div>
 
@@ -733,16 +668,16 @@
 
             inventarioTienda.forEach(item => {
                 const card = document.createElement('div');
-                card.className = "bg-gray-800 p-3 rounded-xl border border-gray-700 flex justify-between items-center";
+                card.className = "bg-gray-800 p-2.5 rounded-xl border border-gray-700 flex justify-between items-center";
                 let etiquetaBoton = item.tipoMoneda === "gratis" ? "Gratis" : (item.tipoMoneda === "gold" ? `${item.costo} 🪙` : `${item.costo} 💎`);
                 let colorBoton = item.tipoMoneda === "gems" ? "bg-cyan-500 hover:bg-cyan-400 text-gray-950" : "bg-amber-500 hover:bg-amber-600 text-gray-950";
 
                 card.innerHTML = `
-                    <div>
-                        <h3 class="font-bold text-sm">${item.nombre}</h3>
-                        <p class="text-[11px] text-gray-400">${item.descripcion}</p>
+                    <div class="pr-2">
+                        <h3 class="font-bold text-xs">${item.nombre}</h3>
+                        <p class="text-[10px] text-gray-400">${item.descripcion}</p>
                     </div>
-                    <button onclick="comprarCofre('${item.id}')" class="${colorBoton} font-bold px-3 py-2 rounded-lg text-xs transition shrink-0 ml-2">
+                    <button onclick="comprarCofre('${item.id}')" class="${colorBoton} font-bold px-2.5 py-1.5 rounded-lg text-xs transition shrink-0">
                         ${etiquetaBoton}
                     </button>
                 `;
@@ -801,6 +736,8 @@
             guardarDatos();
         }
 
+        let cacheRivalesGenerados = [];
+
         function abrirSelectorRival() {
             const tieneEquipo = playerData.equipoActivo.some(id => id !== null);
             if (!tieneEquipo) { alert('⚠️ ¡Coloca al menos un ninja en tu alineación activa!'); return; }
@@ -808,20 +745,72 @@
             const listaRivalesDiv = document.getElementById('lista-rivales');
             listaRivalesDiv.innerHTML = '';
 
-            const poolRivales = [
-                { nombre: "Dojo Novato (Fácil)", recompensaOro: 150, equipo: ["genin_fuego", "estudiante_roca", null] },
-                { nombre: "Maestros del Agua (Medio)", recompensaOro: 350, equipo: ["sanador_agua", "genin_fuego", "estudiante_roca"] },
-                { nombre: "Supremos Legendarios (Difícil)", recompensaOro: 800, equipo: ["maestro_rayo", "dragon_ancestral", "sanador_agua"] }
+            const configuracionesDificultad = [
+                {
+                    nombre: "Dojo Novato (Fácil)",
+                    nivelEnemigos: 2,
+                    cantidadNinjas: 2,
+                    rarezaPool: ["Común"],
+                    recompensaOro: 150,
+                    descripcion: "Ninjas novatos de nivel bajo."
+                },
+                {
+                    nombre: "Maestros del Elemento (Medio)",
+                    nivelEnemigos: 5,
+                    cantidadNinjas: 3,
+                    rarezaPool: ["Común", "Raro"],
+                    recompensaOro: 350,
+                    descripcion: "Equipos equilibrados de nivel medio."
+                },
+                {
+                    nombre: "Elite Táctica (Difícil)",
+                    nivelEnemigos: 10,
+                    cantidadNinjas: 3,
+                    rarezaPool: ["Raro", "Épico"],
+                    recompensaOro: 800,
+                    descripcion: "Veteranos experimentados con sinergia."
+                },
+                {
+                    nombre: "Invasión de Leyendas (Suprema)",
+                    nivelEnemigos: 16,
+                    cantidadNinjas: 3,
+                    rarezaPool: ["Épico", "Legendario"],
+                    recompensaOro: 2200,
+                    descripcion: "¡Poderes primigenios y divinos desatados!"
+                }
             ];
 
-            poolRivales.forEach((rival, idx) => {
+            cacheRivalesGenerados = configuracionesDificultad.map(config => {
+                let idsDisponibles = Object.values(catalogoPersonajes)
+                    .filter(p => config.rarezaPool.includes(p.rareza))
+                    .map(p => p.id);
+
+                let equipoGenerado = [];
+                for (let i = 0; i < config.cantidadNinjas; i++) {
+                    let idAleatorio = idsDisponibles[Math.floor(Math.random() * idsDisponibles.length)];
+                    equipoGenerado.push(idAleatorio);
+                }
+
+                return {
+                    nombre: config.nombre,
+                    nivel: config.nivelEnemigos,
+                    recompensaOro: config.recompensaOro,
+                    descripcion: config.descripcion,
+                    equipo: equipoGenerado
+                };
+            });
+
+            cacheRivalesGenerados.forEach((rival, idx) => {
+                let nombresEquipo = rival.equipo.map(id => catalogoPersonajes[id].emoji).join(' ');
+
                 listaRivalesDiv.innerHTML += `
-                    <div class="bg-gray-800 p-3 rounded-xl border border-gray-700 flex justify-between items-center">
-                        <div>
+                    <div class="bg-gray-800 p-2 rounded-xl border border-gray-700 flex justify-between items-center">
+                        <div class="pr-2">
                             <h4 class="font-bold text-xs text-cyan-300">${rival.nombre}</h4>
-                            <p class="text-[10px] text-amber-300">Recompensa: ${rival.recompensaOro} 🪙</p>
+                            <p class="text-[9px] text-gray-300">Nv. ${rival.nivel} | ${nombresEquipo}</p>
+                            <p class="text-[9px] text-amber-300 font-bold">Recompensa: ${rival.recompensaOro} 🪙</p>
                         </div>
-                        <button onclick="iniciarCombate(${idx})" class="bg-red-600 hover:bg-red-500 font-bold text-xs px-3 py-2 rounded-lg transition">Atacar</button>
+                        <button onclick="iniciarCombate(${idx})" class="bg-red-600 hover:bg-red-500 font-bold text-xs px-2.5 py-1.5 rounded-lg transition shrink-0">Atacar</button>
                     </div>
                 `;
             });
@@ -834,13 +823,7 @@
 
         function iniciarCombate(indiceRival) {
             cerrarSelectorRival();
-            const poolRivales = [
-                { nombre: "Dojo Novato (Fácil)", recompensaOro: 150, equipo: ["genin_fuego", "estudiante_roca", null] },
-                { nombre: "Maestros del Agua (Medio)", recompensaOro: 350, equipo: ["sanador_agua", "genin_fuego", "estudiante_roca"] },
-                { nombre: "Supremos Legendarios (Difícil)", recompensaOro: 800, equipo: ["maestro_rayo", "dragon_ancestral", "sanador_agua"] }
-            ];
-
-            const rivalSeleccionado = poolRivales[indiceRival];
+            const rivalSeleccionado = cacheRivalesGenerados[indiceRival];
 
             let jugadorNinjas = playerData.equipoActivo.map((id, index) => {
                 if (!id) return null;
@@ -863,7 +846,7 @@
                 if (!id) return null;
                 const base = catalogoPersonajes[id];
                 if (!base) return null;
-                const stats = calcularEstadisticas(base, 4);
+                const stats = calcularEstadisticas(base, rivalSeleccionado.nivel);
                 let habilidadesConUsos = stats.habilidades.map(h => ({ ...h, usosRestantes: h.usosMax }));
 
                 return {
@@ -886,7 +869,7 @@
 
             document.getElementById('rival-nombre').querySelector('span').innerText = rivalSeleccionado.nombre;
             document.getElementById('modal-combate').classList.remove('hidden');
-            document.getElementById('combate-log').innerHTML = `⚡ ¡Inicia la Arena Táctica!`;
+            document.getElementById('combate-log').innerHTML = `⚡ ¡Inicia la Arena Táctica contra ${rivalSeleccionado.nombre}!`;
 
             procesarSiguienteTurnoVelocidad();
         }
@@ -903,11 +886,11 @@
             let encontradoTurno = false;
             let iteraciones = 0;
 
-            while (!encontradoTurno && iteraciones < 200) {
+            while (!encontradoTurno && iteraciones < 500) {
                 iteraciones++;
                 for (let combatiente of estadoCombate.todosLosCombatientes) {
                     if (combatiente.vidaActual <= 0) continue;
-                    combatiente.barraAccion += combatiente.velocidad * 0.5;
+                    combatiente.barraAccion += combatiente.velocidad * 2;
                     if (combatiente.barraAccion >= 100) {
                         combatiente.barraAccion = 0;
                         estadoCombate.combatienteActual = combatiente;
@@ -1080,12 +1063,12 @@
                 const seleccionado = estadoCombate.objetivoSeleccionadoId === n.uniqueId;
 
                 rivalSlots.innerHTML += `
-                    <div data-uid="${n.uniqueId}" onclick="seleccionarObjetivo('${n.uniqueId}')" class="bg-gray-900 p-2.5 rounded-xl border ${seleccionado ? 'border-amber-400 bg-amber-950/40 ring-2 ring-amber-400' : (esActivo ? 'border-red-400 enemy-turn-glow bg-red-950/40' : 'border-red-900/30')} text-left transition-all cursor-pointer hover:border-amber-400 relative overflow-hidden">
-                        <div class="flex justify-between items-center text-[11px] font-bold">
-                            <span class="truncate">${n.emoji} ${n.nombre} ${n.vidaActual <= 0 ? '(Derrotado)' : ''}</span>
+                    <div data-uid="${n.uniqueId}" onclick="seleccionarObjetivo('${n.uniqueId}')" class="bg-gray-900 p-2 rounded-xl border ${seleccionado ? 'border-amber-400 bg-amber-950/40 ring-1 ring-amber-400' : (esActivo ? 'border-red-400 enemy-turn-glow bg-red-950/40' : 'border-red-900/30')} text-left transition-all cursor-pointer relative overflow-hidden shrink-0">
+                        <div class="flex justify-between items-center text-[10px] font-bold">
+                            <span class="truncate">${n.emoji} ${n.nombre} ${n.vidaActual <= 0 ? '(X)' : ''}</span>
                             <span class="text-red-400 shrink-0 ml-1">${n.vidaActual}/${n.vidaMax}</span>
                         </div>
-                        <div class="w-full bg-gray-800 h-2 rounded-full mt-1.5 overflow-hidden">
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full mt-1 overflow-hidden">
                             <div class="bg-red-500 h-full transition-all duration-300" style="width: ${porcentaje}%"></div>
                         </div>
                     </div>
@@ -1099,24 +1082,23 @@
                 const esActivo = estadoCombate.combatienteActual === n;
 
                 playerSlots.innerHTML += `
-                    <div data-uid="${n.uniqueId}" onclick="seleccionarObjetivo('${n.uniqueId}')" class="bg-gray-900 p-2.5 rounded-xl border ${esActivo ? 'border-cyan-400 active-turn-glow bg-cyan-950/40' : 'border-cyan-900/30'} text-left transition-all cursor-pointer hover:border-emerald-400 relative overflow-hidden">
-                        <div class="flex justify-between items-center text-[11px] font-bold">
-                            <span class="truncate">${n.emoji} ${n.nombre} ${n.vidaActual <= 0 ? '(Caído)' : ''}</span>
+                    <div data-uid="${n.uniqueId}" onclick="seleccionarObjetivo('${n.uniqueId}')" class="bg-gray-900 p-2 rounded-xl border ${esActivo ? 'border-cyan-400 active-turn-glow bg-cyan-950/40' : 'border-cyan-900/30'} text-left transition-all cursor-pointer relative overflow-hidden shrink-0">
+                        <div class="flex justify-between items-center text-[10px] font-bold">
+                            <span class="truncate">${n.emoji} ${n.nombre} ${n.vidaActual <= 0 ? '(X)' : ''}</span>
                             <span class="text-cyan-400 shrink-0 ml-1">${n.vidaActual}/${n.vidaMax}</span>
                         </div>
-                        <div class="w-full bg-gray-800 h-2 rounded-full mt-1.5 overflow-hidden">
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full mt-1 overflow-hidden">
                             <div class="bg-cyan-500 h-full transition-all duration-300" style="width: ${porcentaje}%"></div>
                         </div>
-                        <div class="text-[8px] text-emerald-400 mt-0.5">💡 Clic para curar/proteger</div>
                     </div>
                 `;
             });
 
             const actor = estadoCombate.combatienteActual;
             if (actor) {
-                document.getElementById('combate-turno-texto').innerText = `⚡ Turno de: ${actor.nombre}`;
+                document.getElementById('combate-turno-texto').innerText = `⚡ Turno: ${actor.nombre}`;
                 if (actor.tipo === 'jugador') {
-                    document.getElementById('combate-estado-texto').innerText = `Elige habilidad y objetivo o aliado.`;
+                    document.getElementById('combate-estado-texto').innerText = `Elige acción.`;
                     const controles = document.getElementById('combate-controles');
                     controles.innerHTML = '';
 
@@ -1126,16 +1108,16 @@
                         if (sinUsos) colorBoton = 'bg-gray-800 text-gray-500 cursor-not-allowed';
 
                         controles.innerHTML += `
-                            <button ${sinUsos ? 'disabled' : `onclick="prepararHabilidadJugador(${index})"`} class="${colorBoton} font-bold text-[11px] p-2 rounded-xl transition flex flex-col items-center text-center shadow-md active:scale-95">
-                                <span class="text-xs">✨ ${hab.nombre}</span>
-                                <span class="text-[9px] opacity-80 font-normal mt-0.5">${hab.desc}</span>
-                                <span class="text-[9px] ${sinUsos ? 'text-red-400' : 'text-amber-200'} mt-1">Usos: ${hab.usosRestantes}/${hab.usosMax}</span>
+                            <button ${sinUsos ? 'disabled' : `onclick="prepararHabilidadJugador(${index})"`} class="${colorBoton} font-bold text-[10px] p-1.5 rounded-xl transition flex flex-col items-center text-center shadow active:scale-95">
+                                <span class="text-[11px] truncate w-full">✨ ${hab.nombre}</span>
+                                <span class="text-[8px] opacity-80 font-normal truncate w-full">${hab.desc}</span>
+                                <span class="text-[8px] ${sinUsos ? 'text-red-400' : 'text-amber-200'} mt-0.5">Usos: ${hab.usosRestantes}/${hab.usosMax}</span>
                             </button>
                         `;
                     });
                 } else {
-                    document.getElementById('combate-estado-texto').innerText = `Turno del Rival...`;
-                    document.getElementById('combate-controles').innerHTML = `<div class="col-span-2 text-center text-gray-500 text-xs py-3 italic">Calculando movimiento táctico...</div>`;
+                    document.getElementById('combate-estado-texto').innerText = `Rival pensando...`;
+                    document.getElementById('combate-controles').innerHTML = `<div class="col-span-2 text-center text-gray-500 text-[10px] py-2 italic">Calculando movimiento táctico...</div>`;
                 }
             }
         }
@@ -1150,20 +1132,20 @@
                     const ninja = catalogoPersonajes[idNinja];
                     const datos = playerData.coleccion[idNinja] || { nivel: 1 };
                     activeSlots.innerHTML += `
-                        <div class="bg-gray-800 h-28 rounded-xl border-2 border-cyan-500 flex flex-col justify-between items-center text-center p-2 relative shadow-md">
-                            <button onclick="removerDelEquipo(${i})" class="absolute top-1 right-1 text-[10px] text-red-400 bg-gray-900 px-1 py-0.5 rounded">❌</button>
+                        <div class="bg-gray-800 h-24 rounded-xl border-2 border-cyan-500 flex flex-col justify-between items-center text-center p-1.5 relative shadow">
+                            <button onclick="removerDelEquipo(${i})" class="absolute top-1 right-1 text-[8px] text-red-400 bg-gray-900 px-1 py-0.5 rounded">❌</button>
                             <div>
-                                <span class="text-xl">${ninja.emoji}</span>
-                                <h4 class="text-[10px] font-bold truncate">${ninja.nombre}</h4>
+                                <span class="text-lg">${ninja.emoji}</span>
+                                <h4 class="text-[9px] font-bold truncate">${ninja.nombre}</h4>
                             </div>
-                            <span class="text-[9px] bg-cyan-950 text-cyan-300 px-1.5 py-0.5 rounded font-bold">Nv. ${datos.nivel}</span>
+                            <span class="text-[8px] bg-cyan-950 text-cyan-300 px-1 py-0.5 rounded font-bold">Nv. ${datos.nivel}</span>
                         </div>
                     `;
                 } else {
                     activeSlots.innerHTML += `
-                        <div class="bg-gray-800/50 h-28 rounded-xl border border-dashed border-gray-700 flex flex-col justify-center items-center text-gray-600">
-                            <span class="text-xl">➕</span>
-                            <span class="text-[10px]">Vacío</span>
+                        <div class="bg-gray-800/50 h-24 rounded-xl border border-dashed border-gray-700 flex flex-col justify-center items-center text-gray-600">
+                            <span class="text-lg">➕</span>
+                            <span class="text-[9px]">Vacío</span>
                         </div>
                     `;
                 }
@@ -1193,58 +1175,57 @@
                             : "bg-red-900/60 hover:bg-red-900 text-red-200 border border-red-700/50";
 
                         btnMejoraHtml = `
-                            <button onclick="mejorarCarta('${id}')" class="${colorClaseBtn} text-[10px] font-bold px-2.5 py-1 rounded-lg transition shadow">
-                                Mejorar (${datos.copias}/${req.copias} copias | ${req.oro} 🪙)
+                            <button onclick="mejorarCarta('${id}')" class="${colorClaseBtn} text-[9px] font-bold px-2 py-1 rounded-lg transition shadow">
+                                Mejorar (${datos.copias}/${req.copias} | ${req.oro} 🪙)
                             </button>
                         `;
                     } else {
-                        btnMejoraHtml = `<span class="text-[10px] text-amber-400 font-bold">Nivel Máximo</span>`;
+                        btnMejoraHtml = `<span class="text-[9px] text-amber-400 font-bold">Nivel Máximo</span>`;
                     }
 
-                    let habilidadesHtml = stats.habilidades.map(h => `<div class="text-[9px] bg-gray-900 p-1 rounded text-gray-300 border border-gray-800"><b>✨ ${h.nombre}:</b> ${h.desc} (Usos: ${h.usosMax})</div>`).join('');
+                    let habilidadesHtml = stats.habilidades.map(h => `<div class="text-[8px] bg-gray-900 p-1 rounded text-gray-300 border border-gray-800"><b>✨ ${h.nombre}:</b> ${h.desc} (${h.usosMax})</div>`).join('');
 
                     roster.innerHTML += `
-                        <div class="bg-gray-800 p-3 rounded-xl border border-cyan-500/50 flex flex-col space-y-2 shadow-md">
+                        <div class="bg-gray-800 p-2.5 rounded-xl border border-cyan-500/50 flex flex-col space-y-1.5 shadow">
                             <div class="flex justify-between items-center">
-                                <div class="flex items-center space-x-3">
-                                    <span class="text-3xl bg-gray-900 p-2 rounded-lg">${ninja.emoji}</span>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-2xl bg-gray-900 p-1.5 rounded-lg">${ninja.emoji}</span>
                                     <div>
-                                        <div class="flex items-center space-x-2">
-                                            <h4 class="font-bold text-sm">${ninja.nombre}</h4>
-                                            <span class="text-[10px] bg-cyan-900 text-cyan-200 px-1.5 rounded font-bold">Nv. ${datos.nivel}</span>
+                                        <div class="flex items-center space-x-1.5">
+                                            <h4 class="font-bold text-xs">${ninja.nombre}</h4>
+                                            <span class="text-[9px] bg-cyan-900 text-cyan-200 px-1 rounded font-bold">Nv. ${datos.nivel}</span>
                                         </div>
-                                        <p class="text-[10px] text-cyan-300">❤️ ${stats.vidaMax} | ⚔️ ${stats.ataque} | ⚡ Vel: ${stats.velocidad}</p>
+                                        <p class="text-[9px] text-cyan-300">❤️ ${stats.vidaMax} | ⚔️ ${stats.ataque} | ⚡ Vel: ${stats.velocidad}</p>
                                     </div>
                                 </div>
                                 <div>
-                                    ${enEquipo ? '<span class="text-[10px] bg-cyan-950 text-cyan-300 px-2 py-1 rounded font-bold">En Equipo</span>' : `<button onclick="agregarAlEquipo('${id}')" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Usar</button>`}
+                                    ${enEquipo ? '<span class="text-[9px] bg-cyan-950 text-cyan-300 px-2 py-1 rounded font-bold">En Equipo</span>' : `<button onclick="agregarAlEquipo('${id}')" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg">Usar</button>`}
                                 </div>
                             </div>
-                            <div class="flex justify-between items-center bg-gray-900/60 p-2 rounded-lg">
-                                <span class="text-[10px] text-gray-300">Rareza: <b class="text-amber-400">${ninja.rareza}</b></span>
+                            <div class="flex justify-between items-center bg-gray-900/60 p-1.5 rounded-lg">
+                                <span class="text-[9px] text-gray-300">Rareza: <b class="text-amber-400">${ninja.rareza}</b></span>
                                 ${btnMejoraHtml}
                             </div>
-                            <div class="bg-gray-900/80 p-2 rounded-lg border border-gray-700 flex flex-col space-y-1">
-                                <p class="text-[10px] font-bold text-purple-400">Habilidades e Información Táctica:</p>
+                            <div class="bg-gray-900/80 p-1.5 rounded-lg border border-gray-700 flex flex-col space-y-1">
+                                <p class="text-[9px] font-bold text-purple-400">Habilidades Tácticas:</p>
                                 ${habilidadesHtml}
                             </div>
                         </div>
                     `;
                 } else {
-                    // Tarjeta para personajes bloqueados (Gris, opacos y con etiqueta de Bloqueado)
                     roster.innerHTML += `
-                        <div class="bg-gray-900/60 p-3 rounded-xl border border-gray-800 flex items-center justify-between opacity-50 grayscale transition">
-                            <div class="flex items-center space-x-3">
-                                <span class="text-3xl bg-gray-950 p-2 rounded-lg">${ninja.emoji}</span>
+                        <div class="bg-gray-900/60 p-2.5 rounded-xl border border-gray-800 flex items-center justify-between opacity-50 grayscale transition">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-2xl bg-gray-950 p-1.5 rounded-lg">${ninja.emoji}</span>
                                 <div>
-                                    <div class="flex items-center space-x-2">
-                                        <h4 class="font-bold text-sm text-gray-400">${ninja.nombre}</h4>
-                                        <span class="text-[9px] bg-gray-800 text-gray-400 px-1.5 rounded font-bold">Bloqueado</span>
+                                    <div class="flex items-center space-x-1.5">
+                                        <h4 class="font-bold text-xs text-gray-400">${ninja.nombre}</h4>
+                                        <span class="text-[8px] bg-gray-800 text-gray-400 px-1 rounded font-bold">Bloqueado</span>
                                     </div>
-                                    <p class="text-[10px] text-gray-500">Consíguelo en la Tienda de Invocaciones</p>
+                                    <p class="text-[9px] text-gray-500">Obtenlo en la Tienda</p>
                                 </div>
                             </div>
-                            <div class="text-[10px] text-gray-500 font-bold bg-gray-800/80 px-2.5 py-1 rounded-lg">🔒 Bloqueado</div>
+                            <div class="text-[9px] text-gray-500 font-bold bg-gray-800/80 px-2 py-1 rounded-lg">🔒 Bloqueado</div>
                         </div>
                     `;
                 }
@@ -1260,14 +1241,14 @@
                 if (idNinja && catalogoPersonajes[idNinja]) {
                     const ninja = catalogoPersonajes[idNinja];
                     container.innerHTML += `
-                        <div class="bg-gray-950 h-20 rounded-xl border border-cyan-500/60 flex flex-col justify-center items-center text-center p-1">
-                            <span class="text-lg">${ninja.emoji}</span>
-                            <h4 class="text-[10px] font-bold text-cyan-200 truncate">${ninja.nombre}</h4>
+                        <div class="bg-gray-950 h-16 rounded-xl border border-cyan-500/60 flex flex-col justify-center items-center text-center p-1">
+                            <span class="text-base">${ninja.emoji}</span>
+                            <h4 class="text-[9px] font-bold text-cyan-200 truncate w-full">${ninja.nombre}</h4>
                         </div>
                     `;
                 } else {
                     container.innerHTML += `
-                        <div class="bg-gray-950/40 h-20 rounded-xl border border-dashed border-gray-800 flex justify-center items-center text-gray-600 text-[10px]">Vacío</div>
+                        <div class="bg-gray-950/40 h-16 rounded-xl border border-dashed border-gray-800 flex justify-center items-center text-gray-600 text-[9px]">Vacío</div>
                     `;
                 }
             }
@@ -1276,9 +1257,9 @@
         function renderizarMisiones() {
             const container = document.getElementById('missions-container');
             container.innerHTML = `
-                <div class="bg-gray-800 p-3 rounded-xl border border-gray-700">
-                    <h4 class="font-bold text-sm text-purple-300">⚔️ Campeón de la Arena</h4>
-                    <p class="text-xs text-gray-400">Victorias actuales: ${playerData.misionesProgreso.combatesGanados}</p>
+                <div class="bg-gray-800 p-2.5 rounded-xl border border-gray-700">
+                    <h4 class="font-bold text-xs text-purple-300">⚔️ Campeón de la Arena</h4>
+                    <p class="text-[10px] text-gray-400">Victorias actuales: ${playerData.misionesProgreso.combatesGanados}</p>
                 </div>
             `;
         }
@@ -1300,12 +1281,12 @@
             document.getElementById('view-' + tabName).classList.add('active');
 
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-amber-400', 'text-cyan-400', 'text-red-500', 'text-purple-400', 'text-emerald-400', 'font-bold', 'scale-110');
+                btn.classList.remove('text-amber-400', 'text-cyan-400', 'text-red-500', 'text-purple-400', 'text-emerald-400', 'font-bold', 'scale-105');
                 btn.classList.add('text-gray-400');
             });
 
             buttonElement.classList.remove('text-gray-400');
-            buttonElement.classList.add('font-bold', 'scale-110');
+            buttonElement.classList.add('font-bold', 'scale-105');
             if (tabName === 'tienda') buttonElement.classList.add('text-amber-400');
             if (tabName === 'equipo') buttonElement.classList.add('text-cyan-400');
             if (tabName === 'combate') buttonElement.classList.add('text-red-500');
