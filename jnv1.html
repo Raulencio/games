@@ -19,8 +19,15 @@
         }
 
         @keyframes subtle-glow {
-            0%, 100% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.4); }
-            50% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.8); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(6, 182, 212, 0.8);
+            }
         }
 
         .active-turn-glow {
@@ -28,8 +35,15 @@
         }
 
         @keyframes enemy-glow {
-            0%, 100% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.4); }
-            50% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.8); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+            }
         }
 
         .enemy-turn-glow {
@@ -37,9 +51,20 @@
         }
 
         @keyframes float-up {
-            0% { transform: translateY(0) scale(0.8); opacity: 0; }
-            20% { transform: translateY(-10px) scale(1.2); opacity: 1; }
-            100% { transform: translateY(-45px) scale(1); opacity: 0; }
+            0% {
+                transform: translateY(0) scale(0.8);
+                opacity: 0;
+            }
+
+            20% {
+                transform: translateY(-10px) scale(1.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-45px) scale(1);
+                opacity: 0;
+            }
         }
 
         .floating-number {
@@ -53,8 +78,13 @@
         }
 
         @keyframes bg-flash-damage {
-            0% { background-color: rgba(127, 29, 29, 0.4); }
-            100% { background-color: rgba(15, 23, 42, 0.95); }
+            0% {
+                background-color: rgba(127, 29, 29, 0.4);
+            }
+
+            100% {
+                background-color: rgba(15, 23, 42, 0.95);
+            }
         }
 
         .flash-damage-bg {
@@ -62,23 +92,193 @@
         }
 
         @keyframes bg-flash-heal {
-            0% { background-color: rgba(6, 95, 70, 0.4); }
-            100% { background-color: rgba(15, 23, 42, 0.95); }
+            0% {
+                background-color: rgba(6, 95, 70, 0.4);
+            }
+
+            100% {
+                background-color: rgba(15, 23, 42, 0.95);
+            }
         }
 
         .flash-heal-bg {
             animation: bg-flash-heal 0.5s ease-out;
         }
+
+        .grid-iconos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .icono-item {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: #1f2937;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .icono-item:hover:not(.bloqueado) {
+            transform: scale(1.1);
+        }
+
+        .icono-item.seleccionado {
+            border-color: #10B981;
+        }
+
+        .icono-item.bloqueado {
+            filter: grayscale(100%) opacity(40%);
+            cursor: not-allowed;
+            border-color: #EF4444;
+        }
+
+        /* Barra de Turnos */
+        .timeline-container {
+            position: relative;
+            display: flex;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 1px solid #444;
+            z-index: 30;
+            overflow-x: auto;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .timeline-unit {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* Destacar la unidad activa actual */
+        .timeline-unit.active {
+            transform: scale(1.2);
+            border-color: #ffd700;
+            box-shadow: 0 0 10px #ffd700;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-25px) scale(1.2);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-40px) scale(0.9);
+            }
+        }
+
+        /* Animación de ataque (sacudida/desplazamiento) */
+        @keyframes attackPulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08) translateY(-4px);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Animación al recibir daño (sacudida violenta) */
+        @keyframes hurtShake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20%,
+            60% {
+                transform: translateX(-6px);
+            }
+
+            40%,
+            80% {
+                transform: translateX(6px);
+            }
+        }
+
+        /* Animación al recibir curación */
+        @keyframes healGlow {
+            0% {
+                box-shadow: 0 0 0px rgba(52, 211, 153, 0);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(52, 211, 153, 0.8);
+            }
+
+            100% {
+                box-shadow: 0 0 0px rgba(52, 211, 153, 0);
+            }
+        }
+
+        /* Clases de utilidad para JS */
+        .anim-attack {
+            animation: attackPulse 0.3s ease-in-out;
+        }
+
+        .anim-hurt {
+            animation: hurtShake 0.4s ease-in-out;
+        }
+
+        .anim-heal {
+            animation: healGlow 0.6s ease-in-out;
+        }
+
+        /* Resplandor de personaje activo en turno */
+        .active-turn-glow {
+            box-shadow: 0 0 12px rgba(34, 211, 238, 0.6);
+            border-color: #22d3ee !important;
+        }
+
+        .enemy-turn-glow {
+            box-shadow: 0 0 12px rgba(248, 113, 113, 0.6);
+            border-color: #f87171 !important;
+        }
     </style>
 </head>
 
-<body class="bg-gray-950 text-white font-sans flex justify-center items-center h-dvh w-screen m-0 overflow-hidden select-none">
+<body
+    class="bg-gray-950 text-white font-sans flex justify-center items-center h-dvh w-screen m-0 overflow-hidden select-none">
 
-    <!-- Contenedor Principal (Flexible para cualquier pantalla de celular) -->
-    <div class="w-full max-w-md h-dvh md:h-[90dvh] md:max-h-[850px] md:rounded-2xl bg-gray-900 shadow-2xl flex flex-col relative border border-gray-800 overflow-hidden">
+    <!-- Contenedor Principal -->
+    <div
+        class="w-full max-w-md h-dvh md:h-[90dvh] md:max-h-[850px] md:rounded-2xl bg-gray-900 shadow-2xl flex flex-col relative border border-gray-800 overflow-hidden">
 
         <!-- ================= BARRA SUPERIOR ================= -->
-        <div class="bg-gray-950/90 px-4 py-2.5 border-b border-gray-800 flex justify-between items-center text-xs font-bold z-40 backdrop-blur shrink-0">
+        <div
+            class="bg-gray-950/90 px-4 py-2.5 border-b border-gray-800 flex justify-between items-center text-xs font-bold z-40 backdrop-blur shrink-0">
             <div class="flex items-center space-x-1.5 text-amber-400">
                 <span>🪙 Oro:</span>
                 <span id="player-gold">3000</span>
@@ -87,7 +287,8 @@
                 <span>💎 Gemas:</span>
                 <span id="player-gems">200</span>
             </div>
-            <button onclick="resetData()" class="text-gray-500 hover:text-red-400 text-[10px] underline transition">Reiniciar</button>
+            <button onclick="resetData()"
+                class="text-gray-500 hover:text-red-400 text-[10px] underline transition">Reiniciar</button>
         </div>
 
         <!-- ================= CONTENIDO DE LAS PÁGINAS (Scrollable) ================= -->
@@ -103,7 +304,8 @@
             <!-- 2. EQUIPO -->
             <div id="view-equipo" class="view-section">
                 <h2 class="text-xl font-bold mb-0.5 text-cyan-400">🛡️ Cuartel de Ninjas</h2>
-                <p class="text-gray-400 text-[11px] mb-3">Gestiona tu alineación y mejora tus cartas con copias y oro.</p>
+                <p class="text-gray-400 text-[11px] mb-3">Gestiona tu alineación y mejora tus cartas con copias y oro.
+                </p>
 
                 <h3 class="text-xs font-bold text-gray-300 mb-1.5">Alineación Activa</h3>
                 <div id="active-slots" class="grid grid-cols-3 gap-2 mb-3"></div>
@@ -116,11 +318,14 @@
             <div id="view-combate" class="view-section">
                 <div class="flex flex-col items-center text-center justify-between h-full">
                     <div class="w-full">
-                        <div class="bg-gradient-to-r from-red-600/20 via-orange-600/20 to-red-600/20 border border-red-500/40 px-3 py-2.5 rounded-2xl mb-2.5 shadow-lg">
-                            <h2 class="text-xl font-black text-red-500 tracking-wide flex items-center justify-center gap-2">
+                        <div
+                            class="bg-gradient-to-r from-red-600/20 via-orange-600/20 to-red-600/20 border border-red-500/40 px-3 py-2.5 rounded-2xl mb-2.5 shadow-lg">
+                            <h2
+                                class="text-xl font-black text-red-500 tracking-wide flex items-center justify-center gap-2">
                                 <span>⚔️</span> ARENA TÁCTICA <span>⚔️</span>
                             </h2>
-                            <p class="text-gray-300 text-[10px] mt-0.5">Combate por turnos de velocidad con curas y ataques de área.</p>
+                            <p class="text-gray-300 text-[10px] mt-0.5">Combate por turnos de velocidad con curas y
+                                ataques de área.</p>
                         </div>
 
                         <div class="grid grid-cols-3 gap-2 w-full mb-2.5 text-center">
@@ -138,39 +343,58 @@
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-b from-gray-900 to-gray-950 p-3 rounded-2xl border border-gray-800 mb-3 w-full shadow-lg text-left">
+                        <div
+                            class="bg-gradient-to-b from-gray-900 to-gray-950 p-3 rounded-2xl border border-gray-800 mb-3 w-full shadow-lg text-left">
                             <div class="flex items-center justify-between mb-2">
-                                <h3 class="text-[11px] font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
+                                <h3
+                                    class="text-[11px] font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
                                     <span>🛡️</span> Escuadrón Activo
                                 </h3>
-                                <button onclick="switchTab('equipo', document.querySelectorAll('.nav-btn')[1])" class="text-[10px] text-gray-400 hover:text-cyan-300 underline">Modificar</button>
+                                <button onclick="switchTab('equipo', document.querySelectorAll('.nav-btn')[1])"
+                                    class="text-[10px] text-gray-400 hover:text-cyan-300 underline">Modificar</button>
                             </div>
                             <div id="combat-active-slots" class="grid grid-cols-3 gap-2"></div>
                         </div>
                     </div>
 
-                    <button onclick="abrirSelectorRival()" class="w-full bg-gradient-to-r from-red-600 via-orange-500 to-red-600 hover:from-red-500 hover:to-orange-400 text-white font-black text-sm py-3 rounded-2xl shadow-xl shadow-red-950/60 transition transform active:scale-[0.98] flex items-center justify-center gap-2 border border-red-400/30 mb-1">
+                    <button onclick="abrirSelectorRival()"
+                        class="w-full bg-gradient-to-r from-red-600 via-orange-500 to-red-600 hover:from-red-500 hover:to-orange-400 text-white font-black text-sm py-3 rounded-2xl shadow-xl shadow-red-950/60 transition transform active:scale-[0.98] flex items-center justify-center gap-2 border border-red-400/30 mb-1">
                         <span class="text-lg">🔥</span> BUSCAR OPONENTE
                     </button>
                 </div>
             </div>
 
-            <!-- 4. MISIONES -->
+            <!-- 4. MISIONES Y LOGROS -->
             <div id="view-misiones" class="view-section">
-                <h2 class="text-xl font-bold mb-0.5 text-purple-400">📜 Misiones Diarias</h2>
-                <p class="text-gray-400 text-[11px] mb-3">Completa logros para obtener abundantes recursos.</p>
-                <div id="missions-container" class="grid grid-cols-1 gap-2.5"></div>
+                <h2 class="text-xl font-bold mb-0.5 text-purple-400">📜 Misiones y Logros</h2>
+                <p class="text-gray-400 text-[11px] mb-3">Las misiones son repetibles infinitamente. Los logros otorgan
+                    recompensas únicas.</p>
+
+                <h3 class="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-2 flex items-center gap-1">
+                    <span>🔄</span> Misiones Repetibles
+                </h3>
+                <div id="missions-container" class="grid grid-cols-1 gap-2 mb-4"></div>
+
+                <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1">
+                    <span>🏆</span> Logros Únicos
+                </h3>
+                <div id="achievements-container" class="grid grid-cols-1 gap-2"></div>
             </div>
 
             <!-- 5. AJUSTES -->
             <div id="view-ajustes" class="view-section">
                 <h2 class="text-xl font-bold mb-3 text-emerald-400">⚙️ Perfil y Ajustes</h2>
-                <div class="bg-gray-800 p-3 rounded-xl border border-gray-700 mb-3 flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-lg">👤</div>
-                    <div>
-                        <h3 class="font-bold text-sm">Jugador Genin</h3>
-                        <p class="text-[10px] text-gray-400">Rango: Maestro Táctico</p>
+                <div class="bg-gray-800 p-3 rounded-xl border border-gray-700 mb-3 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div id="perfil-icono"
+                            class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-lg">🥷</div>
+                        <div>
+                            <h3 id="perfil-nombre" class="font-bold text-sm">Jugador Genin</h3>
+                            <p class="text-[10px] text-gray-400">Rango: Maestro Táctico</p>
+                        </div>
                     </div>
+                    <button onclick="abrirAjustesModal()"
+                        class="bg-emerald-600 hover:bg-emerald-500 text-xs font-bold px-3 py-1.5 rounded-lg transition">Editar</button>
                 </div>
             </div>
 
@@ -178,23 +402,28 @@
 
         <!-- ================= BARRA INFERIOR ================= -->
         <nav class="h-14 bg-gray-950 border-t border-gray-800 flex justify-around items-center px-1 z-40 shrink-0">
-            <button onclick="switchTab('tienda', this)" class="nav-btn flex flex-col items-center justify-center w-1/5 text-amber-400 font-bold scale-105 transition">
+            <button onclick="switchTab('tienda', this)"
+                class="nav-btn flex flex-col items-center justify-center w-1/5 text-amber-400 font-bold scale-105 transition">
                 <span class="text-lg">🛍️</span>
                 <span class="text-[9px] mt-0.5">Tienda</span>
             </button>
-            <button onclick="switchTab('equipo', this)" class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-cyan-400 transition">
+            <button onclick="switchTab('equipo', this)"
+                class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-cyan-400 transition">
                 <span class="text-lg">🛡️</span>
                 <span class="text-[9px] mt-0.5">Equipo</span>
             </button>
-            <button onclick="switchTab('combate', this)" class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-red-500 transition">
+            <button onclick="switchTab('combate', this)"
+                class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-red-500 transition">
                 <span class="text-xl">⚔️</span>
                 <span class="text-[9px] mt-0.5">Combate</span>
             </button>
-            <button onclick="switchTab('misiones', this)" class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-purple-400 transition">
+            <button onclick="switchTab('misiones', this)"
+                class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-purple-400 transition">
                 <span class="text-lg">📜</span>
                 <span class="text-[9px] mt-0.5">Misiones</span>
             </button>
-            <button onclick="switchTab('ajustes', this)" class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-emerald-400 transition">
+            <button onclick="switchTab('ajustes', this)"
+                class="nav-btn flex flex-col items-center justify-center w-1/5 text-gray-400 hover:text-emerald-400 transition">
                 <span class="text-lg">⚙️</span>
                 <span class="text-[9px] mt-0.5">Ajustes</span>
             </button>
@@ -202,46 +431,92 @@
 
     </div>
 
+    <!-- ================= MODAL AJUSTES ================= -->
+    <div id="modalAjustes"
+        class="fixed inset-0 bg-black/80 z-50 hidden flex justify-center items-center p-3 backdrop-blur-sm">
+        <div
+            class="bg-gray-900 border border-gray-700 w-full max-w-sm rounded-2xl p-4 flex flex-col space-y-3 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-2">
+                <h3 class="font-bold text-sm text-emerald-400">⚙️ Ajustes de Perfil</h3>
+                <button onclick="cerrarAjustesModal()"
+                    class="text-gray-400 hover:text-white text-xs font-bold px-1">✕</button>
+            </div>
+
+            <div class="space-y-1">
+                <label for="inputNombreJugador" class="text-xs text-gray-300">Nombre del Jugador:</label>
+                <input type="text" id="inputNombreJugador"
+                    class="w-full bg-gray-800 border border-gray-700 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+                    placeholder="Escribe tu nombre">
+            </div>
+
+            <div class="space-y-1">
+                <label class="text-xs text-gray-300 block">Selecciona tu Avatar:</label>
+                <div id="contenedorIconos" class="grid-iconos"></div>
+            </div>
+
+            <button onclick="guardarAjustes()"
+                class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-2 rounded-xl transition mt-2">Guardar
+                Cambios</button>
+        </div>
+    </div>
+
     <!-- ================= MODAL RIVALES ================= -->
-    <div id="modal-rivales" class="fixed inset-0 bg-black/80 z-50 hidden flex justify-center items-center p-3 backdrop-blur-sm">
-        <div class="bg-gray-900 border border-gray-700 w-full max-w-sm max-h-[85dvh] rounded-2xl p-3 flex flex-col space-y-2.5 shadow-2xl overflow-hidden">
+    <div id="modal-rivales"
+        class="fixed inset-0 bg-black/80 z-50 hidden flex justify-center items-center p-3 backdrop-blur-sm">
+        <div
+            class="bg-gray-900 border border-gray-700 w-full max-w-sm max-h-[85dvh] rounded-2xl p-3 flex flex-col space-y-2.5 shadow-2xl overflow-hidden">
             <div class="flex justify-between items-center border-b border-gray-800 pb-2 shrink-0">
                 <h3 class="font-bold text-xs text-red-400">⚔️ Selecciona tu Oponente</h3>
-                <button onclick="cerrarSelectorRival()" class="text-gray-400 hover:text-white text-xs font-bold px-1">✕</button>
+                <button onclick="cerrarSelectorRival()"
+                    class="text-gray-400 hover:text-white text-xs font-bold px-1">✕</button>
             </div>
             <div id="lista-rivales" class="flex flex-col space-y-2 overflow-y-auto min-h-0"></div>
         </div>
     </div>
 
     <!-- ================= MODAL DE COMBATE TÁCTICO ================= -->
-    <div id="modal-combate" class="fixed inset-0 bg-gray-950/95 z-50 hidden flex flex-col justify-between p-3 backdrop-blur-md transition-colors duration-300 overflow-hidden">
-        <div class="bg-gray-900/90 border border-gray-800 p-2.5 rounded-2xl flex justify-between items-center text-xs shadow-md z-20 shrink-0">
-            <span id="combate-turno-texto" class="font-bold text-cyan-400 flex items-center gap-1 text-[11px]">⚡ Turno Activo</span>
+    <div id="modal-combate"
+        class="fixed inset-0 bg-gray-950/95 z-50 hidden flex flex-col justify-between p-3 backdrop-blur-md transition-colors duration-300 overflow-hidden">
+        <div
+            class="bg-gray-900/90 border border-gray-800 p-2.5 rounded-2xl flex justify-between items-center text-xs shadow-md z-20 shrink-0">
+            <span id="combate-turno-texto" class="font-bold text-cyan-400 flex items-center gap-1 text-[11px]">⚡ Turno
+                Activo</span>
             <span id="combate-estado-texto" class="font-bold text-amber-400 text-[10px]">Esperando orden...</span>
         </div>
 
         <div class="grid grid-cols-2 gap-2 flex-1 my-2 overflow-y-auto min-h-0 z-20">
-            <!-- Panel del Rival -->
-            <div class="bg-red-950/20 border border-red-900/40 p-2 rounded-2xl flex flex-col justify-start shadow-inner overflow-y-auto">
-                <h4 id="rival-nombre" class="text-[11px] font-bold text-red-400 mb-1.5 pb-1 border-b border-red-900/30 flex justify-between items-center shrink-0">
+            <div
+                class="bg-red-950/20 border border-red-900/40 p-2 rounded-2xl flex flex-col justify-start shadow-inner overflow-y-auto">
+                <h4 id="rival-nombre"
+                    class="text-[11px] font-bold text-red-400 mb-1.5 pb-1 border-b border-red-900/30 flex justify-between items-center shrink-0">
                     <span>Rival</span>
-                    <span id="label-modo-objetivo" class="text-[8px] bg-red-900 text-white px-1 py-0.5 rounded animate-pulse hidden">¡Elige Enemigo!</span>
+                    <span id="label-modo-objetivo"
+                        class="text-[8px] bg-red-900 text-white px-1 py-0.5 rounded animate-pulse hidden">¡Elige
+                        Enemigo!</span>
                 </h4>
                 <div id="rival-team-slots" class="flex flex-col space-y-1.5"></div>
             </div>
 
-            <!-- Panel del Jugador -->
-            <div class="bg-cyan-950/20 border border-cyan-900/40 p-2 rounded-2xl flex flex-col justify-start shadow-inner overflow-y-auto">
-                <h4 class="text-[11px] font-bold text-cyan-400 mb-1.5 pb-1 border-b border-cyan-900/30 flex justify-between items-center shrink-0">
+            <div
+                class="bg-cyan-950/20 border border-cyan-900/40 p-2 rounded-2xl flex flex-col justify-start shadow-inner overflow-y-auto">
+                <h4
+                    class="text-[11px] font-bold text-cyan-400 mb-1.5 pb-1 border-b border-cyan-900/30 flex justify-between items-center shrink-0">
                     <span>Tus Ninjas</span>
-                    <span id="label-modo-aliado" class="text-[8px] bg-cyan-800 text-white px-1 py-0.5 rounded animate-pulse hidden">¡Elige Aliado!</span>
+                    <span id="label-modo-aliado"
+                        class="text-[8px] bg-cyan-800 text-white px-1 py-0.5 rounded animate-pulse hidden">¡Elige
+                        Aliado!</span>
                 </h4>
                 <div id="player-team-slots-battle" class="flex flex-col space-y-1.5"></div>
             </div>
         </div>
 
-        <div class="bg-gray-900 border border-gray-800 p-2.5 rounded-2xl flex flex-col space-y-2 shadow-2xl z-20 shrink-0">
-            <div id="combate-log" class="bg-gray-950 p-2 rounded-xl text-[9px] text-gray-300 h-16 overflow-y-auto font-mono border border-gray-800">
+        <!-- Contenedor para la barra de turnos -->
+        <div id="timeline-bar" class="timeline-container"></div>
+
+        <div
+            class="bg-gray-900 border border-gray-800 p-2.5 rounded-2xl flex flex-col space-y-2 shadow-2xl z-20 shrink-0">
+            <div id="combate-log"
+                class="bg-gray-950 p-2 rounded-xl text-[9px] text-gray-300 h-16 overflow-y-auto font-mono border border-gray-800">
                 ¡La batalla ha comenzado en la Arena!
             </div>
             <div id="combate-controles" class="grid grid-cols-2 gap-1.5"></div>
@@ -250,348 +525,341 @@
 
     <!-- ================= SCRIPT DE DATOS Y LÓGICA ================= -->
     <script>
+
         const catalogoPersonajes = {
+            // ==================== COMUNES ====================
             "genin_fuego": {
                 id: "genin_fuego", nombre: "Katsu el Pyromante", emoji: "🔥", rareza: "Común", vida: 100, ataque: 25, velocidad: 15,
                 habilidades: [
-                    { nombre: "Puño Ardiente", desc: "Ataque físico básico.", multiplicador: 1.0, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Embestida Ígnea", desc: "Carga rápida en llamas.", multiplicador: 1.35, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Escudo de cenizas", desc: "Protege y cura.", multiplicador: 0.20, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Explosión Carmesí", desc: "Gran devastación pirotécnica.", multiplicador: 1.80, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Puño Ardiente", desc: "Ataque físico básico.", multiplicador: 1.0, tipo: "ataque", usosMax: 10 },
+                    { nombre: "Embestida Ígnea", desc: "Carga rápida en llamas.", multiplicador: 1.30, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Escudo de Cenizas", desc: "Protección con brasas.", multiplicador: 0.25, tipo: "defensa", usosMax: 3 },
+                    { nombre: "Explosión Carmesí", desc: "Gran devastación pirotécnica.", multiplicador: 1.75, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "estudiante_roca": {
-                id: "estudiante_roca", nombre: "Daiki Roca Dura", emoji: "🪨", rareza: "Común", vida: 130, ataque: 20, velocidad: 8,
+                id: "estudiante_roca", nombre: "Daiki Roca Dura", emoji: "🪨", rareza: "Común", vida: 130, ataque: 19, velocidad: 8,
                 habilidades: [
-                    { nombre: "Golpe de Piedra", desc: "Impacto pesado.", multiplicador: 1.0, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Guardia de Piedra", desc: "Postura robusta.", multiplicador: 0.35, tipo: "defensa", usosMax: 3 },
-                    { nombre: "Lluvia de Monolitos", desc: "Rocas desde el cielo.", multiplicador: 1.30, tipo: "ataque", usosMax: 2 },
-                    { nombre: "Fortaleza Inmortal", desc: "Sanación y endurecimiento.", multiplicador: 0.50, tipo: "defensa", usosMax: 1 }
+                    { nombre: "Golpe de Piedra", desc: "Impacto pesado.", multiplicador: 1.0, tipo: "ataque", usosMax: 8 },
+                    { nombre: "Guardia de Piedra", desc: "Postura robusta.", multiplicador: 0.35, tipo: "defensa", usosMax: 7 },
+                    { nombre: "Lluvia de Monolitos", desc: "Rocas desde el cielo.", multiplicador: 1.25, tipo: "ataque", usosMax: 4 },
+                    { nombre: "Fortaleza Inmortal", desc: "Sanación y endurecimiento.", multiplicador: 0.45, tipo: "defensa", usosMax: 3 }
                 ]
             },
             "novato_viento": {
-                id: "novato_viento", nombre: "Sora Brisa Ligera", emoji: "💨", rareza: "Común", vida: 90, ataque: 22, velocidad: 20,
+                id: "novato_viento", nombre: "Sora Brisa Ligera", emoji: "💨", rareza: "Común", vida: 85, ataque: 22, velocidad: 22,
                 habilidades: [
-                    { nombre: "Corte Céfiro", desc: "Corte rápido.", multiplicador: 1.05, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Ráfaga Veloz", desc: "Golpe ágil de viento.", multiplicador: 1.25, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Esquiva Aérea", desc: "Evasión y contraataque.", multiplicador: 0.25, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Tornado Cortante", desc: "Huracán devastador.", multiplicador: 1.70, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Corte Céfiro", desc: "Corte rápido.", multiplicador: 1.05, tipo: "ataque", usosMax: 12 },
+                    { nombre: "Ráfaga Veloz", desc: "Golpe ágil de viento.", multiplicador: 1.25, tipo: "ataque", usosMax: 6 },
+                    { nombre: "Esquiva Aérea", desc: "Evasión y contraataque.", multiplicador: 0.25, tipo: "defensa", usosMax: 4 },
+                    { nombre: "Tornado Cortante", desc: "Huracán devastador.", multiplicador: 1.65, tipo: "ataque", usosMax: 1 }
                 ]
             },
             "aprendiz_bosque": {
                 id: "aprendiz_bosque", nombre: "Midori Hoja Oculta", emoji: "🍃", rareza: "Común", vida: 105, ataque: 21, velocidad: 14,
                 habilidades: [
-                    { nombre: "Hoja Navaja", desc: "Lanzamiento de hoja afilada.", multiplicador: 1.0, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Hoja Venenosa", desc: "Daña e inyecta toxina.", multiplicador: 1.30, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Savia Regeneradora", desc: "Sana las heridas del ninja.", multiplicador: 0.40, tipo: "curacion", usosMax: 2 },
-                    { nombre: "Tormenta de Hojas", desc: "Mil hojas cortantes.", multiplicador: 1.65, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Hoja Navaja", desc: "Lanzamiento de hoja afilada.", multiplicador: 1.0, tipo: "ataque", usosMax: 9 },
+                    { nombre: "Hoja Venenosa", desc: "Daña e inyecta toxina.", multiplicador: 1.25, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Savia Regeneradora", desc: "Sana las heridas del ninja.", multiplicador: 0.35, tipo: "curacion", usosMax: 5 },
+                    { nombre: "Tormenta de Hojas", desc: "Mil hojas cortantes.", multiplicador: 1.65, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "luchador_callejero": {
-                id: "luchador_callejero", nombre: "Kenji Puño Firme", emoji: "👊", rareza: "Común", vida: 110, ataque: 24, velocidad: 12,
+                id: "luchador_callejero", nombre: "Kenji Puño Firme", emoji: "👊", rareza: "Común", vida: 110, ataque: 23, velocidad: 12,
                 habilidades: [
-                    { nombre: "Jab Directo", desc: "Golpe rápido de boxeo.", multiplicador: 1.0, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Golpe Bajo", desc: "Impacto desconcertante.", multiplicador: 1.30, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Bloqueo de Brazos", desc: "Absorbe parte del impacto.", multiplicador: 0.30, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Golpe de Furia", desc: "Ráfaga de golpes demoledores.", multiplicador: 1.75, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Jab Directo", desc: "Golpe rápido de boxeo.", multiplicador: 1.0, tipo: "ataque", usosMax: 10 },
+                    { nombre: "Golpe Bajo", desc: "Impacto desconcertante.", multiplicador: 1.30, tipo: "ataque", usosMax: 4 },
+                    { nombre: "Bloqueo de Brazos", desc: "Absorbe parte del impacto.", multiplicador: 0.30, tipo: "defensa", usosMax: 5 },
+                    { nombre: "Golpe de Furia", desc: "Ráfaga de golpes demoledores.", multiplicador: 1.70, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "recluta_acero": {
-                id: "recluta_acero", nombre: "Brant Escudo Férreo", emoji: "⚙️", rareza: "Común", vida: 120, ataque: 19, velocidad: 10,
+                id: "recluta_acero", nombre: "Brant Escudo Férreo", emoji: "⚙️", rareza: "Común", vida: 125, ataque: 20, velocidad: 10,
                 habilidades: [
-                    { nombre: "Estocada de Acero", desc: "Ataque con espada pesada.", multiplicador: 0.95, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Bloqueo Táctico", desc: "Parada defensiva superior.", multiplicador: 0.40, tipo: "defensa", usosMax: 3 },
-                    { nombre: "Carga Mecánica", desc: "Embiste con armadura.", multiplicador: 1.25, tipo: "ataque", usosMax: 2 },
-                    { nombre: "Juicio de Hierro", desc: "Gran golpe con filo reforzado.", multiplicador: 1.60, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Estocada de Acero", desc: "Ataque con espada pesada.", multiplicador: 1.0, tipo: "ataque", usosMax: 7 },
+                    { nombre: "Bloqueo Táctico", desc: "Parada defensiva superior.", multiplicador: 0.35, tipo: "defensa", usosMax: 6 },
+                    { nombre: "Carga Mecánica", desc: "Embiste con armadura.", multiplicador: 1.25, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Juicio de Hierro", desc: "Gran golpe con filo reinforced.", multiplicador: 1.60, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "acolyte_arena": {
-                id: "acolyte_arena", nombre: "Zane Dunas Doradas", emoji: "⏳", rareza: "Común", vida: 95, ataque: 23, velocidad: 16,
+                id: "acolyte_arena", nombre: "Zane Dunas Doradas", emoji: "⏳", rareza: "Común", vida: 95, ataque: 23, velocidad: 17,
                 habilidades: [
-                    { nombre: "Filo de Arena", desc: "Corte rápido con arena.", multiplicador: 1.0, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Torbellino Menor", desc: "Ráfaga de polvo cegador.", multiplicador: 1.25, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Manto de Duna", desc: "Absorbe daño mediante partículas.", multiplicador: 0.25, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Sepulcro de Arena", desc: "Entierra al oponente bajo peso.", multiplicador: 1.70, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Filo de Arena", desc: "Corte rápido con arena.", multiplicador: 1.0, tipo: "ataque", usosMax: 8 },
+                    { nombre: "Torbellino Menor", desc: "Ráfaga de polvo cegador.", multiplicador: 1.25, tipo: "ataque", usosMax: 6 },
+                    { nombre: "Manto de Duna", desc: "Absorbe daño mediante partículas.", multiplicador: 0.25, tipo: "defensa", usosMax: 4 },
+                    { nombre: "Sepulcro de Arena", desc: "Entierra al oponente bajo peso.", multiplicador: 1.65, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "novato_marcial": {
-                id: "novato_marcial", nombre: "Bao Patada Rápida", emoji: "🥋", rareza: "Común", vida: 100, ataque: 22, velocidad: 19,
+                id: "novato_marcial", nombre: "Bao Patada Rápida", emoji: "🥋", rareza: "Común", vida: 95, ataque: 22, velocidad: 19,
                 habilidades: [
-                    { nombre: "Patada Frontal", desc: "Golpe directo y veloz.", multiplicador: 1.02, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Patada Circular", desc: "Impacto giratorio amplio.", multiplicador: 1.30, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Postura del Tigre", desc: "Concentración y guardia.", multiplicador: 0.25, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Combo Relámpago", desc: "Sucesión continua de patadas.", multiplicador: 1.75, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Patada Frontal", desc: "Golpe directo y veloz.", multiplicador: 1.0, tipo: "ataque", usosMax: 11 },
+                    { nombre: "Patada Circular", desc: "Impacto giratorio amplio.", multiplicador: 1.28, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Postura del Tigre", desc: "Concentración y guardia.", multiplicador: 0.25, tipo: "defensa", usosMax: 3 },
+                    { nombre: "Combo Relámpago", desc: "Sucesión continua de patadas.", multiplicador: 1.70, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "cazador_novato": {
-                id: "cazador_novato", nombre: "Ronin Silvestre", emoji: "🗡️", rareza: "Común", vida: 105, ataque: 24, velocidad: 15,
+                id: "cazador_novato", nombre: "Ronin Silvestre", emoji: "🗡️", rareza: "Común", vida: 100, ataque: 24, velocidad: 16,
                 habilidades: [
-                    { nombre: "Corte Rápido", desc: "Estocada rápida de daga.", multiplicador: 1.0, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Tajo Desgarrador", desc: "Herida profunda al rival.", multiplicador: 1.32, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Parada de Emergencia", desc: "Bloqueo con empuñadura.", multiplicador: 0.28, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Ejecución Salvaje", desc: "Ataque certero letal.", multiplicador: 1.78, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Corte Rápido", desc: "Estocada rápida de daga.", multiplicador: 1.0, tipo: "ataque", usosMax: 9 },
+                    { nombre: "Tajo Desgarrador", desc: "Herida profunda al rival.", multiplicador: 1.30, tipo: "ataque", usosMax: 4 },
+                    { nombre: "Parada de Emergencia", desc: "Bloqueo con empuñadura.", multiplicador: 0.25, tipo: "defensa", usosMax: 3 },
+                    { nombre: "Ejecución Salvaje", desc: "Ataque certero letal.", multiplicador: 1.75, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "aprendiz_lumina": {
-                id: "aprendiz_lumina", nombre: "Lia Chispa de Luz", emoji: "✨", rareza: "Común", vida: 95, ataque: 21, velocidad: 17,
+                id: "aprendiz_lumina", nombre: "Lia Chispa de Luz", emoji: "✨", rareza: "Común", vida: 90, ataque: 21, velocidad: 18,
                 habilidades: [
-                    { nombre: "Destello Menor", desc: "Haz de luz cegador.", multiplicador: 1.0, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Flecha Radiante", desc: "Proyectil luminoso concentrado.", multiplicador: 1.28, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Aura Suave", desc: "Sanación lumínica leve.", multiplicador: 0.35, tipo: "curacion", usosMax: 2 },
-                    { nombre: "Nova de Luz", desc: "Explosión brillante en área.", multiplicador: 1.70, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Destello Menor", desc: "Haz de luz cegador.", multiplicador: 1.0, tipo: "ataque", usosMax: 8 },
+                    { nombre: "Flecha Radiante", desc: "Proyectil luminoso concentrado.", multiplicador: 1.25, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Aura Suave", desc: "Sanación lumínica leve.", multiplicador: 0.30, tipo: "curacion", usosMax: 6 },
+                    { nombre: "Nova de Luz", desc: "Explosión brillante en área.", multiplicador: 1.65, tipo: "ataque", usosMax: 1 }
                 ]
             },
+
+            // ==================== RAROS ====================
             "ninja_sombra": {
-                id: "ninja_sombra", nombre: "Kuro Asesino", emoji: "🥷", rareza: "Raro", vida: 110, ataque: 38, velocidad: 28,
+                id: "ninja_sombra", nombre: "Kuro Asesino", emoji: "🥷", rareza: "Raro", vida: 110, ataque: 36, velocidad: 27,
                 habilidades: [
-                    { nombre: "Kunai Veloz", desc: "Lanzamiento sigiloso de arma.", multiplicador: 1.10, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Golpe Sombrío", desc: "Ataque desde las sombras.", multiplicador: 1.45, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Manto de Oscuridad", desc: "Evasión e invisibilidad.", multiplicador: 0.30, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Asesinato Silencioso", desc: "Técnica letal de ejecuciones.", multiplicador: 2.10, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Kunai Veloz", desc: "Lanzamiento sigiloso de arma.", multiplicador: 1.05, tipo: "ataque", usosMax: 7 },
+                    { nombre: "Golpe Sombrío", desc: "Ataque desde las sombras.", multiplicador: 1.35, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Manto de Oscuridad", desc: "Evasión e invisibilidad.", multiplicador: 0.30, tipo: "defensa", usosMax: 3 },
+                    { nombre: "Asesinato Silencioso", desc: "Técnica letal de ejecuciones.", multiplicador: 2.00, tipo: "ataque", usosMax: 1 }
                 ]
             },
             "sanador_agua": {
-                id: "sanador_agua", nombre: "Mizuki Sanadora", emoji: "💧", rareza: "Raro", vida: 125, ataque: 24, velocidad: 18,
+                id: "sanador_agua", nombre: "Mizuki Sanadora", emoji: "💧", rareza: "Raro", vida: 135, ataque: 25, velocidad: 18,
                 habilidades: [
-                    { nombre: "Chorro de Agua", desc: "Látigo líquido ofensivo.", multiplicador: 1.0, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Pulso Curativo", desc: "Sanación fluida considerable.", multiplicador: 0.55, tipo: "curacion", usosMax: 3 },
-                    { nombre: "Prisión de Burbujas", desc: "Encierra al rival dañándolo.", multiplicador: 1.30, tipo: "ataque", usosMax: 2 },
-                    { nombre: "Bendición del Océano", desc: "Cura masiva y restauración.", multiplicador: 0.80, tipo: "curacion", usosMax: 1 }
+                    { nombre: "Chorro de Agua", desc: "Látigo líquido ofensivo.", multiplicador: 1.0, tipo: "ataque", usosMax: 6 },
+                    { nombre: "Pulso Curativo", desc: "Sanación fluida considerable.", multiplicador: 0.35, tipo: "curacion", usosMax: 7 },
+                    { nombre: "Prisión de Burbujas", desc: "Encierra al rival dañándolo.", multiplicador: 1.30, tipo: "ataque", usosMax: 3 },
+                    { nombre: "Bendición del Océano", desc: "Cura masiva y restauración.", multiplicador: 0.65, tipo: "curacion", usosMax: 2 }
                 ]
             },
             "arquero_elfico": {
-                id: "arquero_elfico", nombre: "Hayate Ojo de Halcón", emoji: "🏹", rareza: "Raro", vida: 105, ataque: 41, velocidad: 25,
+                id: "arquero_elfico", nombre: "Hayate Ojo de Halcón", emoji: "🏹", rareza: "Raro", vida: 105, ataque: 38, velocidad: 25,
                 habilidades: [
-                    { nombre: "Flecha Rápida", desc: "Disparo fluido y certero.", multiplicador: 1.15, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Flecha Certera", desc: "Impacto directo al punto débil.", multiplicador: 1.50, tipo: "ataque", usosMax: 3 },
+                    { nombre: "Flecha Rápida", desc: "Disparo fluido y certero.", multiplicador: 1.05, tipo: "ataque", usosMax: 10 },
+                    { nombre: "Flecha Certera", desc: "Impacto directo al punto débil.", multiplicador: 1.38, tipo: "ataque", usosMax: 4 },
                     { nombre: "Postura del Arquero", desc: "Concentración defensiva.", multiplicador: 0.25, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Lluvia de Flechas", desc: "Granizada de proyectiles.", multiplicador: 2.0, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Lluvia de Flechas", desc: "Granizada de proyectiles.", multiplicador: 1.85, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "monje_hierro": {
-                id: "monje_hierro", nombre: "Tetsuo Defensor", emoji: "🛡️", rareza: "Raro", vida: 170, ataque: 30, velocidad: 11,
+                id: "monje_hierro", nombre: "Tetsuo Defensor", emoji: "🛡️", rareza: "Raro", vida: 160, ataque: 28, velocidad: 12,
                 habilidades: [
-                    { nombre: "Palma de Hierro", desc: "Golpe contundente con ki.", multiplicador: 1.05, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Muralla Inquebrantable", desc: "Defensa absoluta de monje.", multiplicador: 0.50, tipo: "defensa", usosMax: 3 },
-                    { nombre: "Impacto Sísmico", desc: "Onda expansiva con los puños.", multiplicador: 1.40, tipo: "ataque", usosMax: 2 },
-                    { nombre: "Aura Celestial", desc: "Escudo y sanación sagrada.", multiplicador: 0.70, tipo: "curacion", usosMax: 1 }
+                    { nombre: "Palma de Hierro", desc: "Golpe contundente con ki.", multiplicador: 1.0, tipo: "ataque", usosMax: 8 },
+                    { nombre: "Muralla Inquebrantable", desc: "Defensa absoluta de monje.", multiplicador: 0.40, tipo: "defensa", usosMax: 8 },
+                    { nombre: "Impacto Sísmico", desc: "Onda expansiva con los puños.", multiplicador: 1.30, tipo: "ataque", usosMax: 3 },
+                    { nombre: "Aura Celestial", desc: "Escudo y sanación sagrada.", multiplicador: 0.50, tipo: "curacion", usosMax: 2 }
                 ]
             },
             "alquimista_toxico": {
-                id: "alquimista_toxico", nombre: "Vespera Veneno", emoji: "🧪", rareza: "Raro", vida: 115, ataque: 36, velocidad: 22,
+                id: "alquimista_toxico", nombre: "Vespera Veneno", emoji: "🧪", rareza: "Raro", vida: 115, ataque: 35, velocidad: 22,
                 habilidades: [
-                    { nombre: "Frasco Ácido", desc: "Lanza líquido corrosivo.", multiplicador: 1.12, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Gas Nocivo", desc: "Nube tóxica asfixiante.", multiplicador: 1.48, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Antídoto Rápido", desc: "Neutraliza efectos y cura.", multiplicador: 0.45, tipo: "curacion", usosMax: 2 },
-                    { nombre: "Bomba Miasmática", desc: "Explosión química masiva.", multiplicador: 2.05, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Frasco Ácido", desc: "Lanza líquido corrosivo.", multiplicador: 1.0, tipo: "ataque", usosMax: 9 },
+                    { nombre: "Gas Nocivo", desc: "Nube tóxica asfixiante.", multiplicador: 1.35, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Antídoto Rápido", desc: "Neutraliza efectos y cura.", multiplicador: 0.30, tipo: "curacion", usosMax: 4 },
+                    { nombre: "Bomba Miasmática", desc: "Explosión química masiva.", multiplicador: 1.85, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "espadachin_fantasma": {
-                id: "espadachin_fantasma", nombre: "Yurei Hoja Espectral", emoji: "👻", rareza: "Raro", vida: 120, ataque: 39, velocidad: 26,
+                id: "espadachin_fantasma", nombre: "Yurei Hoja Espectral", emoji: "👻", rareza: "Raro", vida: 120, ataque: 36, velocidad: 24,
                 habilidades: [
-                    { nombre: "Corte Etéreo", desc: "Atraviesa defensas físicas.", multiplicador: 1.15, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Danza Espectral", desc: "Golpes múltiples incorpóreos.", multiplicador: 1.52, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Fase Fantasmal", desc: "Esquiva total temporalmente.", multiplicador: 0.35, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Juicio del Inframundo", desc: "Corte definitivo del alma.", multiplicador: 2.15, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Corte Etéreo", desc: "Atraviesa defensas físicas.", multiplicador: 1.05, tipo: "ataque", usosMax: 8 },
+                    { nombre: "Danza Espectral", desc: "Golpes múltiples incorpóreos.", multiplicador: 1.35, tipo: "ataque", usosMax: 6 },
+                    { nombre: "Fase Fantasmal", desc: "Esquiva total temporalmente.", multiplicador: 0.30, tipo: "defensa", usosMax: 3 },
+                    { nombre: "Juicio del Inframundo", desc: "Corte definitivo del alma.", multiplicador: 1.90, tipo: "ataque", usosMax: 1 }
                 ]
             },
             "bestia_lunar": {
-                id: "bestia_lunar", nombre: "Lyra Garra de Luna", emoji: "🐺", rareza: "Raro", vida: 130, ataque: 37, velocidad: 24,
+                id: "bestia_lunar", nombre: "Lyra Garra de Luna", emoji: "🐺", rareza: "Raro", vida: 130, ataque: 34, velocidad: 23,
                 habilidades: [
-                    { nombre: "Zarpa Lunandina", desc: "Zarpa con energía estelar.", multiplicador: 1.12, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Mordisco Feroz", desc: "Desgarra carne con furia.", multiplicador: 1.50, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Aura Lunar", desc: "Sanación natural bajo la luna.", multiplicador: 0.48, tipo: "curacion", usosMax: 2 },
-                    { nombre: "Furor de la Manada", desc: "Ataque salvaje imparable.", multiplicador: 2.10, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Zarpa Lunar", desc: "Zarpa con energía estelar.", multiplicador: 1.0, tipo: "ataque", usosMax: 9 },
+                    { nombre: "Mordisco Feroz", desc: "Desgarra carne con furia.", multiplicador: 1.35, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Aura Lunar", desc: "Sanación natural bajo la luna.", multiplicador: 0.32, tipo: "curacion", usosMax: 3 },
+                    { nombre: "Furor de la Manada", desc: "Ataque salvaje imparable.", multiplicador: 1.85, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "hechicera_arcana": {
-                id: "hechicera_arcana", nombre: "Morgana Runas", emoji: "🔮", rareza: "Raro", vida: 115, ataque: 40, velocidad: 20,
+                id: "hechicera_arcana", nombre: "Morgana Runas", emoji: "🔮", rareza: "Raro", vida: 110, ataque: 37, velocidad: 20,
                 habilidades: [
-                    { nombre: "Misil Arcano", desc: "Orbe de energía pura.", multiplicador: 1.15, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Rayo de Fuerza", desc: "Haz concentrado de maná.", multiplicador: 1.49, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Barrera Mágica", desc: "Escudo protector de runas.", multiplicador: 0.42, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Tormenta de Maná", desc: "Sobrecarga mágica devastadora.", multiplicador: 2.12, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Misil Arcano", desc: "Orbe de energía pura.", multiplicador: 1.05, tipo: "ataque", usosMax: 10 },
+                    { nombre: "Rayo de Fuerza", desc: "Haz concentrado de maná.", multiplicador: 1.38, tipo: "ataque", usosMax: 4 },
+                    { nombre: "Barrera Mágica", desc: "Escudo protector de runas.", multiplicador: 0.30, tipo: "defensa", usosMax: 4 },
+                    { nombre: "Tormenta de Maná", desc: "Sobrecarga mágica devastadora.", multiplicador: 1.95, tipo: "ataque", usosMax: 1 }
                 ]
             },
             "pirata_marino": {
-                id: "pirata_marino", nombre: "Drake Marea Roja", emoji: "⚓", rareza: "Raro", vida: 135, ataque: 35, velocidad: 19,
+                id: "pirata_marino", nombre: "Drake Marea Roja", emoji: "⚓", rareza: "Raro", vida: 135, ataque: 33, velocidad: 19,
                 habilidades: [
-                    { nombre: "Tajo de Sable", desc: "Estocada pirata clásica.", multiplicador: 1.10, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Disparo de Pistón", desc: "Abandona el sable por pólvora.", multiplicador: 1.45, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Ron Curativo", desc: "Trago energizante y sanador.", multiplicador: 0.45, tipo: "curacion", usosMax: 2 },
-                    { nombre: "Abordaje Salvaje", desc: "Carga brutal con toda la tripu.", multiplicador: 2.05, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Tajo de Sable", desc: "Estocada pirata clásica.", multiplicador: 1.0, tipo: "ataque", usosMax: 8 },
+                    { nombre: "Disparo de Pistón", desc: "Abandona el sable por pólvora.", multiplicador: 1.32, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Ron Curativo", desc: "Trago energizante y sanador.", multiplicador: 0.30, tipo: "curacion", usosMax: 5 },
+                    { nombre: "Abordaje Salvaje", desc: "Carga brutal con toda la tripu.", multiplicador: 1.85, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "centinela_floral": {
-                id: "centinela_floral", nombre: "Rosalind Pétalo Feroz", emoji: "🌹", rareza: "Raro", vida: 120, ataque: 36, velocidad: 21,
+                id: "centinela_floral", nombre: "Rosalind Pétalo Feroz", emoji: "🌹", rareza: "Raro", vida: 120, ataque: 34, velocidad: 21,
                 habilidades: [
-                    { nombre: "Espina Afilada", desc: "Dispara espinas venenosas.", multiplicador: 1.12, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Látigo de Rosas", desc: "Impacto floral contundente.", multiplicador: 1.46, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Néctar Vital", desc: "Extracto curativo natural.", multiplicador: 0.50, tipo: "curacion", usosMax: 2 },
-                    { nombre: "Jardín Prisión", desc: "Enreda y aplasta al enemigo.", multiplicador: 2.08, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Espina Afilada", desc: "Dispara espinas venenosas.", multiplicador: 1.0, tipo: "ataque", usosMax: 8 },
+                    { nombre: "Látigo de Rosas", desc: "Impacto floral contundente.", multiplicador: 1.35, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Néctar Vital", desc: "Extracto curativo natural.", multiplicador: 0.35, tipo: "curacion", usosMax: 5 },
+                    { nombre: "Jardín Prisión", desc: "Enreda y aplasta al enemigo.", multiplicador: 1.85, tipo: "ataque", usosMax: 2 }
                 ]
             },
+
+            // ==================== ÉPICOS ====================
             "maestro_rayo": {
-                id: "maestro_rayo", nombre: "Raijin Relámpago", emoji: "⚡", rareza: "Épico", vida: 145, ataque: 52, velocidad: 35,
+                id: "maestro_rayo", nombre: "Raijin Relámpago", emoji: "⚡", rareza: "Épico", vida: 140, ataque: 48, velocidad: 32,
                 habilidades: [
-                    { nombre: "Chispa Eléctrica", desc: "Descarga rápida de voltaje.", multiplicador: 1.20, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Juicio del Relámpago", desc: "Rayo fulminante directo.", multiplicador: 1.70, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Velocidad de la Luz", desc: "Campo electromagnético.", multiplicador: 0.35, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Tormenta de Plasma", desc: "Cataclismo eléctrico supremo.", multiplicador: 2.40, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Chispa Eléctrica", desc: "Descarga rápida de voltaje.", multiplicador: 1.10, tipo: "ataque", usosMax: 10 },
+                    { nombre: "Juicio del Relámpago", desc: "Rayo fulminante directo.", multiplicador: 1.45, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Velocidad de la Luz", desc: "Campo electromagnético.", multiplicador: 0.30, tipo: "defensa", usosMax: 3 },
+                    { nombre: "Tormenta de Plasma", desc: "Cataclismo eléctrico supremo.", multiplicador: 2.20, tipo: "ataque", usosMax: 1 }
                 ]
             },
             "chaman_hielo": {
-                id: "chaman_hielo", nombre: "Yuki Espectro Helado", emoji: "❄️", rareza: "Épico", vida: 150, ataque: 48, velocidad: 22,
+                id: "chaman_hielo", nombre: "Yuki Espectro Helado", emoji: "❄️", rareza: "Épico", vida: 150, ataque: 45, velocidad: 22,
                 habilidades: [
-                    { nombre: "Dardo de Hielo", desc: "Fragmento congelado cortante.", multiplicador: 1.15, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Prisión Glacial", desc: "Congela y destroza al enemigo.", multiplicador: 1.65, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Armadura de Escarcha", desc: "Bloquea y reduce daño gélido.", multiplicador: 0.45, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Ventisca Eterna", desc: "Tormenta de hielo absoluta.", multiplicador: 2.30, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Dardo de Hielo", desc: "Fragmento congelado cortante.", multiplicador: 1.05, tipo: "ataque", usosMax: 8 },
+                    { nombre: "Prisión Glacial", desc: "Congela y destroza al enemigo.", multiplicador: 1.42, tipo: "ataque", usosMax: 6 },
+                    { nombre: "Armadura de Escarcha", desc: "Bloquea y reduce daño gélido.", multiplicador: 0.35, tipo: "defensa", usosMax: 5 },
+                    { nombre: "Ventisca Eterna", desc: "Tormenta de hielo absoluta.", multiplicador: 2.10, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "senor_magma": {
-                id: "senor_magma", nombre: "Ignis Núcleo Volcánico", emoji: "🌋", rareza: "Épico", vida: 165, ataque: 50, velocidad: 17,
+                id: "senor_magma", nombre: "Ignis Núcleo Volcánico", emoji: "🌋", rareza: "Épico", vida: 165, ataque: 46, velocidad: 17,
                 habilidades: [
-                    { nombre: "Lluvia de Ceniza", desc: "Roca fundida ardiente.", multiplicador: 1.22, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Erupción Tectónica", desc: "Magma brota desde el suelo.", multiplicador: 1.75, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Piel de Obsidiana", desc: "Endurece la lava en armadura.", multiplicador: 0.50, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Apocalipsis Magma", desc: "Destrucción total de fuego.", multiplicador: 2.45, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Lluvia de Ceniza", desc: "Roca fundida ardiente.", multiplicador: 1.05, tipo: "ataque", usosMax: 7 },
+                    { nombre: "Erupción Tectónica", desc: "Magma brota desde el suelo.", multiplicador: 1.45, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Piel de Obsidiana", desc: "Endurece la lava en armadura.", multiplicador: 0.40, tipo: "defensa", usosMax: 6 },
+                    { nombre: "Apocalipsis Magma", desc: "Destrucción total de fuego.", multiplicador: 2.20, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "general_celestial": {
-                id: "general_celestial", nombre: "Valerius Vengador", emoji: "⚔️", rareza: "Épico", vida: 160, ataque: 53, velocidad: 24,
+                id: "general_celestial", nombre: "Valerius Vengador", emoji: "⚔️", rareza: "Épico", vida: 155, ataque: 49, velocidad: 24,
                 habilidades: [
-                    { nombre: "Corte Sagrado", desc: "Espada imbuida en luz blanca.", multiplicador: 1.25, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Juicio Divino", desc: "Espada gigante de energía.", multiplicador: 1.80, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Escudo Protector", desc: "Barrera defensiva celestial.", multiplicador: 0.52, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Ira de los Cielos", desc: "Castigo supremo con rayos de luz.", multiplicador: 2.50, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Corte Sagrado", desc: "Espada imbuida en luz blanca.", multiplicador: 1.10, tipo: "ataque", usosMax: 8 },
+                    { nombre: "Juicio Divino", desc: "Espada gigante de energía.", multiplicador: 1.50, tipo: "ataque", usosMax: 4 },
+                    { nombre: "Escudo Protector", desc: "Barrera defensiva celestial.", multiplicador: 0.35, tipo: "defensa", usosMax: 4 },
+                    { nombre: "Ira de los Cielos", desc: "Castigo supremo con rayos de luz.", multiplicador: 2.25, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "cazarrecompensas_cibernetico": {
-                id: "cazarrecompensas_cibernetico", nombre: "Vex Ojo Biónico", emoji: "🤖", rareza: "Épico", vida: 155, ataque: 51, velocidad: 29,
+                id: "cazarrecompensas_cibernetico", nombre: "Vex Ojo Biónico", emoji: "🤖", rareza: "Épico", vida: 150, ataque: 47, velocidad: 28,
                 habilidades: [
-                    { nombre: "Láser Óptico", desc: "Disparo rápido desde el ojo.", multiplicador: 1.22, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Misil Rastreador", desc: "Proyectil teledirigido letal.", multiplicador: 1.74, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Campo Nanobots", desc: "Repara daños y protege.", multiplicador: 0.48, tipo: "curacion", usosMax: 2 },
-                    { nombre: "Sobrecarga Cibernética", desc: "Ataque a máxima potencia.", multiplicador: 2.42, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Láser Óptico", desc: "Disparo rápido desde el ojo.", multiplicador: 1.08, tipo: "ataque", usosMax: 9 },
+                    { nombre: "Misil Rastreador", desc: "Proyectil teledirigido letal.", multiplicador: 1.46, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Campo Nanobots", desc: "Repara daños y protege.", multiplicador: 0.35, tipo: "curacion", usosMax: 3 },
+                    { nombre: "Sobrecarga Cibernética", desc: "Ataque a máxima potencia.", multiplicador: 2.20, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "reina_mariposa": {
-                id: "reina_mariposa", nombre: "Titania Monarca", emoji: "🦋", rareza: "Épico", vida: 140, ataque: 49, velocidad: 31,
+                id: "reina_mariposa", nombre: "Titania Monarca", emoji: "🦋", rareza: "Épico", vida: 135, ataque: 45, velocidad: 30,
                 habilidades: [
-                    { nombre: "Polvo Estelar", desc: "Escamas deslumbrantes dañinas.", multiplicador: 1.18, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Aguijón Psíquico", desc: "Impacto mental a distancia.", multiplicador: 1.68, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Polen Sanador", desc: "Alivia heridas con gracia.", multiplicador: 0.55, tipo: "curacion", usosMax: 2 },
-                    { nombre: "Danza de la Metamorfosis", desc: "Poderío floral definitivo.", multiplicador: 2.35, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Polvo Estelar", desc: "Escamas deslumbrantes dañinas.", multiplicador: 1.05, tipo: "ataque", usosMax: 7 },
+                    { nombre: "Aguijón Psíquico", desc: "Impacto mental a distancia.", multiplicador: 1.42, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Polen Sanador", desc: "Alivia heridas con gracia.", multiplicador: 0.40, tipo: "curacion", usosMax: 6 },
+                    { nombre: "Danza de la Metamorfosis", desc: "Poderío floral definitivo.", multiplicador: 2.15, tipo: "ataque", usosMax: 1 }
                 ]
             },
+
+            // ==================== LEGENDARIOS ====================
             "dragon_ancestral": {
-                id: "dragon_ancestral", nombre: "Shinobi Dragón", emoji: "🐉", rareza: "Legendario", vida: 210, ataque: 70, velocidad: 16,
+                id: "dragon_ancestral", nombre: "Shinobi Dragón", emoji: "🐉", rareza: "Legendario", vida: 210, ataque: 62, velocidad: 16,
                 habilidades: [
-                    { nombre: "Garra de Dragón", desc: "Zarpa escamada devastadora.", multiplicador: 1.30, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Aliento Ancestral", desc: "Llamarada primigenia masiva.", multiplicador: 1.90, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Escamas de Diamante", desc: "Defensa legendaria impenetrable.", multiplicador: 0.60, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Rugido del Cataclismo", desc: "Poderío puro de los antiguos.", multiplicador: 2.80, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Garra de Dragón", desc: "Zarpa escamada devastadora.", multiplicador: 1.15, tipo: "ataque", usosMax: 8 },
+                    { nombre: "Aliento Ancestral", desc: "Llamarada primigenia masiva.", multiplicador: 1.55, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Escamas de Diamante", desc: "Defensa legendaria impenetrable.", multiplicador: 0.45, tipo: "defensa", usosMax: 5 },
+                    { nombre: "Rugido del Cataclismo", desc: "Poderío puro de los antiguos.", multiplicador: 2.50, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "dios_celestial": {
-                id: "dios_celestial", nombre: "Amaterasu Solar", emoji: "☀️", rareza: "Legendario", vida: 190, ataque: 75, velocidad: 30,
+                id: "dios_celestial", nombre: "Amaterasu Solar", emoji: "☀️", rareza: "Legendario", vida: 180, ataque: 68, velocidad: 28,
                 habilidades: [
-                    { nombre: "Rayo de Sol", desc: "Haz de luz concentrada.", multiplicador: 1.35, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Fuego Divino", desc: "Llamas sagradas eternas.", multiplicador: 2.0, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Bendición Solar", desc: "Sanación y protección divina.", multiplicador: 0.75, tipo: "curacion", usosMax: 2 },
-                    { nombre: "Juicio del Sol Naciente", desc: "El poder absoluto del astro.", multiplicador: 3.0, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Rayo de Sol", desc: "Haz de luz concentrada.", multiplicador: 1.15, tipo: "ataque", usosMax: 9 },
+                    { nombre: "Fuego Divino", desc: "Llamas sagradas eternas.", multiplicador: 1.60, tipo: "ataque", usosMax: 5 },
+                    { nombre: "Bendición Solar", desc: "Sanación y protección divina.", multiplicador: 0.50, tipo: "curacion", usosMax: 4 },
+                    { nombre: "Juicio del Sol Naciente", desc: "El poder absoluto del astro.", multiplicador: 2.60, tipo: "ataque", usosMax: 1 }
                 ]
             },
             "soberano_vacio": {
-                id: "soberano_vacio", nombre: "Erebus Abismo", emoji: "🌌", rareza: "Legendario", vida: 200, ataque: 78, velocidad: 28,
+                id: "soberano_vacio", nombre: "Erebus Abismo", emoji: "🌌", rareza: "Legendario", vida: 190, ataque: 70, velocidad: 26,
                 habilidades: [
-                    { nombre: "Pulso del Vacío", desc: "Onda expansiva de antimateria.", multiplicador: 1.40, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Desgarro Dimensional", desc: "Abre portales destructivos.", multiplicador: 2.10, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Horizonte de Eventos", desc: "Absorbe y anula cualquier daño.", multiplicador: 0.70, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Colapso Cósmico", desc: "Elimina la realidad del rival.", multiplicador: 3.20, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Pulso del Vacío", desc: "Onda expansiva de antimateria.", multiplicador: 1.18, tipo: "ataque", usosMax: 8 },
+                    { nombre: "Desgarro Dimensional", desc: "Abre portales destructivos.", multiplicador: 1.62, tipo: "ataque", usosMax: 4 },
+                    { nombre: "Horizonte de Eventos", desc: "Absorbe y anula cualquier daño.", multiplicador: 0.45, tipo: "defensa", usosMax: 3 },
+                    { nombre: "Colapso Cósmico", desc: "Elimina la realidad del rival.", multiplicador: 2.65, tipo: "ataque", usosMax: 2 }
                 ]
             },
             "titan_primigenio": {
-                id: "titan_primigenio", nombre: "Cronos El Eterno", emoji: "🗿", rareza: "Legendario", vida: 230, ataque: 68, velocidad: 12,
+                id: "titan_primigenio", nombre: "Cronos El Eterno", emoji: "🗿", rareza: "Legendario", vida: 230, ataque: 58, velocidad: 12,
                 habilidades: [
-                    { nombre: "Golpe de Era", desc: "Puño con peso milenario.", multiplicador: 1.32, tipo: "ataque", usosMax: 4 },
-                    { nombre: "Temblor Continental", desc: "Fractura la tierra bajo el rival.", multiplicador: 1.95, tipo: "ataque", usosMax: 3 },
-                    { nombre: "Piel de Monolito", desc: "Caparazón de roca milenaria.", multiplicador: 0.65, tipo: "defensa", usosMax: 2 },
-                    { nombre: "Juicio del Tiempo", desc: "Detiene el tiempo y aniquila.", multiplicador: 2.95, tipo: "ataque", usosMax: 1 }
+                    { nombre: "Golpe de Era", desc: "Puño con peso milenario.", multiplicador: 1.15, tipo: "ataque", usosMax: 7 },
+                    { nombre: "Temblor Continental", desc: "Fractura la tierra bajo el rival.", multiplicador: 1.52, tipo: "ataque", usosMax: 4 },
+                    { nombre: "Piel de Monolito", desc: "Caparazón de roca milenaria.", multiplicador: 0.50, tipo: "defensa", usosMax: 7 },
+                    { nombre: "Juicio del Tiempo", desc: "Detiene el tiempo y aniquila.", multiplicador: 2.55, tipo: "ataque", usosMax: 2 }
                 ]
             }
         };
 
+
         const inventarioTienda = [
-            {
-                id: "cofre_gratis",
-                nombre: "🎁 Cofre de Recompensas Diarias",
-                descripcion: "¡Gratis! Puede dar Oro, Gemas y copias de personajes básicos.",
-                tipoMoneda: "gratis",
-                costo: 0,
-                probabilidades: { Común: 70, Raro: 25, Épico: 4, Legendario: 1 }
-            },
-            {
-                id: "cofre_normal",
-                nombre: "🪙 Cofre Básico de Oro",
-                descripcion: "Equilibrado, mayor probabilidad de comunes y raros.",
-                tipoMoneda: "gold",
-                costo: 300,
-                probabilidades: { Común: 70, Raro: 25, Épico: 4, Legendario: 1 }
-            },
-            {
-                id: "cofre_oro_1000",
-                nombre: "💰 Cofre de Bronce Avanzado",
-                descripcion: "Mejores probabilidades de encontrar personajes Raros y Épicos.",
-                tipoMoneda: "gold",
-                costo: 1000,
-                probabilidades: { Común: 40, Raro: 45, Épico: 13, Legendario: 2 }
-            },
-            {
-                id: "cofre_oro_2000",
-                nombre: "🏺 Cofre de Plata Dorado",
-                descripcion: "Gran enfoque en personajes Raros y Épicos poderosos.",
-                tipoMoneda: "gold",
-                costo: 2000,
-                probabilidades: { Común: 15, Raro: 50, Épico: 30, Legendario: 5 }
-            },
-            {
-                id: "cofre_oro_10000_legendario",
-                nombre: "👑 Cofre Imperial Legendario",
-                descripcion: "¡Exclusivo por Oro! Garantiza un personaje Legendario al 100%.",
-                tipoMoneda: "gold",
-                costo: 10000,
-                probabilidades: { Común: 0, Raro: 0, Épico: 0, Legendario: 100 }
-            },
-            {
-                id: "cofre_epico_gemas",
-                nombre: "💎 Cofre Estelar de Gemas",
-                descripcion: "¡Gran tasa de Épicos y alta probabilidad de Legendarios!",
-                tipoMoneda: "gems",
-                costo: 50,
-                probabilidades: { Común: 0, Raro: 30, Épico: 55, Legendario: 15 }
-            },
-            {
-                id: "cofre_legendario_seguro",
-                nombre: "🌟 Cofre Legendario Absoluto (Gemas)",
-                descripcion: "¡Exclusivo de Gemas! Garantiza mínimo un personaje Épico o Legendario.",
-                tipoMoneda: "gems",
-                costo: 120,
-                probabilidades: { Común: 0, Raro: 0, Épico: 75, Legendario: 25 }
-            }
+            { id: "cofre_gratis", nombre: "🎁 Cofre de Recompensas Diarias", descripcion: "¡Gratis! Puede dar Oro, Gemas y copias de personajes básicos.", tipoMoneda: "gratis", costo: 0, probabilidades: { Común: 70, Raro: 25, Épico: 4, Legendario: 1 } },
+            { id: "cofre_normal", nombre: "🪙 Cofre Básico de Oro", descripcion: "Equilibrado, mayor probabilidad de comunes y raros.", tipoMoneda: "gold", costo: 300, probabilidades: { Común: 70, Raro: 25, Épico: 4, Legendario: 1 } },
+            { id: "cofre_oro_1000", nombre: "💰 Cofre de Bronce Avanzado", descripcion: "Mejores probabilidades de encontrar personajes Raros y Épicos.", tipoMoneda: "gold", costo: 1000, probabilidades: { Común: 40, Raro: 45, Épico: 13, Legendario: 2 } },
+            { id: "cofre_oro_2000", nombre: "🏺 Cofre de Plata Dorado", descripcion: "Gran enfoque en personajes Raros y Épicos poderosos.", tipoMoneda: "gold", costo: 2000, probabilidades: { Común: 15, Raro: 50, Épico: 30, Legendario: 5 } },
+            { id: "cofre_oro_10000_legendario", nombre: "👑 Cofre Imperial Legendario", descripcion: "¡Exclusivo por Oro! Garantiza un personaje Legendario al 100%.", tipoMoneda: "gold", costo: 10000, probabilidades: { Común: 0, Raro: 0, Épico: 0, Legendario: 100 } },
+            { id: "cofre_epico_gemas", nombre: "💎 Cofre Estelar de Gemas", descripcion: "¡Gran tasa de Épicos y alta probabilidad de Legendarios!", tipoMoneda: "gems", costo: 50, probabilidades: { Común: 0, Raro: 30, Épico: 55, Legendario: 15 } },
+            { id: "cofre_legendario_seguro", nombre: "🌟 Cofre Legendario Absoluto (Gemas)", descripcion: "¡Exclusivo de Gemas! Garantiza mínimo un personaje Épico o Legendario.", tipoMoneda: "gems", costo: 120, probabilidades: { Común: 0, Raro: 0, Épico: 75, Legendario: 25 } }
+        ];
+
+        const definicionesMisiones = [
+            { id: "mision_cofres", titulo: "Apertura de Cofres", desc: "Abre 3 cofres en la tienda.", meta: 3, recompensaGemas: 15, tipo: "cofres" },
+            { id: "mision_subir_nivel", titulo: "Entrenamiento Ninja", desc: "Sube de nivel a cualquier personaje 2 veces.", meta: 2, recompensaGemas: 20, tipo: "nivel" },
+            { id: "mision_victorias", titulo: "Dominio en la Arena", desc: "Gana 2 combates tácticos.", meta: 2, recompensaGemas: 25, tipo: "victorias" }
+        ];
+
+        const definicionesLogros = [
+            { id: "logro_primer_combate", titulo: "Primer Batalla", desc: "Gana tu primer combate en la Arena.", meta: 1, recompensaOro: 500, recompensaGemas: 10, tipo: "victorias" },
+            { id: "logro_coleccionista_1", titulo: "Coleccionista Novato", desc: "Abre un total de 10 cofres.", meta: 10, recompensaOro: 1000, recompensaGemas: 30, tipo: "cofres" },
+            { id: "logro_coleccionista_2", titulo: "Coleccionista Especializado", desc: "Abre un total de 30 cofres.", meta: 30, recompensaOro: 3000, recompensaGemas: 60, tipo: "cofres" },
+            { id: "logro_coleccionista_3", titulo: "Coleccionista Real", desc: "Abre un total de 50 cofres.", meta: 50, recompensaOro: 10000, recompensaGemas: 500, tipo: "cofres" },
+            { id: "logro_maestro_entrenador_1", titulo: "Maestro del Dojo", desc: "Sube de nivel 10 veces en total a tus ninjas.", meta: 10, recompensaOro: 2000, recompensaGemas: 50, tipo: "nivel" },
+            { id: "logro_maestro_entrenador_2", titulo: "Sensei del Dojo", desc: "Sube de nivel 20 veces en total a tus ninjas.", meta: 20, recompensaOro: 10000, recompensaGemas: 500, tipo: "nivel" },
+
+            { id: "logro_arena_1", titulo: "Luchador", desc: "Consigue 10 victorias en la Arena.", meta: 10, recompensaOro: 3000, recompensaGemas: 100, tipo: "victorias" },
+            { id: "logro_arena_2", titulo: "Guerrero", desc: "Consigue 25 victorias en la Arena.", meta: 25, recompensaOro: 5000, recompensaGemas: 200, tipo: "victorias" },
+            { id: "logro_veterano_arena", titulo: "Leyenda Táctica", desc: "Consigue 50 victorias en la Arena.", meta: 50, recompensaOro: 10000, recompensaGemas: 500, tipo: "victorias" },
         ];
 
         let playerData = {
             gold: 3000,
             gems: 200,
+            perfil: {
+                nombre: "Jugador Genin",
+                icono: "🥷"
+            },
             coleccion: {
                 "genin_fuego": { nivel: 1, copias: 1 },
                 "estudiante_roca": { nivel: 1, copias: 1 },
                 "sanador_agua": { nivel: 1, copias: 1 }
             },
             equipoActivo: ["genin_fuego", "estudiante_roca", "sanador_agua"],
-            misionesProgreso: { combatesGanados: 0 }
+            progresoMisiones: {
+                cofresAbiertos: 0,
+                nivelesSubidos: 0,
+                combatesGanados: 0
+            },
+            misionesContador: {
+                mision_cofres: 0,
+                mision_subir_nivel: 0,
+                mision_victorias: 0
+            },
+            logrosCompletados: []
         };
 
         let estadoCombate = {
@@ -628,9 +896,14 @@
         }
 
         function cargarDatos() {
-            const saved = localStorage.getItem('juego_player_data_v11');
+            const saved = localStorage.getItem('juego_player_data_v12');
             if (saved) {
-                playerData = JSON.parse(saved);
+                const parsed = JSON.parse(saved);
+                playerData = { ...playerData, ...parsed };
+                if (!playerData.perfil) playerData.perfil = { nombre: "Jugador Genin", icono: "🥷" };
+                if (!playerData.misionesContador) playerData.misionesContador = { mision_cofres: 0, mision_subir_nivel: 0, mision_victorias: 0 };
+                if (!playerData.logrosCompletados) playerData.logrosCompletados = [];
+                if (!playerData.progresoMisiones) playerData.progresoMisiones = { cofresAbiertos: 0, nivelesSubidos: 0, combatesGanados: 0 };
             } else {
                 guardarDatos();
             }
@@ -638,27 +911,43 @@
         }
 
         function guardarDatos() {
-            localStorage.setItem('juego_player_data_v11', JSON.stringify(playerData));
+            localStorage.setItem('juego_player_data_v12', JSON.stringify(playerData));
             actualizarUI();
         }
 
         function actualizarUI() {
             document.getElementById('player-gold').innerText = playerData.gold;
             document.getElementById('player-gems').innerText = playerData.gems;
+            document.getElementById('perfil-nombre').innerText = playerData.perfil.nombre;
+            document.getElementById('perfil-icono').innerText = playerData.perfil.icono;
+
             const statVictoriasMenu = document.getElementById('stat-victorias-menu');
             if (statVictoriasMenu) {
-                statVictoriasMenu.innerText = playerData.misionesProgreso.combatesGanados;
+                statVictoriasMenu.innerText = playerData.progresoMisiones.combatesGanados;
             }
             renderizarTienda();
             renderizarEquipo();
             renderizarCombateActivo();
-            renderizarMisiones();
+            renderizarMisionesYLogros();
         }
 
         function resetData() {
             if (confirm('¿Reiniciar todo el progreso?')) {
-                localStorage.removeItem('juego_player_data_v11');
+                localStorage.removeItem('juego_player_data_v12');
                 location.reload();
+            }
+        }
+
+        function registrarAccionProgreso(tipo) {
+            if (tipo === 'cofres') {
+                playerData.progresoMisiones.cofresAbiertos += 1;
+                playerData.misionesContador.mision_cofres += 1;
+            } else if (tipo === 'nivel') {
+                playerData.progresoMisiones.nivelesSubidos += 1;
+                playerData.misionesContador.mision_subir_nivel += 1;
+            } else if (tipo === 'victorias') {
+                playerData.progresoMisiones.combatesGanados += 1;
+                playerData.misionesContador.mision_victorias += 1;
             }
         }
 
@@ -692,6 +981,8 @@
 
             if (cofreSeleccionado.tipoMoneda === "gold") playerData.gold -= cofreSeleccionado.costo;
             if (cofreSeleccionado.tipoMoneda === "gems") playerData.gems -= cofreSeleccionado.costo;
+
+            registrarAccionProgreso('cofres');
 
             const tirada = Math.random() * 100;
             let acumulado = 0;
@@ -732,6 +1023,8 @@
             datosCarta.copias -= requisitos.copias;
             datosCarta.nivel += 1;
 
+            registrarAccionProgreso('nivel');
+
             alert(`🚀 ¡MEJORA EXITOSA! Nivel ${datosCarta.nivel}`);
             guardarDatos();
         }
@@ -749,34 +1042,30 @@
                 {
                     nombre: "Dojo Novato (Fácil)",
                     nivelEnemigos: 2,
-                    cantidadNinjas: 2,
+                    cantidadNinjas: 3,
                     rarezaPool: ["Común"],
-                    recompensaOro: 150,
-                    descripcion: "Ninjas novatos de nivel bajo."
+                    recompensaOro: 150
                 },
                 {
                     nombre: "Maestros del Elemento (Medio)",
                     nivelEnemigos: 5,
                     cantidadNinjas: 3,
                     rarezaPool: ["Común", "Raro"],
-                    recompensaOro: 350,
-                    descripcion: "Equipos equilibrados de nivel medio."
+                    recompensaOro: 350
                 },
                 {
                     nombre: "Elite Táctica (Difícil)",
                     nivelEnemigos: 10,
                     cantidadNinjas: 3,
                     rarezaPool: ["Raro", "Épico"],
-                    recompensaOro: 800,
-                    descripcion: "Veteranos experimentados con sinergia."
+                    recompensaOro: 800
                 },
                 {
                     nombre: "Invasión de Leyendas (Suprema)",
                     nivelEnemigos: 16,
                     cantidadNinjas: 3,
                     rarezaPool: ["Épico", "Legendario"],
-                    recompensaOro: 2200,
-                    descripcion: "¡Poderes primigenios y divinos desatados!"
+                    recompensaOro: 2200
                 }
             ];
 
@@ -795,7 +1084,6 @@
                     nombre: config.nombre,
                     nivel: config.nivelEnemigos,
                     recompensaOro: config.recompensaOro,
-                    descripcion: config.descripcion,
                     equipo: equipoGenerado
                 };
             });
@@ -838,7 +1126,8 @@
                     id, nombre: base.nombre, emoji: base.emoji,
                     vidaActual: stats.vidaMax, vidaMax: stats.vidaMax,
                     ataque: stats.ataque, velocidad: stats.velocidad,
-                    habilidades: habilidadesConUsos, tipo: 'jugador', barraAccion: 0
+                    habilidades: habilidadesConUsos, tipo: 'jugador', barraAccion: 0,
+                    isPlayer: true
                 };
             }).filter(n => n !== null);
 
@@ -854,7 +1143,8 @@
                     id, nombre: base.nombre, emoji: base.emoji,
                     vidaActual: stats.vidaMax, vidaMax: stats.vidaMax,
                     ataque: stats.ataque, velocidad: stats.velocidad,
-                    habilidades: habilidadesConUsos, tipo: 'rival', barraAccion: 0
+                    habilidades: habilidadesConUsos, tipo: 'rival', barraAccion: 0,
+                    isPlayer: false
                 };
             }).filter(n => n !== null);
 
@@ -906,7 +1196,15 @@
                 setTimeout(() => { ejecutarTurnoRivalInteligente(); }, 800);
             }
         }
-
+        // Función auxiliar para aplicar animaciones a los elementos del combate
+        function aplicarEfectoVisualCard(uniqueId, claseAnimacion) {
+            const card = document.querySelector(`[data-uid="${uniqueId}"]`);
+            if (!card) return;
+            card.classList.remove('anim-attack', 'anim-hurt', 'anim-heal');
+            void card.offsetWidth; // Forzar reflow para reiniciar la animación
+            card.classList.add(claseAnimacion);
+            setTimeout(() => card.classList.remove(claseAnimacion), 600);
+        }
         function ejecutarTurnoRivalInteligente() {
             if (!estadoCombate.combateActivo) return;
             const actor = estadoCombate.combatienteActual;
@@ -925,26 +1223,46 @@
             let habElegida = habilidadesDisponibles[Math.floor(Math.random() * habilidadesDisponibles.length)];
             habElegida.usosRestantes -= 1;
 
+            // Animación del atacante
+            aplicarEfectoVisualCard(actor.uniqueId, 'anim-attack');
+
             if (habElegida.tipo === 'ataque') {
                 let objetivo = jugadoresVivos[Math.floor(Math.random() * jugadoresVivos.length)];
                 let dano = Math.round(actor.ataque * habElegida.multiplicadorActual);
                 objetivo.vidaActual -= dano;
-                mostrarNumeroFlotante(objetivo.uniqueId, `-${dano}`, 'text-red-500');
+
+                // Animación de daño al objetivo
+                aplicarEfectoVisualCard(objetivo.uniqueId, 'anim-hurt');
+
+                const targetCard = document.querySelector(`[data-uid="${objetivo.uniqueId}"]`);
+                if (targetCard) {
+                    const rect = targetCard.getBoundingClientRect();
+                    showFloatingText(rect.left + rect.width / 2, rect.top + rect.height / 2, `-${dano} 💥`, '#ef4444');
+                }
+
                 dispararEfectoFondo('damage');
-                agregarLogCombate(`🔴 [Rival] ${actor.nombre} usó [${habElegida.nombre}] en ${objetivo.nombre} (${dano} daño).`);
+                agregarLogCombate(`🔴 <b class="text-red-400">[Rival] ${actor.nombre}</b> usó <span class="text-amber-300">[${habElegida.nombre}]</span> en <b>${objetivo.nombre}</b> por <span class="text-red-400 font-bold">${dano} daño</span>.`);
             } else if (habElegida.tipo === 'curacion' || habElegida.tipo === 'defensa') {
                 let heridos = rivalesVivos.sort((a, b) => (a.vidaActual / a.vidaMax) - (b.vidaActual / b.vidaMax));
                 let objetivoCura = heridos[0];
                 let curacion = Math.round(actor.vidaMax * habElegida.multiplicadorActual);
                 objetivoCura.vidaActual = Math.min(objetivoCura.vidaMax, objetivoCura.vidaActual + curacion);
-                mostrarNumeroFlotante(objetivoCura.uniqueId, `+${curacion}`, 'text-emerald-400');
+
+                // Animación de curación al objetivo
+                aplicarEfectoVisualCard(objetivoCura.uniqueId, 'anim-heal');
+
+                const targetCard = document.querySelector(`[data-uid="${objetivoCura.uniqueId}"]`);
+                if (targetCard) {
+                    const rect = targetCard.getBoundingClientRect();
+                    showFloatingText(rect.left + rect.width / 2, rect.top + rect.height / 2, `+${curacion} 💚`, '#34d399');
+                }
+
                 dispararEfectoFondo('heal');
-                agregarLogCombate(`🟢 [Rival] ${actor.nombre} curó a ${objetivoCura.nombre} por ${curacion} HP.`);
+                agregarLogCombate(`🟢 <b class="text-emerald-400">[Rival] ${actor.nombre}</b> curó a <b>${objetivoCura.nombre}</b> recuperando <span class="text-emerald-400 font-bold">${curacion} HP</span>.`);
             }
 
-            procesarSiguienteTurnoVelocidad();
+            setTimeout(() => procesarSiguienteTurnoVelocidad(), 600);
         }
-
         function prepararHabilidadJugador(indexHabilidad) {
             const actor = estadoCombate.combatienteActual;
             if (!actor || actor.tipo !== 'jugador') return;
@@ -980,45 +1298,44 @@
             const objetivo = estadoCombate.todosLosCombatientes.find(c => c.uniqueId === uniqueId);
             if (!objetivo || objetivo.vidaActual <= 0) return;
 
+            const targetCard = document.querySelector(`[data-uid="${uniqueId}"]`);
+            const rect = targetCard ? targetCard.getBoundingClientRect() : { left: 100, top: 100, width: 0, height: 0 };
+            const posX = rect.left + rect.width / 2;
+            const posY = rect.top + rect.height / 2;
+
+            // Animación de ataque/acción del atacante jugador
+            aplicarEfectoVisualCard(actor.uniqueId, 'anim-attack');
+
             if (hab.tipo === 'curacion' || hab.tipo === 'defensa') {
                 if (objetivo.tipo !== 'jugador') { alert('⚠️ Debes seleccionar a un miembro de tu equipo aliado.'); return; }
                 hab.usosRestantes -= 1;
                 let curacion = Math.round(actor.vidaMax * hab.multiplicadorActual);
                 objetivo.vidaActual = Math.min(objetivo.vidaMax, objetivo.vidaActual + curacion);
-                mostrarNumeroFlotante(objetivo.uniqueId, `+${curacion}`, 'text-emerald-400');
+
+                aplicarEfectoVisualCard(objetivo.uniqueId, 'anim-heal');
+                showFloatingText(posX, posY, `+${curacion} 💚`, '#34d399');
                 dispararEfectoFondo('heal');
-                agregarLogCombate(`✨ ${actor.nombre} usó [${hab.nombre}] en ${objetivo.nombre} recuperando ${curacion} HP.`);
+                agregarLogCombate(`✨ <b class="text-cyan-400">${actor.nombre}</b> usó <span class="text-amber-300">[${hab.nombre}]</span> en <b>${objetivo.nombre}</b> recuperando <span class="text-emerald-400 font-bold">${curacion} HP</span>.`);
             } else if (hab.tipo === 'ataque') {
                 if (objetivo.tipo !== 'rival') { alert('⚠️ Debes seleccionar a un enemigo.'); return; }
                 hab.usosRestantes -= 1;
                 let dano = Math.round(actor.ataque * hab.multiplicadorActual);
                 objetivo.vidaActual -= dano;
-                mostrarNumeroFlotante(objetivo.uniqueId, `-${dano}`, 'text-red-500');
+
+                aplicarEfectoVisualCard(objetivo.uniqueId, 'anim-hurt');
+                showFloatingText(posX, posY, `-${dano} 💥`, '#ef4444');
                 dispararEfectoFondo('damage');
-                agregarLogCombate(`⚔️ ${actor.nombre} atacó a ${objetivo.nombre} por ${dano} de daño.`);
+                agregarLogCombate(`⚔️ <b class="text-cyan-400">${actor.nombre}</b> atacó a <b class="text-red-400">${objetivo.nombre}</b> causando <span class="text-red-400 font-bold">${dano} daño</span>.`);
             }
 
             limpiarSeleccionYContinuar();
         }
-
         function limpiarSeleccionYContinuar() {
             estadoCombate.habilidadSeleccionadaPendiente = null;
             estadoCombate.objetivoSeleccionadoId = null;
             document.getElementById('label-modo-objetivo').classList.add('hidden');
             document.getElementById('label-modo-aliado').classList.add('hidden');
             procesarSiguienteTurnoVelocidad();
-        }
-
-        function mostrarNumeroFlotante(uniqueId, texto, claseColor) {
-            const tarjeta = document.querySelector(`[data-uid="${uniqueId}"]`);
-            if (!tarjeta) return;
-
-            const div = document.createElement('div');
-            div.className = `floating-number ${claseColor}`;
-            div.innerText = texto;
-            tarjeta.appendChild(div);
-
-            setTimeout(() => { div.remove(); }, 900);
         }
 
         function dispararEfectoFondo(tipo) {
@@ -1046,7 +1363,7 @@
             if (victoria) {
                 const oroGanado = estadoCombate.rival.recompensaOro;
                 playerData.gold += oroGanado;
-                playerData.misionesProgreso.combatesGanados += 1;
+                registrarAccionProgreso('victorias');
                 alert(`🏆 ¡VICTORIA EN LA ARENA!\n\nRecompensas:\n+${oroGanado} 🪙 Oro`);
             } else {
                 alert(`❌ ¡DERROTA!\n\nTus ninjas fueron vencidos. Mejora sus atributos en el Cuartel.`);
@@ -1055,6 +1372,18 @@
         }
 
         function actualizarUICombate() {
+            const combatientesVivos = estadoCombate.todosLosCombatientes.filter(c => c.vidaActual > 0);
+            const ordenTurnos = [...combatientesVivos].sort((a, b) => b.barraAccion - a.barraAccion);
+            if (estadoCombate.combatienteActual && estadoCombate.combatienteActual.vidaActual > 0) {
+                const idx = ordenTurnos.findIndex(c => c.uniqueId === estadoCombate.combatienteActual.uniqueId);
+                if (idx > -1) {
+                    ordenTurnos.splice(idx, 1);
+                    ordenTurnos.unshift(estadoCombate.combatienteActual);
+                }
+            }
+            renderTimeline(ordenTurnos);
+
+            // Renderizar rivales con color dinámico en la barra de salud
             const rivalSlots = document.getElementById('rival-team-slots');
             rivalSlots.innerHTML = '';
             estadoCombate.todosLosCombatientes.filter(c => c.tipo === 'rival').forEach(n => {
@@ -1062,36 +1391,46 @@
                 const esActivo = estadoCombate.combatienteActual === n;
                 const seleccionado = estadoCombate.objetivoSeleccionadoId === n.uniqueId;
 
+                // Cambia el color de la barra según el nivel de HP
+                let colorBarra = 'bg-red-500';
+                if (porcentaje < 25) colorBarra = 'bg-red-700 animate-pulse';
+                else if (porcentaje < 50) colorBarra = 'bg-amber-500';
+
                 rivalSlots.innerHTML += `
-                    <div data-uid="${n.uniqueId}" onclick="seleccionarObjetivo('${n.uniqueId}')" class="bg-gray-900 p-2 rounded-xl border ${seleccionado ? 'border-amber-400 bg-amber-950/40 ring-1 ring-amber-400' : (esActivo ? 'border-red-400 enemy-turn-glow bg-red-950/40' : 'border-red-900/30')} text-left transition-all cursor-pointer relative overflow-hidden shrink-0">
-                        <div class="flex justify-between items-center text-[10px] font-bold">
-                            <span class="truncate">${n.emoji} ${n.nombre} ${n.vidaActual <= 0 ? '(X)' : ''}</span>
-                            <span class="text-red-400 shrink-0 ml-1">${n.vidaActual}/${n.vidaMax}</span>
-                        </div>
-                        <div class="w-full bg-gray-800 h-1.5 rounded-full mt-1 overflow-hidden">
-                            <div class="bg-red-500 h-full transition-all duration-300" style="width: ${porcentaje}%"></div>
-                        </div>
-                    </div>
-                `;
+            <div data-uid="${n.uniqueId}" onclick="seleccionarObjetivo('${n.uniqueId}')" class="bg-gray-900 p-2 rounded-xl border ${seleccionado ? 'border-amber-400 bg-amber-950/40 ring-2 ring-amber-400 scale-105' : (esActivo ? 'border-red-400 enemy-turn-glow bg-red-950/40' : 'border-red-900/30')} ${n.vidaActual <= 0 ? 'opacity-40 grayscale' : 'hover:scale-102'} text-left transition-all cursor-pointer relative overflow-hidden shrink-0">
+                <div class="flex justify-between items-center text-[10px] font-bold">
+                    <span class="truncate flex items-center gap-1">${n.emoji} ${n.nombre} ${n.vidaActual <= 0 ? '<span class="text-red-500 font-extrabold">(DERROTADO)</span>' : ''}</span>
+                    <span class="text-red-400 shrink-0 ml-1">${Math.max(0, n.vidaActual)}/${n.vidaMax}</span>
+                </div>
+                <div class="w-full bg-gray-800 h-2 rounded-full mt-1.5 overflow-hidden p-0.5 border border-gray-700">
+                    <div class="${colorBarra} h-full rounded-full transition-all duration-500" style="width: ${porcentaje}%"></div>
+                </div>
+            </div>
+        `;
             });
 
+            // Renderizar aliados
             const playerSlots = document.getElementById('player-team-slots-battle');
             playerSlots.innerHTML = '';
             estadoCombate.todosLosCombatientes.filter(c => c.tipo === 'jugador').forEach(n => {
                 const porcentaje = Math.max(0, Math.round((n.vidaActual / n.vidaMax) * 100));
                 const esActivo = estadoCombate.combatienteActual === n;
 
+                let colorBarra = 'bg-cyan-500';
+                if (porcentaje < 25) colorBarra = 'bg-red-500 animate-pulse';
+                else if (porcentaje < 50) colorBarra = 'bg-amber-400';
+
                 playerSlots.innerHTML += `
-                    <div data-uid="${n.uniqueId}" onclick="seleccionarObjetivo('${n.uniqueId}')" class="bg-gray-900 p-2 rounded-xl border ${esActivo ? 'border-cyan-400 active-turn-glow bg-cyan-950/40' : 'border-cyan-900/30'} text-left transition-all cursor-pointer relative overflow-hidden shrink-0">
-                        <div class="flex justify-between items-center text-[10px] font-bold">
-                            <span class="truncate">${n.emoji} ${n.nombre} ${n.vidaActual <= 0 ? '(X)' : ''}</span>
-                            <span class="text-cyan-400 shrink-0 ml-1">${n.vidaActual}/${n.vidaMax}</span>
-                        </div>
-                        <div class="w-full bg-gray-800 h-1.5 rounded-full mt-1 overflow-hidden">
-                            <div class="bg-cyan-500 h-full transition-all duration-300" style="width: ${porcentaje}%"></div>
-                        </div>
-                    </div>
-                `;
+            <div data-uid="${n.uniqueId}" onclick="seleccionarObjetivo('${n.uniqueId}')" class="bg-gray-900 p-2 rounded-xl border ${esActivo ? 'border-cyan-400 active-turn-glow bg-cyan-950/40 scale-105' : 'border-cyan-900/30'} ${n.vidaActual <= 0 ? 'opacity-40 grayscale' : 'hover:scale-102'} text-left transition-all cursor-pointer relative overflow-hidden shrink-0">
+                <div class="flex justify-between items-center text-[10px] font-bold">
+                    <span class="truncate flex items-center gap-1">${n.emoji} ${n.nombre} ${n.vidaActual <= 0 ? '<span class="text-gray-500">(CAÍDO)</span>' : ''}</span>
+                    <span class="text-cyan-400 shrink-0 ml-1">${Math.max(0, n.vidaActual)}/${n.vidaMax}</span>
+                </div>
+                <div class="w-full bg-gray-800 h-2 rounded-full mt-1.5 overflow-hidden p-0.5 border border-gray-700">
+                    <div class="${colorBarra} h-full rounded-full transition-all duration-500" style="width: ${porcentaje}%"></div>
+                </div>
+            </div>
+        `;
             });
 
             const actor = estadoCombate.combatienteActual;
@@ -1104,24 +1443,23 @@
 
                     actor.habilidades.forEach((hab, index) => {
                         let sinUsos = hab.usosRestantes <= 0;
-                        let colorBoton = hab.tipo === 'curacion' ? 'bg-emerald-600 hover:bg-emerald-500' : 'bg-red-600 hover:bg-red-500';
-                        if (sinUsos) colorBoton = 'bg-gray-800 text-gray-500 cursor-not-allowed';
+                        let colorBoton = hab.tipo === 'curacion' ? 'bg-emerald-600 hover:bg-emerald-500 border-emerald-400' : 'bg-red-600 hover:bg-red-500 border-red-400';
+                        if (sinUsos) colorBoton = 'bg-gray-800 text-gray-500 border-gray-700 cursor-not-allowed';
 
                         controles.innerHTML += `
-                            <button ${sinUsos ? 'disabled' : `onclick="prepararHabilidadJugador(${index})"`} class="${colorBoton} font-bold text-[10px] p-1.5 rounded-xl transition flex flex-col items-center text-center shadow active:scale-95">
-                                <span class="text-[11px] truncate w-full">✨ ${hab.nombre}</span>
-                                <span class="text-[8px] opacity-80 font-normal truncate w-full">${hab.desc}</span>
-                                <span class="text-[8px] ${sinUsos ? 'text-red-400' : 'text-amber-200'} mt-0.5">Usos: ${hab.usosRestantes}/${hab.usosMax}</span>
-                            </button>
-                        `;
+                    <button ${sinUsos ? 'disabled' : `onclick="prepararHabilidadJugador(${index})"`} class="${colorBoton} border-b-2 font-bold text-[10px] p-2 rounded-xl transition flex flex-col items-center text-center shadow-lg active:scale-95">
+                        <span class="text-[11px] truncate w-full font-extrabold">✨ ${hab.nombre}</span>
+                        <span class="text-[8px] opacity-90 font-normal truncate w-full mt-0.5">${hab.desc}</span>
+                        <span class="text-[8px] ${sinUsos ? 'text-red-400' : 'text-amber-200'} font-bold mt-1 bg-black/30 px-2 py-0.5 rounded-full">Usos: ${hab.usosRestantes}/${hab.usosMax}</span>
+                    </button>
+                `;
                     });
                 } else {
                     document.getElementById('combate-estado-texto').innerText = `Rival pensando...`;
-                    document.getElementById('combate-controles').innerHTML = `<div class="col-span-2 text-center text-gray-500 text-[10px] py-2 italic">Calculando movimiento táctico...</div>`;
+                    document.getElementById('combate-controles').innerHTML = `<div class="col-span-2 text-center text-gray-400 text-[10px] py-2 italic animate-pulse">🤖 Calculando movimiento táctico...</div>`;
                 }
             }
         }
-
         function renderizarEquipo() {
             const activeSlots = document.getElementById('active-slots');
             activeSlots.innerHTML = '';
@@ -1254,14 +1592,96 @@
             }
         }
 
-        function renderizarMisiones() {
-            const container = document.getElementById('missions-container');
-            container.innerHTML = `
-                <div class="bg-gray-800 p-2.5 rounded-xl border border-gray-700">
-                    <h4 class="font-bold text-xs text-purple-300">⚔️ Campeón de la Arena</h4>
-                    <p class="text-[10px] text-gray-400">Victorias actuales: ${playerData.misionesProgreso.combatesGanados}</p>
-                </div>
-            `;
+        function renderizarMisionesYLogros() {
+            const containerMisiones = document.getElementById('missions-container');
+            containerMisiones.innerHTML = '';
+
+            definicionesMisiones.forEach(mision => {
+                let progresoActual = playerData.misionesContador[mision.id] || 0;
+                let completado = progresoActual >= mision.meta;
+                let porcentaje = Math.min(100, Math.round((progresoActual / mision.meta) * 100));
+
+                containerMisiones.innerHTML += `
+                    <div class="bg-gray-800 p-2.5 rounded-xl border border-purple-500/40 flex justify-between items-center shadow">
+                        <div class="pr-2 flex-1">
+                            <h4 class="font-bold text-xs text-purple-300">${mision.titulo}</h4>
+                            <p class="text-[10px] text-gray-300 mb-1">${mision.desc}</p>
+                            <div class="w-full bg-gray-900 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-purple-500 h-full transition-all duration-300" style="width: ${porcentaje}%"></div>
+                            </div>
+                            <span class="text-[9px] text-gray-400 mt-0.5 block">${progresoActual}/${mision.meta}</span>
+                        </div>
+                        <button ${completado ? `onclick="reclamarMisionRepetible('${mision.id}')"` : 'disabled'} class="${completado ? 'bg-cyan-500 hover:bg-cyan-400 active:scale-95 text-gray-950 animate-bounce' : 'bg-gray-700 text-gray-500 cursor-not-allowed'} font-bold text-xs px-2.5 py-1.5 rounded-lg transition shrink-0 ml-2">
+                            ${completado ? `Reclamar ${mision.recompensaGemas} 💎` : `+${mision.recompensaGemas} 💎`}
+                        </button>
+                    </div>
+                `;
+            });
+
+            const containerLogros = document.getElementById('achievements-container');
+            containerLogros.innerHTML = '';
+
+            definicionesLogros.forEach(logro => {
+                let yaReclamado = playerData.logrosCompletados.includes(logro.id);
+                let progresoActual = 0;
+
+                if (logro.tipo === 'cofres') progresoActual = playerData.progresoMisiones.cofresAbiertos;
+                else if (logro.tipo === 'nivel') progresoActual = playerData.progresoMisiones.nivelesSubidos;
+                else if (logro.tipo === 'victorias') progresoActual = playerData.progresoMisiones.combatesGanados;
+
+                let listoParaReclamar = !yaReclamado && progresoActual >= logro.meta;
+                let porcentaje = Math.min(100, Math.round((progresoActual / logro.meta) * 100));
+
+                let estadoBoton = '';
+                if (yaReclamado) {
+                    estadoBoton = `<span class="text-[9px] text-emerald-400 font-bold bg-emerald-950/60 px-2 py-1 rounded-lg border border-emerald-800 shrink-0 ml-2">✓ Completado</span>`;
+                } else if (listoParaReclamar) {
+                    estadoBoton = `<button onclick="reclamarLogro('${logro.id}')" class="bg-amber-400 hover:bg-amber-300 text-gray-950 font-bold text-xs px-2.5 py-1.5 rounded-lg transition shrink-0 ml-2 animate-pulse">Reclamar</button>`;
+                } else {
+                    estadoBoton = `<button disabled class="bg-gray-700 text-gray-500 font-bold text-xs px-2.5 py-1.5 rounded-lg shrink-0 ml-2 cursor-not-allowed">Bloqueado</button>`;
+                }
+
+                containerLogros.innerHTML += `
+                    <div class="bg-gray-800 p-2.5 rounded-xl border border-amber-500/30 flex justify-between items-center shadow">
+                        <div class="pr-2 flex-1">
+                            <h4 class="font-bold text-xs text-amber-300">${logro.titulo}</h4>
+                            <p class="text-[10px] text-gray-300 mb-1">${logro.desc}</p>
+                            <div class="w-full bg-gray-900 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-amber-500 h-full transition-all duration-300" style="width: ${porcentaje}%"></div>
+                            </div>
+                            <div class="flex justify-between items-center text-[9px] text-gray-400 mt-0.5">
+                                <span>${Math.min(progresoActual, logro.meta)}/${logro.meta}</span>
+                                <span class="text-amber-300 font-bold">+${logro.recompensaOro} 🪙 +${logro.recompensaGemas} 💎</span>
+                            </div>
+                        </div>
+                        ${estadoBoton}
+                    </div>
+                `;
+            });
+        }
+
+        function reclamarMisionRepetible(idMision) {
+            const mision = definicionesMisiones.find(m => m.id === idMision);
+            if (!mision) return;
+
+            if (playerData.misionesContador[idMision] >= mision.meta) {
+                playerData.gems += mision.recompensaGemas;
+                playerData.misionesContador[idMision] -= mision.meta;
+                alert(`✨ ¡MISION REPETIBLE COMPLETADA!\n\nRecompensa:\n+${mision.recompensaGemas} 💎 Gemas`);
+                guardarDatos();
+            }
+        }
+
+        function reclamarLogro(idLogro) {
+            const logro = definicionesLogros.find(l => l.id === idLogro);
+            if (!logro || playerData.logrosCompletados.includes(idLogro)) return;
+
+            playerData.gold += logro.recompensaOro;
+            playerData.gems += logro.recompensaGemas;
+            playerData.logrosCompletados.push(idLogro);
+
+            alert(`🏆 ¡LOGRO COMPLETADO!\n\nRecompensa:\n+${logro.recompensaOro} 🪙 Oro\n+${logro.recompensaGemas} 💎 Gemas`);
+            guardarDatos();
         }
 
         function agregarAlEquipo(id) {
@@ -1292,6 +1712,100 @@
             if (tabName === 'combate') buttonElement.classList.add('text-red-500');
             if (tabName === 'misiones') buttonElement.classList.add('text-purple-400');
             if (tabName === 'ajustes') buttonElement.classList.add('text-emerald-400');
+        }
+
+        // ================= NUEVAS FUNCIONES DE LÍNEA DE TIEMPO Y EFECTOS =================
+
+        // 1. DIBUJAR / ACTUALIZAR LA LÍNEA DE TURNOS
+        function renderTimeline(turnQueue) {
+            const container = document.getElementById('timeline-bar');
+            if (!container) return;
+            container.innerHTML = '';
+
+            turnQueue.forEach((unit, index) => {
+                const icon = document.createElement('div');
+                icon.classList.add('timeline-unit');
+
+                if (unit.avatarUrl) {
+                    icon.style.backgroundImage = `url(${unit.avatarUrl})`;
+                } else {
+                    icon.innerText = unit.emoji || '🥷';
+                    icon.style.backgroundColor = unit.isPlayer ? '#1e3a8a' : '#881337';
+                }
+
+                if (index === 0) {
+                    icon.classList.add('active');
+                }
+
+                container.appendChild(icon);
+            });
+        }
+
+        // 2. MOSTRAR NÚMERO FLOTANTE
+        function showFloatingText(x, y, text, color = '#e74c3c') {
+            const elem = document.createElement('div');
+            elem.classList.add('floating-number');
+            elem.innerText = text;
+            elem.style.color = color;
+            elem.style.left = `${x}px`;
+            elem.style.top = `${y}px`;
+
+            document.body.appendChild(elem);
+
+            setTimeout(() => {
+                elem.remove();
+            }, 800);
+        }
+
+        // ================= SISTEMA DE AJUSTES Y PERFIL =================
+        const avataresDisponibles = [
+            { id: "🥷", nombre: "Ninja" },
+            { id: "🧙‍♂️", nombre: "Mago" },
+            { id: "🏹", nombre: "Arquero" },
+            { id: "⚔️", nombre: "Guerrero" },
+            { id: "🤖", nombre: "Cíborg" },
+            { id: "🐉", nombre: "Dragón" }
+        ];
+
+        let iconoSeleccionadoTemporal = "🥷";
+
+        function abrirAjustesModal() {
+            document.getElementById("inputNombreJugador").value = playerData.perfil.nombre;
+            iconoSeleccionadoTemporal = playerData.perfil.icono;
+            renderizarIconos();
+            document.getElementById("modalAjustes").classList.remove("hidden");
+        }
+
+        function cerrarAjustesModal() {
+            document.getElementById("modalAjustes").classList.add("hidden");
+        }
+
+        function renderizarIconos() {
+            const contenedor = document.getElementById("contenedorIconos");
+            contenedor.innerHTML = "";
+
+            avataresDisponibles.forEach(avatar => {
+                const div = document.createElement("div");
+                div.className = `icono-item ${avatar.id === iconoSeleccionadoTemporal ? 'seleccionado' : ''}`;
+                div.innerText = avatar.id;
+                div.onclick = () => {
+                    iconoSeleccionadoTemporal = avatar.id;
+                    renderizarIconos();
+                };
+                contenedor.appendChild(div);
+            });
+        }
+
+        function guardarAjustes() {
+            const nuevoNombre = document.getElementById("inputNombreJugador").value.trim();
+            if (nuevoNombre !== "") {
+                playerData.perfil.nombre = nuevoNombre;
+            }
+            playerData.perfil.icono = iconoSeleccionadoTemporal;
+
+            guardarDatos();
+            cerrarAjustesModal();
+            alert("¡Ajustes guardados correctamente!");
         }
 
         window.onload = function () { cargarDatos(); };
