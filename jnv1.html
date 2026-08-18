@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Juego de Combate Táctico - Misiones y Arena</title>
+    <title>Juego de Combate Táctico</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
@@ -824,41 +824,99 @@
         ];
 
         const definicionesLogros = [
-            { id: "logro_primer_combate", titulo: "Primer Batalla", desc: "Gana tu primer combate en la Arena.", meta: 1, recompensaOro: 500, recompensaGemas: 10, tipo: "victorias" },
-            { id: "logro_coleccionista_1", titulo: "Coleccionista Novato", desc: "Abre un total de 10 cofres.", meta: 10, recompensaOro: 1000, recompensaGemas: 30, tipo: "cofres" },
-            { id: "logro_coleccionista_2", titulo: "Coleccionista Especializado", desc: "Abre un total de 30 cofres.", meta: 30, recompensaOro: 3000, recompensaGemas: 60, tipo: "cofres" },
-            { id: "logro_coleccionista_3", titulo: "Coleccionista Real", desc: "Abre un total de 50 cofres.", meta: 50, recompensaOro: 10000, recompensaGemas: 500, tipo: "cofres" },
-            { id: "logro_maestro_entrenador_1", titulo: "Maestro del Dojo", desc: "Sube de nivel 10 veces en total a tus ninjas.", meta: 10, recompensaOro: 2000, recompensaGemas: 50, tipo: "nivel" },
-            { id: "logro_maestro_entrenador_2", titulo: "Sensei del Dojo", desc: "Sube de nivel 20 veces en total a tus ninjas.", meta: 20, recompensaOro: 10000, recompensaGemas: 500, tipo: "nivel" },
+            {
+                id: "logro_primer_combate", titulo: "Primer Batalla",
+                desc: "Gana tu primer combate en la Arena.", meta: 1, recompensaOro: 500, recompensaGemas: 10, tipo: "victorias"
+            },
+            {
+                id: "logro_coleccionista_1", titulo: "Coleccionista Novato",
+                desc: "Abre un total de 10 cofres.", meta: 10, recompensaOro: 1000, recompensaGemas: 30, tipo: "cofres"
+            },
+            {
+                id: "logro_coleccionista_2", titulo: "Coleccionista Especializado"
+                , desc: "Abre un total de 30 cofres.", meta: 30, recompensaOro: 3000, recompensaGemas: 60, tipo: "cofres"
+            },
+            {
+                id: "logro_coleccionista_3", titulo: "Coleccionista Real"
+                , desc: "Abre un total de 50 cofres.", meta: 50, recompensaOro: 10000, recompensaGemas: 500, tipo: "cofres"
+            },
+            {
+                id: "logro_maestro_entrenador_1", titulo: "Maestro del Dojo",
+                desc: "Sube de nivel 10 veces en total a tus ninjas.", meta: 10, recompensaOro: 2000, recompensaGemas: 50, tipo: "nivel"
+            },
+            {
+                id: "logro_maestro_entrenador_2", titulo: "Sensei del Dojo",
+                desc: "Sube de nivel 20 veces en total a tus ninjas.", meta: 20, recompensaOro: 10000, recompensaGemas: 500, tipo: "nivel"
+            },
 
-            { id: "logro_arena_1", titulo: "Luchador", desc: "Consigue 10 victorias en la Arena.", meta: 10, recompensaOro: 3000, recompensaGemas: 100, tipo: "victorias" },
-            { id: "logro_arena_2", titulo: "Guerrero", desc: "Consigue 25 victorias en la Arena.", meta: 25, recompensaOro: 5000, recompensaGemas: 200, tipo: "victorias" },
-            { id: "logro_veterano_arena", titulo: "Leyenda Táctica", desc: "Consigue 50 victorias en la Arena.", meta: 50, recompensaOro: 10000, recompensaGemas: 500, tipo: "victorias" },
+            {
+                id: "logro_arena_1", titulo: "Luchador", desc: "Consigue 10 victorias en la Arena.",
+                meta: 10, recompensaOro: 3000, recompensaGemas: 100, tipo: "victorias"
+            },
+            {
+                id: "logro_arena_2", titulo: "Guerrero", desc: "Consigue 25 victorias en la Arena.",
+                meta: 25, recompensaOro: 5000, recompensaGemas: 200, tipo: "victorias"
+            },
+            {
+                id: "logro_veterano_arena", titulo: "Leyenda Táctica", desc: "Consigue 50 victorias en la Arena.",
+                meta: 50, recompensaOro: 10000, recompensaGemas: 500, tipo: "victorias"
+            },
+
+            {
+                id: "logro_arena_3", titulo: "Luchador Furioso", desc: "Consigue Racha de 5 victorias en la Arena.",
+                meta: 5, recompensaOro: 5000, recompensaGemas: 200, tipo: "rachavictorias"
+            },
+            {
+                id: "logro_arena_4", titulo: "Guerrero Feroz", desc: "Consigue Racha de 10 victorias en la Arena.",
+                meta: 10, recompensaOro: 10000, recompensaGemas: 500, tipo: "rachavictorias"
+            },
+            {
+                id: "logro_arena_5", titulo: "Espadachin Legendario", desc: "Consigue Racha de 15 victorias en la Arena.",
+                meta: 15, recompensaOro: 20000, recompensaGemas: 1000, tipo: "rachavictorias"
+            },
+
+
+
         ];
-
         let playerData = {
             gold: 3000,
             gems: 200,
+
             perfil: {
                 nombre: "Jugador Genin",
                 icono: "🥷"
             },
+
             coleccion: {
                 "genin_fuego": { nivel: 1, copias: 1 },
                 "estudiante_roca": { nivel: 1, copias: 1 },
                 "sanador_agua": { nivel: 1, copias: 1 }
             },
-            equipoActivo: ["genin_fuego", "estudiante_roca", "sanador_agua"],
+
+            equipoActivo: [
+                "genin_fuego",
+                "estudiante_roca",
+                "sanador_agua"
+            ],
+
             progresoMisiones: {
                 cofresAbiertos: 0,
                 nivelesSubidos: 0,
-                combatesGanados: 0
+                combatesGanados: 0,
+
+                // Nueva estadística
+                rachaVictorias: 0
             },
+
             misionesContador: {
                 mision_cofres: 0,
                 mision_subir_nivel: 0,
-                mision_victorias: 0
+                mision_victorias: 0,
+
+                // Preparado para la misión de racha
+                mision_racha_victorias: 0
             },
+
             logrosCompletados: []
         };
 
@@ -897,16 +955,64 @@
 
         function cargarDatos() {
             const saved = localStorage.getItem('juego_player_data_v12');
+
             if (saved) {
                 const parsed = JSON.parse(saved);
-                playerData = { ...playerData, ...parsed };
-                if (!playerData.perfil) playerData.perfil = { nombre: "Jugador Genin", icono: "🥷" };
-                if (!playerData.misionesContador) playerData.misionesContador = { mision_cofres: 0, mision_subir_nivel: 0, mision_victorias: 0 };
-                if (!playerData.logrosCompletados) playerData.logrosCompletados = [];
-                if (!playerData.progresoMisiones) playerData.progresoMisiones = { cofresAbiertos: 0, nivelesSubidos: 0, combatesGanados: 0 };
+
+                // Recuperamos los datos guardados
+                playerData = {
+                    ...playerData,
+                    ...parsed
+                };
+
+                // ==============================
+                // COMPATIBILIDAD CON PARTIDAS VIEJAS
+                // ==============================
+
+                if (!playerData.perfil) {
+                    playerData.perfil = {
+                        nombre: "Jugador Genin",
+                        icono: "🥷"
+                    };
+                }
+
+                if (!playerData.misionesContador) {
+                    playerData.misionesContador = {
+                        mision_cofres: 0,
+                        mision_subir_nivel: 0,
+                        mision_victorias: 0,
+                        mision_racha_victorias: 0
+                    };
+                }
+
+                if (playerData.misionesContador.mision_racha_victorias === undefined) {
+                    playerData.misionesContador.mision_racha_victorias = 0;
+                }
+
+                if (!playerData.logrosCompletados) {
+                    playerData.logrosCompletados = [];
+                }
+
+                if (!playerData.progresoMisiones) {
+                    playerData.progresoMisiones = {
+                        cofresAbiertos: 0,
+                        nivelesSubidos: 0,
+                        combatesGanados: 0,
+                        rachaVictorias: 0
+                    };
+                }
+
+                // Si la partida antigua no tenía racha,
+                // comenzamos desde 0.
+                if (playerData.progresoMisiones.rachaVictorias === undefined) {
+                    playerData.progresoMisiones.rachaVictorias = 0;
+                }
+
             } else {
+                // Primera partida
                 guardarDatos();
             }
+
             actualizarUI();
         }
 
@@ -939,18 +1045,56 @@
         }
 
         function registrarAccionProgreso(tipo) {
+
+            // ==========================================
+            // COFRES
+            // ==========================================
             if (tipo === 'cofres') {
+
                 playerData.progresoMisiones.cofresAbiertos += 1;
                 playerData.misionesContador.mision_cofres += 1;
-            } else if (tipo === 'nivel') {
+
+            }
+
+            // ==========================================
+            // SUBIR NIVEL
+            // ==========================================
+            else if (tipo === 'nivel') {
+
                 playerData.progresoMisiones.nivelesSubidos += 1;
                 playerData.misionesContador.mision_subir_nivel += 1;
-            } else if (tipo === 'victorias') {
+
+            }
+
+            // ==========================================
+            // VICTORIA
+            // ==========================================
+            else if (tipo === 'victorias') {
+
+                // Victoria total
                 playerData.progresoMisiones.combatesGanados += 1;
+
+                // Contador de misión de victorias
                 playerData.misionesContador.mision_victorias += 1;
+
+                // ==============================
+                // RACHA DE VICTORIAS
+                // ==============================
+
+                playerData.progresoMisiones.mision_racha_victorias += 1;
+                playerData.progresoMisiones.rachaVictorias += 1;
             }
         }
+        rachaVictorias: 0; mision_racha_victorias: 0
+        function registrarDerrota() {
 
+            // Una derrota rompe completamente la racha
+            playerData.progresoMisiones.rachaVictorias = 0;
+
+            // Por ahora no usamos este contador para la misión.
+            // Lo dejamos preparado para futuras mejoras.
+            playerData.misionesContador.mision_racha_victorias = 0;
+        }
         function renderizarTienda() {
             const container = document.getElementById('shop-container');
             container.innerHTML = '';
@@ -1061,11 +1205,18 @@
                     recompensaOro: 800
                 },
                 {
-                    nombre: "Invasión de Leyendas (Suprema)",
+                    nombre: "Corte Suprema (Suprema)",
                     nivelEnemigos: 16,
                     cantidadNinjas: 3,
                     rarezaPool: ["Épico", "Legendario"],
                     recompensaOro: 2200
+                },
+                {
+                    nombre: "Invasión de Leyendas (Leyenda)",
+                    nivelEnemigos: 20,
+                    cantidadNinjas: 1,
+                    rarezaPool: ["Legendario"],
+                    recompensaOro: 5000
                 }
             ];
 
@@ -1357,17 +1508,56 @@
         }
 
         function finalizarCombate(victoria) {
+
+            // El combate terminó
             estadoCombate.combateActivo = false;
+
+            // Cerramos el modal
             document.getElementById('modal-combate').classList.add('hidden');
 
+
+            // ==========================================
+            // VICTORIA
+            // ==========================================
+
             if (victoria) {
+
                 const oroGanado = estadoCombate.rival.recompensaOro;
+
+                // Recompensa
                 playerData.gold += oroGanado;
+
+                // Registrar victoria
                 registrarAccionProgreso('victorias');
-                alert(`🏆 ¡VICTORIA EN LA ARENA!\n\nRecompensas:\n+${oroGanado} 🪙 Oro`);
-            } else {
-                alert(`❌ ¡DERROTA!\n\nTus ninjas fueron vencidos. Mejora sus atributos en el Cuartel.`);
+
+                alert(
+                    `🏆 ¡VICTORIA EN LA ARENA!\n\n` +
+                    `Recompensas:\n` +
+                    `+${oroGanado} 🪙 Oro\n\n` +
+                    `🔥 Racha actual: ${playerData.progresoMisiones.rachaVictorias}`
+                );
             }
+
+
+            // ==========================================
+            // DERROTA
+            // ==========================================
+
+            else {
+
+                // La derrota rompe la racha
+                registrarDerrota();
+
+                alert(
+                    `❌ ¡DERROTA!\n\n` +
+                    `Tus ninjas fueron vencidos.\n` +
+                    `🔥 Racha reiniciada a 0.\n\n` +
+                    `Mejora sus atributos en el Cuartel.`
+                );
+            }
+
+
+            // Guardamos la nueva información
             guardarDatos();
         }
 
@@ -1628,6 +1818,7 @@
                 if (logro.tipo === 'cofres') progresoActual = playerData.progresoMisiones.cofresAbiertos;
                 else if (logro.tipo === 'nivel') progresoActual = playerData.progresoMisiones.nivelesSubidos;
                 else if (logro.tipo === 'victorias') progresoActual = playerData.progresoMisiones.combatesGanados;
+                else if (logro.tipo === 'racha_victorias') progresoActual = playerData.progresoMisiones.rachaVictorias;
 
                 let listoParaReclamar = !yaReclamado && progresoActual >= logro.meta;
                 let porcentaje = Math.min(100, Math.round((progresoActual / logro.meta) * 100));
