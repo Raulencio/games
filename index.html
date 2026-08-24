@@ -1,11 +1,1067 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-    <link rel="stylesheet" href="css/nuevocss.css">
+
+<head>
+
+    <!-- ============================================================ 
+    
+    1100
+
+    
+         EL TALLER DEL CUERVO
+         VERSIÓN 3.0
+
+         SISTEMA MODULAR
+
+         Esta versión introduce:
+
+         ✓ Módulos independientes
+         ✓ Orden personalizable
+         ✓ Subir / bajar módulos
+         ✓ Mostrar / ocultar módulos
+         ✓ Editar nombre
+         ✓ Editar icono
+         ✓ Guardar configuración
+         ✓ Recuperar configuración automáticamente
+
+         TODO SE GUARDA EN localStorage.
+
+         ============================================================ -->
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>El Taller del Cuervo</title>
+
+
+    <!-- ============================================================
+         LEAFLET
+         Biblioteca utilizada para el mapa.
+         ============================================================ -->
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+
+    <!-- ============================================================
+         ESTILOS
+         ============================================================ -->
+
+    <style>
+        /* =========================================================
+           COLORES PRINCIPALES
+           ========================================================= */
+
+        :root {
+
+            --fondo: #11110f;
+            --panel: #1b1a17;
+            --panel-2: #24221d;
+            --panel-3: #0d0d0c;
+
+            --texto: #eee9dc;
+            --texto-suave: #aaa395;
+
+            --acento: #b58b52;
+            --acento-hover: #d1aa72;
+
+            --borde: #39352e;
+
+            --peligro: #a85454;
+
+            --radio: 14px;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .25);
+        }
+
+
+        /* =========================================================
+           REINICIO
+           ========================================================= */
+
+        * {
+
+            box-sizing: border-box;
+
+            margin: 0;
+
+            padding: 0;
+        }
+
+
+        html {
+
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: var(--fondo);
+
+            color: var(--texto);
+
+            min-height: 100vh;
+
+            padding-bottom: 50px;
+        }
+
+
+        /* =========================================================
+           ENCABEZADO
+           ========================================================= */
+
+        header {
+
+            text-align: center;
+
+            padding: 28px 15px;
+
+            border-bottom:
+                1px solid var(--borde);
+
+            background:
+                linear-gradient(to bottom,
+                    #171612,
+                    var(--fondo));
+        }
+
+
+        header h1 {
+
+            font-size: 28px;
+
+            letter-spacing: 2px;
+        }
+
+
+        header p {
+
+            margin-top: 8px;
+
+            color: var(--texto-suave);
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           CONTENEDOR PRINCIPAL
+           ========================================================= */
+
+        main {
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 18px;
+        }
+
+
+        /* =========================================================
+           RELOJ
+           ========================================================= */
+
+        .reloj {
+
+            text-align: center;
+
+            background: var(--panel);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius: var(--radio);
+
+            padding: 25px;
+
+            margin-bottom: 18px;
+
+            box-shadow: var(--sombra);
+        }
+
+
+        #hora {
+
+            font-size: 44px;
+
+            font-weight: bold;
+
+            color: var(--acento);
+        }
+
+
+        #fecha {
+
+            margin-top: 8px;
+
+            color: var(--texto-suave);
+
+            font-size: 16px;
+        }
+
+
+        /* =========================================================
+           BARRA SUPERIOR
+           ========================================================= */
+
+        .barra {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================================================
+           BOTONES
+           ========================================================= */
+
+        button {
+
+            border: none;
+
+            border-radius: 9px;
+
+            padding: 10px 13px;
+
+            background: var(--acento);
+
+            color: #17130d;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: .15s;
+        }
+
+
+        button:hover {
+
+            background: var(--acento-hover);
+
+            transform: translateY(-1px);
+        }
+
+
+        button:active {
+
+            transform: translateY(0);
+        }
+
+
+        .secundario {
+
+            background: var(--panel-2);
+
+            color: var(--texto);
+
+            border:
+                1px solid var(--borde);
+        }
+
+
+        .peligro {
+
+            background: var(--peligro);
+
+            color: white;
+        }
+
+
+        /* =========================================================
+           CONTENEDOR DE MÓDULOS
+
+           IMPORTANTE:
+
+           JavaScript coloca aquí los módulos automáticamente.
+
+           El orden de esta lista puede cambiar.
+           ========================================================= */
+
+        #contenedorModulos {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 16px;
+        }
+
+
+        /* =========================================================
+           MÓDULO
+           ========================================================= */
+
+        .modulo {
+
+            background: var(--panel);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius: var(--radio);
+
+            padding: 18px;
+
+            box-shadow: var(--sombra);
+        }
+
+
+        /* =========================================================
+           CABECERA DEL MÓDULO
+           ========================================================= */
+
+        .cabecera-modulo {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .titulo-modulo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            min-width: 0;
+        }
+
+
+        .icono-modulo {
+
+            font-size: 25px;
+        }
+
+
+        .titulo-modulo h2 {
+
+            color: var(--acento);
+
+            font-size: 19px;
+        }
+
+
+        /* =========================================================
+           CONTROLES DE CADA MÓDULO
+
+           Aquí están:
+
+           ⬆️ subir
+           ⬇️ bajar
+           👁️ mostrar/ocultar
+           ✏️ editar
+           ========================================================= */
+
+        .controles-modulo {
+
+            display: flex;
+
+            gap: 4px;
+
+            flex-shrink: 0;
+        }
+
+
+        .controles-modulo button {
+
+            padding: 7px 9px;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           DESCRIPCIONES
+           ========================================================= */
+
+        .descripcion {
+
+            color: var(--texto-suave);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            margin-bottom: 12px;
+        }
+
+
+        /* =========================================================
+           INPUTS
+           ========================================================= */
+
+        input,
+        textarea,
+        select {
+
+            width: 100%;
+
+            border:
+                1px solid var(--borde);
+
+            border-radius: 9px;
+
+            background: var(--panel-3);
+
+            color: var(--texto);
+
+            padding: 12px;
+
+            outline: none;
+
+            font-family: inherit;
+        }
+
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+
+            border-color: var(--acento);
+        }
+
+
+        textarea {
+
+            min-height: 180px;
+
+            resize: vertical;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================================
+           RADIO
+           ========================================================= */
+
+        audio {
+
+            width: 100%;
+
+            margin: 10px 0;
+        }
+
+
+        .radio-actual {
+
+            background: var(--panel-2);
+
+            border-radius: 10px;
+
+            padding: 12px;
+
+            margin-bottom: 10px;
+
+            color: var(--texto-suave);
+        }
+
+
+        .buscador-radio {
+
+            display: flex;
+
+            gap: 8px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .resultados-radio {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+            max-height: 350px;
+
+            overflow-y: auto;
+        }
+
+
+        .radio-item {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            background: var(--panel-2);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius: 10px;
+
+            padding: 10px;
+        }
+
+
+        .radio-info {
+
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .radio-nombre {
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .radio-meta {
+
+            color: var(--texto-suave);
+
+            font-size: 12px;
+
+            margin-top: 3px;
+        }
+
+
+        /* =========================================================
+           BOTONES DE PAÍSES
+           ========================================================= */
+
+        .paises {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 6px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .pais {
+
+            background: var(--panel-2);
+
+            color: var(--texto);
+
+            border:
+                1px solid var(--borde);
+        }
+
+
+        /* =========================================================
+           MAPA
+           ========================================================= */
+
+        #mapa {
+
+            width: 100%;
+
+            height: 420px;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            border:
+                1px solid var(--borde);
+        }
+
+
+        .controles-mapa {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 5px;
+
+            margin-top: 10px;
+        }
+
+
+        /* =========================================================
+           HERRAMIENTAS
+           ========================================================= */
+
+        .herramientas {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit,
+                    minmax(120px, 1fr));
+
+            gap: 8px;
+        }
+
+
+        .herramienta {
+
+            background: var(--panel-2);
+
+            border:
+                1px dashed var(--borde);
+
+            border-radius: 10px;
+
+            padding: 15px;
+
+            text-align: center;
+
+            color: var(--texto-suave);
+        }
+
+
+        /* =========================================================
+           PANEL DE CONFIGURACIÓN
+           ========================================================= */
+
+        #panelConfiguracion {
+
+            display: none;
+
+            background: var(--panel);
+
+            border:
+                1px solid var(--acento);
+
+            border-radius: var(--radio);
+
+            padding: 18px;
+
+            margin-bottom: 18px;
+
+            box-shadow: var(--sombra);
+        }
+
+
+        #panelConfiguracion.abierto {
+
+            display: block;
+        }
+
+
+        .config-item {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            padding: 10px;
+
+            margin-bottom: 6px;
+
+            background: var(--panel-2);
+
+            border-radius: 9px;
+        }
+
+
+        .config-nombre {
+
+            flex: 1;
+        }
+
+
+        .config-controles {
+
+            display: flex;
+
+            gap: 4px;
+        }
+
+
+        /* =========================================================
+           VENTANA DE EDICIÓN
+           ========================================================= */
+
+        #editor {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0, 0, 0, .75);
+
+            z-index: 5000;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+
+        #editor.abierto {
+
+            display: flex;
+        }
+
+
+        .editor-contenido {
+
+            width: 100%;
+
+            max-width: 450px;
+
+            background: var(--panel);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            box-shadow: var(--sombra);
+        }
+
+
+        .editor-contenido h2 {
+
+            color: var(--acento);
+
+            margin-bottom: 15px;
+        }
+
+
+        .campo-editor {
+
+            margin-bottom: 12px;
+        }
+
+
+        .campo-editor label {
+
+            display: block;
+
+            color: var(--texto-suave);
+
+            font-size: 13px;
+
+            margin-bottom: 5px;
+        }
+
+
+        /* =========================================================
+           MENSAJES
+           ========================================================= */
+
+        #mensaje {
+
+            position: fixed;
+
+            bottom: 18px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%) translateY(100px);
+
+            background: #24221d;
+
+            border:
+                1px solid var(--acento);
+
+            color: var(--texto);
+
+            padding: 12px 18px;
+
+            border-radius: 30px;
+
+            box-shadow: var(--sombra);
+
+            transition: .3s;
+
+            z-index: 9999;
+
+            opacity: 0;
+        }
+
+
+        #mensaje.visible {
+
+            transform:
+                translateX(-50%) translateY(0);
+
+            opacity: 1;
+        }
+
+
+        /* =========================================================
+           PIE
+           ========================================================= */
+
+        footer {
+
+            text-align: center;
+
+            color: var(--texto-suave);
+
+            font-size: 12px;
+
+            margin-top: 30px;
+        }
+
+
+        /* =========================================================
+           MÓVIL
+           ========================================================= */
+
+        @media(max-width:600px) {
+
+            main {
+
+                padding: 10px;
+            }
+
+
+            header h1 {
+
+                font-size: 22px;
+            }
+
+
+            #hora {
+
+                font-size: 35px;
+            }
+
+
+            #mapa {
+
+                height: 350px;
+            }
+
+
+            .buscador-radio {
+
+                flex-direction: column;
+            }
+
+
+            .cabecera-modulo {
+
+                align-items: flex-start;
+            }
+
+
+            .controles-modulo {
+
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+
 </head>
+
+
 <body>
+
+
+    <!-- ============================================================
+     ENCABEZADO
+     ============================================================ -->
+
+    <header>
+
+        <h1>🐦‍⬛ EL TALLER DEL CUERVO</h1>
+
+        <p>
+            Herramientas, música, mapas y proyectos.
+        </p>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- ========================================================
+         RELOJ
+         ======================================================== -->
+
+        <section class="reloj">
+
+            <div id="hora">
+                00:00:00
+            </div>
+
+            <div id="fecha">
+                Cargando fecha...
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================
+         BARRA PRINCIPAL
+         ======================================================== -->
+
+        <div class="barra">
+
+            <button onclick="abrirConfiguracion()">
+                ⚙️ Personalizar Taller
+            </button>
+
+            <button class="secundario" onclick="guardarConfiguracion()">
+                💾 Guardar configuración
+            </button>
+
+            <button class="secundario" onclick="restaurarConfiguracion()">
+                ↩️ Restaurar orden
+            </button>
+
+        </div>
+
+
+        <!-- ========================================================
+         PANEL DE CONFIGURACIÓN
+
+         Desde aquí podemos ver TODOS los módulos.
+         ======================================================== -->
+
+        <section id="panelConfiguracion">
+
+            <h2 style="color:var(--acento); margin-bottom:10px;">
+                ⚙️ Configuración del Taller
+            </h2>
+
+            <p class="descripcion">
+
+                Puedes subir, bajar, mostrar, ocultar y editar
+                cada herramienta.
+
+                Los cambios se guardan en este dispositivo.
+
+            </p>
+
+
+            <div id="listaConfiguracion"></div>
+
+        </section>
+
+
+        <!-- ========================================================
+         CONTENEDOR DE MÓDULOS
+
+         JavaScript construirá aquí todo el Taller.
+         ======================================================== -->
+
+        <div id="contenedorModulos"></div>
+
+
+    </main>
+
+
+    <footer>
+
+        El Taller del Cuervo · V3.0
+
+    </footer>
+
+
+    <!-- ============================================================
+     SISTEMA DE MENSAJES
+     ============================================================ -->
+
+    <div id="mensaje"></div>
+
+
+    <!-- ============================================================
+     EDITOR DE MÓDULO
+     ============================================================ -->
+
+    <div id="editor">
+
+        <div class="editor-contenido">
+
+            <h2>
+                ✏️ Editar herramienta
+            </h2>
+
+
+            <div class="campo-editor">
+
+                <label>
+                    Nombre de la herramienta
+                </label>
+
+                <input id="editorNombre" type="text">
+
+            </div>
+
+
+            <div class="campo-editor">
+
+                <label>
+                    Icono
+                </label>
+
+                <input id="editorIcono" type="text" maxlength="4" placeholder="🎸">
+
+            </div>
+
+
+            <button onclick="guardarEdicion()">
+                💾 Guardar
+            </button>
+
+
+            <button class="secundario" onclick="cerrarEditor()">
+                Cancelar
+            </button>
+
+        </div>
+
+    </div>
 <h1 class="divE">Juegos</h1>
 <div class="divA">
     <div class="divE">
@@ -35,8 +1091,3808 @@
         $$\text{ܐܲܠܵܗܵܐ ܢܒܲܪܸܟ݂ ܠܥܵܒܹ̈ܐ ܕܥܵܠܡܵܐ ܘܠܓܵܙܔܹ̈ܐ ܕܝܵܡܵܐ}$$
     </div>
 </div>
+
+    <!-- ============================================================
+     LEAFLET
+     ============================================================ -->
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
+    <script>
+
+        /* ================================================================
+           EL TALLER DEL CUERVO
+           JAVASCRIPT PRINCIPAL
+        
+           Esta parte controla:
+        
+           - módulos
+           - configuración
+           - orden
+           - almacenamiento
+           - reloj
+           - radio
+           - mapa
+           - notas
+        
+           ================================================================ */
+
+
+        /* ================================================================
+           1. CONFIGURACIÓN DEL SISTEMA
+           ================================================================ */
+
+
+        /*
+            Esta es la clave utilizada por localStorage.
+        
+            Si cambiamos esta palabra,
+            el navegador considerará que estamos usando
+            una configuración nueva.
+        */
+
+        const CLAVE_CONFIGURACION =
+            "taller_cuervo_configuracion_v3";
+
+
+        /*
+            Variable que recuerda qué módulo estamos editando.
+        */
+
+        let moduloEditando = null;
+
+
+
+        /* ================================================================
+           2. LISTA DE MÓDULOS
+           =================================================================
+        
+           ESTA ES LA PARTE MÁS IMPORTANTE PARA CRECER.
+        
+           Para agregar una herramienta nueva podemos añadir
+           otro objeto a esta lista.
+        
+           Ejemplo:
+        
+           {
+               id: "afinador",
+               nombre: "Afinador",
+               icono: "🎸",
+               visible: true
+           }
+        
+           ================================================================ */
+
+
+        const MODULOS_BASE = [
+
+            {
+                id: "radio",
+                nombre: "Radio del Cuervo",
+                icono: "📻",
+                visible: true
+            },
+
+            {
+                id: "mapa",
+                nombre: "Mapa del Cuervo",
+                icono: "🗺️",
+                visible: true
+            },
+
+            {
+                id: "notas",
+                nombre: "Libreta del Cuervo",
+                icono: "📝",
+                visible: true
+            },
+
+            {
+                id: "afinador",
+                nombre: "Afinador de guitarra",
+                icono: "🎸",
+                visible: false
+            },
+
+            {
+                id: "metronomo",
+                nombre: "Metrónomo",
+                icono: "🎵",
+                visible: false
+            },
+
+            {
+                id: "calculadora",
+                nombre: "Calculadora",
+                icono: "🧮",
+                visible: false
+            },
+
+            {
+                id: "temporizador",
+                nombre: "Temporizador",
+                icono: "⏱️",
+                visible: false
+            },
+
+            {
+                id: "finanzas",
+                nombre: "Finanzas",
+                icono: "💰",
+                visible: false
+            },
+
+            {
+                id: "inventario",
+                nombre: "Inventario",
+                icono: "📦",
+                visible: false
+            },
+
+            {
+                id: "proyectos",
+                nombre: "Proyectos",
+                icono: "🎮",
+                visible: false
+            },
+
+            {
+                id: "escritorio",
+                nombre: "Escritorio",
+                icono: "✍️",
+                visible: false
+            }
+
+        ];
+
+
+
+        /* ================================================================
+           3. CARGAR CONFIGURACIÓN
+           ================================================================ */
+
+
+        /*
+            Primero intentamos recuperar una configuración
+            guardada anteriormente.
+        
+            Si no existe:
+        
+            usamos MODULOS_BASE.
+        */
+
+        function cargarConfiguracion() {
+
+            const guardado =
+                localStorage.getItem(
+                    CLAVE_CONFIGURACION
+                );
+
+
+            if (!guardado) {
+
+                return MODULOS_BASE.map(
+                    modulo => ({ ...modulo })
+                );
+            }
+
+
+            try {
+
+                return JSON.parse(guardado);
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                return MODULOS_BASE.map(
+                    modulo => ({ ...modulo })
+                );
+            }
+        }
+
+
+        /*
+            Esta variable contiene la configuración actual.
+        */
+
+        let MODULOS =
+            cargarConfiguracion();
+
+
+
+        /* ================================================================
+           4. GUARDAR CONFIGURACIÓN
+           ================================================================ */
+
+
+        /*
+            Esta función guarda TODO:
+        
+            - orden
+            - nombre
+            - icono
+            - visibilidad
+        */
+
+        function guardarConfiguracion() {
+
+            localStorage.setItem(
+
+                CLAVE_CONFIGURACION,
+
+                JSON.stringify(MODULOS)
+
+            );
+
+
+            mostrarMensaje(
+                "Configuración guardada."
+            );
+        }
+
+
+
+        /* ================================================================
+           5. RESTAURAR CONFIGURACIÓN
+           ================================================================ */
+
+
+        function restaurarConfiguracion() {
+
+            const confirmar =
+                confirm(
+                    "¿Restaurar la configuración original?"
+                );
+
+
+            if (!confirmar) {
+
+                return;
+            }
+
+
+            MODULOS =
+                MODULOS_BASE.map(
+                    modulo => ({ ...modulo })
+                );
+
+
+            guardarConfiguracion();
+
+            dibujarModulos();
+
+            dibujarConfiguracion();
+
+
+            mostrarMensaje(
+                "Configuración restaurada."
+            );
+        }
+
+
+
+        /* ================================================================
+           6. MOSTRAR MENSAJES
+           ================================================================ */
+
+
+        function mostrarMensaje(texto) {
+
+            const elemento =
+                document.getElementById("mensaje");
+
+
+            elemento.textContent = texto;
+
+            elemento.classList.add("visible");
+
+
+            setTimeout(
+                function () {
+
+                    elemento.classList.remove("visible");
+
+                },
+                2500
+            );
+        }
+
+
+
+        /* ================================================================
+           7. RELOJ
+           ================================================================ */
+
+
+        function actualizarReloj() {
+
+            const ahora =
+                new Date();
+
+
+            const hora =
+                ahora.toLocaleTimeString(
+                    "es-CL",
+                    {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: false
+                    }
+                );
+
+
+            document.getElementById("hora")
+                .textContent = hora;
+
+
+            let fecha =
+                ahora.toLocaleDateString(
+                    "es-CL",
+                    {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric"
+                    }
+                );
+
+
+            fecha =
+                fecha.charAt(0).toUpperCase()
+                + fecha.slice(1);
+
+
+            document.getElementById("fecha")
+                .textContent = fecha;
+        }
+
+
+        actualizarReloj();
+
+
+        setInterval(
+            actualizarReloj,
+            1000
+        );
+
+
+
+        /* ================================================================
+           8. DIBUJAR MÓDULOS
+           ================================================================ */
+
+
+        /*
+            Esta función crea visualmente los módulos
+            según el orden de MODULOS.
+        
+            Por eso cuando cambiamos el orden,
+            simplemente volvemos a ejecutar esta función.
+        */
+
+        function dibujarModulos() {
+
+            const contenedor =
+                document.getElementById(
+                    "contenedorModulos"
+                );
+
+
+            contenedor.innerHTML = "";
+
+
+            MODULOS.forEach(
+                function (modulo) {
+
+
+                    /*
+                        Si el módulo está oculto,
+                        no lo mostramos.
+                    */
+
+                    if (!modulo.visible) {
+
+                        return;
+                    }
+
+
+                    /*
+                        Creamos el contenedor.
+                    */
+
+                    const elemento =
+                        document.createElement("section");
+
+
+                    elemento.className =
+                        "modulo";
+
+
+                    elemento.id =
+                        "modulo-" + modulo.id;
+
+
+                    /*
+                        Cabecera.
+                    */
+
+                    const cabecera =
+                        document.createElement("div");
+
+
+                    cabecera.className =
+                        "cabecera-modulo";
+
+
+                    cabecera.innerHTML = `
+
+                <div class="titulo-modulo">
+
+                    <span class="icono-modulo">
+
+                        ${escaparHTML(modulo.icono)}
+
+                    </span>
+
+                    <h2>
+
+                        ${escaparHTML(modulo.nombre)}
+
+                    </h2>
+
+                </div>
+
+                <div class="controles-modulo">
+
+                    <button
+                        class="secundario"
+                        onclick="subirModulo('${modulo.id}')">
+
+                        ⬆️
+
+                    </button>
+
+                    <button
+                        class="secundario"
+                        onclick="bajarModulo('${modulo.id}')">
+
+                        ⬇️
+
+                    </button>
+
+                    <button
+                        class="secundario"
+                        onclick="editarModulo('${modulo.id}')">
+
+                        ✏️
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+                    elemento.appendChild(cabecera);
+
+
+                    /*
+                        Ahora colocamos el contenido
+                        correspondiente a cada módulo.
+                    */
+
+                    elemento.innerHTML +=
+                        obtenerContenidoModulo(
+                            modulo.id
+                        );
+
+
+                    contenedor.appendChild(
+                        elemento
+                    );
+
+                }
+            );
+
+
+            /*
+                Algunos módulos necesitan inicializarse
+                después de ser creados.
+            */
+
+            inicializarModulos();
+        }
+
+
+
+        /* ================================================================
+           9. CONTENIDO DE CADA MÓDULO
+           ================================================================ */
+
+
+        /*
+            Esta función decide qué HTML pertenece
+            a cada herramienta.
+        
+            Cuando creemos una herramienta nueva,
+            podemos agregar otro "case".
+        */
+
+        function obtenerContenidoModulo(id) {
+
+            switch (id) {
+
+                /* ========================================================
+                   RADIO
+                   ======================================================== */
+
+                case "radio":
+
+                    return `
+
+                <p class="descripcion">
+                    Busca emisoras de todo el mundo utilizando Radio Browser.
+                </p>
+
+                <div id="radioActual" class="radio-actual">
+                    <strong>Ninguna emisora seleccionada</strong>
+                </div>
+
+                <audio id="reproductor" controls preload="none"></audio>
+
+                <h3 style="margin:15px 0 8px;">🇨🇱 Chile</h3>
+
+                <div class="paises">
+
+                    <button class="pais"
+                        onclick="buscarRadio('FM2 Chile')">
+                        FM2
+                    </button>
+
+                    <button class="pais"
+                        onclick="buscarRadio('LOS40 Chile')">
+                        LOS40
+                    </button>
+
+                    <button class="pais"
+                        onclick="buscarRadio('Tornagaleones')">
+                        Tornagaleones
+                    </button>
+
+                    <button class="pais"
+                        onclick="buscarRadio('Punto 7')">
+                        Punto 7
+                    </button>
+
+                </div>
+
+                <h3 style="margin:15px 0 8px;">🌎 Países</h3>
+
+                <div class="paises">
+
+                    <button class="pais"
+                        onclick="buscarPais('Argentina')">
+                        🇦🇷 Argentina
+                    </button>
+
+                    <button class="pais"
+                        onclick="buscarPais('Spain')">
+                        🇪🇸 España
+                    </button>
+
+                    <button class="pais"
+                        onclick="buscarPais('Brazil')">
+                        🇧🇷 Brasil
+                    </button>
+
+                    <button class="pais"
+                        onclick="buscarPais('France')">
+                        🇫🇷 Francia
+                    </button>
+
+                    <button class="pais"
+                        onclick="buscarPais('United Kingdom')">
+                        🇬🇧 Inglaterra
+                    </button>
+
+                    <button class="pais"
+                        onclick="buscarPais('Japan')">
+                        🇯🇵 Japón
+                    </button>
+
+                </div>
+
+                <div class="buscador-radio">
+
+                    <input
+                        id="busquedaRadio"
+                        placeholder="Buscar radio...">
+
+                    <button onclick="ejecutarBusquedaRadio()">
+                        🔎 Buscar
+                    </button>
+
+                </div>
+
+                <div id="resultadosRadio"
+                     class="resultados-radio">
+                </div>
+
+            `;
+
+
+                /* ========================================================
+                   MAPA
+                   ======================================================== */
+
+                case "mapa":
+
+                    return `
+
+                <p class="descripcion">
+                    Mapa interactivo centrado inicialmente en Valdivia.
+                </p>
+
+                <div id="mapa"></div>
+
+                <div class="controles-mapa">
+
+                    <button onclick="irAValdivia()">
+                        📍 Valdivia
+                    </button>
+
+                    <button onclick="miUbicacion()">
+                        📍 Mi ubicación
+                    </button>
+
+                    <button class="secundario"
+                        onclick="zoomMapa(1)">
+                        ➕
+                    </button>
+
+                    <button class="secundario"
+                        onclick="zoomMapa(-1)">
+                        ➖
+                    </button>
+
+                </div>
+
+            `;
+
+
+                /* ========================================================
+                   NOTAS
+                   ======================================================== */
+
+                case "notas":
+
+                    return `
+
+                <p class="descripcion">
+                    Libreta personal del Taller.
+                </p>
+
+                <textarea
+                    id="notas"
+                    placeholder="Escribe aquí tus notas...">
+                </textarea>
+
+                <br><br>
+
+                <button onclick="guardarNotas()">
+                    💾 Guardar
+                </button>
+
+                <button class="peligro"
+                    onclick="borrarNotas()">
+                    🗑️ Borrar
+                </button>
+
+            `;
+
+
+                /* ========================================================
+                   AFINADOR
+                   ======================================================== */
+
+                case "afinador":
+
+                    return `
+
+                <p class="descripcion">
+                    Afinador básico mediante el micrófono del dispositivo.
+                    Permite comprobar la frecuencia aproximada de una cuerda.
+                </p>
+
+                <button onclick="iniciarAfinador()">
+                    🎸 Activar micrófono
+                </button>
+
+                <button class="peligro"
+                    onclick="detenerAfinador()">
+                    ⏹ Detener
+                </button>
+
+                <div style="
+                    text-align:center;
+                    margin-top:20px;
+                    background:var(--panel-2);
+                    padding:20px;
+                    border-radius:12px;
+                ">
+
+                    <div id="afinadorNota"
+                         style="
+                         font-size:38px;
+                         color:var(--acento);
+                         font-weight:bold;">
+                        --
+                    </div>
+
+                    <div id="afinadorFrecuencia">
+                        Frecuencia: -- Hz
+                    </div>
+
+                    <div id="afinadorIndicador"
+                         style="
+                         margin-top:10px;
+                         font-size:18px;">
+                        Esperando sonido...
+                    </div>
+
+                </div>
+
+            `;
+
+
+                /* ========================================================
+                   METRÓNOMO
+                   ======================================================== */
+
+                case "metronomo":
+
+                    return `
+
+                <p class="descripcion">
+                    Metrónomo digital para practicar guitarra,
+                    composición y ritmo.
+                </p>
+
+                <label>BPM</label>
+
+                <input
+                    id="bpmMetronomo"
+                    type="number"
+                    min="30"
+                    max="240"
+                    value="90">
+
+                <br><br>
+
+                <button onclick="iniciarMetronomo()">
+                    ▶ Iniciar
+                </button>
+
+                <button class="peligro"
+                    onclick="detenerMetronomo()">
+                    ⏹ Detener
+                </button>
+
+                <div id="metronomoPantalla"
+                     style="
+                     text-align:center;
+                     font-size:42px;
+                     color:var(--acento);
+                     margin-top:20px;">
+                    ♩
+                </div>
+
+                <div id="metronomoPulso"
+                     style="
+                     text-align:center;
+                     color:var(--texto-suave);">
+                    Detenido
+                </div>
+
+            `;
+
+
+                /* ========================================================
+                   CALCULADORA
+                   ======================================================== */
+
+                case "calculadora":
+
+                    return `
+
+                <p class="descripcion">
+                    Calculadora para operaciones básicas.
+                </p>
+
+                <input
+                    id="calculadoraInput"
+                    type="text"
+                    placeholder="Ejemplo: 25 + 50 * 2">
+
+                <br><br>
+
+                <button onclick="calcular()">
+                    =
+                </button>
+
+                <div id="resultadoCalculadora"
+                     style="
+                     margin-top:15px;
+                     color:var(--acento);
+                     font-size:25px;">
+                </div>
+
+            `;
+
+
+                /* ========================================================
+                   TEMPORIZADOR
+                   ======================================================== */
+
+                case "temporizador":
+
+                    return `
+
+                <p class="descripcion">
+                    Temporizador del Taller.
+                </p>
+
+                <input
+                    id="segundosTemporizador"
+                    type="number"
+                    min="1"
+                    placeholder="Segundos">
+
+                <br><br>
+
+                <button onclick="iniciarTemporizador()">
+                    ▶ Iniciar
+                </button>
+
+                <button class="peligro"
+                    onclick="detenerTemporizador()">
+                    ⏹ Detener
+                </button>
+
+                <div id="temporizadorResultado"
+                     style="
+                     text-align:center;
+                     margin-top:20px;
+                     font-size:40px;
+                     color:var(--acento);">
+                    00:00
+                </div>
+
+            `;
+
+
+                /* ========================================================
+                   FINANZAS
+                   ======================================================== */
+
+                case "finanzas":
+
+                    return `
+
+                <p class="descripcion">
+                    Control sencillo de ingresos y gastos.
+                    La información queda guardada en este dispositivo.
+                </p>
+
+                <div style="
+                    display:grid;
+                    grid-template-columns:
+                    repeat(auto-fit,minmax(150px,1fr));
+                    gap:10px;
+                    margin-bottom:15px;">
+
+                    <div class="radio-actual">
+                        <small>Saldo</small>
+                        <div id="saldoFinanzas"
+                             style="
+                             font-size:24px;
+                             color:var(--acento);">
+                            $0
+                        </div>
+                    </div>
+
+                    <div class="radio-actual">
+                        <small>Ingresos</small>
+                        <div id="ingresosFinanzas"
+                             style="font-size:20px;">
+                            $0
+                        </div>
+                    </div>
+
+                    <div class="radio-actual">
+                        <small>Gastos</small>
+                        <div id="gastosFinanzas"
+                             style="font-size:20px;">
+                            $0
+                        </div>
+                    </div>
+
+                </div>
+
+                <select id="tipoFinanza">
+
+                    <option value="ingreso">
+                        ➕ Ingreso
+                    </option>
+
+                    <option value="gasto">
+                        ➖ Gasto
+                    </option>
+
+                </select>
+
+                <br><br>
+
+                <input
+                    id="conceptoFinanza"
+                    placeholder="Concepto">
+
+                <br><br>
+
+                <input
+                    id="montoFinanza"
+                    type="number"
+                    min="1"
+                    placeholder="Monto">
+
+                <br><br>
+
+                <button onclick="agregarMovimiento()">
+                    💾 Agregar movimiento
+                </button>
+
+                <button class="peligro"
+                    onclick="borrarFinanzas()">
+                    🗑️ Borrar todo
+                </button>
+
+                <div id="listaFinanzas"
+                     style="margin-top:20px;">
+                </div>
+
+            `;
+
+
+                /* ========================================================
+                   INVENTARIO
+                   ======================================================== */
+
+                case "inventario":
+
+                    return `
+
+                <p class="descripcion">
+                    Inventario de herramientas, instrumentos,
+                    discos, materiales y objetos del Taller.
+                </p>
+
+                <input
+                    id="inventarioNombre"
+                    placeholder="Nombre del objeto">
+
+                <br><br>
+
+                <input
+                    id="inventarioCantidad"
+                    type="number"
+                    min="1"
+                    value="1"
+                    placeholder="Cantidad">
+
+                <br><br>
+
+                <input
+                    id="inventarioCategoria"
+                    placeholder="Categoría">
+
+                <br><br>
+
+                <button onclick="agregarInventario()">
+                    📦 Agregar
+                </button>
+
+                <div id="listaInventario"
+                     style="margin-top:20px;">
+                </div>
+
+            `;
+
+
+                /* ========================================================
+                   PROYECTOS
+                   ======================================================== */
+
+                case "proyectos":
+
+                    return `
+
+                <p class="descripcion">
+                    Organiza tus proyectos musicales,
+                    juegos, escritos, muebles y otros trabajos.
+                </p>
+
+                <input
+                    id="proyectoNombre"
+                    placeholder="Nombre del proyecto">
+
+                <br><br>
+
+                <textarea
+                    id="proyectoDescripcion"
+                    style="min-height:100px;"
+                    placeholder="Descripción...">
+                </textarea>
+
+                <br>
+
+                <select id="proyectoEstado">
+
+                    <option value="Idea">
+                        💡 Idea
+                    </option>
+
+                    <option value="En desarrollo">
+                        🔨 En desarrollo
+                    </option>
+
+                    <option value="Terminado">
+                        ✅ Terminado
+                    </option>
+
+                </select>
+
+                <br><br>
+
+                <button onclick="agregarProyecto()">
+                    🎮 Crear proyecto
+                </button>
+
+                <div id="listaProyectos"
+                     style="margin-top:20px;">
+                </div>
+
+            `;
+
+
+                /* ========================================================
+                   ESCRITORIO
+                   ======================================================== */
+
+                case "escritorio":
+
+                    return `
+
+                <p class="descripcion">
+                    Espacio libre para escribir canciones,
+                    ideas, historias, letras o proyectos.
+                </p>
+
+                <input
+                    id="tituloEscritorio"
+                    placeholder="Título">
+
+                <br><br>
+
+                <textarea
+                    id="textoEscritorio"
+                    style="min-height:300px;"
+                    placeholder="Escribe aquí...">
+                </textarea>
+
+                <br><br>
+
+                <button onclick="guardarEscritorio()">
+                    💾 Guardar texto
+                </button>
+
+                <button class="secundario"
+                    onclick="nuevoEscritorio()">
+                    📄 Nuevo
+                </button>
+
+            `;
+
+
+
+
+                default:
+
+                    return `
+
+                <p class="descripcion">
+                    Este módulo todavía no tiene contenido.
+                </p>
+
+            `;
+            }
+        }
+
+        /* ================================================================
+           10. SUBIR MÓDULO
+           ================================================================ */
+
+
+        /*
+            Busca la posición del módulo.
+        
+            Después intercambia su posición con el módulo anterior.
+        */
+
+        function subirModulo(id) {
+
+            const posicion =
+                MODULOS.findIndex(
+                    modulo => modulo.id === id
+                );
+
+
+            if (posicion <= 0) {
+
+                mostrarMensaje(
+                    "Ya está arriba."
+                );
+
+                return;
+            }
+
+
+            const temporal =
+                MODULOS[posicion - 1];
+
+
+            MODULOS[posicion - 1] =
+                MODULOS[posicion];
+
+
+            MODULOS[posicion] =
+                temporal;
+
+
+            guardarConfiguracion();
+
+            dibujarModulos();
+
+            dibujarConfiguracion();
+        }
+
+
+
+        /* ================================================================
+           11. BAJAR MÓDULO
+           ================================================================ */
+
+
+        function bajarModulo(id) {
+
+            const posicion =
+                MODULOS.findIndex(
+                    modulo => modulo.id === id
+                );
+
+
+            if (
+                posicion === -1 ||
+                posicion >= MODULOS.length - 1
+            ) {
+
+                mostrarMensaje(
+                    "Ya está abajo."
+                );
+
+                return;
+            }
+
+
+            const temporal =
+                MODULOS[posicion + 1];
+
+
+            MODULOS[posicion + 1] =
+                MODULOS[posicion];
+
+
+            MODULOS[posicion] =
+                temporal;
+
+
+            guardarConfiguracion();
+
+            dibujarModulos();
+
+            dibujarConfiguracion();
+        }
+
+
+
+        /* ================================================================
+           12. MOSTRAR / OCULTAR
+           ================================================================ */
+
+
+        function cambiarVisibilidad(id) {
+
+            const modulo =
+                MODULOS.find(
+                    m => m.id === id
+                );
+
+
+            if (!modulo) {
+
+                return;
+            }
+
+
+            modulo.visible =
+                !modulo.visible;
+
+
+            guardarConfiguracion();
+
+            dibujarModulos();
+
+            dibujarConfiguracion();
+        }
+
+
+
+        /* ================================================================
+           13. ABRIR CONFIGURACIÓN
+           ================================================================ */
+
+
+        function abrirConfiguracion() {
+
+            const panel =
+                document.getElementById(
+                    "panelConfiguracion"
+                );
+
+
+            panel.classList.toggle(
+                "abierto"
+            );
+
+
+            dibujarConfiguracion();
+        }
+
+
+
+        /* ================================================================
+           14. LISTA DE CONFIGURACIÓN
+           ================================================================ */
+
+
+        function dibujarConfiguracion() {
+
+            const lista =
+                document.getElementById(
+                    "listaConfiguracion"
+                );
+
+
+            lista.innerHTML = "";
+
+
+            MODULOS.forEach(
+                function (modulo, indice) {
+
+
+                    const elemento =
+                        document.createElement("div");
+
+
+                    elemento.className =
+                        "config-item";
+
+
+                    elemento.innerHTML = `
+
+                <div class="config-nombre">
+
+                    ${escaparHTML(modulo.icono)}
+                    ${escaparHTML(modulo.nombre)}
+
+                    <small
+                        style="color:var(--texto-suave);">
+
+                        · posición ${indice + 1}
+
+                    </small>
+
+                </div>
+
+
+                <div class="config-controles">
+
+                    <button
+                        class="secundario"
+                        onclick="subirModulo('${modulo.id}')">
+
+                        ⬆️
+
+                    </button>
+
+
+                    <button
+                        class="secundario"
+                        onclick="bajarModulo('${modulo.id}')">
+
+                        ⬇️
+
+                    </button>
+
+
+                    <button
+                        class="secundario"
+                        onclick="cambiarVisibilidad('${modulo.id}')">
+
+                        ${modulo.visible ? "👁️" : "🚫"}
+
+                    </button>
+
+
+                    <button
+                        class="secundario"
+                        onclick="editarModulo('${modulo.id}')">
+
+                        ✏️
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+                    lista.appendChild(
+                        elemento
+                    );
+
+                }
+            );
+        }
+
+
+
+        /* ================================================================
+           15. EDITAR MÓDULO
+           ================================================================ */
+
+
+        function editarModulo(id) {
+
+            const modulo =
+                MODULOS.find(
+                    m => m.id === id
+                );
+
+
+            if (!modulo) {
+
+                return;
+            }
+
+
+            moduloEditando =
+                id;
+
+
+            document.getElementById(
+                "editorNombre"
+            ).value =
+                modulo.nombre;
+
+
+            document.getElementById(
+                "editorIcono"
+            ).value =
+                modulo.icono;
+
+
+            document.getElementById(
+                "editor"
+            ).classList.add(
+                "abierto"
+            );
+        }
+
+
+
+        /* ================================================================
+           16. GUARDAR EDICIÓN
+           ================================================================ */
+
+
+        function guardarEdicion() {
+
+            const modulo =
+                MODULOS.find(
+                    m => m.id === moduloEditando
+                );
+
+
+            if (!modulo) {
+
+                return;
+            }
+
+
+            const nombre =
+                document.getElementById(
+                    "editorNombre"
+                ).value.trim();
+
+
+            const icono =
+                document.getElementById(
+                    "editorIcono"
+                ).value.trim();
+
+
+            if (nombre !== "") {
+
+                modulo.nombre =
+                    nombre;
+            }
+
+
+            if (icono !== "") {
+
+                modulo.icono =
+                    icono;
+            }
+
+
+            guardarConfiguracion();
+
+            dibujarModulos();
+
+            dibujarConfiguracion();
+
+            cerrarEditor();
+
+
+            mostrarMensaje(
+                "Herramienta modificada."
+            );
+        }
+
+
+
+        /* ================================================================
+           17. CERRAR EDITOR
+           ================================================================ */
+
+
+        function cerrarEditor() {
+
+            document.getElementById(
+                "editor"
+            ).classList.remove(
+                "abierto"
+            );
+
+
+            moduloEditando =
+                null;
+        }
+
+
+
+        /* ================================================================
+           18. ESCAPAR HTML
+           ================================================================ */
+
+
+        function escaparHTML(texto) {
+
+            return String(texto)
+
+                .replaceAll("&", "&amp;")
+
+                .replaceAll("<", "&lt;")
+
+                .replaceAll(">", "&gt;")
+
+                .replaceAll('"', "&quot;")
+
+                .replaceAll("'", "&#039;");
+        }
+
+
+
+        /* ================================================================
+           19. NOTAS
+           ================================================================ */
+
+
+        const CLAVE_NOTAS =
+            "taller_cuervo_notas";
+
+
+        function guardarNotas() {
+
+            const elemento =
+                document.getElementById("notas");
+
+
+            if (!elemento) {
+
+                return;
+            }
+
+
+            localStorage.setItem(
+                CLAVE_NOTAS,
+                elemento.value
+            );
+
+
+            mostrarMensaje(
+                "Notas guardadas."
+            );
+        }
+
+
+        function cargarNotas() {
+
+            const elemento =
+                document.getElementById("notas");
+
+
+            if (!elemento) {
+
+                return;
+            }
+
+
+            const guardado =
+                localStorage.getItem(
+                    CLAVE_NOTAS
+                );
+
+
+            if (guardado !== null) {
+
+                elemento.value =
+                    guardado;
+            }
+        }
+
+
+        function borrarNotas() {
+
+            if (
+                !confirm(
+                    "¿Borrar todas las notas?"
+                )
+            ) {
+
+                return;
+            }
+
+
+            localStorage.removeItem(
+                CLAVE_NOTAS
+            );
+
+
+            const elemento =
+                document.getElementById("notas");
+
+
+            if (elemento) {
+
+                elemento.value = "";
+            }
+
+
+            mostrarMensaje(
+                "Notas eliminadas."
+            );
+        }
+
+
+
+        /* ================================================================
+           20. RADIO
+           ================================================================ */
+
+
+        const RADIO_API =
+            "https://de1.api.radio-browser.info/json/stations";
+
+
+        async function buscarRadio(nombre) {
+
+            mostrarMensaje(
+                "Buscando " + nombre + "..."
+            );
+
+
+            const url =
+                RADIO_API
+                + "/search"
+                + "?name="
+                + encodeURIComponent(nombre)
+                + "&limit=20"
+                + "&hidebroken=true"
+                + "&order=votes"
+                + "&reverse=true";
+
+
+            try {
+
+                const respuesta =
+                    await fetch(url);
+
+
+                const radios =
+                    await respuesta.json();
+
+
+                mostrarResultadosRadio(
+                    radios
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                mostrarMensaje(
+                    "No se pudo realizar la búsqueda."
+                );
+            }
+        }
+
+
+
+        async function buscarPais(pais) {
+
+            mostrarMensaje(
+                "Buscando radios de " + pais + "..."
+            );
+
+
+            const url =
+                RADIO_API
+                + "/bycountry/"
+                + encodeURIComponent(pais)
+                + "?limit=30"
+                + "&hidebroken=true"
+                + "&order=votes"
+                + "&reverse=true";
+
+
+            try {
+
+                const respuesta =
+                    await fetch(url);
+
+
+                const radios =
+                    await respuesta.json();
+
+
+                mostrarResultadosRadio(
+                    radios
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                mostrarMensaje(
+                    "No se pudieron cargar las radios."
+                );
+            }
+        }
+
+
+
+        function ejecutarBusquedaRadio() {
+
+            const campo =
+                document.getElementById(
+                    "busquedaRadio"
+                );
+
+
+            if (!campo) {
+
+                return;
+            }
+
+
+            const texto =
+                campo.value.trim();
+
+
+            if (!texto) {
+
+                mostrarMensaje(
+                    "Escribe algo para buscar."
+                );
+
+                return;
+            }
+
+
+            buscarRadio(texto);
+        }
+
+
+
+        function mostrarResultadosRadio(radios) {
+
+            const contenedor =
+                document.getElementById(
+                    "resultadosRadio"
+                );
+
+
+            if (!contenedor) {
+
+                return;
+            }
+
+
+            contenedor.innerHTML = "";
+
+
+            if (
+                !radios ||
+                radios.length === 0
+            ) {
+
+                contenedor.innerHTML =
+                    "<div class='radio-item'>No encontramos emisoras.</div>";
+
+                return;
+            }
+
+
+            radios.forEach(
+                function (radio) {
+
+
+                    const elemento =
+                        document.createElement("div");
+
+
+                    elemento.className =
+                        "radio-item";
+
+
+                    elemento.innerHTML = `
+
+                <div class="radio-info">
+
+                    <div class="radio-nombre">
+
+                        ${escaparHTML(
+                        radio.name ||
+                        "Radio"
+                    )}
+
+                    </div>
+
+                    <div class="radio-meta">
+
+                        ${escaparHTML(
+                        radio.country ||
+                        ""
+                    )}
+
+                    </div>
+
+                </div>
+
+
+                <button>
+
+                    ▶
+
+                </button>
+
+            `;
+
+
+                    elemento
+                        .querySelector("button")
+                        .onclick =
+                        function () {
+
+                            reproducirEmisora(
+                                radio
+                            );
+
+                        };
+
+
+                    contenedor.appendChild(
+                        elemento
+                    );
+
+                }
+            );
+        }
+
+
+
+        function reproducirEmisora(radio) {
+
+            const reproductor =
+                document.getElementById(
+                    "reproductor"
+                );
+
+
+            if (!reproductor) {
+
+                return;
+            }
+
+
+            const url =
+                radio.url_resolved ||
+                radio.url;
+
+
+            if (!url) {
+
+                mostrarMensaje(
+                    "Esta radio no tiene stream."
+                );
+
+                return;
+            }
+
+
+            document.getElementById(
+                "radioActual"
+            ).innerHTML = `
+
+        <strong>
+            📻 ${escaparHTML(
+                radio.name
+            )}
+        </strong>
+
+        <br>
+
+        ${escaparHTML(
+                radio.country || ""
+            )}
+
+    `;
+
+
+            reproductor.src =
+                url;
+
+
+            reproductor.play()
+                .then(
+                    function () {
+
+                        mostrarMensaje(
+                            "Reproduciendo radio."
+                        );
+
+                    }
+                )
+                .catch(
+                    function () {
+
+                        mostrarMensaje(
+                            "El navegador bloqueó la reproducción."
+                        );
+
+                    }
+                );
+        }
+
+
+
+        /* ================================================================
+           21. MAPA
+           ================================================================ */
+
+
+        /*
+            Guardamos la instancia del mapa aquí.
+        
+            Así podemos utilizarla desde otras funciones.
+        */
+
+        let mapa = null;
+
+        let marcadorValdivia = null;
+
+
+
+        function iniciarMapa() {
+
+            const elemento =
+                document.getElementById(
+                    "mapa"
+                );
+
+
+            if (!elemento) {
+
+                return;
+            }
+
+
+            /*
+                Creamos el mapa centrado en Valdivia.
+            */
+
+            mapa =
+                L.map("mapa")
+                    .setView(
+                        [-39.8142, -73.2459],
+                        13
+                    );
+
+
+            /*
+                Mapa base de OpenStreetMap.
+            */
+
+            L.tileLayer(
+
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+                {
+
+                    maxZoom: 19,
+
+                    attribution:
+                        "&copy; OpenStreetMap contributors"
+
+                }
+
+            ).addTo(mapa);
+
+
+            /*
+                Marcador de Valdivia.
+            */
+
+            marcadorValdivia =
+                L.marker(
+                    [-39.8142, -73.2459]
+                )
+                    .addTo(mapa)
+                    .bindPopup(
+                        "<b>Valdivia</b><br>El Taller del Cuervo"
+                    );
+        }
+
+
+
+        function irAValdivia() {
+
+            if (!mapa) {
+
+                return;
+            }
+
+
+            mapa.setView(
+                [-39.8142, -73.2459],
+                13
+            );
+
+
+            marcadorValdivia.openPopup();
+        }
+
+
+
+        function zoomMapa(cantidad) {
+
+            if (!mapa) {
+
+                return;
+            }
+
+
+            if (cantidad > 0) {
+
+                mapa.zoomIn();
+
+            } else {
+
+                mapa.zoomOut();
+
+            }
+        }
+
+
+
+        function miUbicacion() {
+
+            if (!navigator.geolocation) {
+
+                mostrarMensaje(
+                    "Tu navegador no permite geolocalización."
+                );
+
+                return;
+            }
+
+
+            mostrarMensaje(
+                "Buscando ubicación..."
+            );
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                function (posicion) {
+
+
+                    const lat =
+                        posicion.coords.latitude;
+
+
+                    const lon =
+                        posicion.coords.longitude;
+
+
+                    mapa.setView(
+                        [lat, lon],
+                        16
+                    );
+
+
+                    L.marker(
+                        [lat, lon]
+                    )
+                        .addTo(mapa)
+                        .bindPopup(
+                            "<b>Tu ubicación</b>"
+                        )
+                        .openPopup();
+
+
+                    mostrarMensaje(
+                        "Ubicación encontrada."
+                    );
+
+                },
+
+
+                function () {
+
+                    mostrarMensaje(
+                        "No pudimos obtener tu ubicación."
+                    );
+
+                }
+
+            );
+        }
+
+
+
+        /* ================================================================
+           22. CALCULADORA
+           ================================================================ */
+
+
+        function calcular() {
+
+            const campo =
+                document.getElementById(
+                    "calculadoraInput"
+                );
+
+
+            const resultado =
+                document.getElementById(
+                    "resultadoCalculadora"
+                );
+
+
+            if (!campo || !resultado) {
+
+                return;
+            }
+
+
+            try {
+
+                /*
+                    Esta función es sencilla para el prototipo.
+        
+                    Más adelante podemos reemplazarla por
+                    una calculadora propia más segura y completa.
+                */
+
+                resultado.textContent =
+                    Function(
+                        "return " +
+                        campo.value
+                    )();
+
+            }
+
+            catch {
+
+                resultado.textContent =
+                    "Error";
+            }
+        }
+
+
+
+
+
+        /* ================================================================
+           24. INICIALIZAR MÓDULOS
+           ================================================================ */
+
+
+        function inicializarModulos() {
+
+            inicializarHerramientasNuevas();
+
+            /*
+                NOTAS
+            */
+
+            cargarNotas();
+
+
+            /*
+                MAPA
+        
+                Si existe el módulo,
+                creamos el mapa.
+            */
+
+            if (
+                document.getElementById("mapa")
+            ) {
+
+                iniciarMapa();
+            }
+
+
+            /*
+                BUSCADOR DE RADIO
+            */
+
+            const buscador =
+                document.getElementById(
+                    "busquedaRadio"
+                );
+
+
+            if (buscador) {
+
+                buscador.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        if (
+                            event.key === "Enter"
+                        ) {
+
+                            ejecutarBusquedaRadio();
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            /*
+                CARGAMOS RADIOS DE VALDIVIA
+                AL INICIAR EL TALLER.
+            */
+
+            if (
+                document.getElementById(
+                    "resultadosRadio"
+                )
+            ) {
+
+                buscarRadio(
+                    "Valdivia Chile"
+                );
+            }
+        }
+
+        /* ================================================================
+           FINANZAS
+           ================================================================ */
+
+        const CLAVE_FINANZAS =
+            "taller_cuervo_finanzas";
+
+
+        function obtenerFinanzas() {
+
+            try {
+
+                return JSON.parse(
+                    localStorage.getItem(CLAVE_FINANZAS)
+                ) || [];
+
+            } catch {
+
+                return [];
+            }
+        }
+
+
+        function guardarFinanzasDatos(datos) {
+
+            localStorage.setItem(
+                CLAVE_FINANZAS,
+                JSON.stringify(datos)
+            );
+        }
+
+
+        function agregarMovimiento() {
+
+            const tipo =
+                document.getElementById("tipoFinanza")?.value;
+
+            const concepto =
+                document.getElementById("conceptoFinanza")?.value.trim();
+
+            const monto =
+                Number(
+                    document.getElementById("montoFinanza")?.value
+                );
+
+
+            if (!concepto || !monto || monto <= 0) {
+
+                mostrarMensaje(
+                    "Introduce concepto y monto."
+                );
+
+                return;
+            }
+
+
+            const movimientos =
+                obtenerFinanzas();
+
+
+            movimientos.push({
+
+                id: Date.now(),
+
+                tipo: tipo,
+
+                concepto: concepto,
+
+                monto: monto,
+
+                fecha:
+                    new Date().toLocaleDateString("es-CL")
+
+            });
+
+
+            guardarFinanzasDatos(
+                movimientos
+            );
+
+
+            document.getElementById(
+                "conceptoFinanza"
+            ).value = "";
+
+
+            document.getElementById(
+                "montoFinanza"
+            ).value = "";
+
+
+            actualizarFinanzas();
+
+
+            mostrarMensaje(
+                "Movimiento agregado."
+            );
+        }
+
+
+        function actualizarFinanzas() {
+
+            const lista =
+                document.getElementById("listaFinanzas");
+
+
+            if (!lista) return;
+
+
+            const movimientos =
+                obtenerFinanzas();
+
+
+            let ingresos = 0;
+
+            let gastos = 0;
+
+
+            movimientos.forEach(m => {
+
+                if (m.tipo === "ingreso") {
+
+                    ingresos += Number(m.monto);
+
+                } else {
+
+                    gastos += Number(m.monto);
+
+                }
+
+            });
+
+
+            const saldo =
+                ingresos - gastos;
+
+
+            document.getElementById(
+                "ingresosFinanzas"
+            ).textContent =
+                formatoPesos(ingresos);
+
+
+            document.getElementById(
+                "gastosFinanzas"
+            ).textContent =
+                formatoPesos(gastos);
+
+
+            document.getElementById(
+                "saldoFinanzas"
+            ).textContent =
+                formatoPesos(saldo);
+
+
+            lista.innerHTML = "";
+
+
+            movimientos
+                .slice()
+                .reverse()
+                .forEach(m => {
+
+                    const item =
+                        document.createElement("div");
+
+
+                    item.className =
+                        "radio-item";
+
+
+                    const signo =
+                        m.tipo === "ingreso"
+                            ? "+"
+                            : "-";
+
+
+                    item.innerHTML = `
+
+                <div class="radio-info">
+
+                    <div class="radio-nombre">
+
+                        ${signo}
+                        ${escaparHTML(m.concepto)}
+
+                    </div>
+
+                    <div class="radio-meta">
+
+                        ${m.fecha}
+
+                    </div>
+
+                </div>
+
+                <strong>
+
+                    ${formatoPesos(m.monto)}
+
+                </strong>
+
+                <button
+                    class="peligro"
+                    onclick="eliminarMovimiento(${m.id})">
+
+                    🗑️
+
+                </button>
+
+            `;
+
+
+                    lista.appendChild(item);
+
+                });
+        }
+
+
+        function eliminarMovimiento(id) {
+
+            const movimientos =
+                obtenerFinanzas()
+                    .filter(m => m.id !== id);
+
+
+            guardarFinanzasDatos(
+                movimientos
+            );
+
+
+            actualizarFinanzas();
+        }
+
+
+        function borrarFinanzas() {
+
+            if (
+                !confirm(
+                    "¿Borrar todos los movimientos financieros?"
+                )
+            ) return;
+
+
+            localStorage.removeItem(
+                CLAVE_FINANZAS
+            );
+
+
+            actualizarFinanzas();
+
+
+            mostrarMensaje(
+                "Finanzas borradas."
+            );
+        }
+
+
+        function formatoPesos(numero) {
+
+            return "$" +
+                Number(numero).toLocaleString(
+                    "es-CL"
+                );
+        }
+
+
+
+        /* ================================================================
+           INVENTARIO
+           ================================================================ */
+
+        const CLAVE_INVENTARIO =
+            "taller_cuervo_inventario";
+
+
+        function obtenerInventario() {
+
+            try {
+
+                return JSON.parse(
+                    localStorage.getItem(CLAVE_INVENTARIO)
+                ) || [];
+
+            } catch {
+
+                return [];
+            }
+        }
+
+
+        function guardarInventario(datos) {
+
+            localStorage.setItem(
+                CLAVE_INVENTARIO,
+                JSON.stringify(datos)
+            );
+        }
+
+
+        function agregarInventario() {
+
+            const nombre =
+                document.getElementById(
+                    "inventarioNombre"
+                )?.value.trim();
+
+
+            const cantidad =
+                Number(
+                    document.getElementById(
+                        "inventarioCantidad"
+                    )?.value
+                );
+
+
+            const categoria =
+                document.getElementById(
+                    "inventarioCategoria"
+                )?.value.trim();
+
+
+            if (!nombre) {
+
+                mostrarMensaje(
+                    "Escribe el nombre del objeto."
+                );
+
+                return;
+            }
+
+
+            const inventario =
+                obtenerInventario();
+
+
+            inventario.push({
+
+                id: Date.now(),
+
+                nombre: nombre,
+
+                cantidad:
+                    cantidad > 0 ? cantidad : 1,
+
+                categoria:
+                    categoria || "Sin categoría"
+
+            });
+
+
+            guardarInventario(
+                inventario
+            );
+
+
+            document.getElementById(
+                "inventarioNombre"
+            ).value = "";
+
+
+            document.getElementById(
+                "inventarioCantidad"
+            ).value = 1;
+
+
+            document.getElementById(
+                "inventarioCategoria"
+            ).value = "";
+
+
+            actualizarInventario();
+
+
+            mostrarMensaje(
+                "Objeto agregado al inventario."
+            );
+        }
+
+
+        function actualizarInventario() {
+
+            const lista =
+                document.getElementById(
+                    "listaInventario"
+                );
+
+
+            if (!lista) return;
+
+
+            const inventario =
+                obtenerInventario();
+
+
+            lista.innerHTML = "";
+
+
+            inventario.forEach(item => {
+
+                const elemento =
+                    document.createElement("div");
+
+
+                elemento.className =
+                    "radio-item";
+
+
+                elemento.innerHTML = `
+
+            <div class="radio-info">
+
+                <div class="radio-nombre">
+
+                    📦 ${escaparHTML(item.nombre)}
+
+                </div>
+
+                <div class="radio-meta">
+
+                    ${escaparHTML(item.categoria)}
+
+                    · Cantidad: ${item.cantidad}
+
+                </div>
+
+            </div>
+
+            <button
+                class="secundario"
+                onclick="cambiarCantidadInventario(${item.id},1)">
+                +
+            </button>
+
+            <button
+                class="secundario"
+                onclick="cambiarCantidadInventario(${item.id},-1)">
+                −
+            </button>
+
+            <button
+                class="peligro"
+                onclick="eliminarInventario(${item.id})">
+                🗑️
+            </button>
+
+        `;
+
+
+                lista.appendChild(
+                    elemento
+                );
+
+            });
+        }
+
+
+        function cambiarCantidadInventario(
+            id,
+            cambio
+        ) {
+
+            const inventario =
+                obtenerInventario();
+
+
+            const item =
+                inventario.find(
+                    i => i.id === id
+                );
+
+
+            if (!item) return;
+
+
+            item.cantidad += cambio;
+
+
+            if (item.cantidad < 0) {
+
+                item.cantidad = 0;
+
+            }
+
+
+            guardarInventario(
+                inventario
+            );
+
+
+            actualizarInventario();
+        }
+
+
+        function eliminarInventario(id) {
+
+            const inventario =
+                obtenerInventario()
+                    .filter(i => i.id !== id);
+
+
+            guardarInventario(
+                inventario
+            );
+
+
+            actualizarInventario();
+        }
+
+
+
+        /* ================================================================
+           PROYECTOS
+           ================================================================ */
+
+        const CLAVE_PROYECTOS =
+            "taller_cuervo_proyectos";
+
+
+        function obtenerProyectos() {
+
+            try {
+
+                return JSON.parse(
+                    localStorage.getItem(CLAVE_PROYECTOS)
+                ) || [];
+
+            } catch {
+
+                return [];
+            }
+        }
+
+
+        function guardarProyectos(datos) {
+
+            localStorage.setItem(
+                CLAVE_PROYECTOS,
+                JSON.stringify(datos)
+            );
+        }
+
+
+        function agregarProyecto() {
+
+            const nombre =
+                document.getElementById(
+                    "proyectoNombre"
+                )?.value.trim();
+
+
+            const descripcion =
+                document.getElementById(
+                    "proyectoDescripcion"
+                )?.value.trim();
+
+
+            const estado =
+                document.getElementById(
+                    "proyectoEstado"
+                )?.value;
+
+
+            if (!nombre) {
+
+                mostrarMensaje(
+                    "Escribe un nombre para el proyecto."
+                );
+
+                return;
+            }
+
+
+            const proyectos =
+                obtenerProyectos();
+
+
+            proyectos.push({
+
+                id: Date.now(),
+
+                nombre: nombre,
+
+                descripcion:
+                    descripcion || "",
+
+                estado:
+                    estado || "Idea",
+
+                fecha:
+                    new Date().toLocaleDateString("es-CL")
+
+            });
+
+
+            guardarProyectos(
+                proyectos
+            );
+
+
+            document.getElementById(
+                "proyectoNombre"
+            ).value = "";
+
+
+            document.getElementById(
+                "proyectoDescripcion"
+            ).value = "";
+
+
+            actualizarProyectos();
+
+
+            mostrarMensaje(
+                "Proyecto creado."
+            );
+        }
+
+
+        function actualizarProyectos() {
+
+            const lista =
+                document.getElementById(
+                    "listaProyectos"
+                );
+
+
+            if (!lista) return;
+
+
+            const proyectos =
+                obtenerProyectos();
+
+
+            lista.innerHTML = "";
+
+
+            proyectos.forEach(proyecto => {
+
+                const elemento =
+                    document.createElement("div");
+
+
+                elemento.className =
+                    "radio-item";
+
+
+                elemento.style.display =
+                    "block";
+
+
+                elemento.innerHTML = `
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                gap:10px;">
+
+                <strong>
+
+                    🎮
+                    ${escaparHTML(proyecto.nombre)}
+
+                </strong>
+
+                <button
+                    class="peligro"
+                    onclick="eliminarProyecto(${proyecto.id})">
+
+                    🗑️
+
+                </button>
+
+            </div>
+
+            <div class="radio-meta"
+                 style="margin-top:8px;">
+
+                Estado:
+                ${escaparHTML(proyecto.estado)}
+
+            </div>
+
+            <div style="
+                margin-top:8px;
+                color:var(--texto-suave);">
+
+                ${escaparHTML(
+                    proyecto.descripcion
+                )}
+
+            </div>
+
+        `;
+
+
+                lista.appendChild(
+                    elemento
+                );
+
+            });
+        }
+
+
+        function eliminarProyecto(id) {
+
+            const proyectos =
+                obtenerProyectos()
+                    .filter(
+                        p => p.id !== id
+                    );
+
+
+            guardarProyectos(
+                proyectos
+            );
+
+
+            actualizarProyectos();
+        }
+
+
+
+        /* ================================================================
+           ESCRITORIO
+           ================================================================ */
+
+        const CLAVE_ESCRITORIO =
+            "taller_cuervo_escritorio";
+
+
+        function cargarEscritorio() {
+
+            const titulo =
+                document.getElementById(
+                    "tituloEscritorio"
+                );
+
+
+            const texto =
+                document.getElementById(
+                    "textoEscritorio"
+                );
+
+
+            if (!titulo || !texto) return;
+
+
+            try {
+
+                const datos =
+                    JSON.parse(
+                        localStorage.getItem(
+                            CLAVE_ESCRITORIO
+                        )
+                    );
+
+
+                if (!datos) return;
+
+
+                titulo.value =
+                    datos.titulo || "";
+
+
+                texto.value =
+                    datos.texto || "";
+
+            } catch {
+
+                return;
+            }
+        }
+
+
+        function guardarEscritorio() {
+
+            const titulo =
+                document.getElementById(
+                    "tituloEscritorio"
+                )?.value || "";
+
+
+            const texto =
+                document.getElementById(
+                    "textoEscritorio"
+                )?.value || "";
+
+
+            localStorage.setItem(
+
+                CLAVE_ESCRITORIO,
+
+                JSON.stringify({
+
+                    titulo: titulo,
+
+                    texto: texto
+
+                })
+
+            );
+
+
+            mostrarMensaje(
+                "Escritorio guardado."
+            );
+        }
+
+
+        function nuevoEscritorio() {
+
+            if (
+                !confirm(
+                    "¿Crear un documento nuevo?"
+                )
+            ) return;
+
+
+            const titulo =
+                document.getElementById(
+                    "tituloEscritorio"
+                );
+
+
+            const texto =
+                document.getElementById(
+                    "textoEscritorio"
+                );
+
+
+            if (titulo) titulo.value = "";
+
+            if (texto) texto.value = "";
+
+
+            localStorage.removeItem(
+                CLAVE_ESCRITORIO
+            );
+        }
+
+
+
+        /* ================================================================
+           METRÓNOMO
+           ================================================================ */
+
+        let intervaloMetronomo = null;
+
+        let audioMetronomo = null;
+
+
+        function iniciarMetronomo() {
+
+            detenerMetronomo();
+
+
+            const campo =
+                document.getElementById(
+                    "bpmMetronomo"
+                );
+
+
+            if (!campo) return;
+
+
+            let bpm =
+                Number(campo.value);
+
+
+            if (
+                bpm < 30 ||
+                bpm > 240
+            ) {
+
+                mostrarMensaje(
+                    "El BPM debe estar entre 30 y 240."
+                );
+
+                return;
+            }
+
+
+            const intervalo =
+                60000 / bpm;
+
+
+            audioMetronomo =
+                new (
+                    window.AudioContext ||
+                    window.webkitAudioContext
+                )();
+
+
+            function pulso() {
+
+                const oscilador =
+                    audioMetronomo.createOscillator();
+
+
+                const ganancia =
+                    audioMetronomo.createGain();
+
+
+                oscilador.frequency.value =
+                    1000;
+
+
+                ganancia.gain.setValueAtTime(
+                    0.25,
+                    audioMetronomo.currentTime
+                );
+
+
+                ganancia.gain.exponentialRampToValueAtTime(
+                    0.001,
+                    audioMetronomo.currentTime + 0.08
+                );
+
+
+                oscilador.connect(
+                    ganancia
+                );
+
+
+                ganancia.connect(
+                    audioMetronomo.destination
+                );
+
+
+                oscilador.start();
+
+                oscilador.stop(
+                    audioMetronomo.currentTime + 0.08
+                );
+
+
+                const pantalla =
+                    document.getElementById(
+                        "metronomoPulso"
+                    );
+
+
+                if (pantalla) {
+
+                    pantalla.textContent =
+                        "● Pulso · " + bpm + " BPM";
+
+                }
+
+            }
+
+
+            pulso();
+
+
+            intervaloMetronomo =
+                setInterval(
+                    pulso,
+                    intervalo
+                );
+
+
+            mostrarMensaje(
+                "Metrónomo iniciado."
+            );
+        }
+
+
+        function detenerMetronomo() {
+
+            if (intervaloMetronomo) {
+
+                clearInterval(
+                    intervaloMetronomo
+                );
+
+                intervaloMetronomo =
+                    null;
+            }
+
+
+            if (audioMetronomo) {
+
+                audioMetronomo.close();
+
+                audioMetronomo =
+                    null;
+            }
+
+
+            const pantalla =
+                document.getElementById(
+                    "metronomoPulso"
+                );
+
+
+            if (pantalla) {
+
+                pantalla.textContent =
+                    "Detenido";
+            }
+        }
+
+
+
+        /* ================================================================
+           TEMPORIZADOR
+           ================================================================ */
+
+        let temporizador = null;
+
+
+        function iniciarTemporizador() {
+
+            detenerTemporizador();
+
+
+            const campo =
+                document.getElementById(
+                    "segundosTemporizador"
+                );
+
+
+            const pantalla =
+                document.getElementById(
+                    "temporizadorResultado"
+                );
+
+
+            if (!campo || !pantalla) return;
+
+
+            let segundos =
+                Number(campo.value);
+
+
+            if (
+                !Number.isFinite(segundos) ||
+                segundos <= 0
+            ) {
+
+                mostrarMensaje(
+                    "Introduce una cantidad válida de segundos."
+                );
+
+                return;
+            }
+
+
+            function actualizar() {
+
+                const minutos =
+                    Math.floor(
+                        segundos / 60
+                    );
+
+
+                const resto =
+                    segundos % 60;
+
+
+                pantalla.textContent =
+                    String(minutos)
+                        .padStart(2, "0")
+                    + ":" +
+                    String(resto)
+                        .padStart(2, "0");
+
+            }
+
+
+            actualizar();
+
+
+            temporizador =
+                setInterval(
+                    function () {
+
+                        segundos--;
+
+
+                        if (segundos < 0) {
+
+                            detenerTemporizador();
+
+                            pantalla.textContent =
+                                "00:00";
+
+
+                            mostrarMensaje(
+                                "⏱️ Tiempo terminado."
+                            );
+
+                            return;
+                        }
+
+
+                        actualizar();
+
+                    },
+                    1000
+                );
+        }
+
+
+        function detenerTemporizador() {
+
+            if (temporizador) {
+
+                clearInterval(
+                    temporizador
+                );
+
+                temporizador = null;
+            }
+        }
+
+
+
+        /* ================================================================
+           CALCULADORA SEGURA
+           ================================================================ */
+
+        function calcular() {
+
+            const campo =
+                document.getElementById(
+                    "calculadoraInput"
+                );
+
+
+            const resultado =
+                document.getElementById(
+                    "resultadoCalculadora"
+                );
+
+
+            if (!campo || !resultado) return;
+
+
+            const expresion =
+                campo.value.trim();
+
+
+            /*
+                Permitimos solamente:
+        
+                números
+                decimales
+                + - * / %
+                paréntesis
+            */
+
+            if (
+                !/^[0-9+\-*/%().\s]+$/.test(
+                    expresion
+                )
+            ) {
+
+                resultado.textContent =
+                    "Expresión no válida.";
+
+                return;
+            }
+
+
+            try {
+
+                const valor =
+                    Function(
+                        '"use strict"; return (' +
+                        expresion +
+                        ')'
+                    )();
+
+
+                if (
+                    typeof valor !== "number" ||
+                    !Number.isFinite(valor)
+                ) {
+
+                    throw new Error();
+
+                }
+
+
+                resultado.textContent =
+                    valor.toLocaleString(
+                        "es-CL"
+                    );
+
+            }
+
+            catch {
+
+                resultado.textContent =
+                    "Error";
+
+            }
+        }
+
+
+
+        /* ================================================================
+           AFINADOR
+           ================================================================ */
+
+        let audioAfinador = null;
+
+        let afinadorActivo = false;
+
+
+        const NOTAS_AFINADOR = [
+            "C",
+            "C#",
+            "D",
+            "D#",
+            "E",
+            "F",
+            "F#",
+            "G",
+            "G#",
+            "A",
+            "A#",
+            "B"
+        ];
+
+
+        async function iniciarAfinador() {
+
+            if (afinadorActivo) return;
+
+
+            try {
+
+                const stream =
+                    await navigator.mediaDevices
+                        .getUserMedia({
+                            audio: true
+                        });
+
+
+                audioAfinador =
+                    new (
+                        window.AudioContext ||
+                        window.webkitAudioContext
+                    )();
+
+
+                const entrada =
+                    audioAfinador
+                        .createMediaStreamSource(
+                            stream
+                        );
+
+
+                const analizador =
+                    audioAfinador
+                        .createAnalyser();
+
+
+                analizador.fftSize =
+                    2048;
+
+
+                entrada.connect(
+                    analizador
+                );
+
+
+                afinadorActivo = true;
+
+
+                analizarAfinador(
+                    analizador
+                );
+
+
+                mostrarMensaje(
+                    "Afinador activado."
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                mostrarMensaje(
+                    "No se pudo acceder al micrófono."
+                );
+            }
+        }
+
+
+        function analizarAfinador(
+            analizador
+        ) {
+
+            if (!afinadorActivo) return;
+
+
+            const buffer =
+                new Float32Array(
+                    analizador.fftSize
+                );
+
+
+            analizador.getFloatTimeDomainData(
+                buffer
+            );
+
+
+            const frecuencia =
+                detectarFrecuencia(
+                    buffer,
+                    audioAfinador.sampleRate
+                );
+
+
+            if (frecuencia) {
+
+                const numeroNota =
+                    Math.round(
+                        12 *
+                        Math.log2(
+                            frecuencia / 440
+                        ) +
+                        69
+                    );
+
+
+                const indice =
+                    numeroNota % 12;
+
+
+                const octava =
+                    Math.floor(
+                        numeroNota / 12
+                    ) - 1;
+
+
+                const nota =
+                    NOTAS_AFINADOR[
+                    (indice + 12) % 12
+                    ];
+
+
+                const frecuenciaCorrecta =
+                    440 *
+                    Math.pow(
+                        2,
+                        (numeroNota - 69) / 12
+                    );
+
+
+                const diferencia =
+                    frecuencia -
+                    frecuenciaCorrecta;
+
+
+                const notaElemento =
+                    document.getElementById(
+                        "afinadorNota"
+                    );
+
+
+                const frecuenciaElemento =
+                    document.getElementById(
+                        "afinadorFrecuencia"
+                    );
+
+
+                const indicador =
+                    document.getElementById(
+                        "afinadorIndicador"
+                    );
+
+
+                if (notaElemento) {
+
+                    notaElemento.textContent =
+                        nota + octava;
+
+                }
+
+
+                if (frecuenciaElemento) {
+
+                    frecuenciaElemento.textContent =
+                        "Frecuencia: " +
+                        frecuencia.toFixed(1) +
+                        " Hz";
+
+                }
+
+
+                if (indicador) {
+
+                    if (
+                        Math.abs(diferencia) < 2
+                    ) {
+
+                        indicador.textContent =
+                            "✓ Afinado";
+
+                    } else if (
+                        diferencia < 0
+                    ) {
+
+                        indicador.textContent =
+                            "♭ Sube la afinación";
+
+                    } else {
+
+                        indicador.textContent =
+                            "♯ Baja la afinación";
+
+                    }
+
+                }
+
+            }
+
+
+            requestAnimationFrame(
+                () => analizarAfinador(analizador)
+            );
+        }
+
+
+        function detectarFrecuencia(
+            buffer,
+            sampleRate
+        ) {
+
+            let mejorIndice = -1;
+
+            let mejorValor = 0;
+
+
+            for (
+                let i = 0;
+                i < buffer.length;
+                i++
+            ) {
+
+                const valor =
+                    Math.abs(buffer[i]);
+
+
+                if (
+                    valor > mejorValor
+                ) {
+
+                    mejorValor =
+                        valor;
+
+                    mejorIndice =
+                        i;
+
+                }
+
+            }
+
+
+            if (
+                mejorValor < 0.01 ||
+                mejorIndice <= 0
+            ) {
+
+                return null;
+            }
+
+
+            return (
+                mejorIndice *
+                sampleRate /
+                buffer.length
+            );
+        }
+
+
+        function detenerAfinador() {
+
+            afinadorActivo = false;
+
+
+            if (audioAfinador) {
+
+                audioAfinador.close();
+
+                audioAfinador =
+                    null;
+            }
+
+
+            mostrarMensaje(
+                "Afinador detenido."
+            );
+        }
+
+
+
+        /* ================================================================
+           INICIALIZACIÓN DE LAS NUEVAS HERRAMIENTAS
+           ================================================================ */
+
+        function inicializarHerramientasNuevas() {
+
+            actualizarFinanzas();
+
+            actualizarInventario();
+
+            actualizarProyectos();
+
+            cargarEscritorio();
+
+        }
+
+
+        /* ================================================================
+           ACTUALIZAR TU FUNCIÓN inicializarModulos()
+           ================================================================ */
+
+
+        /* ================================================================
+           25. INICIAR TODO
+           ================================================================ */
+
+
+        /*
+            Dibujamos el Taller por primera vez.
+        */
+
+        dibujarModulos();
+
+
+        /*
+            Dibujamos el panel de configuración.
+        */
+
+        dibujarConfiguracion();
+
+
+
+        /* ================================================================
+           FIN DEL SISTEMA
+           ================================================================ */
+
+    </script>
+
 </body>
+
 </html>
+
+
+
+
 <!--  
         <h1><a href="chess.html">Ajedrez 1</a></h1>
         <h1><a href="Untitled-5.html">Planeta 0</a></h1>
