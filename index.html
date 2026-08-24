@@ -3,11 +3,7 @@
 
 <head>
 
-    <!-- ============================================================ 
-    
-    1100
-
-    
+    <!-- ============================================================ 1060
          EL TALLER DEL CUERVO
          VERSIÓN 3.0
 
@@ -1062,6 +1058,8 @@
         </div>
 
     </div>
+
+    
 <h1 class="divE">Juegos</h1>
 <div class="divA">
     <div class="divE">
@@ -1091,6 +1089,7 @@
         $$\text{ܐܲܠܵܗܵܐ ܢܒܲܪܸܟ݂ ܠܥܵܒܹ̈ܐ ܕܥܵܠܡܵܐ ܘܠܓܵܙܔܹ̈ܐ ܕܝܵܡܵܐ}$$
     </div>
 </div>
+
 
     <!-- ============================================================
      LEAFLET
@@ -1720,9 +1719,24 @@
 
                 </div>
 
-                <div id="resultadosRadio"
-                     class="resultados-radio">
-                </div>
+                <h3 style="margin:18px 0 8px;">
+    ⭐ Radios favoritas
+</h3>
+
+<div id="favoritosRadio"
+     class="resultados-radio">
+
+</div>
+
+
+<h3 style="margin:18px 0 8px;">
+    🔎 Resultados
+</h3>
+
+<div id="resultadosRadio"
+     class="resultados-radio">
+
+</div>
 
             `;
 
@@ -2711,38 +2725,345 @@
         }
 
 
-
         /* ================================================================
-           20. RADIO
+           20. RADIO DEL CUERVO
+           ================================================================
+        
+           FUNCIONES:
+        
+           ✓ Detecta ubicación del navegador
+           ✓ Busca radios cercanas
+           ✓ Busca radios por nombre
+           ✓ Busca radios por país
+           ✓ Radios favoritas
+           ✓ Favoritas guardadas en localStorage
+           ✓ Reproducción de radios
+           ✓ Agregar / quitar favoritas
+           ✓ Favoritas aparecen al iniciar
+           ✓ Compatible con el sistema modular
+        
            ================================================================ */
 
+
+        /* ================================================================
+           API
+           ================================================================ */
 
         const RADIO_API =
             "https://de1.api.radio-browser.info/json/stations";
 
 
+        /* ================================================================
+           CLAVE DE FAVORITAS
+           ================================================================ */
+
+        const CLAVE_RADIOS_FAVORITAS =
+            "taller_cuervo_radios_favoritas";
+
+
+        /* ================================================================
+           VARIABLES
+           ================================================================ */
+
+        let radiosFavoritas =
+            cargarRadiosFavoritas();
+
+
+        let ubicacionUsuario =
+            null;
+
+
+
+        /* ================================================================
+           CARGAR FAVORITAS
+           ================================================================ */
+
+        function cargarRadiosFavoritas() {
+
+            const guardado =
+                localStorage.getItem(
+                    CLAVE_RADIOS_FAVORITAS
+                );
+
+
+            if (!guardado) {
+
+                return [];
+
+            }
+
+
+            try {
+
+                const datos =
+                    JSON.parse(guardado);
+
+
+                if (
+                    Array.isArray(datos)
+                ) {
+
+                    return datos;
+
+                }
+
+
+                return [];
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Error cargando radios favoritas:",
+                    error
+                );
+
+                return [];
+
+            }
+
+        }
+
+
+
+        /* ================================================================
+           GUARDAR FAVORITAS
+           ================================================================ */
+
+        function guardarRadiosFavoritas() {
+
+            localStorage.setItem(
+
+                CLAVE_RADIOS_FAVORITAS,
+
+                JSON.stringify(
+                    radiosFavoritas
+                )
+
+            );
+
+        }
+
+
+
+        /* ================================================================
+           COMPROBAR FAVORITA
+           ================================================================ */
+
+        function esRadioFavorita(radio) {
+
+            if (!radio) {
+
+                return false;
+
+            }
+
+
+            const identificador =
+
+                radio.stationuuid ||
+
+                radio.url_resolved ||
+
+                radio.url;
+
+
+            if (!identificador) {
+
+                return false;
+
+            }
+
+
+            return radiosFavoritas.some(
+
+                favorita => (
+
+                    favorita.stationuuid ||
+
+                    favorita.url_resolved ||
+
+                    favorita.url
+
+                ) === identificador
+
+            );
+
+        }
+
+
+
+        /* ================================================================
+           AGREGAR / QUITAR FAVORITA
+           ================================================================ */
+
+        function cambiarFavorita(radio) {
+
+            if (!radio) {
+
+                return;
+
+            }
+
+
+            const identificador =
+
+                radio.stationuuid ||
+
+                radio.url_resolved ||
+
+                radio.url;
+
+
+            if (!identificador) {
+
+                mostrarMensaje(
+                    "No se pudo identificar esta radio."
+                );
+
+                return;
+
+            }
+
+
+            const posicion =
+
+                radiosFavoritas.findIndex(
+
+                    favorita => (
+
+                        favorita.stationuuid ||
+
+                        favorita.url_resolved ||
+
+                        favorita.url
+
+                    ) === identificador
+
+                );
+
+
+            /* ============================================================
+               QUITAR
+               ============================================================ */
+
+            if (posicion !== -1) {
+
+                radiosFavoritas.splice(
+                    posicion,
+                    1
+                );
+
+
+                guardarRadiosFavoritas();
+
+                dibujarRadiosFavoritas();
+
+                mostrarMensaje(
+                    "Radio eliminada de favoritas."
+                );
+
+                return;
+
+            }
+
+
+            /* ============================================================
+               AGREGAR
+               ============================================================ */
+
+            radiosFavoritas.push({
+
+                stationuuid:
+                    radio.stationuuid || "",
+
+                name:
+                    radio.name || "Radio",
+
+                country:
+                    radio.country || "",
+
+                language:
+                    radio.language || "",
+
+                favicon:
+                    radio.favicon || "",
+
+                url:
+                    radio.url || "",
+
+                url_resolved:
+                    radio.url_resolved || "",
+
+                homepage:
+                    radio.homepage || "",
+
+                tags:
+                    radio.tags || ""
+
+            });
+
+
+            guardarRadiosFavoritas();
+
+            dibujarRadiosFavoritas();
+
+
+            mostrarMensaje(
+                "⭐ Radio agregada a favoritas."
+            );
+
+        }
+
+
+
+        /* ================================================================
+           BUSCAR RADIO POR NOMBRE
+           ================================================================ */
+
         async function buscarRadio(nombre) {
 
             mostrarMensaje(
-                "Buscando " + nombre + "..."
+                "Buscando " +
+                nombre +
+                "..."
             );
 
 
             const url =
-                RADIO_API
-                + "/search"
-                + "?name="
-                + encodeURIComponent(nombre)
-                + "&limit=20"
-                + "&hidebroken=true"
-                + "&order=votes"
-                + "&reverse=true";
+
+                RADIO_API +
+
+                "/search" +
+
+                "?name=" +
+
+                encodeURIComponent(nombre) +
+
+                "&limit=30" +
+
+                "&hidebroken=true" +
+
+                "&order=votes" +
+
+                "&reverse=true";
 
 
             try {
 
                 const respuesta =
                     await fetch(url);
+
+
+                if (!respuesta.ok) {
+
+                    throw new Error(
+                        "Error HTTP " +
+                        respuesta.status
+                    );
+
+                }
 
 
                 const radios =
@@ -2753,41 +3074,68 @@
                     radios
                 );
 
+
             }
 
             catch (error) {
 
                 console.error(error);
+
 
                 mostrarMensaje(
                     "No se pudo realizar la búsqueda."
                 );
+
             }
+
         }
 
 
 
+        /* ================================================================
+           BUSCAR POR PAÍS
+           ================================================================ */
+
         async function buscarPais(pais) {
 
             mostrarMensaje(
-                "Buscando radios de " + pais + "..."
+                "Buscando radios de " +
+                pais +
+                "..."
             );
 
 
             const url =
-                RADIO_API
-                + "/bycountry/"
-                + encodeURIComponent(pais)
-                + "?limit=30"
-                + "&hidebroken=true"
-                + "&order=votes"
-                + "&reverse=true";
+
+                RADIO_API +
+
+                "/bycountry/" +
+
+                encodeURIComponent(pais) +
+
+                "?limit=30" +
+
+                "&hidebroken=true" +
+
+                "&order=votes" +
+
+                "&reverse=true";
 
 
             try {
 
                 const respuesta =
                     await fetch(url);
+
+
+                if (!respuesta.ok) {
+
+                    throw new Error(
+                        "Error HTTP " +
+                        respuesta.status
+                    );
+
+                }
 
 
                 const radios =
@@ -2798,19 +3146,222 @@
                     radios
                 );
 
+
             }
 
             catch (error) {
 
                 console.error(error);
 
+
                 mostrarMensaje(
                     "No se pudieron cargar las radios."
                 );
+
             }
+
         }
 
 
+
+        /* ================================================================
+           BUSCAR POR UBICACIÓN DEL NAVEGADOR
+           ================================================================ */
+
+        function buscarRadiosPorUbicacion() {
+
+            if (
+                !navigator.geolocation
+            ) {
+
+                mostrarMensaje(
+                    "Tu navegador no permite obtener ubicación."
+                );
+
+                buscarRadio(
+                    "Chile"
+                );
+
+                return;
+
+            }
+
+
+            mostrarMensaje(
+                "📍 Detectando tu ubicación..."
+            );
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                async function (posicion) {
+
+                    const lat =
+                        posicion.coords.latitude;
+
+
+                    const lon =
+                        posicion.coords.longitude;
+
+
+                    ubicacionUsuario = {
+
+                        lat: lat,
+
+                        lon: lon
+
+                    };
+
+
+                    /*
+                        Buscamos radios cerca de
+                        las coordenadas obtenidas.
+                    */
+
+                    await buscarRadiosCercanas(
+                        lat,
+                        lon
+                    );
+
+                },
+
+
+                function (error) {
+
+                    console.warn(
+                        "No se pudo obtener ubicación:",
+                        error
+                    );
+
+
+                    mostrarMensaje(
+                        "No se pudo obtener tu ubicación."
+                    );
+
+
+                    /*
+                        Como alternativa buscamos
+                        radios de Chile.
+                    */
+
+                    buscarRadio(
+                        "Chile"
+                    );
+
+                },
+
+
+                {
+
+                    enableHighAccuracy: false,
+
+                    timeout: 10000,
+
+                    maximumAge: 300000
+
+                }
+
+            );
+
+        }
+
+
+
+        /* ================================================================
+           BUSCAR RADIOS CERCANAS
+           ================================================================ */
+
+        async function buscarRadiosCercanas(
+            lat,
+            lon
+        ) {
+
+            mostrarMensaje(
+                "📻 Buscando radios cercanas..."
+            );
+
+
+            /*
+                Radio Browser permite buscar
+                estaciones por coordenadas.
+        
+                Usamos un radio aproximado
+                de 100 km.
+            */
+
+            const url =
+
+                RADIO_API +
+
+                "/search" +
+
+                "?lat=" +
+
+                encodeURIComponent(lat) +
+
+                "&lon=" +
+
+                encodeURIComponent(lon) +
+
+                "&limit=30" +
+
+                "&hidebroken=true" +
+
+                "&order=votes" +
+
+                "&reverse=true";
+
+
+            try {
+
+                const respuesta =
+                    await fetch(url);
+
+
+                if (!respuesta.ok) {
+
+                    throw new Error(
+                        "Error HTTP " +
+                        respuesta.status
+                    );
+
+                }
+
+
+                const radios =
+                    await respuesta.json();
+
+
+                mostrarResultadosRadio(
+                    radios
+                );
+
+
+                mostrarMensaje(
+                    "📍 Radios cercanas cargadas."
+                );
+
+            }
+
+
+            catch (error) {
+
+                console.error(error);
+
+
+                mostrarMensaje(
+                    "No se pudieron cargar radios cercanas."
+                );
+
+            }
+
+        }
+
+
+
+        /* ================================================================
+           BUSCADOR
+           ================================================================ */
 
         function ejecutarBusquedaRadio() {
 
@@ -2823,6 +3374,7 @@
             if (!campo) {
 
                 return;
+
             }
 
 
@@ -2837,15 +3389,25 @@
                 );
 
                 return;
+
             }
 
 
-            buscarRadio(texto);
+            buscarRadio(
+                texto
+            );
+
         }
 
 
 
-        function mostrarResultadosRadio(radios) {
+        /* ================================================================
+           MOSTRAR RESULTADOS
+           ================================================================ */
+
+        function mostrarResultadosRadio(
+            radios
+        ) {
 
             const contenedor =
                 document.getElementById(
@@ -2856,6 +3418,7 @@
             if (!contenedor) {
 
                 return;
+
             }
 
 
@@ -2867,69 +3430,43 @@
                 radios.length === 0
             ) {
 
-                contenedor.innerHTML =
-                    "<div class='radio-item'>No encontramos emisoras.</div>";
+                contenedor.innerHTML = `
 
-                return;
-            }
-
-
-            radios.forEach(
-                function (radio) {
-
-
-                    const elemento =
-                        document.createElement("div");
-
-
-                    elemento.className =
-                        "radio-item";
-
-
-                    elemento.innerHTML = `
+            <div class="radio-item">
 
                 <div class="radio-info">
 
                     <div class="radio-nombre">
 
-                        ${escaparHTML(
-                        radio.name ||
-                        "Radio"
-                    )}
+                        No encontramos emisoras.
 
                     </div>
 
                     <div class="radio-meta">
 
-                        ${escaparHTML(
-                        radio.country ||
-                        ""
-                    )}
+                        Intenta otra búsqueda.
 
                     </div>
 
                 </div>
 
+            </div>
 
-                <button>
+        `;
 
-                    ▶
+                return;
 
-                </button>
-
-            `;
+            }
 
 
-                    elemento
-                        .querySelector("button")
-                        .onclick =
-                        function () {
+            radios.forEach(
 
-                            reproducirEmisora(
-                                radio
-                            );
+                function (radio) {
 
-                        };
+                    const elemento =
+                        crearElementoRadio(
+                            radio
+                        );
 
 
                     contenedor.appendChild(
@@ -2937,12 +3474,260 @@
                     );
 
                 }
+
             );
+
         }
 
 
 
-        function reproducirEmisora(radio) {
+        /* ================================================================
+           CREAR TARJETA DE RADIO
+           ================================================================ */
+
+        function crearElementoRadio(
+            radio
+        ) {
+
+            const elemento =
+                document.createElement(
+                    "div"
+                );
+
+
+            elemento.className =
+                "radio-item";
+
+
+            const favorita =
+                esRadioFavorita(
+                    radio
+                );
+
+
+            elemento.innerHTML = `
+
+        <div class="radio-info">
+
+            <div class="radio-nombre">
+
+                ${escaparHTML(
+                radio.name ||
+                "Radio"
+            )}
+
+            </div>
+
+
+            <div class="radio-meta">
+
+                ${escaparHTML(
+                radio.country ||
+                ""
+            )}
+
+                ${radio.language
+                    ?
+                    " · " +
+                    escaparHTML(
+                        radio.language
+                    )
+                    :
+                    ""
+                }
+
+            </div>
+
+        </div>
+
+
+        <div style="
+            display:flex;
+            gap:5px;
+            flex-shrink:0;
+        ">
+
+
+            <button
+                class="secundario"
+                title="${favorita
+                    ?
+                    "Quitar favorita"
+                    :
+                    "Agregar favorita"
+                }">
+
+                ${favorita
+                    ?
+                    "⭐"
+                    :
+                    "☆"
+                }
+
+            </button>
+
+
+            <button
+                title="Reproducir">
+
+                ▶
+
+            </button>
+
+
+        </div>
+
+    `;
+
+
+            const botones =
+                elemento.querySelectorAll(
+                    "button"
+                );
+
+
+            /*
+                FAVORITA
+            */
+
+            botones[0].onclick =
+                function () {
+
+                    cambiarFavorita(
+                        radio
+                    );
+
+
+                    const ahoraEsFavorita =
+                        esRadioFavorita(
+                            radio
+                        );
+
+
+                    botones[0].textContent =
+
+                        ahoraEsFavorita
+                            ?
+                            "⭐"
+                            :
+                            "☆";
+
+                };
+
+
+            /*
+                REPRODUCIR
+            */
+
+            botones[1].onclick =
+                function () {
+
+                    reproducirEmisora(
+                        radio
+                    );
+
+                };
+
+
+            return elemento;
+
+        }
+
+
+
+        /* ================================================================
+           DIBUJAR FAVORITAS
+           ================================================================ */
+
+        function dibujarRadiosFavoritas() {
+
+            const contenedor =
+                document.getElementById(
+                    "favoritosRadio"
+                );
+
+
+            if (!contenedor) {
+
+                return;
+
+            }
+
+
+            contenedor.innerHTML = "";
+
+
+            /*
+                NO HAY FAVORITAS
+            */
+
+            if (
+                radiosFavoritas.length === 0
+            ) {
+
+                contenedor.innerHTML = `
+
+            <div class="radio-item">
+
+                <div class="radio-info">
+
+                    <div class="radio-nombre">
+
+                        ⭐ No tienes radios favoritas
+
+                    </div>
+
+                    <div class="radio-meta">
+
+                        Pulsa ☆ en una radio
+                        para agregarla.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+                return;
+
+            }
+
+
+            /*
+                MOSTRAR FAVORITAS
+            */
+
+            radiosFavoritas.forEach(
+
+                function (radio) {
+
+                    const elemento =
+                        crearElementoRadio(
+                            radio
+                        );
+
+
+                    contenedor.appendChild(
+                        elemento
+                    );
+
+                }
+
+            );
+
+        }
+
+
+
+        /* ================================================================
+           REPRODUCIR EMISORA
+           ================================================================ */
+
+        function reproducirEmisora(
+            radio
+        ) {
 
             const reproductor =
                 document.getElementById(
@@ -2953,11 +3738,14 @@
             if (!reproductor) {
 
                 return;
+
             }
 
 
             const url =
+
                 radio.url_resolved ||
+
                 radio.url;
 
 
@@ -2968,26 +3756,39 @@
                 );
 
                 return;
+
             }
 
 
-            document.getElementById(
-                "radioActual"
-            ).innerHTML = `
+            const radioActual =
+                document.getElementById(
+                    "radioActual"
+                );
 
-        <strong>
-            📻 ${escaparHTML(
-                radio.name
-            )}
-        </strong>
 
-        <br>
+            if (radioActual) {
 
-        ${escaparHTML(
-                radio.country || ""
-            )}
+                radioActual.innerHTML = `
 
-    `;
+            <strong>
+
+                📻 ${escaparHTML(
+                    radio.name ||
+                    "Radio"
+                )}
+
+            </strong>
+
+            <br>
+
+            ${escaparHTML(
+                    radio.country ||
+                    ""
+                )}
+
+        `;
+
+            }
 
 
             reproductor.src =
@@ -2995,16 +3796,21 @@
 
 
             reproductor.play()
+
                 .then(
+
                     function () {
 
                         mostrarMensaje(
-                            "Reproduciendo radio."
+                            "▶ Reproduciendo radio."
                         );
 
                     }
+
                 )
+
                 .catch(
+
                     function () {
 
                         mostrarMensaje(
@@ -3012,10 +3818,72 @@
                         );
 
                     }
+
                 );
+
         }
 
 
+
+        /* ================================================================
+           INICIALIZAR RADIO
+           ================================================================ */
+
+        function inicializarRadio() {
+
+            /*
+                MUY IMPORTANTE:
+        
+                Las favoritas se dibujan
+                ANTES de hacer cualquier
+                búsqueda en Internet.
+            */
+
+            dibujarRadiosFavoritas();
+
+
+            /*
+                Buscador.
+            */
+
+            const buscador =
+                document.getElementById(
+                    "busquedaRadio"
+                );
+
+
+            if (buscador) {
+
+                buscador.onkeydown =
+                    function (event) {
+
+                        if (
+                            event.key === "Enter"
+                        ) {
+
+                            ejecutarBusquedaRadio();
+
+                        }
+
+                    };
+
+            }
+
+
+            /*
+                Buscar automáticamente
+                usando la ubicación.
+            */
+
+            buscarRadiosPorUbicacion();
+
+        }
+
+
+
+        /* ================================================================
+           FIN RADIO
+           ================================================================ */
 
         /* ================================================================
            21. MAPA
@@ -3316,20 +4184,18 @@
             }
 
 
-            /*
-                CARGAMOS RADIOS DE VALDIVIA
-                AL INICIAR EL TALLER.
-            */
+            /* ================================================================
+    RADIO
+    ================================================================ */
 
             if (
                 document.getElementById(
-                    "resultadosRadio"
+                    "favoritosRadio"
                 )
             ) {
 
-                buscarRadio(
-                    "Valdivia Chile"
-                );
+                inicializarRadio();
+
             }
         }
 
@@ -4889,19 +5755,3 @@
 </body>
 
 </html>
-
-
-
-
-<!--  
-        <h1><a href="chess.html">Ajedrez 1</a></h1>
-        <h1><a href="Untitled-5.html">Planeta 0</a></h1>
-        <h1><a href="cajarena.html">Prueba A 0</a></h1>
-        <h1><a href="solya.html">Prueba B 0</a></h1>
-        <h1><a href="buble.html">Prueba C 0</a></h1>
-        <h1><a href="cofa.html">Prueba D 1</a></h1>
-        <h1><a href="Untitled-2.html">hh</a></h1>
-        <h1><a href="Untitled-7.html">ttt</a></h1>
--->
-
-
