@@ -2286,6 +2286,24 @@
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /* =========================================================
    🌦️ METEOROLOGÍA DEL CUERVO
    ========================================================= */
@@ -2688,6 +2706,35 @@
             }
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3513,22 +3560,22 @@
                 id: "generadorIdeas",
                 nombre: "Generador de Ideas 2.0",
                 icono: "💡",
-                visible: true
+                visible: false
             },
             {
                 id: "youtube",
                 nombre: "Buscador de YouTube",
                 icono: "▶️",
-                visible: true
+                visible: false
             },
             {
                 id: "television",
                 nombre: "Television",
-                icono: "▶️",
+                icono: "📺",
                 visible: true
             },
             {
-                id: "clima",
+                id: "meteorologia",
                 nombre: "Clima",
                 icono: "🌦️",
                 visible: true
@@ -3936,17 +3983,25 @@
 
         function obtenerContenidoModulo(id) {
 
+
+            console.log("Módulo solicitado:", id);
+
             switch (id) {
+
+
+
                 case "meteorologia":
 
                     return `
 
         <p class="descripcion">
 
-            🌦️ Consulta el clima actual y el pronóstico
+            🌦️ Meteorología del Cuervo.
+            Consulta el clima actual y el pronóstico
             de cualquier lugar del mundo.
 
         </p>
+
 
         <!-- ==================================================
              BUSCADOR
@@ -3957,9 +4012,13 @@
             <input
                 id="climaBusqueda"
                 type="text"
-                placeholder="Buscar ciudad...">
+                placeholder="Buscar ciudad..."
+                autocomplete="off"
+            >
 
-            <button onclick="CLIMA_buscarCiudad()">
+            <button
+                onclick="CLIMA_buscarCiudad()"
+            >
 
                 🔎 Buscar
 
@@ -3971,20 +4030,33 @@
         <button
             class="secundario"
             onclick="CLIMA_usarUbicacion()"
-            style="margin-bottom:15px;">
+            style="margin-bottom:15px;"
+        >
 
             📍 Usar mi ubicación
 
         </button>
 
 
+        <button
+            class="secundario"
+            onclick="CLIMA_actualizar()"
+            style="margin-bottom:15px;"
+        >
+
+            🔄 Actualizar
+
+        </button>
+
+
         <!-- ==================================================
-             UBICACIÓN ACTUAL
+             UBICACIÓN
         ================================================== -->
 
         <div
             id="climaUbicacion"
-            class="clima-ubicacion">
+            class="clima-ubicacion"
+        >
 
             🌎 Selecciona una ciudad
 
@@ -3997,13 +4069,16 @@
 
         <div
             id="climaActual"
-            class="clima-actual">
+            class="clima-actual"
+        >
 
             <div class="clima-cargando">
 
                 🌦️
                 <br>
-                Busca una ciudad para consultar el clima.
+
+                Busca una ciudad para consultar
+                el clima.
 
             </div>
 
@@ -4016,7 +4091,20 @@
 
         <div
             id="climaDatos"
-            class="clima-datos">
+            class="clima-datos"
+        >
+
+        </div>
+
+
+        <!-- ==================================================
+             SOL
+        ================================================== -->
+
+        <div
+            id="climaSol"
+            class="clima-datos"
+        >
 
         </div>
 
@@ -4027,18 +4115,29 @@
 
         <h3 class="clima-titulo">
 
-            📅 Pronóstico
+            📅 Pronóstico de 7 días
 
         </h3>
 
 
         <div
             id="climaPronostico"
-            class="clima-pronostico">
+            class="clima-pronostico"
+        >
 
         </div>
 
     `;
+
+
+
+
+
+
+
+
+
+
                 case "television":
 
                     return `
@@ -11696,148 +11795,1395 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /* ================================================================
-           🌦️ METEOROLOGÍA DEL CUERVO
+           🌦️ METEOROLOGÍA DEL CUERVO V2
+           ================================================================
+           
+           FUNCIONES:
+           
+           ✓ Búsqueda de ciudades
+           ✓ Clima actual
+           ✓ Sensación térmica
+           ✓ Humedad
+           ✓ Viento
+           ✓ Dirección del viento
+           ✓ Precipitación
+           ✓ Amanecer
+           ✓ Atardecer
+           ✓ Pronóstico de 7 días
+           ✓ Usar ubicación del dispositivo
+           ✓ Guardar última ubicación
+           ✓ ⭐ Favoritos
+           ✓ 💾 Favoritos permanentes
+           ✓ ⭐ Evita favoritos duplicados
+           ✓ 🗑️ Eliminar favoritos
+           ✓ Cargar favoritos al abrir Meteorología
+           ✓ Cargar clima pulsando un favorito
+           ✓ Compatible con sistema modular
+           
            ================================================================ */
 
-        const CLIMA_API =
-            "https://api.open-meteo.com/v1/forecast";
+
+        /* ================================================================
+           🌐 APIs
+           ================================================================ */
 
         const CLIMA_GEOCODING_API =
             "https://geocoding-api.open-meteo.com/v1/search";
 
 
-        let CLIMA_ubicacionActual = null;
+        const CLIMA_API =
+            "https://api.open-meteo.com/v1/forecast";
 
 
         /* ================================================================
-           CÓDIGOS METEOROLÓGICOS
+           💾 CLAVES DE LOCALSTORAGE
            ================================================================ */
 
-        function CLIMA_interpretarCodigo(codigo) {
+        /*
+           Nueva clave exclusiva para los favoritos del clima.
+        
+           No comparte datos con televisión ni otros módulos.
+        */
+
+        const CLIMA_CLAVE_FAVORITOS =
+            "taller_cuervo_clima_favoritos_v2";
+
+
+        /*
+           Última ubicación utilizada.
+        */
+
+        const CLIMA_CLAVE_UBICACION =
+            "taller_cuervo_clima_ultima_ubicacion";
+
+
+        /* ================================================================
+           📦 ESTADO
+           ================================================================ */
+
+        let CLIMA_ciudadActual = null;
+
+        let CLIMA_datosActuales = null;
+
+        let CLIMA_favoritos = [];
+
+        let CLIMA_cargando = false;
+
+        let CLIMA_inicializado = false;
+
+
+        /* ================================================================
+           🛡️ ESCAPAR HTML
+           ================================================================ */
+
+        function CLIMA_escapeHTML(valor) {
+
+            if (
+                typeof escaparHTML ===
+                "function"
+            ) {
+
+                return escaparHTML(
+                    String(valor ?? "")
+                );
+
+            }
+
+
+            return String(
+                valor ?? ""
+            )
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        /* ================================================================
+           🌤️ CÓDIGOS METEOROLÓGICOS
+           ================================================================ */
+
+        function CLIMA_icono(codigo) {
+
+            codigo = Number(codigo);
+
+
+            if (codigo === 0) {
+
+                return "☀️";
+
+            }
+
+
+            if (
+                codigo === 1 ||
+                codigo === 2
+            ) {
+
+                return "🌤️";
+
+            }
+
+
+            if (codigo === 3) {
+
+                return "☁️";
+
+            }
+
+
+            if (
+                codigo === 45 ||
+                codigo === 48
+            ) {
+
+                return "🌫️";
+
+            }
+
+
+            if (
+                codigo >= 51 &&
+                codigo <= 57
+            ) {
+
+                return "🌦️";
+
+            }
+
+
+            if (
+                codigo >= 61 &&
+                codigo <= 67
+            ) {
+
+                return "🌧️";
+
+            }
+
+
+            if (
+                codigo >= 71 &&
+                codigo <= 77
+            ) {
+
+                return "❄️";
+
+            }
+
+
+            if (
+                codigo >= 80 &&
+                codigo <= 82
+            ) {
+
+                return "🌧️";
+
+            }
+
+
+            if (
+                codigo >= 85 &&
+                codigo <= 86
+            ) {
+
+                return "🌨️";
+
+            }
+
+
+            if (
+                codigo >= 95 &&
+                codigo <= 99
+            ) {
+
+                return "⛈️";
+
+            }
+
+
+            return "🌦️";
+
+        }
+
+
+        /* ================================================================
+           📝 DESCRIPCIÓN METEOROLÓGICA
+           ================================================================ */
+
+        function CLIMA_descripcion(codigo) {
+
+            codigo = Number(codigo);
+
 
             const estados = {
 
-                0: {
-                    icono: "☀️",
-                    texto: "Cielo despejado"
-                },
+                0:
+                    "Cielo despejado",
 
-                1: {
-                    icono: "🌤️",
-                    texto: "Principalmente despejado"
-                },
+                1:
+                    "Principalmente despejado",
 
-                2: {
-                    icono: "⛅",
-                    texto: "Parcialmente nublado"
-                },
+                2:
+                    "Parcialmente nublado",
 
-                3: {
-                    icono: "☁️",
-                    texto: "Nublado"
-                },
+                3:
+                    "Nublado",
 
-                45: {
-                    icono: "🌫️",
-                    texto: "Niebla"
-                },
+                45:
+                    "Niebla",
 
-                48: {
-                    icono: "🌫️",
-                    texto: "Niebla escarchada"
-                },
+                48:
+                    "Niebla con escarcha",
 
-                51: {
-                    icono: "🌦️",
-                    texto: "Llovizna ligera"
-                },
+                51:
+                    "Llovizna ligera",
 
-                53: {
-                    icono: "🌦️",
-                    texto: "Llovizna"
-                },
+                53:
+                    "Llovizna moderada",
 
-                55: {
-                    icono: "🌧️",
-                    texto: "Llovizna intensa"
-                },
+                55:
+                    "Llovizna intensa",
 
-                61: {
-                    icono: "🌧️",
-                    texto: "Lluvia ligera"
-                },
+                56:
+                    "Llovizna helada ligera",
 
-                63: {
-                    icono: "🌧️",
-                    texto: "Lluvia moderada"
-                },
+                57:
+                    "Llovizna helada intensa",
 
-                65: {
-                    icono: "🌧️",
-                    texto: "Lluvia intensa"
-                },
+                61:
+                    "Lluvia ligera",
 
-                71: {
-                    icono: "🌨️",
-                    texto: "Nieve ligera"
-                },
+                63:
+                    "Lluvia moderada",
 
-                73: {
-                    icono: "🌨️",
-                    texto: "Nieve"
-                },
+                65:
+                    "Lluvia intensa",
 
-                75: {
-                    icono: "❄️",
-                    texto: "Nieve intensa"
-                },
+                66:
+                    "Lluvia helada ligera",
 
-                80: {
-                    icono: "🌦️",
-                    texto: "Chubascos ligeros"
-                },
+                67:
+                    "Lluvia helada intensa",
 
-                81: {
-                    icono: "🌧️",
-                    texto: "Chubascos"
-                },
+                71:
+                    "Nieve ligera",
 
-                82: {
-                    icono: "⛈️",
-                    texto: "Chubascos intensos"
-                },
+                73:
+                    "Nieve moderada",
 
-                95: {
-                    icono: "⛈️",
-                    texto: "Tormenta"
-                },
+                75:
+                    "Nieve intensa",
 
-                96: {
-                    icono: "⛈️",
-                    texto: "Tormenta con granizo"
-                },
+                77:
+                    "Granizo de nieve",
 
-                99: {
-                    icono: "⛈️",
-                    texto: "Tormenta fuerte"
-                }
+                80:
+                    "Chubascos ligeros",
+
+                81:
+                    "Chubascos moderados",
+
+                82:
+                    "Chubascos intensos",
+
+                85:
+                    "Chubascos de nieve",
+
+                86:
+                    "Chubascos de nieve intensos",
+
+                95:
+                    "Tormenta",
+
+                96:
+                    "Tormenta con granizo",
+
+                99:
+                    "Tormenta fuerte con granizo"
 
             };
 
 
-            return estados[codigo]
-                ||
-            {
-                icono: "🌡️",
-                texto: "Condiciones desconocidas"
+            return (
+
+                estados[codigo] ||
+
+                "Condiciones desconocidas"
+
+            );
+
+        }
+
+
+        /* ================================================================
+           🕐 FORMATEAR HORA
+           ================================================================ */
+
+        function CLIMA_formatearHora(hora) {
+
+            if (!hora) {
+
+                return "--:--";
+
+            }
+
+
+            const partes =
+                String(hora).split("T");
+
+
+            if (
+                partes.length < 2
+            ) {
+
+                return hora;
+
+            }
+
+
+            return partes[1]
+                .substring(0, 5);
+
+        }
+
+
+        /* ================================================================
+           📅 FORMATEAR FECHA
+           ================================================================ */
+
+        function CLIMA_formatearFecha(fecha) {
+
+            if (!fecha) {
+
+                return "";
+
+            }
+
+
+            const partes =
+                String(fecha).split("-");
+
+
+            if (
+                partes.length !== 3
+            ) {
+
+                return fecha;
+
+            }
+
+
+            return (
+
+                partes[2] +
+                "/" +
+                partes[1]
+
+            );
+
+        }
+
+
+        /* ================================================================
+           📆 DÍA DE LA SEMANA
+           ================================================================ */
+
+        function CLIMA_diaSemana(fecha) {
+
+            const dias = [
+
+                "Domingo",
+
+                "Lunes",
+
+                "Martes",
+
+                "Miércoles",
+
+                "Jueves",
+
+                "Viernes",
+
+                "Sábado"
+
+            ];
+
+
+            if (!fecha) {
+
+                return "";
+
+            }
+
+
+            const partes =
+                String(fecha).split("-");
+
+
+            if (
+                partes.length !== 3
+            ) {
+
+                return "";
+
+            }
+
+
+            const fechaObj =
+                new Date(
+
+                    Number(partes[0]),
+
+                    Number(partes[1]) - 1,
+
+                    Number(partes[2])
+
+                );
+
+
+            return dias[
+                fechaObj.getDay()
+            ];
+
+        }
+
+
+        /* ================================================================
+           🧭 DIRECCIÓN DEL VIENTO
+           ================================================================ */
+
+        function CLIMA_direccionViento(
+            grados
+        ) {
+
+            if (
+                grados === null ||
+                grados === undefined ||
+                isNaN(Number(grados))
+            ) {
+
+                return "--";
+
+            }
+
+
+            const direcciones = [
+
+                "N",
+
+                "NE",
+
+                "E",
+
+                "SE",
+
+                "S",
+
+                "SO",
+
+                "O",
+
+                "NO"
+
+            ];
+
+
+            const indice =
+                Math.round(
+                    Number(grados) / 45
+                ) % 8;
+
+
+            return direcciones[
+                indice
+            ];
+
+        }
+
+
+        /* ================================================================
+           ⭐ OBTENER ID DE FAVORITO
+           ================================================================ */
+
+        function CLIMA_obtenerId(
+            ciudad
+        ) {
+
+            if (!ciudad) {
+
+                return null;
+
+            }
+
+
+            /*
+               Las coordenadas son el identificador
+               más seguro de una ubicación.
+            */
+
+            if (
+                ciudad.latitude !== undefined &&
+                ciudad.longitude !== undefined
+            ) {
+
+                return (
+
+                    Number(
+                        ciudad.latitude
+                    ).toFixed(4)
+
+                    +
+
+                    "_"
+
+                    +
+
+                    Number(
+                        ciudad.longitude
+                    ).toFixed(4)
+
+                );
+
+            }
+
+
+            /*
+               Compatibilidad adicional.
+            */
+
+            if (ciudad.id) {
+
+                return String(
+                    ciudad.id
+                );
+
+            }
+
+
+            if (ciudad.name) {
+
+                return String(
+                    ciudad.name
+                )
+                    .trim()
+                    .toLowerCase();
+
+            }
+
+
+            return null;
+
+        }
+
+
+        /* ================================================================
+           ⭐ NORMALIZAR FAVORITO
+           ================================================================ */
+
+        function CLIMA_normalizarFavorito(
+            ciudad
+        ) {
+
+            if (!ciudad) {
+
+                return null;
+
+            }
+
+
+            const id =
+                CLIMA_obtenerId(
+                    ciudad
+                );
+
+
+            if (!id) {
+
+                return null;
+
+            }
+
+
+            return {
+
+                id:
+
+                    id,
+
+                latitude:
+
+                    Number(
+                        ciudad.latitude
+                    ),
+
+                longitude:
+
+                    Number(
+                        ciudad.longitude
+                    ),
+
+                name:
+
+                    ciudad.name ||
+                    "Ciudad",
+
+                country:
+
+                    ciudad.country ||
+                    "",
+
+                region:
+
+                    ciudad.region ||
+                    ""
+
             };
 
         }
 
 
         /* ================================================================
-           BUSCAR CIUDAD
+           💾 CARGAR FAVORITOS
+           ================================================================ */
+
+        function CLIMA_cargarFavoritos() {
+
+            console.log(
+                "🌦️ Cargando favoritos del clima..."
+            );
+
+
+            try {
+
+                const guardado =
+                    localStorage.getItem(
+                        CLIMA_CLAVE_FAVORITOS
+                    );
+
+
+                /*
+                   Si todavía no existe la lista,
+                   simplemente empezamos vacíos.
+                */
+
+                if (!guardado) {
+
+                    CLIMA_favoritos = [];
+
+                    return;
+
+                }
+
+
+                const datos =
+                    JSON.parse(
+                        guardado
+                    );
+
+
+                if (
+                    !Array.isArray(datos)
+                ) {
+
+                    CLIMA_favoritos = [];
+
+                    return;
+
+                }
+
+
+                const favoritosLimpios = [];
+
+
+                datos.forEach(
+
+                    function (ciudad) {
+
+                        const favorito =
+                            CLIMA_normalizarFavorito(
+                                ciudad
+                            );
+
+
+                        if (!favorito) {
+
+                            return;
+
+                        }
+
+
+                        const existe =
+                            favoritosLimpios.some(
+
+                                function (item) {
+
+                                    return (
+
+                                        item.id ===
+                                        favorito.id
+
+                                    );
+
+                                }
+
+                            );
+
+
+                        if (!existe) {
+
+                            favoritosLimpios.push(
+                                favorito
+                            );
+
+                        }
+
+                    }
+
+                );
+
+
+                CLIMA_favoritos =
+                    favoritosLimpios;
+
+
+                console.log(
+
+                    "⭐ Favoritos del clima:",
+
+                    CLIMA_favoritos.length
+
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+
+                    "❌ Error leyendo favoritos del clima:",
+
+                    error
+
+                );
+
+
+                CLIMA_favoritos = [];
+
+            }
+
+        }
+
+
+        /* ================================================================
+           💾 GUARDAR FAVORITOS
+           ================================================================ */
+
+        function CLIMA_guardarFavoritos() {
+
+            try {
+
+                const lista =
+                    CLIMA_favoritos.map(
+
+                        function (ciudad) {
+
+                            return {
+
+                                id:
+                                    ciudad.id,
+
+                                latitude:
+                                    ciudad.latitude,
+
+                                longitude:
+                                    ciudad.longitude,
+
+                                name:
+                                    ciudad.name,
+
+                                country:
+                                    ciudad.country,
+
+                                region:
+                                    ciudad.region
+
+                            };
+
+                        }
+
+                    );
+
+
+                localStorage.setItem(
+
+                    CLIMA_CLAVE_FAVORITOS,
+
+                    JSON.stringify(
+                        lista
+                    )
+
+                );
+
+
+                console.log(
+
+                    "💾 Favoritos clima guardados:",
+
+                    lista.length
+
+                );
+
+
+                return true;
+
+            }
+
+            catch (error) {
+
+                console.error(
+
+                    "❌ Error guardando favoritos del clima:",
+
+                    error
+
+                );
+
+
+                mostrarMensaje(
+
+                    "❌ No se pudieron guardar los favoritos."
+
+                );
+
+
+                return false;
+
+            }
+
+        }
+
+
+        /* ================================================================
+           ⭐ COMPROBAR SI ES FAVORITO
+           ================================================================ */
+
+        function CLIMA_esFavorito(
+            ciudad
+        ) {
+
+            const id =
+                CLIMA_obtenerId(
+                    ciudad
+                );
+
+
+            if (!id) {
+
+                return false;
+
+            }
+
+
+            return CLIMA_favoritos.some(
+
+                function (favorito) {
+
+                    return (
+
+                        favorito.id ===
+                        id
+
+                    );
+
+                }
+
+            );
+
+        }
+
+
+        /* ================================================================
+           ⭐ AGREGAR / QUITAR FAVORITO
+           ================================================================ */
+
+        function CLIMA_cambiarFavorito() {
+
+            if (
+                !CLIMA_ciudadActual
+            ) {
+
+                mostrarMensaje(
+
+                    "🌎 Primero busca una ciudad."
+
+                );
+
+                return;
+
+            }
+
+
+            const ciudad =
+                CLIMA_normalizarFavorito(
+                    CLIMA_ciudadActual
+                );
+
+
+            if (!ciudad) {
+
+                mostrarMensaje(
+
+                    "❌ No se pudo identificar la ciudad."
+
+                );
+
+                return;
+
+            }
+
+
+            const posicion =
+                CLIMA_favoritos.findIndex(
+
+                    function (favorito) {
+
+                        return (
+
+                            favorito.id ===
+                            ciudad.id
+
+                        );
+
+                    }
+
+                );
+
+
+            /*
+               YA ES FAVORITO
+            */
+
+            if (
+                posicion !== -1
+            ) {
+
+                CLIMA_favoritos.splice(
+
+                    posicion,
+
+                    1
+
+                );
+
+
+                CLIMA_guardarFavoritos();
+
+                CLIMA_mostrarFavoritos();
+
+                CLIMA_actualizarBotonFavorito();
+
+
+                mostrarMensaje(
+
+                    "🗑️ Ciudad eliminada de favoritos."
+
+                );
+
+
+                return;
+
+            }
+
+
+            /*
+               NUEVO FAVORITO
+            */
+
+            CLIMA_favoritos.unshift(
+                ciudad
+            );
+
+
+            CLIMA_guardarFavoritos();
+
+            CLIMA_mostrarFavoritos();
+
+            CLIMA_actualizarBotonFavorito();
+
+
+            mostrarMensaje(
+
+                "⭐ Ciudad guardada en favoritos."
+
+            );
+
+        }
+
+
+        /* ================================================================
+           ⭐ ACTUALIZAR BOTÓN FAVORITO
+           ================================================================ */
+
+        function CLIMA_actualizarBotonFavorito() {
+
+            const boton =
+                document.getElementById(
+                    "climaBotonFavorito"
+                );
+
+
+            if (!boton) {
+
+                return;
+
+            }
+
+
+            if (
+                CLIMA_esFavorito(
+                    CLIMA_ciudadActual
+                )
+            ) {
+
+                boton.textContent =
+                    "⭐";
+
+                boton.title =
+                    "Quitar de favoritos";
+
+            }
+
+            else {
+
+                boton.textContent =
+                    "☆";
+
+                boton.title =
+                    "Guardar en favoritos";
+
+            }
+
+        }
+
+
+        /* ================================================================
+           ⭐ MOSTRAR FAVORITOS
+           ================================================================ */
+
+        function CLIMA_mostrarFavoritos() {
+
+            const contenedor =
+                document.getElementById(
+                    "climaFavoritos"
+                );
+
+
+            if (!contenedor) {
+
+                return;
+
+            }
+
+
+            contenedor.innerHTML =
+                "";
+
+
+            /*
+               SIN FAVORITOS
+            */
+
+            if (
+                CLIMA_favoritos.length === 0
+            ) {
+
+                contenedor.innerHTML = `
+
+            <div class="clima-favorito-vacio">
+
+                ⭐
+
+                <div>
+
+                    No tienes ciudades favoritas.
+
+                </div>
+
+                <small>
+
+                    Busca una ciudad y pulsa ☆ para guardarla.
+
+                </small>
+
+            </div>
+
+        `;
+
+
+                return;
+
+            }
+
+
+            /*
+               MOSTRAR FAVORITOS
+            */
+
+            CLIMA_favoritos.forEach(
+
+                function (ciudad) {
+
+                    const elemento =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    elemento.className =
+                        "clima-favorito";
+
+
+                    const nombre =
+                        CLIMA_escapeHTML(
+                            ciudad.name
+                        );
+
+
+                    const region =
+                        ciudad.region
+                            ?
+                            " · " +
+                            CLIMA_escapeHTML(
+                                ciudad.region
+                            )
+                            :
+                            "";
+
+
+                    const pais =
+                        ciudad.country
+                            ?
+                            " · " +
+                            CLIMA_escapeHTML(
+                                ciudad.country
+                            )
+                            :
+                            "";
+
+
+                    elemento.innerHTML = `
+
+                <button
+                    class="clima-favorito-cargar"
+                    title="Ver clima">
+
+                    <span
+                        class="clima-favorito-icono">
+
+                        🌎
+
+                    </span>
+
+
+                    <span
+                        class="clima-favorito-info">
+
+                        <strong>
+
+                            ${nombre}
+
+                        </strong>
+
+
+                        <small>
+
+                            ${region}${pais}
+
+                        </small>
+
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="clima-favorito-eliminar"
+                    title="Eliminar favorito">
+
+                    🗑️
+
+                </button>
+
+            `;
+
+
+                    /*
+                       CARGAR FAVORITO
+                    */
+
+                    const botonCargar =
+                        elemento.querySelector(
+                            ".clima-favorito-cargar"
+                        );
+
+
+                    if (botonCargar) {
+
+                        botonCargar.onclick =
+                            function () {
+
+                                CLIMA_cargarCiudad(
+
+                                    ciudad.latitude,
+
+                                    ciudad.longitude,
+
+                                    ciudad.name,
+
+                                    ciudad.country,
+
+                                    ciudad.region
+
+                                );
+
+                            };
+
+                    }
+
+
+                    /*
+                       ELIMINAR FAVORITO
+                    */
+
+                    const botonEliminar =
+                        elemento.querySelector(
+                            ".clima-favorito-eliminar"
+                        );
+
+
+                    if (botonEliminar) {
+
+                        botonEliminar.onclick =
+                            function () {
+
+                                CLIMA_eliminarFavorito(
+                                    ciudad.id
+                                );
+
+                            };
+
+                    }
+
+
+                    contenedor.appendChild(
+                        elemento
+                    );
+
+                }
+
+            );
+
+        }
+
+
+        /* ================================================================
+           🗑️ ELIMINAR FAVORITO POR ID
+           ================================================================ */
+
+        function CLIMA_eliminarFavorito(
+            id
+        ) {
+
+            const posicion =
+                CLIMA_favoritos.findIndex(
+
+                    function (favorito) {
+
+                        return (
+
+                            favorito.id ===
+                            id
+
+                        );
+
+                    }
+
+                );
+
+
+            if (
+                posicion === -1
+            ) {
+
+                return;
+
+            }
+
+
+            const ciudad =
+                CLIMA_favoritos[
+                posicion
+                ];
+
+
+            CLIMA_favoritos.splice(
+
+                posicion,
+
+                1
+
+            );
+
+
+            CLIMA_guardarFavoritos();
+
+            CLIMA_mostrarFavoritos();
+
+            CLIMA_actualizarBotonFavorito();
+
+
+            mostrarMensaje(
+
+                "🗑️ " +
+
+                (
+                    ciudad.name ||
+                    "Ciudad"
+                ) +
+
+                " eliminada de favoritos."
+
+            );
+
+        }
+
+
+        /* ================================================================
+           🔎 BUSCAR CIUDAD
            ================================================================ */
 
         async function CLIMA_buscarCiudad() {
@@ -11855,11 +13201,11 @@
             }
 
 
-            const texto =
+            const ciudad =
                 campo.value.trim();
 
 
-            if (!texto) {
+            if (!ciudad) {
 
                 mostrarMensaje(
                     "Escribe una ciudad."
@@ -11870,44 +13216,52 @@
             }
 
 
-            mostrarMensaje(
-                "🔎 Buscando ciudad..."
-            );
+            if (
+                CLIMA_cargando
+            ) {
+
+                return;
+
+            }
+
+
+            CLIMA_cargando =
+                true;
 
 
             try {
 
-                const parametros =
-                    new URLSearchParams({
+                mostrarMensaje(
+                    "🌎 Buscando ciudad..."
+                );
 
-                        name:
-                            texto,
 
-                        count:
-                            "5",
+                const url =
 
-                        language:
-                            "es",
+                    CLIMA_GEOCODING_API +
 
-                        format:
-                            "json"
+                    "?name=" +
 
-                    });
+                    encodeURIComponent(
+                        ciudad
+                    ) +
+
+                    "&count=1" +
+
+                    "&language=es" +
+
+                    "&format=json";
 
 
                 const respuesta =
                     await fetch(
-
-                        CLIMA_GEOCODING_API
-                        +
-                        "?"
-                        +
-                        parametros.toString()
-
+                        url
                     );
 
 
-                if (!respuesta.ok) {
+                if (
+                    !respuesta.ok
+                ) {
 
                     throw new Error(
                         "Error de geocodificación."
@@ -11922,11 +13276,13 @@
 
                 if (
                     !datos.results ||
-                    datos.results.length === 0
+                    !datos.results.length
                 ) {
 
                     mostrarMensaje(
-                        "No encontramos esa ciudad."
+
+                        "❌ No encontramos esa ciudad."
+
                     );
 
                     return;
@@ -11934,19 +13290,21 @@
                 }
 
 
-                const ciudad =
+                const resultado =
                     datos.results[0];
 
 
-                await CLIMA_cargar(
+                await CLIMA_cargarCiudad(
 
-                    ciudad.latitude,
+                    resultado.latitude,
 
-                    ciudad.longitude,
+                    resultado.longitude,
 
-                    ciudad.name,
+                    resultado.name,
 
-                    ciudad.country
+                    resultado.country,
+
+                    resultado.admin1 || ""
 
                 );
 
@@ -11955,13 +13313,26 @@
             catch (error) {
 
                 console.error(
-                    "Clima:",
+
+                    "CLIMA:",
+
                     error
+
                 );
 
+
                 mostrarMensaje(
-                    "No se pudo buscar la ciudad."
+
+                    "❌ No se pudo buscar la ciudad."
+
                 );
+
+            }
+
+            finally {
+
+                CLIMA_cargando =
+                    false;
 
             }
 
@@ -11969,87 +13340,90 @@
 
 
         /* ================================================================
-           CARGAR CLIMA
+           🌦️ CARGAR CIUDAD
            ================================================================ */
 
-        async function CLIMA_cargar(
+        async function CLIMA_cargarCiudad(
 
             lat,
+
             lon,
+
             nombre,
-            pais
+
+            pais,
+
+            region
 
         ) {
 
-            mostrarMensaje(
-                "🌦️ Consultando meteorología..."
-            );
-
-
             try {
 
-                const parametros =
-                    new URLSearchParams({
+                const url =
 
-                        latitude:
-                            lat,
+                    CLIMA_API +
 
-                        longitude:
-                            lon,
+                    "?latitude=" +
 
-                        current:
-                            [
-                                "temperature_2m",
-                                "relative_humidity_2m",
-                                "apparent_temperature",
-                                "precipitation",
-                                "weather_code",
-                                "wind_speed_10m",
-                                "wind_direction_10m"
-                            ].join(","),
+                    encodeURIComponent(
+                        lat
+                    ) +
 
-                        hourly:
-                            [
-                                "temperature_2m",
-                                "precipitation_probability",
-                                "weather_code"
-                            ].join(","),
+                    "&longitude=" +
 
-                        daily:
-                            [
-                                "weather_code",
-                                "temperature_2m_max",
-                                "temperature_2m_min",
-                                "precipitation_probability_max",
-                                "sunrise",
-                                "sunset"
-                            ].join(","),
+                    encodeURIComponent(
+                        lon
+                    ) +
 
-                        timezone:
-                            "auto",
+                    "&current=" +
 
-                        forecast_days:
-                            "7"
+                    "temperature_2m," +
 
-                    });
+                    "relative_humidity_2m," +
+
+                    "apparent_temperature," +
+
+                    "is_day," +
+
+                    "precipitation," +
+
+                    "weather_code," +
+
+                    "wind_speed_10m," +
+
+                    "wind_direction_10m" +
+
+                    "&daily=" +
+
+                    "weather_code," +
+
+                    "temperature_2m_max," +
+
+                    "temperature_2m_min," +
+
+                    "precipitation_probability_max," +
+
+                    "sunrise," +
+
+                    "sunset" +
+
+                    "&timezone=auto" +
+
+                    "&forecast_days=7";
 
 
                 const respuesta =
                     await fetch(
-
-                        CLIMA_API
-                        +
-                        "?"
-                        +
-                        parametros.toString()
-
+                        url
                     );
 
 
-                if (!respuesta.ok) {
+                if (
+                    !respuesta.ok
+                ) {
 
                     throw new Error(
-                        "Error meteorológico."
+                        "No se pudo obtener el clima."
                     );
 
                 }
@@ -12059,71 +13433,88 @@
                     await respuesta.json();
 
 
-                CLIMA_ubicacionActual = {
+                /*
+                   Guardamos la ciudad actual.
+                */
 
-                    lat:
-                        lat,
+                CLIMA_ciudadActual = {
 
-                    lon:
-                        lon,
+                    latitude:
+                        Number(lat),
 
-                    nombre:
-                        nombre,
+                    longitude:
+                        Number(lon),
 
-                    pais:
-                        pais
+                    name:
+                        nombre ||
+                        "Ciudad",
+
+                    country:
+                        pais ||
+                        "",
+
+                    region:
+                        region ||
+                        ""
 
                 };
 
 
-                CLIMA_mostrarActual(
-                    datos
-                );
+                CLIMA_datosActuales =
+                    datos;
 
 
-                CLIMA_mostrarDatos(
-                    datos
-                );
+                /*
+                   Guardamos última ubicación.
+                */
 
+                try {
 
-                CLIMA_mostrarPronostico(
-                    datos
-                );
+                    localStorage.setItem(
 
+                        CLIMA_CLAVE_UBICACION,
 
-                const ubicacion =
-                    document.getElementById(
-                        "climaUbicacion"
+                        JSON.stringify(
+                            CLIMA_ciudadActual
+                        )
+
                     );
 
+                }
 
-                if (ubicacion) {
+                catch (error) {
 
-                    ubicacion.innerHTML = `
+                    console.warn(
 
-                📍
+                        "No se pudo guardar última ubicación:",
 
-                <strong>
+                        error
 
-                    ${escaparHTML(
-                        nombre
-                    )}
-
-                </strong>
-
-                ·
-
-                ${escaparHTML(
-                        pais || ""
-                    )}
-
-            `;
+                    );
 
                 }
 
 
+                /*
+                   Mostrar.
+                */
+
+                CLIMA_mostrar(
+                    datos
+                );
+
+
+                /*
+                   Actualizar favoritos.
+                */
+
+                CLIMA_actualizarBotonFavorito();
+
+
                 mostrarMensaje(
-                    "🌦️ Meteorología actualizada."
+
+                    "🌦️ Clima actualizado."
+
                 );
 
             }
@@ -12131,12 +13522,18 @@
             catch (error) {
 
                 console.error(
-                    "Clima:",
+
+                    "CLIMA:",
+
                     error
+
                 );
 
+
                 mostrarMensaje(
-                    "No se pudo obtener el clima."
+
+                    "❌ No se pudo cargar el clima."
+
                 );
 
             }
@@ -12145,12 +13542,36 @@
 
 
         /* ================================================================
-           MOSTRAR CLIMA ACTUAL
+           🌦️ MOSTRAR CLIMA
            ================================================================ */
 
-        function CLIMA_mostrarActual(
+        function CLIMA_mostrar(
             datos
         ) {
+
+            if (!datos) {
+
+                return;
+
+            }
+
+
+            const actual =
+                datos.current;
+
+
+            if (!actual) {
+
+                return;
+
+            }
+
+
+            const ubicacion =
+                document.getElementById(
+                    "climaUbicacion"
+                );
+
 
             const contenedor =
                 document.getElementById(
@@ -12158,184 +13579,322 @@
                 );
 
 
-            if (!contenedor) {
-
-                return;
-
-            }
-
-
-            const actual =
-                datos.current;
-
-
-            const estado =
-                CLIMA_interpretarCodigo(
-                    actual.weather_code
-                );
-
-
-            contenedor.innerHTML = `
-
-        <div class="clima-icono">
-
-            ${estado.icono}
-
-        </div>
-
-
-        <div class="clima-temperatura">
-
-            ${Math.round(
-                actual.temperature_2m
-            )}°C
-
-        </div>
-
-
-        <div class="clima-descripcion">
-
-            ${estado.texto}
-
-        </div>
-
-
-        <div class="clima-sensacion">
-
-            Sensación térmica:
-
-            ${Math.round(
-                actual.apparent_temperature
-            )}°C
-
-        </div>
-
-    `;
-
-        }
-
-
-        /* ================================================================
-           DATOS ADICIONALES
-           ================================================================ */
-
-        function CLIMA_mostrarDatos(
-            datos
-        ) {
-
-            const contenedor =
+            const datosContenedor =
                 document.getElementById(
                     "climaDatos"
                 );
 
 
-            if (!contenedor) {
+            const sol =
+                document.getElementById(
+                    "climaSol"
+                );
 
-                return;
+
+            if (
+                ubicacion &&
+                CLIMA_ciudadActual
+            ) {
+
+                ubicacion.innerHTML = `
+
+            📍
+
+            <strong>
+
+                ${CLIMA_escapeHTML(
+                    CLIMA_ciudadActual.name
+                )}
+
+            </strong>
+
+            ${CLIMA_ciudadActual.region
+                        ?
+                        " · " +
+                        CLIMA_escapeHTML(
+                            CLIMA_ciudadActual.region
+                        )
+                        :
+                        ""
+                    }
+
+            ${CLIMA_ciudadActual.country
+                        ?
+                        " · " +
+                        CLIMA_escapeHTML(
+                            CLIMA_ciudadActual.country
+                        )
+                        :
+                        ""
+                    }
+
+        `;
 
             }
 
 
-            const actual =
-                datos.current;
+            /*
+               CLIMA ACTUAL
+            */
 
+            if (
+                contenedor
+            ) {
 
-            contenedor.innerHTML = `
+                contenedor.innerHTML = `
 
-        <div class="clima-dato">
+            <div class="clima-icono">
 
-            <div class="clima-dato-icono">
-                💧
-            </div>
-
-            <div class="clima-dato-valor">
-
-                ${actual.relative_humidity_2m}%
-
-            </div>
-
-            <div class="clima-dato-nombre">
-
-                Humedad
+                ${CLIMA_icono(
+                    actual.weather_code
+                )}
 
             </div>
 
-        </div>
 
-
-        <div class="clima-dato">
-
-            <div class="clima-dato-icono">
-                💨
-            </div>
-
-            <div class="clima-dato-valor">
+            <div class="clima-temperatura">
 
                 ${Math.round(
-                actual.wind_speed_10m
-            )} km/h
+                    actual.temperature_2m
+                )}°C
 
             </div>
 
-            <div class="clima-dato-nombre">
 
-                Viento
+            <div class="clima-descripcion">
 
-            </div>
-
-        </div>
-
-
-        <div class="clima-dato">
-
-            <div class="clima-dato-icono">
-                🌧️
-            </div>
-
-            <div class="clima-dato-valor">
-
-                ${actual.precipitation} mm
+                ${CLIMA_descripcion(
+                    actual.weather_code
+                )}
 
             </div>
 
-            <div class="clima-dato-nombre">
 
-                Precipitación
+            <div class="clima-sensacion">
 
-            </div>
-
-        </div>
-
-
-        <div class="clima-dato">
-
-            <div class="clima-dato-icono">
-                🧭
-            </div>
-
-            <div class="clima-dato-valor">
+                Sensación térmica:
 
                 ${Math.round(
-                actual.wind_direction_10m
-            )}°
+                    actual.apparent_temperature
+                )}°C
 
             </div>
 
-            <div class="clima-dato-nombre">
 
-                Dirección viento
+            <button
+                id="climaBotonFavorito"
+                class="secundario"
+                onclick="CLIMA_cambiarFavorito()"
+                style="
+                    margin-top:15px;
+                    font-size:20px;
+                "
+                title="Guardar en favoritos">
+
+                ☆
+
+            </button>
+
+        `;
+
+            }
+
+
+            /*
+               DATOS
+            */
+
+            if (
+                datosContenedor
+            ) {
+
+                datosContenedor.innerHTML = `
+
+            <div class="clima-dato">
+
+                <div class="clima-dato-icono">
+
+                    💧
+
+                </div>
+
+                <div class="clima-dato-valor">
+
+                    ${actual.relative_humidity_2m}%
+
+                </div>
+
+                <div class="clima-dato-nombre">
+
+                    Humedad
+
+                </div>
 
             </div>
 
-        </div>
 
-    `;
+            <div class="clima-dato">
+
+                <div class="clima-dato-icono">
+
+                    💨
+
+                </div>
+
+                <div class="clima-dato-valor">
+
+                    ${Math.round(
+                    actual.wind_speed_10m
+                )} km/h
+
+                </div>
+
+                <div class="clima-dato-nombre">
+
+                    Viento
+
+                </div>
+
+            </div>
+
+
+            <div class="clima-dato">
+
+                <div class="clima-dato-icono">
+
+                    🧭
+
+                </div>
+
+                <div class="clima-dato-valor">
+
+                    ${CLIMA_direccionViento(
+                    actual.wind_direction_10m
+                )}
+
+                </div>
+
+                <div class="clima-dato-nombre">
+
+                    Dirección
+
+                </div>
+
+            </div>
+
+
+            <div class="clima-dato">
+
+                <div class="clima-dato-icono">
+
+                    🌧️
+
+                </div>
+
+                <div class="clima-dato-valor">
+
+                    ${actual.precipitation ?? 0} mm
+
+                </div>
+
+                <div class="clima-dato-nombre">
+
+                    Precipitación
+
+                </div>
+
+            </div>
+
+        `;
+
+            }
+
+
+            /*
+               SOL
+            */
+
+            if (
+                sol &&
+                datos.daily
+            ) {
+
+                sol.innerHTML = `
+
+            <div class="clima-dato">
+
+                <div class="clima-dato-icono">
+
+                    🌅
+
+                </div>
+
+                <div class="clima-dato-valor">
+
+                    ${CLIMA_formatearHora(
+                    datos.daily.sunrise[0]
+                )}
+
+                </div>
+
+                <div class="clima-dato-nombre">
+
+                    Amanecer
+
+                </div>
+
+            </div>
+
+
+            <div class="clima-dato">
+
+                <div class="clima-dato-icono">
+
+                    🌇
+
+                </div>
+
+                <div class="clima-dato-valor">
+
+                    ${CLIMA_formatearHora(
+                    datos.daily.sunset[0]
+                )}
+
+                </div>
+
+                <div class="clima-dato-nombre">
+
+                    Atardecer
+
+                </div>
+
+            </div>
+
+        `;
+
+            }
+
+
+            /*
+               Pronóstico.
+            */
+
+            CLIMA_mostrarPronostico(
+                datos
+            );
+
+
+            /*
+               Actualizar botón.
+            */
+
+            CLIMA_actualizarBotonFavorito();
 
         }
 
 
         /* ================================================================
-           PRONÓSTICO
+           📅 PRONÓSTICO
            ================================================================ */
 
         function CLIMA_mostrarPronostico(
@@ -12348,7 +13907,10 @@
                 );
 
 
-            if (!contenedor) {
+            if (
+                !contenedor ||
+                !datos.daily
+            ) {
 
                 return;
 
@@ -12369,29 +13931,6 @@
                 i++
             ) {
 
-                const estado =
-                    CLIMA_interpretarCodigo(
-                        diario.weather_code[i]
-                    );
-
-
-                const fecha =
-                    new Date(
-                        diario.time[i] +
-                        "T12:00:00"
-                    );
-
-
-                const nombreDia =
-                    fecha.toLocaleDateString(
-                        "es-CL",
-                        {
-                            weekday:
-                                "short"
-                        }
-                    );
-
-
                 const elemento =
                     document.createElement(
                         "div"
@@ -12406,47 +13945,64 @@
 
             <div class="clima-dia-nombre">
 
-                ${nombreDia}
+                ${i === 0
+                        ?
+                        "Hoy"
+                        :
+                        CLIMA_diaSemana(
+                            diario.time[i]
+                        )
+                    }
+
+            </div>
+
+
+            <div
+                style="
+                    color:var(--texto-suave);
+                    font-size:11px;
+                "
+            >
+
+                ${CLIMA_formatearFecha(
+                        diario.time[i]
+                    )}
 
             </div>
 
 
             <div class="clima-dia-icono">
 
-                ${estado.icono}
+                ${CLIMA_icono(
+                        diario.weather_code[i]
+                    )}
 
             </div>
 
 
-            <div>
-
-                ${estado.texto}
-
-            </div>
-
-
-            <div
-                class="clima-dia-temperaturas">
+            <div class="clima-dia-temperaturas">
 
                 ${Math.round(
-                    diario.temperature_2m_max[i]
-                )}°
+                        diario.temperature_2m_max[i]
+                    )}°
 
                 /
 
                 ${Math.round(
-                    diario.temperature_2m_min[i]
-                )}°
+                        diario.temperature_2m_min[i]
+                    )}°
 
             </div>
 
 
-            <div
-                class="clima-dia-lluvia">
+            <div class="clima-dia-lluvia">
 
-                🌧️
+                ☔
 
-                ${diario.precipitation_probability_max[i] ?? 0}%
+                ${diario.precipitation_probability_max[i]
+                    ??
+                    0
+                    }%
 
             </div>
 
@@ -12463,7 +14019,7 @@
 
 
         /* ================================================================
-           USAR UBICACIÓN
+           📍 USAR UBICACIÓN
            ================================================================ */
 
         function CLIMA_usarUbicacion() {
@@ -12473,7 +14029,9 @@
             ) {
 
                 mostrarMensaje(
-                    "Tu navegador no permite obtener ubicación."
+
+                    "❌ Tu navegador no permite obtener ubicación."
+
                 );
 
                 return;
@@ -12482,7 +14040,9 @@
 
 
             mostrarMensaje(
-                "📍 Detectando ubicación..."
+
+                "📍 Obteniendo ubicación..."
+
             );
 
 
@@ -12493,71 +14053,101 @@
                     const lat =
                         posicion.coords.latitude;
 
+
                     const lon =
                         posicion.coords.longitude;
 
 
                     try {
 
-                        const parametros =
-                            new URLSearchParams({
+                        /*
+                           Geocodificación inversa.
+                        */
 
-                                latitude:
-                                    lat,
+                        const url =
 
-                                longitude:
-                                    lon,
+                            "https://geocoding-api.open-meteo.com/v1/reverse" +
 
-                                count:
-                                    "1",
+                            "?latitude=" +
+                            encodeURIComponent(lat) +
 
-                                language:
-                                    "es",
+                            "&longitude=" +
+                            encodeURIComponent(lon) +
 
-                                format:
-                                    "json"
+                            "&count=1" +
 
-                            });
+                            "&language=es" +
 
-
-                        const respuesta =
-                            await fetch(
-
-                                CLIMA_GEOCODING_API
-                                +
-                                "?"
-                                +
-                                parametros.toString()
-
-                            );
-
-
-                        const datos =
-                            await respuesta.json();
+                            "&format=json";
 
 
                         let nombre =
                             "Mi ubicación";
 
+
                         let pais =
                             "";
 
 
-                        if (
-                            datos.results &&
-                            datos.results.length
-                        ) {
+                        let region =
+                            "";
 
-                            nombre =
-                                datos.results[0].name;
 
-                            pais =
-                                datos.results[0].country;
+                        try {
+
+                            const respuesta =
+                                await fetch(
+                                    url
+                                );
+
+
+                            if (
+                                respuesta.ok
+                            ) {
+
+                                const datos =
+                                    await respuesta.json();
+
+
+                                if (
+                                    datos.results &&
+                                    datos.results.length
+                                ) {
+
+                                    nombre =
+                                        datos.results[0].name ||
+                                        nombre;
+
+
+                                    pais =
+                                        datos.results[0].country ||
+                                        "";
+
+
+                                    region =
+                                        datos.results[0].admin1 ||
+                                        "";
+
+                                }
+
+                            }
+
+                        }
+
+                        catch (error) {
+
+                            console.warn(
+
+                                "No se pudo obtener nombre:",
+
+                                error
+
+                            );
 
                         }
 
 
-                        await CLIMA_cargar(
+                        await CLIMA_cargarCiudad(
 
                             lat,
 
@@ -12565,7 +14155,9 @@
 
                             nombre,
 
-                            pais
+                            pais,
+
+                            region
 
                         );
 
@@ -12577,15 +14169,10 @@
                             error
                         );
 
-                        await CLIMA_cargar(
 
-                            lat,
+                        mostrarMensaje(
 
-                            lon,
-
-                            "Mi ubicación",
-
-                            ""
+                            "❌ No se pudo obtener el clima."
 
                         );
 
@@ -12596,12 +14183,19 @@
 
                 function (error) {
 
-                    console.error(
+                    console.warn(
+
+                        "Geolocalización:",
+
                         error
+
                     );
 
+
                     mostrarMensaje(
-                        "No se pudo obtener tu ubicación."
+
+                        "❌ No se pudo obtener tu ubicación."
+
                     );
 
                 },
@@ -12610,7 +14204,7 @@
                 {
 
                     enableHighAccuracy:
-                        false,
+                        true,
 
                     timeout:
                         10000,
@@ -12626,10 +14220,184 @@
 
 
         /* ================================================================
-           INICIALIZAR METEOROLOGÍA
+           🔄 ACTUALIZAR CLIMA
+           ================================================================ */
+
+        async function CLIMA_actualizar() {
+
+            if (
+                !CLIMA_ciudadActual
+            ) {
+
+                mostrarMensaje(
+
+                    "🌎 Primero selecciona una ciudad."
+
+                );
+
+                return;
+
+            }
+
+
+            if (
+                CLIMA_cargando
+            ) {
+
+                return;
+
+            }
+
+
+            CLIMA_cargando =
+                true;
+
+
+            try {
+
+                mostrarMensaje(
+
+                    "🔄 Actualizando clima..."
+
+                );
+
+
+                await CLIMA_cargarCiudad(
+
+                    CLIMA_ciudadActual.latitude,
+
+                    CLIMA_ciudadActual.longitude,
+
+                    CLIMA_ciudadActual.name,
+
+                    CLIMA_ciudadActual.country,
+
+                    CLIMA_ciudadActual.region
+
+                );
+
+            }
+
+            finally {
+
+                CLIMA_cargando =
+                    false;
+
+            }
+
+        }
+
+
+        /* ================================================================
+           💾 CARGAR ÚLTIMA UBICACIÓN
+           ================================================================ */
+
+        async function CLIMA_cargarUltimaUbicacion() {
+
+            try {
+
+                const guardado =
+                    localStorage.getItem(
+
+                        CLIMA_CLAVE_UBICACION
+
+                    );
+
+
+                if (!guardado) {
+
+                    return;
+
+                }
+
+
+                const ubicacion =
+                    JSON.parse(
+                        guardado
+                    );
+
+
+                if (
+
+                    !ubicacion ||
+
+                    ubicacion.latitude === undefined ||
+
+                    ubicacion.longitude === undefined
+
+                ) {
+
+                    return;
+
+                }
+
+
+                await CLIMA_cargarCiudad(
+
+                    ubicacion.latitude,
+
+                    ubicacion.longitude,
+
+                    ubicacion.name ||
+                    "Última ubicación",
+
+                    ubicacion.country ||
+                    "",
+
+                    ubicacion.region ||
+                    ""
+
+                );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+
+                    "No se pudo cargar última ubicación:",
+
+                    error
+
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           🌦️ INICIALIZAR METEOROLOGÍA
            ================================================================ */
 
         function CLIMA_inicializar() {
+
+            console.log(
+
+                "🌦️ Inicializando Meteorología del Cuervo..."
+
+            );
+
+
+            /*
+               Cargar favoritos PRIMERO.
+        
+               No depende de Internet.
+            */
+
+            CLIMA_cargarFavoritos();
+
+
+            /*
+               Mostrar favoritos inmediatamente.
+            */
+
+            CLIMA_mostrarFavoritos();
+
+
+            /*
+               Buscador.
+            */
 
             const campo =
                 document.getElementById(
@@ -12654,7 +14422,44 @@
 
             }
 
+
+            /*
+               Intentar recuperar
+               última ubicación.
+            */
+
+            CLIMA_cargarUltimaUbicacion();
+
+
+            console.log(
+
+                "🌦️ Meteorología inicializada."
+
+            );
+
         }
+
+
+        /* ================================================================
+           🔌 COMPATIBILIDAD CON EL SISTEMA MODULAR
+           ================================================================ */
+
+        function inicializarClima() {
+
+            CLIMA_inicializar();
+
+        }
+
+
+        /* ================================================================
+           FIN METEOROLOGÍA DEL CUERVO
+           ================================================================ */
+
+
+
+
+
+
 
 
 
