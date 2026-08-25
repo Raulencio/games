@@ -711,28 +711,360 @@
         /* =========================================================
        RADIO
        ========================================================= */
+        /* =========================================================
+   📻 RADIO DEL CUERVO
+   ESTILO RETRO + VISUALIZADOR
+   ========================================================= */
+
+        .radio-actual {
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(145deg,
+                    #171511,
+                    #292319);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius: 16px;
+
+            padding: 18px;
+
+            margin-bottom: 12px;
+
+            color: var(--texto);
+
+            box-shadow:
+                inset 0 0 25px rgba(0, 0, 0, .35),
+                var(--sombra);
+
+        }
+
+
+        /* =========================================================
+   RADIO RETRO
+   ========================================================= */
+
+        .radio-retro {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        /* =========================================================
+   BOTÓN PLAY RETRO
+   ========================================================= */
+
+        .radio-dial {
+
+            width: 58px;
+
+            height: 58px;
+
+            border-radius: 50%;
+
+            border:
+                4px solid var(--acento);
+
+            background:
+                radial-gradient(circle,
+                    #3b3328 0 25%,
+                    #161411 27% 55%,
+                    #2b251d 57% 100%);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 22px;
+
+            flex-shrink: 0;
+
+            box-shadow:
+                0 0 0 3px #17130f,
+                0 0 18px rgba(181, 139, 82, .15);
+
+        }
+
+
+        /* =========================================================
+   INFORMACIÓN
+   ========================================================= */
+
+        .radio-retro-info {
+
+            flex: 1;
+
+            min-width: 0;
+
+        }
+
+
+        .radio-retro-nombre {
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        .radio-retro-meta {
+
+            color: var(--texto-suave);
+
+            font-size: 12px;
+
+            margin-top: 5px;
+
+        }
+
+
+        /* =========================================================
+   LUZ DE ENCENDIDO
+   ========================================================= */
+
+        .radio-led {
+
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #555;
+
+            box-shadow: none;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .radio-actual.reproduciendo .radio-led {
+
+            background: #d98b52;
+
+            box-shadow:
+                0 0 5px #d98b52,
+                0 0 14px rgba(217, 139, 82, .7);
+
+            animation:
+                radioLed 1s infinite alternate;
+
+        }
+
+
+        @keyframes radioLed {
+
+            from {
+                opacity: .45;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+
+        /* =========================================================
+   VISUALIZADOR
+   ========================================================= */
+
+        .radio-visualizador {
+
+            height: 70px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 4px;
+
+            margin-top: 15px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        /* =========================================================
+   BARRAS
+   ========================================================= */
+
+        .radio-barra {
+
+            width: 5px;
+
+            height: 12px;
+
+            border-radius: 5px;
+
+            background: var(--acento);
+
+            opacity: .35;
+
+            transform-origin: center;
+
+        }
+
+
+        .radio-actual.reproduciendo .radio-barra {
+
+            opacity: .9;
+
+            animation:
+                radioSonido var(--velocidad) ease-in-out infinite alternate;
+
+        }
+
+
+        @keyframes radioSonido {
+
+            0% {
+                height: 8px;
+                transform: translateY(5px);
+            }
+
+            25% {
+                height: 25px;
+            }
+
+            50% {
+                height: 45px;
+            }
+
+            75% {
+                height: 18px;
+            }
+
+            100% {
+                height: 55px;
+                transform: translateY(-3px);
+            }
+
+        }
+
+
+        /* =========================================================
+   PARTÍCULAS
+   ========================================================= */
+
+        .radio-particulas {
+
+            position: absolute;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            overflow: hidden;
+
+            opacity: .45;
+
+        }
+
+
+        .radio-particula {
+
+            position: absolute;
+
+            width: 3px;
+
+            height: 3px;
+
+            border-radius: 50%;
+
+            background: var(--acento);
+
+            opacity: 0;
+
+        }
+
+
+        .radio-actual.reproduciendo .radio-particula {
+
+            animation:
+                particulaSonido var(--duracion) linear infinite;
+
+        }
+
+
+        @keyframes particulaSonido {
+
+            0% {
+
+                transform:
+                    translate(0,
+                        0) scale(.4);
+
+                opacity: 0;
+
+            }
+
+            20% {
+
+                opacity: .8;
+
+            }
+
+            100% {
+
+                transform:
+                    translate(var(--x),
+                        var(--y)) scale(1.5);
+
+                opacity: 0;
+
+            }
+
+        }
+
+
+        /* =========================================================
+   AUDIO
+   ========================================================= */
 
         audio {
 
             width: 100%;
 
             margin: 10px 0;
-        }
-
-
-        .radio-actual {
-
-            background: var(--panel-2);
 
             border-radius: 10px;
 
-            padding: 12px;
-
-            margin-bottom: 10px;
-
-            color: var(--texto-suave);
         }
 
+
+        /* =========================================================
+   BUSCADOR
+   ========================================================= */
 
         .buscador-radio {
 
@@ -741,8 +1073,13 @@
             gap: 8px;
 
             margin-bottom: 12px;
+
         }
 
+
+        /* =========================================================
+   RESULTADOS
+   ========================================================= */
 
         .resultados-radio {
 
@@ -755,8 +1092,13 @@
             max-height: 350px;
 
             overflow-y: auto;
+
         }
 
+
+        /* =========================================================
+   TARJETA RADIO
+   ========================================================= */
 
         .radio-item {
 
@@ -773,9 +1115,23 @@
             border:
                 1px solid var(--borde);
 
-            border-radius: 10px;
+            border-radius: 12px;
 
             padding: 10px;
+
+            transition: .18s;
+
+        }
+
+
+        .radio-item:hover {
+
+            border-color:
+                var(--acento);
+
+            transform:
+                translateY(-1px);
+
         }
 
 
@@ -784,6 +1140,7 @@
             flex: 1;
 
             min-width: 0;
+
         }
 
 
@@ -796,6 +1153,7 @@
             overflow: hidden;
 
             text-overflow: ellipsis;
+
         }
 
 
@@ -806,12 +1164,13 @@
             font-size: 12px;
 
             margin-top: 3px;
+
         }
 
 
         /* =========================================================
-       BOTONES DE PAÍSES
-       ========================================================= */
+   PAÍSES
+   ========================================================= */
 
         .paises {
 
@@ -822,6 +1181,7 @@
             gap: 6px;
 
             margin-bottom: 15px;
+
         }
 
 
@@ -833,7 +1193,57 @@
 
             border:
                 1px solid var(--borde);
+
         }
+
+
+        .pais:hover {
+
+            border-color:
+                var(--acento);
+
+        }
+
+
+        /* =========================================================
+   MÓVIL
+   ========================================================= */
+
+        @media(max-width:600px) {
+
+            .radio-retro {
+
+                gap: 10px;
+
+            }
+
+
+            .radio-dial {
+
+                width: 48px;
+
+                height: 48px;
+
+                font-size: 18px;
+
+            }
+
+
+            .radio-retro-nombre {
+
+                font-size: 15px;
+
+            }
+
+
+            .radio-visualizador {
+
+                height: 55px;
+
+            }
+
+        }
+
 
 
         /* =========================================================
@@ -1691,22 +2101,26 @@
             <h1>Paginas</h1>
 
             <h1><a href="zg.html">Dioses Egipcios</a></h1>
+            <h1><a href="bha.html">Auxiliar Cazadores de Bestias</a></h1>
             <h1><a href="poke.html">Pokémon</a></h1>
             <h1><a href="ejercicioCanciones.html">tabla musical</a></h1>
 
             <h1 class="divE">Juegos</h1>
 
-            <h1><a href="jnv1.html">Juego Nuevo IA</a></h1>
-            <h1><a href="LunaAdventures.html"> Luna Adventures</a></h1>
-            <h1><a href="bha.html">Auxiliar Cazadores de Bestias</a></h1>
-            <h1><a href="ttt.html">Tierra Antigua</a></h1>
-            <h1><a href="tierraAntigua1v1.html">Tierra Antigua 1v1</a></h1>
+            <h1><a href="jnv1.html">Ninja´s Arena v.1.1</a></h1>            
+            <h1><a href="tierraAntigua1v1.html">Tierra Antigua 1v1 v.2.0</a></h1>
+            <h1><a href="geometrypato3.html">Geometry Pato III v.5.0</a></h1>
+            <h1><a href="version0.0.html">Espacio y Ovnis v.0.1</a></h1>
+            <h1><a href="nuevonuevo.html">Batallas vs IA v.0.2</a></h1>
+            <h1><a href="ttt.html">Tierra Antigua v.0.1</a></h1>
+
+            <h1>Proyectos</h1>
+            <h1><a href="LunaAdventures.html"> Luna Adventures</a></h1>            
             <h1><a href="busqueda.html">Busqueda</a></h1>
-            <h1><a href="geometryduck.html">Geometry Pato</a></h1>
-            <h1><a href="geometrypato3.html">Geometry Pato III</a></h1>
+            <h1><a href="geometryduck.html">Geometry Pato</a></h1>            
             <h1><a href="unoentrecuatro.html">Uno Entre Cuatro</a></h1>
-            <h1><a href="version0.0.html">Espacio y Ovnis</a></h1>
-            <h1><a href="nuevonuevo.html">Hinodis</a></h1>
+            
+            
             <h1><a href="arenagladiadores.html">Arena Gladiadores</a></h1>
 
             {ܐܲܠܵܗܵܐ ܢܒܲܪܸܟ݂ ܠܥܵܒܹ̈ܐ ܕܥܵܠܡܵܐ ܘܠܓܵܙܔܹ̈ܐ ܕܝܵܡܵܐ}
@@ -3102,112 +3516,378 @@
 
                     return `
 
-                <p class="descripcion">
-                    Busca emisoras de todo el mundo utilizando Radio Browser.
-                </p>
+        <p class="descripcion">
 
-                <div id="radioActual" class="radio-actual">
-                    <strong>Ninguna emisora seleccionada</strong>
-                </div>
+            📻 Sintoniza emisoras de todo el mundo
+            desde El Taller del Cuervo.
 
-                <audio id="reproductor" controls preload="none"></audio>
+        </p>
 
-                <h3 style="margin:15px 0 8px;">🇨🇱 Chile</h3>
 
-                <div class="paises">
+        <!-- ==================================================
+             📻 RADIO ACTUAL
+        ================================================== -->
 
-                    <button class="pais"
-                        onclick="buscarRadio('FM2 Chile')">
-                        FM2
-                    </button>
+        <div
+            id="radioActual"
+            class="radio-actual">
 
-                    <button class="pais"
-                        onclick="buscarRadio('LOS40 Chile')">
-                        LOS40
-                    </button>
 
-                    <button class="pais"
-                        onclick="buscarRadio('Tornagaleones')">
-                        Tornagaleones
-                    </button>
+            <div class="radio-retro">
 
-                    <button class="pais"
-                        onclick="buscarRadio('Punto 7')">
-                        Punto 7
-                    </button>
+
+                <div class="radio-dial">
+
+                    📻
 
                 </div>
 
-                <h3 style="margin:15px 0 8px;">🌎 Países</h3>
 
-                <div class="paises">
+                <div
+                    class="radio-retro-info">
 
-                    <button class="pais"
-                        onclick="buscarPais('Argentina')">
-                        🇦🇷 Argentina
-                    </button>
 
-                    <button class="pais"
-                        onclick="buscarPais('Spain')">
-                        🇪🇸 España
-                    </button>
+                    <div
+                        id="radioNombreActual"
+                        class="radio-retro-nombre">
 
-                    <button class="pais"
-                        onclick="buscarPais('Brazil')">
-                        🇧🇷 Brasil
-                    </button>
+                        Ninguna emisora seleccionada
 
-                    <button class="pais"
-                        onclick="buscarPais('France')">
-                        🇫🇷 Francia
-                    </button>
+                    </div>
 
-                    <button class="pais"
-                        onclick="buscarPais('United Kingdom')">
-                        🇬🇧 Inglaterra
-                    </button>
 
-                    <button class="pais"
-                        onclick="buscarPais('Japan')">
-                        🇯🇵 Japón
-                    </button>
+                    <div
+                        id="radioMetaActual"
+                        class="radio-retro-meta">
+
+                        Selecciona una emisora para comenzar.
+
+                    </div>
+
 
                 </div>
 
-                <div class="buscador-radio">
 
-                    <input
-                        id="busquedaRadio"
-                        placeholder="Buscar radio...">
-
-                    <button onclick="ejecutarBusquedaRadio()">
-                        🔎 Buscar
-                    </button>
+                <div
+                    id="radioLed"
+                    class="radio-led">
 
                 </div>
 
-                <h3 style="margin:18px 0 8px;">
-    ⭐ Radios favoritas
-</h3>
 
-<div id="favoritosRadio"
-     class="resultados-radio">
-
-</div>
+            </div>
 
 
-<h3 style="margin:18px 0 8px;">
-    🔎 Resultados
-</h3>
+            <!-- ==================================================
+                 VISUALIZADOR
+            ================================================== -->
 
-<div id="resultadosRadio"
-     class="resultados-radio">
-
-</div>
-
-            `;
+            <div
+                id="radioVisualizador"
+                class="radio-visualizador">
 
 
+                ${Array.from(
+                        { length: 28 },
+                        (_, i) => `
+
+                        <div
+                            class="radio-barra"
+                            style="
+                                --velocidad:
+                                    ${0.35 + (i % 7) * 0.08}s;
+                            ">
+                        </div>
+
+                    `
+                    ).join("")}
+
+
+            </div>
+
+
+            <!-- ==================================================
+                 PARTÍCULAS
+            ================================================== -->
+
+            <div
+                class="radio-particulas">
+
+
+                ${Array.from(
+                        { length: 35 },
+                        (_, i) => {
+
+                            const x =
+                                ((i * 47) % 180) - 90;
+
+                            const y =
+                                ((i * 31) % 100) - 50;
+
+                            const duracion =
+                                2 + ((i * 17) % 30) / 10;
+
+
+                            return `
+
+                            <span
+                                class="radio-particula"
+                                style="
+                                    left:${50 + ((i * 13) % 45) - 22}%;
+
+                                    top:${50 + ((i * 29) % 45) - 22}%;
+
+                                    --x:${x}px;
+
+                                    --y:${y}px;
+
+                                    --duracion:${duracion}s;
+                                ">
+                            </span>
+
+                        `;
+
+                        }
+                    ).join("")}
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ==================================================
+             REPRODUCTOR
+        ================================================== -->
+
+        <audio
+            id="reproductor"
+            controls
+            preload="none">
+
+        </audio>
+
+
+        <!-- ==================================================
+             🇨🇱 CHILE
+        ================================================== -->
+
+        <h3
+            style="
+                margin:15px 0 8px;
+            ">
+
+            🇨🇱 Chile
+
+        </h3>
+
+
+        <div class="paises">
+
+
+            <button
+                class="pais"
+                onclick="
+                    buscarRadio('FM2 Chile')
+                ">
+
+                FM2
+
+            </button>
+
+
+            <button
+                class="pais"
+                onclick="
+                    buscarRadio('LOS40 Chile')
+                ">
+
+                LOS40
+
+            </button>
+
+
+            <button
+                class="pais"
+                onclick="
+                    buscarRadio('Tornagaleones')
+                ">
+
+                Tornagaleones
+
+            </button>
+
+
+            <button
+                class="pais"
+                onclick="
+                    buscarRadio('Punto 7')
+                ">
+
+                Punto 7
+
+            </button>
+
+
+        </div>
+
+
+        <!-- ==================================================
+             🌎 PAÍSES
+        ================================================== -->
+
+        <h3
+            style="
+                margin:15px 0 8px;
+            ">
+
+            🌎 Países
+
+        </h3>
+
+
+        <div class="paises">
+
+
+            <button
+                class="pais"
+                onclick="
+                    buscarPais('Argentina')
+                ">
+
+                🇦🇷 Argentina
+
+            </button>
+
+
+            <button
+                class="pais"
+                onclick="
+                    buscarPais('Spain')
+                ">
+
+                🇪🇸 España
+
+            </button>
+
+
+            <button
+                class="pais"
+                onclick="
+                    buscarPais('Brazil')
+                ">
+
+                🇧🇷 Brasil
+
+            </button>
+
+
+            <button
+                class="pais"
+                onclick="
+                    buscarPais('France')
+                ">
+
+                🇫🇷 Francia
+
+            </button>
+
+
+            <button
+                class="pais"
+                onclick="
+                    buscarPais('United Kingdom')
+                ">
+
+                🇬🇧 Inglaterra
+
+            </button>
+
+
+            <button
+                class="pais"
+                onclick="
+                    buscarPais('Japan')
+                ">
+
+                🇯🇵 Japón
+
+            </button>
+
+
+        </div>
+
+
+        <!-- ==================================================
+             🔎 BUSCADOR
+        ================================================== -->
+
+        <div class="buscador-radio">
+
+
+            <input
+                id="busquedaRadio"
+                placeholder="
+                    Buscar emisora...
+                ">
+
+
+            <button
+                onclick="
+                    ejecutarBusquedaRadio()
+                ">
+
+                🔎 Buscar
+
+            </button>
+
+
+        </div>
+
+
+        <!-- ==================================================
+             ⭐ FAVORITAS
+        ================================================== -->
+
+        <h3
+            style="
+                margin:18px 0 8px;
+            ">
+
+            ⭐ Radios favoritas
+
+        </h3>
+
+
+        <div
+            id="favoritosRadio"
+            class="resultados-radio">
+
+        </div>
+
+
+        <!-- ==================================================
+             🔎 RESULTADOS
+        ================================================== -->
+
+        <h3
+            style="
+                margin:18px 0 8px;
+            ">
+
+            🔎 Resultados
+
+        </h3>
+
+
+        <div
+            id="resultadosRadio"
+            class="resultados-radio">
+
+        </div>
+
+    `;
                 /* ========================================================
                    MAPA
                    ======================================================== */
@@ -5187,9 +5867,7 @@
            REPRODUCIR EMISORA
            ================================================================ */
 
-        function reproducirEmisora(
-            radio
-        ) {
+        function reproducirEmisora(radio) {
 
             const reproductor =
                 document.getElementById(
@@ -5222,39 +5900,80 @@
             }
 
 
+            /* =========================================================
+               INFORMACIÓN
+               ========================================================= */
+
             const radioActual =
                 document.getElementById(
                     "radioActual"
                 );
 
 
-            if (radioActual) {
+            const nombre =
+                document.getElementById(
+                    "radioNombreActual"
+                );
 
-                radioActual.innerHTML = `
 
-            <strong>
+            const meta =
+                document.getElementById(
+                    "radioMetaActual"
+                );
 
-                📻 ${escaparHTML(
+
+            if (nombre) {
+
+                nombre.textContent =
                     radio.name ||
-                    "Radio"
-                )}
-
-            </strong>
-
-            <br>
-
-            ${escaparHTML(
-                    radio.country ||
-                    ""
-                )}
-
-        `;
+                    "Radio";
 
             }
 
 
-            reproductor.src =
-                url;
+            if (meta) {
+
+                meta.textContent =
+
+                    (
+                        radio.country ||
+                        "Emisora internacional"
+                    )
+                    +
+                    (
+                        radio.language
+                            ?
+                            " · " +
+                            radio.language
+                            :
+                            ""
+                    );
+
+            }
+
+
+            /* =========================================================
+               CAMBIAR ESTADO VISUAL
+               ========================================================= */
+
+            if (radioActual) {
+
+                radioActual.classList.remove(
+                    "reproduciendo"
+                );
+
+            }
+
+
+            /* =========================================================
+               CAMBIAR STREAM
+               ========================================================= */
+
+            reproductor.pause();
+
+            reproductor.src = url;
+
+            reproductor.load();
 
 
             reproductor.play()
@@ -5263,8 +5982,23 @@
 
                     function () {
 
+                        if (radioActual) {
+
+                            radioActual.classList.add(
+                                "reproduciendo"
+                            );
+
+                        }
+
+
                         mostrarMensaje(
-                            "▶ Reproduciendo radio."
+
+                            "📻 Reproduciendo " +
+                            (
+                                radio.name ||
+                                "radio"
+                            )
+
                         );
 
                     }
@@ -5273,10 +6007,24 @@
 
                 .catch(
 
-                    function () {
+                    function (error) {
+
+                        console.error(
+                            error
+                        );
+
+
+                        if (radioActual) {
+
+                            radioActual.classList.remove(
+                                "reproduciendo"
+                            );
+
+                        }
+
 
                         mostrarMensaje(
-                            "El navegador bloqueó la reproducción."
+                            "No se pudo reproducir esta emisora."
                         );
 
                     }
@@ -5284,9 +6032,55 @@
                 );
 
         }
+        const radioAudio =
+            document.getElementById(
+                "reproductor"
+            );
+
+        if (radioAudio) {
+
+            radioAudio.addEventListener(
+                "pause",
+                function () {
+
+                    const radioActual =
+                        document.getElementById(
+                            "radioActual"
+                        );
+
+                    if (radioActual) {
+
+                        radioActual.classList.remove(
+                            "reproduciendo"
+                        );
+
+                    }
+
+                }
+            );
 
 
+            radioAudio.addEventListener(
+                "playing",
+                function () {
 
+                    const radioActual =
+                        document.getElementById(
+                            "radioActual"
+                        );
+
+                    if (radioActual) {
+
+                        radioActual.classList.add(
+                            "reproduciendo"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
         /* ================================================================
            INICIALIZAR RADIO
            ================================================================ */
