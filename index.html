@@ -2284,6 +2284,811 @@
             }
 
         }
+
+
+        /* =========================================================
+   🌦️ METEOROLOGÍA DEL CUERVO
+   ========================================================= */
+
+        .buscador-clima {
+
+            display: flex;
+
+            gap: 8px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .buscador-clima input {
+
+            flex: 1;
+
+        }
+
+
+        /* =========================================================
+   UBICACIÓN
+   ========================================================= */
+
+        .clima-ubicacion {
+
+            background:
+                var(--panel-2);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius:
+                var(--radio);
+
+            padding:
+                12px;
+
+            margin-bottom:
+                12px;
+
+            color:
+                var(--texto-suave);
+
+        }
+
+
+        /* =========================================================
+   TARJETA PRINCIPAL
+   ========================================================= */
+
+        .clima-actual {
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+
+                radial-gradient(circle at 80% 20%,
+                    rgba(181, 139, 82, .16),
+                    transparent 35%),
+
+                linear-gradient(145deg,
+                    var(--panel-2),
+                    var(--panel-3));
+
+            border:
+                1px solid var(--borde);
+
+            border-radius:
+                18px;
+
+            padding:
+                24px;
+
+            min-height:
+                210px;
+
+            box-shadow:
+                var(--sombra);
+
+        }
+
+
+        /* =========================================================
+   DECORACIÓN
+   ========================================================= */
+
+        .clima-actual::before {
+
+            content:
+                "☁";
+
+            position:
+                absolute;
+
+            right:
+                20px;
+
+            top:
+                10px;
+
+            font-size:
+                90px;
+
+            opacity:
+                .05;
+
+            pointer-events:
+                none;
+
+        }
+
+
+        .clima-cargando {
+
+            text-align:
+                center;
+
+            color:
+                var(--texto-suave);
+
+            padding:
+                40px 10px;
+
+        }
+
+
+        /* =========================================================
+   ICONO
+   ========================================================= */
+
+        .clima-icono {
+
+            font-size:
+                58px;
+
+            line-height:
+                1;
+
+            margin-bottom:
+                10px;
+
+        }
+
+
+        /* =========================================================
+   TEMPERATURA
+   ========================================================= */
+
+        .clima-temperatura {
+
+            font-size:
+                52px;
+
+            font-weight:
+                bold;
+
+            color:
+                var(--acento);
+
+            line-height:
+                1;
+
+        }
+
+
+        .clima-descripcion {
+
+            color:
+                var(--texto);
+
+            font-size:
+                17px;
+
+            margin-top:
+                8px;
+
+        }
+
+
+        .clima-sensacion {
+
+            color:
+                var(--texto-suave);
+
+            font-size:
+                13px;
+
+            margin-top:
+                5px;
+
+        }
+
+
+        /* =========================================================
+   DATOS
+   ========================================================= */
+
+        .clima-datos {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(auto-fit,
+                    minmax(120px, 1fr));
+
+            gap:
+                8px;
+
+            margin-top:
+                10px;
+
+        }
+
+
+        .clima-dato {
+
+            background:
+                var(--panel-2);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius:
+                10px;
+
+            padding:
+                12px;
+
+            text-align:
+                center;
+
+        }
+
+
+        .clima-dato-icono {
+
+            font-size:
+                22px;
+
+        }
+
+
+        .clima-dato-valor {
+
+            font-weight:
+                bold;
+
+            margin-top:
+                5px;
+
+        }
+
+
+        .clima-dato-nombre {
+
+            color:
+                var(--texto-suave);
+
+            font-size:
+                11px;
+
+            margin-top:
+                3px;
+
+        }
+
+
+        /* =========================================================
+   PRONÓSTICO
+   ========================================================= */
+
+        .clima-titulo {
+
+            color:
+                var(--acento);
+
+            margin:
+                18px 0 8px;
+
+        }
+
+
+        .clima-pronostico {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(auto-fit,
+                    minmax(115px, 1fr));
+
+            gap:
+                8px;
+
+        }
+
+
+        .clima-dia {
+
+            background:
+                var(--panel-2);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius:
+                12px;
+
+            padding:
+                12px;
+
+            text-align:
+                center;
+
+            transition:
+                .15s;
+
+        }
+
+
+        .clima-dia:hover {
+
+            transform:
+                translateY(-2px);
+
+            border-color:
+                var(--acento);
+
+        }
+
+
+        .clima-dia-nombre {
+
+            font-weight:
+                bold;
+
+        }
+
+
+        .clima-dia-icono {
+
+            font-size:
+                30px;
+
+            margin:
+                8px 0;
+
+        }
+
+
+        .clima-dia-temperaturas {
+
+            font-weight:
+                bold;
+
+        }
+
+
+        .clima-dia-lluvia {
+
+            color:
+                var(--texto-suave);
+
+            font-size:
+                11px;
+
+            margin-top:
+                5px;
+
+        }
+
+
+        @media(max-width:600px) {
+
+            .buscador-clima {
+
+                flex-direction:
+                    column;
+
+            }
+
+            .clima-temperatura {
+
+                font-size:
+                    45px;
+
+            }
+
+            .clima-pronostico {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+
+        /* =========================================================
+   📺 TV V2
+   ========================================================= */
+
+        .tv-aparato {
+
+            background:
+                linear-gradient(145deg,
+                    #181713,
+                    #080807);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius:
+                18px;
+
+            padding:
+                14px;
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, .45);
+
+            margin-bottom:
+                18px;
+
+        }
+
+
+        .tv-pantalla {
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            aspect-ratio:
+                16 / 9;
+
+            background:
+                #000;
+
+            border:
+                6px solid #292721;
+
+            border-radius:
+                12px;
+
+            overflow:
+                hidden;
+
+        }
+
+
+        #tvReproductor {
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            display:
+                block;
+
+            background:
+                #000;
+
+            object-fit:
+                contain;
+
+        }
+
+
+        .tv-sin-senal {
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            flex-direction:
+                column;
+
+            text-align:
+                center;
+
+            background:
+                #050505;
+
+            color:
+                #777;
+
+            font-size:
+                16px;
+
+            pointer-events:
+                none;
+
+        }
+
+
+        .tv-sin-senal.oculto {
+
+            display:
+                none;
+
+        }
+
+
+        .tv-canal-actual {
+
+            margin-top:
+                10px;
+
+            padding:
+                10px;
+
+            background:
+                var(--panel-2);
+
+            border-radius:
+                9px;
+
+            color:
+                var(--texto-suave);
+
+            font-size:
+                13px;
+
+        }
+
+
+        .tv-titulo {
+
+            color:
+                var(--acento);
+
+            margin:
+                18px 0 8px;
+
+        }
+
+
+        .tv-generos {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(auto-fit,
+                    minmax(130px, 1fr));
+
+            gap:
+                8px;
+
+            margin-bottom:
+                15px;
+
+        }
+
+
+        .tv-genero {
+
+            background:
+                var(--panel-2);
+
+            color:
+                var(--texto);
+
+            border:
+                1px solid var(--borde);
+
+        }
+
+
+        .tv-genero:hover {
+
+            border-color:
+                var(--acento);
+
+        }
+
+
+        .tv-canal {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            background:
+                var(--panel-2);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius:
+                12px;
+
+            padding:
+                10px;
+
+        }
+
+
+        .tv-canal:hover {
+
+            border-color:
+                var(--acento);
+
+        }
+
+
+        .tv-logo {
+
+            width:
+                65px;
+
+            height:
+                45px;
+
+            object-fit:
+                contain;
+
+            background:
+                #000;
+
+            border-radius:
+                7px;
+
+            flex-shrink:
+                0;
+
+        }
+
+
+        .tv-info {
+
+            flex:
+                1;
+
+            min-width:
+                0;
+
+        }
+
+
+        .tv-nombre {
+
+            font-weight:
+                bold;
+
+            white-space:
+                nowrap;
+
+            overflow:
+                hidden;
+
+            text-overflow:
+                ellipsis;
+
+        }
+
+
+        .tv-pais {
+
+            color:
+                var(--texto-suave);
+
+            font-size:
+                12px;
+
+            margin-top:
+                4px;
+
+        }
+
+
+        .tv-estado {
+
+            background:
+                var(--panel-2);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius:
+                9px;
+
+            padding:
+                10px;
+
+            color:
+                var(--texto-suave);
+
+            font-size:
+                13px;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .tv-disponible {
+
+            color:
+                #78b878;
+
+        }
+
+
+        .tv-error {
+
+            color:
+                #b86b6b;
+
+        }
+
+
+        .tv-comprobando {
+
+            color:
+                var(--acento);
+
+        }
+
+
+        .tv-indicador {
+
+            display:
+                inline-block;
+
+            width:
+                8px;
+
+            height:
+                8px;
+
+            border-radius:
+                50%;
+
+            margin-right:
+                5px;
+
+        }
+
+
+        .tv-verde {
+
+            background:
+                #69b869;
+
+        }
+
+
+        .tv-rojo {
+
+            background:
+                #b85b5b;
+
+        }
+
+
+        @media(max-width:600px) {
+
+            .tv-aparato {
+
+                padding:
+                    8px;
+
+            }
+
+
+            .tv-generos {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
     </style>
 </head>
 
@@ -2693,7 +3498,7 @@
             {
                 id: "proyectos",
                 nombre: "Proyectos",
-                icono: "🎮",
+                icono: "♪♫",
                 visible: false
             },
 
@@ -2714,6 +3519,18 @@
                 id: "youtube",
                 nombre: "Buscador de YouTube",
                 icono: "▶️",
+                visible: true
+            },
+            {
+                id: "television",
+                nombre: "Television",
+                icono: "▶️",
+                visible: true
+            },
+            {
+                id: "clima",
+                nombre: "Clima",
+                icono: "🌦️",
                 visible: true
             },
         ];
@@ -3120,7 +3937,108 @@
         function obtenerContenidoModulo(id) {
 
             switch (id) {
+                case "meteorologia":
 
+                    return `
+
+        <p class="descripcion">
+
+            🌦️ Consulta el clima actual y el pronóstico
+            de cualquier lugar del mundo.
+
+        </p>
+
+        <!-- ==================================================
+             BUSCADOR
+        ================================================== -->
+
+        <div class="buscador-clima">
+
+            <input
+                id="climaBusqueda"
+                type="text"
+                placeholder="Buscar ciudad...">
+
+            <button onclick="CLIMA_buscarCiudad()">
+
+                🔎 Buscar
+
+            </button>
+
+        </div>
+
+
+        <button
+            class="secundario"
+            onclick="CLIMA_usarUbicacion()"
+            style="margin-bottom:15px;">
+
+            📍 Usar mi ubicación
+
+        </button>
+
+
+        <!-- ==================================================
+             UBICACIÓN ACTUAL
+        ================================================== -->
+
+        <div
+            id="climaUbicacion"
+            class="clima-ubicacion">
+
+            🌎 Selecciona una ciudad
+
+        </div>
+
+
+        <!-- ==================================================
+             CLIMA ACTUAL
+        ================================================== -->
+
+        <div
+            id="climaActual"
+            class="clima-actual">
+
+            <div class="clima-cargando">
+
+                🌦️
+                <br>
+                Busca una ciudad para consultar el clima.
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             DATOS
+        ================================================== -->
+
+        <div
+            id="climaDatos"
+            class="clima-datos">
+
+        </div>
+
+
+        <!-- ==================================================
+             PRONÓSTICO
+        ================================================== -->
+
+        <h3 class="clima-titulo">
+
+            📅 Pronóstico
+
+        </h3>
+
+
+        <div
+            id="climaPronostico"
+            class="clima-pronostico">
+
+        </div>
+
+    `;
                 case "television":
 
                     return `
@@ -3128,11 +4046,11 @@
         <p class="descripcion">
 
             📺 Televisión del Cuervo.
-            Explora canales de televisión de distintas
-            partes del mundo y reproduce los streams
-            compatibles directamente en el Taller.
+            Busca canales de todo el mundo y reproduce
+            las señales compatibles directamente aquí.
 
         </p>
+
 
         <!-- ==================================================
              TELEVISOR
@@ -3154,6 +4072,7 @@
                     class="tv-sin-senal">
 
                     📺
+
                     <br>
 
                     Selecciona un canal
@@ -3162,15 +4081,12 @@
 
             </div>
 
-            <div class="tv-controles">
 
-                <div
-                    id="tvCanalActual"
-                    class="tv-canal-actual">
+            <div
+                id="tvCanalActual"
+                class="tv-canal-actual">
 
-                    Sin canal seleccionado
-
-                </div>
+                Sin canal seleccionado
 
             </div>
 
@@ -3178,7 +4094,27 @@
 
 
         <!-- ==================================================
-             CATEGORÍAS
+             BUSCADOR
+        ================================================== -->
+
+        <div class="buscador-clima">
+
+            <input
+                id="tvBusqueda"
+                type="text"
+                placeholder="Buscar canal...">
+
+            <button onclick="TV5_buscar()">
+
+                🔎 Buscar
+
+            </button>
+
+        </div>
+
+
+        <!-- ==================================================
+             GÉNEROS
         ================================================== -->
 
         <h3 class="tv-titulo">
@@ -3187,59 +4123,66 @@
 
         </h3>
 
+
         <div class="tv-generos">
 
             <button
                 class="tv-genero"
-                onclick="TV_buscarCategoria('news')">
+                onclick="TV5_buscarCategoria('news')">
 
                 📰 Noticias
 
             </button>
 
+
             <button
                 class="tv-genero"
-                onclick="TV_buscarCategoria('music')">
+                onclick="TV5_buscarCategoria('music')">
 
                 🎵 Música
 
             </button>
 
+
             <button
                 class="tv-genero"
-                onclick="TV_buscarCategoria('sports')">
+                onclick="TV5_buscarCategoria('sports')">
 
                 ⚽ Deportes
 
             </button>
 
+
             <button
                 class="tv-genero"
-                onclick="TV_buscarCategoria('entertainment')">
+                onclick="TV5_buscarCategoria('entertainment')">
 
                 🎬 Entretenimiento
 
             </button>
 
+
             <button
                 class="tv-genero"
-                onclick="TV_buscarCategoria('movies')">
+                onclick="TV5_buscarCategoria('movies')">
 
                 🎞️ Películas
 
             </button>
 
+
             <button
                 class="tv-genero"
-                onclick="TV_buscarCategoria('kids')">
+                onclick="TV5_buscarCategoria('kids')">
 
                 🧸 Infantil
 
             </button>
 
+
             <button
                 class="tv-genero"
-                onclick="TV_buscarCategoria('documentary')">
+                onclick="TV5_buscarCategoria('documentary')">
 
                 🌍 Documentales
 
@@ -3249,20 +4192,19 @@
 
 
         <!-- ==================================================
-             BUSCADOR
+             FAVORITOS
         ================================================== -->
 
-        <div class="buscador-radio">
+        <h3 class="tv-titulo">
 
-            <input
-                id="tvBusqueda"
-                placeholder="Buscar canal de televisión...">
+            ⭐ Mis canales favoritos
 
-            <button onclick="TV_buscar()">
+        </h3>
 
-                🔎 Buscar
 
-            </button>
+        <div
+            id="tvFavoritos"
+            class="resultados-radio">
 
         </div>
 
@@ -3273,9 +4215,19 @@
 
         <h3 class="tv-titulo">
 
-            📺 Canales encontrados
+            📺 Canales disponibles
 
         </h3>
+
+
+        <div
+            id="tvEstadoBusqueda"
+            class="tv-estado">
+
+            Busca un canal o selecciona una categoría.
+
+        </div>
+
 
         <div
             id="tvResultados"
@@ -3283,8 +4235,7 @@
 
         </div>
 
-    `;
-                /* ========================================================
+    `;  /* ========================================================
                    YOUTUBE
                    ======================================================== */
 
@@ -7437,7 +8388,7 @@
             /* ========================================================
                YOUTUBE
             ======================================================== */
-            YT_inicializar()
+            YT_inicializar(); CLIMA_inicializar();
 
             if (
                 document.getElementById(
@@ -10733,6 +11684,999 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+        /* ================================================================
+           🌦️ METEOROLOGÍA DEL CUERVO
+           ================================================================ */
+
+        const CLIMA_API =
+            "https://api.open-meteo.com/v1/forecast";
+
+        const CLIMA_GEOCODING_API =
+            "https://geocoding-api.open-meteo.com/v1/search";
+
+
+        let CLIMA_ubicacionActual = null;
+
+
+        /* ================================================================
+           CÓDIGOS METEOROLÓGICOS
+           ================================================================ */
+
+        function CLIMA_interpretarCodigo(codigo) {
+
+            const estados = {
+
+                0: {
+                    icono: "☀️",
+                    texto: "Cielo despejado"
+                },
+
+                1: {
+                    icono: "🌤️",
+                    texto: "Principalmente despejado"
+                },
+
+                2: {
+                    icono: "⛅",
+                    texto: "Parcialmente nublado"
+                },
+
+                3: {
+                    icono: "☁️",
+                    texto: "Nublado"
+                },
+
+                45: {
+                    icono: "🌫️",
+                    texto: "Niebla"
+                },
+
+                48: {
+                    icono: "🌫️",
+                    texto: "Niebla escarchada"
+                },
+
+                51: {
+                    icono: "🌦️",
+                    texto: "Llovizna ligera"
+                },
+
+                53: {
+                    icono: "🌦️",
+                    texto: "Llovizna"
+                },
+
+                55: {
+                    icono: "🌧️",
+                    texto: "Llovizna intensa"
+                },
+
+                61: {
+                    icono: "🌧️",
+                    texto: "Lluvia ligera"
+                },
+
+                63: {
+                    icono: "🌧️",
+                    texto: "Lluvia moderada"
+                },
+
+                65: {
+                    icono: "🌧️",
+                    texto: "Lluvia intensa"
+                },
+
+                71: {
+                    icono: "🌨️",
+                    texto: "Nieve ligera"
+                },
+
+                73: {
+                    icono: "🌨️",
+                    texto: "Nieve"
+                },
+
+                75: {
+                    icono: "❄️",
+                    texto: "Nieve intensa"
+                },
+
+                80: {
+                    icono: "🌦️",
+                    texto: "Chubascos ligeros"
+                },
+
+                81: {
+                    icono: "🌧️",
+                    texto: "Chubascos"
+                },
+
+                82: {
+                    icono: "⛈️",
+                    texto: "Chubascos intensos"
+                },
+
+                95: {
+                    icono: "⛈️",
+                    texto: "Tormenta"
+                },
+
+                96: {
+                    icono: "⛈️",
+                    texto: "Tormenta con granizo"
+                },
+
+                99: {
+                    icono: "⛈️",
+                    texto: "Tormenta fuerte"
+                }
+
+            };
+
+
+            return estados[codigo]
+                ||
+            {
+                icono: "🌡️",
+                texto: "Condiciones desconocidas"
+            };
+
+        }
+
+
+        /* ================================================================
+           BUSCAR CIUDAD
+           ================================================================ */
+
+        async function CLIMA_buscarCiudad() {
+
+            const campo =
+                document.getElementById(
+                    "climaBusqueda"
+                );
+
+
+            if (!campo) {
+
+                return;
+
+            }
+
+
+            const texto =
+                campo.value.trim();
+
+
+            if (!texto) {
+
+                mostrarMensaje(
+                    "Escribe una ciudad."
+                );
+
+                return;
+
+            }
+
+
+            mostrarMensaje(
+                "🔎 Buscando ciudad..."
+            );
+
+
+            try {
+
+                const parametros =
+                    new URLSearchParams({
+
+                        name:
+                            texto,
+
+                        count:
+                            "5",
+
+                        language:
+                            "es",
+
+                        format:
+                            "json"
+
+                    });
+
+
+                const respuesta =
+                    await fetch(
+
+                        CLIMA_GEOCODING_API
+                        +
+                        "?"
+                        +
+                        parametros.toString()
+
+                    );
+
+
+                if (!respuesta.ok) {
+
+                    throw new Error(
+                        "Error de geocodificación."
+                    );
+
+                }
+
+
+                const datos =
+                    await respuesta.json();
+
+
+                if (
+                    !datos.results ||
+                    datos.results.length === 0
+                ) {
+
+                    mostrarMensaje(
+                        "No encontramos esa ciudad."
+                    );
+
+                    return;
+
+                }
+
+
+                const ciudad =
+                    datos.results[0];
+
+
+                await CLIMA_cargar(
+
+                    ciudad.latitude,
+
+                    ciudad.longitude,
+
+                    ciudad.name,
+
+                    ciudad.country
+
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Clima:",
+                    error
+                );
+
+                mostrarMensaje(
+                    "No se pudo buscar la ciudad."
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           CARGAR CLIMA
+           ================================================================ */
+
+        async function CLIMA_cargar(
+
+            lat,
+            lon,
+            nombre,
+            pais
+
+        ) {
+
+            mostrarMensaje(
+                "🌦️ Consultando meteorología..."
+            );
+
+
+            try {
+
+                const parametros =
+                    new URLSearchParams({
+
+                        latitude:
+                            lat,
+
+                        longitude:
+                            lon,
+
+                        current:
+                            [
+                                "temperature_2m",
+                                "relative_humidity_2m",
+                                "apparent_temperature",
+                                "precipitation",
+                                "weather_code",
+                                "wind_speed_10m",
+                                "wind_direction_10m"
+                            ].join(","),
+
+                        hourly:
+                            [
+                                "temperature_2m",
+                                "precipitation_probability",
+                                "weather_code"
+                            ].join(","),
+
+                        daily:
+                            [
+                                "weather_code",
+                                "temperature_2m_max",
+                                "temperature_2m_min",
+                                "precipitation_probability_max",
+                                "sunrise",
+                                "sunset"
+                            ].join(","),
+
+                        timezone:
+                            "auto",
+
+                        forecast_days:
+                            "7"
+
+                    });
+
+
+                const respuesta =
+                    await fetch(
+
+                        CLIMA_API
+                        +
+                        "?"
+                        +
+                        parametros.toString()
+
+                    );
+
+
+                if (!respuesta.ok) {
+
+                    throw new Error(
+                        "Error meteorológico."
+                    );
+
+                }
+
+
+                const datos =
+                    await respuesta.json();
+
+
+                CLIMA_ubicacionActual = {
+
+                    lat:
+                        lat,
+
+                    lon:
+                        lon,
+
+                    nombre:
+                        nombre,
+
+                    pais:
+                        pais
+
+                };
+
+
+                CLIMA_mostrarActual(
+                    datos
+                );
+
+
+                CLIMA_mostrarDatos(
+                    datos
+                );
+
+
+                CLIMA_mostrarPronostico(
+                    datos
+                );
+
+
+                const ubicacion =
+                    document.getElementById(
+                        "climaUbicacion"
+                    );
+
+
+                if (ubicacion) {
+
+                    ubicacion.innerHTML = `
+
+                📍
+
+                <strong>
+
+                    ${escaparHTML(
+                        nombre
+                    )}
+
+                </strong>
+
+                ·
+
+                ${escaparHTML(
+                        pais || ""
+                    )}
+
+            `;
+
+                }
+
+
+                mostrarMensaje(
+                    "🌦️ Meteorología actualizada."
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Clima:",
+                    error
+                );
+
+                mostrarMensaje(
+                    "No se pudo obtener el clima."
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           MOSTRAR CLIMA ACTUAL
+           ================================================================ */
+
+        function CLIMA_mostrarActual(
+            datos
+        ) {
+
+            const contenedor =
+                document.getElementById(
+                    "climaActual"
+                );
+
+
+            if (!contenedor) {
+
+                return;
+
+            }
+
+
+            const actual =
+                datos.current;
+
+
+            const estado =
+                CLIMA_interpretarCodigo(
+                    actual.weather_code
+                );
+
+
+            contenedor.innerHTML = `
+
+        <div class="clima-icono">
+
+            ${estado.icono}
+
+        </div>
+
+
+        <div class="clima-temperatura">
+
+            ${Math.round(
+                actual.temperature_2m
+            )}°C
+
+        </div>
+
+
+        <div class="clima-descripcion">
+
+            ${estado.texto}
+
+        </div>
+
+
+        <div class="clima-sensacion">
+
+            Sensación térmica:
+
+            ${Math.round(
+                actual.apparent_temperature
+            )}°C
+
+        </div>
+
+    `;
+
+        }
+
+
+        /* ================================================================
+           DATOS ADICIONALES
+           ================================================================ */
+
+        function CLIMA_mostrarDatos(
+            datos
+        ) {
+
+            const contenedor =
+                document.getElementById(
+                    "climaDatos"
+                );
+
+
+            if (!contenedor) {
+
+                return;
+
+            }
+
+
+            const actual =
+                datos.current;
+
+
+            contenedor.innerHTML = `
+
+        <div class="clima-dato">
+
+            <div class="clima-dato-icono">
+                💧
+            </div>
+
+            <div class="clima-dato-valor">
+
+                ${actual.relative_humidity_2m}%
+
+            </div>
+
+            <div class="clima-dato-nombre">
+
+                Humedad
+
+            </div>
+
+        </div>
+
+
+        <div class="clima-dato">
+
+            <div class="clima-dato-icono">
+                💨
+            </div>
+
+            <div class="clima-dato-valor">
+
+                ${Math.round(
+                actual.wind_speed_10m
+            )} km/h
+
+            </div>
+
+            <div class="clima-dato-nombre">
+
+                Viento
+
+            </div>
+
+        </div>
+
+
+        <div class="clima-dato">
+
+            <div class="clima-dato-icono">
+                🌧️
+            </div>
+
+            <div class="clima-dato-valor">
+
+                ${actual.precipitation} mm
+
+            </div>
+
+            <div class="clima-dato-nombre">
+
+                Precipitación
+
+            </div>
+
+        </div>
+
+
+        <div class="clima-dato">
+
+            <div class="clima-dato-icono">
+                🧭
+            </div>
+
+            <div class="clima-dato-valor">
+
+                ${Math.round(
+                actual.wind_direction_10m
+            )}°
+
+            </div>
+
+            <div class="clima-dato-nombre">
+
+                Dirección viento
+
+            </div>
+
+        </div>
+
+    `;
+
+        }
+
+
+        /* ================================================================
+           PRONÓSTICO
+           ================================================================ */
+
+        function CLIMA_mostrarPronostico(
+            datos
+        ) {
+
+            const contenedor =
+                document.getElementById(
+                    "climaPronostico"
+                );
+
+
+            if (!contenedor) {
+
+                return;
+
+            }
+
+
+            const diario =
+                datos.daily;
+
+
+            contenedor.innerHTML =
+                "";
+
+
+            for (
+                let i = 0;
+                i < diario.time.length;
+                i++
+            ) {
+
+                const estado =
+                    CLIMA_interpretarCodigo(
+                        diario.weather_code[i]
+                    );
+
+
+                const fecha =
+                    new Date(
+                        diario.time[i] +
+                        "T12:00:00"
+                    );
+
+
+                const nombreDia =
+                    fecha.toLocaleDateString(
+                        "es-CL",
+                        {
+                            weekday:
+                                "short"
+                        }
+                    );
+
+
+                const elemento =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                elemento.className =
+                    "clima-dia";
+
+
+                elemento.innerHTML = `
+
+            <div class="clima-dia-nombre">
+
+                ${nombreDia}
+
+            </div>
+
+
+            <div class="clima-dia-icono">
+
+                ${estado.icono}
+
+            </div>
+
+
+            <div>
+
+                ${estado.texto}
+
+            </div>
+
+
+            <div
+                class="clima-dia-temperaturas">
+
+                ${Math.round(
+                    diario.temperature_2m_max[i]
+                )}°
+
+                /
+
+                ${Math.round(
+                    diario.temperature_2m_min[i]
+                )}°
+
+            </div>
+
+
+            <div
+                class="clima-dia-lluvia">
+
+                🌧️
+
+                ${diario.precipitation_probability_max[i] ?? 0}%
+
+            </div>
+
+        `;
+
+
+                contenedor.appendChild(
+                    elemento
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           USAR UBICACIÓN
+           ================================================================ */
+
+        function CLIMA_usarUbicacion() {
+
+            if (
+                !navigator.geolocation
+            ) {
+
+                mostrarMensaje(
+                    "Tu navegador no permite obtener ubicación."
+                );
+
+                return;
+
+            }
+
+
+            mostrarMensaje(
+                "📍 Detectando ubicación..."
+            );
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                async function (posicion) {
+
+                    const lat =
+                        posicion.coords.latitude;
+
+                    const lon =
+                        posicion.coords.longitude;
+
+
+                    try {
+
+                        const parametros =
+                            new URLSearchParams({
+
+                                latitude:
+                                    lat,
+
+                                longitude:
+                                    lon,
+
+                                count:
+                                    "1",
+
+                                language:
+                                    "es",
+
+                                format:
+                                    "json"
+
+                            });
+
+
+                        const respuesta =
+                            await fetch(
+
+                                CLIMA_GEOCODING_API
+                                +
+                                "?"
+                                +
+                                parametros.toString()
+
+                            );
+
+
+                        const datos =
+                            await respuesta.json();
+
+
+                        let nombre =
+                            "Mi ubicación";
+
+                        let pais =
+                            "";
+
+
+                        if (
+                            datos.results &&
+                            datos.results.length
+                        ) {
+
+                            nombre =
+                                datos.results[0].name;
+
+                            pais =
+                                datos.results[0].country;
+
+                        }
+
+
+                        await CLIMA_cargar(
+
+                            lat,
+
+                            lon,
+
+                            nombre,
+
+                            pais
+
+                        );
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            error
+                        );
+
+                        await CLIMA_cargar(
+
+                            lat,
+
+                            lon,
+
+                            "Mi ubicación",
+
+                            ""
+
+                        );
+
+                    }
+
+                },
+
+
+                function (error) {
+
+                    console.error(
+                        error
+                    );
+
+                    mostrarMensaje(
+                        "No se pudo obtener tu ubicación."
+                    );
+
+                },
+
+
+                {
+
+                    enableHighAccuracy:
+                        false,
+
+                    timeout:
+                        10000,
+
+                    maximumAge:
+                        300000
+
+                }
+
+            );
+
+        }
+
+
+        /* ================================================================
+           INICIALIZAR METEOROLOGÍA
+           ================================================================ */
+
+        function CLIMA_inicializar() {
+
+            const campo =
+                document.getElementById(
+                    "climaBusqueda"
+                );
+
+
+            if (campo) {
+
+                campo.onkeydown =
+                    function (event) {
+
+                        if (
+                            event.key === "Enter"
+                        ) {
+
+                            CLIMA_buscarCiudad();
+
+                        }
+
+                    };
+
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /* ================================================================
            🐦 BIBLIOTECA DEL CUERVO
            YouTube SIN API
@@ -11772,127 +13716,956 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /* ================================================================
-        📺 TELEVISIÓN DEL CUERVO
-        ================================================================ */
-
-        const TV_API =
-            "https://iptv-org.github.io/api/channels.json";
-
-
-        let TV_canales = [];
-
-
-        /* ================================================================
-           CARGAR CANALES
+           📺 TELEVISIÓN DEL CUERVO V5
+           ================================================================
+        
+           SISTEMA NUEVO DE FAVORITOS
+        
+           ✓ Nueva base de favoritos
+           ✓ No importa favoritos antiguos
+           ✓ Una sola clave localStorage
+           ✓ Una sola función de carga
+           ✓ Una sola función de guardado
+           ✓ No borra favoritos al cargar IPTV
+           ✓ Evita duplicados
+           ✓ Guarda favoritos permanentemente
+           ✓ Carga favoritos al entrar
+           ✓ Funciona antes y después de cargar IPTV
+           ✓ Guarda stream
+           ✓ Búsqueda por canal
+           ✓ Búsqueda por país
+           ✓ Búsqueda por categoría
+           ✓ Reproducción dentro de la página
+           ✓ Compatible con sistema modular
+        
            ================================================================ */
 
-        async function TV_cargarCanales() {
 
-            try {
+        /* ================================================================
+           📡 APIs IPTV
+           ================================================================ */
 
-                mostrarMensaje(
-                    "📺 Cargando canales..."
-                );
+        const TV5_CANAL_API =
+            "https://iptv-org.github.io/api/channels.json";
 
-                const respuesta =
-                    await fetch(TV_API);
+        const TV5_STREAM_API =
+            "https://iptv-org.github.io/api/streams.json";
 
-                if (!respuesta.ok) {
 
-                    throw new Error(
-                        "Error cargando canales"
-                    );
+        /* ================================================================
+           ⭐ NUEVA CLAVE DE FAVORITOS
+           ================================================================
+        
+           ESTA CLAVE ES NUEVA.
+        
+           No utilizamos ninguna clave anterior.
+        
+           ================================================================ */
 
-                }
+        const TV5_CLAVE_FAVORITOS =
+            "cuervo_tv_favoritos_v5";
 
-                TV_canales =
-                    await respuesta.json();
 
-                mostrarMensaje(
-                    "📺 Canales cargados."
+        /* ================================================================
+           ESTADO
+           ================================================================ */
+
+        let TV5_canales = [];
+
+        let TV5_streams = [];
+
+        let TV5_favoritos = [];
+
+        let TV5_cargando = false;
+
+        let TV5_inicializado = false;
+
+
+        /* ================================================================
+           🔑 OBTENER ID DEL CANAL
+           ================================================================ */
+
+        function TV5_obtenerId(canal) {
+
+            if (!canal) {
+                return null;
+            }
+
+            if (canal.id) {
+
+                return String(
+                    canal.id
                 );
 
             }
 
-            catch (error) {
+            if (canal.channel) {
 
-                console.error(
-                    "TV:",
-                    error
-                );
-
-                mostrarMensaje(
-                    "No se pudieron cargar los canales."
+                return String(
+                    canal.channel
                 );
 
             }
 
+            if (canal.name) {
+
+                return String(
+                    canal.name
+                )
+                    .trim()
+                    .toLowerCase();
+
+            }
+
+            return null;
         }
 
 
         /* ================================================================
-           BUSCAR POR CATEGORÍA
+           ⭐ CARGAR FAVORITOS
            ================================================================ */
 
-        async function TV_buscarCategoria(
-            categoria
-        ) {
+        function TV5_cargarFavoritos() {
 
-            if (
-                TV_canales.length === 0
-            ) {
+            console.log(
+                "📺 V5: cargando favoritos..."
+            );
 
-                await TV_cargarCanales();
+            try {
 
-            }
+                const datosGuardados =
+                    localStorage.getItem(
+                        TV5_CLAVE_FAVORITOS
+                    );
 
 
-            const resultados =
-                TV_canales.filter(
+                /*
+                   Si todavía no existe la lista,
+                   simplemente empezamos vacíos.
+                */
 
-                    canal => {
+                if (
+                    !datosGuardados
+                ) {
 
-                        if (
-                            !canal.categories
-                        ) {
+                    TV5_favoritos = [];
 
-                            return false;
+                    console.log(
+                        "⭐ V5: no existen favoritos guardados."
+                    );
 
+                    return;
+
+                }
+
+
+                const datos =
+                    JSON.parse(
+                        datosGuardados
+                    );
+
+
+                /*
+                   Comprobamos que realmente
+                   sea una lista.
+                */
+
+                if (
+                    !Array.isArray(datos)
+                ) {
+
+                    console.warn(
+                        "⚠️ V5: favoritos inválidos."
+                    );
+
+                    TV5_favoritos = [];
+
+                    return;
+
+                }
+
+
+                /*
+                   Limpiamos duplicados.
+                */
+
+                const favoritosLimpios = [];
+
+                datos.forEach(
+
+                    function (canal) {
+
+                        const id =
+                            TV5_obtenerId(
+                                canal
+                            );
+
+
+                        if (!id) {
+                            return;
                         }
 
-                        return canal.categories
-                            .some(
 
-                                cat =>
-                                    cat.toLowerCase()
-                                        .includes(
-                                            categoria
-                                                .toLowerCase()
-                                        )
+                        const existe =
+                            favoritosLimpios.some(
+
+                                function (item) {
+
+                                    return (
+                                        TV5_obtenerId(item) === id
+                                    );
+
+                                }
 
                             );
+
+
+                        if (!existe) {
+
+                            favoritosLimpios.push(
+                                canal
+                            );
+
+                        }
 
                     }
 
                 );
 
 
-            TV_mostrarResultados(
-                resultados.slice(
-                    0,
-                    50
-                )
+                TV5_favoritos =
+                    favoritosLimpios;
+
+
+                console.log(
+                    "⭐ V5: favoritos cargados:",
+                    TV5_favoritos.length
+                );
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "❌ V5: error cargando favoritos:",
+                    error
+                );
+
+                TV5_favoritos = [];
+
+            }
+
+        }
+
+
+        /* ================================================================
+           💾 GUARDAR FAVORITOS
+           ================================================================ */
+
+        function TV5_guardarFavoritos() {
+
+            try {
+
+                /*
+                   Creamos una copia para guardar.
+        
+                   Esto evita guardar referencias
+                   extrañas del sistema IPTV.
+                */
+
+                const lista =
+                    TV5_favoritos.map(
+
+                        function (canal) {
+
+                            return {
+
+                                id:
+                                    TV5_obtenerId(
+                                        canal
+                                    ),
+
+                                name:
+                                    canal.name ||
+                                    "Canal",
+
+                                country:
+                                    canal.country ||
+                                    "",
+
+                                logo:
+                                    canal.logo ||
+                                    "",
+
+                                categories:
+                                    Array.isArray(
+                                        canal.categories
+                                    )
+                                        ?
+                                        [...canal.categories]
+                                        :
+                                        [],
+
+                                stream:
+                                    canal.stream &&
+                                        canal.stream.url
+
+                                        ?
+
+                                        {
+                                            url:
+                                                canal.stream.url
+                                        }
+
+                                        :
+
+                                        null
+
+                            };
+
+                        }
+
+                    );
+
+
+                localStorage.setItem(
+
+                    TV5_CLAVE_FAVORITOS,
+
+                    JSON.stringify(
+                        lista
+                    )
+
+                );
+
+
+                console.log(
+                    "💾 V5: favoritos guardados:",
+                    lista.length
+                );
+
+
+                /*
+                   Verificación real.
+        
+                   Leemos nuevamente lo que acabamos
+                   de guardar.
+                */
+
+                const verificacion =
+                    localStorage.getItem(
+                        TV5_CLAVE_FAVORITOS
+                    );
+
+
+                if (!verificacion) {
+
+                    throw new Error(
+                        "localStorage no devolvió los datos guardados."
+                    );
+
+                }
+
+
+                return true;
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "❌ V5: ERROR GUARDANDO FAVORITOS:",
+                    error
+                );
+
+
+                if (
+                    typeof mostrarMensaje ===
+                    "function"
+                ) {
+
+                    mostrarMensaje(
+                        "❌ No se pudieron guardar los favoritos."
+                    );
+
+                }
+
+
+                return false;
+
+            }
+
+        }
+
+
+        /* ================================================================
+           ⭐ COMPROBAR FAVORITO
+           ================================================================ */
+
+        function TV5_esFavorito(canal) {
+
+            const id =
+                TV5_obtenerId(
+                    canal
+                );
+
+
+            if (!id) {
+
+                return false;
+
+            }
+
+
+            return TV5_favoritos.some(
+
+                function (favorito) {
+
+                    return (
+                        TV5_obtenerId(
+                            favorito
+                        ) === id
+                    );
+
+                }
+
             );
 
         }
 
 
         /* ================================================================
-           BUSCADOR
+           ⭐ CAMBIAR FAVORITO
            ================================================================ */
 
-        async function TV_buscar() {
+        function TV5_cambiarFavorito(canal) {
+
+            if (!canal) {
+
+                return;
+
+            }
+
+
+            const id =
+                TV5_obtenerId(
+                    canal
+                );
+
+
+            if (!id) {
+
+                mostrarMensaje(
+                    "❌ No se pudo identificar el canal."
+                );
+
+                return;
+
+            }
+
+
+            const posicion =
+                TV5_favoritos.findIndex(
+
+                    function (favorito) {
+
+                        return (
+                            TV5_obtenerId(
+                                favorito
+                            ) === id
+                        );
+
+                    }
+
+                );
+
+
+            /* ============================================================
+               QUITAR
+               ============================================================ */
+
+            if (
+                posicion !== -1
+            ) {
+
+                TV5_favoritos.splice(
+                    posicion,
+                    1
+                );
+
+
+                /*
+                   GUARDAMOS LA LISTA COMPLETA.
+                */
+
+                TV5_guardarFavoritos();
+
+
+                /*
+                   Redibujamos favoritos.
+                */
+
+                TV5_mostrarFavoritos();
+
+
+                /*
+                   Actualizamos resultados.
+                */
+
+                TV5_actualizarBotones();
+
+
+                mostrarMensaje(
+                    "📺 Canal eliminado de favoritos."
+                );
+
+
+                return;
+
+            }
+
+
+            /* ============================================================
+               AGREGAR
+               ============================================================ */
+
+            const stream =
+                TV5_obtenerStream(
+                    canal
+                );
+
+
+            const nuevoFavorito = {
+
+                id:
+                    id,
+
+                name:
+                    canal.name ||
+                    "Canal",
+
+                country:
+                    canal.country ||
+                    "",
+
+                logo:
+                    canal.logo ||
+                    "",
+
+                categories:
+                    Array.isArray(
+                        canal.categories
+                    )
+                        ?
+                        [...canal.categories]
+                        :
+                        [],
+
+                stream:
+                    stream &&
+                        stream.url
+
+                        ?
+
+                        {
+                            url:
+                                stream.url
+                        }
+
+                        :
+
+                        null
+
+            };
+
+
+            /*
+               IMPORTANTE:
+        
+               NO hacemos:
+        
+               TV5_favoritos = [nuevoFavorito]
+        
+               Eso borraría la lista.
+        
+               Usamos push.
+            */
+
+            TV5_favoritos.unshift(
+                nuevoFavorito
+            );
+
+
+            /*
+               Guardamos TODA la lista.
+            */
+
+            TV5_guardarFavoritos();
+
+
+            /*
+               Actualizamos pantalla.
+            */
+
+            TV5_mostrarFavoritos();
+
+            TV5_actualizarBotones();
+
+
+            mostrarMensaje(
+                "⭐ Canal agregado a favoritos."
+            );
+
+        }
+
+
+        /* ================================================================
+           🔄 ACTUALIZAR BOTONES
+           ================================================================ */
+
+        function TV5_actualizarBotones() {
+
+            const botones =
+                document.querySelectorAll(
+                    ".tv5-favorito"
+                );
+
+
+            botones.forEach(
+
+                function (boton) {
+
+                    const id =
+                        boton.dataset.tvId;
+
+
+                    if (!id) {
+                        return;
+                    }
+
+
+                    const favorito =
+                        TV5_favoritos.some(
+
+                            function (canal) {
+
+                                return (
+                                    TV5_obtenerId(canal) ===
+                                    String(id)
+                                );
+
+                            }
+
+                        );
+
+
+                    boton.textContent =
+                        favorito
+                            ?
+                            "⭐"
+                            :
+                            "☆";
+
+                }
+
+            );
+
+        }
+
+
+        /* ================================================================
+           📡 CARGAR IPTV
+           ================================================================ */
+
+        async function TV5_cargarDatos() {
+
+            /*
+               Si ya tenemos los datos,
+               no hacemos otra descarga.
+            */
+
+            if (
+
+                TV5_canales.length > 0 &&
+
+                TV5_streams.length > 0
+
+            ) {
+
+                return true;
+
+            }
+
+
+            /*
+               Evitamos dos descargas simultáneas.
+            */
+
+            if (
+                TV5_cargando
+            ) {
+
+                return false;
+
+            }
+
+
+            TV5_cargando =
+                true;
+
+
+            try {
+
+                mostrarMensaje(
+                    "📺 Cargando televisión..."
+                );
+
+
+                const respuestas =
+                    await Promise.all([
+
+                        fetch(
+                            TV5_CANAL_API
+                        ),
+
+                        fetch(
+                            TV5_STREAM_API
+                        )
+
+                    ]);
+
+
+                if (
+
+                    !respuestas[0].ok ||
+
+                    !respuestas[1].ok
+
+                ) {
+
+                    throw new Error(
+                        "Error descargando IPTV."
+                    );
+
+                }
+
+
+                TV5_canales =
+                    await respuestas[0].json();
+
+
+                TV5_streams =
+                    await respuestas[1].json();
+
+
+                /*
+                   Filtramos canales que tengan
+                   al menos un stream.
+                */
+
+                TV5_canales =
+                    TV5_canales.filter(
+
+                        function (canal) {
+
+                            return TV5_streams.some(
+
+                                function (stream) {
+
+                                    return (
+
+                                        stream.channel ===
+                                        canal.id
+
+                                        &&
+
+                                        stream.url
+
+                                    );
+
+                                }
+
+                            );
+
+                        }
+
+                    );
+
+
+                console.log(
+                    "📺 V5 canales disponibles:",
+                    TV5_canales.length
+                );
+
+
+                /*
+                   MUY IMPORTANTE:
+        
+                   Aquí NO tocamos TV5_favoritos.
+        
+                   Solamente volvemos a mostrarlos.
+                */
+
+                TV5_mostrarFavoritos();
+
+
+                mostrarMensaje(
+                    "📺 Televisión lista."
+                );
+
+
+                return true;
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "❌ TV5:",
+                    error
+                );
+
+
+                mostrarMensaje(
+                    "❌ No se pudieron cargar los canales."
+                );
+
+
+                return false;
+
+            }
+
+            finally {
+
+                TV5_cargando =
+                    false;
+
+            }
+
+        }
+
+
+        /* ================================================================
+           📡 OBTENER STREAM
+           ================================================================ */
+
+        function TV5_obtenerStream(canal) {
+
+            if (!canal) {
+
+                return null;
+
+            }
+
+
+            /*
+               Primero buscamos el stream actual.
+            */
+
+            if (
+                canal.id &&
+                TV5_streams.length
+            ) {
+
+                const actual =
+                    TV5_streams.find(
+
+                        function (stream) {
+
+                            return (
+
+                                stream.channel ===
+                                canal.id
+
+                                &&
+
+                                stream.url
+
+                            );
+
+                        }
+
+                    );
+
+
+                if (actual) {
+
+                    return actual;
+
+                }
+
+            }
+
+
+            /*
+               Si es favorito y tiene stream
+               guardado, utilizamos ese.
+            */
+
+            if (
+
+                canal.stream &&
+
+                canal.stream.url
+
+            ) {
+
+                return {
+
+                    url:
+                        canal.stream.url
+
+                };
+
+            }
+
+
+            return null;
+
+        }
+
+
+        /* ================================================================
+           🔎 BUSCAR CANAL
+           ================================================================ */
+
+        async function TV5_buscar() {
 
             const campo =
                 document.getElementById(
@@ -11916,7 +14689,7 @@
             if (!texto) {
 
                 mostrarMensaje(
-                    "Escribe el nombre de un canal."
+                    "Escribe un canal o país."
                 );
 
                 return;
@@ -11924,39 +14697,47 @@
             }
 
 
-            if (
-                TV_canales.length === 0
-            ) {
+            const cargado =
+                await TV5_cargarDatos();
 
-                await TV_cargarCanales();
+
+            if (!cargado) {
+
+                return;
 
             }
 
 
             const resultados =
-                TV_canales.filter(
+                TV5_canales.filter(
 
-                    canal => {
+                    function (canal) {
 
                         const nombre =
-                            (
-                                canal.name ||
-                                ""
-                            ).toLowerCase();
+                            String(
+                                canal.name || ""
+                            )
+                                .toLowerCase();
+
 
                         const pais =
-                            (
-                                canal.country ||
-                                ""
-                            ).toLowerCase();
+                            String(
+                                canal.country || ""
+                            )
+                                .toLowerCase();
+
 
                         return (
 
-                            nombre.includes(texto)
+                            nombre.includes(
+                                texto
+                            )
 
                             ||
 
-                            pais.includes(texto)
+                            pais.includes(
+                                texto
+                            )
 
                         );
 
@@ -11965,7 +14746,7 @@
                 );
 
 
-            TV_mostrarResultados(
+            TV5_mostrarResultados(
                 resultados.slice(
                     0,
                     50
@@ -11976,16 +14757,98 @@
 
 
         /* ================================================================
-           MOSTRAR RESULTADOS
+           🌎 BUSCAR CATEGORÍA
            ================================================================ */
 
-        function TV_mostrarResultados(
+        async function TV5_buscarCategoria(
+            categoria
+        ) {
+
+            const cargado =
+                await TV5_cargarDatos();
+
+
+            if (!cargado) {
+
+                return;
+
+            }
+
+
+            const buscada =
+                String(
+                    categoria || ""
+                )
+                    .toLowerCase()
+                    .trim();
+
+
+            const resultados =
+                TV5_canales.filter(
+
+                    function (canal) {
+
+                        if (
+                            !Array.isArray(
+                                canal.categories
+                            )
+                        ) {
+
+                            return false;
+
+                        }
+
+
+                        return canal.categories.some(
+
+                            function (cat) {
+
+                                return String(
+                                    cat
+                                )
+                                    .toLowerCase()
+                                    .includes(
+                                        buscada
+                                    );
+
+                            }
+
+                        );
+
+                    }
+
+                );
+
+
+            TV5_mostrarResultados(
+
+                resultados.slice(
+                    0,
+                    50
+                )
+
+            );
+
+        }
+
+
+        /* ================================================================
+           📺 MOSTRAR RESULTADOS
+           ================================================================ */
+
+        function TV5_mostrarResultados(
             canales
         ) {
 
             const contenedor =
                 document.getElementById(
                     "tvResultados"
+                );
+
+
+            const estado =
+                document.getElementById(
+                    "tvEstadoBusqueda"
                 );
 
 
@@ -11996,11 +14859,21 @@
             }
 
 
-            contenedor.innerHTML = "";
+            contenedor.innerHTML =
+                "";
+
+
+            if (estado) {
+
+                estado.textContent =
+                    "🟢 " +
+                    canales.length +
+                    " canales encontrados.";
+
+            }
 
 
             if (
-                !canales ||
                 canales.length === 0
             ) {
 
@@ -12018,7 +14891,7 @@
 
                     <div class="radio-meta">
 
-                        Prueba otra categoría o búsqueda.
+                        Prueba otra búsqueda.
 
                     </div>
 
@@ -12035,15 +14908,14 @@
 
             canales.forEach(
 
-                canal => {
-
-                    const elemento =
-                        TV_crearCanal(
-                            canal
-                        );
+                function (canal) {
 
                     contenedor.appendChild(
-                        elemento
+
+                        TV5_crearCanal(
+                            canal
+                        )
+
                     );
 
                 }
@@ -12054,10 +14926,10 @@
 
 
         /* ================================================================
-           CREAR CANAL
+           📺 CREAR TARJETA
            ================================================================ */
 
-        function TV_crearCanal(
+        function TV5_crearCanal(
             canal
         ) {
 
@@ -12071,95 +14943,205 @@
                 "tv-canal";
 
 
+            const id =
+                TV5_obtenerId(
+                    canal
+                );
+
+
+            const favorito =
+                TV5_esFavorito(
+                    canal
+                );
+
+
+            const stream =
+                TV5_obtenerStream(
+                    canal
+                );
+
+
             const logo =
-                canal.logo ||
-                "";
-
-
-            elemento.innerHTML = `
-
-        ${logo
-
+                canal.logo
                     ?
 
                     `
-            <img
-                class="tv-logo"
-                src="${escaparHTML(logo)}"
-                onerror="
-                    this.style.display='none'
-                "
-            >
+
+                <img
+                    class="tv-logo"
+                    src="${escaparHTML(
+                        canal.logo
+                    )}"
+                    onerror="
+                        this.style.display='none'
+                    "
+                >
+
             `
 
                     :
 
                     `
-            <div class="tv-logo"
-                 style="
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    font-size:24px;
-                 ">
 
-                📺
+                <div
+                    class="tv-logo"
+                    style="
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        font-size:24px;
+                    "
+                >
 
-            </div>
-            `
+                    📺
 
-                }
+                </div>
 
+            `;
+
+
+            elemento.innerHTML = `
+
+        ${logo}
 
         <div class="tv-info">
 
             <div class="tv-nombre">
 
                 ${escaparHTML(
-                    canal.name ||
-                    "Canal"
-                )}
+                canal.name ||
+                "Canal"
+            )}
 
             </div>
 
-
             <div class="tv-pais">
 
-                🌎
+                <span
+                    class="tv-indicador tv-verde">
+                </span>
 
-                ${escaparHTML(
-                    canal.country ||
-                    "Internacional"
-                )}
+                Señal disponible
+
+                ${canal.country
+                    ?
+                    " · " +
+                    escaparHTML(
+                        canal.country
+                    )
+                    :
+                    ""
+                }
 
             </div>
 
         </div>
 
 
-        <button>
+        <div
+            style="
+                display:flex;
+                gap:5px;
+                flex-shrink:0;
+            "
+        >
 
-            ▶ Ver
+            <button
+                class="secundario tv5-favorito"
 
-        </button>
+                data-tv-id="${escaparHTML(
+                    id || ""
+                )}"
+
+                title="Agregar o quitar favorito"
+            >
+
+                ${favorito
+                    ?
+                    "⭐"
+                    :
+                    "☆"
+                }
+
+            </button>
+
+
+            <button
+                class="tv-reproducir"
+
+                title="Reproducir"
+
+                ${!stream
+                    ?
+                    "disabled"
+                    :
+                    ""
+                }
+            >
+
+                ▶
+
+            </button>
+
+        </div>
 
     `;
 
 
-            const boton =
+            /*
+               FAVORITO
+            */
+
+            const botonFavorito =
                 elemento.querySelector(
-                    "button"
+                    ".tv5-favorito"
                 );
 
 
-            boton.onclick =
-                function () {
+            if (botonFavorito) {
 
-                    TV_reproducir(
-                        canal
-                    );
+                botonFavorito.onclick =
+                    function (event) {
 
-                };
+                        event.preventDefault();
+
+                        event.stopPropagation();
+
+
+                        TV5_cambiarFavorito(
+                            canal
+                        );
+
+                    };
+
+            }
+
+
+            /*
+               REPRODUCIR
+            */
+
+            const botonReproducir =
+                elemento.querySelector(
+                    ".tv-reproducir"
+                );
+
+
+            if (botonReproducir) {
+
+                botonReproducir.onclick =
+                    function () {
+
+                        TV5_reproducir(
+                            canal,
+                            TV5_obtenerStream(
+                                canal
+                            )
+                        );
+
+                    };
+
+            }
 
 
             return elemento;
@@ -12168,113 +15150,118 @@
 
 
         /* ================================================================
-           REPRODUCIR
+           ▶️ REPRODUCIR
            ================================================================ */
 
-        async function TV_reproducir(
-            canal
+        function TV5_reproducir(
+            canal,
+            stream
         ) {
 
-            if (!canal) {
+            const reproductor =
+                document.getElementById(
+                    "tvReproductor"
+                );
+
+
+            if (!reproductor) {
+
+                mostrarMensaje(
+                    "❌ No se encontró el reproductor."
+                );
 
                 return;
 
             }
 
 
-            /*
-               IPTV-ORG separa la información
-               de los canales y los streams.
-        
-               Primero intentamos encontrar
-               el stream correspondiente.
-            */
+            if (!stream) {
+
+                mostrarMensaje(
+                    "🔴 Este canal no tiene señal."
+                );
+
+                return;
+
+            }
+
+
+            const sinSenal =
+                document.getElementById(
+                    "tvSinSenal"
+                );
+
+
+            const actual =
+                document.getElementById(
+                    "tvCanalActual"
+                );
+
+
+            if (sinSenal) {
+
+                sinSenal.classList.add(
+                    "oculto"
+                );
+
+            }
+
+
+            if (actual) {
+
+                actual.innerHTML = `
+
+            📺
+
+            <strong>
+
+                ${escaparHTML(
+                    canal.name ||
+                    "Canal"
+                )}
+
+            </strong>
+
+            · Conectando...
+
+        `;
+
+            }
+
 
             try {
 
-                const respuesta =
-                    await fetch(
-                        "https://iptv-org.github.io/api/streams.json"
-                    );
+                reproductor.pause();
 
-
-                const streams =
-                    await respuesta.json();
-
-
-                const stream =
-                    streams.find(
-
-                        item =>
-                            item.channel ===
-                            canal.id
-
-                    );
-
-
-                if (
-                    !stream ||
-                    !stream.url
-                ) {
-
-                    mostrarMensaje(
-                        "⚠️ Este canal no tiene un stream disponible."
-                    );
-
-                    return;
-
-                }
-
-
-                const reproductor =
-                    document.getElementById(
-                        "tvReproductor"
-                    );
-
-
-                if (!reproductor) {
-
-                    return;
-
-                }
-
-
-                const sinSenal =
-                    document.getElementById(
-                        "tvSinSenal"
-                    );
-
+                reproductor.removeAttribute(
+                    "src"
+                );
 
                 reproductor.src =
                     stream.url;
 
+                reproductor.load();
 
-                reproductor.play()
 
-                    .then(
+                const reproduccion =
+                    reproductor.play();
+
+
+                if (
+                    reproduccion &&
+                    typeof reproduccion.then ===
+                    "function"
+                ) {
+
+                    reproduccion.then(
 
                         function () {
-
-                            if (sinSenal) {
-
-                                sinSenal.classList.add(
-                                    "oculto"
-                                );
-
-                            }
-
-
-                            const actual =
-                                document.getElementById(
-                                    "tvCanalActual"
-                                );
-
 
                             if (actual) {
 
                                 actual.innerHTML = `
 
-                            📺
+                            🟢
 
                             <strong>
 
@@ -12285,12 +15272,102 @@
 
                             </strong>
 
-                            ·
+                            · Señal activa
 
-                            ${escaparHTML(
-                                    canal.country ||
-                                    "Internacional"
+                        `;
+
+                            }
+
+
+                            /*
+                               Si es favorito,
+                               actualizamos el stream.
+                            */
+
+                            const id =
+                                TV5_obtenerId(
+                                    canal
+                                );
+
+
+                            const posicion =
+                                TV5_favoritos.findIndex(
+
+                                    function (fav) {
+
+                                        return (
+                                            TV5_obtenerId(fav) === id
+                                        );
+
+                                    }
+
+                                );
+
+
+                            if (
+                                posicion !== -1
+                            ) {
+
+                                TV5_favoritos[
+                                    posicion
+                                ].stream = {
+
+                                    url:
+                                        stream.url
+
+                                };
+
+
+                                TV5_guardarFavoritos();
+
+                            }
+
+
+                            mostrarMensaje(
+                                "📺 Reproduciendo " +
+                                (
+                                    canal.name ||
+                                    "canal"
+                                )
+                            );
+
+                        }
+
+                    ).catch(
+
+                        function (error) {
+
+                            console.warn(
+                                "TV5 stream:",
+                                error
+                            );
+
+
+                            if (sinSenal) {
+
+                                sinSenal.classList.remove(
+                                    "oculto"
+                                );
+
+                            }
+
+
+                            if (actual) {
+
+                                actual.innerHTML = `
+
+                            🔴
+
+                            <strong>
+
+                                ${escaparHTML(
+                                    canal.name ||
+                                    "Canal"
                                 )}
+
+                            </strong>
+
+                            · No compatible
 
                         `;
 
@@ -12298,41 +15375,27 @@
 
 
                             mostrarMensaje(
-                                "▶ Reproduciendo " +
-                                canal.name
-                            );
-
-                        }
-
-                    )
-
-                    .catch(
-
-                        function (error) {
-
-                            console.error(
-                                error
-                            );
-
-                            mostrarMensaje(
-                                "El navegador no pudo reproducir este canal."
+                                "🔴 El navegador no pudo reproducir esta señal."
                             );
 
                         }
 
                     );
 
+                }
+
             }
 
             catch (error) {
 
                 console.error(
-                    "TV stream:",
+                    "TV5 reproducción:",
                     error
                 );
 
+
                 mostrarMensaje(
-                    "No se pudo obtener la señal."
+                    "🔴 No se pudo reproducir el canal."
                 );
 
             }
@@ -12341,14 +15404,380 @@
 
 
         /* ================================================================
-           INICIALIZAR TV
+           ⭐ MOSTRAR FAVORITOS
            ================================================================ */
 
-        function TV_inicializar() {
+        function TV5_mostrarFavoritos() {
+
+            const contenedor =
+                document.getElementById(
+                    "tvFavoritos"
+                );
+
+
+            if (!contenedor) {
+
+                return;
+
+            }
+
+
+            contenedor.innerHTML =
+                "";
+
 
             /*
-               No descargamos todos los canales
-               hasta que el usuario use la herramienta.
+               SIN FAVORITOS
+            */
+
+            if (
+                TV5_favoritos.length === 0
+            ) {
+
+                contenedor.innerHTML = `
+
+            <div class="radio-item">
+
+                <div class="radio-info">
+
+                    <div class="radio-nombre">
+
+                        ⭐ No tienes favoritos.
+
+                    </div>
+
+                    <div class="radio-meta">
+
+                        Pulsa ☆ para guardar un canal.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+                return;
+
+            }
+
+
+            /*
+               MOSTRAR TODOS.
+        
+               No dependemos de IPTV.
+            */
+
+            TV5_favoritos.forEach(
+
+                function (favorito) {
+
+                    /*
+                       Si IPTV está cargado,
+                       usamos la información actual.
+                    */
+
+                    const actual =
+                        TV5_canales.find(
+
+                            function (canal) {
+
+                                return (
+                                    TV5_obtenerId(canal) ===
+                                    TV5_obtenerId(favorito)
+                                );
+
+                            }
+
+                        );
+
+
+                    const canal =
+                        actual ||
+                        favorito;
+
+
+                    contenedor.appendChild(
+
+                        TV5_crearFavorito(
+                            canal
+                        )
+
+                    );
+
+                }
+
+            );
+
+        }
+
+
+        /* ================================================================
+           ⭐ CREAR TARJETA FAVORITO
+           ================================================================ */
+
+        function TV5_crearFavorito(
+            canal
+        ) {
+
+            const elemento =
+                document.createElement(
+                    "div"
+                );
+
+
+            elemento.className =
+                "tv-canal";
+
+
+            const id =
+                TV5_obtenerId(
+                    canal
+                );
+
+
+            const stream =
+                TV5_obtenerStream(
+                    canal
+                );
+
+
+            const logo =
+                canal.logo
+
+                    ?
+
+                    `
+
+                <img
+                    class="tv-logo"
+                    src="${escaparHTML(
+                        canal.logo
+                    )}"
+                    onerror="
+                        this.style.display='none'
+                    "
+                >
+
+            `
+
+                    :
+
+                    `
+
+                <div
+                    class="tv-logo"
+                    style="
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        font-size:24px;
+                    "
+                >
+
+                    📺
+
+                </div>
+
+            `;
+
+
+            elemento.innerHTML = `
+
+        ${logo}
+
+
+        <div class="tv-info">
+
+            <div class="tv-nombre">
+
+                ${escaparHTML(
+                canal.name ||
+                "Canal"
+            )}
+
+            </div>
+
+
+            <div class="tv-pais">
+
+                ⭐ Favorito
+
+                ${canal.country
+                    ?
+                    " · " +
+                    escaparHTML(
+                        canal.country
+                    )
+                    :
+                    ""
+                }
+
+            </div>
+
+        </div>
+
+
+        <div
+            style="
+                display:flex;
+                gap:5px;
+                flex-shrink:0;
+            "
+        >
+
+            <button
+                class="secundario tv5-favorito"
+
+                data-tv-id="${escaparHTML(
+                    id || ""
+                )}"
+
+                title="Quitar favorito"
+            >
+
+                ⭐
+
+            </button>
+
+
+            <button
+                class="tv-reproducir"
+
+                title="Reproducir"
+
+                ${!stream
+                    ?
+                    "disabled"
+                    :
+                    ""
+                }
+            >
+
+                ▶
+
+            </button>
+
+        </div>
+
+    `;
+
+
+            /*
+               QUITAR FAVORITO
+            */
+
+            const botonFavorito =
+                elemento.querySelector(
+                    ".tv5-favorito"
+                );
+
+
+            if (botonFavorito) {
+
+                botonFavorito.onclick =
+                    function (event) {
+
+                        event.preventDefault();
+
+                        event.stopPropagation();
+
+
+                        TV5_cambiarFavorito(
+                            canal
+                        );
+
+                    };
+
+            }
+
+
+            /*
+               REPRODUCIR FAVORITO
+            */
+
+            const botonReproducir =
+                elemento.querySelector(
+                    ".tv-reproducir"
+                );
+
+
+            if (botonReproducir) {
+
+                botonReproducir.onclick =
+                    function () {
+
+                        const streamActual =
+                            TV5_obtenerStream(
+                                canal
+                            );
+
+
+                        if (!streamActual) {
+
+                            mostrarMensaje(
+                                "🔴 Este canal ya no tiene señal disponible."
+                            );
+
+                            return;
+
+                        }
+
+
+                        TV5_reproducir(
+                            canal,
+                            streamActual
+                        );
+
+                    };
+
+            }
+
+
+            return elemento;
+
+        }
+
+
+        /* ================================================================
+           🔄 INICIALIZAR
+           ================================================================ */
+
+        async function TV5_inicializar() {
+
+            console.log(
+                "📺 Inicializando Televisión V5..."
+            );
+
+
+            /*
+               =============================================================
+               PASO 1
+               CARGAR FAVORITOS
+               =============================================================
+        
+               Esto ocurre ANTES de descargar IPTV.
+            */
+
+            TV5_cargarFavoritos();
+
+
+            /*
+               =============================================================
+               PASO 2
+               MOSTRAR FAVORITOS
+               =============================================================
+            */
+
+            TV5_mostrarFavoritos();
+
+
+            /*
+               =============================================================
+               PASO 3
+               BUSCADOR
+               =============================================================
             */
 
             const campo =
@@ -12359,6 +15788,13 @@
 
             if (campo) {
 
+                /*
+                   Usamos onkeydown.
+        
+                   Si el case se abre varias veces,
+                   no acumulamos listeners.
+                */
+
                 campo.onkeydown =
                     function (event) {
 
@@ -12366,7 +15802,7 @@
                             event.key === "Enter"
                         ) {
 
-                            TV_buscar();
+                            TV5_buscar();
 
                         }
 
@@ -12374,7 +15810,82 @@
 
             }
 
+
+            /*
+               =============================================================
+               PASO 4
+               CARGAR IPTV
+               =============================================================
+            */
+
+            await TV5_cargarDatos();
+
+
+            /*
+               =============================================================
+               PASO 5
+               VOLVER A MOSTRAR FAVORITOS
+               =============================================================
+            */
+
+            TV5_mostrarFavoritos();
+
+
+            TV5_actualizarBotones();
+
+
+            TV5_inicializado =
+                true;
+
+
+            console.log(
+                "📺 Televisión V5 lista."
+            );
+
         }
+
+
+        /* ================================================================
+           🔌 COMPATIBILIDAD CON TU SISTEMA
+           ================================================================ */
+
+        function inicializarTV() {
+
+            TV5_inicializar();
+
+        }
+
+
+        /* ================================================================
+           FIN TELEVISIÓN DEL CUERVO V5
+           ================================================================ */
+        inicializarTV();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
