@@ -48,36 +48,297 @@
 
     <style>
         /* =========================================================
-           COLORES PRINCIPALES
-           ========================================================= */
+       EL TALLER DEL CUERVO
+       SISTEMA DE TEMAS INSPIRADOS EN AVES
+       ========================================================= */
+
+
+        /* =========================================================
+       TEMA ACTIVO POR DEFECTO
+       🐦‍⬛ CUERVO
+       ========================================================= */
 
         :root {
 
-            --fondo: #11110f;
-            --panel: #1b1a17;
-            --panel-2: #24221d;
-            --panel-3: #0d0d0c;
+            --fondo: #0d0d0c;
+            --panel: #171614;
+            --panel-2: #211f1b;
+            --panel-3: #090909;
 
             --texto: #eee9dc;
-            --texto-suave: #aaa395;
+            --texto-suave: #9f9a8d;
 
             --acento: #b58b52;
-            --acento-hover: #d1aa72;
+            --acento-hover: #d2aa70;
 
-            --borde: #39352e;
+            --borde: #35322d;
 
             --peligro: #a85454;
 
             --radio: 14px;
 
             --sombra:
-                0 8px 30px rgba(0, 0, 0, .25);
+                0 8px 30px rgba(0, 0, 0, .35);
         }
 
 
         /* =========================================================
-           REINICIO
-           ========================================================= */
+       TEMAS
+       
+       JavaScript puede activar uno cambiando:
+       
+       document.body.dataset.tema = "cuervo";
+       document.body.dataset.tema = "buho";
+       document.body.dataset.tema = "aguila";
+       etc.
+       ========================================================= */
+
+
+        /* ---------------------------------------------------------
+       🐦‍⬛ CUERVO
+       --------------------------------------------------------- */
+
+        body[data-tema="cuervo"] {
+
+            --fondo: #0d0d0c;
+            --panel: #171614;
+            --panel-2: #211f1b;
+            --panel-3: #090909;
+
+            --texto: #eee9dc;
+            --texto-suave: #9f9a8d;
+
+            --acento: #b58b52;
+            --acento-hover: #d2aa70;
+
+            --borde: #35322d;
+
+            --peligro: #a85454;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .35);
+        }
+
+
+        /* ---------------------------------------------------------
+       🦉 BÚHO
+       Biblioteca nocturna
+       --------------------------------------------------------- */
+
+        body[data-tema="buho"] {
+
+            --fondo: #11130f;
+            --panel: #1b1d17;
+            --panel-2: #27291f;
+            --panel-3: #0c0e0b;
+
+            --texto: #eee8d5;
+            --texto-suave: #aaa68f;
+
+            --acento: #c49a52;
+            --acento-hover: #e0b96d;
+
+            --borde: #3b3c2f;
+
+            --peligro: #a9574e;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .35);
+        }
+
+
+        /* ---------------------------------------------------------
+       🦅 ÁGUILA
+       Montaña y cielo
+       --------------------------------------------------------- */
+
+        body[data-tema="aguila"] {
+
+            --fondo: #0c1115;
+            --panel: #141c22;
+            --panel-2: #1d2830;
+            --panel-3: #080d11;
+
+            --texto: #e9eef0;
+            --texto-suave: #9daab1;
+
+            --acento: #c49b50;
+            --acento-hover: #e0b968;
+
+            --borde: #303d45;
+
+            --peligro: #a64f4f;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .4);
+        }
+
+
+        /* ---------------------------------------------------------
+       🐧 PINGÜINO
+       Hielo
+       --------------------------------------------------------- */
+
+        body[data-tema="pinguino"] {
+
+            --fondo: #0b1115;
+            --panel: #121c22;
+            --panel-2: #1b2931;
+            --panel-3: #070c10;
+
+            --texto: #edf5f7;
+            --texto-suave: #9eafb7;
+
+            --acento: #6eb6c9;
+            --acento-hover: #8bd4e5;
+
+            --borde: #30414a;
+
+            --peligro: #b85b5b;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .4);
+        }
+
+
+        /* ---------------------------------------------------------
+       🦜 LORO
+       Selva tropical
+       --------------------------------------------------------- */
+
+        body[data-tema="loro"] {
+
+            --fondo: #09120d;
+            --panel: #101c14;
+            --panel-2: #18271c;
+            --panel-3: #060b08;
+
+            --texto: #edf1d8;
+            --texto-suave: #9da88e;
+
+            --acento: #c4b33e;
+            --acento-hover: #e1d15b;
+
+            --borde: #2f4232;
+
+            --peligro: #b84e4e;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .4);
+        }
+
+
+        /* ---------------------------------------------------------
+       🦩 FLAMENCO
+       Atardecer
+       --------------------------------------------------------- */
+
+        body[data-tema="flamenco"] {
+
+            --fondo: #160e13;
+            --panel: #21131b;
+            --panel-2: #2d1923;
+            --panel-3: #0e080c;
+
+            --texto: #f4e7ea;
+            --texto-suave: #b59ca4;
+
+            --acento: #d47b91;
+            --acento-hover: #ed9db0;
+
+            --borde: #4b2937;
+
+            --peligro: #b84e55;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .4);
+        }
+
+
+        /* ---------------------------------------------------------
+       🦚 PAVO REAL
+       Elegante
+       --------------------------------------------------------- */
+
+        body[data-tema="pavo-real"] {
+
+            --fondo: #071113;
+            --panel: #0e1b1e;
+            --panel-2: #14282c;
+            --panel-3: #050b0d;
+
+            --texto: #e8eeee;
+            --texto-suave: #91a9aa;
+
+            --acento: #c8a84e;
+            --acento-hover: #e5c866;
+
+            --borde: #29464a;
+
+            --peligro: #a94f62;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .45);
+        }
+
+
+        /* ---------------------------------------------------------
+       🐦 MARTÍN PESCADOR
+       Río y bosque
+       --------------------------------------------------------- */
+
+        body[data-tema="martin-pescador"] {
+
+            --fondo: #071316;
+            --panel: #0d1d21;
+            --panel-2: #143039;
+            --panel-3: #050d10;
+
+            --texto: #e3f1ef;
+            --texto-suave: #91aaa8;
+
+            --acento: #5bb8bd;
+            --acento-hover: #7ed9d0;
+
+            --borde: #275057;
+
+            --peligro: #b75b51;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .4);
+        }
+
+
+        /* =========================================================
+       TRANSICIÓN ENTRE TEMAS
+       ========================================================= */
+
+        body,
+        header,
+        .reloj,
+        .modulo,
+        #panelConfiguracion,
+        .editor-contenido,
+        .radio-item,
+        .radio-actual,
+        .herramienta,
+        .config-item,
+        input,
+        textarea,
+        select,
+        button {
+
+            transition:
+                background .3s ease,
+                color .3s ease,
+                border-color .3s ease,
+                box-shadow .3s ease;
+        }
+
+
+        /* =========================================================
+       REINICIO
+       ========================================================= */
 
         * {
 
@@ -113,8 +374,8 @@
 
 
         /* =========================================================
-           ENCABEZADO
-           ========================================================= */
+       ENCABEZADO
+       ========================================================= */
 
         header {
 
@@ -127,7 +388,7 @@
 
             background:
                 linear-gradient(to bottom,
-                    #171612,
+                    var(--panel),
                     var(--fondo));
         }
 
@@ -151,8 +412,8 @@
 
 
         /* =========================================================
-           CONTENEDOR PRINCIPAL
-           ========================================================= */
+       CONTENEDOR PRINCIPAL
+       ========================================================= */
 
         main {
 
@@ -167,8 +428,8 @@
 
 
         /* =========================================================
-           RELOJ
-           ========================================================= */
+       RELOJ
+       ========================================================= */
 
         .reloj {
 
@@ -210,8 +471,8 @@
 
 
         /* =========================================================
-           BARRA SUPERIOR
-           ========================================================= */
+       BARRA SUPERIOR
+       ========================================================= */
 
         .barra {
 
@@ -226,8 +487,8 @@
 
 
         /* =========================================================
-           BOTONES
-           ========================================================= */
+       BOTONES
+       ========================================================= */
 
         button {
 
@@ -239,7 +500,7 @@
 
             background: var(--acento);
 
-            color: #17130d;
+            color: var(--fondo);
 
             font-weight: bold;
 
@@ -253,13 +514,15 @@
 
             background: var(--acento-hover);
 
-            transform: translateY(-1px);
+            transform:
+                translateY(-1px);
         }
 
 
         button:active {
 
-            transform: translateY(0);
+            transform:
+                translateY(0);
         }
 
 
@@ -283,14 +546,8 @@
 
 
         /* =========================================================
-           CONTENEDOR DE MÓDULOS
-
-           IMPORTANTE:
-
-           JavaScript coloca aquí los módulos automáticamente.
-
-           El orden de esta lista puede cambiar.
-           ========================================================= */
+       CONTENEDOR DE MÓDULOS
+       ========================================================= */
 
         #contenedorModulos {
 
@@ -303,8 +560,8 @@
 
 
         /* =========================================================
-           MÓDULO
-           ========================================================= */
+       MÓDULO
+       ========================================================= */
 
         .modulo {
 
@@ -322,8 +579,8 @@
 
 
         /* =========================================================
-           CABECERA DEL MÓDULO
-           ========================================================= */
+       CABECERA DEL MÓDULO
+       ========================================================= */
 
         .cabecera-modulo {
 
@@ -366,15 +623,8 @@
 
 
         /* =========================================================
-           CONTROLES DE CADA MÓDULO
-
-           Aquí están:
-
-           ⬆️ subir
-           ⬇️ bajar
-           👁️ mostrar/ocultar
-           ✏️ editar
-           ========================================================= */
+       CONTROLES DE MÓDULO
+       ========================================================= */
 
         .controles-modulo {
 
@@ -395,8 +645,8 @@
 
 
         /* =========================================================
-           DESCRIPCIONES
-           ========================================================= */
+       DESCRIPCIONES
+       ========================================================= */
 
         .descripcion {
 
@@ -411,8 +661,8 @@
 
 
         /* =========================================================
-           INPUTS
-           ========================================================= */
+       INPUTS
+       ========================================================= */
 
         input,
         textarea,
@@ -442,6 +692,9 @@
         select:focus {
 
             border-color: var(--acento);
+
+            box-shadow:
+                0 0 0 2px rgba(181, 139, 82, .12);
         }
 
 
@@ -456,8 +709,8 @@
 
 
         /* =========================================================
-           RADIO
-           ========================================================= */
+       RADIO
+       ========================================================= */
 
         audio {
 
@@ -557,8 +810,8 @@
 
 
         /* =========================================================
-           BOTONES DE PAÍSES
-           ========================================================= */
+       BOTONES DE PAÍSES
+       ========================================================= */
 
         .paises {
 
@@ -584,8 +837,8 @@
 
 
         /* =========================================================
-           MAPA
-           ========================================================= */
+       MAPA
+       ========================================================= */
 
         #mapa {
 
@@ -615,8 +868,8 @@
 
 
         /* =========================================================
-           HERRAMIENTAS
-           ========================================================= */
+       HERRAMIENTAS
+       ========================================================= */
 
         .herramientas {
 
@@ -648,8 +901,8 @@
 
 
         /* =========================================================
-           PANEL DE CONFIGURACIÓN
-           ========================================================= */
+       PANEL DE CONFIGURACIÓN
+       ========================================================= */
 
         #panelConfiguracion {
 
@@ -711,8 +964,8 @@
 
 
         /* =========================================================
-           VENTANA DE EDICIÓN
-           ========================================================= */
+       VENTANA DE EDICIÓN
+       ========================================================= */
 
         #editor {
 
@@ -787,8 +1040,8 @@
 
 
         /* =========================================================
-           MENSAJES
-           ========================================================= */
+       MENSAJES
+       ========================================================= */
 
         #mensaje {
 
@@ -801,7 +1054,7 @@
             transform:
                 translateX(-50%) translateY(100px);
 
-            background: #24221d;
+            background: var(--panel-2);
 
             border:
                 1px solid var(--acento);
@@ -832,8 +1085,8 @@
 
 
         /* =========================================================
-           PIE
-           ========================================================= */
+       PIE
+       ========================================================= */
 
         footer {
 
@@ -848,8 +1101,8 @@
 
 
         /* =========================================================
-           MÓVIL
-           ========================================================= */
+       MÓVIL
+       ========================================================= */
 
         @media(max-width:600px) {
 
@@ -893,9 +1146,116 @@
 
                 flex-wrap: wrap;
             }
+
+        }
+
+        /* =========================================================
+    SELECTOR DE TEMAS
+    ========================================================= */
+
+        .temas-taller {
+
+            margin-bottom: 20px;
+
+            padding: 15px;
+
+            background: var(--panel-2);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius: 12px;
+        }
+
+
+        .titulo-temas {
+
+            color: var(--acento);
+
+            font-size: 17px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .lista-temas {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit,
+                    minmax(130px, 1fr));
+
+            gap: 8px;
+
+            margin-top: 12px;
+        }
+
+
+        .tema-btn {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            min-height: 55px;
+
+            background: var(--panel);
+
+            color: var(--texto);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius: 10px;
+
+            padding: 10px;
+
+            font-size: 14px;
+
+            transition: .2s;
+        }
+
+
+        .tema-btn:first-letter {
+
+            font-size: 22px;
+        }
+
+
+        .tema-btn:hover {
+
+            background: var(--panel-3);
+
+            border-color: var(--acento);
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        .tema-btn.activo {
+
+            background: var(--acento);
+
+            color: var(--fondo);
+
+            border-color: var(--acento);
+
+            box-shadow:
+                0 0 0 2px rgba(181, 139, 82, .2);
+        }
+
+
+        .tema-btn.activo:hover {
+
+            background: var(--acento-hover);
         }
     </style>
-
 </head>
 
 
@@ -982,6 +1342,68 @@
 
             <div id="listaConfiguracion"></div>
 
+            <!-- ========================================================
+     TEMAS DEL TALLER
+     ======================================================== -->
+
+            <div class="temas-taller">
+
+                <h3 class="titulo-temas">
+                    🎨 Temas del Taller
+                </h3>
+
+                <p class="descripcion">
+                    Elige el ave que representa el ambiente de tu Taller.
+                    El tema se guarda automáticamente en este dispositivo.
+                </p>
+
+                <div id="listaTemas" class="lista-temas">
+
+                    <button class="tema-btn" data-tema="cuervo" onclick="cambiarTema('cuervo')">
+                        🐦‍⬛
+                        <span>Cuervo</span>
+                    </button>
+
+                    <button class="tema-btn" data-tema="buho" onclick="cambiarTema('buho')">
+                        🦉
+                        <span>Búho</span>
+                    </button>
+
+                    <button class="tema-btn" data-tema="aguila" onclick="cambiarTema('aguila')">
+                        🦅
+                        <span>Águila</span>
+                    </button>
+
+                    <button class="tema-btn" data-tema="pinguino" onclick="cambiarTema('pinguino')">
+                        🐧
+                        <span>Pingüino</span>
+                    </button>
+
+                    <button class="tema-btn" data-tema="loro" onclick="cambiarTema('loro')">
+                        🦜
+                        <span>Loro</span>
+                    </button>
+
+                    <button class="tema-btn" data-tema="flamenco" onclick="cambiarTema('flamenco')">
+                        🦩
+                        <span>Flamenco</span>
+                    </button>
+
+                    <button class="tema-btn" data-tema="pavo-real" onclick="cambiarTema('pavo-real')">
+                        🦚
+                        <span>Pavo Real</span>
+                    </button>
+
+                    <button class="tema-btn" data-tema="martin-pescador" onclick="cambiarTema('martin-pescador')">
+                        🐦
+                        <span>Martín Pescador</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+
         </section>
 
 
@@ -1062,37 +1484,33 @@
 
 
 
-
-    <h1>Paginas</h1>
-
     <div class="divA">
         <div class="divE">
             <div class="divE"></div>
 
+            <h1>Paginas</h1>
+
             <h1><a href="zg.html">Dioses Egipcios</a></h1>
+            <h1><a href="poke.html">Pokémon</a></h1>
             <h1><a href="ejercicioCanciones.html">tabla musical</a></h1>
 
             <h1 class="divE">Juegos</h1>
 
             <h1><a href="jnv1.html">Juego Nuevo IA</a></h1>
-
             <h1><a href="LunaAdventures.html"> Luna Adventures</a></h1>
-
             <h1><a href="bha.html">Auxiliar Cazadores de Bestias</a></h1>
             <h1><a href="ttt.html">Tierra Antigua</a></h1>
-
             <h1><a href="tierraAntigua1v1.html">Tierra Antigua 1v1</a></h1>
-
-
             <h1><a href="busqueda.html">Busqueda</a></h1>
             <h1><a href="geometryduck.html">Geometry Pato</a></h1>
             <h1><a href="geometrypato3.html">Geometry Pato III</a></h1>
             <h1><a href="unoentrecuatro.html">Uno Entre Cuatro</a></h1>
-            <h1><a href="poke.html">pokemon</a></h1>
             <h1><a href="version0.0.html">Espacio y Ovnis</a></h1>
             <h1><a href="nuevonuevo.html">Hinodis</a></h1>
             <h1><a href="arenagladiadores.html">Arena Gladiadores</a></h1>
-            $$\text{ܐܲܠܵܗܵܐ ܢܒܲܪܸܟ݂ ܠܥܵܒܹ̈ܐ ܕܥܵܠܡܵܐ ܘܠܓܵܙܔܹ̈ܐ ܕܝܵܡܵܐ}$$
+
+            {ܐܲܠܵܗܵܐ ܢܒܲܪܸܟ݂ ܠܥܵܒܹ̈ܐ ܕܥܵܠܡܵܐ ܘܠܓܵܙܔܹ̈ܐ ܕܝܵܡܵܐ}
+
         </div>
     </div>
 
@@ -1179,21 +1597,21 @@
 
             {
                 id: "radio",
-                nombre: "Radio del Cuervo",
+                nombre: "Radio Mundial",
                 icono: "📻",
                 visible: true
             },
 
             {
                 id: "mapa",
-                nombre: "Mapa del Cuervo",
+                nombre: "Mapa",
                 icono: "🗺️",
                 visible: true
             },
 
             {
                 id: "notas",
-                nombre: "Libreta del Cuervo",
+                nombre: "Libreta de Notas",
                 icono: "📝",
                 visible: true
             },
@@ -1672,7 +2090,240 @@
             switch (id) {
 
 
+                /* ========================================================
+                   YOUTUBE
+                   ======================================================== */
 
+                case "youtube":
+
+                    return `
+
+        <p class="descripcion">
+
+            ▶️ Busca videos de YouTube desde
+            El Taller del Cuervo.
+
+        </p>
+
+
+        <!-- ==================================================
+             API KEY
+        ================================================== -->
+
+        <div style="
+            background:var(--panel-2);
+            padding:12px;
+            border-radius:10px;
+            margin-bottom:12px;
+        ">
+
+            <label style="
+                display:block;
+                color:var(--texto-suave);
+                font-size:13px;
+                margin-bottom:6px;
+            ">
+
+                🔑 API Key de YouTube
+
+            </label>
+
+
+            <input
+                id="ytApiKey"
+                type="password"
+                placeholder="Introduce tu API Key">
+
+
+            <button
+                onclick="YT_guardarApiKey()"
+                style="margin-top:8px;">
+
+                💾 Guardar API Key
+
+            </button>
+
+        </div>
+
+
+        <!-- ==================================================
+             BUSCADOR
+        ================================================== -->
+
+        <div style="
+            display:flex;
+            gap:8px;
+            margin-bottom:10px;
+        ">
+
+            <input
+                id="ytBusqueda"
+                placeholder="Ej: guitarra blues">
+
+
+            <button onclick="YT_buscar()">
+
+                🔎
+
+            </button>
+
+        </div>
+
+
+        <!-- ==================================================
+             FILTROS
+        ================================================== -->
+
+        <div style="
+            display:grid;
+            grid-template-columns:
+            repeat(auto-fit,minmax(140px,1fr));
+            gap:8px;
+            margin-bottom:12px;
+        ">
+
+
+            <select id="ytOrden">
+
+                <option value="relevance">
+                    Relevancia
+                </option>
+
+                <option value="date">
+                    Más nuevos
+                </option>
+
+                <option value="viewCount">
+                    Más vistos
+                </option>
+
+            </select>
+
+
+            <select id="ytDuracion">
+
+                <option value="any">
+                    Cualquier duración
+                </option>
+
+                <option value="short">
+                    Menos de 4 min
+                </option>
+
+                <option value="medium">
+                    4–20 min
+                </option>
+
+                <option value="long">
+                    Más de 20 min
+                </option>
+
+            </select>
+
+
+            <select id="ytDefinicion">
+
+                <option value="any">
+                    Cualquier calidad
+                </option>
+
+                <option value="high">
+                    HD
+                </option>
+
+                <option value="standard">
+                    Estándar
+                </option>
+
+            </select>
+
+
+            <select id="ytResultados">
+
+                <option value="10">
+                    10 resultados
+                </option>
+
+                <option value="20" selected>
+                    20 resultados
+                </option>
+
+                <option value="30">
+                    30 resultados
+                </option>
+
+                <option value="50">
+                    50 resultados
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- ==================================================
+             FAVORITOS
+        ================================================== -->
+
+        <h3 style="
+            color:var(--acento);
+            margin-top:15px;
+        ">
+
+            ⭐ Videos favoritos
+
+        </h3>
+
+
+        <div
+            id="ytFavoritos"
+            style="margin-top:8px;">
+
+        </div>
+
+
+        <!-- ==================================================
+             RESULTADOS
+        ================================================== -->
+
+        <h3 style="
+            color:var(--acento);
+            margin-top:15px;
+        ">
+
+            🎬 Resultados
+
+        </h3>
+
+
+        <div
+            id="ytResultados"
+            style="margin-top:8px;">
+
+        </div>
+
+
+        <!-- ==================================================
+             HISTORIAL
+        ================================================== -->
+
+        <h3 style="
+            color:var(--acento);
+            margin-top:15px;
+        ">
+
+            🕘 Historial
+
+        </h3>
+
+
+        <div
+            id="ytHistorial"
+            style="margin-top:8px;">
+
+        </div>
+
+    `;
 
 
 
@@ -2633,245 +3284,7 @@
                     📄 Nuevo
                 </button>
 
-            `;
-
-                /* ========================================================
-                   YOUTUBE
-                   ======================================================== */
-
-                case "youtube":
-
-                    return `
-
-        <p class="descripcion">
-
-            ▶️ Busca videos de YouTube desde
-            El Taller del Cuervo.
-
-        </p>
-
-
-        <!-- ==================================================
-             API KEY
-        ================================================== -->
-
-        <div style="
-            background:var(--panel-2);
-            padding:12px;
-            border-radius:10px;
-            margin-bottom:12px;
-        ">
-
-            <label style="
-                display:block;
-                color:var(--texto-suave);
-                font-size:13px;
-                margin-bottom:6px;
-            ">
-
-                🔑 API Key de YouTube
-
-            </label>
-
-
-            <input
-                id="ytApiKey"
-                type="password"
-                placeholder="Introduce tu API Key">
-
-
-            <button
-                onclick="YT_guardarApiKey()"
-                style="margin-top:8px;">
-
-                💾 Guardar API Key
-
-            </button>
-
-        </div>
-
-
-        <!-- ==================================================
-             BUSCADOR
-        ================================================== -->
-
-        <div style="
-            display:flex;
-            gap:8px;
-            margin-bottom:10px;
-        ">
-
-            <input
-                id="ytBusqueda"
-                placeholder="Ej: guitarra blues">
-
-
-            <button onclick="YT_buscar()">
-
-                🔎
-
-            </button>
-
-        </div>
-
-
-        <!-- ==================================================
-             FILTROS
-        ================================================== -->
-
-        <div style="
-            display:grid;
-            grid-template-columns:
-            repeat(auto-fit,minmax(140px,1fr));
-            gap:8px;
-            margin-bottom:12px;
-        ">
-
-
-            <select id="ytOrden">
-
-                <option value="relevance">
-                    Relevancia
-                </option>
-
-                <option value="date">
-                    Más nuevos
-                </option>
-
-                <option value="viewCount">
-                    Más vistos
-                </option>
-
-            </select>
-
-
-            <select id="ytDuracion">
-
-                <option value="any">
-                    Cualquier duración
-                </option>
-
-                <option value="short">
-                    Menos de 4 min
-                </option>
-
-                <option value="medium">
-                    4–20 min
-                </option>
-
-                <option value="long">
-                    Más de 20 min
-                </option>
-
-            </select>
-
-
-            <select id="ytDefinicion">
-
-                <option value="any">
-                    Cualquier calidad
-                </option>
-
-                <option value="high">
-                    HD
-                </option>
-
-                <option value="standard">
-                    Estándar
-                </option>
-
-            </select>
-
-
-            <select id="ytResultados">
-
-                <option value="10">
-                    10 resultados
-                </option>
-
-                <option value="20" selected>
-                    20 resultados
-                </option>
-
-                <option value="30">
-                    30 resultados
-                </option>
-
-                <option value="50">
-                    50 resultados
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <!-- ==================================================
-             FAVORITOS
-        ================================================== -->
-
-        <h3 style="
-            color:var(--acento);
-            margin-top:15px;
-        ">
-
-            ⭐ Videos favoritos
-
-        </h3>
-
-
-        <div
-            id="ytFavoritos"
-            style="margin-top:8px;">
-
-        </div>
-
-
-        <!-- ==================================================
-             RESULTADOS
-        ================================================== -->
-
-        <h3 style="
-            color:var(--acento);
-            margin-top:15px;
-        ">
-
-            🎬 Resultados
-
-        </h3>
-
-
-        <div
-            id="ytResultados"
-            style="margin-top:8px;">
-
-        </div>
-
-
-        <!-- ==================================================
-             HISTORIAL
-        ================================================== -->
-
-        <h3 style="
-            color:var(--acento);
-            margin-top:15px;
-        ">
-
-            🕘 Historial
-
-        </h3>
-
-
-        <div
-            id="ytHistorial"
-            style="margin-top:8px;">
-
-        </div>
-
-    `;
-
-
-                default:
+            `; default:
 
                     return `
 
@@ -9250,7 +9663,158 @@
         }
 
 
+        /* =========================================================
+           SISTEMA DE TEMAS DEL TALLER
+           ========================================================= */
 
+
+        const temasDisponibles = [
+
+            "cuervo",
+            "buho",
+            "aguila",
+            "pinguino",
+            "loro",
+            "flamenco",
+            "pavo-real",
+            "martin-pescador"
+
+        ];
+
+
+        function cambiarTema(tema) {
+
+            /* -----------------------------------------
+               Comprobar que el tema exista
+               ----------------------------------------- */
+
+            if (!temasDisponibles.includes(tema)) {
+
+                console.warn(
+                    "Tema no encontrado:",
+                    tema
+                );
+
+                return;
+            }
+
+
+            /* -----------------------------------------
+               Aplicar tema
+               ----------------------------------------- */
+
+            document.body.dataset.tema = tema;
+
+
+            /* -----------------------------------------
+               Guardar tema
+               ----------------------------------------- */
+
+            localStorage.setItem(
+                "temaTaller",
+                tema
+            );
+
+
+            /* -----------------------------------------
+               Actualizar botones
+               ----------------------------------------- */
+
+            actualizarTemaActivo();
+
+
+            /* -----------------------------------------
+               Mensaje
+               ----------------------------------------- */
+
+            if (typeof mostrarMensaje === "function") {
+
+                mostrarMensaje(
+                    "Tema cambiado correctamente"
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           MARCAR TEMA ACTIVO
+           ========================================================= */
+
+        function actualizarTemaActivo() {
+
+            const temaActual =
+                document.body.dataset.tema ||
+                "cuervo";
+
+
+            const botones =
+                document.querySelectorAll(
+                    ".tema-btn"
+                );
+
+
+            botones.forEach(boton => {
+
+                const tema =
+                    boton.dataset.tema;
+
+
+                boton.classList.toggle(
+                    "activo",
+                    tema === temaActual
+                );
+
+            });
+
+        }
+
+
+        /* =========================================================
+           CARGAR TEMA GUARDADO
+           ========================================================= */
+
+        function cargarTema() {
+
+            const temaGuardado =
+                localStorage.getItem(
+                    "temaTaller"
+                );
+
+
+            const tema =
+
+                temasDisponibles.includes(
+                    temaGuardado
+                )
+
+                    ? temaGuardado
+
+                    : "cuervo";
+
+
+            document.body.dataset.tema =
+                tema;
+
+
+            actualizarTemaActivo();
+
+        }
+
+
+        /* =========================================================
+           CARGAR AL INICIAR LA PÁGINA
+           ========================================================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                cargarTema();
+
+            }
+        );
         /* ================================================================
            INICIALIZACIÓN DE LAS NUEVAS HERRAMIENTAS
            ================================================================ */
