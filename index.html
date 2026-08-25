@@ -3,7 +3,7 @@
 
 <head>
 
-    <!-- ============================================================ 1060
+    <!-- ============================================================
          EL TALLER DEL CUERVO
          VERSIÓN 3.0
 
@@ -1059,36 +1059,40 @@
 
     </div>
 
-    
-<h1 class="divE">Juegos</h1>
-<div class="divA">
-    <div class="divE">
-        <div class="divE"></div>
-        
-        <h1><a href="zg.html">Dioses Egipcios</a></h1>
-        
-        <h1><a href="jnv1.html">Juego Nuevo IA</a></h1>
 
-        <h1><a href="LunaAdventures.html"> Luna Adventures</a></h1>
-       
-        <h1><a href="bha.html">Auxiliar Cazadores de Bestias</a></h1>
-        <h1><a href="ttt.html">Tierra Antigua</a></h1>
-        
-        <h1><a href="tierraAntigua1v1.html">Tierra Antigua 1v1</a></h1>
-        
-        
-        <h1><a href="busqueda.html">Busqueda</a></h1>
-        <h1><a href="geometryduck.html">Geometry Pato</a></h1>
-        <h1><a href="geometrypato3.html">Geometry Pato III</a></h1>
-    <h1><a href="unoentrecuatro.html">Uno Entre Cuatro</a></h1>
-    <h1><a href="ejercicioCanciones.html">tabla musical</a></h1>
-        <h1><a href="poke.html">pokemon</a></h1>
-        <h1><a href="version0.0.html">Espacio y Ovnis</a></h1>
-         <h1><a href="nuevonuevo.html">Hinodis</a></h1>     
-        <h1><a href="arenagladiadores.html">Arena Gladiadores</a></h1>
-        $$\text{ܐܲܠܵܗܵܐ ܢܒܲܪܸܟ݂ ܠܥܵܒܹ̈ܐ ܕܥܵܠܡܵܐ ܘܠܓܵܙܔܹ̈ܐ ܕܝܵܡܵܐ}$$
+    <h1 class="divE">Juegos</h1>
+    <div class="divA">
+        <div class="divE">
+            <div class="divE"></div>
+
+            <h1><a href="zg.html">Dioses Egipcios</a></h1>
+
+            <h1><a href="jnv1.html">Juego Nuevo IA</a></h1>
+
+            <h1><a href="LunaAdventures.html"> Luna Adventures</a></h1>
+
+            <h1><a href="bha.html">Auxiliar Cazadores de Bestias</a></h1>
+            <h1><a href="ttt.html">Tierra Antigua</a></h1>
+
+            <h1><a href="tierraAntigua1v1.html">Tierra Antigua 1v1</a></h1>
+
+
+            <h1><a href="busqueda.html">Busqueda</a></h1>
+            <h1><a href="geometryduck.html">Geometry Pato</a></h1>
+            <h1><a href="geometrypato3.html">Geometry Pato III</a></h1>
+            <h1><a href="unoentrecuatro.html">Uno Entre Cuatro</a></h1>
+            <h1><a href="ejercicioCanciones.html">tabla musical</a></h1>
+            <h1><a href="poke.html">pokemon</a></h1>
+            <h1><a href="version0.0.html">Espacio y Ovnis</a></h1>
+            <h1><a href="nuevonuevo.html">Hinodis</a></h1>
+            <h1><a href="arenagladiadores.html">Arena Gladiadores</a></h1>
+            $$\text{ܐܲܠܵܗܵܐ ܢܒܲܪܸܟ݂ ܠܥܵܒܹ̈ܐ ܕܥܵܠܡܵܐ ܘܠܓܵܙܔܹ̈ܐ ܕܝܵܡܵܐ}$$
+        </div>
     </div>
-</div>
+
+
+
+
 
 
     <!-- ============================================================
@@ -1242,8 +1246,14 @@
                 nombre: "Escritorio",
                 icono: "✍️",
                 visible: false
-            }
+            },
 
+            {
+                id: "generadorIdeas",
+                nombre: "Generador de Ideas 2.0",
+                icono: "💡",
+                visible: true
+            },
         ];
 
 
@@ -1606,6 +1616,15 @@
             */
 
             inicializarModulos();
+            if (
+                document.getElementById(
+                    "gi22Guardadas"
+                )
+            ) {
+
+                GI22_mostrarGuardadas();
+
+            }
         }
 
 
@@ -1627,7 +1646,376 @@
 
             switch (id) {
 
-                /* ========================================================
+
+
+
+
+
+                case "generadorIdeas":
+
+                    return `
+
+        <p class="descripcion">
+
+            💡 <strong>Generador de Ideas 2.2</strong><br>
+
+            Genera emojis, conceptos y conexiones.
+            Puedes guardar cada idea junto con sus
+            claves y comentarios.
+
+        </p>
+
+
+        <!-- =====================================================
+             MODO
+        ====================================================== -->
+
+        <label style="
+            display:block;
+            color:var(--texto-suave);
+            margin-bottom:6px;
+        ">
+
+            🧠 Método
+
+        </label>
+
+
+        <select id="gi22Modo">
+
+            <option value="caos">
+                🎲 Caos
+            </option>
+
+            <option value="preciso">
+                🎯 Preciso
+            </option>
+
+        </select>
+
+
+        <!-- =====================================================
+             TIPO DE IDEA
+        ====================================================== -->
+
+        <label style="
+            display:block;
+            color:var(--texto-suave);
+            margin-top:12px;
+            margin-bottom:6px;
+        ">
+
+            💡 Tipo de idea
+
+        </label>
+
+
+        <select id="gi22Tipo">
+
+            <option value="narrativa">
+                📖 Narrativa
+            </option>
+
+            <option value="creativa">
+                🎨 Creativa
+            </option>
+
+            <option value="inventiva">
+                🔧 Inventiva
+            </option>
+
+            <option value="necesidad">
+                🛠️ Necesidad
+            </option>
+
+            <option value="negocio">
+                💰 Negocio
+            </option>
+
+            <option value="mejora">
+                🔨 Mejora
+            </option>
+
+            <option value="combinacion">
+                🔀 Combinación
+            </option>
+
+            <option value="juego">
+                🎮 Juego
+            </option>
+
+            <option value="musica">
+                🎵 Música
+            </option>
+
+            <option value="cotidiana">
+                🏠 Cotidiana
+            </option>
+
+            <option value="futurista">
+                🚀 Futurista
+            </option>
+
+        </select>
+
+
+        <!-- =====================================================
+             CANTIDAD DE EMOJIS
+        ====================================================== -->
+
+        <label style="
+            display:block;
+            color:var(--texto-suave);
+            margin-top:12px;
+            margin-bottom:6px;
+        ">
+
+            😀 Número de emojis
+
+        </label>
+
+
+        <input
+            id="gi22CantidadEmojis"
+            type="number"
+            min="1"
+            max="30"
+            value="6"
+        >
+
+
+        <label style="
+            display:flex;
+            align-items:center;
+            gap:8px;
+            margin-top:8px;
+        ">
+
+            <input
+                id="gi22RepetirEmojis"
+                type="checkbox"
+                checked
+                style="width:auto;"
+            >
+
+            Permitir emojis repetidos
+
+        </label>
+
+
+        <!-- =====================================================
+             CANTIDAD DE CONCEPTOS
+        ====================================================== -->
+
+        <label style="
+            display:block;
+            color:var(--texto-suave);
+            margin-top:12px;
+            margin-bottom:6px;
+        ">
+
+            🧩 Número de otros conceptos
+
+        </label>
+
+
+        <input
+            id="gi22CantidadConceptos"
+            type="number"
+            min="0"
+            max="30"
+            value="6"
+        >
+
+
+        <!-- =====================================================
+             CONTEXTO
+        ====================================================== -->
+
+        <h3 style="
+            color:var(--acento);
+            margin-top:18px;
+        ">
+
+            🌎 Contexto opcional
+
+        </h3>
+
+
+        <input
+            id="gi22Persona"
+            style="margin-top:8px;"
+            placeholder="👤 Persona o usuario">
+
+
+        <input
+            id="gi22Necesidad"
+            style="margin-top:8px;"
+            placeholder="🛠️ Necesidad o problema">
+
+
+        <input
+            id="gi22Presupuesto"
+            style="margin-top:8px;"
+            placeholder="💰 Presupuesto">
+
+
+        <input
+            id="gi22Tiempo"
+            style="margin-top:8px;"
+            placeholder="⏱️ Tiempo disponible">
+
+
+        <input
+            id="gi22Material"
+            style="margin-top:8px;"
+            placeholder="🧱 Material o recurso">
+
+
+        <input
+            id="gi22Restriccion"
+            style="margin-top:8px;"
+            placeholder="⚠️ Restricción">
+
+
+        <!-- =====================================================
+             GENERAR
+        ====================================================== -->
+
+        <button
+            onclick="GI22_generar()"
+            style="
+                width:100%;
+                margin-top:16px;
+                font-size:16px;
+            ">
+
+            🎲 GENERAR
+
+        </button>
+
+
+        <!-- =====================================================
+             EMOJIS
+        ====================================================== -->
+
+        <div id="gi22Emojis"
+             style="
+                 margin-top:15px;
+                 display:flex;
+                 flex-wrap:wrap;
+                 gap:8px;
+             ">
+
+        </div>
+
+
+        <!-- =====================================================
+             OTROS CONCEPTOS
+        ====================================================== -->
+
+        <div id="gi22Conceptos"
+             style="
+                 margin-top:10px;
+                 display:flex;
+                 flex-wrap:wrap;
+                 gap:7px;
+             ">
+
+        </div>
+
+
+        <!-- =====================================================
+             RESULTADO
+        ====================================================== -->
+
+        <div id="gi22Resultado"
+             style="
+                 margin-top:15px;
+                 background:var(--panel-2);
+                 border:1px solid var(--borde);
+                 border-radius:12px;
+                 padding:16px;
+                 line-height:1.7;
+                 min-height:120px;
+             ">
+
+            Genera una combinación para comenzar.
+
+        </div>
+
+
+        <!-- =====================================================
+             GUARDAR
+        ====================================================== -->
+
+        <div style="
+            margin-top:15px;
+            padding-top:15px;
+            border-top:1px solid var(--borde);
+        ">
+
+            <h3 style="
+                color:var(--acento);
+            ">
+
+                ⭐ Guardar idea
+
+            </h3>
+
+
+            <input
+                id="gi22Nombre"
+                style="margin-top:8px;"
+                placeholder="Nombre de la idea">
+
+
+            <textarea
+                id="gi22Comentario"
+                style="
+                    margin-top:8px;
+                    min-height:120px;
+                "
+                placeholder="Escribe tu comentario, desarrollo o próximos pasos..."
+            ></textarea>
+
+
+            <button
+                onclick="GI22_guardar()"
+                style="
+                    width:100%;
+                    margin-top:8px;
+                ">
+
+                💾 GUARDAR IDEA
+
+            </button>
+
+        </div>
+
+
+        <!-- =====================================================
+             IDEAS GUARDADAS
+        ====================================================== -->
+
+        <h3 style="
+            color:var(--acento);
+            margin-top:20px;
+        ">
+
+            📚 Mis ideas
+
+        </h3>
+
+
+        <div id="gi22Guardadas"
+             style="
+                 margin-top:10px;
+             ">
+
+        </div>
+
+    `; /* ========================================================
                    RADIO
                    ======================================================== */
 
@@ -4132,6 +4520,18 @@
 
             inicializarHerramientasNuevas();
 
+
+
+            if (
+                document.getElementById(
+                    "gi22Resultado"
+                )
+            ) {
+
+                GI22_inicializar();
+
+            }
+
             /*
                 NOTAS
             */
@@ -4152,7 +4552,15 @@
 
                 iniciarMapa();
             }
+            if (
+                document.getElementById(
+                    "listaIdeas"
+                )
+            ) {
 
+                inicializarIdeas();
+
+            }
 
             /*
                 BUSCADOR DE RADIO
@@ -4195,6 +4603,15 @@
             ) {
 
                 inicializarRadio();
+
+            }
+            if (
+                document.getElementById(
+                    "resultadoConceptos"
+                )
+            ) {
+
+                inicializarGeneradorIdeas();
 
             }
         }
@@ -5701,8 +6118,1701 @@
                 "Afinador detenido."
             );
         }
+        /* ================================================================
+           💡 GENERADOR DE IDEAS 2.2
+           SISTEMA INDEPENDIENTE
+           ================================================================ */
 
 
+        /* ================================================================
+           CLAVE DE GUARDADO
+        ================================================================ */
+
+        const GI22_CLAVE =
+            "taller_cuervo_ideas_v22";
+
+
+        /* ================================================================
+           ESTADO ACTUAL
+        ================================================================ */
+
+        let GI22_actual = null;
+
+
+        /* ================================================================
+           BANCO DE EMOJIS
+        ================================================================ */
+
+        const GI22_EMOJIS = [
+
+            "🐦‍⬛",
+            "🐺",
+            "🦊",
+            "🦉",
+            "🦅",
+            "🐍",
+            "🐉",
+            "🐢",
+            "🐙",
+            "🦈",
+            "🐋",
+            "🐬",
+            "🦋",
+            "🐝",
+            "🐸",
+            "🦌",
+            "🐻",
+            "🐯",
+            "🦁",
+            "🐘",
+
+            "🌲",
+            "🌳",
+            "🌴",
+            "🌵",
+            "🌱",
+            "🍀",
+            "🍄",
+            "🌻",
+            "🌹",
+            "🌊",
+            "⛰️",
+            "🏔️",
+            "🌋",
+            "🏜️",
+            "🏝️",
+            "🏖️",
+            "💧",
+            "🔥",
+            "🌪️",
+            "🌧️",
+            "⛈️",
+            "❄️",
+            "🌈",
+
+            "🌙",
+            "🌑",
+            "🌕",
+            "☀️",
+            "⭐",
+            "🌟",
+            "✨",
+            "🌌",
+            "🪐",
+            "🌍",
+            "☄️",
+            "🚀",
+            "🛸",
+            "👽",
+
+            "🔑",
+            "🧭",
+            "🗺️",
+            "🕰️",
+            "📻",
+            "📺",
+            "📷",
+            "📖",
+            "📜",
+            "✉️",
+            "📦",
+            "🎁",
+            "🪞",
+            "🕯️",
+            "💡",
+            "🔦",
+            "🔒",
+            "🔓",
+            "🧰",
+            "🔧",
+            "🔨",
+            "🪚",
+            "⛓️",
+            "🪢",
+            "🧲",
+            "⚙️",
+            "🔩",
+
+            "🎸",
+            "🎹",
+            "🥁",
+            "🎺",
+            "🎻",
+            "🪕",
+            "🎷",
+            "🪈",
+            "🎤",
+            "🎧",
+            "💿",
+            "📀",
+            "📼",
+            "🎼",
+            "🎵",
+            "🎶",
+
+            "🧙",
+            "🧝",
+            "🧛",
+            "🧟",
+            "🧞",
+            "🧜",
+            "🧚",
+            "🥷",
+            "🧑‍🚀",
+            "🧑‍🎨",
+            "🧑‍🔧",
+            "🧑‍🍳",
+            "🧑‍🏫",
+            "🧑‍🌾",
+            "🧑‍🎤",
+            "👑",
+
+            "🏠",
+            "🏚️",
+            "🏢",
+            "🏭",
+            "🏪",
+            "🏬",
+            "🏛️",
+            "🏰",
+            "🗼",
+            "⛪",
+            "🛕",
+            "🗿",
+            "🚉",
+            "🚂",
+            "🚇",
+            "🏕️",
+            "⛺",
+            "🌉",
+            "🛣️",
+            "🎭",
+            "🎪",
+            "🏫",
+            "📚",
+
+            "🚗",
+            "🚕",
+            "🚌",
+            "🚲",
+            "🏍️",
+            "🚢",
+            "⛵",
+            "✈️",
+            "🚁",
+            "🛷",
+
+            "🔮",
+            "🧿",
+            "🪄",
+            "⚔️",
+            "🗡️",
+            "🛡️",
+            "🏹",
+            "👁️",
+            "💀",
+            "☠️",
+            "🌀",
+            "🚪",
+            "🕳️",
+            "🧪",
+            "⚗️",
+
+            "💻",
+            "📱",
+            "⌨️",
+            "🖥️",
+            "🤖",
+            "🦾",
+            "🔋",
+            "🔌",
+            "💾",
+            "📡",
+            "📶",
+            "⚡",
+            "🔬",
+            "🔭",
+            "🧬",
+            "🛰️",
+
+            "🍎",
+            "🍊",
+            "🍋",
+            "🍉",
+            "🍇",
+            "🍓",
+            "🥥",
+            "🍞",
+            "🧀",
+            "🥚",
+            "🍕",
+            "🍔",
+            "🍲",
+            "🍜",
+            "🍵",
+            "☕",
+
+            "❤️",
+            "💔",
+            "😂",
+            "😢",
+            "😡",
+            "😱",
+            "🤔",
+            "😴",
+            "🤯",
+            "🙏",
+            "🕊️",
+            "⚖️",
+            "☯️",
+            "♻️",
+            "🔄",
+
+            "⚫",
+            "⬛",
+            "🔺",
+            "🔷",
+            "➰",
+            "➿",
+            "➕",
+            "➖",
+            "✖️",
+            "➗",
+            "❓",
+            "❗",
+            "❌",
+            "✅",
+            "⚠️",
+            "🔗",
+            "🔀",
+            "🎯",
+            "💭",
+
+            "⏰",
+            "⌛",
+            "⏳",
+            "📅",
+            "🗓️",
+            "🌅",
+            "🌇",
+            "🌃",
+
+            "💰",
+            "🪙",
+            "📈",
+            "📉",
+            "🧮",
+            "📐",
+            "📏",
+            "🔢",
+            "👥",
+            "🏦",
+            "🏪"
+
+        ];
+
+
+        /* ================================================================
+           BANCO DE OTROS CONCEPTOS
+        ================================================================ */
+
+        const GI22_CONCEPTOS = [
+
+            "misterio",
+            "aventura",
+            "nostalgia",
+            "libertad",
+            "soledad",
+            "curiosidad",
+            "transformación",
+            "secreto",
+            "viaje",
+            "memoria",
+            "futuro",
+            "pasado",
+            "equilibrio",
+            "caos",
+            "orden",
+            "energía",
+            "tiempo",
+            "espacio",
+            "silencio",
+            "movimiento",
+
+            "ahorrar tiempo",
+            "ahorrar dinero",
+            "ordenar",
+            "transportar",
+            "reparar",
+            "aprender",
+            "comunicar",
+            "proteger",
+            "crear",
+            "vender",
+            "reutilizar",
+            "simplificar",
+            "automatizar",
+            "construir",
+            "mejorar",
+
+            "un problema cotidiano",
+            "una oportunidad",
+            "una necesidad",
+            "una herramienta",
+            "un producto",
+            "un servicio",
+            "una historia",
+            "una canción",
+            "un juego",
+            "un dibujo",
+            "un objeto",
+            "una máquina",
+
+            "madera",
+            "metal",
+            "cartón",
+            "papel",
+            "tela",
+            "vidrio",
+            "cuerda",
+            "imanes",
+            "electricidad",
+            "material reciclado",
+
+            "una feria",
+            "una ciudad",
+            "un barrio",
+            "un bosque",
+            "una playa",
+            "una montaña",
+            "una tienda",
+            "un taller",
+            "una escuela",
+            "una estación",
+            "una fábrica",
+            "un restaurante"
+
+        ];
+
+
+        /* ================================================================
+           SELECCIÓN ALEATORIA
+        ================================================================ */
+
+        function GI22_random(lista) {
+
+            return lista[
+                Math.floor(
+                    Math.random() * lista.length
+                )
+            ];
+
+        }
+
+
+        /* ================================================================
+           GENERAR EMOJIS
+        ================================================================ */
+
+        function GI22_generarEmojis(
+            cantidad,
+            repetir
+        ) {
+
+            const resultado = [];
+
+            let banco =
+                [...GI22_EMOJIS];
+
+
+            for (
+                let i = 0;
+                i < cantidad;
+                i++
+            ) {
+
+                /*
+                    Si se permiten repetidos,
+                    siempre usamos el banco completo.
+                */
+
+                if (
+                    repetir ||
+                    banco.length === 0
+                ) {
+
+                    resultado.push(
+                        GI22_random(
+                            GI22_EMOJIS
+                        )
+                    );
+
+                    continue;
+                }
+
+
+                /*
+                    Sin repetición.
+                */
+
+                const indice =
+                    Math.floor(
+                        Math.random() *
+                        banco.length
+                    );
+
+
+                resultado.push(
+                    banco[indice]
+                );
+
+
+                banco.splice(
+                    indice,
+                    1
+                );
+
+            }
+
+
+            return resultado;
+
+        }
+
+
+        /* ================================================================
+           GENERAR
+        ================================================================ */
+
+        function GI22_generar() {
+
+            let cantidadEmojis =
+                parseInt(
+                    document.getElementById(
+                        "gi22CantidadEmojis"
+                    )?.value
+                );
+
+
+            let cantidadConceptos =
+                parseInt(
+                    document.getElementById(
+                        "gi22CantidadConceptos"
+                    )?.value
+                );
+
+
+            if (
+                !Number.isFinite(
+                    cantidadEmojis
+                )
+            ) {
+
+                cantidadEmojis = 6;
+
+            }
+
+
+            if (
+                !Number.isFinite(
+                    cantidadConceptos
+                )
+            ) {
+
+                cantidadConceptos = 6;
+
+            }
+
+
+            cantidadEmojis =
+                Math.max(
+                    1,
+                    Math.min(
+                        30,
+                        cantidadEmojis
+                    )
+                );
+
+
+            cantidadConceptos =
+                Math.max(
+                    0,
+                    Math.min(
+                        30,
+                        cantidadConceptos
+                    )
+                );
+
+
+            const repetir =
+                document.getElementById(
+                    "gi22RepetirEmojis"
+                )?.checked ?? true;
+
+
+            const tipo =
+                document.getElementById(
+                    "gi22Tipo"
+                )?.value || "creativa";
+
+
+            /*
+                EMOJIS
+            */
+
+            const emojis =
+                GI22_generarEmojis(
+                    cantidadEmojis,
+                    repetir
+                );
+
+
+            /*
+                OTROS CONCEPTOS
+            */
+
+            const conceptos = [];
+
+
+            for (
+                let i = 0;
+                i < cantidadConceptos;
+                i++
+            ) {
+
+                conceptos.push(
+                    GI22_random(
+                        GI22_CONCEPTOS
+                    )
+                );
+
+            }
+
+
+            /*
+                CONTEXTO DEL USUARIO
+            */
+
+            const persona =
+                document.getElementById(
+                    "gi22Persona"
+                )?.value.trim() || "";
+
+
+            const necesidad =
+                document.getElementById(
+                    "gi22Necesidad"
+                )?.value.trim() || "";
+
+
+            const presupuesto =
+                document.getElementById(
+                    "gi22Presupuesto"
+                )?.value.trim() || "";
+
+
+            const tiempo =
+                document.getElementById(
+                    "gi22Tiempo"
+                )?.value.trim() || "";
+
+
+            const material =
+                document.getElementById(
+                    "gi22Material"
+                )?.value.trim() || "";
+
+
+            const restriccion =
+                document.getElementById(
+                    "gi22Restriccion"
+                )?.value.trim() || "";
+
+
+            /*
+                GUARDAMOS LA GENERACIÓN COMPLETA.
+        
+                Lo importante:
+                emojis y conceptos quedan separados.
+            */
+
+            GI22_actual = {
+
+                id:
+                    Date.now(),
+
+                tipo:
+                    tipo,
+
+                emojis:
+                    emojis,
+
+                conceptos:
+                    conceptos,
+
+                contexto: {
+
+                    persona:
+                        persona,
+
+                    necesidad:
+                        necesidad,
+
+                    presupuesto:
+                        presupuesto,
+
+                    tiempo:
+                        tiempo,
+
+                    material:
+                        material,
+
+                    restriccion:
+                        restriccion
+
+                },
+
+                fecha:
+                    new Date()
+                        .toLocaleString(
+                            "es-CL"
+                        )
+
+            };
+
+
+            GI22_mostrar();
+
+        }
+
+
+        /* ================================================================
+           CREAR MENSAJE
+        ================================================================ */
+
+        function GI22_crearMensaje() {
+
+            const tipo =
+                GI22_actual.tipo;
+
+
+            const emojiTexto =
+                GI22_actual.emojis.join(
+                    " "
+                );
+
+
+            const conceptoTexto =
+                GI22_actual.conceptos.join(
+                    ", "
+                );
+
+
+            const c =
+                GI22_actual.contexto;
+
+
+            const mensajes = {
+
+                narrativa: [
+
+                    `📖 ¿Qué historia podría surgir al conectar ${emojiTexto} con ${conceptoTexto}?`,
+
+                    `📖 Si estos elementos pertenecieran al mismo mundo, ¿qué conflicto aparecería?`,
+
+                    `📖 ¿Qué personaje tendría una razón para reunir estos elementos?`
+
+                ],
+
+
+                creativa: [
+
+                    `🎨 ¿Qué obra podrías crear usando ${emojiTexto} como punto de partida?`,
+
+                    `🎨 ¿Cómo convertirías esta combinación en una experiencia visual, musical o artística?`,
+
+                    `🎨 ¿Qué asociación inesperada puedes encontrar entre estos elementos?`
+
+                ],
+
+
+                inventiva: [
+
+                    `🔧 ¿Qué objeto, mecanismo o herramienta podría nacer de esta combinación?`,
+
+                    `🔧 ¿Puedes unir estos elementos para resolver algo de una forma nueva?`,
+
+                    `🔧 ¿Qué podrías construir que todavía no exista?`
+
+                ],
+
+
+                necesidad: [
+
+                    `🛠️ ¿Qué necesidad podría estar escondida detrás de ${conceptoTexto}?`,
+
+                    `🛠️ ¿Qué problema cotidiano podría resolverse utilizando estos elementos?`,
+
+                    `🛠️ ¿Qué hace perder tiempo, dinero o esfuerzo y todavía no está bien resuelto?`
+
+                ],
+
+
+                negocio: [
+
+                    `💰 ¿Quién pagaría por una solución relacionada con ${conceptoTexto}?`,
+
+                    `💰 ¿Qué producto o servicio podría surgir de esta combinación?`,
+
+                    `💰 ¿Qué oportunidad comercial podría existir aquí?`
+
+                ],
+
+
+                mejora: [
+
+                    `🔨 ¿Qué podrías simplificar, acelerar o mejorar?`,
+
+                    `🔨 ¿Qué parte de ${conceptoTexto} podría hacerse de una manera diferente?`,
+
+                    `🔨 ¿Qué podrías eliminar para hacer algo más útil?`
+
+                ],
+
+
+                combinacion: [
+
+                    `🔀 ¿Qué podrías crear mezclando ${emojiTexto}?`,
+
+                    `🔀 ¿Qué tienen en común estos elementos aparentemente diferentes?`,
+
+                    `🔀 ¿Qué función nueva aparecería al combinarlos?`
+
+                ],
+
+
+                juego: [
+
+                    `🎮 ¿Cómo convertirías ${emojiTexto} en una mecánica de juego?`,
+
+                    `🎮 ¿Qué objetivo, regla o desafío podría surgir?`,
+
+                    `🎮 ¿Qué tendría que hacer el jugador con estos elementos?`
+
+                ],
+
+
+                musica: [
+
+                    `🎵 ¿Qué canción podría nacer de ${emojiTexto}?`,
+
+                    `🎵 ¿Qué ritmo, instrumento o atmósfera representa esta combinación?`,
+
+                    `🎵 ¿Cómo convertirías estos elementos en una composición?`
+
+                ],
+
+
+                cotidiana: [
+
+                    `🏠 ¿Qué pequeña molestia cotidiana podría convertirse en una solución?`,
+
+                    `🏠 ¿Qué podrías hacer más fácil con estos elementos?`,
+
+                    `🏠 ¿Qué tarea repetitiva podrías mejorar?`
+
+                ],
+
+
+                futurista: [
+
+                    `🚀 ¿Qué necesidad futura podría aparecer a partir de estos elementos?`,
+
+                    `🚀 ¿Qué objeto del futuro podría surgir de esta combinación?`,
+
+                    `🚀 ¿Qué problema todavía no existe pero podría existir?`
+
+                ]
+
+            };
+
+
+            let lista =
+                mensajes[tipo] ||
+                mensajes.creativa;
+
+
+            let mensaje =
+                GI22_random(
+                    lista
+                );
+
+
+            /*
+                Añadimos contexto real
+                cuando el usuario lo entregó.
+            */
+
+            if (c.persona) {
+
+                mensaje +=
+                    `\n\n👤 Usuario: ${c.persona}`;
+
+            }
+
+
+            if (c.necesidad) {
+
+                mensaje +=
+                    `\n🛠️ Necesidad: ${c.necesidad}`;
+
+            }
+
+
+            if (c.presupuesto) {
+
+                mensaje +=
+                    `\n💰 Presupuesto: ${c.presupuesto}`;
+
+            }
+
+
+            if (c.tiempo) {
+
+                mensaje +=
+                    `\n⏱️ Tiempo: ${c.tiempo}`;
+
+            }
+
+
+            if (c.material) {
+
+                mensaje +=
+                    `\n🧱 Material: ${c.material}`;
+
+            }
+
+
+            if (c.restriccion) {
+
+                mensaje +=
+                    `\n⚠️ Restricción: ${c.restriccion}`;
+
+            }
+
+
+            return mensaje;
+
+        }
+
+
+        /* ================================================================
+           MOSTRAR GENERACIÓN
+        ================================================================ */
+
+        function GI22_mostrar() {
+
+            const emojisContenedor =
+                document.getElementById(
+                    "gi22Emojis"
+                );
+
+
+            const conceptosContenedor =
+                document.getElementById(
+                    "gi22Conceptos"
+                );
+
+
+            const resultado =
+                document.getElementById(
+                    "gi22Resultado"
+                );
+
+
+            if (
+                !emojisContenedor ||
+                !conceptosContenedor ||
+                !resultado
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+                LIMPIAMOS
+            */
+
+            emojisContenedor.innerHTML =
+                "";
+
+
+            conceptosContenedor.innerHTML =
+                "";
+
+
+            /*
+                EMOJIS
+        
+                Aquí usamos directamente
+                GI22_actual.emojis.
+        
+                Por eso SIEMPRE se mostrarán.
+            */
+
+            const tituloEmojis =
+                document.createElement(
+                    "div"
+                );
+
+
+            tituloEmojis.style.width =
+                "100%";
+
+
+            tituloEmojis.style.color =
+                "var(--acento)";
+
+
+            tituloEmojis.style.fontWeight =
+                "bold";
+
+
+            tituloEmojis.textContent =
+                "😀 Emojis · " +
+                GI22_actual.emojis.length;
+
+
+            emojisContenedor.appendChild(
+                tituloEmojis
+            );
+
+
+            GI22_actual.emojis.forEach(
+                function (emoji) {
+
+                    const elemento =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    elemento.style.cssText = `
+
+                background:
+                    var(--panel-2);
+
+                border:
+                    1px solid var(--borde);
+
+                border-radius:
+                    12px;
+
+                padding:
+                    10px;
+
+                min-width:
+                    55px;
+
+                text-align:
+                    center;
+
+                font-size:
+                    30px;
+
+            `;
+
+
+                    elemento.textContent =
+                        emoji;
+
+
+                    emojisContenedor.appendChild(
+                        elemento
+                    );
+
+                }
+            );
+
+
+            /*
+                OTROS CONCEPTOS
+            */
+
+            if (
+                GI22_actual.conceptos.length > 0
+            ) {
+
+                const tituloConceptos =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                tituloConceptos.style.width =
+                    "100%";
+
+
+                tituloConceptos.style.color =
+                    "var(--acento)";
+
+
+                tituloConceptos.style.fontWeight =
+                    "bold";
+
+
+                tituloConceptos.textContent =
+                    "🧩 Otros conceptos · " +
+                    GI22_actual.conceptos.length;
+
+
+                conceptosContenedor.appendChild(
+                    tituloConceptos
+                );
+
+
+                GI22_actual.conceptos.forEach(
+                    function (concepto) {
+
+                        const elemento =
+                            document.createElement(
+                                "span"
+                            );
+
+
+                        elemento.style.cssText = `
+
+                    background:
+                        var(--panel-2);
+
+                    border:
+                        1px solid var(--borde);
+
+                    border-radius:
+                        20px;
+
+                    padding:
+                        7px 10px;
+
+                `;
+
+
+                        elemento.textContent =
+                            concepto;
+
+
+                        conceptosContenedor.appendChild(
+                            elemento
+                        );
+
+                    }
+                );
+
+            }
+
+
+            /*
+                MENSAJE
+            */
+
+            resultado.innerHTML = `
+
+        <div style="
+            color:var(--acento);
+            font-size:19px;
+            font-weight:bold;
+        ">
+
+            💡 ${escaparHTML(
+                GI22_actual.tipo
+            )}
+
+        </div>
+
+
+        <div style="
+            margin-top:10px;
+            white-space:pre-wrap;
+        ">
+
+            ${escaparHTML(
+                GI22_crearMensaje()
+            )}
+
+        </div>
+
+    `;
+
+        }
+
+
+        /* ================================================================
+           GUARDAR
+        ================================================================ */
+
+        function GI22_guardar() {
+
+            if (!GI22_actual) {
+
+                mostrarMensaje(
+                    "Primero genera una idea."
+                );
+
+                return;
+
+            }
+
+
+            const nombre =
+                document.getElementById(
+                    "gi22Nombre"
+                )?.value.trim();
+
+
+            const comentario =
+                document.getElementById(
+                    "gi22Comentario"
+                )?.value.trim();
+
+
+            const ideas =
+                GI22_cargarIdeas();
+
+
+            /*
+                Guardamos TODA la generación.
+        
+                Especialmente:
+                - emojis
+                - conceptos
+                - contexto
+                - tipo
+                - comentario
+            */
+
+            ideas.unshift({
+
+                id:
+                    Date.now(),
+
+                nombre:
+                    nombre ||
+                    "Idea del " +
+                    GI22_actual.fecha,
+
+                tipo:
+                    GI22_actual.tipo,
+
+                emojis:
+                    [...GI22_actual.emojis],
+
+                conceptos:
+                    [...GI22_actual.conceptos],
+
+                contexto:
+                {
+                    ...GI22_actual.contexto
+                },
+
+                comentario:
+                    comentario || "",
+
+                fecha:
+                    GI22_actual.fecha
+
+            });
+
+
+            GI22_guardarIdeas(
+                ideas
+            );
+
+
+            /*
+                Limpiamos solamente
+                los campos de guardado.
+            */
+
+            const nombreInput =
+                document.getElementById(
+                    "gi22Nombre"
+                );
+
+
+            const comentarioInput =
+                document.getElementById(
+                    "gi22Comentario"
+                );
+
+
+            if (nombreInput) {
+
+                nombreInput.value = "";
+
+            }
+
+
+            if (comentarioInput) {
+
+                comentarioInput.value = "";
+
+            }
+
+
+            GI22_mostrarGuardadas();
+
+
+            mostrarMensaje(
+                "⭐ Idea guardada correctamente."
+            );
+
+        }
+
+
+        /* ================================================================
+           CARGAR IDEAS
+        ================================================================ */
+
+        function GI22_cargarIdeas() {
+
+            try {
+
+                const datos =
+                    localStorage.getItem(
+                        GI22_CLAVE
+                    );
+
+
+                if (!datos) {
+
+                    return [];
+
+                }
+
+
+                const ideas =
+                    JSON.parse(
+                        datos
+                    );
+
+
+                return Array.isArray(
+                    ideas
+                )
+                    ? ideas
+                    : [];
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Error cargando ideas:",
+                    error
+                );
+
+
+                return [];
+
+            }
+
+        }
+
+
+        /* ================================================================
+           GUARDAR IDEAS
+        ================================================================ */
+
+        function GI22_guardarIdeas(
+            ideas
+        ) {
+
+            localStorage.setItem(
+
+                GI22_CLAVE,
+
+                JSON.stringify(
+                    ideas
+                )
+
+            );
+
+        }
+
+
+        /* ================================================================
+           MOSTRAR IDEAS GUARDADAS
+        ================================================================ */
+
+        function GI22_mostrarGuardadas() {
+
+            const contenedor =
+                document.getElementById(
+                    "gi22Guardadas"
+                );
+
+
+            if (!contenedor) {
+
+                return;
+
+            }
+
+
+            const ideas =
+                GI22_cargarIdeas();
+
+
+            contenedor.innerHTML =
+                "";
+
+
+            if (
+                ideas.length === 0
+            ) {
+
+                contenedor.innerHTML = `
+
+            <div class="radio-item">
+
+                ⭐ Todavía no tienes ideas guardadas.
+
+            </div>
+
+        `;
+
+                return;
+
+            }
+
+
+            ideas.forEach(
+                function (idea) {
+
+                    const tarjeta =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    tarjeta.style.cssText = `
+
+                background:
+                    var(--panel-2);
+
+                border:
+                    1px solid var(--borde);
+
+                border-radius:
+                    12px;
+
+                padding:
+                    15px;
+
+                margin-top:
+                    10px;
+
+            `;
+
+
+                    /*
+                        EMOJIS GUARDADOS
+                    */
+
+                    const emojis =
+                        Array.isArray(
+                            idea.emojis
+                        )
+                            ? idea.emojis
+                            : [];
+
+
+                    const conceptos =
+                        Array.isArray(
+                            idea.conceptos
+                        )
+                            ? idea.conceptos
+                            : [];
+
+
+                    tarjeta.innerHTML = `
+
+                <div style="
+                    color:var(--acento);
+                    font-size:17px;
+                    font-weight:bold;
+                ">
+
+                    💡 ${escaparHTML(
+                        idea.nombre
+                    )}
+
+                </div>
+
+
+                <div style="
+                    color:var(--texto-suave);
+                    font-size:12px;
+                    margin-top:5px;
+                ">
+
+                    ${escaparHTML(
+                        idea.tipo || ""
+                    )}
+
+                    ·
+
+                    ${escaparHTML(
+                        idea.fecha || ""
+                    )}
+
+                </div>
+
+
+                <!-- EMOJIS -->
+
+                <div style="
+                    margin-top:12px;
+                    font-size:26px;
+                    line-height:1.8;
+                ">
+
+                    ${emojis
+                            .map(
+                                emoji =>
+                                    escaparHTML(
+                                        emoji
+                                    )
+                            )
+                            .join(" ")}
+
+                </div>
+
+
+                <!-- CONCEPTOS -->
+
+                ${conceptos.length > 0
+                            ?
+                            `
+
+                    <div style="
+                        margin-top:8px;
+                        color:var(--texto-suave);
+                        font-size:13px;
+                    ">
+
+                        <strong>
+                            🧩 Conceptos:
+                        </strong>
+
+                        ${escaparHTML(
+                                conceptos.join(
+                                    " · "
+                                )
+                            )}
+
+                    </div>
+
+                    `
+                            :
+                            ""
+                        }
+
+
+                <!-- CONTEXTO -->
+
+                ${idea.contexto
+                            ?
+                            `
+
+                    <div style="
+                        margin-top:10px;
+                        font-size:13px;
+                    ">
+
+                        ${idea.contexto.persona
+                                ?
+                                "👤 " +
+                                escaparHTML(
+                                    idea.contexto.persona
+                                )
+                                :
+                                ""
+                            }
+
+                        ${idea.contexto.necesidad
+                                ?
+                                "<br>🛠️ " +
+                                escaparHTML(
+                                    idea.contexto.necesidad
+                                )
+                                :
+                                ""
+                            }
+
+                        ${idea.contexto.presupuesto
+                                ?
+                                "<br>💰 " +
+                                escaparHTML(
+                                    idea.contexto.presupuesto
+                                )
+                                :
+                                ""
+                            }
+
+                        ${idea.contexto.tiempo
+                                ?
+                                "<br>⏱️ " +
+                                escaparHTML(
+                                    idea.contexto.tiempo
+                                )
+                                :
+                                ""
+                            }
+
+                        ${idea.contexto.material
+                                ?
+                                "<br>🧱 " +
+                                escaparHTML(
+                                    idea.contexto.material
+                                )
+                                :
+                                ""
+                            }
+
+                        ${idea.contexto.restriccion
+                                ?
+                                "<br>⚠️ " +
+                                escaparHTML(
+                                    idea.contexto.restriccion
+                                )
+                                :
+                                ""
+                            }
+
+                    </div>
+
+                    `
+                            :
+                            ""
+                        }
+
+
+                <!-- COMENTARIO -->
+
+                ${idea.comentario
+                            ?
+                            `
+
+                    <div style="
+                        margin-top:12px;
+                        background:
+                            var(--panel-3);
+                        border-radius:8px;
+                        padding:10px;
+                        white-space:pre-wrap;
+                    ">
+
+                        <strong>
+                            📝 Comentario
+                        </strong>
+
+                        <br><br>
+
+                        ${escaparHTML(
+                                idea.comentario
+                            )}
+
+                    </div>
+
+                    `
+                            :
+                            ""
+                        }
+
+
+                <button
+                    class="peligro"
+                    style="margin-top:12px;"
+                    onclick="
+                        GI22_eliminar(
+                            ${idea.id}
+                        )
+                    ">
+
+                    🗑️ Eliminar
+
+                </button>
+
+            `;
+
+
+                    contenedor.appendChild(
+                        tarjeta
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* ================================================================
+           ELIMINAR
+        ================================================================ */
+
+        function GI22_eliminar(id) {
+
+            if (
+                !confirm(
+                    "¿Eliminar esta idea?"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const ideas =
+                GI22_cargarIdeas()
+                    .filter(
+                        idea =>
+                            idea.id !== id
+                    );
+
+
+            GI22_guardarIdeas(
+                ideas
+            );
+
+
+            GI22_mostrarGuardadas();
+
+
+            mostrarMensaje(
+                "Idea eliminada."
+            );
+
+        }
+
+
+        /* ================================================================
+           INICIALIZAR
+        ================================================================ */
+
+        function GI22_inicializar() {
+
+            /*
+                La función se ejecuta cuando
+                el módulo YA está dibujado.
+            */
+
+            GI22_mostrarGuardadas();
+
+        }
 
         /* ================================================================
            INICIALIZACIÓN DE LAS NUEVAS HERRAMIENTAS
