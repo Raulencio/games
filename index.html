@@ -1255,6 +1255,206 @@
 
             background: var(--acento-hover);
         }
+
+
+        /* ================================================================
+   🐦 BIBLIOTECA DEL CUERVO
+   YouTube sin API
+   ================================================================ */
+
+        .yt-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .yt-buscador {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+        }
+
+        .yt-categorias {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .yt-categoria {
+            background: var(--panel-2);
+            color: var(--texto);
+            border: 1px solid var(--borde);
+        }
+
+        .yt-categoria.activa {
+            background: var(--acento);
+            color: #17130d;
+        }
+
+        .yt-seccion {
+            background: var(--panel-2);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .yt-seccion h3 {
+            color: var(--acento);
+            margin-bottom: 10px;
+        }
+
+        .yt-biblioteca {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+        }
+
+        .yt-card {
+            background: var(--panel-3);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: .2s;
+        }
+
+        .yt-card:hover {
+            border-color: var(--acento);
+            transform: translateY(-2px);
+        }
+
+        .yt-card-miniatura {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            background: #000;
+        }
+
+        .yt-card-contenido {
+            padding: 12px;
+        }
+
+        .yt-card-titulo {
+            font-weight: bold;
+            line-height: 1.4;
+            margin-bottom: 5px;
+        }
+
+        .yt-card-canal {
+            color: var(--texto-suave);
+            font-size: 12px;
+        }
+
+        .yt-card-categoria {
+            display: inline-block;
+            margin-top: 7px;
+            padding: 4px 7px;
+            border-radius: 6px;
+            background: var(--panel-2);
+            color: var(--texto-suave);
+            font-size: 11px;
+        }
+
+        .yt-card-acciones {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .yt-card-acciones button {
+            flex: 1;
+            padding: 8px;
+            font-size: 12px;
+        }
+
+        .yt-vacio {
+            padding: 25px;
+            text-align: center;
+            color: var(--texto-suave);
+            border: 1px dashed var(--borde);
+            border-radius: 10px;
+        }
+
+        .yt-formulario {
+            display: grid;
+            gap: 9px;
+        }
+
+        .yt-formulario-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .yt-contador {
+            color: var(--texto-suave);
+            font-size: 12px;
+        }
+
+        #ytReproductor {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 6000;
+            background: rgba(0, 0, 0, .88);
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        #ytReproductor.abierto {
+            display: flex;
+        }
+
+        .yt-reproductor-contenido {
+            width: 100%;
+            max-width: 1000px;
+            background: var(--panel);
+            border: 1px solid var(--borde);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .yt-iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
+            display: block;
+            background: #000;
+        }
+
+        .yt-reproductor-barra {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 12px;
+        }
+
+        .yt-reproductor-titulo {
+            flex: 1;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        @media(max-width:600px) {
+
+            .yt-buscador {
+                grid-template-columns: 1fr;
+            }
+
+            .yt-formulario-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .yt-biblioteca {
+                grid-template-columns: 1fr;
+            }
+
+        }
     </style>
 </head>
 
@@ -2098,234 +2298,437 @@
 
                     return `
 
-        <p class="descripcion">
-
-            ▶️ Busca videos de YouTube desde
-            El Taller del Cuervo.
-
-        </p>
-
-
         <!-- ==================================================
-             API KEY
+             🐦 BIBLIOTECA DEL CUERVO
+             YouTube sin API
         ================================================== -->
 
-        <div style="
-            background:var(--panel-2);
-            padding:12px;
-            border-radius:10px;
-            margin-bottom:12px;
-        ">
+        <div class="yt-panel">
 
-            <label style="
-                display:block;
-                color:var(--texto-suave);
-                font-size:13px;
-                margin-bottom:6px;
-            ">
 
-                🔑 API Key de YouTube
+            <p class="descripcion">
 
-            </label>
+                🐦 Tu biblioteca personal de videos,
+                música y aprendizaje dentro de
+                El Taller del Cuervo.
 
+            </p>
 
-            <input
-                id="ytApiKey"
-                type="password"
-                placeholder="Introduce tu API Key">
 
+            <!-- ==================================================
+                 🔎 BUSCAR EN YOUTUBE
+            ================================================== -->
 
-            <button
-                onclick="YT_guardarApiKey()"
-                style="margin-top:8px;">
+            <div class="yt-seccion">
 
-                💾 Guardar API Key
+                <h3>
 
-            </button>
+                    🔎 Buscar en YouTube
 
-        </div>
+                </h3>
 
 
-        <!-- ==================================================
-             BUSCADOR
-        ================================================== -->
+                <div class="yt-buscador">
 
-        <div style="
-            display:flex;
-            gap:8px;
-            margin-bottom:10px;
-        ">
+                    <input
+                        id="ytBusqueda"
+                        type="search"
+                        placeholder="
+                            Buscar música, guitarra,
+                            tutoriales...
+                        ">
 
-            <input
-                id="ytBusqueda"
-                placeholder="Ej: guitarra blues">
 
+                    <button
+                        onclick="YT_buscar()">
 
-            <button onclick="YT_buscar()">
+                        🔎 Buscar
 
-                🔎
+                    </button>
 
-            </button>
+                </div>
 
-        </div>
 
+                <p
+                    class="descripcion"
+                    style="
+                        margin-top:8px;
+                        margin-bottom:0;
+                    ">
 
-        <!-- ==================================================
-             FILTROS
-        ================================================== -->
+                    La búsqueda se abrirá directamente
+                    en YouTube. No necesitas API Key.
 
-        <div style="
-            display:grid;
-            grid-template-columns:
-            repeat(auto-fit,minmax(140px,1fr));
-            gap:8px;
-            margin-bottom:12px;
-        ">
+                </p>
 
+            </div>
 
-            <select id="ytOrden">
 
-                <option value="relevance">
-                    Relevancia
-                </option>
+            <!-- ==================================================
+                 ⭐ AGREGAR VIDEO
+            ================================================== -->
 
-                <option value="date">
-                    Más nuevos
-                </option>
+            <div class="yt-seccion">
 
-                <option value="viewCount">
-                    Más vistos
-                </option>
+                <h3>
 
-            </select>
+                    ⭐ Guardar video en el Taller
 
+                </h3>
 
-            <select id="ytDuracion">
 
-                <option value="any">
-                    Cualquier duración
-                </option>
+                <div class="yt-formulario">
 
-                <option value="short">
-                    Menos de 4 min
-                </option>
 
-                <option value="medium">
-                    4–20 min
-                </option>
+                    <input
+                        id="ytUrl"
+                        type="url"
+                        placeholder="
+                            Pega aquí el enlace de YouTube
+                        ">
 
-                <option value="long">
-                    Más de 20 min
-                </option>
 
-            </select>
+                    <input
+                        id="ytTitulo"
+                        type="text"
+                        placeholder="
+                            Título del video
+                        ">
 
 
-            <select id="ytDefinicion">
+                    <input
+                        id="ytCanal"
+                        type="text"
+                        placeholder="
+                            Canal o artista
+                        ">
 
-                <option value="any">
-                    Cualquier calidad
-                </option>
 
-                <option value="high">
-                    HD
-                </option>
+                    <div
+                        class="yt-formulario-grid">
 
-                <option value="standard">
-                    Estándar
-                </option>
 
-            </select>
+                        <select
+                            id="ytCategoria">
 
 
-            <select id="ytResultados">
+                            <option value="🎵 Música">
 
-                <option value="10">
-                    10 resultados
-                </option>
+                                🎵 Música
 
-                <option value="20" selected>
-                    20 resultados
-                </option>
+                            </option>
 
-                <option value="30">
-                    30 resultados
-                </option>
 
-                <option value="50">
-                    50 resultados
-                </option>
+                            <option value="🎸 Guitarra">
 
-            </select>
+                                🎸 Guitarra
 
-        </div>
+                            </option>
 
 
-        <!-- ==================================================
-             FAVORITOS
-        ================================================== -->
+                            <option value="🎤 Rap">
 
-        <h3 style="
-            color:var(--acento);
-            margin-top:15px;
-        ">
+                                🎤 Rap
 
-            ⭐ Videos favoritos
+                            </option>
 
-        </h3>
 
+                            <option value="🥁 Percusión">
 
-        <div
-            id="ytFavoritos"
-            style="margin-top:8px;">
+                                🥁 Percusión
 
-        </div>
+                            </option>
 
 
-        <!-- ==================================================
-             RESULTADOS
-        ================================================== -->
+                            <option value="📚 Aprendizaje">
 
-        <h3 style="
-            color:var(--acento);
-            margin-top:15px;
-        ">
+                                📚 Aprendizaje
 
-            🎬 Resultados
+                            </option>
 
-        </h3>
 
+                            <option value="🎮 Juegos">
 
-        <div
-            id="ytResultados"
-            style="margin-top:8px;">
+                                🎮 Juegos
 
-        </div>
+                            </option>
 
 
-        <!-- ==================================================
-             HISTORIAL
-        ================================================== -->
+                            <option value="🛠️ Tutoriales">
 
-        <h3 style="
-            color:var(--acento);
-            margin-top:15px;
-        ">
+                                🛠️ Tutoriales
 
-            🕘 Historial
+                            </option>
 
-        </h3>
 
+                            <option value="🐦 Otros">
 
-        <div
-            id="ytHistorial"
-            style="margin-top:8px;">
+                                🐦 Otros
+
+                            </option>
+
+
+                        </select>
+
+
+                        <input
+                            id="ytMiniatura"
+                            type="url"
+                            placeholder="
+                                URL de miniatura
+                                opcional
+                            ">
+
+
+                    </div>
+
+
+                    <button
+                        onclick="YT_agregarVideo()">
+
+                        ⭐ Guardar en mi biblioteca
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 📚 BIBLIOTECA
+            ================================================== -->
+
+            <div class="yt-seccion">
+
+
+                <h3>
+
+                    📚 Biblioteca del Cuervo
+
+                </h3>
+
+
+                <!-- CATEGORÍAS -->
+
+                <div
+                    class="yt-categorias">
+
+
+                    <button
+                        class="yt-categoria activa"
+                        onclick="
+                            YT_filtrarCategoria(
+                                'Todas',
+                                this
+                            )
+                        ">
+
+                        Todas
+
+                    </button>
+
+
+                    <button
+                        class="yt-categoria"
+                        onclick="
+                            YT_filtrarCategoria(
+                                '🎵 Música',
+                                this
+                            )
+                        ">
+
+                        🎵 Música
+
+                    </button>
+
+
+                    <button
+                        class="yt-categoria"
+                        onclick="
+                            YT_filtrarCategoria(
+                                '🎸 Guitarra',
+                                this
+                            )
+                        ">
+
+                        🎸 Guitarra
+
+                    </button>
+
+
+                    <button
+                        class="yt-categoria"
+                        onclick="
+                            YT_filtrarCategoria(
+                                '🎤 Rap',
+                                this
+                            )
+                        ">
+
+                        🎤 Rap
+
+                    </button>
+
+
+                    <button
+                        class="yt-categoria"
+                        onclick="
+                            YT_filtrarCategoria(
+                                '🥁 Percusión',
+                                this
+                            )
+                        ">
+
+                        🥁 Percusión
+
+                    </button>
+
+
+                    <button
+                        class="yt-categoria"
+                        onclick="
+                            YT_filtrarCategoria(
+                                '📚 Aprendizaje',
+                                this
+                            )
+                        ">
+
+                        📚 Aprendizaje
+
+                    </button>
+
+
+                    <button
+                        class="yt-categoria"
+                        onclick="
+                            YT_filtrarCategoria(
+                                '🎮 Juegos',
+                                this
+                            )
+                        ">
+
+                        🎮 Juegos
+
+                    </button>
+
+
+                    <button
+                        class="yt-categoria"
+                        onclick="
+                            YT_filtrarCategoria(
+                                '🛠️ Tutoriales',
+                                this
+                            )
+                        ">
+
+                        🛠️ Tutoriales
+
+                    </button>
+
+
+                    <button
+                        class="yt-categoria"
+                        onclick="
+                            YT_filtrarCategoria(
+                                '🐦 Otros',
+                                this
+                            )
+                        ">
+
+                        🐦 Otros
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- CONTADOR -->
+
+                <div
+                    id="ytContador"
+                    class="yt-contador"
+                    style="
+                        margin-top:12px;
+                    ">
+
+                    0 videos
+
+                </div>
+
+
+                <!-- VIDEOS -->
+
+                <div
+                    id="ytBiblioteca"
+                    class="yt-biblioteca"
+                    style="
+                        margin-top:12px;
+                    ">
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ==================================================
+                 🕘 HISTORIAL
+            ================================================== -->
+
+            <div class="yt-seccion">
+
+
+                <div
+                    style="
+                        display:flex;
+                        align-items:center;
+                        justify-content:space-between;
+                        gap:10px;
+                    ">
+
+
+                    <h3
+                        style="
+                            margin:0;
+                        ">
+
+                        🕘 Historial
+
+                    </h3>
+
+
+                    <button
+                        class="secundario"
+                        onclick="
+                            YT_borrarHistorial()
+                        ">
+
+                        🗑️ Borrar
+
+                    </button>
+
+
+                </div>
+
+
+                <div
+                    id="ytHistorial"
+                    style="
+                        margin-top:12px;
+                    ">
+
+                </div>
+
+
+            </div>
+
 
         </div>
 
     `;
-
-
 
                 case "generadorIdeas":
 
@@ -5194,16 +5597,7 @@
             /* ========================================================
                YOUTUBE
             ======================================================== */
-
-            if (
-                document.getElementById(
-                    "ytResultados"
-                )
-            ) {
-
-                YT_inicializar();
-
-            }
+            YT_inicializar()
 
             if (
                 document.getElementById(
@@ -8499,38 +8893,18 @@
 
 
 
-
         /* ================================================================
-           ▶️ YOUTUBE DEL CUERVO
-           ================================================================
-        
-           Sistema independiente.
-        
-           FUNCIONES:
-        
-           ✓ Buscar videos
-           ✓ Filtrar resultados
-           ✓ Ordenar resultados
-           ✓ Favoritos
-           ✓ Historial
-           ✓ Abrir videos
-           ✓ Guardar API Key
-           ✓ Persistencia mediante localStorage
-        
+           🐦 BIBLIOTECA DEL CUERVO
+           YouTube SIN API
            ================================================================ */
 
 
         /* ================================================================
-           CLAVES DE LOCALSTORAGE
-        ================================================================ */
+           CLAVES
+           ================================================================ */
 
-        const YT_CLAVE_API =
-            "taller_cuervo_youtube_api";
-
-
-        const YT_CLAVE_FAVORITOS =
-            "taller_cuervo_youtube_favoritos";
-
+        const YT_CLAVE_BIBLIOTECA =
+            "taller_cuervo_youtube_biblioteca";
 
         const YT_CLAVE_HISTORIAL =
             "taller_cuervo_youtube_historial";
@@ -8538,65 +8912,49 @@
 
         /* ================================================================
            ESTADO
-        ================================================================ */
+           ================================================================ */
 
-        let YT_favoritos =
-            YT_cargarDatos(
-                YT_CLAVE_FAVORITOS
+        let YT_biblioteca =
+            YT_cargar(
+                YT_CLAVE_BIBLIOTECA
             );
 
 
         let YT_historial =
-            YT_cargarDatos(
+            YT_cargar(
                 YT_CLAVE_HISTORIAL
             );
 
 
+        let YT_categoriaActual =
+            "Todas";
+
 
         /* ================================================================
-           CARGAR DATOS
-        ================================================================ */
+           CARGAR
+           ================================================================ */
 
-        function YT_cargarDatos(
-            clave
-        ) {
+        function YT_cargar(clave) {
 
             try {
 
                 const datos =
-                    localStorage.getItem(
-                        clave
-                    );
-
+                    localStorage.getItem(clave);
 
                 if (!datos) {
-
                     return [];
-
                 }
 
-
                 const resultado =
-                    JSON.parse(
-                        datos
-                    );
+                    JSON.parse(datos);
 
-
-                return Array.isArray(
-                    resultado
-                )
+                return Array.isArray(resultado)
                     ? resultado
                     : [];
 
-            }
+            } catch (error) {
 
-            catch (error) {
-
-                console.error(
-                    "Error cargando YouTube:",
-                    error
-                );
-
+                console.error(error);
 
                 return [];
 
@@ -8605,350 +8963,286 @@
         }
 
 
-
         /* ================================================================
-           GUARDAR DATOS
-        ================================================================ */
+           GUARDAR
+           ================================================================ */
 
-        function YT_guardarDatos(
+        function YT_guardar(
             clave,
             datos
         ) {
 
             localStorage.setItem(
-
                 clave,
-
-                JSON.stringify(
-                    datos
-                )
-
+                JSON.stringify(datos)
             );
 
         }
 
 
-
         /* ================================================================
-           API KEY
-        ================================================================ */
+           EXTRAER ID DE YOUTUBE
+           ================================================================ */
 
-        function YT_guardarApiKey() {
+        function YT_extraerId(url) {
 
-            const campo =
-                document.getElementById(
-                    "ytApiKey"
-                );
-
-
-            if (!campo) {
-
-                return;
-
+            if (!url) {
+                return null;
             }
 
 
-            const apiKey =
-                campo.value.trim();
+            const patrones = [
 
+                /youtube\.com\/watch\?v=([^&]+)/,
 
-            if (!apiKey) {
+                /youtu\.be\/([^?&]+)/,
 
-                mostrarMensaje(
-                    "Introduce una API Key."
-                );
+                /youtube\.com\/embed\/([^?&]+)/,
 
-                return;
+                /youtube\.com\/shorts\/([^?&]+)/
 
-            }
+            ];
 
 
-            localStorage.setItem(
+            for (
+                const patron of patrones
+            ) {
 
-                YT_CLAVE_API,
+                const resultado =
+                    url.match(patron);
 
-                apiKey
 
-            );
+                if (resultado) {
 
-
-            mostrarMensaje(
-                "🔑 API Key guardada."
-            );
-
-        }
-
-
-
-        /* ================================================================
-           CARGAR API KEY EN LA INTERFAZ
-        ================================================================ */
-
-        function YT_cargarApiKeyEnInterfaz() {
-
-            const campo =
-                document.getElementById(
-                    "ytApiKey"
-                );
-
-
-            if (!campo) {
-
-                return;
-
-            }
-
-
-            const apiKey =
-                localStorage.getItem(
-                    YT_CLAVE_API
-                );
-
-
-            if (apiKey) {
-
-                campo.value =
-                    apiKey;
-
-            }
-
-        }
-
-
-
-        /* ================================================================
-           BUSCAR
-        ================================================================ */
-
-        async function YT_buscar() {
-
-            const campo =
-                document.getElementById(
-                    "ytBusqueda"
-                );
-
-
-            if (!campo) {
-
-                return;
-
-            }
-
-
-            const texto =
-                campo.value.trim();
-
-
-            if (!texto) {
-
-                mostrarMensaje(
-                    "Escribe algo para buscar."
-                );
-
-                return;
-
-            }
-
-
-            const apiKey =
-                localStorage.getItem(
-                    YT_CLAVE_API
-                );
-
-
-            if (!apiKey) {
-
-                mostrarMensaje(
-                    "Primero guarda tu API Key."
-                );
-
-                return;
-
-            }
-
-
-            const orden =
-                document.getElementById(
-                    "ytOrden"
-                )?.value
-                ||
-                "relevance";
-
-
-            const duracion =
-                document.getElementById(
-                    "ytDuracion"
-                )?.value
-                ||
-                "any";
-
-
-            const definicion =
-                document.getElementById(
-                    "ytDefinicion"
-                )?.value
-                ||
-                "any";
-
-
-            const cantidad =
-                document.getElementById(
-                    "ytResultados"
-                )?.value
-                ||
-                "20";
-
-
-            mostrarMensaje(
-                "🔎 Buscando en YouTube..."
-            );
-
-
-            /*
-                search.list:
-        
-                part=snippet
-                q=texto
-                type=video
-        
-                Además utilizamos:
-                order
-                videoDuration
-                videoDefinition
-                videoEmbeddable
-            */
-
-            const parametros =
-                new URLSearchParams({
-
-                    part: "snippet",
-
-                    q: texto,
-
-                    type: "video",
-
-                    maxResults:
-                        cantidad,
-
-                    order:
-                        orden,
-
-                    videoDuration:
-                        duracion,
-
-                    videoDefinition:
-                        definicion,
-
-                    videoEmbeddable:
-                        "true",
-
-                    safeSearch:
-                        "moderate",
-
-                    key:
-                        apiKey
-
-                });
-
-
-            const url =
-                "https://www.googleapis.com/youtube/v3/search?"
-                +
-                parametros.toString();
-
-
-            try {
-
-                const respuesta =
-                    await fetch(
-                        url
-                    );
-
-
-                const datos =
-                    await respuesta.json();
-
-
-                if (!respuesta.ok) {
-
-                    console.error(
-                        datos
-                    );
-
-
-                    throw new Error(
-                        datos?.error?.message
-                        ||
-                        "Error de YouTube."
-                    );
+                    return resultado[1];
 
                 }
 
-
-                YT_mostrarResultados(
-                    datos.items || []
-                );
-
-
-                mostrarMensaje(
-                    "🎬 " +
-                    (datos.items || []).length +
-                    " videos encontrados."
-                );
-
             }
 
-            catch (error) {
 
-                console.error(
-                    error
-                );
-
-
-                mostrarMensaje(
-                    "No se pudo buscar en YouTube."
-                );
-
-            }
+            return null;
 
         }
 
 
+        /* ================================================================
+           AGREGAR VIDEO
+           ================================================================ */
+
+        function YT_agregarVideo() {
+
+            const url =
+                document.getElementById(
+                    "ytUrl"
+                )?.value.trim();
+
+
+            const titulo =
+                document.getElementById(
+                    "ytTitulo"
+                )?.value.trim();
+
+
+            const canal =
+                document.getElementById(
+                    "ytCanal"
+                )?.value.trim();
+
+
+            const categoria =
+                document.getElementById(
+                    "ytCategoria"
+                )?.value
+                ||
+                "🐦 Otros";
+
+
+            const miniaturaManual =
+                document.getElementById(
+                    "ytMiniatura"
+                )?.value.trim();
+
+
+            const id =
+                YT_extraerId(url);
+
+
+            if (!id) {
+
+                mostrarMensaje(
+                    "❌ El enlace de YouTube no es válido."
+                );
+
+                return;
+
+            }
+
+
+            if (!titulo) {
+
+                mostrarMensaje(
+                    "Escribe un título."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                YT_biblioteca.some(
+                    video =>
+                        video.id === id
+                )
+            ) {
+
+                mostrarMensaje(
+                    "⭐ Ese video ya está en tu biblioteca."
+                );
+
+                return;
+
+            }
+
+
+            const miniatura =
+                miniaturaManual
+                ||
+                `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+
+
+            YT_biblioteca.unshift({
+
+                id,
+
+                titulo,
+
+                canal:
+                    canal || "Desconocido",
+
+                categoria,
+
+                miniatura,
+
+                fecha:
+                    new Date()
+                        .toLocaleString(
+                            "es-CL"
+                        )
+
+            });
+
+
+            YT_guardar(
+
+                YT_CLAVE_BIBLIOTECA,
+
+                YT_biblioteca
+
+            );
+
+
+            /* Limpiar */
+
+            document.getElementById(
+                "ytUrl"
+            ).value = "";
+
+
+            document.getElementById(
+                "ytTitulo"
+            ).value = "";
+
+
+            document.getElementById(
+                "ytCanal"
+            ).value = "";
+
+
+            document.getElementById(
+                "ytMiniatura"
+            ).value = "";
+
+
+            YT_mostrarBiblioteca();
+
+
+            mostrarMensaje(
+                "⭐ Video agregado al Taller."
+            );
+
+        }
+
 
         /* ================================================================
-           MOSTRAR RESULTADOS
-        ================================================================ */
+           MOSTRAR BIBLIOTECA
+           ================================================================ */
 
-        function YT_mostrarResultados(
-            videos
-        ) {
+        function YT_mostrarBiblioteca() {
 
             const contenedor =
                 document.getElementById(
-                    "ytResultados"
+                    "ytBiblioteca"
                 );
 
 
             if (!contenedor) {
-
                 return;
+            }
+
+
+            contenedor.innerHTML = "";
+
+
+            let videos =
+                [...YT_biblioteca];
+
+
+            if (
+                YT_categoriaActual !==
+                "Todas"
+            ) {
+
+                videos =
+                    videos.filter(
+
+                        video =>
+                            video.categoria ===
+                            YT_categoriaActual
+
+                    );
 
             }
 
 
-            contenedor.innerHTML =
-                "";
+            const contador =
+                document.getElementById(
+                    "ytContador"
+                );
 
 
-            if (
-                !videos.length
-            ) {
+            if (contador) {
+
+                contador.textContent =
+
+                    `${videos.length} video` +
+                    `${videos.length === 1 ? "" : "s"}`;
+
+            }
+
+
+            if (!videos.length) {
 
                 contenedor.innerHTML = `
 
-            <div class="radio-item">
+            <div class="yt-vacio">
 
-                No encontramos videos.
+                🐦 Tu biblioteca está vacía.
+
+                <br><br>
+
+                Agrega tu primer video arriba.
 
             </div>
 
@@ -8960,16 +9254,14 @@
 
 
             videos.forEach(
-                function (video) {
-
-                    const elemento =
-                        YT_crearTarjetaVideo(
-                            video
-                        );
-
+                video => {
 
                     contenedor.appendChild(
-                        elemento
+
+                        YT_crearTarjeta(
+                            video
+                        )
+
                     );
 
                 }
@@ -8978,168 +9270,89 @@
         }
 
 
-
         /* ================================================================
            CREAR TARJETA
-        ================================================================ */
+           ================================================================ */
 
-        function YT_crearTarjetaVideo(
+        function YT_crearTarjeta(
             video
         ) {
 
-            const elemento =
+            const tarjeta =
                 document.createElement(
-                    "div"
+                    "article"
                 );
 
 
-            elemento.style.cssText = `
-
-        background:
-            var(--panel-2);
-
-        border:
-            1px solid var(--borde);
-
-        border-radius:
-            12px;
-
-        padding:
-            10px;
-
-        margin-bottom:
-            10px;
-
-    `;
+            tarjeta.className =
+                "yt-card";
 
 
-            const id =
-                video.id.videoId;
+            tarjeta.innerHTML = `
 
-
-            const snippet =
-                video.snippet;
-
-
-            const favorito =
-                YT_esFavorito(
-                    id
-                );
-
-
-            const miniatura =
-                snippet.thumbnails?.medium?.url
-                ||
-                snippet.thumbnails?.default?.url
-                ||
-                "";
-
-
-            elemento.innerHTML = `
-
-        <div style="
-            display:flex;
-            gap:10px;
-        ">
-
-            <img
-                src="${escaparHTML(
-                miniatura
+        <img
+            class="yt-card-miniatura"
+            src="${escaparHTML(
+                video.miniatura
             )}"
-                style="
-                    width:150px;
-                    height:85px;
-                    object-fit:cover;
-                    border-radius:8px;
-                    flex-shrink:0;
-                "
-            >
+            loading="lazy"
+            alt=""
+        >
 
 
-            <div style="
-                flex:1;
-                min-width:0;
-            ">
+        <div class="yt-card-contenido">
 
-                <div style="
-                    font-weight:bold;
-                    line-height:1.4;
-                ">
+            <div class="yt-card-titulo">
 
-                    ${escaparHTML(
-                snippet.title
+                ${escaparHTML(
+                video.titulo
             )}
 
-                </div>
+            </div>
 
 
-                <div style="
-                    color:var(--texto-suave);
-                    font-size:12px;
-                    margin-top:5px;
-                ">
+            <div class="yt-card-canal">
 
-                    ${escaparHTML(
-                snippet.channelTitle
+                ${escaparHTML(
+                video.canal
             )}
 
-                </div>
+            </div>
 
 
-                <div style="
-                    margin-top:8px;
-                    display:flex;
-                    flex-wrap:wrap;
-                    gap:5px;
-                ">
+            <span class="yt-card-categoria">
+
+                ${escaparHTML(
+                video.categoria
+            )}
+
+            </span>
 
 
-                    <button
-                        onclick="
-                            YT_abrirVideo(
-                                '${escaparHTML(id)}',
-                                '${escaparHTML(
-                snippet.title
-            )}',
-                                '${escaparHTML(
-                snippet.channelTitle
-            )}',
-                                '${escaparHTML(
-                miniatura
-            )}'
-                            )
-                        ">
+            <div class="yt-card-acciones">
 
-                        ▶ Ver
+                <button
+                    class="yt-ver">
 
-                    </button>
+                    ▶
+
+                </button>
 
 
-                    <button
-                        class="secundario"
-                        onclick="
-                            YT_cambiarFavorito(
-                                '${escaparHTML(id)}',
-                                '${escaparHTML(
-                snippet.title
-            )}',
-                                '${escaparHTML(
-                snippet.channelTitle
-            )}',
-                                '${escaparHTML(
-                miniatura
-            )}'
-                            )
-                        ">
+                <button
+                    class="secundario yt-copiar">
 
-                        ${favorito
-                    ? "⭐"
-                    : "☆"
-                }
+                    🔗
 
-                    </button>
+                </button>
 
-                </div>
+
+                <button
+                    class="secundario yt-eliminar">
+
+                    🗑️
+
+                </button>
 
             </div>
 
@@ -9148,332 +9361,173 @@
     `;
 
 
-            return elemento;
-
-        }
-
-
-
-        /* ================================================================
-           COMPROBAR FAVORITO
-        ================================================================ */
-
-        function YT_esFavorito(
-            videoId
-        ) {
-
-            return YT_favoritos.some(
-                video =>
-                    video.id === videoId
-            );
-
-        }
-
-
-
-        /* ================================================================
-           AGREGAR / QUITAR FAVORITO
-        ================================================================ */
-
-        function YT_cambiarFavorito(
-
-            id,
-            titulo,
-            canal,
-            miniatura
-
-        ) {
-
-            const posicion =
-                YT_favoritos.findIndex(
-
-                    video =>
-                        video.id === id
-
-                );
-
-
-            if (
-                posicion !== -1
-            ) {
-
-                YT_favoritos.splice(
-                    posicion,
-                    1
-                );
-
-
-                mostrarMensaje(
-                    "Video eliminado de favoritos."
-                );
-
-            }
-
-            else {
-
-                YT_favoritos.unshift({
-
-                    id:
-                        id,
-
-                    titulo:
-                        titulo,
-
-                    canal:
-                        canal,
-
-                    miniatura:
-                        miniatura,
-
-                    fecha:
-                        new Date()
-                            .toLocaleString(
-                                "es-CL"
-                            )
-
-                });
-
-
-                mostrarMensaje(
-                    "⭐ Video guardado."
-                );
-
-            }
-
-
-            YT_guardarDatos(
-
-                YT_CLAVE_FAVORITOS,
-
-                YT_favoritos
-
-            );
-
-
-            YT_mostrarFavoritos();
-
-        }
-
-
-
-        /* ================================================================
-           MOSTRAR FAVORITOS
-        ================================================================ */
-
-        function YT_mostrarFavoritos() {
-
-            const contenedor =
-                document.getElementById(
-                    "ytFavoritos"
-                );
-
-
-            if (!contenedor) {
-
-                return;
-
-            }
-
-
-            contenedor.innerHTML =
-                "";
-
-
-            if (
-                YT_favoritos.length === 0
-            ) {
-
-                contenedor.innerHTML = `
-
-            <div class="radio-item">
-
-                ⭐ Todavía no tienes favoritos.
-
-            </div>
-
-        `;
-
-                return;
-
-            }
-
-
-            YT_favoritos.forEach(
-                function (video) {
-
-
-                    const elemento =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    elemento.style.cssText = `
-
-                background:
-                    var(--panel-2);
-
-                border:
-                    1px solid var(--borde);
-
-                border-radius:
-                    10px;
-
-                padding:
-                    8px;
-
-                margin-bottom:
-                    8px;
-
-            `;
-
-
-                    elemento.innerHTML = `
-
-                <div style="
-                    display:flex;
-                    gap:8px;
-                    align-items:center;
-                ">
-
-                    <img
-                        src="${escaparHTML(
-                        video.miniatura
-                    )}"
-                        style="
-                            width:100px;
-                            height:58px;
-                            object-fit:cover;
-                            border-radius:6px;
-                        "
-                    >
-
-
-                    <div style="
-                        flex:1;
-                        min-width:0;
-                    ">
-
-                        <div style="
-                            font-weight:bold;
-                        ">
-
-                            ${escaparHTML(
-                        video.titulo
-                    )}
-
-                        </div>
-
-                        <small style="
-                            color:var(--texto-suave);
-                        ">
-
-                            ${escaparHTML(
-                        video.canal
-                    )}
-
-                        </small>
-
-                    </div>
-
-
-                    <button
-                        onclick="
-                            YT_abrirVideo(
-                                '${escaparHTML(
-                        video.id
-                    )}',
-                                '${escaparHTML(
-                        video.titulo
-                    )}',
-                                '${escaparHTML(
-                        video.canal
-                    )}',
-                                '${escaparHTML(
-                        video.miniatura
-                    )}'
-                            )
-                        ">
-
-                        ▶
-
-                    </button>
-
-                </div>
-
-            `;
-
-
-                    contenedor.appendChild(
-                        elemento
+            tarjeta
+                .querySelector(".yt-ver")
+                .onclick = function () {
+
+                    YT_abrirVideo(
+                        video
                     );
 
-                }
-            );
+                };
+
+
+            tarjeta
+                .querySelector(".yt-copiar")
+                .onclick = function () {
+
+                    YT_copiar(
+                        video.id
+                    );
+
+                };
+
+
+            tarjeta
+                .querySelector(".yt-eliminar")
+                .onclick = function () {
+
+                    YT_eliminarVideo(
+                        video.id
+                    );
+
+                };
+
+
+            return tarjeta;
 
         }
 
+
+        /* ================================================================
+           FILTRAR CATEGORÍA
+           ================================================================ */
+
+        function YT_filtrarCategoria(
+            categoria,
+            boton
+        ) {
+
+            YT_categoriaActual =
+                categoria;
+
+
+            document
+                .querySelectorAll(
+                    ".yt-categoria"
+                )
+                .forEach(
+                    elemento => {
+
+                        elemento.classList.remove(
+                            "activa"
+                        );
+
+                    }
+                );
+
+
+            if (boton) {
+
+                boton.classList.add(
+                    "activa"
+                );
+
+            }
+
+
+            YT_mostrarBiblioteca();
+
+        }
+
+
+        /* ================================================================
+           ELIMINAR VIDEO
+           ================================================================ */
+
+        function YT_eliminarVideo(
+            id
+        ) {
+
+            YT_biblioteca =
+                YT_biblioteca.filter(
+
+                    video =>
+                        video.id !== id
+
+                );
+
+
+            YT_guardar(
+
+                YT_CLAVE_BIBLIOTECA,
+
+                YT_biblioteca
+
+            );
+
+
+            YT_mostrarBiblioteca();
+
+
+            mostrarMensaje(
+                "🗑️ Video eliminado."
+            );
+
+        }
 
 
         /* ================================================================
            ABRIR VIDEO
-        ================================================================ */
+           ================================================================ */
 
-        function YT_abrirVideo(
+        function YT_abrirVideo(video) {
 
-            id,
-            titulo,
-            canal,
-            miniatura
+            if (!video || !video.id) {
 
-        ) {
+                mostrarMensaje(
+                    "❌ No se pudo abrir el video."
+                );
 
-            /*
-                Guardamos en historial.
-            */
+                return;
+
+            }
+
+
+            /* =========================================================
+               GUARDAR EN HISTORIAL
+               ========================================================= */
 
             YT_historial =
                 YT_historial.filter(
-                    video =>
-                        video.id !== id
+
+                    item =>
+                        item.id !== video.id
+
                 );
 
 
             YT_historial.unshift({
 
-                id:
-                    id,
-
-                titulo:
-                    titulo,
-
-                canal:
-                    canal,
-
-                miniatura:
-                    miniatura,
+                ...video,
 
                 fecha:
                     new Date()
-                        .toLocaleString(
-                            "es-CL"
-                        )
+                        .toLocaleString("es-CL")
 
             });
 
 
-            /*
-                Máximo 20 elementos.
-            */
+            /* Máximo 30 videos */
 
             YT_historial =
                 YT_historial.slice(
                     0,
-                    20
+                    30
                 );
 
 
-            YT_guardarDatos(
+            YT_guardar(
 
                 YT_CLAVE_HISTORIAL,
 
@@ -9485,29 +9539,101 @@
             YT_mostrarHistorial();
 
 
-            /*
-                Abrimos YouTube.
-        
-                Esto evita depender de que el video
-                permita un iframe.
-            */
+            /* =========================================================
+               ABRIR YOUTUBE
+               ========================================================= */
+
+            const url =
+                "https://www.youtube.com/watch?v="
+                +
+                encodeURIComponent(
+                    video.id
+                );
+
 
             window.open(
-
-                "https://www.youtube.com/watch?v="
-                + encodeURIComponent(id),
-
-                "_blank"
-
+                url,
+                "_blank",
+                "noopener,noreferrer"
             );
 
         }
 
+        /* ================================================================
+           CERRAR REPRODUCTOR
+           ================================================================ */
+
+        function YT_cerrarReproductor() {
+
+            const reproductor =
+                document.getElementById(
+                    "ytReproductor"
+                );
+
+
+            const iframe =
+                document.getElementById(
+                    "ytIframe"
+                );
+
+
+            if (iframe) {
+
+                iframe.src = "";
+
+            }
+
+
+            if (reproductor) {
+
+                reproductor.classList.remove(
+                    "abierto"
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           COPIAR ENLACE
+           ================================================================ */
+
+        async function YT_copiar(
+            id
+        ) {
+
+            const url =
+                `https://www.youtube.com/watch?v=${id}`;
+
+
+            try {
+
+                await navigator
+                    .clipboard
+                    .writeText(url);
+
+
+                mostrarMensaje(
+                    "🔗 Enlace copiado."
+                );
+
+            }
+
+            catch {
+
+                mostrarMensaje(
+                    "No se pudo copiar."
+                );
+
+            }
+
+        }
 
 
         /* ================================================================
            HISTORIAL
-        ================================================================ */
+           ================================================================ */
 
         function YT_mostrarHistorial() {
 
@@ -9518,25 +9644,20 @@
 
 
             if (!contenedor) {
-
                 return;
-
             }
 
 
-            contenedor.innerHTML =
-                "";
+            contenedor.innerHTML = "";
 
 
-            if (
-                YT_historial.length === 0
-            ) {
+            if (!YT_historial.length) {
 
                 contenedor.innerHTML = `
 
-            <div class="radio-item">
+            <div class="yt-vacio">
 
-                🕘 Historial vacío.
+                🕘 Todavía no has reproducido videos.
 
             </div>
 
@@ -9548,8 +9669,7 @@
 
 
             YT_historial.forEach(
-                function (video) {
-
+                video => {
 
                     const elemento =
                         document.createElement(
@@ -9584,29 +9704,24 @@
                 </div>
 
 
-                <button
-                    onclick="
-                        YT_abrirVideo(
-                            '${escaparHTML(
-                        video.id
-                    )}',
-                            '${escaparHTML(
-                        video.titulo
-                    )}',
-                            '${escaparHTML(
-                        video.canal
-                    )}',
-                            '${escaparHTML(
-                        video.miniatura
-                    )}'
-                        )
-                    ">
+                <button>
 
                     ▶
 
                 </button>
 
             `;
+
+
+                    elemento
+                        .querySelector("button")
+                        .onclick = function () {
+
+                            YT_abrirVideo(
+                                video
+                            );
+
+                        };
 
 
                     contenedor.appendChild(
@@ -9619,23 +9734,109 @@
         }
 
 
-
         /* ================================================================
-           INICIALIZAR YOUTUBE
-        ================================================================ */
+           BORRAR HISTORIAL
+           ================================================================ */
 
-        function YT_inicializar() {
+        function YT_borrarHistorial() {
 
-            YT_cargarApiKeyEnInterfaz();
+            YT_historial = [];
 
-            YT_mostrarFavoritos();
+
+            YT_guardar(
+
+                YT_CLAVE_HISTORIAL,
+
+                YT_historial
+
+            );
+
 
             YT_mostrarHistorial();
 
 
-            /*
-                Enter para buscar.
-            */
+            mostrarMensaje(
+                "🗑️ Historial eliminado."
+            );
+
+        }
+
+
+        /* ================================================================
+           BUSCAR EN YOUTUBE
+           ================================================================ */
+
+        function YT_buscar() {
+
+            const campo =
+                document.getElementById(
+                    "ytBusqueda"
+                );
+
+
+            const texto =
+                campo?.value.trim();
+
+
+            if (!texto) {
+
+                mostrarMensaje(
+                    "Escribe algo para buscar."
+                );
+
+                return;
+
+            }
+
+
+            const url =
+                "https://www.youtube.com/results?search_query="
+                +
+                encodeURIComponent(texto);
+
+
+            window.open(
+                url,
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+        }
+
+
+        /* ================================================================
+           ESCAPAR HTML
+           ================================================================ */
+
+        function escaparHTML(
+            texto
+        ) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.textContent =
+                texto ?? "";
+
+
+            return div.innerHTML;
+
+        }
+
+
+        /* ================================================================
+           ENTER PARA BUSCAR
+           ================================================================ */
+
+        function YT_inicializar() {
+
+            YT_mostrarBiblioteca();
+
+            YT_mostrarHistorial();
+
 
             const campo =
                 document.getElementById(
@@ -9645,7 +9846,10 @@
 
             if (campo) {
 
-                campo.onkeydown =
+                campo.addEventListener(
+
+                    "keydown",
+
                     function (event) {
 
                         if (
@@ -9656,11 +9860,65 @@
 
                         }
 
-                    };
+                    }
+
+                );
 
             }
 
         }
+
+
+        /* ================================================================
+           ESCAPE PARA CERRAR REPRODUCTOR
+           ================================================================ */
+
+        document.addEventListener(
+
+            "keydown",
+
+            function (event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    YT_cerrarReproductor();
+
+                }
+
+            }
+
+        );
+
+
+        /* ================================================================
+           CLICK FUERA DEL REPRODUCTOR
+           ================================================================ */
+
+        document.addEventListener(
+
+            "click",
+
+            function (event) {
+
+                const reproductor =
+                    document.getElementById(
+                        "ytReproductor"
+                    );
+
+
+                if (
+                    event.target === reproductor
+                ) {
+
+                    YT_cerrarReproductor();
+
+                }
+
+            }
+
+        );
 
 
         /* =========================================================
@@ -9862,7 +10120,36 @@
            ================================================================ */
 
     </script>
+    <div id="ytReproductor">
 
+        <div class="yt-reproductor-contenido">
+
+            <iframe id="ytIframe" class="yt-iframe" src="" allow="
+                autoplay;
+                encrypted-media;
+                picture-in-picture;
+                fullscreen
+            " allowfullscreen>
+            </iframe>
+
+
+            <div class="yt-reproductor-barra">
+
+                <div id="ytTituloReproductor" class="yt-reproductor-titulo">
+                </div>
+
+
+                <button class="secundario" onclick="YT_cerrarReproductor()">
+
+                    ✕
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 </body>
 
 </html>
