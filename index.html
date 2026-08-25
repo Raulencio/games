@@ -1204,6 +1204,142 @@
 
         }
 
+        /* =========================================================
+   🎵 GÉNEROS DE RADIO
+   ========================================================= */
+
+        .genero-seccion {
+
+            margin-top: 18px;
+
+        }
+
+
+        .genero-titulo {
+
+            color: var(--acento);
+
+            margin-bottom: 9px;
+
+            font-size: 16px;
+
+        }
+
+
+        .generos-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit,
+                    minmax(115px, 1fr));
+
+            gap: 7px;
+
+        }
+
+
+        .genero-boton {
+
+            min-height: 58px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 4px;
+
+            background:
+                var(--panel-2);
+
+            color:
+                var(--texto);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius: 11px;
+
+            padding: 8px;
+
+            transition:
+                .18s;
+
+        }
+
+
+        .genero-boton span {
+
+            font-size: 22px;
+
+            line-height: 1;
+
+        }
+
+
+        .genero-boton:hover {
+
+            background:
+                var(--panel);
+
+            border-color:
+                var(--acento);
+
+            color:
+                var(--acento-hover);
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .genero-boton.activo {
+
+            background:
+                var(--acento);
+
+            color:
+                #17130d;
+
+            border-color:
+                var(--acento-hover);
+
+            box-shadow:
+                0 0 15px rgba(181, 139, 82, .25);
+
+        }
+
+
+        .genero-boton.retro {
+
+            border-style:
+                dashed;
+
+        }
+
+
+        @media(max-width:600px) {
+
+            .generos-grid {
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+
+            }
+
+
+            .genero-boton {
+
+                min-height: 62px;
+
+            }
+
+        }
 
         /* =========================================================
    MÓVIL
@@ -1865,6 +2001,289 @@
             }
 
         }
+
+        /* =========================================================
+   📺 TELEVISIÓN DEL CUERVO
+   ========================================================= */
+
+        .tv-aparato {
+
+            background:
+                linear-gradient(145deg,
+                    #151512,
+                    #090909);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius: 18px;
+
+            padding: 14px;
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, .45);
+
+            margin-bottom: 18px;
+
+        }
+
+
+        /* =========================================================
+   PANTALLA
+   ========================================================= */
+
+        .tv-pantalla {
+
+            position: relative;
+
+            width: 100%;
+
+            aspect-ratio: 16 / 9;
+
+            background: #000;
+
+            border:
+                6px solid #25231e;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            box-shadow:
+                inset 0 0 30px rgba(0, 0, 0, .8);
+
+        }
+
+
+        #tvReproductor {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            background: #000;
+
+            object-fit: contain;
+
+        }
+
+
+        /* =========================================================
+   SIN SEÑAL
+   ========================================================= */
+
+        .tv-sin-senal {
+
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            text-align: center;
+
+            background: #050505;
+
+            color: #777;
+
+            font-size: 16px;
+
+            pointer-events: none;
+
+        }
+
+
+        .tv-sin-senal.oculto {
+
+            display: none;
+
+        }
+
+
+        /* =========================================================
+   CANAL ACTUAL
+   ========================================================= */
+
+        .tv-canal-actual {
+
+            margin-top: 10px;
+
+            padding: 10px;
+
+            background: var(--panel-2);
+
+            border-radius: 9px;
+
+            color: var(--texto-suave);
+
+            font-size: 13px;
+
+        }
+
+
+        /* =========================================================
+   TÍTULOS
+   ========================================================= */
+
+        .tv-titulo {
+
+            color: var(--acento);
+
+            margin:
+
+                18px 0 8px;
+
+        }
+
+
+        /* =========================================================
+   GÉNEROS
+   ========================================================= */
+
+        .tv-generos {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit,
+                    minmax(130px, 1fr));
+
+            gap: 8px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .tv-genero {
+
+            background:
+                var(--panel-2);
+
+            color:
+                var(--texto);
+
+            border:
+                1px solid var(--borde);
+
+            padding: 12px 10px;
+
+            border-radius: 10px;
+
+        }
+
+
+        .tv-genero:hover {
+
+            border-color:
+                var(--acento);
+
+            background:
+                var(--panel-3);
+
+        }
+
+
+        /* =========================================================
+   TARJETA DE CANAL
+   ========================================================= */
+
+        .tv-canal {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            background:
+                var(--panel-2);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius: 12px;
+
+            padding: 10px;
+
+        }
+
+
+        .tv-logo {
+
+            width: 65px;
+
+            height: 45px;
+
+            object-fit: contain;
+
+            background: #000;
+
+            border-radius: 7px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .tv-info {
+
+            flex: 1;
+
+            min-width: 0;
+
+        }
+
+
+        .tv-nombre {
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        .tv-pais {
+
+            color:
+                var(--texto-suave);
+
+            font-size: 12px;
+
+            margin-top: 4px;
+
+        }
+
+
+        @media(max-width:600px) {
+
+            .tv-aparato {
+
+                padding: 8px;
+
+            }
+
+            .tv-generos {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
     </style>
 </head>
 
@@ -2103,25 +2522,24 @@
             <h1><a href="zg.html">Dioses Egipcios</a></h1>
             <h1><a href="bha.html">Auxiliar Cazadores de Bestias</a></h1>
             <h1><a href="poke.html">Pokémon</a></h1>
-            <h1><a href="ejercicioCanciones.html">tabla musical</a></h1>
 
             <h1 class="divE">Juegos</h1>
 
-            <h1><a href="jnv1.html">Ninja´s Arena v.1.1</a></h1>            
+            <h1><a href="jnv1.html">Ninja´s Arena v.1.1</a></h1>
             <h1><a href="tierraAntigua1v1.html">Tierra Antigua 1v1 v.2.0</a></h1>
             <h1><a href="geometrypato3.html">Geometry Pato III v.5.0</a></h1>
             <h1><a href="version0.0.html">Espacio y Ovnis v.0.1</a></h1>
             <h1><a href="nuevonuevo.html">Batallas vs IA v.0.2</a></h1>
             <h1><a href="ttt.html">Tierra Antigua v.0.1</a></h1>
+            <h1><a href="arenagladiadores.html">Arena Gladiadores v.0.0</a></h1>
 
             <h1>Proyectos</h1>
-            <h1><a href="LunaAdventures.html"> Luna Adventures</a></h1>            
+            <h1><a href="LunaAdventures.html"> Luna Adventures</a></h1>
             <h1><a href="busqueda.html">Busqueda</a></h1>
-            <h1><a href="geometryduck.html">Geometry Pato</a></h1>            
+            <h1><a href="geometryduck.html">Geometry Pato</a></h1>
             <h1><a href="unoentrecuatro.html">Uno Entre Cuatro</a></h1>
-            
-            
-            <h1><a href="arenagladiadores.html">Arena Gladiadores</a></h1>
+            <h1><a href="ejercicioCanciones.html">tabla musical</a></h1>
+
 
             {ܐܲܠܵܗܵܐ ܢܒܲܪܸܟ݂ ܠܥܵܒܹ̈ܐ ܕܥܵܠܡܵܐ ܘܠܓܵܙܔܹ̈ܐ ܕܝܵܡܵܐ}
 
@@ -2703,7 +3121,169 @@
 
             switch (id) {
 
+                case "television":
 
+                    return `
+
+        <p class="descripcion">
+
+            📺 Televisión del Cuervo.
+            Explora canales de televisión de distintas
+            partes del mundo y reproduce los streams
+            compatibles directamente en el Taller.
+
+        </p>
+
+        <!-- ==================================================
+             TELEVISOR
+        ================================================== -->
+
+        <div class="tv-aparato">
+
+            <div class="tv-pantalla">
+
+                <video
+                    id="tvReproductor"
+                    controls
+                    playsinline
+                    preload="none">
+                </video>
+
+                <div
+                    id="tvSinSenal"
+                    class="tv-sin-senal">
+
+                    📺
+                    <br>
+
+                    Selecciona un canal
+
+                </div>
+
+            </div>
+
+            <div class="tv-controles">
+
+                <div
+                    id="tvCanalActual"
+                    class="tv-canal-actual">
+
+                    Sin canal seleccionado
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             CATEGORÍAS
+        ================================================== -->
+
+        <h3 class="tv-titulo">
+
+            🌎 Categorías
+
+        </h3>
+
+        <div class="tv-generos">
+
+            <button
+                class="tv-genero"
+                onclick="TV_buscarCategoria('news')">
+
+                📰 Noticias
+
+            </button>
+
+            <button
+                class="tv-genero"
+                onclick="TV_buscarCategoria('music')">
+
+                🎵 Música
+
+            </button>
+
+            <button
+                class="tv-genero"
+                onclick="TV_buscarCategoria('sports')">
+
+                ⚽ Deportes
+
+            </button>
+
+            <button
+                class="tv-genero"
+                onclick="TV_buscarCategoria('entertainment')">
+
+                🎬 Entretenimiento
+
+            </button>
+
+            <button
+                class="tv-genero"
+                onclick="TV_buscarCategoria('movies')">
+
+                🎞️ Películas
+
+            </button>
+
+            <button
+                class="tv-genero"
+                onclick="TV_buscarCategoria('kids')">
+
+                🧸 Infantil
+
+            </button>
+
+            <button
+                class="tv-genero"
+                onclick="TV_buscarCategoria('documentary')">
+
+                🌍 Documentales
+
+            </button>
+
+        </div>
+
+
+        <!-- ==================================================
+             BUSCADOR
+        ================================================== -->
+
+        <div class="buscador-radio">
+
+            <input
+                id="tvBusqueda"
+                placeholder="Buscar canal de televisión...">
+
+            <button onclick="TV_buscar()">
+
+                🔎 Buscar
+
+            </button>
+
+        </div>
+
+
+        <!-- ==================================================
+             RESULTADOS
+        ================================================== -->
+
+        <h3 class="tv-titulo">
+
+            📺 Canales encontrados
+
+        </h3>
+
+        <div
+            id="tvResultados"
+            class="resultados-radio">
+
+        </div>
+
+    `;
                 /* ========================================================
                    YOUTUBE
                    ======================================================== */
@@ -3512,14 +4092,15 @@
                    RADIO
                    ======================================================== */
 
+
                 case "radio":
 
                     return `
 
         <p class="descripcion">
 
-            📻 Sintoniza emisoras de todo el mundo
-            desde El Taller del Cuervo.
+            📻 Explora emisoras de todo el mundo
+            por género musical y época.
 
         </p>
 
@@ -3532,9 +4113,7 @@
             id="radioActual"
             class="radio-actual">
 
-
             <div class="radio-retro">
-
 
                 <div class="radio-dial">
 
@@ -3543,9 +4122,7 @@
                 </div>
 
 
-                <div
-                    class="radio-retro-info">
-
+                <div class="radio-retro-info">
 
                     <div
                         id="radioNombreActual"
@@ -3564,7 +4141,6 @@
 
                     </div>
 
-
                 </div>
 
 
@@ -3574,7 +4150,6 @@
 
                 </div>
 
-
             </div>
 
 
@@ -3583,9 +4158,7 @@
             ================================================== -->
 
             <div
-                id="radioVisualizador"
                 class="radio-visualizador">
-
 
                 ${Array.from(
                         { length: 28 },
@@ -3595,13 +4168,12 @@
                             class="radio-barra"
                             style="
                                 --velocidad:
-                                    ${0.35 + (i % 7) * 0.08}s;
+                                ${0.35 + (i % 7) * 0.08}s;
                             ">
                         </div>
 
                     `
                     ).join("")}
-
 
             </div>
 
@@ -3612,7 +4184,6 @@
 
             <div
                 class="radio-particulas">
-
 
                 ${Array.from(
                         { length: 35 },
@@ -3625,17 +4196,19 @@
                                 ((i * 31) % 100) - 50;
 
                             const duracion =
-                                2 + ((i * 17) % 30) / 10;
-
+                                2 +
+                                ((i * 17) % 30) / 10;
 
                             return `
 
                             <span
                                 class="radio-particula"
                                 style="
-                                    left:${50 + ((i * 13) % 45) - 22}%;
+                                    left:
+                                    ${50 + ((i * 13) % 45) - 22}%;
 
-                                    top:${50 + ((i * 29) % 45) - 22}%;
+                                    top:
+                                    ${50 + ((i * 29) % 45) - 22}%;
 
                                     --x:${x}px;
 
@@ -3650,15 +4223,13 @@
                         }
                     ).join("")}
 
-
             </div>
-
 
         </div>
 
 
         <!-- ==================================================
-             REPRODUCTOR
+             🎧 REPRODUCTOR
         ================================================== -->
 
         <audio
@@ -3670,151 +4241,298 @@
 
 
         <!-- ==================================================
-             🇨🇱 CHILE
+             🔥 POPULARES
         ================================================== -->
 
-        <h3
-            style="
-                margin:15px 0 8px;
-            ">
+        <div class="genero-seccion">
 
-            🇨🇱 Chile
+            <h3 class="genero-titulo">
 
-        </h3>
+                🔥 Populares
 
-
-        <div class="paises">
+            </h3>
 
 
-            <button
-                class="pais"
-                onclick="
-                    buscarRadio('FM2 Chile')
-                ">
+            <div class="generos-grid">
 
-                FM2
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('rap', this)
+                    ">
 
-            </button>
+                    <span>🎤</span>
+                    Rap
 
-
-            <button
-                class="pais"
-                onclick="
-                    buscarRadio('LOS40 Chile')
-                ">
-
-                LOS40
-
-            </button>
+                </button>
 
 
-            <button
-                class="pais"
-                onclick="
-                    buscarRadio('Tornagaleones')
-                ">
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('hip hop', this)
+                    ">
 
-                Tornagaleones
+                    <span>🎧</span>
+                    Hip-Hop
 
-            </button>
+                </button>
 
 
-            <button
-                class="pais"
-                onclick="
-                    buscarRadio('Punto 7')
-                ">
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('rock', this)
+                    ">
 
-                Punto 7
+                    <span>🎸</span>
+                    Rock
 
-            </button>
+                </button>
 
+
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('pop', this)
+                    ">
+
+                    <span>🎤</span>
+                    Pop
+
+                </button>
+
+
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('reggaeton', this)
+                    ">
+
+                    <span>🔥</span>
+                    Reggaetón
+
+                </button>
+
+
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('cumbia', this)
+                    ">
+
+                    <span>🪇</span>
+                    Cumbia
+
+                </button>
+
+
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('electronic', this)
+                    ">
+
+                    <span>🎛️</span>
+                    Electrónica
+
+                </button>
+
+            </div>
 
         </div>
 
 
         <!-- ==================================================
-             🌎 PAÍSES
+             🎷 ALTERNATIVOS
         ================================================== -->
 
-        <h3
-            style="
-                margin:15px 0 8px;
-            ">
+        <div class="genero-seccion">
 
-            🌎 Países
+            <h3 class="genero-titulo">
 
-        </h3>
+                🎷 Alternativos
 
-
-        <div class="paises">
+            </h3>
 
 
-            <button
-                class="pais"
-                onclick="
-                    buscarPais('Argentina')
-                ">
+            <div class="generos-grid">
 
-                🇦🇷 Argentina
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('jazz', this)
+                    ">
 
-            </button>
+                    <span>🎷</span>
+                    Jazz
 
-
-            <button
-                class="pais"
-                onclick="
-                    buscarPais('Spain')
-                ">
-
-                🇪🇸 España
-
-            </button>
+                </button>
 
 
-            <button
-                class="pais"
-                onclick="
-                    buscarPais('Brazil')
-                ">
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('blues', this)
+                    ">
 
-                🇧🇷 Brasil
+                    <span>🎹</span>
+                    Blues
 
-            </button>
-
-
-            <button
-                class="pais"
-                onclick="
-                    buscarPais('France')
-                ">
-
-                🇫🇷 Francia
-
-            </button>
+                </button>
 
 
-            <button
-                class="pais"
-                onclick="
-                    buscarPais('United Kingdom')
-                ">
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('funk', this)
+                    ">
 
-                🇬🇧 Inglaterra
+                    <span>🕺</span>
+                    Funk
 
-            </button>
+                </button>
 
 
-            <button
-                class="pais"
-                onclick="
-                    buscarPais('Japan')
-                ">
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('soul', this)
+                    ">
 
-                🇯🇵 Japón
+                    <span>🎙️</span>
+                    Soul
 
-            </button>
+                </button>
 
+
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('ska', this)
+                    ">
+
+                    <span>🎺</span>
+                    Ska
+
+                </button>
+
+
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('metal', this)
+                    ">
+
+                    <span>🤘</span>
+                    Metal
+
+                </button>
+
+
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('reggae', this)
+                    ">
+
+                    <span>🌿</span>
+                    Reggae
+
+                </button>
+
+
+                <button
+                    class="genero-boton"
+                    onclick="
+                        buscarGeneroRadio('folk', this)
+                    ">
+
+                    <span>🪕</span>
+                    Folk
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             📻 RETRO
+        ================================================== -->
+
+        <div class="genero-seccion">
+
+            <h3 class="genero-titulo">
+
+                📻 Retro
+
+            </h3>
+
+
+            <div class="generos-grid">
+
+                <button
+                    class="genero-boton retro"
+                    onclick="
+                        buscarEpocaRadio('1960s', this)
+                    ">
+
+                    <span>📼</span>
+                    60s
+
+                </button>
+
+
+                <button
+                    class="genero-boton retro"
+                    onclick="
+                        buscarEpocaRadio('1970s', this)
+                    ">
+
+                    <span>📻</span>
+                    70s
+
+                </button>
+
+
+                <button
+                    class="genero-boton retro"
+                    onclick="
+                        buscarEpocaRadio('1980s', this)
+                    ">
+
+                    <span>🕺</span>
+                    80s
+
+                </button>
+
+
+                <button
+                    class="genero-boton retro"
+                    onclick="
+                        buscarEpocaRadio('1990s', this)
+                    ">
+
+                    <span>💿</span>
+                    90s
+
+                </button>
+
+
+                <button
+                    class="genero-boton retro"
+                    onclick="
+                        buscarEpocaRadio('2000s', this)
+                    ">
+
+                    <span>📺</span>
+                    2000s
+
+                </button>
+
+            </div>
 
         </div>
 
@@ -3825,13 +4543,9 @@
 
         <div class="buscador-radio">
 
-
             <input
                 id="busquedaRadio"
-                placeholder="
-                    Buscar emisora...
-                ">
-
+                placeholder="Buscar emisora...">
 
             <button
                 onclick="
@@ -3841,7 +4555,6 @@
                 🔎 Buscar
 
             </button>
-
 
         </div>
 
@@ -3853,6 +4566,7 @@
         <h3
             style="
                 margin:18px 0 8px;
+                color:var(--acento);
             ">
 
             ⭐ Radios favoritas
@@ -3874,6 +4588,7 @@
         <h3
             style="
                 margin:18px 0 8px;
+                color:var(--acento);
             ">
 
             🔎 Resultados
@@ -3888,9 +4603,10 @@
         </div>
 
     `;
+
                 /* ========================================================
-                   MAPA
-                   ======================================================== */
+                MAPA
+                ======================================================== */
 
                 case "mapa":
 
@@ -5233,7 +5949,252 @@
         }
 
 
+        /* ================================================================
+           🎵 BUSCAR POR GÉNERO
+           ================================================================ */
 
+        async function buscarGeneroRadio(
+            genero,
+            boton
+        ) {
+
+            activarGeneroBoton(
+                boton
+            );
+
+
+            mostrarMensaje(
+                "🎵 Buscando radios de " +
+                genero +
+                "..."
+            );
+
+
+            const url =
+
+                RADIO_API +
+
+                "/bytag/" +
+
+                encodeURIComponent(
+                    genero
+                ) +
+
+                "?limit=30" +
+
+                "&hidebroken=true" +
+
+                "&order=votes" +
+
+                "&reverse=true";
+
+
+            try {
+
+                const respuesta =
+                    await fetch(url);
+
+
+                if (!respuesta.ok) {
+
+                    throw new Error(
+                        "Error HTTP " +
+                        respuesta.status
+                    );
+
+                }
+
+
+                const radios =
+                    await respuesta.json();
+
+
+                mostrarResultadosRadio(
+                    radios
+                );
+
+
+                mostrarMensaje(
+
+                    "🎵 " +
+                    radios.length +
+                    " radios encontradas."
+
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    error
+                );
+
+
+                mostrarMensaje(
+                    "No se pudieron cargar las radios."
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           📻 BUSCAR POR ÉPOCA
+           ================================================================ */
+
+        async function buscarEpocaRadio(
+            epoca,
+            boton
+        ) {
+
+            activarGeneroBoton(
+                boton
+            );
+
+
+            mostrarMensaje(
+                "📻 Buscando radios retro " +
+                epoca +
+                "..."
+            );
+
+
+            /*
+               Buscamos diferentes etiquetas
+               relacionadas con la época.
+            */
+
+            const etiquetas = {
+
+                "1960s":
+                    "60s",
+
+                "1970s":
+                    "70s",
+
+                "1980s":
+                    "80s",
+
+                "1990s":
+                    "90s",
+
+                "2000s":
+                    "2000s"
+
+            };
+
+
+            const etiqueta =
+                etiquetas[epoca] ||
+                epoca;
+
+
+            const url =
+
+                RADIO_API +
+
+                "/bytag/" +
+
+                encodeURIComponent(
+                    etiqueta
+                ) +
+
+                "?limit=30" +
+
+                "&hidebroken=true" +
+
+                "&order=votes" +
+
+                "&reverse=true";
+
+
+            try {
+
+                const respuesta =
+                    await fetch(url);
+
+
+                if (!respuesta.ok) {
+
+                    throw new Error(
+                        "Error HTTP " +
+                        respuesta.status
+                    );
+
+                }
+
+
+                const radios =
+                    await respuesta.json();
+
+
+                mostrarResultadosRadio(
+                    radios
+                );
+
+
+                mostrarMensaje(
+
+                    "📻 " +
+                    radios.length +
+                    " radios retro encontradas."
+
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    error
+                );
+
+
+                mostrarMensaje(
+                    "No se pudieron cargar radios retro."
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           ✨ BOTÓN ACTIVO
+           ================================================================ */
+
+        function activarGeneroBoton(
+            boton
+        ) {
+
+            const botones =
+                document.querySelectorAll(
+                    ".genero-boton"
+                );
+
+
+            botones.forEach(
+                function (elemento) {
+
+                    elemento.classList.remove(
+                        "activo"
+                    );
+
+                }
+            );
+
+
+            if (boton) {
+
+                boton.classList.add(
+                    "activo"
+                );
+
+            }
+
+        }
         /* ================================================================
            BUSCAR POR PAÍS
            ================================================================ */
@@ -5304,7 +6265,92 @@
 
         }
 
+        /* ================================================================
+           🎵 BUSCAR RADIO POR GÉNERO
+           ================================================================ */
 
+        async function buscarGeneroRadio(genero) {
+
+            mostrarMensaje(
+                "🎵 Buscando radios de " +
+                genero +
+                "..."
+            );
+
+
+            const url =
+
+                RADIO_API +
+
+                "/bytag/" +
+
+                encodeURIComponent(
+                    genero
+                ) +
+
+                "?limit=30" +
+
+                "&hidebroken=true" +
+
+                "&order=votes" +
+
+                "&reverse=true";
+
+
+            try {
+
+                const respuesta =
+                    await fetch(url);
+
+
+                if (!respuesta.ok) {
+
+                    throw new Error(
+                        "Error HTTP " +
+                        respuesta.status
+                    );
+
+                }
+
+
+                const radios =
+                    await respuesta.json();
+
+
+                mostrarResultadosRadio(
+                    radios
+                );
+
+
+                mostrarMensaje(
+
+                    "🎵 " +
+                    radios.length +
+                    " radios de " +
+                    genero +
+                    " encontradas."
+
+                );
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    error
+                );
+
+
+                mostrarMensaje(
+                    "No se pudieron cargar radios de " +
+                    genero +
+                    "."
+                );
+
+            }
+
+        }
 
         /* ================================================================
            BUSCAR POR UBICACIÓN DEL NAVEGADOR
@@ -10713,6 +11759,623 @@
             }
 
         );
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* ================================================================
+        📺 TELEVISIÓN DEL CUERVO
+        ================================================================ */
+
+        const TV_API =
+            "https://iptv-org.github.io/api/channels.json";
+
+
+        let TV_canales = [];
+
+
+        /* ================================================================
+           CARGAR CANALES
+           ================================================================ */
+
+        async function TV_cargarCanales() {
+
+            try {
+
+                mostrarMensaje(
+                    "📺 Cargando canales..."
+                );
+
+                const respuesta =
+                    await fetch(TV_API);
+
+                if (!respuesta.ok) {
+
+                    throw new Error(
+                        "Error cargando canales"
+                    );
+
+                }
+
+                TV_canales =
+                    await respuesta.json();
+
+                mostrarMensaje(
+                    "📺 Canales cargados."
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "TV:",
+                    error
+                );
+
+                mostrarMensaje(
+                    "No se pudieron cargar los canales."
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           BUSCAR POR CATEGORÍA
+           ================================================================ */
+
+        async function TV_buscarCategoria(
+            categoria
+        ) {
+
+            if (
+                TV_canales.length === 0
+            ) {
+
+                await TV_cargarCanales();
+
+            }
+
+
+            const resultados =
+                TV_canales.filter(
+
+                    canal => {
+
+                        if (
+                            !canal.categories
+                        ) {
+
+                            return false;
+
+                        }
+
+                        return canal.categories
+                            .some(
+
+                                cat =>
+                                    cat.toLowerCase()
+                                        .includes(
+                                            categoria
+                                                .toLowerCase()
+                                        )
+
+                            );
+
+                    }
+
+                );
+
+
+            TV_mostrarResultados(
+                resultados.slice(
+                    0,
+                    50
+                )
+            );
+
+        }
+
+
+        /* ================================================================
+           BUSCADOR
+           ================================================================ */
+
+        async function TV_buscar() {
+
+            const campo =
+                document.getElementById(
+                    "tvBusqueda"
+                );
+
+
+            if (!campo) {
+
+                return;
+
+            }
+
+
+            const texto =
+                campo.value
+                    .trim()
+                    .toLowerCase();
+
+
+            if (!texto) {
+
+                mostrarMensaje(
+                    "Escribe el nombre de un canal."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                TV_canales.length === 0
+            ) {
+
+                await TV_cargarCanales();
+
+            }
+
+
+            const resultados =
+                TV_canales.filter(
+
+                    canal => {
+
+                        const nombre =
+                            (
+                                canal.name ||
+                                ""
+                            ).toLowerCase();
+
+                        const pais =
+                            (
+                                canal.country ||
+                                ""
+                            ).toLowerCase();
+
+                        return (
+
+                            nombre.includes(texto)
+
+                            ||
+
+                            pais.includes(texto)
+
+                        );
+
+                    }
+
+                );
+
+
+            TV_mostrarResultados(
+                resultados.slice(
+                    0,
+                    50
+                )
+            );
+
+        }
+
+
+        /* ================================================================
+           MOSTRAR RESULTADOS
+           ================================================================ */
+
+        function TV_mostrarResultados(
+            canales
+        ) {
+
+            const contenedor =
+                document.getElementById(
+                    "tvResultados"
+                );
+
+
+            if (!contenedor) {
+
+                return;
+
+            }
+
+
+            contenedor.innerHTML = "";
+
+
+            if (
+                !canales ||
+                canales.length === 0
+            ) {
+
+                contenedor.innerHTML = `
+
+            <div class="radio-item">
+
+                <div class="radio-info">
+
+                    <div class="radio-nombre">
+
+                        📺 No encontramos canales.
+
+                    </div>
+
+                    <div class="radio-meta">
+
+                        Prueba otra categoría o búsqueda.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+                return;
+
+            }
+
+
+            canales.forEach(
+
+                canal => {
+
+                    const elemento =
+                        TV_crearCanal(
+                            canal
+                        );
+
+                    contenedor.appendChild(
+                        elemento
+                    );
+
+                }
+
+            );
+
+        }
+
+
+        /* ================================================================
+           CREAR CANAL
+           ================================================================ */
+
+        function TV_crearCanal(
+            canal
+        ) {
+
+            const elemento =
+                document.createElement(
+                    "div"
+                );
+
+
+            elemento.className =
+                "tv-canal";
+
+
+            const logo =
+                canal.logo ||
+                "";
+
+
+            elemento.innerHTML = `
+
+        ${logo
+
+                    ?
+
+                    `
+            <img
+                class="tv-logo"
+                src="${escaparHTML(logo)}"
+                onerror="
+                    this.style.display='none'
+                "
+            >
+            `
+
+                    :
+
+                    `
+            <div class="tv-logo"
+                 style="
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:24px;
+                 ">
+
+                📺
+
+            </div>
+            `
+
+                }
+
+
+        <div class="tv-info">
+
+            <div class="tv-nombre">
+
+                ${escaparHTML(
+                    canal.name ||
+                    "Canal"
+                )}
+
+            </div>
+
+
+            <div class="tv-pais">
+
+                🌎
+
+                ${escaparHTML(
+                    canal.country ||
+                    "Internacional"
+                )}
+
+            </div>
+
+        </div>
+
+
+        <button>
+
+            ▶ Ver
+
+        </button>
+
+    `;
+
+
+            const boton =
+                elemento.querySelector(
+                    "button"
+                );
+
+
+            boton.onclick =
+                function () {
+
+                    TV_reproducir(
+                        canal
+                    );
+
+                };
+
+
+            return elemento;
+
+        }
+
+
+        /* ================================================================
+           REPRODUCIR
+           ================================================================ */
+
+        async function TV_reproducir(
+            canal
+        ) {
+
+            if (!canal) {
+
+                return;
+
+            }
+
+
+            /*
+               IPTV-ORG separa la información
+               de los canales y los streams.
+        
+               Primero intentamos encontrar
+               el stream correspondiente.
+            */
+
+            try {
+
+                const respuesta =
+                    await fetch(
+                        "https://iptv-org.github.io/api/streams.json"
+                    );
+
+
+                const streams =
+                    await respuesta.json();
+
+
+                const stream =
+                    streams.find(
+
+                        item =>
+                            item.channel ===
+                            canal.id
+
+                    );
+
+
+                if (
+                    !stream ||
+                    !stream.url
+                ) {
+
+                    mostrarMensaje(
+                        "⚠️ Este canal no tiene un stream disponible."
+                    );
+
+                    return;
+
+                }
+
+
+                const reproductor =
+                    document.getElementById(
+                        "tvReproductor"
+                    );
+
+
+                if (!reproductor) {
+
+                    return;
+
+                }
+
+
+                const sinSenal =
+                    document.getElementById(
+                        "tvSinSenal"
+                    );
+
+
+                reproductor.src =
+                    stream.url;
+
+
+                reproductor.play()
+
+                    .then(
+
+                        function () {
+
+                            if (sinSenal) {
+
+                                sinSenal.classList.add(
+                                    "oculto"
+                                );
+
+                            }
+
+
+                            const actual =
+                                document.getElementById(
+                                    "tvCanalActual"
+                                );
+
+
+                            if (actual) {
+
+                                actual.innerHTML = `
+
+                            📺
+
+                            <strong>
+
+                                ${escaparHTML(
+                                    canal.name ||
+                                    "Canal"
+                                )}
+
+                            </strong>
+
+                            ·
+
+                            ${escaparHTML(
+                                    canal.country ||
+                                    "Internacional"
+                                )}
+
+                        `;
+
+                            }
+
+
+                            mostrarMensaje(
+                                "▶ Reproduciendo " +
+                                canal.name
+                            );
+
+                        }
+
+                    )
+
+                    .catch(
+
+                        function (error) {
+
+                            console.error(
+                                error
+                            );
+
+                            mostrarMensaje(
+                                "El navegador no pudo reproducir este canal."
+                            );
+
+                        }
+
+                    );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "TV stream:",
+                    error
+                );
+
+                mostrarMensaje(
+                    "No se pudo obtener la señal."
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           INICIALIZAR TV
+           ================================================================ */
+
+        function TV_inicializar() {
+
+            /*
+               No descargamos todos los canales
+               hasta que el usuario use la herramienta.
+            */
+
+            const campo =
+                document.getElementById(
+                    "tvBusqueda"
+                );
+
+
+            if (campo) {
+
+                campo.onkeydown =
+                    function (event) {
+
+                        if (
+                            event.key === "Enter"
+                        ) {
+
+                            TV_buscar();
+
+                        }
+
+                    };
+
+            }
+
+        }
+
 
 
         /* =========================================================
