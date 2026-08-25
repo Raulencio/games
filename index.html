@@ -3136,6 +3136,546 @@
             }
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+        /* =========================================================
+   🐦‍⬛ GENERADOR DE MEMES DEL CUERVO
+   ========================================================= */
+
+
+        /* =========================================================
+   CONTENEDOR
+   ========================================================= */
+
+        .meme-generador {
+
+            width: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+        }
+
+
+        /* =========================================================
+   LIENZO
+   ========================================================= */
+
+        .meme-lienzo-contenedor {
+
+            width: 100%;
+
+            max-width: 600px;
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        #memeCanvas {
+
+            width: 100%;
+
+            max-width: 600px;
+
+            height: auto;
+
+            aspect-ratio: 1 / 1;
+
+            background:
+
+                linear-gradient(135deg,
+                    #f5f5f5,
+                    #dddddd);
+
+            border:
+
+                1px solid var(--borde);
+
+            border-radius:
+
+                14px;
+
+            box-shadow:
+
+                var(--sombra);
+
+            display:
+
+                block;
+
+        }
+
+
+        /* =========================================================
+   CONTROLES
+   ========================================================= */
+
+        .meme-controles {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            width: 100%;
+
+            max-width: 600px;
+
+        }
+
+
+        /* =========================================================
+   BOTÓN PRINCIPAL
+   ========================================================= */
+
+        .meme-boton {
+
+            background:
+
+                var(--acento);
+
+            color:
+
+                #111;
+
+            border:
+
+                none;
+
+            border-radius:
+
+                var(--radio);
+
+            padding:
+
+                12px 18px;
+
+            font-weight:
+
+                bold;
+
+            cursor:
+
+                pointer;
+
+            transition:
+
+                .15s;
+
+        }
+
+
+        .meme-boton:hover {
+
+            transform:
+
+                translateY(-2px);
+
+        }
+
+
+        /* =========================================================
+   ESTADO
+   ========================================================= */
+
+        .meme-estado {
+
+            width: 100%;
+
+            max-width: 600px;
+
+            margin-top: 12px;
+
+            padding: 10px;
+
+            text-align: center;
+
+            color:
+
+                var(--texto-suave);
+
+            font-size:
+
+                13px;
+
+        }
+
+
+        /* =========================================================
+   MÓVIL
+   ========================================================= */
+
+        @media(max-width:600px) {
+
+            .meme-controles {
+
+                flex-direction: column;
+
+            }
+
+
+            .meme-controles button {
+
+                width: 100%;
+
+            }
+
+
+            #memeCanvas {
+
+                border-radius:
+
+                    10px;
+
+            }
+
+        }
+
+
+        /* ================================================================
+   😂 LIENZO DEL GENERADOR DE MEMES
+   ================================================================ */
+
+        .meme-lienzo {
+
+            position: relative;
+
+            width: 100%;
+
+            max-width: 700px;
+
+            height: 500px;
+
+            margin: 20px auto;
+
+            overflow: hidden;
+
+            background: var(--panel-2);
+
+            border: 2px solid var(--borde);
+
+            border-radius: 18px;
+
+            box-sizing: border-box;
+
+            box-shadow: var(--sombra);
+
+        }
+
+
+        /* ================================================================
+   ESTADO VACÍO
+   ================================================================ */
+
+        .meme-vacio {
+
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            text-align: center;
+
+            color: var(--texto-suave);
+
+            font-size: 18px;
+
+        }
+
+
+        /* ================================================================
+   IMÁGENES
+   ================================================================ */
+
+        .meme-elemento {
+
+            position: absolute;
+
+            display: block;
+
+            height: auto;
+
+            object-fit: contain;
+
+            pointer-events: none;
+
+            user-select: none;
+
+            z-index: 2;
+
+            filter:
+                drop-shadow(0 4px 5px rgba(0, 0, 0, .25));
+
+        }
+
+
+        /* ================================================================
+   TEXTO DEL MEME
+   ================================================================ */
+
+        .meme-texto {
+
+            position: absolute;
+
+            z-index: 10;
+
+            max-width: 40%;
+
+            padding: 4px 8px;
+
+            text-align: center;
+
+            font-size: 24px;
+
+            font-weight: 900;
+
+            color: white;
+
+            text-shadow:
+
+                2px 2px 0 #000,
+
+                -2px -2px 0 #000,
+
+                2px -2px 0 #000,
+
+                -2px 2px 0 #000;
+
+            pointer-events: none;
+
+            user-select: none;
+
+        }
+
+
+        /* ================================================================
+   BOTÓN
+   ================================================================ */
+
+        .meme-generar {
+
+            width: 100%;
+
+            padding: 13px;
+
+            margin-bottom: 5px;
+
+            border: none;
+
+            border-radius: var(--radio);
+
+            background: var(--acento);
+
+            color: var(--fondo);
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: .15s;
+
+        }
+
+
+        .meme-generar:hover {
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .meme-generar:active {
+
+            transform: scale(.98);
+
+        }
+
+
+        /* ================================================================
+   MÓVIL
+   ================================================================ */
+
+        @media(max-width:600px) {
+
+            .meme-lienzo {
+
+                height: 420px;
+
+            }
+
+
+            .meme-texto {
+
+                font-size: 18px;
+
+            }
+
+        }
+
+
+
+
+
+
+        /* =========================================================
+   😂 GENERADOR DE MEMES DEL CUERVO
+   ========================================================= */
+
+        .meme-controles {
+
+            display: flex;
+
+            gap: 8px;
+
+            margin-bottom: 15px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .meme-controles button {
+
+            cursor: pointer;
+
+        }
+
+
+        /* =========================================================
+   CONTENEDOR DEL LIENZO
+   ========================================================= */
+
+        .meme-lienzo-contenedor {
+
+            width: 100%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+                var(--panel-2);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius:
+                15px;
+
+            padding:
+                12px;
+
+            box-sizing:
+                border-box;
+
+            overflow:
+                hidden;
+
+        }
+
+
+        /* =========================================================
+   LIENZO
+   ========================================================= */
+
+        #memeCanvas {
+
+            display:
+                block;
+
+            width:
+                100%;
+
+            max-width:
+                800px;
+
+            height:
+                auto;
+
+            aspect-ratio:
+                4 / 3;
+
+            background:
+                #eeeeee;
+
+            border-radius:
+                8px;
+
+        }
+
+
+        /* =========================================================
+   ESTADO
+   ========================================================= */
+
+        .meme-estado {
+
+            text-align:
+                center;
+
+            color:
+                var(--texto-suave);
+
+            font-size:
+                13px;
+
+            padding:
+                10px;
+
+        }
+
+
+        /* =========================================================
+   MÓVIL
+   ========================================================= */
+
+        @media(max-width:600px) {
+
+            .meme-controles {
+
+                flex-direction:
+                    column;
+
+            }
+
+            .meme-controles button {
+
+                width:
+                    100%;
+
+            }
+
+        }
     </style>
 </head>
 
@@ -3579,6 +4119,11 @@
                 nombre: "Clima",
                 icono: "🌦️",
                 visible: true
+            }, {
+                id: "memes",
+                nombre: "Memes",
+                icono: "🖼️",
+                visible: true
             },
         ];
 
@@ -3926,7 +4471,11 @@
                         obtenerContenidoModulo(
                             modulo.id
                         );
+                    if (modulo.id === "memes") {
 
+                        MEME_inicializar();
+
+                    }
 
                     contenedor.appendChild(
                         elemento
@@ -3989,6 +4538,62 @@
             switch (id) {
 
 
+
+                case "memes":
+
+                    return `
+
+        <p class="descripcion">
+
+            😂 Generador de Memes del Cuervo.
+            Combina imágenes, posiciones y textos
+            para crear memes aleatorios.
+
+        </p>
+
+
+        <div class="meme-controles">
+
+            <button
+                class="principal"
+                onclick="MEME_generar()">
+
+                🎲 Generar meme
+
+            </button>
+
+
+            <button
+                class="secundario"
+                onclick="MEME_limpiar()">
+
+                🗑️ Limpiar
+
+            </button>
+
+        </div>
+
+
+        <div class="meme-lienzo-contenedor">
+
+            <canvas
+                id="memeCanvas"
+                width="800"
+                height="600">
+            </canvas>
+
+        </div>
+
+
+        <div
+            id="memeEstado"
+            class="meme-estado">
+
+            Pulsa "Generar meme" para comenzar.
+
+        </div>
+
+    `;
 
                 case "meteorologia":
 
@@ -17846,6 +18451,15 @@
 
             }
         );
+
+
+
+
+
+
+
+
+
         /* ================================================================
            INICIALIZACIÓN DE LAS NUEVAS HERRAMIENTAS
            ================================================================ */
@@ -17866,6 +18480,1096 @@
         /* ================================================================
            ACTUALIZAR TU FUNCIÓN inicializarModulos()
            ================================================================ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* ================================================================
+           😂 GENERADOR DE MEMES DEL CUERVO
+           ================================================================ */
+
+
+        /* ================================================================
+           CONFIGURACIÓN DEL LIENZO
+           ================================================================ */
+
+        const MEME_ANCHO =
+            800;
+
+        const MEME_ALTO =
+            600;
+
+
+        /* ================================================================
+           ================================================================
+           🖼️ IMÁGENES DEL MEME
+           ================================================================
+        
+           ⚠️ ESTA ES LA PARTE QUE DEBES EDITAR.
+        
+           Agrega aquí las rutas de tus imágenes PNG.
+        
+           IMPORTANTE:
+        
+           Las imágenes deberían tener fondo transparente.
+        
+           Ejemplos:
+        
+           "imagenes/memes/gato1.png"
+        
+           "imagenes/memes/gato2.png"
+        
+           "imagenes/memes/perro1.png"
+        
+           etc.
+        
+           Puedes agregar todas las que quieras.
+        
+           ================================================================ */
+
+
+        const MEME_IMAGENES = [
+
+            /*
+               🐱 GATOS
+            */
+
+            "gato1.png",
+
+            "gato2.png",
+
+            "gato3.png",
+
+            "gato4.png",
+
+            "gato5.png",
+
+            "gato6.png",
+
+            /*
+               🐶 PERROS
+            */
+
+
+
+            /*
+               👽 OTRAS IMÁGENES
+            */
+
+
+
+            "meme1.png",
+            "meme2.png",
+            "meme3.png",
+            "meme4.png",
+            "meme5.png",
+            "meme6.png",
+            "meme7.png",
+            "meme8.png",
+            "meme9.png",
+            "meme10.png",
+            "meme11.png",
+            "meme12.png",
+            "meme13.png",
+            "meme14.png",
+  
+
+
+
+        ];
+
+
+        /* ================================================================
+           📝 TEXTOS
+           ================================================================
+        
+           Puedes modificar esta lista cuando quieras.
+        
+           ================================================================ */
+
+
+        const MEME_TEXTOS = [
+
+            "YO",
+
+            "TÚ",
+
+            "CUANDO...",
+
+            "MIENTRAS TANTO...",
+
+            "YO DICIENDO",
+
+            "YO DESPUÉS",
+
+            "NADIE:",
+
+            "ABSOLUTAMENTE NADIE:",
+
+            "MI CEREBRO:",
+
+            "LA VIDA:",
+
+            "EL PROBLEMA:",
+
+            "MIENTRAS YO:",
+
+            "CUANDO TODO SALE MAL",
+
+            "NO ERA ASÍ",
+
+            "¿QUÉ PODÍA SALIR MAL?",
+
+            "JAJA",
+
+            "XD"
+
+        ];
+
+
+        /* ================================================================
+           ESTADO
+           ================================================================ */
+
+        let MEME_canvas = null;
+
+        let MEME_ctx = null;
+
+        let MEME_imagenesCargadas = [];
+
+        let MEME_inicializado = false;
+
+
+        /* ================================================================
+           UTILIDAD
+           NÚMERO ALEATORIO
+           ================================================================ */
+
+        function MEME_random(min, max) {
+
+            return Math.random() *
+                (max - min) +
+                min;
+
+        }
+
+
+        /* ================================================================
+           ENTERO ALEATORIO
+           ================================================================ */
+
+        function MEME_randomEntero(min, max) {
+
+            return Math.floor(
+
+                Math.random() *
+                (max - min + 1)
+
+            ) + min;
+
+        }
+
+
+        /* ================================================================
+           ELEMENTO ALEATORIO
+           ================================================================ */
+
+        function MEME_randomElemento(lista) {
+
+            if (
+                !lista ||
+                !lista.length
+            ) {
+
+                return null;
+
+            }
+
+
+            return lista[
+                MEME_randomEntero(
+                    0,
+                    lista.length - 1
+                )
+            ];
+
+        }
+
+
+        /* ================================================================
+           INICIALIZAR
+           ================================================================ */
+
+        function MEME_inicializar() {
+
+            const canvas =
+                document.getElementById(
+                    "memeCanvas"
+                );
+
+
+            if (!canvas) {
+
+                console.warn(
+                    "😂 Canvas de memes no encontrado."
+                );
+
+                return;
+
+            }
+
+
+            MEME_canvas =
+                canvas;
+
+
+            MEME_ctx =
+                canvas.getContext(
+                    "2d"
+                );
+
+
+            if (!MEME_ctx) {
+
+                console.error(
+                    "❌ No se pudo obtener el contexto del canvas."
+                );
+
+                return;
+
+            }
+
+
+            MEME_canvas.width =
+                MEME_ANCHO;
+
+
+            MEME_canvas.height =
+                MEME_ALTO;
+
+
+            MEME_inicializado =
+                true;
+
+
+            MEME_dibujarFondo();
+
+
+            MEME_cargarImagenes();
+
+        }
+
+
+        /* ================================================================
+           CARGAR IMÁGENES
+           ================================================================ */
+
+        function MEME_cargarImagenes() {
+
+            MEME_imagenesCargadas =
+                [];
+
+
+            if (
+                !MEME_IMAGENES ||
+                !MEME_IMAGENES.length
+            ) {
+
+                MEME_actualizarEstado(
+                    "⚠️ No hay imágenes configuradas."
+                );
+
+                return;
+
+            }
+
+
+            MEME_IMAGENES.forEach(
+
+                function (ruta) {
+
+                    const imagen =
+                        new Image();
+
+
+                    imagen.onload =
+                        function () {
+
+                            MEME_imagenesCargadas.push(
+                                imagen
+                            );
+
+                            MEME_actualizarEstado(
+
+                                "🖼️ " +
+
+                                MEME_imagenesCargadas.length +
+
+                                " imágenes cargadas."
+
+                            );
+
+                        };
+
+
+                    imagen.onerror =
+                        function () {
+
+                            console.warn(
+
+                                "❌ No se pudo cargar:",
+
+                                ruta
+
+                            );
+
+                        };
+
+
+                    imagen.src =
+                        ruta;
+
+                }
+
+            );
+
+        }
+
+
+        /* ================================================================
+           FONDO
+           ================================================================ */
+
+        function MEME_dibujarFondo() {
+
+            if (!MEME_ctx) {
+
+                return;
+
+            }
+
+
+            /*
+               Fondo blanco.
+            */
+
+            MEME_ctx.fillStyle =
+                "#ffffff";
+
+
+            MEME_ctx.fillRect(
+
+                0,
+
+                0,
+
+                MEME_ANCHO,
+
+                MEME_ALTO
+
+            );
+
+
+            /*
+               Borde.
+            */
+
+            MEME_ctx.strokeStyle =
+                "#dddddd";
+
+
+            MEME_ctx.lineWidth =
+                2;
+
+
+            MEME_ctx.strokeRect(
+
+                0,
+
+                0,
+
+                MEME_ANCHO,
+
+                MEME_ALTO
+
+            );
+
+        }
+
+
+        /* ================================================================
+           GENERAR MEME
+           ================================================================ */
+
+        function MEME_generar() {
+
+            /*
+               Si el canvas todavía no existe,
+               intentamos inicializarlo.
+            */
+
+            if (
+                !MEME_inicializado
+            ) {
+
+                MEME_inicializar();
+
+            }
+
+
+            if (
+                !MEME_ctx
+            ) {
+
+                MEME_actualizarEstado(
+
+                    "❌ No se pudo crear el lienzo."
+
+                );
+
+                return;
+
+            }
+
+
+            /*
+               Limpiamos.
+            */
+
+            MEME_dibujarFondo();
+
+
+            /*
+               Si todavía no cargaron imágenes,
+               mostramos un aviso.
+            */
+
+            if (
+                MEME_imagenesCargadas.length === 0
+            ) {
+
+                MEME_dibujarTexto(
+
+                    "AGREGA TUS IMÁGENES",
+
+                    MEME_ANCHO / 2,
+
+                    MEME_ALTO / 2,
+
+                    34,
+
+                    0
+
+                );
+
+
+                MEME_actualizarEstado(
+
+                    "⚠️ No hay imágenes cargadas. Revisa las rutas."
+
+                );
+
+
+                return;
+
+            }
+
+
+            /*
+               Cantidad de imágenes.
+               
+               No ponemos demasiadas para evitar
+               que quede caótico.
+            */
+
+            const cantidad =
+                Math.min(
+
+                    MEME_randomEntero(
+                        2,
+                        5
+                    ),
+
+                    MEME_imagenesCargadas.length
+
+                );
+
+
+            /*
+               Seleccionamos imágenes.
+            */
+
+            const seleccionadas = [];
+
+
+            while (
+                seleccionadas.length <
+                cantidad
+            ) {
+
+                const imagen =
+                    MEME_randomElemento(
+                        MEME_imagenesCargadas
+                    );
+
+
+                if (
+                    !seleccionadas.includes(
+                        imagen
+                    )
+                ) {
+
+                    seleccionadas.push(
+                        imagen
+                    );
+
+                }
+
+            }
+
+
+            /*
+               Dibujamos las imágenes.
+            */
+
+            seleccionadas.forEach(
+
+                function (imagen, indice) {
+
+                    MEME_dibujarImagenOrdenada(
+
+                        imagen,
+
+                        indice,
+
+                        cantidad
+
+                    );
+
+                }
+
+            );
+
+
+            /*
+               Agregamos entre 1 y 3 textos.
+            */
+
+            const cantidadTextos =
+                MEME_randomEntero(
+                    1,
+                    3
+                );
+
+
+            const textosUsados = [];
+
+
+            for (
+                let i = 0;
+                i < cantidadTextos;
+                i++
+            ) {
+
+                let texto;
+
+
+                do {
+
+                    texto =
+                        MEME_randomElemento(
+                            MEME_TEXTOS
+                        );
+
+                }
+
+                while (
+                    textosUsados.includes(
+                        texto
+                    )
+                );
+
+
+                textosUsados.push(
+                    texto
+                );
+
+
+                MEME_dibujarTextoOrdenado(
+
+                    texto,
+
+                    i,
+
+                    cantidadTextos
+
+                );
+
+            }
+
+
+            MEME_actualizarEstado(
+
+                "😂 Meme generado. Pulsa nuevamente para crear otro."
+
+            );
+
+        }
+
+
+        /* ================================================================
+           DIBUJAR IMAGEN ORDENADA
+           ================================================================ */
+
+        function MEME_dibujarImagenOrdenada(
+
+            imagen,
+
+            indice,
+
+            cantidad
+
+        ) {
+
+            /*
+               Dividimos el lienzo en zonas.
+        
+               Esto evita que las imágenes
+               terminen todas amontonadas.
+            */
+
+
+            const zonas = [
+
+                {
+                    x: 150,
+                    y: 180
+                },
+
+                {
+                    x: 400,
+                    y: 150
+                },
+
+                {
+                    x: 650,
+                    y: 190
+                },
+
+                {
+                    x: 260,
+                    y: 400
+                },
+
+                {
+                    x: 540,
+                    y: 390
+                }
+
+            ];
+
+
+            const zona =
+                zonas[
+                indice %
+                zonas.length
+                ];
+
+
+            /*
+               Tamaño moderado.
+            */
+
+            const tamaño =
+                MEME_random(
+                    120,
+                    210
+                );
+
+
+            const proporcion =
+                imagen.width /
+                imagen.height;
+
+
+            let ancho =
+                tamaño;
+
+
+            let alto =
+                tamaño /
+                proporcion;
+
+
+            /*
+               Variación ligera
+               de posición.
+            */
+
+            const x =
+                zona.x +
+
+                MEME_random(
+                    -45,
+                    45
+                );
+
+
+            const y =
+                zona.y +
+
+                MEME_random(
+                    -35,
+                    35
+                );
+
+
+            /*
+               Rotación pequeña.
+        
+               Nada demasiado caótico.
+            */
+
+            const rotacion =
+                MEME_random(
+                    -0.15,
+                    0.15
+                );
+
+
+            MEME_ctx.save();
+
+
+            MEME_ctx.translate(
+                x,
+                y
+            );
+
+
+            MEME_ctx.rotate(
+                rotacion
+            );
+
+
+            MEME_ctx.drawImage(
+
+                imagen,
+
+                -ancho / 2,
+
+                -alto / 2,
+
+                ancho,
+
+                alto
+
+            );
+
+
+            MEME_ctx.restore();
+
+        }
+
+
+        /* ================================================================
+           TEXTO ORDENADO
+           ================================================================ */
+
+        function MEME_dibujarTextoOrdenado(
+
+            texto,
+
+            indice,
+
+            cantidad
+
+        ) {
+
+            const posiciones = [
+
+                {
+                    x: 150,
+                    y: 70
+                },
+
+                {
+                    x: 400,
+                    y: 540
+                },
+
+                {
+                    x: 650,
+                    y: 80
+                }
+
+            ];
+
+
+            const posicion =
+                posiciones[
+                indice %
+                posiciones.length
+                ];
+
+
+            /*
+               Rotación pequeña.
+            */
+
+            const rotacion =
+                MEME_random(
+                    -0.06,
+                    0.06
+                );
+
+
+            MEME_dibujarTexto(
+
+                texto,
+
+                posicion.x,
+
+                posicion.y,
+
+                34,
+
+                rotacion
+
+            );
+
+        }
+
+
+        /* ================================================================
+           DIBUJAR TEXTO
+           ================================================================ */
+
+        function MEME_dibujarTexto(
+
+            texto,
+
+            x,
+
+            y,
+
+            tamaño,
+
+            rotacion
+
+        ) {
+
+            MEME_ctx.save();
+
+
+            MEME_ctx.translate(
+                x,
+                y
+            );
+
+
+            MEME_ctx.rotate(
+                rotacion
+            );
+
+
+            MEME_ctx.font =
+
+                "bold " +
+
+                tamaño +
+
+                "px Arial";
+
+
+            MEME_ctx.textAlign =
+                "center";
+
+
+            MEME_ctx.textBaseline =
+                "middle";
+
+
+            /*
+               Borde negro.
+            */
+
+            MEME_ctx.lineWidth =
+                8;
+
+
+            MEME_ctx.strokeStyle =
+                "#000000";
+
+
+            MEME_ctx.strokeText(
+
+                texto,
+
+                0,
+
+                0
+
+            );
+
+
+            /*
+               Texto blanco.
+            */
+
+            MEME_ctx.fillStyle =
+                "#ffffff";
+
+
+            MEME_ctx.fillText(
+
+                texto,
+
+                0,
+
+                0
+
+            );
+
+
+            MEME_ctx.restore();
+
+        }
+
+
+        /* ================================================================
+           LIMPIAR
+           ================================================================ */
+
+        function MEME_limpiar() {
+
+            if (
+                !MEME_ctx
+            ) {
+
+                MEME_inicializar();
+
+            }
+
+
+            if (
+                !MEME_ctx
+            ) {
+
+                return;
+
+            }
+
+
+            MEME_dibujarFondo();
+
+
+            MEME_actualizarEstado(
+
+                "Lienzo limpio."
+
+            );
+
+        }
+
+
+        /* ================================================================
+           ESTADO
+           ================================================================ */
+
+        function MEME_actualizarEstado(
+            mensaje
+        ) {
+
+            const estado =
+                document.getElementById(
+                    "memeEstado"
+                );
+
+
+            if (estado) {
+
+                estado.textContent =
+                    mensaje;
+
+            }
+
+        }
+
+
+        /* ================================================================
+           COMPATIBILIDAD
+           ================================================================ */
+
+        function inicializarMemes() {
+
+            MEME_inicializado =
+                false;
+
+
+            MEME_inicializar();
+
+        }
+
+
+        /* ================================================================
+           FIN GENERADOR DE MEMES
+           ================================================================ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         /* ================================================================
