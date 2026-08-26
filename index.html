@@ -4994,9 +4994,7 @@
 
                 <input
                     type="checkbox"
-                    id="memeFondoImagen">
-
-                Imagen con fondo
+                    id="memeFondoImagen"> Fondo Colorido
 
             </label>
 
@@ -5011,7 +5009,7 @@
                     class="principal"
                     onclick="MEME_generar()">
 
-                    😂 Generar meme
+                    Generar meme
 
                 </button>
 
@@ -5022,7 +5020,7 @@
         class="principal"
         onclick="MEME_generarAleatorio()">
 
-        😂 MEME MODERNO
+        Nuevo Meme 😂
 
     </button>
 
@@ -5031,7 +5029,7 @@
         class="principal"
         onclick="MEME_generarAntiguo()">
 
-        🕰️ MEME ANTIGUO
+        Clasico 🕰️
 
     </button>
 
@@ -5042,7 +5040,7 @@
                     class="secundario"
                     onclick="MEME_guardarActual()">
 
-                    ⭐ Guardar
+                    Guardar ⭐ 
 
                 </button>
 
@@ -19102,7 +19100,7 @@
             simpson: [
 
                 "simpson1.png"
-                
+
             ],
 
 
@@ -20412,103 +20410,105 @@
            🌈 FONDO DE MEME ANTIGUO
            ================================================================ */
 
+        /* ================================================================
+     😂 MEME ANTIGUO CLÁSICO V2
+     EL TALLER DEL CUERVO
+     ================================================================ */
+
+
+        /* ================================================================
+           🎨 FONDO RADIAL CLÁSICO
+           ================================================================ */
+
         function MEME_dibujarFondoAntiguo(ctx) {
 
-            const centroX =
-                MEME_ANCHO / 2;
+            const centroX = MEME_ANCHO / 2;
+            const centroY = MEME_ALTO / 2;
 
+            /*
+               Colores posibles.
+               Cada meme seleccionará una combinación diferente.
+            */
 
-            const centroY =
-                MEME_ALTO / 2;
+            const paleta = [
 
-
-            const colores = [
-
-                "#ff3b30",
-                "#ff9500",
-                "#ffcc00",
-                "#34c759",
-                "#00c7be",
-                "#007aff",
-                "#5856d6",
-                "#af52de",
-                "#ff2d55"
+                "#ff1744",
+                "#ff6d00",
+                "#ffd600",
+                "#76ff03",
+                "#00e676",
+                "#00e5ff",
+                "#2979ff",
+                "#651fff",
+                "#d500f9",
+                "#f50057",
+                "#ff9100",
+                "#ffffff"
 
             ];
 
 
-            const gradiente =
-                ctx.createRadialGradient(
+            /*
+               Mezclamos la paleta.
+            */
 
-                    centroX,
-                    centroY,
-                    0,
+            const colores =
+                MEME_barajar(
+                    paleta
+                );
 
-                    centroX,
-                    centroY,
-                    MEME_ANCHO
+
+            /*
+               Cantidad de rayos.
+               Entre 20 y 32 para mantener
+               un aspecto claramente radial.
+            */
+
+            const cantidad =
+                MEME_numero(
+                    20,
+                    32
+                );
+
+
+            const angulo =
+                (Math.PI * 2) /
+                cantidad;
+
+
+            /*
+               Radio suficiente para cubrir
+               incluso las esquinas.
+            */
+
+            const radio =
+                Math.sqrt(
+
+                    MEME_ANCHO *
+                    MEME_ANCHO +
+
+                    MEME_ALTO *
+                    MEME_ALTO
 
                 );
 
 
-            colores.forEach(
-
-                function (color, indice) {
-
-                    gradiente.addColorStop(
-
-                        indice /
-                        (colores.length - 1),
-
-                        color
-
-                    );
-
-                }
-
-            );
-
-
-            ctx.fillStyle =
-                gradiente;
-
-
-            ctx.fillRect(
-
-                0,
-                0,
-                MEME_ANCHO,
-                MEME_ALTO
-
-            );
-
-
             /*
-               Líneas radiales.
+               Dibujamos cada franja.
             */
-
-            ctx.save();
-
-
-            ctx.globalAlpha =
-                0.28;
-
-
-            ctx.lineWidth =
-                8;
-
 
             for (
                 let i = 0;
-                i < 36;
+                i < cantidad;
                 i++
             ) {
 
-                const angulo =
-                    (
-                        Math.PI * 2 /
-                        36
-                    ) * i;
+                const inicio =
+                    i * angulo;
+
+
+                const fin =
+                    inicio + angulo;
 
 
                 ctx.beginPath();
@@ -20525,21 +20525,93 @@
                 ctx.lineTo(
 
                     centroX +
-                    Math.cos(angulo) *
-                    1200,
+                    Math.cos(inicio) *
+                    radio,
 
                     centroY +
-                    Math.sin(angulo) *
-                    1200
+                    Math.sin(inicio) *
+                    radio
 
                 );
 
 
-                ctx.strokeStyle =
+                ctx.lineTo(
+
+                    centroX +
+                    Math.cos(fin) *
+                    radio,
+
+                    centroY +
+                    Math.sin(fin) *
+                    radio
+
+                );
+
+
+                ctx.closePath();
+
+
+                ctx.fillStyle =
                     colores[
                     i %
                     colores.length
                     ];
+
+
+                ctx.fill();
+
+            }
+
+
+            /*
+               Líneas divisorias.
+               Esto hace que las franjas queden
+               mucho más marcadas.
+            */
+
+            ctx.save();
+
+
+            ctx.strokeStyle =
+                "rgba(0,0,0,0.28)";
+
+
+            ctx.lineWidth =
+                4;
+
+
+            for (
+                let i = 0;
+                i < cantidad;
+                i++
+            ) {
+
+                const direccion =
+                    i * angulo;
+
+
+                ctx.beginPath();
+
+
+                ctx.moveTo(
+
+                    centroX,
+                    centroY
+
+                );
+
+
+                ctx.lineTo(
+
+                    centroX +
+                    Math.cos(direccion) *
+                    radio,
+
+                    centroY +
+                    Math.sin(direccion) *
+                    radio
+
+                );
 
 
                 ctx.stroke();
@@ -20552,6 +20624,991 @@
         }
 
 
+        /* ================================================================
+           🖼️ IMAGEN CENTRAL
+           ================================================================ */
+
+        /* ================================================================
+      🖼️ IMAGEN CENTRAL DEL MEME ANTIGUO
+      DETECTA AUTOMÁTICAMENTE UNA SOLA IMAGEN
+      ================================================================ */
+
+        function MEME_dibujarImagenAntigua(
+
+            ctx,
+            imagen
+
+        ) {
+
+            /*
+               No hay imagen.
+            */
+
+            if (!imagen) {
+
+                return;
+
+            }
+
+
+            /*
+               ============================================================
+               UNA SOLA IMAGEN = IMAGEN PRINCIPAL
+               ============================================================
+        
+               No importa si tiene:
+        
+               ✔ transparencia
+               ✔ fondo blanco
+               ✔ fondo negro
+               ✔ fotografía
+               ✔ PNG
+               ✔ JPG
+        
+               Siempre se coloca en el centro.
+            */
+
+
+            const margenHorizontal =
+                80;
+
+
+            const margenSuperior =
+                130;
+
+
+            const margenInferior =
+                130;
+
+
+            const maxAncho =
+                MEME_ANCHO -
+                margenHorizontal * 2;
+
+
+            const maxAlto =
+                MEME_ALTO -
+                margenSuperior -
+                margenInferior;
+
+
+            /*
+               ============================================================
+               MANTENER PROPORCIÓN
+               ============================================================
+            */
+
+            const escala =
+                Math.min(
+
+                    maxAncho /
+                    imagen.width,
+
+                    maxAlto /
+                    imagen.height
+
+                );
+
+
+            const ancho =
+                imagen.width *
+                escala;
+
+
+            const alto =
+                imagen.height *
+                escala;
+
+
+            /*
+               ============================================================
+               CENTRAR
+               ============================================================
+            */
+
+            const x =
+                (
+                    MEME_ANCHO -
+                    ancho
+                ) / 2;
+
+
+            const y =
+                margenSuperior +
+
+                (
+                    maxAlto -
+                    alto
+                ) / 2;
+
+
+            /*
+               ============================================================
+               SOMBRA
+               ============================================================
+            */
+
+            ctx.save();
+
+
+            ctx.shadowColor =
+                "rgba(0,0,0,0.45)";
+
+
+            ctx.shadowBlur =
+                18;
+
+
+            ctx.shadowOffsetX =
+                0;
+
+
+            ctx.shadowOffsetY =
+                8;
+
+
+            /*
+               ============================================================
+               DIBUJAR
+               ============================================================
+            */
+
+            ctx.drawImage(
+
+                imagen,
+
+                x,
+                y,
+
+                ancho,
+                alto
+
+            );
+
+
+            ctx.restore();
+
+        }
+
+        /* ================================================================
+           📝 TEXTO SUPERIOR / INFERIOR
+           ================================================================ */
+
+        function MEME_dibujarTextoClasico(
+
+            ctx,
+            texto,
+            x,
+            y,
+            maxAncho,
+            tamaño = 62,
+            rotacion = 0
+
+        ) {
+
+            if (!texto) {
+
+                return;
+
+            }
+
+
+            /*
+               Nos aseguramos de que maxAncho
+               nunca sea mayor que el lienzo.
+            */
+
+            maxAncho =
+                Math.min(
+
+                    maxAncho,
+                    MEME_ANCHO - 50
+
+                );
+
+
+            /*
+               Reducimos tamaño hasta que
+               el texto entre.
+            */
+
+            while (
+
+                tamaño > 22
+
+            ) {
+
+                ctx.font =
+                    "900 " +
+                    tamaño +
+                    "px Arial";
+
+
+                if (
+
+                    ctx.measureText(
+                        texto
+                    ).width <= maxAncho
+
+                ) {
+
+                    break;
+
+                }
+
+
+                tamaño -= 2;
+
+            }
+
+
+            /*
+               Dividimos frases largas.
+            */
+
+            const palabras =
+                texto.split(
+                    /\s+/
+                );
+
+
+            const lineas = [];
+
+            let linea =
+                "";
+
+
+            palabras.forEach(
+
+                function (palabra) {
+
+                    const prueba =
+                        linea
+                            ? linea +
+                            " " +
+                            palabra
+                            : palabra;
+
+
+                    if (
+
+                        ctx.measureText(
+                            prueba
+                        ).width >
+                        maxAncho
+
+                    ) {
+
+                        if (linea) {
+
+                            lineas.push(
+                                linea
+                            );
+
+                        }
+
+                        linea =
+                            palabra;
+
+                    }
+
+                    else {
+
+                        linea =
+                            prueba;
+
+                    }
+
+                }
+
+            );
+
+
+            if (linea) {
+
+                lineas.push(
+                    linea
+                );
+
+            }
+
+
+            const altoLinea =
+                tamaño *
+                1.10;
+
+
+            const alturaTotal =
+                lineas.length *
+                altoLinea;
+
+
+            /*
+               Transformación para inclinación.
+            */
+
+            ctx.save();
+
+
+            ctx.translate(
+                x,
+                y
+            );
+
+
+            ctx.rotate(
+                rotacion
+            );
+
+
+            ctx.textAlign =
+                "center";
+
+
+            ctx.textBaseline =
+                "middle";
+
+
+            ctx.font =
+                "900 " +
+                tamaño +
+                "px Arial";
+
+
+            /*
+               Contorno clásico.
+            */
+
+            ctx.lineWidth =
+                Math.max(
+                    5,
+                    tamaño * 0.13
+                );
+
+
+            ctx.strokeStyle =
+                "#000";
+
+
+            ctx.fillStyle =
+                "#fff";
+
+
+            lineas.forEach(
+
+                function (
+                    lineaTexto,
+                    indice
+                ) {
+
+                    const yy =
+
+                        -alturaTotal / 2 +
+
+                        indice *
+                        altoLinea +
+
+                        altoLinea / 2;
+
+
+                    ctx.strokeText(
+
+                        lineaTexto,
+
+                        0,
+                        yy
+
+                    );
+
+
+                    ctx.fillText(
+
+                        lineaTexto,
+
+                        0,
+                        yy
+
+                    );
+
+                }
+
+            );
+
+
+            ctx.restore();
+
+        }
+
+
+        /* ================================================================
+           🎲 POSICIONES SEGURAS PARA TEXTOS 3 Y 4
+           ================================================================ */
+
+        function MEME_posicionTextoRandom() {
+
+            /*
+               Zonas interiores.
+               Evitamos bordes y centro extremo.
+            */
+
+            const zonas = [
+
+                {
+                    x:
+                        MEME_ANCHO * 0.25,
+
+                    y:
+                        MEME_ALTO * 0.35
+                },
+
+                {
+                    x:
+                        MEME_ANCHO * 0.75,
+
+                    y:
+                        MEME_ALTO * 0.35
+                },
+
+                {
+                    x:
+                        MEME_ANCHO * 0.25,
+
+                    y:
+                        MEME_ALTO * 0.65
+                },
+
+                {
+                    x:
+                        MEME_ANCHO * 0.75,
+
+                    y:
+                        MEME_ALTO * 0.65
+                },
+
+                {
+                    x:
+                        MEME_ANCHO * 0.20,
+
+                    y:
+                        MEME_ALTO * 0.50
+                },
+
+                {
+                    x:
+                        MEME_ANCHO * 0.80,
+
+                    y:
+                        MEME_ALTO * 0.50
+                }
+
+            ];
+
+
+            return MEME_aleatorio(
+                zonas
+            );
+
+        }
+
+
+        /* ================================================================
+           😂 TEXTOS DEL MEME ANTIGUO
+           ================================================================ */
+
+        function MEME_dibujarTextosAntiguos(
+
+            ctx,
+            textos
+
+        ) {
+
+            if (
+                !textos ||
+                !textos.length
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+               ============================================================
+               TEXTO 1
+               PARTE SUPERIOR
+               ============================================================
+            */
+
+            if (textos[0]) {
+
+                MEME_dibujarTextoClasico(
+
+                    ctx,
+
+                    textos[0],
+
+                    MEME_ANCHO / 2,
+
+                    70,
+
+                    MEME_ANCHO - 70,
+
+                    62,
+
+                    0
+
+                );
+
+            }
+
+
+            /*
+               ============================================================
+               TEXTO 2
+               PARTE INFERIOR
+               ============================================================
+            */
+
+            if (textos[1]) {
+
+                MEME_dibujarTextoClasico(
+
+                    ctx,
+
+                    textos[1],
+
+                    MEME_ANCHO / 2,
+
+                    MEME_ALTO - 70,
+
+                    MEME_ANCHO - 70,
+
+                    62,
+
+                    0
+
+                );
+
+            }
+
+
+            /*
+               ============================================================
+               TEXTO 3
+               RANDOM
+               ============================================================
+            */
+
+            if (textos[2]) {
+
+                const posicion =
+                    MEME_posicionTextoRandom();
+
+
+                const rotacion =
+                    (
+                        MEME_numero(
+                            -8,
+                            8
+                        )
+                        *
+                        Math.PI
+                        /
+                        180
+                    );
+
+
+                MEME_dibujarTextoClasico(
+
+                    ctx,
+
+                    textos[2],
+
+                    posicion.x,
+
+                    posicion.y,
+
+                    330,
+
+                    45,
+
+                    rotacion
+
+                );
+
+            }
+
+
+            /*
+               ============================================================
+               TEXTO 4
+               RANDOM
+               ============================================================
+            */
+
+            if (textos[3]) {
+
+                const posicion =
+                    MEME_posicionTextoRandom();
+
+
+                const rotacion =
+                    (
+                        MEME_numero(
+                            -8,
+                            8
+                        )
+                        *
+                        Math.PI
+                        /
+                        180
+                    );
+
+
+                MEME_dibujarTextoClasico(
+
+                    ctx,
+
+                    textos[3],
+
+                    posicion.x,
+
+                    posicion.y,
+
+                    330,
+
+                    45,
+
+                    rotacion
+
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           😂 GENERAR MEME ANTIGUO
+           ================================================================ */
+
+        async function MEME_generarAntiguo() {
+
+            const canvas =
+                document.getElementById(
+                    "memeCanvas"
+                );
+
+
+            if (!canvas) {
+
+                console.error(
+                    "No existe #memeCanvas"
+                );
+
+                return;
+
+            }
+
+
+            const ctx =
+                canvas.getContext(
+                    "2d"
+                );
+
+
+            /*
+               ============================================================
+               TEXTOS
+               ============================================================
+            */
+
+            const textos = [
+
+                document.getElementById(
+                    "memeTexto1"
+                )?.value.trim() || "",
+
+                document.getElementById(
+                    "memeTexto2"
+                )?.value.trim() || "",
+
+                document.getElementById(
+                    "memeTexto3"
+                )?.value.trim() || "",
+
+                document.getElementById(
+                    "memeTexto4"
+                )?.value.trim() || ""
+
+            ].filter(Boolean);
+
+
+            /*
+               ============================================================
+               BUSCAR IMAGEN DEL USUARIO
+               ============================================================
+            */
+
+            let imagen =
+                await MEME_leerArchivo(
+
+                    document.getElementById(
+                        "memeImagen1"
+                    )
+
+                );
+
+
+            /*
+               Si no existe la primera,
+               probamos la segunda.
+            */
+
+            if (!imagen) {
+
+                imagen =
+                    await MEME_leerArchivo(
+
+                        document.getElementById(
+                            "memeImagen2"
+                        )
+
+                    );
+
+            }
+
+
+            /*
+               ============================================================
+               SI EL USUARIO NO SUBIÓ IMAGEN
+               BUSCAMOS UNA DE CATEGORÍA
+               ============================================================
+            */
+
+            let categoria =
+                document.getElementById(
+                    "memeCategoria"
+                )?.value ||
+                "random";
+
+
+            if (!imagen) {
+
+                const imagenes =
+                    await MEME_obtenerImagenesSeguras(
+
+                        categoria,
+
+                        1
+
+                    );
+
+
+                if (
+                    imagenes.length
+                ) {
+
+                    try {
+
+                        imagen =
+                            await MEME_cargarImagen(
+
+                                imagenes[0].ruta
+
+                            );
+
+                    }
+
+                    catch (error) {
+
+                        console.warn(
+                            "No se pudo cargar la imagen de respaldo.",
+                            error
+                        );
+
+                    }
+
+                }
+
+            }
+            /* ================================================================
+               🖼️ OBTENER IMAGEN PRINCIPAL
+               ================================================================ */
+
+            let imagenPrincipal = null;
+
+
+            /*
+               Primero intentamos la imagen 1.
+            */
+
+            imagenPrincipal =
+                await MEME_leerArchivo(
+
+                    document.getElementById(
+                        "memeImagen1"
+                    )
+
+                );
+
+
+            /*
+               Si no existe imagen 1,
+               probamos imagen 2.
+            */
+
+            if (!imagenPrincipal) {
+
+                imagenPrincipal =
+                    await MEME_leerArchivo(
+
+                        document.getElementById(
+                            "memeImagen2"
+                        )
+
+                    );
+
+            }
+
+
+            /*
+               Si el usuario subió solamente una imagen,
+               esa imagen será automáticamente
+               la imagen central.
+            */
+
+            if (imagenPrincipal) {
+
+                console.log(
+                    "🖼️ Meme antiguo: usando imagen subida por el usuario como imagen central."
+                );
+
+            }
+
+            /*
+               ============================================================
+               LIMPIAR LIENZO
+               ============================================================
+            */
+
+            ctx.clearRect(
+
+                0,
+                0,
+                MEME_ANCHO,
+                MEME_ALTO
+
+            );
+
+
+            /*
+               ============================================================
+               FONDO ANTIGUO
+               ============================================================
+            */
+
+            MEME_dibujarFondoAntiguo(
+                ctx
+            );
+
+
+            /*
+               ============================================================
+               IMAGEN
+               ============================================================
+            */
+
+            MEME_dibujarImagenAntigua(
+
+                ctx,
+                imagen
+
+            );
+
+
+            /*
+               ============================================================
+               TEXTOS
+               ============================================================
+            */
+
+            MEME_dibujarTextosAntiguos(
+
+                ctx,
+                textos
+
+            );
+
+
+            /*
+               ============================================================
+               PUNTUACIÓN
+               ============================================================
+            */
+
+            const puntuacion =
+                MEME_calcularPuntuacion(
+
+                    textos,
+
+                    imagen
+                        ? [imagen]
+                        : []
+
+                );
+
+
+            /*
+               ============================================================
+               GUARDAR MEME ACTUAL
+               ============================================================
+            */
+
+            MEME_ultimo = {
+
+                imagen:
+                    canvas.toDataURL(
+                        "image/png"
+                    ),
+
+                categoria:
+                    categoria,
+
+                textos:
+                    textos,
+
+                puntuacion:
+                    puntuacion,
+
+                tipo:
+                    "antiguo",
+
+                fecha:
+                    Date.now()
+
+            };
+
+
+            MEME_mostrarInfo(
+                puntuacion
+            );
+
+
+            /*
+               ============================================================
+               ACTUALIZAR GUARDADOS
+               ============================================================
+            */
+
+            MEME_mostrarGuardados();
+
+
+            mostrarMensaje(
+                "😂 ¡Meme antiguo generado!"
+            );
+
+        }
         /* ================================================================
            🖼️ MEME CON FONDO
            ================================================================ */
