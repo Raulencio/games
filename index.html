@@ -57,6 +57,1475 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+        /* ================================================================
+   🪶 CÁMARA DE OBJETOS
+   EL TALLER DEL CUERVO
+   ================================================================ */
+
+
+        /* ================================================================
+   CONTENEDOR PRINCIPAL
+   ================================================================ */
+
+        #cuervoTiendaObjetos {
+
+            width:
+                min(94vw, 720px);
+
+            margin:
+                20px auto;
+
+            padding:
+                22px;
+
+            box-sizing:
+                border-box;
+
+            color:
+                #eee;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+        }
+
+
+        /* ================================================================
+   CABECERA
+   ================================================================ */
+
+        .objetos-tienda-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+            margin-bottom:
+                18px;
+
+        }
+
+
+        .objetos-tienda-kicker {
+
+            display:
+                block;
+
+            margin-bottom:
+                4px;
+
+            color:
+                #b99b58;
+
+            font-size:
+                9px;
+
+            font-weight:
+                bold;
+
+            letter-spacing:
+                3px;
+
+        }
+
+
+        .objetos-tienda-header h2 {
+
+            margin:
+                0;
+
+            color:
+                #ead39a;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                25px;
+
+        }
+
+
+        .objetos-tienda-header p {
+
+            margin:
+                7px 0 0;
+
+            color:
+                #999;
+
+            font-size:
+                12px;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        /* ================================================================
+   🪶 BILLETERA
+   ================================================================ */
+
+        .objetos-billetera {
+
+            min-width:
+                95px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            padding:
+                10px 14px;
+
+            background:
+                rgba(30, 23, 17, .8);
+
+            border:
+                1px solid rgba(210, 170, 80, .35);
+
+            border-radius:
+                14px;
+
+            box-shadow:
+                inset 0 0 15px rgba(220, 180, 70, .04);
+
+        }
+
+
+        .objetos-billetera span {
+
+            font-size:
+                20px;
+
+        }
+
+
+        .objetos-billetera strong {
+
+            color:
+                #f0d37a;
+
+            font-size:
+                15px;
+
+        }
+
+
+        /* ================================================================
+   🌿 CARRUSEL
+   ================================================================ */
+
+        .objetos-carrusel {
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            min-height:
+                410px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            overflow:
+                hidden;
+
+            background:
+
+                radial-gradient(circle at 50% 35%,
+                    rgba(130, 100, 50, .12),
+                    transparent 45%),
+
+                linear-gradient(145deg,
+                    rgba(32, 25, 20, .98),
+                    rgba(13, 11, 9, .98));
+
+            border:
+                1px solid rgba(195, 155, 75, .3);
+
+            border-radius:
+                24px;
+
+            box-shadow:
+                0 15px 45px rgba(0, 0, 0, .35),
+
+                inset 0 0 50px rgba(255, 190, 70, .025);
+
+        }
+
+
+        /* ================================================================
+   FONDO DECORATIVO
+   ================================================================ */
+
+        .objetos-carrusel::before {
+
+            content:
+                "✦   ·   ❧   ·   ✦   ·   ❧   ·   ✦";
+
+            position:
+                absolute;
+
+            top:
+                14px;
+
+            left:
+                50%;
+
+            transform:
+                translateX(-50%);
+
+            color:
+                rgba(210, 175, 95, .18);
+
+            font-size:
+                11px;
+
+            letter-spacing:
+                6px;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .objetos-carrusel::after {
+
+            content:
+                "🌿";
+
+            position:
+                absolute;
+
+            right:
+                12px;
+
+            bottom:
+                5px;
+
+            font-size:
+                55px;
+
+            opacity:
+                .12;
+
+            transform:
+                rotate(-18deg);
+
+        }
+
+
+        /* ================================================================
+   ◀ ▶ FLECHAS
+   ================================================================ */
+
+        .objetos-flecha {
+
+            position:
+                absolute;
+
+            top:
+                50%;
+
+            transform:
+                translateY(-50%);
+
+            width:
+                46px;
+
+            height:
+                46px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid rgba(220, 180, 90, .35);
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(15, 12, 10, .75);
+
+            color:
+                #e3c777;
+
+            font-size:
+                34px;
+
+            cursor:
+                pointer;
+
+            z-index:
+                20;
+
+            transition:
+                .25s ease;
+
+        }
+
+
+        .objetos-flecha:hover {
+
+            background:
+                rgba(170, 130, 55, .18);
+
+            border-color:
+                rgba(230, 190, 90, .7);
+
+            transform:
+                translateY(-50%) scale(1.08);
+
+        }
+
+
+        .objetos-flecha:active {
+
+            transform:
+                translateY(-50%) scale(.92);
+
+        }
+
+
+        .objetos-flecha-izquierda {
+
+            left:
+                14px;
+
+        }
+
+
+        .objetos-flecha-derecha {
+
+            right:
+                14px;
+
+        }
+
+
+        /* ================================================================
+   📦 VISTA DEL PRODUCTO
+   ================================================================ */
+
+        .objeto-tienda-vista {
+
+            width:
+                min(72%, 430px);
+
+            text-align:
+                center;
+
+            animation:
+                objetoEntrada .35s ease;
+
+        }
+
+
+        @keyframes objetoEntrada {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateX(25px) scale(.96);
+
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(0) scale(1);
+
+            }
+
+        }
+
+
+        /* ================================================================
+   ICONO DEL PRODUCTO
+   ================================================================ */
+
+        .objeto-preview {
+
+            width:
+                150px;
+
+            height:
+                150px;
+
+            margin:
+                15px auto 20px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            position:
+                relative;
+
+            font-size:
+                85px;
+
+            border-radius:
+                50%;
+
+            background:
+                radial-gradient(circle,
+                    rgba(190, 150, 70, .12),
+                    transparent 65%);
+
+            filter:
+                drop-shadow(0 15px 20px rgba(0, 0, 0, .4));
+
+            animation:
+                previewFlotar 4s ease-in-out infinite;
+
+        }
+
+
+        @keyframes previewFlotar {
+
+            0%,
+            100% {
+
+                transform:
+                    translateY(0);
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(-8px);
+
+            }
+
+        }
+
+
+        /* ================================================================
+   NOMBRE
+   ================================================================ */
+
+        .objeto-preview-nombre {
+
+            margin:
+                0;
+
+            color:
+                #f0d58d;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                24px;
+
+        }
+
+
+        /* ================================================================
+   RAREZA
+   ================================================================ */
+
+        .objeto-preview-rareza {
+
+            display:
+                inline-block;
+
+            margin-top:
+                7px;
+
+            padding:
+                4px 10px;
+
+            border-radius:
+                20px;
+
+            background:
+                rgba(255, 255, 255, .05);
+
+            color:
+                #bca873;
+
+            font-size:
+                9px;
+
+            font-weight:
+                bold;
+
+            letter-spacing:
+                2px;
+
+            text-transform:
+                uppercase;
+
+        }
+
+
+        /* ================================================================
+   DESCRIPCIÓN
+   ================================================================ */
+
+        .objeto-preview-descripcion {
+
+            max-width:
+                330px;
+
+            margin:
+                12px auto;
+
+            color:
+                #999;
+
+            font-size:
+                12px;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        /* ================================================================
+   PRECIO
+   ================================================================ */
+
+        .objeto-preview-precio {
+
+            margin:
+                15px 0;
+
+            color:
+                #e7c86d;
+
+            font-weight:
+                bold;
+
+            font-size:
+                15px;
+
+        }
+
+
+        /* ================================================================
+   BOTÓN
+   ================================================================ */
+
+        .objeto-accion {
+
+            min-width:
+                150px;
+
+            padding:
+                10px 18px;
+
+            border:
+                1px solid rgba(218, 177, 77, .5);
+
+            border-radius:
+                12px;
+
+            background:
+                linear-gradient(145deg,
+                    #4a351b,
+                    #24190d);
+
+            color:
+                #f1d483;
+
+            font-size:
+                11px;
+
+            font-weight:
+                bold;
+
+            letter-spacing:
+                1px;
+
+            cursor:
+                pointer;
+
+            transition:
+                .25s ease;
+
+        }
+
+
+        .objeto-accion:hover {
+
+            border-color:
+                #e7c86d;
+
+            box-shadow:
+                0 0 20px rgba(220, 180, 70, .15);
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .objeto-accion:active {
+
+            transform:
+                translateY(0) scale(.96);
+
+        }
+
+
+        .objeto-accion.equipado {
+
+            background:
+                rgba(70, 100, 60, .2);
+
+            border-color:
+                rgba(130, 170, 100, .6);
+
+            color:
+                #aaca91;
+
+        }
+
+
+        /* ================================================================
+   🔢 INDICADOR
+   ================================================================ */
+
+        .objetos-indicador {
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            min-height:
+                20px;
+
+            margin:
+                12px 0;
+
+        }
+
+
+        .objetos-punto {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(255, 255, 255, .15);
+
+            transition:
+                .25s ease;
+
+        }
+
+
+        .objetos-punto.activo {
+
+            width:
+                18px;
+
+            border-radius:
+                10px;
+
+            background:
+                #cba955;
+
+        }
+
+
+        /* ================================================================
+   🎒 EQUIPAMIENTO
+   ================================================================ */
+
+        .objetos-equipamiento {
+
+            margin-top:
+                25px;
+
+            padding:
+                16px;
+
+            border:
+                1px solid rgba(190, 150, 70, .18);
+
+            border-radius:
+                17px;
+
+            background:
+                rgba(20, 16, 13, .55);
+
+        }
+
+
+        .objetos-seccion-titulo {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            margin-bottom:
+                12px;
+
+        }
+
+
+        .objetos-seccion-titulo span {
+
+            color:
+                #d5b25c;
+
+        }
+
+
+        .objetos-seccion-titulo h3 {
+
+            margin:
+                0;
+
+            color:
+                #bda878;
+
+            font-size:
+                11px;
+
+            letter-spacing:
+                2px;
+
+        }
+
+
+        .objetos-equipados-lista {
+
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                8px;
+
+        }
+
+
+        .objeto-equipado-chip {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            padding:
+                7px 10px;
+
+            border:
+                1px solid rgba(180, 145, 70, .25);
+
+            border-radius:
+                10px;
+
+            background:
+                rgba(255, 255, 255, .025);
+
+            color:
+                #ccc;
+
+            font-size:
+                10px;
+
+        }
+
+
+        /* ================================================================
+   ✨ TOAST
+   ================================================================ */
+
+        .objetos-toast {
+
+            position:
+                fixed;
+
+            left:
+                50%;
+
+            bottom:
+                92px;
+
+            transform:
+                translateX(-50%) translateY(20px);
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            min-width:
+                220px;
+
+            max-width:
+                calc(100vw - 30px);
+
+            padding:
+                10px 15px;
+
+            border:
+                1px solid rgba(210, 170, 80, .45);
+
+            border-radius:
+                14px;
+
+            background:
+                rgba(25, 19, 15, .96);
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, .45);
+
+            opacity:
+                0;
+
+            pointer-events:
+                none;
+
+            z-index:
+                11000;
+
+        }
+
+
+        .objetos-toast.mostrar {
+
+            animation:
+                objetoToast 2.5s ease forwards;
+
+        }
+
+
+        .objetos-toast>span {
+
+            font-size:
+                22px;
+
+        }
+
+
+        .objetos-toast strong {
+
+            display:
+                block;
+
+            color:
+                #ead083;
+
+            font-size:
+                11px;
+
+        }
+
+
+        .objetos-toast small {
+
+            display:
+                block;
+
+            margin-top:
+                3px;
+
+            color:
+                #aaa;
+
+            font-size:
+                10px;
+
+        }
+
+
+        @keyframes objetoToast {
+
+            0% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateX(-50%) translateY(20px);
+
+            }
+
+            15% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(-50%) translateY(0);
+
+            }
+
+            75% {
+
+                opacity:
+                    1;
+
+            }
+
+            100% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateX(-50%) translateY(-15px);
+
+            }
+
+        }
+
+
+        /* ================================================================
+   🌿 ESCENARIO
+   ================================================================ */
+
+        #cuervoEscenarioObjetos {
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                8000;
+
+            pointer-events:
+                none;
+
+            overflow:
+                hidden;
+
+        }
+
+
+        /* ================================================================
+   OBJETO ACTIVO
+   ================================================================ */
+
+        .cuervo-objeto-activo {
+
+            position:
+                fixed;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            width:
+                54px;
+
+            height:
+                54px;
+
+            padding:
+                0;
+
+            border:
+                none;
+
+            background:
+                transparent;
+
+            font-size:
+                38px;
+
+            cursor:
+                pointer;
+
+            pointer-events:
+                auto;
+
+            user-select:
+                none;
+
+            z-index:
+                8100;
+
+            filter:
+                drop-shadow(0 6px 8px rgba(0, 0, 0, .4));
+
+            transition:
+                left .45s cubic-bezier(.2, .8, .2, 1),
+                top .45s cubic-bezier(.2, .8, .2, 1);
+
+        }
+
+
+        /* ================================================================
+   OBJETO ACTIVO: HOVER
+   ================================================================ */
+
+        .cuervo-objeto-activo:hover {
+
+            filter:
+                drop-shadow(0 0 10px rgba(235, 200, 100, .55));
+
+            transform:
+                scale(1.13);
+
+        }
+
+
+        /* ================================================================
+   🍃 HOJA
+   ================================================================ */
+
+        .objeto-visual-hoja {
+
+            animation:
+                hojaFlotar 3s ease-in-out infinite;
+
+        }
+
+
+        @keyframes hojaFlotar {
+
+            0%,
+            100% {
+
+                transform:
+                    rotate(-12deg) translateY(0);
+
+            }
+
+            50% {
+
+                transform:
+                    rotate(15deg) translateY(-8px);
+
+            }
+
+        }
+
+
+        /* ================================================================
+   🪶 PLUMA
+   ================================================================ */
+
+        .objeto-visual-pluma {
+
+            animation:
+                plumaFlotar 2.5s ease-in-out infinite;
+
+        }
+
+
+        @keyframes plumaFlotar {
+
+            0%,
+            100% {
+
+                transform:
+                    rotate(-10deg);
+
+            }
+
+            50% {
+
+                transform:
+                    rotate(12deg) translateY(-9px);
+
+            }
+
+        }
+
+
+        /* ================================================================
+   ✨ LUCIÉRNAGA
+   ================================================================ */
+
+        .objeto-visual-luciernaga {
+
+            animation:
+                luciernagaBrillar 1.4s ease-in-out infinite;
+
+        }
+
+
+        @keyframes luciernagaBrillar {
+
+            0%,
+            100% {
+
+                opacity:
+                    .55;
+
+                filter:
+                    drop-shadow(0 0 3px rgba(255, 230, 120, .3));
+
+            }
+
+            50% {
+
+                opacity:
+                    1;
+
+                filter:
+                    drop-shadow(0 0 15px rgba(255, 230, 120, .9));
+
+                transform:
+                    scale(1.15);
+
+            }
+
+        }
+
+
+        /* ================================================================
+   🦋 MARIPOSA
+   ================================================================ */
+
+        .objeto-visual-mariposa {
+
+            animation:
+                mariposaAlas .45s ease-in-out infinite alternate;
+
+        }
+
+
+        @keyframes mariposaAlas {
+
+            from {
+
+                transform:
+                    scaleX(.88) rotate(-4deg);
+
+            }
+
+            to {
+
+                transform:
+                    scaleX(1.08) rotate(4deg);
+
+            }
+
+        }
+
+
+        /* ================================================================
+   🌟 DESTELLO AL ACTIVAR
+   ================================================================ */
+
+        .cuervo-destello {
+
+            position:
+                fixed;
+
+            width:
+                30px;
+
+            height:
+                30px;
+
+            pointer-events:
+                none;
+
+            z-index:
+                8200;
+
+        }
+
+
+        .cuervo-destello::before {
+
+            content:
+                "✦";
+
+            position:
+                absolute;
+
+            left:
+                50%;
+
+            top:
+                50%;
+
+            transform:
+                translate(-50%, -50%) scale(.2);
+
+            color:
+                #f4d87b;
+
+            font-size:
+                25px;
+
+            animation:
+                destelloObjeto .65s ease-out forwards;
+
+        }
+
+
+        @keyframes destelloObjeto {
+
+            0% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translate(-50%, -50%) scale(.2);
+
+            }
+
+            30% {
+
+                opacity:
+                    1;
+
+            }
+
+            100% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translate(-50%, -50%) scale(2.4);
+
+            }
+
+        }
+
+
+        /* ================================================================
+   📱 MÓVIL
+   ================================================================ */
+
+        @media (max-width: 600px) {
+
+            #cuervoTiendaObjetos {
+
+                width:
+                    calc(100vw - 20px);
+
+                padding:
+                    12px;
+
+            }
+
+
+            .objetos-tienda-header {
+
+                align-items:
+                    flex-start;
+
+            }
+
+
+            .objetos-tienda-header h2 {
+
+                font-size:
+                    21px;
+
+            }
+
+
+            .objetos-tienda-header p {
+
+                font-size:
+                    10px;
+
+            }
+
+
+            .objetos-billetera {
+
+                min-width:
+                    70px;
+
+                padding:
+                    8px;
+
+            }
+
+
+            .objetos-carrusel {
+
+                min-height:
+                    380px;
+
+                border-radius:
+                    20px;
+
+            }
+
+
+            .objetos-flecha {
+
+                width:
+                    38px;
+
+                height:
+                    38px;
+
+                font-size:
+                    27px;
+
+            }
+
+
+            .objetos-flecha-izquierda {
+
+                left:
+                    7px;
+
+            }
+
+
+            .objetos-flecha-derecha {
+
+                right:
+                    7px;
+
+            }
+
+
+            .objeto-tienda-vista {
+
+                width:
+                    65%;
+
+            }
+
+
+            .objeto-preview {
+
+                width:
+                    115px;
+
+                height:
+                    115px;
+
+                font-size:
+                    68px;
+
+            }
+
+
+            .objeto-preview-nombre {
+
+                font-size:
+                    20px;
+
+            }
+
+
+            .cuervo-objeto-activo {
+
+                width:
+                    48px;
+
+                height:
+                    48px;
+
+                font-size:
+                    33px;
+
+            }
+
+        }
+
+
+
+
+
+
+
         /* ================================================================
    🌌 EL CICLO DE LAS VIDAS
    CSS V2
@@ -9459,6 +10928,163 @@
 
 
 
+ <!-- ================================================================
+     🪶 TIENDA DE OBJETOS
+     EL TALLER DEL CUERVO
+     ================================================================ -->
+
+    <section id="cuervoTiendaObjetos">
+
+        <!-- ============================================================
+         CABECERA
+         ============================================================ -->
+
+        <header class="objetos-tienda-header">
+
+            <div>
+
+                <span class="objetos-tienda-kicker">
+                    ✦ EL TALLER DEL CUERVO
+                </span>
+
+                <h2>
+                    Cámara de Objetos
+                </h2>
+
+                <p>
+                    Encuentra objetos extraños del bosque.
+                    Algunos no se quedan quietos...
+                </p>
+
+            </div>
+
+
+            <div class="objetos-billetera">
+
+                <span>
+                    🪶
+                </span>
+
+                <strong id="objetosTiendaPlumas">
+                    0
+                </strong>
+
+            </div>
+
+        </header>
+
+
+        <!-- ============================================================
+         VISOR HORIZONTAL
+         ============================================================ -->
+
+        <div id="objetosCarrusel" class="objetos-carrusel">
+
+
+            <button class="objetos-flecha objetos-flecha-izquierda" onclick="CUERVO_OBJETOS.mover(-1)"
+                aria-label="Objeto anterior">
+
+                ‹
+
+            </button>
+
+
+            <div id="objetoTiendaVista" class="objeto-tienda-vista">
+
+                <!-- JS -->
+
+            </div>
+
+
+            <button class="objetos-flecha objetos-flecha-derecha" onclick="CUERVO_OBJETOS.mover(1)"
+                aria-label="Objeto siguiente">
+
+                ›
+
+            </button>
+
+
+        </div>
+
+
+        <!-- ============================================================
+         INDICADOR
+         ============================================================ -->
+
+        <div id="objetosIndicador" class="objetos-indicador">
+
+        </div>
+
+
+        <!-- ============================================================
+         OBJETOS EQUIPADOS
+         ============================================================ -->
+
+        <section class="objetos-equipamiento">
+
+            <div class="objetos-seccion-titulo">
+
+                <span>
+                    ✦
+                </span>
+
+                <h3>
+                    OBJETOS EQUIPADOS
+                </h3>
+
+            </div>
+
+
+            <div id="objetosEquipados" class="objetos-equipados-lista">
+
+                <!-- JS -->
+
+            </div>
+
+        </section>
+
+
+        <!-- ============================================================
+         MENSAJES
+         ============================================================ -->
+
+        <div id="objetosToast" class="objetos-toast">
+
+            <span id="objetosToastIcono">
+                ✦
+            </span>
+
+            <div>
+
+                <strong id="objetosToastTitulo">
+                    Taller del Cuervo
+                </strong>
+
+                <small id="objetosToastTexto">
+                    -
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================================================
+     🌿 ESCENARIO DE OBJETOS
+     
+     Esta capa ocupa toda la pantalla.
+     
+     Los objetos aparecerán aquí y jamás podrán entrar
+     en la zona inferior reservada al HUD.
+     ================================================================ -->
+
+    <div id="cuervoEscenarioObjetos" aria-hidden="true">
+
+        <!-- Los objetos serán creados por JavaScript -->
+
+    </div>
 
 
 
@@ -39167,37 +40793,2505 @@
 
         );
 
-    </script>
-    <div id="ytReproductor">
-
-        <div class="yt-reproductor-contenido">
-
-            <iframe id="ytIframe" class="yt-iframe" src="" allow="
-                autoplay;
-                encrypted-media;
-                picture-in-picture;
-                fullscreen
-            " allowfullscreen>
-            </iframe>
 
 
-            <div class="yt-reproductor-barra">
-
-                <div id="ytTituloReproductor" class="yt-reproductor-titulo">
-                </div>
 
 
-                <button class="secundario" onclick="YT_cerrarReproductor()">
 
-                    ✕
 
-                </button>
 
-            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* ================================================================
+           🪶 SISTEMA DE OBJETOS
+           EL TALLER DEL CUERVO
+        
+           ARQUITECTURA:
+        
+           CATÁLOGO
+              ↓
+           COMPRA
+              ↓
+           EQUIPAMIENTO
+              ↓
+           MOTOR DE OBJETOS
+              ↓
+           EFECTO
+        
+           MONEDA:
+        
+           CUERVO_DATOS.plumas
+           ================================================================ */
+
+
+        /* ================================================================
+           📦 CATÁLOGO DE OBJETOS
+           ================================================================ */
+
+        const CUERVO_CATALOGO_OBJETOS = [
+
+            {
+                id: "hoja_errante",
+
+                nombre: "Hoja Errante",
+
+                icono: "🍃",
+
+                precio: 50,
+
+                rareza: "Común",
+
+                tipo: "movil",
+
+                efecto: "teletransportar",
+
+                descripcion:
+                    "Una hoja que jamás permanece en el mismo lugar.",
+
+                visual:
+                    "objeto-visual-hoja"
+
+            },
+
+
+            {
+                id: "pluma_perdida",
+
+                nombre: "Pluma Perdida",
+
+                icono: "🪶",
+
+                precio: 100,
+
+                rareza: "Común",
+
+                tipo: "recompensa",
+
+                efecto: "dar_plumas",
+
+                descripcion:
+                    "Una pluma perdida que todavía conserva algo de energía.",
+
+                visual:
+                    "objeto-visual-pluma"
+
+            },
+
+
+            {
+                id: "luciernaga",
+
+                nombre: "Luciérnaga",
+
+                icono: "✨",
+
+                precio: 180,
+
+                rareza: "Poco común",
+
+                tipo: "movil",
+
+                efecto: "dar_xp",
+
+                descripcion:
+                    "Una pequeña luz del bosque que guarda experiencia.",
+
+                visual:
+                    "objeto-visual-luciernaga"
+
+            },
+
+
+            {
+                id: "mariposa",
+
+                nombre: "Mariposa del Bosque",
+
+                icono: "🦋",
+
+                precio: 300,
+
+                rareza: "Raro",
+
+                tipo: "movil",
+
+                efecto: "mariposa",
+
+                descripcion:
+                    "Una criatura inquieta que nunca sigue el mismo camino.",
+
+                visual:
+                    "objeto-visual-mariposa"
+
+            },
+
+
+            {
+                id: "hongo_mistico",
+
+                nombre: "Hongo Místico",
+
+                icono: "🍄",
+
+                precio: 450,
+
+                rareza: "Raro",
+
+                tipo: "recompensa",
+
+                efecto: "lluvia_particulas",
+
+                descripcion:
+                    "Al tocarlo libera pequeñas partículas del bosque.",
+
+                visual:
+                    ""
+
+            },
+
+
+            {
+                id: "cuervo_curioso",
+
+                nombre: "Cuervo Curioso",
+
+                icono: "🐦‍⬛",
+
+                precio: 700,
+
+                rareza: "Épico",
+
+                tipo: "movil",
+
+                efecto: "cuervo",
+
+                descripcion:
+                    "Un pequeño visitante que cruza la pantalla en busca de tesoros.",
+
+                visual:
+                    ""
+
+            },
+
+
+            {
+                id: "luna_fragmento",
+
+                nombre: "Fragmento Lunar",
+
+                icono: "🌙",
+
+                precio: 1000,
+
+                rareza: "Épico",
+
+                tipo: "recompensa",
+
+                efecto: "luna",
+
+                descripcion:
+                    "Un fragmento de luna que aumenta la experiencia obtenida.",
+
+                visual:
+                    ""
+
+            },
+
+
+            {
+                id: "semilla_antigua",
+
+                nombre: "Semilla Antigua",
+
+                icono: "🌱",
+
+                precio: 1400,
+
+                rareza: "Legendario",
+
+                tipo: "recompensa",
+
+                efecto: "semilla",
+
+                descripcion:
+                    "Una semilla de una planta que nadie recuerda.",
+
+                visual:
+                    ""
+
+            }
+
+        ];
+
+
+        /* ================================================================
+           💾 CLAVE DE GUARDADO
+           ================================================================ */
+
+        const CUERVO_OBJETOS_STORAGE =
+            "CUERVO_OBJETOS_V1";
+
+
+        /* ================================================================
+           ESTADO
+           ================================================================ */
+
+        const CUERVO_OBJETOS_ESTADO = {
+
+            comprados: [],
+
+            equipados: [],
+
+            indice: 0
+
+        };
+
+
+        /* ================================================================
+           🔧 CONFIGURACIÓN
+           ================================================================ */
+
+        const CUERVO_OBJETOS_CONFIG = {
+
+            /*
+               Distancia mínima desde el borde.
+            */
+
+            margen: 20,
+
+            /*
+               Distancia mínima respecto al HUD.
+            */
+
+            margenHUD: 110,
+
+            /*
+               Tiempo entre movimientos
+               automáticos de algunos objetos.
+            */
+
+            movimientoMinimo: 1800,
+
+            movimientoMaximo: 4200
+
+        };
+
+
+        /* ================================================================
+           📥 CARGAR
+           ================================================================ */
+
+        function CUERVO_OBJETOS_cargar() {
+
+            try {
+
+                const datos =
+                    JSON.parse(
+                        localStorage.getItem(
+                            CUERVO_OBJETOS_STORAGE
+                        )
+                    );
+
+
+                if (!datos) {
+
+                    return;
+
+                }
+
+
+                if (
+                    Array.isArray(
+                        datos.comprados
+                    )
+                ) {
+
+                    CUERVO_OBJETOS_ESTADO.comprados =
+                        datos.comprados;
+
+                }
+
+
+                if (
+                    Array.isArray(
+                        datos.equipados
+                    )
+                ) {
+
+                    CUERVO_OBJETOS_ESTADO.equipados =
+                        datos.equipados;
+
+                }
+
+
+                if (
+                    Number.isInteger(
+                        datos.indice
+                    )
+                ) {
+
+                    CUERVO_OBJETOS_ESTADO.indice =
+                        datos.indice;
+
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    "No se pudieron cargar los objetos.",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           💾 GUARDAR
+           ================================================================ */
+
+        function CUERVO_OBJETOS_guardar() {
+
+            try {
+
+                localStorage.setItem(
+
+                    CUERVO_OBJETOS_STORAGE,
+
+                    JSON.stringify({
+
+                        comprados:
+                            CUERVO_OBJETOS_ESTADO.comprados,
+
+                        equipados:
+                            CUERVO_OBJETOS_ESTADO.equipados,
+
+                        indice:
+                            CUERVO_OBJETOS_ESTADO.indice
+
+                    })
+
+                );
+
+            } catch (error) {
+
+                console.warn(
+                    "No se pudieron guardar los objetos.",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           🔎 BUSCAR OBJETO
+           ================================================================ */
+
+        function CUERVO_OBJETOS_obtener(id) {
+
+            return CUERVO_CATALOGO_OBJETOS.find(
+
+                objeto =>
+                    objeto.id === id
+
+            );
+
+        }
+
+
+        /* ================================================================
+           ✔️ COMPROBAR PROPIEDAD
+           ================================================================ */
+
+        function CUERVO_OBJETOS_tiene(id) {
+
+            return CUERVO_OBJETOS_ESTADO
+                .comprados
+                .includes(id);
+
+        }
+
+
+        /* ================================================================
+           🎒 COMPROBAR EQUIPAMIENTO
+           ================================================================ */
+
+        function CUERVO_OBJETOS_estaEquipado(id) {
+
+            return CUERVO_OBJETOS_ESTADO
+                .equipados
+                .includes(id);
+
+        }
+
+
+        /* ================================================================
+           💰 COMPRAR
+           ================================================================ */
+
+        function CUERVO_OBJETOS_comprar(id) {
+
+            const objeto =
+                CUERVO_OBJETOS_obtener(id);
+
+
+            if (!objeto) {
+
+                return;
+
+            }
+
+
+            /*
+               Ya comprado.
+            */
+
+            if (
+                CUERVO_OBJETOS_tiene(id)
+            ) {
+
+                CUERVO_OBJETOS_equipar(id);
+
+                return;
+
+            }
+
+
+            /*
+               Comprobar sistema principal.
+            */
+
+            if (
+                typeof CUERVO_DATOS ===
+                "undefined"
+            ) {
+
+                CUERVO_OBJETOS_toast(
+                    "⚠️",
+                    "Error",
+                    "No se encontró CUERVO_DATOS."
+                );
+
+                return;
+
+            }
+
+
+            const plumas =
+                Number(
+                    CUERVO_DATOS.plumas
+                ) || 0;
+
+
+            if (
+                plumas <
+                objeto.precio
+            ) {
+
+                CUERVO_OBJETOS_toast(
+
+                    "🪶",
+
+                    "No alcanza",
+
+                    "Necesitas " +
+                    objeto.precio +
+                    " plumas."
+
+                );
+
+                return;
+
+            }
+
+
+            /*
+               Cobrar.
+            */
+
+            CUERVO_DATOS.plumas -=
+                objeto.precio;
+
+
+            /*
+               Registrar.
+            */
+
+            CUERVO_OBJETOS_ESTADO
+                .comprados
+                .push(id);
+
+
+            CUERVO_OBJETOS_guardar();
+
+
+            /*
+               Guardado principal.
+            */
+
+            if (
+                typeof CUERVO_guardarDatos ===
+                "function"
+            ) {
+
+                CUERVO_guardarDatos();
+
+            }
+
+
+            if (
+                typeof CUERVO_actualizarHUD ===
+                "function"
+            ) {
+
+                CUERVO_actualizarHUD();
+
+            }
+
+
+            /*
+               Actualizar tienda.
+            */
+
+            CUERVO_OBJETOS_actualizarBilletera();
+
+
+            CUERVO_OBJETOS_toast(
+
+                "🪶",
+
+                "Objeto adquirido",
+
+                objeto.nombre
+
+            );
+
+
+            /*
+               Equiparlo automáticamente.
+            */
+
+            CUERVO_OBJETOS_equipar(id);
+
+        }
+
+
+        /* ================================================================
+           🎒 EQUIPAR
+           ================================================================ */
+
+        function CUERVO_OBJETOS_equipar(id) {
+
+            const objeto =
+                CUERVO_OBJETOS_obtener(id);
+
+
+            if (!objeto) {
+
+                return;
+
+            }
+
+
+            if (
+                !CUERVO_OBJETOS_tiene(id)
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+               Algunos objetos son móviles.
+        
+               Permitimos solamente UNO
+               de este tipo simultáneamente.
+            */
+
+            if (
+                objeto.tipo === "movil"
+            ) {
+
+                CUERVO_OBJETOS_ESTADO
+                    .equipados =
+                    CUERVO_OBJETOS_ESTADO
+                        .equipados
+                        .filter(
+
+                            equipadoID => {
+
+                                const otro =
+                                    CUERVO_OBJETOS_obtener(
+                                        equipadoID
+                                    );
+
+                                return (
+                                    !otro ||
+                                    otro.tipo !== "movil"
+                                );
+
+                            }
+
+                        );
+
+            }
+
+
+            /*
+               Evitar duplicados.
+            */
+
+            if (
+                !CUERVO_OBJETOS_estaEquipado(id)
+            ) {
+
+                CUERVO_OBJETOS_ESTADO
+                    .equipados
+                    .push(id);
+
+            }
+
+
+            CUERVO_OBJETOS_guardar();
+
+            CUERVO_OBJETOS_renderEquipados();
+
+            CUERVO_OBJETOS_RENDER_activos();
+
+        }
+
+
+        /* ================================================================
+           ❌ DESEQUIPAR
+           ================================================================ */
+
+        function CUERVO_OBJETOS_desequipar(id) {
+
+            CUERVO_OBJETOS_ESTADO.equipados =
+
+                CUERVO_OBJETOS_ESTADO
+                    .equipados
+                    .filter(
+
+                        objetoID =>
+                            objetoID !== id
+
+                    );
+
+
+            CUERVO_OBJETOS_guardar();
+
+            CUERVO_OBJETOS_renderEquipados();
+
+            CUERVO_OBJETOS_RENDER_activos();
+
+        }
+
+
+        /* ================================================================
+           ◀ ▶ MOVER TIENDA
+           ================================================================ */
+
+        function CUERVO_OBJETOS_mover(direccion) {
+
+            const total =
+                CUERVO_CATALOGO_OBJETOS.length;
+
+
+            CUERVO_OBJETOS_ESTADO.indice +=
+                direccion;
+
+
+            if (
+                CUERVO_OBJETOS_ESTADO.indice <
+                0
+            ) {
+
+                CUERVO_OBJETOS_ESTADO.indice =
+                    total - 1;
+
+            }
+
+
+            if (
+                CUERVO_OBJETOS_ESTADO.indice >=
+                total
+            ) {
+
+                CUERVO_OBJETOS_ESTADO.indice =
+                    0;
+
+            }
+
+
+            CUERVO_OBJETOS_guardar();
+
+            CUERVO_OBJETOS_renderTienda();
+
+        }
+
+
+        /* ================================================================
+           🖼️ RENDER TIENDA
+           ================================================================ */
+
+        function CUERVO_OBJETOS_renderTienda() {
+
+            const contenedor =
+                document.getElementById(
+                    "objetoTiendaVista"
+                );
+
+
+            const indicador =
+                document.getElementById(
+                    "objetosIndicador"
+                );
+
+
+            if (!contenedor) {
+
+                return;
+
+            }
+
+
+            const objeto =
+                CUERVO_CATALOGO_OBJETOS[
+                CUERVO_OBJETOS_ESTADO.indice
+                ];
+
+
+            if (!objeto) {
+
+                return;
+
+            }
+
+
+            const comprado =
+                CUERVO_OBJETOS_tiene(
+                    objeto.id
+                );
+
+
+            const equipado =
+                CUERVO_OBJETOS_estaEquipado(
+                    objeto.id
+                );
+
+
+            let botonTexto =
+                "COMPRAR";
+
+
+            if (equipado) {
+
+                botonTexto =
+                    "EQUIPADO ✓";
+
+            } else if (comprado) {
+
+                botonTexto =
+                    "EQUIPAR";
+
+            }
+
+
+            let accion = "";
+
+
+            if (equipado) {
+
+                accion =
+                    `CUERVO_OBJETOS.desequipar('${objeto.id}')`;
+
+            } else if (comprado) {
+
+                accion =
+                    `CUERVO_OBJETOS.equipar('${objeto.id}')`;
+
+            } else {
+
+                accion =
+                    `CUERVO_OBJETOS.comprar('${objeto.id}')`;
+
+            }
+
+
+            contenedor.innerHTML = `
+
+        <div class="objeto-preview">
+
+            <span class="${objeto.visual || ""}">
+                ${objeto.icono}
+            </span>
 
         </div>
 
-    </div>
+
+        <h3 class="objeto-preview-nombre">
+
+            ${objeto.nombre}
+
+        </h3>
+
+
+        <div class="objeto-preview-rareza">
+
+            ${objeto.rareza}
+
+        </div>
+
+
+        <p class="objeto-preview-descripcion">
+
+            ${objeto.descripcion}
+
+        </p>
+
+
+        <div class="objeto-preview-precio">
+
+            ${comprado
+                    ? "✓ ADQUIRIDO"
+                    : "🪶 " + objeto.precio
+                }
+
+        </div>
+
+
+        <button
+            class="objeto-accion ${equipado ? "equipado" : ""}"
+            onclick="${accion}">
+
+            ${botonTexto}
+
+        </button>
+
+    `;
+
+
+            /*
+               Indicadores.
+            */
+
+            if (indicador) {
+
+                indicador.innerHTML =
+
+                    CUERVO_CATALOGO_OBJETOS
+                        .map(
+
+                            (_, index) => `
+
+                        <span
+                            class="objetos-punto ${index ===
+                                    CUERVO_OBJETOS_ESTADO.indice
+                                    ? "activo"
+                                    : ""
+                                }">
+                        </span>
+
+                    `
+
+                        )
+                        .join("");
+
+            }
+
+
+            CUERVO_OBJETOS_actualizarBilletera();
+
+        }
+
+
+        /* ================================================================
+           🎒 RENDER EQUIPADOS
+           ================================================================ */
+
+        function CUERVO_OBJETOS_renderEquipados() {
+
+            const contenedor =
+                document.getElementById(
+                    "objetosEquipados"
+                );
+
+
+            if (!contenedor) {
+
+                return;
+
+            }
+
+
+            if (
+                CUERVO_OBJETOS_ESTADO
+                    .equipados
+                    .length === 0
+            ) {
+
+                contenedor.innerHTML = `
+
+            <span class="objeto-equipado-chip">
+
+                Ningún objeto equipado
+
+            </span>
+
+        `;
+
+                return;
+
+            }
+
+
+            contenedor.innerHTML =
+
+                CUERVO_OBJETOS_ESTADO
+                    .equipados
+                    .map(
+
+                        id => {
+
+                            const objeto =
+                                CUERVO_OBJETOS_obtener(
+                                    id
+                                );
+
+
+                            if (!objeto) {
+
+                                return "";
+
+                            }
+
+
+                            return `
+
+                        <button
+                            class="objeto-equipado-chip"
+                            onclick="
+                                CUERVO_OBJETOS.desequipar(
+                                    '${objeto.id}'
+                                )
+                            ">
+
+                            ${objeto.icono}
+
+                            ${objeto.nombre}
+
+                            ×
+
+                        </button>
+
+                    `;
+
+                        }
+
+                    )
+                    .join("");
+
+        }
+
+
+        /* ================================================================
+           🪶 BILLETERA
+           ================================================================ */
+
+        function CUERVO_OBJETOS_actualizarBilletera() {
+
+            const elemento =
+                document.getElementById(
+                    "objetosTiendaPlumas"
+                );
+
+
+            if (!elemento) {
+
+                return;
+
+            }
+
+
+            if (
+                typeof CUERVO_DATOS ===
+                "undefined"
+            ) {
+
+                elemento.textContent =
+                    "0";
+
+                return;
+
+            }
+
+
+            elemento.textContent =
+                Number(
+                    CUERVO_DATOS.plumas
+                ) || 0;
+
+        }
+
+
+        /* ================================================================
+           🌿 MOTOR DE OBJETOS ACTIVOS
+           ================================================================ */
+
+        const CUERVO_OBJETOS_ACTIVOS = new Map();
+
+
+        /* ================================================================
+           RENDERIZAR OBJETOS EQUIPADOS
+           ================================================================ */
+
+        function CUERVO_OBJETOS_RENDER_activos() {
+
+            const escenario =
+                document.getElementById(
+                    "cuervoEscenarioObjetos"
+                );
+
+
+            if (!escenario) {
+
+                return;
+
+            }
+
+
+            /*
+               Eliminar objetos anteriores.
+            */
+
+            escenario.innerHTML = "";
+
+            CUERVO_OBJETOS_ACTIVOS.clear();
+
+
+            /*
+               Crear cada objeto equipado.
+            */
+
+            CUERVO_OBJETOS_ESTADO
+                .equipados
+                .forEach(
+
+                    id => {
+
+                        const objeto =
+                            CUERVO_OBJETOS_obtener(id);
+
+
+                        if (!objeto) {
+
+                            return;
+
+                        }
+
+
+                        CUERVO_OBJETOS_CREAR_ACTIVO(
+                            objeto
+                        );
+
+                    }
+
+                );
+
+        }
+
+
+        /* ================================================================
+           CREAR OBJETO ACTIVO
+           ================================================================ */
+
+        function CUERVO_OBJETOS_CREAR_ACTIVO(objeto) {
+
+            const escenario =
+                document.getElementById(
+                    "cuervoEscenarioObjetos"
+                );
+
+
+            if (!escenario) {
+
+                return;
+
+            }
+
+
+            const elemento =
+                document.createElement(
+                    "button"
+                );
+
+
+            elemento.type =
+                "button";
+
+
+            elemento.className =
+                "cuervo-objeto-activo";
+
+
+            elemento.dataset.objeto =
+                objeto.id;
+
+
+            elemento.innerHTML =
+
+                `<span class="${objeto.visual || ""}">
+            ${objeto.icono}
+        </span>`;
+
+
+            escenario.appendChild(
+                elemento
+            );
+
+
+            CUERVO_OBJETOS_ACTIVOS.set(
+
+                objeto.id,
+
+                elemento
+
+            );
+
+
+            CUERVO_OBJETOS_POSICIONAR(
+
+                elemento
+
+            );
+
+
+            /*
+               Clic.
+            */
+
+            elemento.addEventListener(
+
+                "click",
+
+                function (evento) {
+
+                    evento.preventDefault();
+
+                    CUERVO_OBJETOS_ACTIVAR(
+                        objeto,
+                        elemento
+                    );
+
+                }
+
+            );
+
+
+            /*
+               Algunos objetos se mueven
+               automáticamente.
+            */
+
+            if (
+                objeto.tipo ===
+                "movil"
+            ) {
+
+                CUERVO_OBJETOS_PROGRAMAR_MOVIMIENTO(
+
+                    objeto,
+                    elemento
+
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           📍 POSICIÓN SEGURA
+           ================================================================ */
+
+        function CUERVO_OBJETOS_POSICIONAR(elemento) {
+
+            const ancho =
+                window.innerWidth;
+
+
+            const alto =
+                window.innerHeight;
+
+
+            const anchoObjeto =
+                elemento.offsetWidth ||
+                54;
+
+
+            const altoObjeto =
+                elemento.offsetHeight ||
+                54;
+
+
+            /*
+               Detectar HUD.
+            */
+
+            const hud =
+                document.getElementById(
+                    "cuervoHUD"
+                );
+
+
+            let limiteInferior =
+                alto -
+                CUERVO_OBJETOS_CONFIG.margenHUD;
+
+
+            if (hud) {
+
+                const rect =
+                    hud.getBoundingClientRect();
+
+
+                limiteInferior =
+                    Math.min(
+
+                        limiteInferior,
+
+                        rect.top -
+                        15
+
+                    );
+
+            }
+
+
+            /*
+               Zona válida.
+            */
+
+            const maxX =
+                Math.max(
+
+                    CUERVO_OBJETOS_CONFIG.margen,
+
+                    ancho -
+                    anchoObjeto -
+                    CUERVO_OBJETOS_CONFIG.margen
+
+                );
+
+
+            const maxY =
+                Math.max(
+
+                    CUERVO_OBJETOS_CONFIG.margen,
+
+                    limiteInferior -
+                    altoObjeto
+
+                );
+
+
+            const x =
+                CUERVO_OBJETOS_ALEATORIO(
+
+                    CUERVO_OBJETOS_CONFIG.margen,
+
+                    maxX
+
+                );
+
+
+            const y =
+                CUERVO_OBJETOS_ALEATORIO(
+
+                    20,
+
+                    maxY
+
+                );
+
+
+            elemento.style.left =
+                x + "px";
+
+
+            elemento.style.top =
+                y + "px";
+
+        }
+
+
+        /* ================================================================
+           🎲 ALEATORIO
+           ================================================================ */
+
+        function CUERVO_OBJETOS_ALEATORIO(min, max) {
+
+            return Math.floor(
+
+                Math.random() *
+                (max - min + 1)
+
+            ) + min;
+
+        }
+
+
+        /* ================================================================
+           🖱️ ACTIVAR OBJETO
+           ================================================================ */
+
+        function CUERVO_OBJETOS_ACTIVAR(
+            objeto,
+            elemento
+        ) {
+
+            /*
+               Destello.
+            */
+
+            CUERVO_OBJETOS_DESTELLO(
+                elemento
+            );
+
+
+            /*
+               Ejecutar efecto.
+            */
+
+            CUERVO_OBJETOS_EJECUTAR_EFECTO(
+
+                objeto.efecto,
+
+                objeto,
+
+                elemento
+
+            );
+
+        }
+
+
+        /* ================================================================
+           ⚙️ MOTOR DE EFECTOS
+           ================================================================ */
+
+        function CUERVO_OBJETOS_EJECUTAR_EFECTO(
+
+            nombreEfecto,
+            objeto,
+            elemento
+
+        ) {
+
+            const efecto =
+                CUERVO_EFECTOS[
+                nombreEfecto
+                ];
+
+
+            if (
+                typeof efecto !==
+                "function"
+            ) {
+
+                console.warn(
+
+                    "Efecto no encontrado:",
+
+                    nombreEfecto
+
+                );
+
+                return;
+
+            }
+
+
+            efecto(
+                objeto,
+                elemento
+            );
+
+        }
+
+
+        /* ================================================================
+           ✨ EFECTOS
+           ================================================================ */
+
+        const CUERVO_EFECTOS = {
+
+
+            /* ============================================================
+               🍃 TELETRANSPORTAR
+               ============================================================ */
+
+            teletransportar:
+
+                function (
+                    objeto,
+                    elemento
+                ) {
+
+                    CUERVO_OBJETOS_POSICIONAR(
+                        elemento
+                    );
+
+                },
+
+
+            /* ============================================================
+               🪶 DAR PLUMAS
+               ============================================================ */
+
+            dar_plumas:
+
+                function (
+                    objeto,
+                    elemento
+                ) {
+
+                    const cantidad =
+                        10;
+
+
+                    if (
+                        typeof CUERVO_DATOS ===
+                        "undefined"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    CUERVO_DATOS.plumas +=
+                        cantidad;
+
+
+                    if (
+                        typeof CUERVO_guardarDatos ===
+                        "function"
+                    ) {
+
+                        CUERVO_guardarDatos();
+
+                    }
+
+
+                    if (
+                        typeof CUERVO_actualizarHUD ===
+                        "function"
+                    ) {
+
+                        CUERVO_actualizarHUD();
+
+                    }
+
+
+                    CUERVO_OBJETOS_actualizarBilletera();
+
+
+                    CUERVO_OBJETOS_toast(
+
+                        "🪶",
+
+                        "Plumas encontradas",
+
+                        "+" +
+                        cantidad +
+                        " plumas"
+
+                    );
+
+
+                    /*
+                       Después de usarla,
+                       cambia de lugar.
+                    */
+
+                    CUERVO_OBJETOS_POSICIONAR(
+                        elemento
+                    );
+
+                },
+
+
+            /* ============================================================
+               ⭐ DAR XP
+               ============================================================ */
+
+            dar_xp:
+
+                function (
+                    objeto,
+                    elemento
+                ) {
+
+                    const cantidad =
+                        5;
+
+
+                    if (
+                        typeof CUERVO_ganarXP ===
+                        "function"
+                    ) {
+
+                        CUERVO_ganarXP(
+                            cantidad
+                        );
+
+                    }
+
+
+                    CUERVO_OBJETOS_toast(
+
+                        "✨",
+
+                        "Luciérnaga atrapada",
+
+                        "+" +
+                        cantidad +
+                        " XP"
+
+                    );
+
+
+                    CUERVO_OBJETOS_POSICIONAR(
+                        elemento
+                    );
+
+                },
+
+
+            /* ============================================================
+               🦋 MARIPOSA
+               ============================================================ */
+
+            mariposa:
+
+                function (
+                    objeto,
+                    elemento
+                ) {
+
+                    CUERVO_OBJETOS_POSICIONAR(
+                        elemento
+                    );
+
+
+                    CUERVO_OBJETOS_toast(
+
+                        "🦋",
+
+                        "Mariposa",
+
+                        "¡Volvió a escapar!"
+
+                    );
+
+                },
+
+
+            /* ============================================================
+               🍄 LLUVIA DE PARTÍCULAS
+               ============================================================ */
+
+            lluvia_particulas:
+
+                function (
+                    objeto,
+                    elemento
+                ) {
+
+                    CUERVO_OBJETOS_PARTICULAS(
+                        elemento
+                    );
+
+
+                    const cantidad =
+                        15;
+
+
+                    if (
+                        typeof CUERVO_DATOS !==
+                        "undefined"
+                    ) {
+
+                        CUERVO_DATOS.plumas +=
+                            cantidad;
+
+                    }
+
+
+                    if (
+                        typeof CUERVO_guardarDatos ===
+                        "function"
+                    ) {
+
+                        CUERVO_guardarDatos();
+
+                    }
+
+
+                    if (
+                        typeof CUERVO_actualizarHUD ===
+                        "function"
+                    ) {
+
+                        CUERVO_actualizarHUD();
+
+                    }
+
+
+                    CUERVO_OBJETOS_actualizarBilletera();
+
+
+                    CUERVO_OBJETOS_toast(
+
+                        "🍄",
+
+                        "Energía del bosque",
+
+                        "+" +
+                        cantidad +
+                        " plumas"
+
+                    );
+
+                },
+
+
+            /* ============================================================
+               🐦 CUERVO
+               ============================================================ */
+
+            cuervo:
+
+                function (
+                    objeto,
+                    elemento
+                ) {
+
+                    const cantidad =
+                        25;
+
+
+                    if (
+                        typeof CUERVO_DATOS !==
+                        "undefined"
+                    ) {
+
+                        CUERVO_DATOS.plumas +=
+                            cantidad;
+
+                    }
+
+
+                    if (
+                        typeof CUERVO_ganarXP ===
+                        "function"
+                    ) {
+
+                        CUERVO_ganarXP(
+                            10
+                        );
+
+                    }
+
+
+                    if (
+                        typeof CUERVO_guardarDatos ===
+                        "function"
+                    ) {
+
+                        CUERVO_guardarDatos();
+
+                    }
+
+
+                    if (
+                        typeof CUERVO_actualizarHUD ===
+                        "function"
+                    ) {
+
+                        CUERVO_actualizarHUD();
+
+                    }
+
+
+                    CUERVO_OBJETOS_actualizarBilletera();
+
+
+                    CUERVO_OBJETOS_toast(
+
+                        "🐦‍⬛",
+
+                        "El cuervo dejó un regalo",
+
+                        "+25 🪶  +10 XP"
+
+                    );
+
+
+                    CUERVO_OBJETOS_POSICIONAR(
+                        elemento
+                    );
+
+                },
+
+
+            /* ============================================================
+               🌙 LUNA
+               ============================================================ */
+
+            luna:
+
+                function (
+                    objeto,
+                    elemento
+                ) {
+
+                    const cantidad =
+                        20;
+
+
+                    if (
+                        typeof CUERVO_ganarXP ===
+                        "function"
+                    ) {
+
+                        CUERVO_ganarXP(
+                            cantidad
+                        );
+
+                    }
+
+
+                    CUERVO_OBJETOS_PARTICULAS(
+                        elemento
+                    );
+
+
+                    CUERVO_OBJETOS_toast(
+
+                        "🌙",
+
+                        "Fragmento Lunar",
+
+                        "+" +
+                        cantidad +
+                        " XP"
+
+                    );
+
+                },
+
+
+            /* ============================================================
+               🌱 SEMILLA
+               ============================================================ */
+
+            semilla:
+
+                function (
+                    objeto,
+                    elemento
+                ) {
+
+                    CUERVO_OBJETOS_PARTICULAS(
+                        elemento
+                    );
+
+
+                    if (
+                        typeof CUERVO_DATOS !==
+                        "undefined"
+                    ) {
+
+                        CUERVO_DATOS.plumas +=
+                            50;
+
+                    }
+
+
+                    if (
+                        typeof CUERVO_ganarXP ===
+                        "function"
+                    ) {
+
+                        CUERVO_ganarXP(
+                            25
+                        );
+
+                    }
+
+
+                    if (
+                        typeof CUERVO_guardarDatos ===
+                        "function"
+                    ) {
+
+                        CUERVO_guardarDatos();
+
+                    }
+
+
+                    if (
+                        typeof CUERVO_actualizarHUD ===
+                        "function"
+                    ) {
+
+                        CUERVO_actualizarHUD();
+
+                    }
+
+
+                    CUERVO_OBJETOS_actualizarBilletera();
+
+
+                    CUERVO_OBJETOS_toast(
+
+                        "🌱",
+
+                        "La semilla despertó",
+
+                        "+50 🪶  +25 XP"
+
+                    );
+
+                }
+
+        };
+
+
+        /* ================================================================
+           ✨ DESTELLO
+           ================================================================ */
+
+        function CUERVO_OBJETOS_DESTELLO(
+            elemento
+        ) {
+
+            const rect =
+                elemento.getBoundingClientRect();
+
+
+            const destello =
+                document.createElement(
+                    "div"
+                );
+
+
+            destello.className =
+                "cuervo-destello";
+
+
+            destello.style.left =
+                (
+                    rect.left +
+                    rect.width / 2 -
+                    15
+                ) + "px";
+
+
+            destello.style.top =
+                (
+                    rect.top +
+                    rect.height / 2 -
+                    15
+                ) + "px";
+
+
+            document.body.appendChild(
+                destello
+            );
+
+
+            setTimeout(
+
+                function () {
+
+                    destello.remove();
+
+                },
+
+                700
+
+            );
+
+        }
+
+
+        /* ================================================================
+           ✨ PARTÍCULAS
+           ================================================================ */
+
+        function CUERVO_OBJETOS_PARTICULAS(
+            elemento
+        ) {
+
+            const rect =
+                elemento.getBoundingClientRect();
+
+
+            for (
+                let i = 0;
+                i < 12;
+                i++
+            ) {
+
+                const particula =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                particula.textContent =
+                    "✦";
+
+
+                particula.style.position =
+                    "fixed";
+
+
+                particula.style.left =
+                    (
+                        rect.left +
+                        rect.width / 2
+                    ) + "px";
+
+
+                particula.style.top =
+                    (
+                        rect.top +
+                        rect.height / 2
+                    ) + "px";
+
+
+                particula.style.pointerEvents =
+                    "none";
+
+
+                particula.style.zIndex =
+                    "9000";
+
+
+                particula.style.color =
+                    "#e5c76e";
+
+
+                particula.style.fontSize =
+                    (
+                        8 +
+                        Math.random() * 10
+                    ) + "px";
+
+
+                document.body.appendChild(
+                    particula
+                );
+
+
+                const x =
+                    (
+                        Math.random() -
+                        .5
+                    ) * 140;
+
+
+                const y =
+                    (
+                        Math.random() -
+                        .7
+                    ) * 120;
+
+
+                particula.animate(
+
+                    [
+
+                        {
+                            transform:
+                                "translate(-50%,-50%) scale(.3)",
+
+                            opacity:
+                                0
+
+                        },
+
+                        {
+
+                            transform:
+                                `translate(
+                            calc(-50% + ${x / 2}px),
+                            calc(-50% + ${y / 2}px)
+                        ) scale(1)`,
+
+                            opacity:
+                                1
+
+                        },
+
+                        {
+
+                            transform:
+                                `translate(
+                            calc(-50% + ${x}px),
+                            calc(-50% + ${y}px)
+                        ) scale(.2)`,
+
+                            opacity:
+                                0
+
+                        }
+
+                    ],
+
+                    {
+
+                        duration:
+                            700 +
+                            Math.random() * 500,
+
+                        easing:
+                            "ease-out"
+
+                    }
+
+                );
+
+
+                setTimeout(
+
+                    () => {
+
+                        particula.remove();
+
+                    },
+
+                    1300
+
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           🐦 MOVIMIENTO AUTOMÁTICO
+           ================================================================ */
+
+        function CUERVO_OBJETOS_PROGRAMAR_MOVIMIENTO(
+
+            objeto,
+            elemento
+
+        ) {
+
+            function mover() {
+
+                if (
+                    !document.body.contains(
+                        elemento
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                CUERVO_OBJETOS_POSICIONAR(
+                    elemento
+                );
+
+
+                const siguiente =
+
+                    CUERVO_OBJETOS_ALEATORIO(
+
+                        CUERVO_OBJETOS_CONFIG
+                            .movimientoMinimo,
+
+                        CUERVO_OBJETOS_CONFIG
+                            .movimientoMaximo
+
+                    );
+
+
+                setTimeout(
+                    mover,
+                    siguiente
+                );
+
+            }
+
+
+            setTimeout(
+
+                mover,
+
+                CUERVO_OBJETOS_ALEATORIO(
+                    1000,
+                    2500
+                )
+
+            );
+
+        }
+
+
+        /* ================================================================
+           💬 TOAST
+           ================================================================ */
+
+        let CUERVO_OBJETOS_TOAST_TIMER = null;
+
+
+        function CUERVO_OBJETOS_toast(
+
+            icono,
+            titulo,
+            texto
+
+        ) {
+
+            const toast =
+                document.getElementById(
+                    "objetosToast"
+                );
+
+
+            const toastIcono =
+                document.getElementById(
+                    "objetosToastIcono"
+                );
+
+
+            const toastTitulo =
+                document.getElementById(
+                    "objetosToastTitulo"
+                );
+
+
+            const toastTexto =
+                document.getElementById(
+                    "objetosToastTexto"
+                );
+
+
+            if (
+                !toast
+            ) {
+
+                return;
+
+            }
+
+
+            toastIcono.textContent =
+                icono;
+
+            toastTitulo.textContent =
+                titulo;
+
+            toastTexto.textContent =
+                texto;
+
+
+            toast.classList.remove(
+                "mostrar"
+            );
+
+
+            /*
+               Reiniciar animación.
+            */
+
+            void toast.offsetWidth;
+
+
+            toast.classList.add(
+                "mostrar"
+            );
+
+
+            clearTimeout(
+                CUERVO_OBJETOS_TOAST_TIMER
+            );
+
+
+            CUERVO_OBJETOS_TOAST_TIMER =
+
+                setTimeout(
+
+                    function () {
+
+                        toast.classList.remove(
+                            "mostrar"
+                        );
+
+                    },
+
+                    2600
+
+                );
+
+        }
+
+
+        /* ================================================================
+           📱 REDIMENSIONAR
+           ================================================================ */
+
+        window.addEventListener(
+
+            "resize",
+
+            function () {
+
+                CUERVO_OBJETOS_ACTIVOS
+                    .forEach(
+
+                        elemento => {
+
+                            CUERVO_OBJETOS_POSICIONAR(
+                                elemento
+                            );
+
+                        }
+
+                    );
+
+            }
+
+        );
+
+
+        /* ================================================================
+           ⌨️ TECLADO
+           ================================================================ */
+
+        document.addEventListener(
+
+            "keydown",
+
+            function (evento) {
+
+                /*
+                   Solo usamos las flechas
+                   si la tienda está visible.
+                */
+
+                const tienda =
+                    document.getElementById(
+                        "cuervoTiendaObjetos"
+                    );
+
+
+                if (
+                    !tienda ||
+                    tienda.offsetParent === null
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    evento.key ===
+                    "ArrowLeft"
+                ) {
+
+                    CUERVO_OBJETOS.mover(-1);
+
+                }
+
+
+                if (
+                    evento.key ===
+                    "ArrowRight"
+                ) {
+
+                    CUERVO_OBJETOS.mover(1);
+
+                }
+
+            }
+
+        );
+
+
+        /* ================================================================
+           🚀 INICIALIZACIÓN
+           ================================================================ */
+
+        function CUERVO_OBJETOS_iniciar() {
+
+            CUERVO_OBJETOS_cargar();
+
+            CUERVO_OBJETOS_renderTienda();
+
+            CUERVO_OBJETOS_renderEquipados();
+
+            CUERVO_OBJETOS_RENDER_activos();
+
+        }
+
+
+        /* ================================================================
+           🌐 API PÚBLICA
+           ================================================================ */
+
+        const CUERVO_OBJETOS = {
+
+            mover:
+                CUERVO_OBJETOS_mover,
+
+            comprar:
+                CUERVO_OBJETOS_comprar,
+
+            equipar:
+                CUERVO_OBJETOS_equipar,
+
+            desequipar:
+                CUERVO_OBJETOS_desequipar,
+
+            render:
+                CUERVO_OBJETOS_renderTienda,
+
+            iniciar:
+                CUERVO_OBJETOS_iniciar
+
+        };
+
+
+        /* ================================================================
+           INICIAR
+           ================================================================ */
+
+        document.addEventListener(
+
+            "DOMContentLoaded",
+
+            function () {
+
+                CUERVO_OBJETOS_iniciar();
+
+            }
+
+        );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
 
 
     <!-- ================================================================
