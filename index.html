@@ -120,6 +120,62 @@
         }
 
 
+        /* =========================================================
+           🐻 OSO
+           Montaña, madera y refugio
+           ========================================================= */
+
+        body[data-tema="oso"] {
+
+            --fondo: #0f0b08;
+            --panel: #1b130e;
+            --panel-2: #282017;
+            --panel-3: #090705;
+
+            --texto: #eee6d8;
+            --texto-suave: #aaa092;
+
+            --acento: #9b7048;
+            --acento-hover: #c08d5b;
+
+            --borde: #493729;
+
+            --peligro: #a95248;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .45);
+
+        }
+
+
+
+        /* =========================================================
+           🐍 SERPIENTE
+           Misterio, pantano y naturaleza
+           ========================================================= */
+
+        body[data-tema="serpiente"] {
+
+            --fondo: #07100b;
+            --panel: #0d1a11;
+            --panel-2: #14271a;
+            --panel-3: #040a06;
+
+            --texto: #e4eee3;
+            --texto-suave: #91a794;
+
+            --acento: #78a94d;
+            --acento-hover: #9bc96b;
+
+            --borde: #2d4a32;
+
+            --peligro: #a94f4f;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .45);
+
+        }
+
         /* ---------------------------------------------------------
        🦉 BÚHO
        Biblioteca nocturna
@@ -307,6 +363,107 @@
             --sombra:
                 0 8px 30px rgba(0, 0, 0, .4);
         }
+
+        /* ---------------------------------------------------------
+           🐯 TIGRE
+           Selva nocturna
+           --------------------------------------------------------- */
+
+        body[data-tema="tigre"] {
+
+            --fondo: #120d08;
+
+            --panel: #1d140d;
+
+            --panel-2: #2a1c11;
+
+            --panel-3: #0b0805;
+
+            --texto: #f4eadb;
+
+            --texto-suave: #b5a28b;
+
+            --acento: #d68a32;
+
+            --acento-hover: #efa84d;
+
+            --borde: #4a321d;
+
+            --peligro: #b65345;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .45);
+
+        }
+
+
+
+        /* ---------------------------------------------------------
+           🐉 DRAGÓN
+           Fuego y fantasía oriental
+           --------------------------------------------------------- */
+
+        body[data-tema="dragon"] {
+
+            --fondo: #100809;
+
+            --panel: #1b0d0e;
+
+            --panel-2: #281214;
+
+            --panel-3: #080506;
+
+            --texto: #f3e8dc;
+
+            --texto-suave: #b49b91;
+
+            --acento: #c84b38;
+
+            --acento-hover: #e2674f;
+
+            --borde: #512528;
+
+            --peligro: #d04a43;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .5);
+
+        }
+
+
+
+        /* ---------------------------------------------------------
+           🐺 LOBO
+           Bosque nocturno
+           --------------------------------------------------------- */
+
+        body[data-tema="lobo"] {
+
+            --fondo: #080d13;
+
+            --panel: #111923;
+
+            --panel-2: #192531;
+
+            --panel-3: #05080c;
+
+            --texto: #e8edf2;
+
+            --texto-suave: #98a5b1;
+
+            --acento: #8fa8bb;
+
+            --acento-hover: #b2c7d6;
+
+            --borde: #30404e;
+
+            --peligro: #a95359;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .45);
+
+        }
+
 
 
         /* =========================================================
@@ -1593,7 +1750,7 @@
 
             position: fixed;
 
-            bottom: 18px;
+            top: 42px;
 
             left: 50%;
 
@@ -3941,6 +4098,364 @@
             }
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* ================================================================
+   🪶 HUD DEL CUERVO
+   Barra de progreso del usuario
+   ================================================================ */
+
+        #cuervoHUD {
+            position: fixed;
+            left: 50%;
+            bottom: 14px;
+            transform: translateX(-50%);
+
+            width: min(94vw, 620px);
+            min-height: 58px;
+
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            padding: 9px 14px;
+
+            background:
+                linear-gradient(145deg,
+                    rgba(35, 25, 20, 0.97),
+                    rgba(15, 12, 10, 0.97));
+
+            border: 1px solid rgba(205, 163, 74, 0.55);
+            border-radius: 16px;
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, 0.45),
+                inset 0 0 20px rgba(255, 190, 60, 0.04);
+
+            backdrop-filter: blur(10px);
+
+            color: #eee;
+
+            z-index: 9999;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            user-select: none;
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        /* ================================================================
+   🪶 PLUMAS
+   ================================================================ */
+
+        #cuervoHUDPlumas {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            min-width: 85px;
+
+            font-weight: bold;
+            font-size: 16px;
+
+            color: #f3d37a;
+        }
+
+        #cuervoHUDPlumaIcono {
+            font-size: 23px;
+
+            filter:
+                drop-shadow(0 0 5px rgba(255, 205, 80, 0.35));
+        }
+
+
+        /* ================================================================
+   👤 USUARIO
+   ================================================================ */
+
+        #cuervoHUDUsuario {
+            display: flex;
+            flex-direction: column;
+
+            min-width: 95px;
+
+            overflow: hidden;
+        }
+
+        #cuervoHUDNombre {
+            font-size: 13px;
+            font-weight: bold;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            color: #fff;
+        }
+
+        #cuervoHUDNivel {
+            font-size: 11px;
+
+            color: #aaa;
+        }
+
+
+        /* ================================================================
+   ⭐ EXPERIENCIA
+   ================================================================ */
+
+        #cuervoHUDExperiencia {
+            flex: 1;
+
+            min-width: 90px;
+        }
+
+        #cuervoHUDXPTexto {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 4px;
+
+            font-size: 9px;
+
+            color: #aaa;
+        }
+
+        #cuervoHUDXPBarra {
+            width: 100%;
+            height: 6px;
+
+            overflow: hidden;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            border-radius: 10px;
+        }
+
+        #cuervoHUDXPProgreso {
+            width: 0%;
+            height: 100%;
+
+            background:
+                linear-gradient(90deg,
+                    #8c6b2c,
+                    #e6c568);
+
+            border-radius: inherit;
+
+            transition:
+                width 0.5s ease;
+        }
+
+
+        /* ================================================================
+   ⏱️ TIEMPO PARA LA PRÓXIMA PLUMA
+   ================================================================ */
+
+        #cuervoHUDTiempo {
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+
+            min-width: 62px;
+
+            font-size: 10px;
+
+            color: #aaa;
+        }
+
+        #cuervoHUDTiempoValor {
+            font-size: 12px;
+            font-weight: bold;
+
+            color: #ddd;
+        }
+
+
+        /* ================================================================
+   🪶 ANIMACIÓN DE NUEVA PLUMA
+   ================================================================ */
+
+        #cuervoHUDRecompensa {
+            position: fixed;
+
+            left: 50%;
+            bottom: 90px;
+
+            transform:
+                translateX(-50%) translateY(20px) scale(0.7);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            padding: 12px 20px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(30, 23, 18, 0.96);
+
+            border:
+                1px solid rgba(220, 180, 80, 0.7);
+
+            color: #f3d37a;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            z-index: 10000;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.4);
+
+        }
+
+
+        /* ================================================================
+   ✨ ANIMACIÓN ACTIVA
+   ================================================================ */
+
+        #cuervoHUDRecompensa.mostrar {
+            animation:
+                cuervoRecompensa 2.4s ease forwards;
+        }
+
+
+        @keyframes cuervoRecompensa {
+
+            0% {
+
+                opacity: 0;
+
+                transform:
+                    translateX(-50%) translateY(20px) scale(0.7);
+
+            }
+
+            15% {
+
+                opacity: 1;
+
+                transform:
+                    translateX(-50%) translateY(0) scale(1.05);
+
+            }
+
+            30% {
+
+                transform:
+                    translateX(-50%) translateY(0) scale(1);
+
+            }
+
+            80% {
+
+                opacity: 1;
+
+                transform:
+                    translateX(-50%) translateY(-10px) scale(1);
+
+            }
+
+            100% {
+
+                opacity: 0;
+
+                transform:
+                    translateX(-50%) translateY(-35px) scale(0.9);
+
+            }
+
+        }
+
+
+        /* ================================================================
+   📱 MÓVIL
+   ================================================================ */
+
+        @media (max-width: 600px) {
+
+            #cuervoHUD {
+
+                bottom: 8px;
+
+                width: calc(100vw - 16px);
+
+                gap: 8px;
+
+                padding:
+                    8px 9px;
+
+                border-radius: 14px;
+
+            }
+
+
+            #cuervoHUDPlumas {
+
+                min-width: 58px;
+
+                font-size: 14px;
+
+            }
+
+
+            #cuervoHUDPlumaIcono {
+
+                font-size: 19px;
+
+            }
+
+
+            #cuervoHUDUsuario {
+
+                min-width: 70px;
+
+            }
+
+
+            #cuervoHUDNombre {
+
+                font-size: 11px;
+
+            }
+
+
+            #cuervoHUDNivel {
+
+                font-size: 9px;
+
+            }
+
+
+            #cuervoHUDTiempo {
+
+                min-width: 48px;
+
+            }
+
+        }
     </style>
 </head>
 
@@ -4084,6 +4599,37 @@
                         🐦
                         <span>Martín Pescador</span>
                     </button>
+                    <button class="tema-btn" data-tema="tigre" onclick="cambiarTema('tigre')">
+                        🐯
+                        <span>Tigre</span>
+                    </button>
+                    <button class="tema-btn" data-tema="dragon" onclick="cambiarTema('dragon')">
+                        🐉
+                        <span>Dragon</span>
+                    </button>
+                    <button class="tema-btn" data-tema="lobo" onclick="cambiarTema('lobo')">
+                        🐺
+                        <span>Lobo</span>
+                    </button>
+
+                    <button class="tema-btn" data-tema="oso" onclick="cambiarTema('oso')">
+                        🐻
+                        <span>Oso</span>
+                    </button>
+                    <button class="tema-btn" data-tema="serpiente" onclick="cambiarTema('serpiente')">
+                        🐍
+                        <span>Serpiente</span>
+                    </button>
+
+
+
+
+
+
+
+
+
+
 
                 </div>
 
@@ -4477,7 +5023,7 @@
 
             mostrarMensaje(
                 "Configuración guardada."
-            );
+            ); CUERVO_ganarXP(1);
         }
 
 
@@ -4516,7 +5062,7 @@
 
             mostrarMensaje(
                 "Configuración restaurada."
-            );
+            ); CUERVO_ganarPluma(1);
         }
 
 
@@ -8065,7 +8611,7 @@
 
             mostrarMensaje(
                 "⭐ Radio agregada a favoritas."
-            );
+            ); CUERVO_ganarPluma(1); CUERVO_ganarXP(2);
 
         }
 
@@ -8571,7 +9117,7 @@
 
 
             mostrarMensaje(
-                "📍 Detectando tu ubicación..."
+                "📍 Detectando tu ubicación... Paciencia"
             );
 
 
@@ -10104,7 +10650,7 @@
 
             mostrarMensaje(
                 "Objeto agregado al inventario."
-            );
+            ); CUERVO_ganarPluma(1); CUERVO_ganarXP(2);
         }
 
 
@@ -10343,7 +10889,7 @@
 
             mostrarMensaje(
                 "Proyecto creado."
-            );
+            ); CUERVO_ganarPluma(1); CUERVO_ganarXP(2);
         }
 
 
@@ -10534,7 +11080,7 @@
 
             mostrarMensaje(
                 "Escritorio guardado."
-            );
+            ); CUERVO_ganarPluma(1); CUERVO_ganarXP(2);
         }
 
 
@@ -10693,7 +11239,7 @@
 
             mostrarMensaje(
                 "Metrónomo iniciado."
-            );
+            ); CUERVO_ganarXP(1);
         }
 
 
@@ -10820,7 +11366,7 @@
 
                             mostrarMensaje(
                                 "⏱️ Tiempo terminado."
-                            );
+                            ); CUERVO_ganarXP(1);
 
                             return;
                         }
@@ -12478,7 +13024,7 @@
 
             mostrarMensaje(
                 "⭐ Idea guardada correctamente."
-            );
+            ); CUERVO_ganarPluma(1); CUERVO_ganarXP(2);
 
         }
 
@@ -13984,7 +14530,7 @@
 
                 "⭐ Ciudad guardada en favoritos."
 
-            );
+            ); CUERVO_ganarPluma(1); CUERVO_ganarXP(2);
 
         }
 
@@ -14660,7 +15206,7 @@
 
                     "🌦️ Clima actualizado."
 
-                );
+                ); CUERVO_ganarXP(1);
 
             }
 
@@ -15904,7 +16450,7 @@
 
             mostrarMensaje(
                 "⭐ Video agregado al Taller."
-            );
+            ); CUERVO_ganarPluma(1); CUERVO_ganarXP(5);
 
         }
 
@@ -17300,7 +17846,7 @@
 
             mostrarMensaje(
                 "⭐ Canal agregado a favoritos."
-            );
+            ); CUERVO_ganarPluma(1); CUERVO_ganarXP(2);
 
         }
 
@@ -18279,7 +18825,7 @@
                                     canal.name ||
                                     "canal"
                                 )
-                            );
+                            ); CUERVO_ganarPluma(1); CUERVO_ganarXP(5);
 
                         }
 
@@ -18853,7 +19399,12 @@
             "loro",
             "flamenco",
             "pavo-real",
-            "martin-pescador"
+            "martin-pescador",
+            "tigre",
+            "dragon",
+            "lobo",
+            "oso",
+            "serpiente"
 
         ];
 
@@ -18907,7 +19458,7 @@
 
                 mostrarMensaje(
                     "Tema cambiado correctamente"
-                );
+                ); CUERVO_ganarXP(1);
 
             }
 
@@ -19099,7 +19650,12 @@
         const MEME_IMAGENES = {
             simpson: [
 
-                "simpson1.png"
+                "simpson1.png",
+                "simpson2.png",
+                "simpson3.png",
+                "simpson4.png",
+                "simpson5.png",
+                "simpson6.png",
 
             ],
 
@@ -20393,7 +20949,7 @@
 
                 mostrarMensaje(
                     "😂 ¡Meme generado y listo para guardar!"
-                );
+                ); CUERVO_ganarPluma(1); CUERVO_ganarXP(2);
 
             }
 
@@ -21606,7 +22162,7 @@
 
             mostrarMensaje(
                 "😂 ¡Meme antiguo generado!"
-            );
+            ); CUERVO_ganarPluma(1); CUERVO_ganarXP(5);
 
         }
         /* ================================================================
@@ -22923,7 +23479,7 @@
                 estrellas +
                 " estrellas."
 
-            );
+            ); CUERVO_ganarXP(1);
 
         }
 
@@ -22986,7 +23542,7 @@
 
             mostrarMensaje(
                 "⭐ Meme guardado."
-            );
+            ); CUERVO_ganarPluma(2); CUERVO_ganarXP(10);
 
         }
 
@@ -23936,7 +24492,7 @@
             MEME_MODO = "moderno";
 
             console.log(
-                "😂 Modo meme moderno activado."
+                "😂 Modo meme activado."
             );
 
         }
@@ -24241,7 +24797,7 @@
 
             mostrarMensaje(
                 "😂 ¡Meme antiguo generado!"
-            );
+            ); CUERVO_ganarPluma(1); CUERVO_ganarXP(5);
 
         }
 
@@ -24506,7 +25062,7 @@
             ctx.fill();
 
 
-            ctx.restore();
+            ctx.restore(); CUERVO_ganarPluma(1);
 
         }
 
@@ -24622,7 +25178,7 @@
             );
 
 
-            ctx.restore();
+            ctx.restore(); CUERVO_ganarPluma(1);
 
         }
         /* ================================================================
@@ -24785,6 +25341,1333 @@
            FIN DEL SISTEMA
            ================================================================ */
 
+
+
+        /* ================================================================
+           🪶 SISTEMA DE PROGRESIÓN DEL CUERVO
+           V1 — HUD + PLUMAS + TIEMPO
+           ================================================================ */
+
+
+        /* ================================================================
+           CONFIGURACIÓN
+           ================================================================ */
+
+        const CUERVO_CLAVE_DATOS =
+            "taller_cuervo_progreso_v1";
+
+
+        const CUERVO_MINUTOS_POR_PLUMA =
+            12;
+
+
+        const CUERVO_SEGUNDOS_POR_PLUMA =
+            CUERVO_MINUTOS_POR_PLUMA * 60;
+
+
+        /* ================================================================
+           DATOS DEL USUARIO
+           ================================================================ */
+
+        let CUERVO_DATOS = {
+
+            nombre:
+                "Cuervo",
+
+            plumas:
+                0,
+
+            experiencia:
+                0,
+
+            nivel:
+                1,
+
+            tiempoAcumulado:
+                0,
+
+            ultimaActualizacion:
+                Date.now()
+
+        };
+
+
+        /* ================================================================
+           CARGAR DATOS
+           ================================================================ */
+
+        function CUERVO_cargarDatos() {
+
+            try {
+
+                const guardado =
+                    localStorage.getItem(
+                        CUERVO_CLAVE_DATOS
+                    );
+
+
+                if (guardado) {
+
+                    const datos =
+                        JSON.parse(
+                            guardado
+                        );
+
+
+                    CUERVO_DATOS = {
+
+                        ...CUERVO_DATOS,
+
+                        ...datos
+
+                    };
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "⚠️ No se pudieron cargar los datos del Cuervo.",
+                    error
+                );
+
+            }
+
+
+            CUERVO_actualizarHUD();
+
+        }
+
+
+        /* ================================================================
+           GUARDAR DATOS
+           ================================================================ */
+
+        function CUERVO_guardarDatos() {
+
+            try {
+
+                localStorage.setItem(
+
+                    CUERVO_CLAVE_DATOS,
+
+                    JSON.stringify(
+                        CUERVO_DATOS
+                    )
+
+                );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "⚠️ No se pudieron guardar los datos del Cuervo.",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           ACTUALIZAR HUD
+           ================================================================ */
+
+        function CUERVO_actualizarHUD() {
+
+            const plumas =
+                document.getElementById(
+                    "cuervoHUDPlumasValor"
+                );
+
+
+            const nombre =
+                document.getElementById(
+                    "cuervoHUDNombre"
+                );
+
+
+            const nivel =
+                document.getElementById(
+                    "cuervoHUDNivel"
+                );
+
+
+            const xp =
+                document.getElementById(
+                    "cuervoHUDXPValor"
+                );
+
+
+            const progreso =
+                document.getElementById(
+                    "cuervoHUDXPProgreso"
+                );
+
+
+            if (plumas) {
+
+                plumas.textContent =
+                    CUERVO_DATOS.plumas;
+
+            }
+
+
+            if (nombre) {
+
+                nombre.textContent =
+                    CUERVO_DATOS.nombre;
+
+            }
+
+
+            if (nivel) {
+
+                nivel.textContent =
+                    "Nivel " +
+                    CUERVO_DATOS.nivel;
+
+            }
+
+
+            const xpNecesaria =
+                CUERVO_experienciaNecesaria();
+
+
+            if (xp) {
+
+                xp.textContent =
+
+                    CUERVO_DATOS.experiencia +
+
+                    " / " +
+
+                    xpNecesaria;
+
+            }
+
+
+            if (progreso) {
+
+                const porcentaje =
+
+                    Math.min(
+
+                        100,
+
+                        (
+                            CUERVO_DATOS.experiencia /
+                            xpNecesaria
+                        ) * 100
+
+                    );
+
+
+                progreso.style.width =
+                    porcentaje + "%";
+
+            }
+
+
+            CUERVO_actualizarTemporizador();
+
+        }
+
+
+        /* ================================================================
+           EXPERIENCIA NECESARIA
+           ================================================================ */
+
+        function CUERVO_experienciaNecesaria() {
+
+            return (
+
+                CUERVO_DATOS.nivel *
+                100
+
+            );
+
+        }
+
+
+        /* ================================================================
+           GANAR EXPERIENCIA
+           ================================================================ */
+
+        function CUERVO_ganarXP(
+            cantidad = 1
+        ) {
+
+            if (
+                cantidad <= 0
+            ) {
+
+                return;
+
+            }
+
+
+            CUERVO_DATOS.experiencia +=
+                cantidad;
+
+
+            CUERVO_comprobarNivel();
+
+
+            CUERVO_guardarDatos();
+
+            CUERVO_actualizarHUD();
+
+        }
+
+
+        /* ================================================================
+           COMPROBAR NIVEL
+           ================================================================ */
+
+        function CUERVO_comprobarNivel() {
+
+            let subioNivel =
+                false;
+
+
+            while (
+
+                CUERVO_DATOS.experiencia >=
+                CUERVO_experienciaNecesaria()
+
+            ) {
+
+                CUERVO_DATOS.experiencia -=
+                    CUERVO_experienciaNecesaria();
+
+
+                CUERVO_DATOS.nivel++;
+
+                subioNivel =
+                    true;
+
+            }
+
+
+            if (subioNivel) {
+
+                CUERVO_mostrarRecompensa(
+
+                    "⭐ ¡SUBISTE AL NIVEL " +
+                    CUERVO_DATOS.nivel +
+                    "!"
+
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           GANAR PLUMA
+           ================================================================ */
+
+        function CUERVO_ganarPluma(
+            cantidad = 1
+        ) {
+
+            CUERVO_DATOS.plumas +=
+                cantidad;
+
+
+            /*
+               Cada pluma también
+               entrega experiencia.
+            */
+
+            CUERVO_ganarXP(
+                cantidad * 10
+            );
+
+
+            CUERVO_guardarDatos();
+
+            CUERVO_actualizarHUD();
+
+
+            CUERVO_mostrarRecompensa(
+
+                "🪶 +" +
+                cantidad +
+                " Pluma"
+
+            );
+
+        }
+
+
+        /* ================================================================
+           TEMPORIZADOR
+           ================================================================ */
+
+        function CUERVO_actualizarTemporizador() {
+
+            const elemento =
+                document.getElementById(
+                    "cuervoHUDTiempoValor"
+                );
+
+
+            if (!elemento) {
+
+                return;
+
+            }
+
+
+            const transcurrido =
+
+                CUERVO_DATOS.tiempoAcumulado;
+
+
+            const restante =
+
+                CUERVO_SEGUNDOS_POR_PLUMA -
+                (
+                    transcurrido %
+                    CUERVO_SEGUNDOS_POR_PLUMA
+                );
+
+
+            const minutos =
+                Math.floor(
+                    restante / 60
+                );
+
+
+            const segundos =
+                restante % 60;
+
+
+            elemento.textContent =
+
+                String(minutos)
+                    .padStart(2, "0") +
+
+                ":" +
+
+                String(segundos)
+                    .padStart(2, "0");
+
+        }
+
+
+        /* ================================================================
+           ⏱️ SISTEMA DE TIEMPO
+           ================================================================ */
+
+        setInterval(
+
+            function () {
+
+                CUERVO_DATOS.tiempoAcumulado++;
+
+
+                if (
+
+                    CUERVO_DATOS.tiempoAcumulado >=
+                    CUERVO_SEGUNDOS_POR_PLUMA
+
+                ) {
+
+                    CUERVO_DATOS.tiempoAcumulado = 0;
+
+                    CUERVO_ganarPluma(100);
+
+                }
+
+
+                /*
+                   Guardamos periódicamente.
+                */
+
+                if (
+
+                    CUERVO_DATOS.tiempoAcumulado %
+                    10 === 0
+
+                ) {
+
+                    CUERVO_guardarDatos();
+
+                }
+
+
+                CUERVO_actualizarHUD();
+
+            },
+
+            1000
+
+        );
+
+
+        /* ================================================================
+           ANIMACIÓN
+           ================================================================ */
+
+        function CUERVO_mostrarRecompensa(
+            mensaje
+        ) {
+
+            const elemento =
+                document.getElementById(
+                    "cuervoHUDRecompensa"
+                );
+
+
+            if (!elemento) {
+
+                return;
+
+            }
+
+
+            elemento.textContent =
+                mensaje;
+
+
+            elemento.classList.remove(
+                "mostrar"
+            );
+
+
+            /*
+               Forzamos reinicio
+               de la animación.
+            */
+
+            void elemento.offsetWidth;
+
+
+            elemento.classList.add(
+                "mostrar"
+            );
+
+        }
+
+
+        /* ================================================================
+           INICIALIZAR
+           ================================================================ */
+
+        function CUERVO_inicializar() {
+
+            CUERVO_cargarDatos();
+
+
+            console.log(
+                "🪶 Sistema de progresión del Cuervo iniciado."
+            );
+
+        }
+
+
+        /* ================================================================
+           ARRANQUE
+           ================================================================ */
+
+        if (
+            document.readyState ===
+            "loading"
+        ) {
+
+            document.addEventListener(
+
+                "DOMContentLoaded",
+
+                CUERVO_inicializar
+
+            );
+
+        }
+
+        else {
+
+            CUERVO_inicializar();
+
+        }
+
+
+        /* ================================================================
+           🪶 SISTEMA DE PROGRESIÓN DEL CUERVO
+           V2 — HUD + PLUMAS + XP + NIVELES + RANGOS
+           ================================================================ */
+
+
+        /* ================================================================
+           CONFIGURACIÓN
+           ================================================================ */
+
+
+
+        /* ================================================================
+           LÍMITE DE NIVEL
+           ================================================================ */
+
+        const CUERVO_NIVEL_MAXIMO =
+            12;
+
+
+        /* ================================================================
+           DATOS DEL USUARIO
+           ================================================================ */
+
+
+
+        /* ================================================================
+           🏅 RANGOS DEL CUERVO
+           ================================================================
+
+           NIVEL 1 - 2
+           🐣 Cuervo Novato
+
+           NIVEL 3 - 5
+           🪶 Cuervo Errante
+
+           NIVEL 6 - 8
+           🦅 Cuervo Vigía
+
+           NIVEL 9 - 10
+           ⚔️ Cuervo Veterano
+
+           NIVEL 11 - 12
+           👑 Señor del Cuervo
+
+           ================================================================ */
+
+
+        const CUERVO_RANGOS = [
+
+            {
+                minimo: 1,
+                maximo: 2,
+                nombre: "Cuervo Novato",
+                icono: "🐣"
+            },
+
+            {
+                minimo: 3,
+                maximo: 5,
+                nombre: "Cuervo Errante",
+                icono: "🪶"
+            },
+
+            {
+                minimo: 6,
+                maximo: 8,
+                nombre: "Cuervo Vigía",
+                icono: "🦅"
+            },
+
+            {
+                minimo: 9,
+                maximo: 10,
+                nombre: "Cuervo Veterano",
+                icono: "⚔️"
+            },
+
+            {
+                minimo: 11,
+                maximo: 12,
+                nombre: "Señor del Cuervo",
+                icono: "👑"
+            }
+
+        ];
+
+
+        /* ================================================================
+           OBTENER RANGO ACTUAL
+           ================================================================ */
+
+        function CUERVO_obtenerRango() {
+
+            const nivel =
+                CUERVO_DATOS.nivel;
+
+
+            const rango =
+                CUERVO_RANGOS.find(
+
+                    function (rango) {
+
+                        return (
+
+                            nivel >= rango.minimo &&
+
+                            nivel <= rango.maximo
+
+                        );
+
+                    }
+
+                );
+
+
+            /*
+               Por seguridad, siempre
+               devolvemos un rango.
+            */
+
+            return rango ||
+                CUERVO_RANGOS[0];
+
+        }
+
+
+        /* ================================================================
+           OBTENER NOMBRE DEL RANGO
+           ================================================================ */
+
+        function CUERVO_nombreRango() {
+
+            const rango =
+                CUERVO_obtenerRango();
+
+
+            return (
+
+                rango.icono +
+                " " +
+                rango.nombre
+
+            );
+
+        }
+
+
+        /* ================================================================
+           CARGAR DATOS
+           ================================================================ */
+
+        function CUERVO_cargarDatos() {
+
+            try {
+
+                const guardado =
+                    localStorage.getItem(
+                        CUERVO_CLAVE_DATOS
+                    );
+
+
+                if (guardado) {
+
+                    const datos =
+                        JSON.parse(
+                            guardado
+                        );
+
+
+                    CUERVO_DATOS = {
+
+                        ...CUERVO_DATOS,
+
+                        ...datos
+
+                    };
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.warn(
+
+                    "⚠️ No se pudieron cargar " +
+                    "los datos del Cuervo.",
+
+                    error
+
+                );
+
+            }
+
+
+            /*
+               Seguridad contra niveles
+               inválidos guardados.
+            */
+
+            if (
+                CUERVO_DATOS.nivel < 1
+            ) {
+
+                CUERVO_DATOS.nivel =
+                    1;
+
+            }
+
+
+            if (
+                CUERVO_DATOS.nivel >
+                CUERVO_NIVEL_MAXIMO
+            ) {
+
+                CUERVO_DATOS.nivel =
+                    CUERVO_NIVEL_MAXIMO;
+
+            }
+
+
+            CUERVO_actualizarHUD();
+
+        }
+
+
+        /* ================================================================
+           GUARDAR DATOS
+           ================================================================ */
+
+        function CUERVO_guardarDatos() {
+
+            try {
+
+                localStorage.setItem(
+
+                    CUERVO_CLAVE_DATOS,
+
+                    JSON.stringify(
+                        CUERVO_DATOS
+                    )
+
+                );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+
+                    "⚠️ No se pudieron guardar " +
+                    "los datos del Cuervo.",
+
+                    error
+
+                );
+
+            }
+
+        }
+
+
+        /* ================================================================
+           ACTUALIZAR HUD
+           ================================================================ */
+
+        function CUERVO_actualizarHUD() {
+
+            const plumas =
+                document.getElementById(
+                    "cuervoHUDPlumasValor"
+                );
+
+
+            const nombre =
+                document.getElementById(
+                    "cuervoHUDNombre"
+                );
+
+
+            const nivel =
+                document.getElementById(
+                    "cuervoHUDNivel"
+                );
+
+
+            const xp =
+                document.getElementById(
+                    "cuervoHUDXPValor"
+                );
+
+
+            const progreso =
+                document.getElementById(
+                    "cuervoHUDXPProgreso"
+                );
+
+
+            /*
+               NUEVO:
+               Elemento del rango.
+            */
+
+            const rango =
+                document.getElementById(
+                    "cuervoHUDRango"
+                );
+
+
+            /* ------------------------------------------------------------
+               PLUMAS
+               ------------------------------------------------------------ */
+
+            if (plumas) {
+
+                plumas.textContent =
+                    CUERVO_DATOS.plumas;
+
+            }
+
+
+            /* ------------------------------------------------------------
+               NOMBRE
+               ------------------------------------------------------------ */
+
+            if (nombre) {
+
+                nombre.textContent =
+                    CUERVO_DATOS.nombre;
+
+            }
+
+
+            /* ------------------------------------------------------------
+               NIVEL
+               ------------------------------------------------------------ */
+
+            if (nivel) {
+
+                nivel.textContent =
+
+                    "Nivel " +
+
+                    CUERVO_DATOS.nivel;
+
+            }
+
+
+            /* ------------------------------------------------------------
+               RANGO
+               ------------------------------------------------------------ */
+
+            if (rango) {
+
+                rango.textContent =
+                    CUERVO_nombreRango();
+
+            }
+
+
+            /* ------------------------------------------------------------
+               EXPERIENCIA
+               ------------------------------------------------------------ */
+
+            const xpNecesaria =
+                CUERVO_experienciaNecesaria();
+
+
+            if (xp) {
+
+                xp.textContent =
+
+                    CUERVO_DATOS.experiencia +
+
+                    " / " +
+
+                    xpNecesaria;
+
+            }
+
+
+            /* ------------------------------------------------------------
+               BARRA DE EXPERIENCIA
+               ------------------------------------------------------------ */
+
+            if (progreso) {
+
+                const porcentaje =
+
+                    Math.min(
+
+                        100,
+
+                        (
+
+                            CUERVO_DATOS.experiencia /
+
+                            xpNecesaria
+
+                        ) * 100
+
+                    );
+
+
+                progreso.style.width =
+                    porcentaje + "%";
+
+            }
+
+
+            CUERVO_actualizarTemporizador();
+
+        }
+
+
+        /* ================================================================
+           EXPERIENCIA NECESARIA
+           ================================================================ */
+
+        function CUERVO_experienciaNecesaria() {
+
+            /*
+               Cada nivel necesita
+               100 XP adicionales.
+
+               Nivel 1 → 100 XP
+               Nivel 2 → 200 XP
+               Nivel 3 → 300 XP
+               etc.
+            */
+
+            return (
+
+                CUERVO_DATOS.nivel *
+                100
+
+            );
+
+        }
+
+
+        /* ================================================================
+           GANAR EXPERIENCIA
+           ================================================================ */
+
+        function CUERVO_ganarXP(
+
+            cantidad = 1
+
+        ) {
+
+            if (
+                cantidad <= 0
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+               Si ya estamos en el nivel máximo,
+               no seguimos acumulando niveles.
+            */
+
+            if (
+
+                CUERVO_DATOS.nivel >=
+                CUERVO_NIVEL_MAXIMO
+
+            ) {
+
+                CUERVO_DATOS.experiencia = 0;
+
+                CUERVO_guardarDatos();
+
+                CUERVO_actualizarHUD();
+
+                return;
+
+            }
+
+
+            CUERVO_DATOS.experiencia +=
+                cantidad;
+
+
+            CUERVO_comprobarNivel();
+
+
+            CUERVO_guardarDatos();
+
+            CUERVO_actualizarHUD();
+
+        }
+
+
+        /* ================================================================
+           COMPROBAR NIVEL
+           ================================================================ */
+
+        function CUERVO_comprobarNivel() {
+
+            let subioNivel =
+                false;
+
+
+            let rangoAnterior =
+                CUERVO_obtenerRango();
+
+
+            while (
+
+                CUERVO_DATOS.nivel <
+                CUERVO_NIVEL_MAXIMO &&
+
+                CUERVO_DATOS.experiencia >=
+                CUERVO_experienciaNecesaria()
+
+            ) {
+
+                CUERVO_DATOS.experiencia -=
+                    CUERVO_experienciaNecesaria();
+
+
+                CUERVO_DATOS.nivel++;
+
+
+                subioNivel =
+                    true;
+
+            }
+
+
+            /*
+               Si llegó al máximo,
+               evitamos que quede
+               experiencia acumulada.
+            */
+
+            if (
+
+                CUERVO_DATOS.nivel >=
+                CUERVO_NIVEL_MAXIMO
+
+            ) {
+
+                CUERVO_DATOS.nivel =
+                    CUERVO_NIVEL_MAXIMO;
+
+            }
+
+
+            if (subioNivel) {
+
+                const rangoNuevo =
+                    CUERVO_obtenerRango();
+
+
+                /*
+                   Si cambió de rango,
+                   mostramos una recompensa especial.
+                */
+
+                if (
+
+                    rangoNuevo.nombre !==
+                    rangoAnterior.nombre
+
+                ) {
+
+                    CUERVO_mostrarRecompensa(
+
+                        rangoNuevo.icono +
+
+                        " ¡NUEVO RANGO!" +
+
+                        "<br>" +
+
+                        rangoNuevo.nombre
+
+                    );
+
+                }
+
+                else {
+
+                    CUERVO_mostrarRecompensa(
+
+                        "⭐ ¡SUBISTE AL NIVEL " +
+
+                        CUERVO_DATOS.nivel +
+
+                        "!"
+
+                    );
+
+                }
+
+            }
+
+
+            CUERVO_guardarDatos();
+
+            CUERVO_actualizarHUD();
+
+        }
+
+
+        /* ================================================================
+           OBTENER PROGRESO DEL RANGO
+           ================================================================ */
+
+        function CUERVO_progresoRango() {
+
+            const rango =
+                CUERVO_obtenerRango();
+
+
+            const nivelesTotales =
+
+                rango.maximo -
+                rango.minimo +
+                1;
+
+
+            const nivelActual =
+
+                CUERVO_DATOS.nivel -
+                rango.minimo;
+
+
+            return {
+
+                actual:
+                    nivelActual,
+
+                total:
+                    nivelesTotales,
+
+                porcentaje:
+
+                    (
+
+                        nivelActual /
+
+                        nivelesTotales
+
+                    ) * 100
+
+            };
+
+        }
+
+
+        /* ================================================================
+           INFORMACIÓN DEL RANGO
+           ================================================================ */
+
+        function CUERVO_obtenerInfoRango() {
+
+            const rango =
+                CUERVO_obtenerRango();
+
+
+            return {
+
+                nombre:
+                    rango.nombre,
+
+                icono:
+                    rango.icono,
+
+                nivelMinimo:
+                    rango.minimo,
+
+                nivelMaximo:
+                    rango.maximo
+
+            };
+
+        }
+
+
+        /* ================================================================
+           PRÓXIMO RANGO
+           ================================================================ */
+
+        function CUERVO_proximoRango() {
+
+            const rangoActual =
+                CUERVO_obtenerRango();
+
+
+            const indice =
+                CUERVO_RANGOS.indexOf(
+                    rangoActual
+                );
+
+
+            if (
+
+                indice ===
+                CUERVO_RANGOS.length - 1
+
+            ) {
+
+                return null;
+
+            }
+
+
+            return CUERVO_RANGOS[
+                indice + 1
+            ];
+
+        }
+
+
+        /* ================================================================
+           INFORMACIÓN COMPLETA DEL USUARIO
+           ================================================================ */
+
+        function CUERVO_obtenerPerfil() {
+
+            const rango =
+                CUERVO_obtenerInfoRango();
+
+
+            const siguiente =
+                CUERVO_proximoRango();
+
+
+            return {
+
+                nombre:
+                    CUERVO_DATOS.nombre,
+
+                nivel:
+                    CUERVO_DATOS.nivel,
+
+                experiencia:
+                    CUERVO_DATOS.experiencia,
+
+                plumas:
+                    CUERVO_DATOS.plumas,
+
+                rango:
+                    rango.nombre,
+
+                iconoRango:
+                    rango.icono,
+
+                siguienteRango:
+                    siguiente
+                        ? siguiente.nombre
+                        : "Rango máximo",
+
+                nivelMaximo:
+                    CUERVO_NIVEL_MAXIMO
+
+            };
+
+        }
+
+
+
     </script>
     <div id="ytReproductor">
 
@@ -24816,6 +26699,91 @@
         </div>
 
     </div>
+
+
+    <!-- ================================================================
+     🪶 HUD DEL TALLER DEL CUERVO
+     ================================================================ -->
+
+    <div id="cuervoHUD">
+
+        <!-- PLUMAS -->
+        <div id="cuervoHUDPlumas">
+
+            <span id="cuervoHUDPlumaIcono">
+                🪶
+            </span>
+
+            <span id="cuervoHUDPlumasValor">
+                0
+            </span>
+
+        </div>
+
+
+        <!-- USUARIO -->
+        <div id="cuervoHUDUsuario">
+
+            <span id="cuervoHUDNombre">
+                Cuervo
+            </span>
+
+            <span id="cuervoHUDNivel">
+                Nivel 1
+            </span>
+
+        </div>
+
+
+        <!-- EXPERIENCIA -->
+        <div id="cuervoHUDExperiencia">
+            <div id="cuervoHUDRango">
+                🐣 Cuervo Novato
+            </div>
+            <div id="cuervoHUDXPTexto">
+
+                <span>
+                    XP
+                </span>
+
+                <span id="cuervoHUDXPValor">
+                    0 / 100
+                </span>
+
+            </div>
+
+            <div id="cuervoHUDXPBarra">
+
+                <div id="cuervoHUDXPProgreso"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TIEMPO -->
+        <div id="cuervoHUDTiempo">
+
+            <span>
+                Próxima 🪶
+            </span>
+
+            <span id="cuervoHUDTiempoValor">
+                12:00
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ANIMACIÓN DE RECOMPENSA -->
+
+    <div id="cuervoHUDRecompensa">
+        🪶 +1 Pluma
+    </div>
+
+
 </body>
 
 </html>
