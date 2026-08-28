@@ -175,7 +175,32 @@
                 0 8px 30px rgba(0, 0, 0, .45);
 
         }
+        /* =========================================================
+           🦁 LEÓN
+           Reino, fuerza y majestuosidad
+           ========================================================= */
 
+        body[data-tema="leon"] {
+
+            --fondo: #100d07;
+            --panel: #1d170d;
+            --panel-2: #2b2315;
+            --panel-3: #080704;
+
+            --texto: #f4ead5;
+            --texto-suave: #b5a37e;
+
+            --acento: #c59a3a;
+            --acento-hover: #e2bb5a;
+
+            --borde: #514324;
+
+            --peligro: #a94f43;
+
+            --sombra:
+                0 8px 30px rgba(0, 0, 0, .5);
+
+        }
         /* ---------------------------------------------------------
        🦉 BÚHO
        Biblioteca nocturna
@@ -4621,7 +4646,10 @@
                         <span>Serpiente</span>
                     </button>
 
-
+<button class="tema-btn" data-tema="leon" onclick="cambiarTema('leon')">
+                        🦁 
+                        <span>León</span>
+                    </button>
 
 
 
@@ -19404,7 +19432,8 @@
             "dragon",
             "lobo",
             "oso",
-            "serpiente"
+            "serpiente",
+            "leon"
 
         ];
 
@@ -25687,7 +25716,7 @@
             */
 
             CUERVO_ganarXP(
-                cantidad * 10
+                cantidad * 1
             );
 
 
