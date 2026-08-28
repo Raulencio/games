@@ -10928,7 +10928,7 @@
 
 
 
- <!-- ================================================================
+    <!-- ================================================================
      🪶 TIENDA DE OBJETOS
      EL TALLER DEL CUERVO
      ================================================================ -->
@@ -42049,32 +42049,34 @@
 
         function CUERVO_OBJETOS_POSICIONAR(elemento) {
 
-            const ancho =
-                window.innerWidth;
-
-
-            const alto =
-                window.innerHeight;
+            const ancho = window.innerWidth;
+            const alto = window.innerHeight;
 
 
             const anchoObjeto =
-                elemento.offsetWidth ||
-                54;
-
+                elemento.offsetWidth || 54;
 
             const altoObjeto =
-                elemento.offsetHeight ||
-                54;
+                elemento.offsetHeight || 54;
 
 
-            /*
-               Detectar HUD.
-            */
+            /* =========================================================
+               POSICIÓN ANTERIOR
+               ========================================================= */
+
+            const posicionAnteriorX =
+                parseFloat(elemento.dataset.posicionX) || 0;
+
+            const posicionAnteriorY =
+                parseFloat(elemento.dataset.posicionY) || 0;
+
+
+            /* =========================================================
+               DETECTAR HUD
+               ========================================================= */
 
             const hud =
-                document.getElementById(
-                    "cuervoHUD"
-                );
+                document.getElementById("cuervoHUD");
 
 
             let limiteInferior =
@@ -42093,17 +42095,16 @@
 
                         limiteInferior,
 
-                        rect.top -
-                        15
+                        rect.top - 15
 
                     );
 
             }
 
 
-            /*
-               Zona válida.
-            */
+            /* =========================================================
+               ZONA VÁLIDA
+               ========================================================= */
 
             const maxX =
                 Math.max(
@@ -42128,6 +42129,10 @@
                 );
 
 
+            /* =========================================================
+               NUEVA POSICIÓN
+               ========================================================= */
+
             const x =
                 CUERVO_OBJETOS_ALEATORIO(
 
@@ -42148,6 +42153,70 @@
                 );
 
 
+            /* =========================================================
+               DIRECCIÓN DEL MOVIMIENTO
+               ========================================================= */
+
+            const deltaX =
+                x - posicionAnteriorX;
+
+
+            const deltaY =
+                y - posicionAnteriorY;
+
+
+            /*
+               atan2 calcula el ángulo
+               exacto entre las dos posiciones.
+            */
+
+            let angulo =
+                Math.atan2(
+                    deltaY,
+                    deltaX
+                ) * (180 / Math.PI);
+
+
+            /*
+               Corrección para que el objeto
+               apunte con su orientación natural.
+        
+               Si tu imagen/emoji apunta originalmente
+               hacia la derecha, deja 0.
+        
+               Si apunta hacia arriba, usa -90.
+            */
+
+            const correccion =
+                0;
+
+
+            angulo += correccion;
+
+
+            /* =========================================================
+               GUARDAR NUEVA POSICIÓN
+               ========================================================= */
+
+            elemento.dataset.posicionX = x;
+            elemento.dataset.posicionY = y;
+
+
+            elemento.dataset.angulo =
+                angulo;
+
+
+
+            /* =========================================================
+        POSICIONAR
+        ========================================================= */
+
+            elemento.style.transition =
+                "left 2s ease-in-out, " +
+                "top 2s ease-in-out, " +
+                "transform 2s ease-in-out";
+
+
             elemento.style.left =
                 x + "px";
 
@@ -42155,8 +42224,16 @@
             elemento.style.top =
                 y + "px";
 
-        }
 
+            /* =========================================================
+               ROTACIÓN
+               ========================================================= */
+
+            elemento.style.transform =
+                `rotate(${angulo}deg)`;
+
+
+        }
 
         /* ================================================================
            🎲 ALEATORIO
@@ -43290,7 +43367,7 @@
 
 
 
-   
+
 
 
 
