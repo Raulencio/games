@@ -40943,7 +40943,7 @@
 
                 tipo: "movil",
 
-                efecto: "mariposa",
+                efecto: ("mariposa"),
 
                 descripcion:
                     "Una criatura inquieta que nunca sigue el mismo camino.",
@@ -42130,6 +42130,9 @@
             }
 
 
+
+
+
             /* =========================================================
                🌙 FRAGMENTO LUNAR
                SIEMPRE ARRIBA
@@ -42139,7 +42142,7 @@
                 objetoId === "luna_fragmento"
             ) {
 
-                const margenSuperior = 20;
+                const margenSuperior = 1;
 
                 const maxY =
                     Math.max(
@@ -42369,7 +42372,7 @@
                 ) {
 
                     const cantidad =
-                        10;
+                        1;
 
 
                     if (
@@ -42509,6 +42512,7 @@
                🍄 LLUVIA DE PARTÍCULAS
                ============================================================ */
 
+
             lluvia_particulas:
 
                 function (
@@ -42516,10 +42520,84 @@
                     elemento
                 ) {
 
+                    /* =========================================================
+                       🍄 PARTÍCULAS
+                       ========================================================= */
+
                     CUERVO_OBJETOS_PARTICULAS(
                         elemento
                     );
 
+
+                    /* =========================================================
+                       🍄 CRECIMIENTO DEL HONGO
+                       ========================================================= */
+
+                    if (
+                        objeto.id === "hongo_mistico"
+                    ) {
+
+                        /*
+                           Tamaño inicial.
+                        */
+
+                        const escalaActual =
+                            parseFloat(
+                                elemento.dataset.escalaHongo
+                            ) || 0.7;
+
+
+                        /*
+                           Cuánto crece por cada clic.
+                        */
+
+                        const crecimiento =
+                            0.08;
+
+
+                        /*
+                           Tamaño máximo.
+                           1.8 = 180% del tamaño original.
+                        */
+
+                        const escalaMaxima =
+                            2.4;
+
+
+                        /*
+                           Aumentar tamaño.
+                        */
+
+                        const nuevaEscala =
+                            Math.min(
+                                escalaActual +
+                                crecimiento,
+                                escalaMaxima
+                            );
+
+
+                        /*
+                           Guardar tamaño.
+                        */
+
+                        elemento.dataset.escalaHongo =
+                            nuevaEscala;
+
+
+                        /*
+                           Aplicar crecimiento.
+                           rotate(0deg) evita que vuelva a girarse.
+                        */
+
+                        elemento.style.transform =
+                            `scale(${nuevaEscala}) rotate(0deg)`;
+
+                    }
+
+
+                    /* =========================================================
+                       🪶 RECOMPENSA
+                       ========================================================= */
 
                     const cantidad =
                         15;
@@ -42567,12 +42645,11 @@
 
                         "+" +
                         cantidad +
-                        " plumas"
+                        " 🪶"
 
                     );
 
                 },
-
 
             /* ============================================================
                🐦 CUERVO
@@ -42713,6 +42790,75 @@
                     );
 
 
+
+                    if (
+                        objeto.id === "semilla_antigua"
+                    ) {
+
+                        /*
+                           Tamaño inicial.
+                        */
+
+                        const escalaActual =
+                            parseFloat(
+                                elemento.dataset.escalaHongo
+                            ) || 0.7;
+
+
+                        /*
+                           Cuánto crece por cada clic.
+                        */
+
+                        const crecimiento =
+                            0.08;
+
+
+                        /*
+                           Tamaño máximo.
+                           1.8 = 180% del tamaño original.
+                        */
+
+                        const escalaMaxima =
+                            2.4;
+
+
+                        /*
+                           Aumentar tamaño.
+                        */
+
+                        const nuevaEscala =
+                            Math.min(
+                                escalaActual +
+                                crecimiento,
+                                escalaMaxima
+                            );
+
+
+                        /*
+                           Guardar tamaño.
+                        */
+
+                        elemento.dataset.escalaHongo =
+                            nuevaEscala;
+
+
+                        /*
+                           Aplicar crecimiento.
+                           rotate(0deg) evita que vuelva a girarse.
+                        */
+
+                        elemento.style.transform =
+                            `scale(${nuevaEscala}) rotate(0deg)`;
+
+                    }
+
+
+
+
+
+
+
+
                     if (
                         typeof CUERVO_DATOS !==
                         "undefined"
@@ -42763,7 +42909,7 @@
 
                         "🌱",
 
-                        "La semilla despertó",
+                        "...",
 
                         "+50 🪶  +25 XP"
 
