@@ -40989,7 +40989,7 @@
 
                 rareza: "Épico",
 
-                tipo: "movil",
+                tipo: "recompensa",
 
                 efecto: "cuervo",
 
@@ -41021,7 +41021,7 @@
                     "Un fragmento de luna que aumenta la experiencia obtenida.",
 
                 visual:
-                    ""
+                    "objeto-visual-hoja"
 
             },
 
@@ -41046,6 +41046,29 @@
 
                 visual:
                     ""
+
+            },
+
+            {
+                id: "sol",
+
+                nombre: "Sol Feliz",
+
+                icono: "🌞",
+
+                precio: 2500,
+
+                rareza: "Legendario",
+
+                tipo: "recompensa",
+
+                efecto: "sol",
+
+                descripcion:
+                    "Sol.",
+
+                visual:
+                    "objeto-visual-hoja"
 
             }
 
@@ -42139,7 +42162,8 @@
                ========================================================= */
 
             if (
-                objetoId === "luna_fragmento"
+                objetoId === "luna_fragmento" ||
+                objetoId === "sol"
             ) {
 
                 const margenSuperior = 1;
@@ -42663,8 +42687,9 @@
                 ) {
 
                     const cantidad =
-                        25;
-
+                        Math.floor(
+                            Math.random() * 16
+                        ) + 10;
 
                     if (
                         typeof CUERVO_DATOS !==
@@ -42676,11 +42701,17 @@
 
                     }
 
-
+                    var expran = 0;
                     if (
                         typeof CUERVO_ganarXP ===
                         "function"
                     ) {
+
+                        expran =
+                            Math.floor(
+                                Math.random() * 16
+                            ) + 10
+
 
                         CUERVO_ganarXP(
                             10
@@ -42718,7 +42749,7 @@
 
                         "El cuervo dejó un regalo",
 
-                        "+25 🪶  +10 XP"
+                        "+" + cantidad + " 🪶  +" + expran + " xp"
 
                     );
 
@@ -42772,6 +42803,56 @@
                     );
 
                 },
+
+
+
+
+
+            sol:
+
+                function (
+                    objeto,
+                    elemento
+                ) {
+
+                    const cantidad =
+                        150;
+
+
+                    if (
+                        typeof CUERVO_ganarXP ===
+                        "function"
+                    ) {
+
+                        CUERVO_ganarXP(
+                            cantidad
+                        );
+
+                    }
+
+
+                    CUERVO_OBJETOS_PARTICULAS(
+                        elemento
+                    );
+
+
+                    CUERVO_OBJETOS_toast(
+
+                        "☀️",
+
+                        "Energia",
+
+                        "+" +
+                        cantidad +
+                        " XP"
+
+                    );
+
+                },
+
+
+
+
 
 
             /* ============================================================
