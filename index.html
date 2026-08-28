@@ -9159,6 +9159,25 @@
             }
 
         }
+
+
+
+
+        .nombre-editable {
+            cursor: pointer;
+        }
+
+        .nombre-editable-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #d4af37;
+            color: inherit;
+            font: inherit;
+            font-weight: inherit;
+            width: 120px;
+            outline: none;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -30692,7 +30711,7 @@
         let CUERVO_DATOS = {
 
             nombre:
-                "Cuervo",
+                "",
 
             plumas:
                 0,
@@ -31087,12 +31106,19 @@
            ⏱️ SISTEMA DE TIEMPO
            ================================================================ */
 
+        let CUERVO_editandoNombre = false;
+
+
         setInterval(
 
             function () {
 
-                CUERVO_DATOS.tiempoAcumulado++;
+                // ⏸️ No avanzar el tiempo mientras se edita
+                if (CUERVO_editandoNombre) {
+                    return;
+                }
 
+                CUERVO_DATOS.tiempoAcumulado++;
 
                 if (
 
@@ -31237,7 +31263,7 @@
            ================================================================ */
 
         const CUERVO_NIVEL_MAXIMO =
-            1200;
+            120;
 
 
         /* ================================================================
@@ -31248,23 +31274,6 @@
 
         /* ================================================================
            🏅 RANGOS DEL CUERVO
-           ================================================================
-
-           NIVEL 1 - 2
-           🐣 Cuervo Novato
-
-           NIVEL 3 - 5
-           🪶 Cuervo Errante
-
-           NIVEL 6 - 8
-           🦅 Cuervo Vigía
-
-           NIVEL 9 - 10
-           ⚔️ Cuervo Veterano
-
-           NIVEL 11 - 12
-           👑 Señor del Cuervo
-
            ================================================================ */
 
 
@@ -31273,14 +31282,14 @@
             {
                 minimo: 1,
                 maximo: 2,
-                nombre: "Cuervo Novato",
+                nombre: "Corvetto",
                 icono: "🐣"
             },
 
             {
                 minimo: 3,
                 maximo: 5,
-                nombre: "Cuervo Errante",
+                nombre: "Cuervo ",
                 icono: "🪶"
             },
 
@@ -31294,16 +31303,34 @@
             {
                 minimo: 9,
                 maximo: 10,
-                nombre: "Cuervo Veterano",
+                nombre: "Cuervo Errante",
                 icono: "⚔️"
             },
 
             {
                 minimo: 11,
-                maximo: 12,
-                nombre: "Señor del Cuervo",
-                icono: "👑"
+                maximo: 20,
+                nombre: "Cuervo Veterano",
+                icono: "🐦‍⬛"
             }
+            ,
+
+            {
+                minimo: 21,
+                maximo: 42,
+                nombre: "Señor Cuervo",
+                icono: "🐦‍⬛"
+            }
+            ,
+
+            {
+                minimo: 43,
+                maximo: 120,
+                nombre: "Don Cuervo",
+                icono: "🐦‍⬛"
+            }
+
+
 
         ];
 
@@ -32543,15 +32570,6 @@
            ================================================================ */
 
         function CICLO_reencarnar() {
-
-            if (CICLO.reencarnando) {
-
-                return;
-
-            }
-
-
-            CICLO.reencarnando = true;
 
 
             if (CICLO.personaje) {
@@ -39011,7 +39029,97 @@
 
 
 
+        document.addEventListener("DOMContentLoaded", () => {
 
+            const campoNombre = document.getElementById("cuervoHUDNombre");
+
+            if (!campoNombre) return;
+
+            // ================================
+            // 🐦‍⬛ CARGAR NOMBRE
+            // ================================
+
+            const nombreGuardado = localStorage.getItem("CUERVO_NOMBRE");
+
+            if (nombreGuardado) {
+                campoNombre.textContent = nombreGuardado;
+            }
+
+            // ================================
+            // ✏️ ACTIVAR EDICIÓN
+            // ================================
+
+
+
+
+            campoNombre.addEventListener("click", () => {
+
+                if (campoNombre.querySelector("input")) return;
+
+                // ⏸️ PAUSAR SISTEMA DE TIEMPO
+                CUERVO_editandoNombre = true;
+
+                const nombreActual = campoNombre.textContent.trim();
+
+                const input = document.createElement("input");
+
+                input.type = "text";
+                input.value = nombreActual;
+                input.maxLength = 16;
+                input.className = "nombre-editable-input";
+
+                campoNombre.textContent = "";
+                campoNombre.appendChild(input);
+
+                input.focus();
+                input.select();
+
+                // ================================
+                // 💾 TERMINAR EDICIÓN
+                // ================================
+
+                function guardarNombre() {
+
+                    let nuevoNombre = input.value.trim();
+
+                    if (nuevoNombre === "") {
+                        nuevoNombre = nombreActual;
+                    }
+
+                    localStorage.setItem(
+                        "CUERVO_NOMBRE",
+                        nuevoNombre
+                    );
+
+                    CUERVO_DATOS.nombre = nuevoNombre;
+
+
+                    campoNombre.textContent = nuevoNombre;
+
+                    // ▶️ REANUDAR SISTEMA DE TIEMPO
+                    CUERVO_editandoNombre = false;
+                }
+                // Enter = guardar
+                input.addEventListener("keydown", (evento) => {
+
+                    if (evento.key === "Enter") {
+                        guardarNombre();
+                    }
+
+                    if (evento.key === "Escape") {
+
+                        campoNombre.textContent = nombreActual;
+
+                        // ▶️ REANUDAR
+                        CUERVO_editandoNombre = false;
+                    }
+                });
+
+                // Click fuera = guardar
+                input.addEventListener("blur", guardarNombre);
+            });
+
+        });
 
 
 
@@ -39097,7 +39205,20 @@
      ================================================================ -->
 
     <div id="cuervoHUD">
+        <div id="cuervoHUDUsuario">
 
+
+            <span id="cuervoHUDNombre" class="nombre-editable">
+                ...
+            </span>
+
+
+
+            <span id="cuervoHUDNivel">
+                Nivel 1
+            </span>
+
+        </div>
         <!-- PLUMAS -->
         <div id="cuervoHUDPlumas">
 
@@ -39113,23 +39234,13 @@
 
 
         <!-- USUARIO -->
-        <div id="cuervoHUDUsuario">
 
-            <span id="cuervoHUDNombre">
-                Cuervo
-            </span>
-
-            <span id="cuervoHUDNivel">
-                Nivel 1
-            </span>
-
-        </div>
 
 
         <!-- EXPERIENCIA -->
         <div id="cuervoHUDExperiencia">
             <div id="cuervoHUDRango">
-                🐣 Cuervo Novato
+                🐣 Corvetto
             </div>
             <div id="cuervoHUDXPTexto">
 
