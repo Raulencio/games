@@ -40871,7 +40871,7 @@
 
                 tipo: "movil",
 
-                efecto: "teletransportar",
+                efecto: "caer",
 
                 descripcion:
                     "Una hoja que jamás permanece en el mismo lugar.",
@@ -41992,11 +41992,7 @@
             );
 
 
-            CUERVO_OBJETOS_POSICIONAR(
-
-                elemento
-
-            );
+            CUERVO_OBJETOS_POSICIONAR(elemento, objeto);
 
 
             /*
@@ -42046,12 +42042,10 @@
         /* ================================================================
            📍 POSICIÓN SEGURA
            ================================================================ */
-
-        function CUERVO_OBJETOS_POSICIONAR(elemento) {
+        function CUERVO_OBJETOS_POSICIONAR(elemento, objeto) {
 
             const ancho = window.innerWidth;
             const alto = window.innerHeight;
-
 
             const anchoObjeto =
                 elemento.offsetWidth || 54;
@@ -42061,23 +42055,140 @@
 
 
             /* =========================================================
-               POSICIÓN ANTERIOR
+               IDENTIFICAR OBJETO
                ========================================================= */
 
-            const posicionAnteriorX =
-                parseFloat(elemento.dataset.posicionX) || 0;
-
-            const posicionAnteriorY =
-                parseFloat(elemento.dataset.posicionY) || 0;
+            const objetoId =
+                objeto ? objeto.id : elemento.dataset.objetoId;
 
 
             /* =========================================================
-               DETECTAR HUD
+               POSICIÓN HORIZONTAL
+               ========================================================= */
+
+            const maxX =
+                Math.max(
+                    CUERVO_OBJETOS_CONFIG.margen,
+                    ancho -
+                    anchoObjeto -
+                    CUERVO_OBJETOS_CONFIG.margen
+                );
+
+            const x =
+                CUERVO_OBJETOS_ALEATORIO(
+                    CUERVO_OBJETOS_CONFIG.margen,
+                    maxX
+                );
+
+
+            /* =========================================================
+               🌱🍄 SEMILLA Y HONGO
+               SIEMPRE ABAJO
+               ========================================================= */
+
+            if (
+                objetoId === "semilla_antigua" ||
+                objetoId === "hongo_mistico"
+            ) {
+
+                const margenInferior = 65;
+
+                const y =
+                    Math.max(
+                        0,
+                        alto -
+                        altoObjeto -
+                        margenInferior
+                    );
+
+
+                elemento.style.transition =
+                    "left 2s ease-in-out, top 2s ease-in-out";
+
+
+                elemento.style.left =
+                    x + "px";
+
+                elemento.style.top =
+                    y + "px";
+
+
+                elemento.dataset.posicionX = x;
+                elemento.dataset.posicionY = y;
+
+
+                /*
+                   NO GIRAR.
+                   Mantener orientación original.
+                */
+
+                elemento.style.transform =
+                    "rotate(0deg)";
+
+
+                return;
+            }
+
+
+            /* =========================================================
+               🌙 FRAGMENTO LUNAR
+               SIEMPRE ARRIBA
+               ========================================================= */
+
+            if (
+                objetoId === "luna_fragmento"
+            ) {
+
+                const margenSuperior = 20;
+
+                const maxY =
+                    Math.max(
+                        margenSuperior,
+                        Math.floor(alto * 0.30) -
+                        altoObjeto
+                    );
+
+                const y =
+                    CUERVO_OBJETOS_ALEATORIO(
+                        margenSuperior,
+                        maxY
+                    );
+
+
+                elemento.style.transition =
+                    "left 2s ease-in-out, top 2s ease-in-out";
+
+
+                elemento.style.left =
+                    x + "px";
+
+                elemento.style.top =
+                    y + "px";
+
+
+                elemento.dataset.posicionX = x;
+                elemento.dataset.posicionY = y;
+
+
+                /*
+                   NO GIRAR.
+                */
+
+                elemento.style.transform =
+                    "rotate(0deg)";
+
+
+                return;
+            }
+
+
+            /* =========================================================
+               🌲 RESTO DE OBJETOS
+               COMPORTAMIENTO NORMAL
                ========================================================= */
 
             const hud =
                 document.getElementById("cuervoHUD");
-
 
             let limiteInferior =
                 alto -
@@ -42089,152 +42200,45 @@
                 const rect =
                     hud.getBoundingClientRect();
 
-
                 limiteInferior =
                     Math.min(
-
                         limiteInferior,
-
                         rect.top - 15
-
                     );
-
             }
-
-
-            /* =========================================================
-               ZONA VÁLIDA
-               ========================================================= */
-
-            const maxX =
-                Math.max(
-
-                    CUERVO_OBJETOS_CONFIG.margen,
-
-                    ancho -
-                    anchoObjeto -
-                    CUERVO_OBJETOS_CONFIG.margen
-
-                );
 
 
             const maxY =
                 Math.max(
-
                     CUERVO_OBJETOS_CONFIG.margen,
-
                     limiteInferior -
                     altoObjeto
-
-                );
-
-
-            /* =========================================================
-               NUEVA POSICIÓN
-               ========================================================= */
-
-            const x =
-                CUERVO_OBJETOS_ALEATORIO(
-
-                    CUERVO_OBJETOS_CONFIG.margen,
-
-                    maxX
-
                 );
 
 
             const y =
                 CUERVO_OBJETOS_ALEATORIO(
-
                     20,
-
                     maxY
-
                 );
 
 
-            /* =========================================================
-               DIRECCIÓN DEL MOVIMIENTO
-               ========================================================= */
-
-            const deltaX =
-                x - posicionAnteriorX;
-
-
-            const deltaY =
-                y - posicionAnteriorY;
-
-
-            /*
-               atan2 calcula el ángulo
-               exacto entre las dos posiciones.
-            */
-
-            let angulo =
-                Math.atan2(
-                    deltaY,
-                    deltaX
-                ) * (180 / Math.PI);
-
-
-            /*
-               Corrección para que el objeto
-               apunte con su orientación natural.
-        
-               Si tu imagen/emoji apunta originalmente
-               hacia la derecha, deja 0.
-        
-               Si apunta hacia arriba, usa -90.
-            */
-
-            const correccion =
-                0;
-
-
-            angulo += correccion;
-
-
-            /* =========================================================
-               GUARDAR NUEVA POSICIÓN
-               ========================================================= */
-
-            elemento.dataset.posicionX = x;
-            elemento.dataset.posicionY = y;
-
-
-            elemento.dataset.angulo =
-                angulo;
-
-
-
-            /* =========================================================
-        POSICIONAR
-        ========================================================= */
-
             elemento.style.transition =
                 "left 2s ease-in-out, " +
-                "top 2s ease-in-out, " +
-                "transform 2s ease-in-out";
+                "top 2s ease-in-out";
 
 
             elemento.style.left =
                 x + "px";
 
-
             elemento.style.top =
                 y + "px";
 
 
-            /* =========================================================
-               ROTACIÓN
-               ========================================================= */
-
-            elemento.style.transform =
-                `rotate(${angulo}deg)`;
-
+            elemento.dataset.posicionX = x;
+            elemento.dataset.posicionY = y;
 
         }
-
         /* ================================================================
            🎲 ALEATORIO
            ================================================================ */
@@ -42348,9 +42352,7 @@
                     elemento
                 ) {
 
-                    CUERVO_OBJETOS_POSICIONAR(
-                        elemento
-                    );
+                    CUERVO_OBJETOS_POSICIONAR(elemento, objeto);
 
                 },
 
@@ -42425,10 +42427,7 @@
                        cambia de lugar.
                     */
 
-                    CUERVO_OBJETOS_POSICIONAR(
-                        elemento
-                    );
-
+                    CUERVO_OBJETOS_POSICIONAR(elemento, objeto);
                 },
 
 
@@ -42490,9 +42489,7 @@
                     elemento
                 ) {
 
-                    CUERVO_OBJETOS_POSICIONAR(
-                        elemento
-                    );
+                    CUERVO_OBJETOS_POSICIONAR(elemento, objeto);
 
 
                     CUERVO_OBJETOS_toast(
@@ -42649,10 +42646,7 @@
                     );
 
 
-                    CUERVO_OBJETOS_POSICIONAR(
-                        elemento
-                    );
-
+                    CUERVO_OBJETOS_POSICIONAR(elemento, objeto);
                 },
 
 
@@ -43018,9 +43012,7 @@
                 }
 
 
-                CUERVO_OBJETOS_POSICIONAR(
-                    elemento
-                );
+                CUERVO_OBJETOS_POSICIONAR(elemento, objeto);
 
 
                 const siguiente =
@@ -43172,9 +43164,7 @@
 
                         elemento => {
 
-                            CUERVO_OBJETOS_POSICIONAR(
-                                elemento
-                            );
+                            CUERVO_OBJETOS_POSICIONAR(elemento, objeto);
 
                         }
 
