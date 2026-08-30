@@ -3,12 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-      content="width=device-width,
-               initial-scale=1,
-               maximum-scale=1,
-               user-scalable=no">
+content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<title>MONSTER HUNTER 2.5D</title>
+<title>BEAST HUNTER</title>
 
 <style>
 *{
@@ -24,7 +21,7 @@ html,body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#080b09;
+    background:#080a08;
     font-family:Arial,sans-serif;
 }
 
@@ -33,10 +30,7 @@ html,body{
     inset:0;
     width:100%;
     height:100%;
-    display:block;
 }
-
-/* ================= HUD ================= */
 
 #hud{
     position:fixed;
@@ -44,50 +38,64 @@ html,body{
     pointer-events:none;
 }
 
+/* ================= ESTADÍSTICAS ================= */
+
 #stats{
     position:absolute;
     left:12px;
     top:12px;
-    width:210px;
+    width:220px;
 }
 
-.level{
-    color:#fff;
-    font-size:13px;
+.title{
+    color:#e0c77b;
+    font-size:18px;
     font-weight:bold;
+    letter-spacing:2px;
+    text-shadow:0 2px 5px #000;
+    margin-bottom:7px;
+}
+
+.status{
+    color:#fff;
+    font-size:12px;
     margin-bottom:5px;
     text-shadow:0 2px 4px #000;
 }
 
 .bar{
+    height:14px;
     width:100%;
-    height:15px;
-    margin-bottom:5px;
+    background:#20221f;
     border:2px solid #111;
-    border-radius:9px;
-    background:#242424;
+    border-radius:8px;
     overflow:hidden;
+    margin-bottom:5px;
 }
 
 .bar span{
     display:block;
-    height:100%;
     width:100%;
+    height:100%;
 }
 
 .hp span{
-    background:#b83232;
+    background:#b83333;
 }
 
 .stamina span{
-    background:#c49b35;
+    background:#c19a3a;
 }
 
-.xp span{
-    background:#3e79b7;
+.beastbar span{
+    background:#7b3f38;
 }
 
-/* ================= MINIMAPA ================= */
+.capturebar span{
+    background:#4f7c52;
+}
+
+/* ================= MINI MAP ================= */
 
 #miniMap{
     position:absolute;
@@ -95,9 +103,9 @@ html,body{
     top:12px;
     width:130px;
     height:130px;
+    border:3px solid #b8a36b;
     border-radius:50%;
-    border:3px solid #b9a46c;
-    background:#182018;
+    background:#182019;
     box-shadow:0 4px 15px #000;
 }
 
@@ -112,23 +120,23 @@ html,body{
     transform:translate(-50%,-50%);
 }
 
-#crosshair::before,
-#crosshair::after{
+#crosshair:before,
+#crosshair:after{
     content:"";
     position:absolute;
     background:#fff;
-    opacity:.85;
+    opacity:.8;
 }
 
-#crosshair::before{
+#crosshair:before{
     width:2px;
     height:24px;
     left:11px;
 }
 
-#crosshair::after{
-    width:24px;
+#crosshair:after{
     height:2px;
+    width:24px;
     top:11px;
 }
 
@@ -137,12 +145,12 @@ html,body{
 #joystick{
     position:absolute;
     left:18px;
-    bottom:22px;
+    bottom:20px;
     width:125px;
     height:125px;
     border-radius:50%;
-    background:#ffffff10;
-    border:2px solid #ffffff2d;
+    background:#ffffff0d;
+    border:2px solid #ffffff25;
     pointer-events:auto;
 }
 
@@ -153,61 +161,70 @@ html,body{
     width:57px;
     height:57px;
     border-radius:50%;
-    background:#cdbb8a55;
-    border:2px solid #d8c89788;
+    background:#cbb47755;
+    border:2px solid #d7c68f88;
 }
 
 /* ================= BOTONES ================= */
 
 #buttons{
     position:absolute;
-    right:16px;
-    bottom:18px;
-    width:200px;
-    height:190px;
+    right:15px;
+    bottom:16px;
+    width:215px;
+    height:205px;
     pointer-events:auto;
 }
 
 .button{
     position:absolute;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     color:#fff;
-    background:#151916dd;
-    border:2px solid #ffffff35;
+    background:#131713dd;
+    border:2px solid #ffffff32;
     box-shadow:0 4px 12px #000;
     font-weight:bold;
 }
 
 .button:active{
-    transform:scale(.91);
-    background:#725b35ee;
+    transform:scale(.92);
+    background:#715a32;
 }
 
 #attack{
     right:0;
     bottom:30px;
-    width:82px;
-    height:82px;
+    width:85px;
+    height:85px;
     border-radius:50%;
     font-size:30px;
 }
 
+#net{
+    right:98px;
+    bottom:4px;
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    font-size:25px;
+}
+
 #dodge{
-    right:95px;
-    bottom:0;
+    right:110px;
+    bottom:95px;
     width:60px;
     height:60px;
     border-radius:50%;
 }
 
 #camera{
-    right:7px;
+    right:0;
     top:0;
-    width:70px;
-    height:58px;
-    border-radius:16px;
+    width:78px;
+    height:54px;
+    border-radius:15px;
     font-size:11px;
 }
 
@@ -225,6 +242,26 @@ html,body{
     opacity:0;
     white-space:nowrap;
 }
+
+/* ================= ESTADO BESTIA ================= */
+
+#beastStatus{
+    position:absolute;
+    left:50%;
+    top:18%;
+    transform:translateX(-50%);
+    text-align:center;
+    color:#fff;
+    font-size:15px;
+    font-weight:bold;
+    text-shadow:0 3px 8px #000;
+}
+
+#beastName{
+    color:#d7bd72;
+    font-size:20px;
+    letter-spacing:1px;
+}
 </style>
 </head>
 
@@ -236,8 +273,12 @@ html,body{
 
     <div id="stats">
 
-        <div class="level" id="level">
-            NIVEL 1 · CAZADOR
+        <div class="title">
+            BEAST HUNTER
+        </div>
+
+        <div class="status" id="playerStatus">
+            CAZADOR · NIVEL 1
         </div>
 
         <div class="bar hp">
@@ -248,15 +289,30 @@ html,body{
             <span id="staminaBar"></span>
         </div>
 
-        <div class="bar xp">
-            <span id="xpBar"></span>
+        <div class="bar beastbar">
+            <span id="beastHpBar"></span>
+        </div>
+
+        <div class="bar capturebar">
+            <span id="captureBar"></span>
         </div>
 
     </div>
 
-    <canvas id="miniMap"
-            width="130"
-            height="130"></canvas>
+    <div id="beastStatus">
+        <div id="beastName">
+            BESTIA ALFA
+        </div>
+        <div id="beastState">
+            ESTADO: NORMAL
+        </div>
+    </div>
+
+    <canvas
+        id="miniMap"
+        width="130"
+        height="130">
+    </canvas>
 
     <div id="crosshair"></div>
 
@@ -276,6 +332,12 @@ html,body{
             id="dodge"
             class="button">
             ↪
+        </div>
+
+        <div
+            id="net"
+            class="button">
+            🕸
         </div>
 
         <div
@@ -302,19 +364,19 @@ const canvas =
 const ctx =
     canvas.getContext("2d");
 
-let W = 0;
-let H = 0;
+let W=0;
+let H=0;
 
 function resize(){
 
-    W = window.innerWidth;
-    H = window.innerHeight;
+    W=innerWidth;
+    H=innerHeight;
 
-    canvas.width = W;
-    canvas.height = H;
+    canvas.width=W;
+    canvas.height=H;
 }
 
-window.addEventListener(
+addEventListener(
     "resize",
     resize
 );
@@ -326,7 +388,7 @@ resize();
    MAPA
 ========================================================= */
 
-const MAP = [
+const MAP=[
 "####################",
 "#..................#",
 "#..................#",
@@ -349,31 +411,25 @@ const MAP = [
 "####################"
 ];
 
-const MAP_W = 20;
-const MAP_H = 20;
-
-
-/* =========================================================
-   COLISIÓN MAPA
-========================================================= */
+const MAP_W=20;
+const MAP_H=20;
 
 function wall(x,y){
 
-    const gx = Math.floor(x);
-    const gy = Math.floor(y);
+    const gx=Math.floor(x);
+    const gy=Math.floor(y);
 
     if(
-        gx < 0 ||
-        gy < 0 ||
-        gx >= MAP_W ||
-        gy >= MAP_H
+        gx<0 ||
+        gy<0 ||
+        gx>=MAP_W ||
+        gy>=MAP_H
     ){
         return true;
     }
 
-    return MAP[gy][gx] === "#";
+    return MAP[gy][gx]==="#";
 }
-
 
 function free(x,y,r){
 
@@ -385,11 +441,10 @@ function free(x,y,r){
     );
 }
 
-
 function moveEntity(e,dx,dy){
 
-    const nx = e.x + dx;
-    const ny = e.y + dy;
+    const nx=e.x+dx;
+    const ny=e.y+dy;
 
     if(
         free(
@@ -398,7 +453,7 @@ function moveEntity(e,dx,dy){
             e.radius
         )
     ){
-        e.x = nx;
+        e.x=nx;
     }
 
     if(
@@ -408,7 +463,7 @@ function moveEntity(e,dx,dy){
             e.radius
         )
     ){
-        e.y = ny;
+        e.y=ny;
     }
 }
 
@@ -417,7 +472,7 @@ function moveEntity(e,dx,dy){
    JUGADOR
 ========================================================= */
 
-const player = {
+const player={
 
     x:2.7,
     y:2.7,
@@ -434,7 +489,6 @@ const player = {
     stamina:100,
     maxStamina:100,
 
-    xp:0,
     level:1,
 
     attackTimer:0,
@@ -450,19 +504,19 @@ const player = {
    CÁMARA
 ========================================================= */
 
-let thirdPerson = false;
+let thirdPerson=false;
 
-let cameraDistance = 4;
+let cameraDistance=4;
 
-const MIN_ZOOM = 1.8;
-const MAX_ZOOM = 7;
+const MIN_ZOOM=1.8;
+const MAX_ZOOM=7;
 
-let cameraPitch = 0;
+let cameraPitch=0;
 
-const MIN_PITCH = -0.65;
-const MAX_PITCH = 0.65;
+const MIN_PITCH=-.65;
+const MAX_PITCH=.65;
 
-const camera = {
+const camera={
 
     x:player.x,
     y:player.y,
@@ -474,88 +528,105 @@ const camera = {
 
 
 /* =========================================================
-   MONSTRUOS
+   LA BESTIA
 ========================================================= */
 
-const monsters = [];
+const beast={
+
+    /*
+        Una única bestia grande
+        por mapa.
+    */
+
+    x:14.5,
+    y:9.5,
+
+    radius:.75,
+
+    maxHp:1000,
+    hp:1000,
+
+    maxStamina:100,
+    stamina:100,
+
+    state:"normal",
+
+    angle:0,
+
+    speed:1.15,
+
+    hitTimer:0,
+
+    attackTimer:0,
+
+    tiredTimer:0,
+
+    downTimer:0,
+
+    netTimer:0,
+
+    escapeTimer:0,
+
+    captureProgress:0,
+
+    alive:true
+};
 
 
-function addMonster(x,y){
+/*
+    Estados posibles:
 
-    monsters.push({
-
-        x:x,
-        y:y,
-
-        radius:.45,
-
-        hp:100,
-        maxHp:100,
-
-        speed:1,
-
-        angle:0,
-
-        hit:0,
-
-        attackTimer:0,
-
-        alive:true
-    });
-}
-
-
-addMonster(8.5,3.5);
-addMonster(14.5,8.5);
-addMonster(6.5,13.5);
-addMonster(16,15);
+    normal
+    herida
+    cansada
+    noqueada
+    atrapada
+    huida
+*/
 
 
 /* =========================================================
    JOYSTICK
 ========================================================= */
 
-const joystick =
+const joystick=
     document.getElementById(
         "joystick"
     );
 
-const stick =
+const stick=
     document.getElementById(
         "stick"
     );
 
-let joyX = 0;
-let joyY = 0;
-
-let joystickPointer = null;
+let joyX=0;
+let joyY=0;
+let joyPointer=null;
 
 
 joystick.addEventListener(
     "pointerdown",
-    function(e){
+    e=>{
 
-        joystickPointer =
-            e.pointerId;
+        joyPointer=e.pointerId;
 
         joystick.setPointerCapture(
             e.pointerId
         );
 
-        joystickMove(e);
+        updateJoystick(e);
     }
 );
 
 
 joystick.addEventListener(
     "pointermove",
-    function(e){
+    e=>{
 
         if(
-            e.pointerId ===
-            joystickPointer
+            e.pointerId===joyPointer
         ){
-            joystickMove(e);
+            updateJoystick(e);
         }
     }
 );
@@ -563,65 +634,55 @@ joystick.addEventListener(
 
 joystick.addEventListener(
     "pointerup",
-    joystickReset
+    resetJoystick
 );
 
 
 joystick.addEventListener(
     "pointercancel",
-    joystickReset
+    resetJoystick
 );
 
 
-function joystickMove(e){
+function updateJoystick(e){
 
-    const r =
+    const r=
         joystick.getBoundingClientRect();
 
-    let x =
-        e.clientX -
+    let x=
+        e.clientX-
         (r.left+r.width/2);
 
-    let y =
-        e.clientY -
+    let y=
+        e.clientY-
         (r.top+r.height/2);
 
-    const max = 45;
+    const max=45;
 
-    const distance =
-        Math.hypot(x,y);
+    const d=Math.hypot(x,y);
 
-    if(distance > max){
+    if(d>max){
 
-        x =
-            x/distance*
-            max;
-
-        y =
-            y/distance*
-            max;
+        x=x/d*max;
+        y=y/d*max;
     }
 
-    joyX = x/max;
-    joyY = y/max;
+    joyX=x/max;
+    joyY=y/max;
 
-    stick.style.transform =
-        "translate("+
-        x+
-        "px,"+
-        y+
-        "px)";
+    stick.style.transform=
+        `translate(${x}px,${y}px)`;
 }
 
 
-function joystickReset(){
+function resetJoystick(){
 
-    joystickPointer = null;
+    joyPointer=null;
 
-    joyX = 0;
-    joyY = 0;
+    joyX=0;
+    joyY=0;
 
-    stick.style.transform =
+    stick.style.transform=
         "translate(0,0)";
 }
 
@@ -630,28 +691,20 @@ function joystickReset(){
    CÁMARA TÁCTIL
 ========================================================= */
 
-const cameraTouches =
-    new Map();
+const touches=new Map();
 
-let previousX = 0;
-let previousY = 0;
+let previousX=0;
+let previousY=0;
 
-let pinchDistance = 0;
-let pinchZoom = 4;
+let pinchDistance=0;
+let pinchZoom=4;
 
-
-/*
-    Zona derecha de pantalla.
-
-    El joystick queda completamente
-    separado de la cámara.
-*/
 
 canvas.addEventListener(
     "pointerdown",
-    function(e){
+    e=>{
 
-        cameraTouches.set(
+        touches.set(
             e.pointerId,
             {
                 x:e.clientX,
@@ -659,22 +712,18 @@ canvas.addEventListener(
             }
         );
 
-        if(
-            cameraTouches.size === 1
-        ){
+        if(touches.size===1){
 
-            previousX = e.clientX;
-            previousY = e.clientY;
+            previousX=e.clientX;
+            previousY=e.clientY;
         }
 
-        if(
-            cameraTouches.size === 2
-        ){
+        if(touches.size===2){
 
-            pinchDistance =
+            pinchDistance=
                 getPinchDistance();
 
-            pinchZoom =
+            pinchZoom=
                 cameraDistance;
         }
     }
@@ -683,17 +732,15 @@ canvas.addEventListener(
 
 canvas.addEventListener(
     "pointermove",
-    function(e){
+    e=>{
 
         if(
-            !cameraTouches.has(
-                e.pointerId
-            )
+            !touches.has(e.pointerId)
         ){
             return;
         }
 
-        cameraTouches.set(
+        touches.set(
             e.pointerId,
             {
                 x:e.clientX,
@@ -703,72 +750,51 @@ canvas.addEventListener(
 
 
         /*
-            DOS DEDOS = ZOOM
+            DOS DEDOS:
+            acercar / alejar
         */
 
-        if(
-            cameraTouches.size >= 2
-        ){
+        if(touches.size>=2){
 
-            const distance =
+            const d=
                 getPinchDistance();
 
-            if(
-                pinchDistance > 0
-            ){
+            const change=
+                d-pinchDistance;
 
-                const change =
-                    distance -
-                    pinchDistance;
+            cameraDistance=
+                pinchZoom-
+                change*.012;
 
-                cameraDistance =
-                    pinchZoom -
-                    change*.012;
-
-                cameraDistance =
-                    Math.max(
-                        MIN_ZOOM,
-                        Math.min(
-                            MAX_ZOOM,
-                            cameraDistance
-                        )
-                    );
-            }
+            cameraDistance=
+                Math.max(
+                    MIN_ZOOM,
+                    Math.min(
+                        MAX_ZOOM,
+                        cameraDistance
+                    )
+                );
 
             return;
         }
 
 
         /*
-            UN DEDO = CÁMARA
+            UN DEDO:
+            mirar
         */
 
-        const dx =
-            e.clientX -
-            previousX;
+        const dx=
+            e.clientX-previousX;
 
-        const dy =
-            e.clientY -
-            previousY;
+        const dy=
+            e.clientY-previousY;
 
+        player.angle+=dx*.004;
 
-        /*
-            Giro horizontal.
-        */
+        cameraPitch+=dy*.005;
 
-        player.angle +=
-            dx*.004;
-
-
-        /*
-            Cámara vertical.
-        */
-
-        cameraPitch +=
-            dy*.005;
-
-
-        cameraPitch =
+        cameraPitch=
             Math.max(
                 MIN_PITCH,
                 Math.min(
@@ -777,140 +803,73 @@ canvas.addEventListener(
                 )
             );
 
-
-        previousX =
-            e.clientX;
-
-        previousY =
-            e.clientY;
+        previousX=e.clientX;
+        previousY=e.clientY;
     }
 );
 
 
 canvas.addEventListener(
     "pointerup",
-    cameraTouchEnd
+    removeTouch
 );
 
 canvas.addEventListener(
     "pointercancel",
-    cameraTouchEnd
+    removeTouch
 );
 
 
-function cameraTouchEnd(e){
+function removeTouch(e){
 
-    cameraTouches.delete(
+    touches.delete(
         e.pointerId
     );
 
     if(
-        cameraTouches.size < 2
+        touches.size<2
     ){
-        pinchDistance = 0;
+        pinchDistance=0;
     }
 }
 
 
 function getPinchDistance(){
 
-    const values =
-        [...cameraTouches.values()];
+    const values=
+        [...touches.values()];
 
-    if(values.length < 2)
+    if(values.length<2)
         return 0;
 
     return Math.hypot(
-        values[0].x -
-        values[1].x,
-
-        values[0].y -
-        values[1].y
+        values[0].x-values[1].x,
+        values[0].y-values[1].y
     );
 }
 
 
 /* =========================================================
-   CAMBIO DE CÁMARA
+   CAMBIO 1P / 3P
 ========================================================= */
 
 document
 .getElementById("camera")
 .addEventListener(
     "pointerdown",
-    function(e){
+    e=>{
 
         e.preventDefault();
 
-        thirdPerson =
-            !thirdPerson;
+        thirdPerson=!thirdPerson;
 
-        if(thirdPerson){
-
-            showMessage(
-                "TERCERA PERSONA"
-            );
-
-        }else{
-
-            showMessage(
-                "PRIMERA PERSONA"
-            );
-        }
+        showMessage(
+            thirdPerson
+            ? "TERCERA PERSONA"
+            : "PRIMERA PERSONA"
+        );
     }
 );
-
-
-/* =========================================================
-   OBJETIVO MÁS CERCANO
-========================================================= */
-
-function nearestEnemy(){
-
-    let result = null;
-    let best = Infinity;
-
-
-    for(
-        const enemy of monsters
-    ){
-
-        if(!enemy.alive)
-            continue;
-
-
-        const dx =
-            enemy.x -
-            player.x;
-
-        const dy =
-            enemy.y -
-            player.y;
-
-
-        const distance =
-            Math.hypot(
-                dx,
-                dy
-            );
-
-
-        if(
-            distance <= 2.8 &&
-            distance < best
-        ){
-
-            best =
-                distance;
-
-            result =
-                enemy;
-        }
-    }
-
-
-    return result;
-}
 
 
 /* =========================================================
@@ -921,7 +880,7 @@ document
 .getElementById("attack")
 .addEventListener(
     "pointerdown",
-    function(e){
+    e=>{
 
         e.preventDefault();
 
@@ -933,79 +892,208 @@ document
 function attack(){
 
     if(
-        player.attackCooldown > 0
+        player.attackCooldown>0
+    ){
+        return;
+    }
+
+    player.attackCooldown=.48;
+
+    player.attackTimer=.28;
+
+
+    if(
+        beast.state==="atrapada" ||
+        beast.state==="huida"
     ){
         return;
     }
 
 
-    const enemy =
-        nearestEnemy();
+    const dx=
+        beast.x-player.x;
+
+    const dy=
+        beast.y-player.y;
+
+    const distance=
+        Math.hypot(dx,dy);
 
 
     /*
-        EN 3ª PERSONA:
+        Alcance del arma.
+    */
 
-        el cazador gira automáticamente
-        hacia el monstruo.
+    if(distance>2.9){
+
+        showMessage(
+            "DEMASIADO LEJOS"
+        );
+
+        return;
+    }
+
+
+    /*
+        Auto orientación.
+    */
+
+    player.angle=
+        Math.atan2(
+            dy,
+            dx
+        );
+
+
+    /*
+        DAÑO
+    */
+
+    beast.hp-=45;
+
+    beast.hitTimer=.18;
+
+    /*
+        Cada golpe reduce energía.
+        Cuando llega a 0 queda cansada.
+    */
+
+    beast.stamina-=15;
+
+
+    if(
+        beast.hp<=0
+    ){
+
+        beast.hp=0;
+
+        beast.state=
+            "cansada";
+    }
+
+
+    if(
+        beast.stamina<=0 &&
+        beast.state==="normal"
+    ){
+
+        beast.stamina=0;
+
+        beast.state=
+            "cansada";
+
+        beast.tiredTimer=3;
+
+        showMessage(
+            "¡LA BESTIA ESTÁ CANSADA!"
+        );
+
+        return;
+    }
+
+
+    if(
+        beast.state==="normal" ||
+        beast.state==="cansada"
+    ){
+
+        showMessage(
+            "⚔ GOLPE · -45"
+        );
+    }
+
+
+    /*
+        Mucho daño acumulado:
+        posibilidad de caída.
     */
 
     if(
-        thirdPerson &&
-        enemy
+        beast.hp<350 &&
+        beast.state!=="cansada"
     ){
 
-        player.angle =
-            Math.atan2(
-                enemy.y-player.y,
-                enemy.x-player.x
-            );
-    }
+        beast.state=
+            "noqueada";
 
-
-    player.attackTimer =
-        .28;
-
-    player.attackCooldown =
-        .48;
-
-
-    if(enemy){
-
-        enemy.hp -= 35;
-
-        enemy.hit =
-            .15;
-
-
-        if(
-            enemy.hp <= 0
-        ){
-
-            enemy.alive =
-                false;
-
-            player.xp += 50;
-
-            showMessage(
-                "+50 XP"
-            );
-
-            levelCheck();
-
-        }else{
-
-            showMessage(
-                "⚔ IMPACTO"
-            );
-        }
-
-    }else{
+        beast.downTimer=5;
 
         showMessage(
-            "⚔ ATAQUE"
+            "¡BESTIA NOQUEADA!"
         );
     }
+}
+
+
+/* =========================================================
+   RED
+========================================================= */
+
+document
+.getElementById("net")
+.addEventListener(
+    "pointerdown",
+    e=>{
+
+        e.preventDefault();
+
+        useNet();
+    }
+);
+
+
+function useNet(){
+
+    /*
+        La red solo funciona
+        cuando la bestia está cansada
+        o noqueada.
+    */
+
+    if(
+        beast.state!=="cansada" &&
+        beast.state!=="noqueada"
+    ){
+
+        showMessage(
+            "LA BESTIA AÚN PUEDE LUCHAR"
+        );
+
+        return;
+    }
+
+
+    const dx=
+        beast.x-player.x;
+
+    const dy=
+        beast.y-player.y;
+
+    const distance=
+        Math.hypot(dx,dy);
+
+
+    if(distance>3){
+
+        showMessage(
+            "ACÉRCATE A LA BESTIA"
+        );
+
+        return;
+    }
+
+
+    beast.state=
+        "atrapada";
+
+    beast.netTimer=
+        4;
+
+    beast.captureProgress=0;
+
+    showMessage(
+        "🕸 ¡RED COLOCADA!"
+    );
 }
 
 
@@ -1017,52 +1105,49 @@ document
 .getElementById("dodge")
 .addEventListener(
     "pointerdown",
-    function(e){
+    e=>{
 
         e.preventDefault();
 
         if(
-            player.stamina < 25
+            player.stamina<25
         ){
             return;
         }
 
-        player.stamina -= 25;
+        player.stamina-=25;
 
-        player.dodgeTimer =
-            .25;
+        player.dodgeTimer=.25;
     }
 );
 
 
 /* =========================================================
-   MOVIMIENTO
+   MOVIMIENTO JUGADOR
 ========================================================= */
 
 function updatePlayer(dt){
 
     if(
-        player.attackTimer > 0
+        player.attackTimer>0
     ){
-        player.attackTimer -= dt;
+        player.attackTimer-=dt;
     }
-
 
     if(
-        player.attackCooldown > 0
+        player.attackCooldown>0
     ){
-        player.attackCooldown -= dt;
+        player.attackCooldown-=dt;
     }
-
 
     if(
-        player.dodgeTimer > 0
+        player.dodgeTimer>0
     ){
-        player.dodgeTimer -= dt;
+        player.dodgeTimer-=dt;
     }
 
 
-    player.stamina =
+    player.stamina=
         Math.min(
             player.maxStamina,
             player.stamina+
@@ -1070,74 +1155,66 @@ function updatePlayer(dt){
         );
 
 
-    let forward =
-        -joyY;
+    const forward=-joyY;
+    const strafe=joyX;
 
-    let strafe =
-        joyX;
-
-
-    const input =
+    const input=
         Math.hypot(
             forward,
             strafe
         );
 
 
-    player.moving =
-        input > .1;
+    player.moving=
+        input>.1;
 
 
     if(!player.moving)
         return;
 
 
-    if(input > 1){
+    let f=forward;
+    let s=strafe;
 
-        forward /= input;
-        strafe /= input;
+
+    if(input>1){
+
+        f/=input;
+        s/=input;
     }
 
 
-    let speed =
+    let speed=
         player.speed;
 
 
     if(
-        player.dodgeTimer > 0
+        player.dodgeTimer>0
     ){
-        speed = 5.5;
+        speed=5.5;
     }
 
 
-    /*
-        Movimiento relativo a la cámara.
-    */
+    const cos=
+        Math.cos(player.angle);
 
-    const cos =
-        Math.cos(
-            player.angle
-        );
-
-    const sin =
-        Math.sin(
-            player.angle
-        );
+    const sin=
+        Math.sin(player.angle);
 
 
-    const dx =
+    const dx=
         (
-            cos*forward -
-            sin*strafe
+            cos*f-
+            sin*s
         )*
         speed*
         dt;
 
 
-    const dy =
+    const dy=
         (
-            sin*forward +
-            cos*strafe
+            sin*f+
+            cos*s
         )*
         speed*
         dt;
@@ -1151,34 +1228,26 @@ function updatePlayer(dt){
 
 
     /*
-        El personaje siempre mira
-        hacia la dirección del desplazamiento.
+        En tercera persona
+        el personaje acompaña
+        automáticamente la dirección.
     */
 
-    if(
-        thirdPerson
-    ){
+    if(thirdPerson){
 
-        const movementAngle =
+        const target=
             Math.atan2(
                 dy,
                 dx
             );
 
-
-        const difference =
+        const diff=
             normalizeAngle(
-                movementAngle -
-                player.angle
+                target-player.angle
             );
 
-
-        /*
-            Rotación progresiva.
-        */
-
-        player.angle +=
-            difference*
+        player.angle+=
+            diff*
             Math.min(
                 1,
                 dt*8
@@ -1188,102 +1257,308 @@ function updatePlayer(dt){
 
 
 /* =========================================================
-   IA
+   IA DE LA BESTIA
 ========================================================= */
 
-function updateMonsters(dt){
+function updateBeast(dt){
 
-    for(
-        const enemy of monsters
+    if(
+        !beast.alive
+    ){
+        return;
+    }
+
+
+    if(
+        beast.hitTimer>0
+    ){
+        beast.hitTimer-=dt;
+    }
+
+
+    /*
+        ESTADO ATRAPADA
+    */
+
+    if(
+        beast.state==="atrapada"
     ){
 
-        if(!enemy.alive)
-            continue;
+        beast.netTimer-=dt;
+
+        /*
+            La bestia intenta romper
+            la red.
+        */
+
+        beast.captureProgress+=
+            dt*22;
 
 
-        if(enemy.hit > 0)
-            enemy.hit -= dt;
-
-
-        const dx =
-            player.x -
-            enemy.x;
-
-        const dy =
-            player.y -
-            enemy.y;
-
-
-        const distance =
-            Math.hypot(
-                dx,
-                dy
-            );
-
-
-        enemy.angle =
-            Math.atan2(
-                dy,
-                dx
-            );
-
+        /*
+            Probabilidad de romperla
+            antes de ser capturada.
+        */
 
         if(
-            distance < 8 &&
-            distance > 1.25
+            beast.netTimer<=0
         ){
 
-            const speed =
-                enemy.speed*dt;
+            beast.state=
+                "normal";
 
+            beast.stamina=
+                30;
 
-            moveEntity(
-                enemy,
+            beast.captureProgress=0;
 
-                Math.cos(
-                    enemy.angle
-                )*speed,
+            beast.escapeTimer=3;
 
-                Math.sin(
-                    enemy.angle
-                )*speed
+            showMessage(
+                "¡LA BESTIA ROMPIÓ LA RED!"
             );
+
+            return;
         }
 
 
         if(
-            distance <= 1.25
+            beast.captureProgress>=100
         ){
 
-            enemy.attackTimer -= dt;
+            beast.state=
+                "capturada";
+
+            beast.alive=false;
+
+            showMessage(
+                "🏆 ¡BESTIA CAPTURADA!"
+            );
+
+            return;
+        }
+
+        return;
+    }
 
 
-            if(
-                enemy.attackTimer <= 0
-            ){
+    /*
+        ESTADO NOQUEADA
+    */
 
-                enemy.attackTimer =
-                    1.15;
+    if(
+        beast.state==="noqueada"
+    ){
+
+        beast.downTimer-=dt;
 
 
-                if(
-                    player.dodgeTimer <= 0
-                ){
+        if(
+            beast.downTimer<=0
+        ){
 
-                    player.hp -= 10;
+            beast.state=
+                "normal";
 
-                    showMessage(
-                        "-10 VIDA"
-                    );
-                }
-            }
+            beast.stamina=50;
+
+            showMessage(
+                "¡LA BESTIA SE LEVANTÓ!"
+            );
+        }
+
+        return;
+    }
+
+
+    /*
+        ESTADO CANSADA
+    */
+
+    if(
+        beast.state==="cansada"
+    ){
+
+        beast.tiredTimer-=dt;
+
+        beast.stamina+=
+            10*dt;
+
+
+        /*
+            Si está sin vida
+            queda derribada.
+        */
+
+        if(
+            beast.hp<=0
+        ){
+
+            beast.state=
+                "noqueada";
+
+            beast.downTimer=5;
+
+            showMessage(
+                "¡LA BESTIA CAYÓ!"
+            );
+
+            return;
+        }
+
+
+        /*
+            Recuperación.
+        */
+
+        if(
+            beast.stamina>=35 &&
+            beast.tiredTimer<=0
+        ){
+
+            beast.stamina=35;
+
+            beast.state=
+                "normal";
+
+            showMessage(
+                "LA BESTIA SE RECUPERÓ"
+            );
+        }
+
+        return;
+    }
+
+
+    /*
+        HUIDA
+    */
+
+    if(
+        beast.escapeTimer>0
+    ){
+
+        beast.escapeTimer-=dt;
+
+        const escapeAngle=
+            Math.atan2(
+                beast.y-player.y,
+                beast.x-player.x
+            );
+
+
+        moveEntity(
+            beast,
+            Math.cos(
+                escapeAngle
+            )*
+            beast.speed*
+            2*
+            dt,
+
+            Math.sin(
+                escapeAngle
+            )*
+            beast.speed*
+            2*
+            dt
+        );
+
+        return;
+    }
+
+
+    /*
+        COMBATE NORMAL
+    */
+
+    const dx=
+        player.x-beast.x;
+
+    const dy=
+        player.y-beast.y;
+
+    const distance=
+        Math.hypot(
+            dx,
+            dy
+        );
+
+
+    beast.angle=
+        Math.atan2(
+            dy,
+            dx
+        );
+
+
+    /*
+        Persigue al cazador.
+    */
+
+    if(
+        distance<9 &&
+        distance>1.5
+    ){
+
+        moveEntity(
+            beast,
+
+            Math.cos(beast.angle)*
+            beast.speed*
+            dt,
+
+            Math.sin(beast.angle)*
+            beast.speed*
+            dt
+        );
+    }
+
+
+    /*
+        Ataque de la bestia.
+    */
+
+    beast.attackTimer-=dt;
+
+
+    if(
+        distance<=1.5 &&
+        beast.attackTimer<=0
+    ){
+
+        beast.attackTimer=1.25;
+
+
+        if(
+            player.dodgeTimer<=0
+        ){
+
+            player.hp-=15;
+
+            showMessage(
+                "¡LA BESTIA TE GOLPEÓ!"
+            );
         }
     }
+
+
+    /*
+        Recuperación gradual
+        de energía.
+    */
+
+    beast.stamina=
+        Math.min(
+            beast.maxStamina,
+            beast.stamina+
+            4*dt
+        );
 }
 
 
 /* =========================================================
-   NORMALIZAR ÁNGULO
+   ÁNGULO
 ========================================================= */
 
 function normalizeAngle(a){
@@ -1301,141 +1576,103 @@ function normalizeAngle(a){
 
 function updateCamera(dt){
 
-    let targetX;
-    let targetY;
+    let tx;
+    let ty;
 
 
     if(!thirdPerson){
 
-        /*
-            Primera persona:
-            cámara dentro del personaje.
-        */
-
-        targetX =
-            player.x;
-
-        targetY =
-            player.y;
+        tx=player.x;
+        ty=player.y;
 
     }else{
 
-        /*
-            Tercera persona:
-            cámara detrás del personaje.
-        */
-
-        const behind =
-            player.angle +
+        const behind=
+            player.angle+
             Math.PI;
 
 
-        targetX =
-            player.x +
+        tx=
+            player.x+
             Math.cos(behind)*
             cameraDistance;
 
 
-        targetY =
-            player.y +
+        ty=
+            player.y+
             Math.sin(behind)*
             cameraDistance;
 
 
         /*
-            Evitar atravesar paredes.
+            La cámara no atraviesa
+            paredes.
         */
 
         if(
             !free(
-                targetX,
-                targetY,
+                tx,
+                ty,
                 .18
             )
         ){
 
-            let found = false;
-
-
             for(
-                let d =
-                    cameraDistance;
-
-                d >= MIN_ZOOM;
-
-                d -= .15
+                let d=cameraDistance;
+                d>=MIN_ZOOM;
+                d-=.15
             ){
 
-                const tx =
-                    player.x +
+                const testX=
+                    player.x+
                     Math.cos(behind)*d;
 
-                const ty =
-                    player.y +
+                const testY=
+                    player.y+
                     Math.sin(behind)*d;
 
 
                 if(
                     free(
-                        tx,
-                        ty,
+                        testX,
+                        testY,
                         .18
                     )
                 ){
 
-                    targetX = tx;
-                    targetY = ty;
-
-                    found = true;
+                    tx=testX;
+                    ty=testY;
 
                     break;
                 }
-            }
-
-
-            if(!found){
-
-                targetX =
-                    player.x;
-
-                targetY =
-                    player.y;
             }
         }
     }
 
 
-    const smooth =
-        1 -
-        Math.pow(
+    const smooth=
+        1-Math.pow(
             .001,
             dt
         );
 
 
-    camera.x +=
-        (
-            targetX-camera.x
-        )*
+    camera.x+=
+        (tx-camera.x)*
         smooth;
 
-
-    camera.y +=
-        (
-            targetY-camera.y
-        )*
+    camera.y+=
+        (ty-camera.y)*
         smooth;
 
-
-    camera.angle +=
+    camera.angle+=
         normalizeAngle(
             player.angle-
             camera.angle
         )*
         smooth;
 
-
-    camera.pitch +=
+    camera.pitch+=
         (
             cameraPitch-
             camera.pitch
@@ -1448,53 +1685,41 @@ function updateCamera(dt){
    RAYCAST
 ========================================================= */
 
-const FOV =
-    Math.PI/3;
+const FOV=Math.PI/3;
 
-const RAYS =
-    220;
+const RAYS=220;
 
-const MAX_DEPTH =
-    20;
+const MAX_DEPTH=20;
 
 
 function raycast(angle){
 
-    const dx =
-        Math.cos(angle);
+    const dx=Math.cos(angle);
+    const dy=Math.sin(angle);
 
-    const dy =
-        Math.sin(angle);
-
-
-    let distance = 0;
-
+    let distance=0;
 
     while(
-        distance <
-        MAX_DEPTH
+        distance<MAX_DEPTH
     ){
 
-        distance += .035;
+        distance+=.035;
 
-
-        const x =
-            camera.x +
+        const x=
+            camera.x+
             dx*distance;
 
-        const y =
-            camera.y +
+        const y=
+            camera.y+
             dy*distance;
 
 
         if(
             wall(x,y)
         ){
-
             return distance;
         }
     }
-
 
     return MAX_DEPTH;
 }
@@ -1506,8 +1731,8 @@ function raycast(angle){
 
 function renderWorld(){
 
-    const horizon =
-        H/2 +
+    const horizon=
+        H/2+
         camera.pitch*
         H*.5;
 
@@ -1516,7 +1741,7 @@ function renderWorld(){
         CIELO
     */
 
-    const sky =
+    const sky=
         ctx.createLinearGradient(
             0,
             0,
@@ -1526,17 +1751,15 @@ function renderWorld(){
 
     sky.addColorStop(
         0,
-        "#162733"
+        "#17262b"
     );
 
     sky.addColorStop(
         1,
-        "#66715b"
+        "#68725e"
     );
 
-
-    ctx.fillStyle =
-        sky;
+    ctx.fillStyle=sky;
 
     ctx.fillRect(
         0,
@@ -1547,10 +1770,10 @@ function renderWorld(){
 
 
     /*
-        SUELO
+        TERRENO
     */
 
-    const ground =
+    const ground=
         ctx.createLinearGradient(
             0,
             horizon,
@@ -1560,7 +1783,7 @@ function renderWorld(){
 
     ground.addColorStop(
         0,
-        "#474a3b"
+        "#50523e"
     );
 
     ground.addColorStop(
@@ -1568,9 +1791,7 @@ function renderWorld(){
         "#11140f"
     );
 
-
-    ctx.fillStyle =
-        ground;
+    ctx.fillStyle=ground;
 
     ctx.fillRect(
         0,
@@ -1580,17 +1801,16 @@ function renderWorld(){
     );
 
 
-    const depth = [];
-
-    const rays =
+    const rays=
         Math.min(
             RAYS,
             Math.floor(W/3)
         );
 
-
-    const column =
+    const column=
         W/rays;
+
+    const depth=[];
 
 
     for(
@@ -1599,27 +1819,26 @@ function renderWorld(){
         i++
     ){
 
-        const angle =
-            camera.angle -
-            FOV/2 +
-            (i/rays)*FOV;
+        const angle=
+            camera.angle-
+            FOV/2+
+            i/rays*FOV;
 
 
-        let distance =
+        let distance=
             raycast(angle);
 
 
-        distance *=
+        distance*=
             Math.cos(
                 angle-camera.angle
             );
 
 
-        depth[i] =
-            distance;
+        depth[i]=distance;
 
 
-        const wallHeight =
+        const wallHeight=
             Math.min(
                 H*1.7,
                 H/
@@ -1628,26 +1847,24 @@ function renderWorld(){
             );
 
 
-        const top =
-            horizon -
+        const top=
+            horizon-
             wallHeight/2;
 
 
-        const shade =
+        const shade=
             Math.max(
                 20,
                 120-distance*6
             );
 
 
-        ctx.fillStyle =
-            "rgb("+
-            Math.floor(shade)+
-            ","+
-            Math.floor(shade*.87)+
-            ","+
-            Math.floor(shade*.68)+
-            ")";
+        ctx.fillStyle=
+            `rgb(
+                ${Math.floor(shade)},
+                ${Math.floor(shade*.87)},
+                ${Math.floor(shade*.68)}
+            )`;
 
 
         ctx.fillRect(
@@ -1659,7 +1876,7 @@ function renderWorld(){
     }
 
 
-    renderEntities(
+    renderBeast(
         depth,
         rays,
         column,
@@ -1667,7 +1884,16 @@ function renderWorld(){
     );
 
 
-    if(!thirdPerson){
+    if(thirdPerson){
+
+        renderPlayer(
+            depth,
+            rays,
+            column,
+            horizon
+        );
+
+    }else{
 
         renderWeapon();
     }
@@ -1675,230 +1901,134 @@ function renderWorld(){
 
 
 /* =========================================================
-   ENTIDADES
+   RENDER BESTIA
 ========================================================= */
 
-function renderEntities(
+function renderBeast(
     depth,
     rays,
     column,
     horizon
 ){
 
-    const list = [];
-
-
-    for(
-        const enemy of monsters
+    if(
+        !beast.alive
     ){
-
-        if(!enemy.alive)
-            continue;
-
-
-        const dx =
-            enemy.x-camera.x;
-
-        const dy =
-            enemy.y-camera.y;
-
-
-        const distance =
-            Math.hypot(
-                dx,
-                dy
-            );
-
-
-        let relative =
-            Math.atan2(
-                dy,
-                dx
-            ) -
-            camera.angle;
-
-
-        relative =
-            normalizeAngle(
-                relative
-            );
-
-
-        if(
-            Math.abs(relative) >
-            FOV*.75
-        ){
-            continue;
-        }
-
-
-        list.push({
-            enemy,
-            distance,
-            relative
-        });
+        return;
     }
 
 
-    /*
-        Jugador en 3P.
-    */
+    const dx=
+        beast.x-camera.x;
 
-    if(thirdPerson){
-
-        const dx =
-            player.x-camera.x;
-
-        const dy =
-            player.y-camera.y;
+    const dy=
+        beast.y-camera.y;
 
 
-        const distance =
-            Math.hypot(
-                dx,
-                dy
-            );
+    const distance=
+        Math.hypot(
+            dx,
+            dy
+        );
 
 
-        let relative =
-            Math.atan2(
-                dy,
-                dx
-            ) -
-            camera.angle;
+    let relative=
+        Math.atan2(
+            dy,
+            dx
+        )-
+        camera.angle;
 
 
-        relative =
-            normalizeAngle(
-                relative
-            );
+    relative=
+        normalizeAngle(relative);
 
 
-        list.push({
-            player:true,
-            distance,
-            relative
-        });
+    if(
+        Math.abs(relative)>FOV*.8
+    ){
+        return;
     }
 
 
-    list.sort(
-        (a,b)=>
-            b.distance-a.distance
+    const screenX=
+        W/2+
+        Math.tan(relative)/
+        Math.tan(FOV/2)*
+        W/2;
+
+
+    const size=
+        Math.min(
+            H*1.7,
+            H/
+            (distance+.001)*
+            1.35
+        );
+
+
+    const index=
+        Math.floor(
+            screenX/column
+        );
+
+
+    if(
+        index>=0 &&
+        index<rays &&
+        distance>
+        depth[index]+.5
+    ){
+        return;
+    }
+
+
+    const baseY=
+        horizon+
+        size*.4;
+
+
+    drawBeast(
+        screenX,
+        baseY,
+        size
     );
-
-
-    for(
-        const item of list
-    ){
-
-        const distance =
-            item.distance;
-
-
-        const screenX =
-            W/2 +
-            Math.tan(
-                item.relative
-            )/
-            Math.tan(FOV/2)*
-            W/2;
-
-
-        if(
-            screenX < -300 ||
-            screenX > W+300
-        ){
-            continue;
-        }
-
-
-        const size =
-            Math.min(
-                H*1.4,
-                H/
-                (distance+.001)*
-                .8
-            );
-
-
-        const index =
-            Math.floor(
-                screenX/column
-            );
-
-
-        if(
-            index >= 0 &&
-            index < rays &&
-            distance >
-            depth[index]+.25
-        ){
-            continue;
-        }
-
-
-        const baseY =
-            horizon +
-            size*.42;
-
-
-        if(item.player){
-
-            drawPlayer(
-                screenX,
-                baseY,
-                size
-            );
-
-        }else{
-
-            drawMonster(
-                screenX,
-                baseY,
-                size,
-                item.enemy
-            );
-        }
-    }
 }
 
 
 /* =========================================================
-   MONSTRUO
+   DIBUJAR BESTIA
 ========================================================= */
 
-function drawMonster(
+function drawBeast(
     x,
     y,
-    size,
-    enemy
+    s
 ){
-
-    const s =
-        Math.max(
-            25,
-            size
-        );
-
 
     ctx.save();
 
 
+    const scale=
+        Math.max(
+            40,
+            s
+        );
+
+
     /*
-        sombra
+        Sombra
     */
 
-    ctx.fillStyle =
-        "#0008";
+    ctx.fillStyle="#0008";
 
     ctx.beginPath();
 
     ctx.ellipse(
         x,
         y,
-        s*.25,
-        s*.07,
+        scale*.48,
+        scale*.10,
         0,
         0,
         Math.PI*2
@@ -1908,22 +2038,22 @@ function drawMonster(
 
 
     /*
-        cuerpo
+        CUERPO GRANDE
     */
 
-    ctx.fillStyle =
-        enemy.hit > 0
-        ? "#fff"
-        : "#554431";
+    ctx.fillStyle=
+        beast.hitTimer>0
+        ? "#eee"
+        : "#554636";
 
 
     ctx.beginPath();
 
     ctx.ellipse(
         x,
-        y-s*.55,
-        s*.28,
-        s*.38,
+        y-scale*.53,
+        scale*.43,
+        scale*.35,
         0,
         0,
         Math.PI*2
@@ -1933,128 +2063,159 @@ function drawMonster(
 
 
     /*
-        piernas
+        CUELLO
     */
 
-    ctx.strokeStyle =
-        "#282019";
+    ctx.fillStyle=
+        "#493b2e";
 
-    ctx.lineWidth =
+    ctx.fillRect(
+        x-scale*.20,
+        y-scale*.83,
+        scale*.40,
+        scale*.30
+    );
+
+
+    /*
+        CABEZA
+    */
+
+    ctx.fillStyle=
+        "#66513d";
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        x,
+        y-scale*1.02,
+        scale*.28,
+        scale*.25,
+        0,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    /*
+        CUERNOS
+    */
+
+    ctx.strokeStyle=
+        "#21170e";
+
+    ctx.lineWidth=
         Math.max(
             4,
-            s*.08
+            scale*.055
         );
-
 
     ctx.beginPath();
 
     ctx.moveTo(
-        x-s*.1,
-        y-s*.3
+        x-scale*.18,
+        y-scale*1.13
     );
 
     ctx.lineTo(
-        x-s*.14,
-        y
+        x-scale*.40,
+        y-scale*1.40
     );
 
     ctx.moveTo(
-        x+s*.1,
-        y-s*.3
+        x+scale*.18,
+        y-scale*1.13
     );
 
     ctx.lineTo(
-        x+s*.14,
-        y
+        x+scale*.40,
+        y-scale*1.40
     );
 
     ctx.stroke();
 
 
     /*
-        cabeza
+        PATAS
     */
 
-    ctx.fillStyle =
-        enemy.hit > 0
-        ? "#fff"
-        : "#806546";
+    ctx.strokeStyle=
+        "#30271e";
 
-
-    ctx.beginPath();
-
-    ctx.arc(
-        x,
-        y-s*.97,
-        s*.2,
-        0,
-        Math.PI*2
-    );
-
-    ctx.fill();
-
-
-    /*
-        cuernos
-    */
-
-    ctx.strokeStyle =
-        "#21170f";
-
-    ctx.lineWidth =
+    ctx.lineWidth=
         Math.max(
-            3,
-            s*.045
+            5,
+            scale*.09
         );
-
 
     ctx.beginPath();
 
     ctx.moveTo(
-        x-s*.12,
-        y-s*1.08
+        x-scale*.27,
+        y-scale*.36
     );
 
     ctx.lineTo(
-        x-s*.27,
-        y-s*1.3
+        x-scale*.30,
+        y
     );
 
     ctx.moveTo(
-        x+s*.12,
-        y-s*1.08
+        x-scale*.08,
+        y-scale*.30
     );
 
     ctx.lineTo(
-        x+s*.27,
-        y-s*1.3
+        x-scale*.10,
+        y
+    );
+
+    ctx.moveTo(
+        x+scale*.08,
+        y-scale*.30
+    );
+
+    ctx.lineTo(
+        x+scale*.10,
+        y
+    );
+
+    ctx.moveTo(
+        x+scale*.27,
+        y-scale*.36
+    );
+
+    ctx.lineTo(
+        x+scale*.30,
+        y
     );
 
     ctx.stroke();
 
 
     /*
-        ojos
+        OJOS
     */
 
-    ctx.fillStyle =
-        "#e7c653";
-
+    ctx.fillStyle=
+        "#d7ae3b";
 
     ctx.beginPath();
 
     ctx.arc(
-        x-s*.08,
-        y-s*.97,
-        s*.035,
+        x-scale*.11,
+        y-scale*1.03,
+        scale*.045,
         0,
         Math.PI*2
     );
 
     ctx.arc(
-        x+s*.08,
-        y-s*.97,
-        s*.035,
+        x+scale*.11,
+        y-scale*1.03,
+        scale*.045,
         0,
         Math.PI*2
     );
@@ -2063,36 +2224,106 @@ function drawMonster(
 
 
     /*
-        vida
+        COLA
     */
 
-    const barWidth =
-        s*.6;
+    ctx.strokeStyle=
+        "#493628";
 
+    ctx.lineWidth=
+        Math.max(
+            4,
+            scale*.055
+        );
 
-    ctx.fillStyle =
-        "#111";
+    ctx.beginPath();
 
-    ctx.fillRect(
-        x-barWidth/2,
-        y-s*1.38,
-        barWidth,
-        7
+    ctx.moveTo(
+        x+scale*.38,
+        y-scale*.60
     );
 
+    ctx.quadraticCurveTo(
+        x+scale*.65,
+        y-scale*.80,
+        x+scale*.62,
+        y-scale*.48
+    );
 
-    ctx.fillStyle =
-        "#c33";
+    ctx.stroke();
+
+
+    /*
+        RED
+    */
+
+    if(
+        beast.state==="atrapada"
+    ){
+
+        ctx.strokeStyle=
+            "#e2e2df";
+
+        ctx.lineWidth=
+            Math.max(
+                3,
+                scale*.025
+            );
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            x-scale*.48,
+            y-scale*1.15
+        );
+
+        ctx.lineTo(
+            x+scale*.48,
+            y-scale*.30
+        );
+
+        ctx.moveTo(
+            x+scale*.48,
+            y-scale*1.15
+        );
+
+        ctx.lineTo(
+            x-scale*.48,
+            y-scale*.30
+        );
+
+        ctx.stroke();
+    }
+
+
+    /*
+        VIDA DE LA BESTIA
+    */
+
+    const bw=
+        scale*.9;
+
+    ctx.fillStyle="#111";
 
     ctx.fillRect(
-        x-barWidth/2,
-        y-s*1.38,
-        barWidth*
+        x-bw/2,
+        y-scale*1.55,
+        bw,
+        9
+    );
+
+    ctx.fillStyle="#9b3b35";
+
+    ctx.fillRect(
+        x-bw/2,
+        y-scale*1.55,
+        bw*
         Math.max(
             0,
-            enemy.hp/enemy.maxHp
+            beast.hp/
+            beast.maxHp
         ),
-        7
+        9
     );
 
 
@@ -2104,18 +2335,74 @@ function drawMonster(
    JUGADOR 3P
 ========================================================= */
 
+function renderPlayer(
+    depth,
+    rays,
+    column,
+    horizon
+){
+
+    const dx=
+        player.x-camera.x;
+
+    const dy=
+        player.y-camera.y;
+
+
+    const distance=
+        Math.hypot(dx,dy);
+
+
+    let relative=
+        Math.atan2(
+            dy,
+            dx
+        )-
+        camera.angle;
+
+
+    relative=
+        normalizeAngle(relative);
+
+
+    if(
+        Math.abs(relative)>FOV*.8
+    ){
+        return;
+    }
+
+
+    const x=
+        W/2+
+        Math.tan(relative)/
+        Math.tan(FOV/2)*
+        W/2;
+
+
+    const size=
+        Math.min(
+            H,
+            H/
+            (distance+.001)*
+            .8
+        );
+
+
+    drawPlayer(
+        x,
+        horizon+size*.45,
+        size
+    );
+}
+
+
 function drawPlayer(
     x,
     y,
-    size
+    s
 ){
 
-    const s =
-        Math.max(
-            25,
-            size
-        );
-
+    s=Math.max(30,s);
 
     ctx.save();
 
@@ -2124,16 +2411,15 @@ function drawPlayer(
         sombra
     */
 
-    ctx.fillStyle =
-        "#0008";
+    ctx.fillStyle="#0008";
 
     ctx.beginPath();
 
     ctx.ellipse(
         x,
         y,
-        s*.22,
-        s*.07,
+        s*.25,
+        s*.08,
         0,
         0,
         Math.PI*2
@@ -2146,18 +2432,15 @@ function drawPlayer(
         piernas
     */
 
-    ctx.strokeStyle =
-        "#24282b";
+    ctx.strokeStyle="#24282b";
 
-    ctx.lineWidth =
-        s*.11;
-
+    ctx.lineWidth=s*.11;
 
     ctx.beginPath();
 
     ctx.moveTo(
         x-s*.08,
-        y-s*.28
+        y-s*.30
     );
 
     ctx.lineTo(
@@ -2167,7 +2450,7 @@ function drawPlayer(
 
     ctx.moveTo(
         x+s*.08,
-        y-s*.28
+        y-s*.30
     );
 
     ctx.lineTo(
@@ -2182,9 +2465,7 @@ function drawPlayer(
         cuerpo
     */
 
-    ctx.fillStyle =
-        "#35434a";
-
+    ctx.fillStyle="#38464b";
 
     ctx.beginPath();
 
@@ -2203,9 +2484,7 @@ function drawPlayer(
         cabeza
     */
 
-    ctx.fillStyle =
-        "#bd8b68";
-
+    ctx.fillStyle="#b98162";
 
     ctx.beginPath();
 
@@ -2224,26 +2503,24 @@ function drawPlayer(
         espada
     */
 
-    ctx.strokeStyle =
-        "#d6d9dc";
+    ctx.strokeStyle="#d5d8dc";
 
-    ctx.lineWidth =
+    ctx.lineWidth=
         Math.max(
             2,
             s*.045
         );
 
-
     ctx.beginPath();
 
     ctx.moveTo(
-        x+s*.19,
+        x+s*.20,
         y-s*.45
     );
 
     ctx.lineTo(
-        x+s*.47,
-        y-s*.95
+        x+s*.50,
+        y-s*.98
     );
 
     ctx.stroke();
@@ -2254,28 +2531,28 @@ function drawPlayer(
 
 
 /* =========================================================
-   ARMA
+   ARMA 1P
 ========================================================= */
 
 function renderWeapon(){
 
-    let swing = 0;
+    let swing=0;
 
 
     if(
-        player.attackTimer > 0
+        player.attackTimer>0
     ){
 
-        const p =
-            1 -
+        const p=
+            1-
             player.attackTimer/
             .28;
 
-
-        swing =
+        swing=
             Math.sin(
                 p*Math.PI
-            )*100;
+            )*
+            100;
     }
 
 
@@ -2287,19 +2564,13 @@ function renderWeapon(){
         H*.8
     );
 
-
     ctx.rotate(
         -.32+
         swing*.003
     );
 
 
-    /*
-        brazo
-    */
-
-    ctx.fillStyle =
-        "#9d6d4e";
+    ctx.fillStyle="#9d6d4e";
 
     ctx.fillRect(
         -25,
@@ -2309,12 +2580,7 @@ function renderWeapon(){
     );
 
 
-    /*
-        empuñadura
-    */
-
-    ctx.fillStyle =
-        "#392317";
+    ctx.fillStyle="#392317";
 
     ctx.fillRect(
         18,
@@ -2324,12 +2590,7 @@ function renderWeapon(){
     );
 
 
-    /*
-        guardia
-    */
-
-    ctx.fillStyle =
-        "#c19c55";
+    ctx.fillStyle="#c19c55";
 
     ctx.fillRect(
         -12,
@@ -2339,13 +2600,7 @@ function renderWeapon(){
     );
 
 
-    /*
-        hoja
-    */
-
-    ctx.fillStyle =
-        "#d4d8da";
-
+    ctx.fillStyle="#d4d8da";
 
     ctx.beginPath();
 
@@ -2377,12 +2632,12 @@ function renderWeapon(){
    MINIMAPA
 ========================================================= */
 
-const mini =
+const mini=
     document.getElementById(
         "miniMap"
     );
 
-const mctx =
+const mctx=
     mini.getContext("2d");
 
 
@@ -2396,11 +2651,10 @@ function renderMinimap(){
     );
 
 
-    const scale = 6;
+    const scale=6;
 
 
     mctx.save();
-
 
     mctx.translate(
         65-player.x*scale,
@@ -2421,11 +2675,11 @@ function renderMinimap(){
         ){
 
             if(
-                MAP[y][x] === "#"
+                MAP[y][x]==="#"
             ){
 
-                mctx.fillStyle =
-                    "#565348";
+                mctx.fillStyle=
+                    "#55534b";
 
                 mctx.fillRect(
                     x*scale,
@@ -2439,27 +2693,20 @@ function renderMinimap(){
 
 
     /*
-        enemigos
+        BESTIA
     */
 
-    for(
-        const enemy of monsters
-    ){
+    if(beast.alive){
 
-        if(!enemy.alive)
-            continue;
-
-
-        mctx.fillStyle =
-            "#c33";
-
+        mctx.fillStyle=
+            "#b83b36";
 
         mctx.beginPath();
 
         mctx.arc(
-            enemy.x*scale,
-            enemy.y*scale,
-            3,
+            beast.x*scale,
+            beast.y*scale,
+            5,
             0,
             Math.PI*2
         );
@@ -2475,9 +2722,7 @@ function renderMinimap(){
         jugador
     */
 
-    mctx.fillStyle =
-        "#fff";
-
+    mctx.fillStyle="#fff";
 
     mctx.beginPath();
 
@@ -2492,12 +2737,7 @@ function renderMinimap(){
     mctx.fill();
 
 
-    /*
-        dirección
-    */
-
-    mctx.strokeStyle =
-        "#fff";
+    mctx.strokeStyle="#fff";
 
     mctx.beginPath();
 
@@ -2519,59 +2759,39 @@ function renderMinimap(){
 
 
 /* =========================================================
-   NIVEL
+   ESTADO DE LA BESTIA
 ========================================================= */
 
-function levelCheck(){
+function getBeastState(){
 
-    const required =
-        player.level*100;
-
-
-    if(
-        player.xp >= required
+    switch(
+        beast.state
     ){
 
-        player.xp -= required;
+        case "normal":
+            return "NORMAL";
 
-        player.level++;
+        case "herida":
+            return "HERIDA";
 
-        player.maxHp += 15;
+        case "cansada":
+            return "CANSADA";
 
-        player.hp =
-            player.maxHp;
+        case "noqueada":
+            return "NOQUEADA";
 
+        case "atrapada":
+            return "ATRAPADA";
 
-        showMessage(
-            "⭐ NIVEL "+
-            player.level
-        );
+        case "capturada":
+            return "CAPTURADA";
+
+        case "huida":
+            return "HUIDA";
+
+        default:
+            return "NORMAL";
     }
-}
-
-
-/* =========================================================
-   MENSAJES
-========================================================= */
-
-let messageTime = 0;
-
-
-function showMessage(text){
-
-    const element =
-        document.getElementById(
-            "message"
-        );
-
-
-    element.textContent =
-        text;
-
-    element.style.opacity =
-        "1";
-
-    messageTime = 1.1;
 }
 
 
@@ -2583,7 +2803,7 @@ function updateHUD(dt){
 
     document
     .getElementById("hpBar")
-    .style.width =
+    .style.width=
         (
             player.hp/
             player.maxHp*
@@ -2593,7 +2813,7 @@ function updateHUD(dt){
 
     document
     .getElementById("staminaBar")
-    .style.width =
+    .style.width=
         (
             player.stamina/
             player.maxStamina*
@@ -2602,60 +2822,64 @@ function updateHUD(dt){
 
 
     document
-    .getElementById("xpBar")
-    .style.width =
+    .getElementById("beastHpBar")
+    .style.width=
         (
-            player.xp/
-            (player.level*100)*
+            beast.hp/
+            beast.maxHp*
             100
         )+"%";
 
 
     document
-    .getElementById("level")
-    .textContent =
-        "NIVEL "+
-        player.level+
-        " · CAZADOR";
+    .getElementById("captureBar")
+    .style.width=
+        beast.captureProgress+
+        "%";
+
+
+    document
+    .getElementById("playerStatus")
+    .textContent=
+        "CAZADOR · NIVEL "+
+        player.level;
+
+
+    document
+    .getElementById("beastState")
+    .textContent=
+        "ESTADO: "+
+        getBeastState();
 
 
     if(
-        messageTime > 0
+        messageTime>0
     ){
 
-        messageTime -= dt;
-
+        messageTime-=dt;
 
         if(
-            messageTime <= 0
+            messageTime<=0
         ){
 
             document
             .getElementById(
                 "message"
             )
-            .style.opacity =
-                "0";
+            .style.opacity="0";
         }
     }
 
 
     if(
-        player.hp <= 0
+        player.hp<=0
     ){
 
-        player.hp =
+        player.hp=
             player.maxHp;
 
-        player.x = 2.7;
-        player.y = 2.7;
-
-        camera.x =
-            player.x;
-
-        camera.y =
-            player.y;
-
+        player.x=2.7;
+        player.y=2.7;
 
         showMessage(
             "HAS CAÍDO"
@@ -2665,30 +2889,50 @@ function updateHUD(dt){
 
 
 /* =========================================================
+   MENSAJES
+========================================================= */
+
+let messageTime=0;
+
+
+function showMessage(text){
+
+    const el=
+        document.getElementById(
+            "message"
+        );
+
+    el.textContent=text;
+
+    el.style.opacity="1";
+
+    messageTime=1.4;
+}
+
+
+/* =========================================================
    GAME LOOP
 ========================================================= */
 
-let lastTime =
+let lastTime=
     performance.now();
 
 
-function gameLoop(time){
+function loop(time){
 
-    const dt =
+    const dt=
         Math.min(
             .033,
             (time-lastTime)/
             1000
         );
 
-
-    lastTime =
-        time;
+    lastTime=time;
 
 
     updatePlayer(dt);
 
-    updateMonsters(dt);
+    updateBeast(dt);
 
     updateCamera(dt);
 
@@ -2699,15 +2943,11 @@ function gameLoop(time){
     updateHUD(dt);
 
 
-    requestAnimationFrame(
-        gameLoop
-    );
+    requestAnimationFrame(loop);
 }
 
 
-requestAnimationFrame(
-    gameLoop
-);
+requestAnimationFrame(loop);
 
 </script>
 
