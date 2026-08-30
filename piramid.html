@@ -3,19 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-      content="width=device-width,
-               initial-scale=1,
-               maximum-scale=1,
-               user-scalable=no">
+content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<title>RESIDENT RAYCASTER 0.2</title>
+<title>Resident Raycaster 0.3</title>
 
 <style>
 *{
     box-sizing:border-box;
-    user-select:none;
     -webkit-user-select:none;
-    touch-action:none;
+    user-select:none;
+    -webkit-touch-callout:none;
 }
 
 html,body{
@@ -27,7 +24,7 @@ html,body{
     font-family:Arial,sans-serif;
 }
 
-canvas{
+#game{
     position:fixed;
     inset:0;
     width:100%;
@@ -35,135 +32,142 @@ canvas{
     display:block;
 }
 
-/* =========================================================
-HUD
-========================================================= */
-
-#hud{
+#ui{
     position:fixed;
     inset:0;
     pointer-events:none;
-    color:#fff;
+    color:white;
 }
 
-.panel{
-    background:rgba(7,8,8,.82);
-    border:1px solid rgba(255,255,255,.16);
-    box-shadow:0 5px 20px rgba(0,0,0,.35);
-    backdrop-filter:blur(6px);
-}
+/* =========================
+   HUD SUPERIOR IZQUIERDO
+========================= */
 
-/* jugador */
-
-#playerPanel{
+#status{
     position:absolute;
-    top:12px;
-    left:12px;
-    width:190px;
-    padding:10px;
-    border-radius:13px;
+    top:10px;
+    left:10px;
+    width:185px;
+    padding:9px;
+    border-radius:12px;
+    background:rgba(8,8,8,.82);
+    border:1px solid rgba(255,255,255,.14);
 }
 
-.smallTitle{
+.label{
+    color:#999;
     font-size:9px;
-    letter-spacing:1.5px;
-    color:#aaa;
+    letter-spacing:1px;
 }
 
-#playerName{
-    margin-top:3px;
+.name{
     font-size:13px;
     font-weight:bold;
+    margin-top:3px;
 }
 
-.bar{
-    width:100%;
+.health{
     height:8px;
-    margin-top:7px;
-    border-radius:8px;
-    background:#202020;
+    margin-top:6px;
+    background:#242424;
+    border-radius:10px;
     overflow:hidden;
 }
 
-#playerHealthFill{
+#healthFill{
     width:100%;
     height:100%;
-    background:#c33;
+    background:#b83b3b;
 }
 
-/* superviviente */
+#healthText{
+    margin-top:4px;
+    font-size:9px;
+    color:#aaa;
+}
 
-#survivorPanel{
+/* =========================
+   RESCATADO
+========================= */
+
+#rescue{
     display:none;
 
     position:absolute;
-    top:100px;
-    left:12px;
+    top:92px;
+    left:10px;
 
-    width:190px;
-    padding:10px;
+    width:185px;
+    padding:9px;
 
-    border-radius:13px;
+    border-radius:12px;
+    background:rgba(8,8,8,.82);
+    border:1px solid rgba(255,255,255,.14);
 }
 
-#survivorName{
-    margin-top:4px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-#survivorHealthFill{
+#survivorHealth{
     width:100%;
     height:100%;
-    background:#4ac477;
+    background:#4dbb70;
 }
 
-/* minimapa */
+/* =========================
+   MINIMAPA
+========================= */
 
-#mapPanel{
+#mapBox{
     position:absolute;
-    top:12px;
-    right:12px;
+    top:10px;
+    right:10px;
 
-    width:190px;
-    height:190px;
+    width:180px;
+    height:180px;
 
-    padding:7px;
-    border-radius:14px;
+    padding:6px;
+
+    border-radius:13px;
+
+    background:rgba(8,8,8,.85);
+    border:1px solid rgba(255,255,255,.14);
 }
 
-#mapCanvas{
+#mini{
     width:100%;
     height:100%;
     display:block;
-    background:#0b0b0b;
-    border-radius:8px;
+    background:#111;
+    border-radius:7px;
 }
 
-/* objetivo */
+/* =========================
+   OBJETIVO
+========================= */
 
-#objective{
+#mission{
     position:absolute;
 
-    top:14px;
+    top:12px;
     left:50%;
 
     transform:translateX(-50%);
 
-    padding:8px 16px;
+    max-width:250px;
+
+    padding:8px 13px;
 
     border-radius:20px;
 
-    background:rgba(5,5,5,.75);
-    border:1px solid rgba(255,255,255,.15);
+    background:rgba(0,0,0,.7);
 
-    font-size:10px;
-    letter-spacing:.5px;
-
+    font-size:9px;
     text-align:center;
+
+    border:1px solid rgba(255,255,255,.12);
 }
 
-/* mira */
+/* =========================
+   MIRA
+========================= */
 
 #crosshair{
     position:absolute;
@@ -171,35 +175,67 @@ HUD
     left:50%;
     top:50%;
 
-    width:22px;
-    height:22px;
+    width:20px;
+    height:20px;
 
     transform:translate(-50%,-50%);
 }
 
-#crosshair:before,
-#crosshair:after{
-    content:"";
+#crosshair i{
     position:absolute;
     background:#fff;
-    opacity:.85;
 }
 
-#crosshair:before{
+#crosshair .v{
     width:2px;
-    height:20px;
-    left:10px;
+    height:18px;
+    left:9px;
     top:1px;
 }
 
-#crosshair:after{
+#crosshair .h{
+    width:18px;
     height:2px;
-    width:20px;
     left:1px;
-    top:10px;
+    top:9px;
 }
 
-/* mensaje */
+/* =========================
+   MUNICIÓN
+========================= */
+
+#ammo{
+    position:absolute;
+
+    right:12px;
+    bottom:12px;
+
+    padding:8px 12px;
+
+    min-width:105px;
+
+    border-radius:12px;
+
+    text-align:right;
+
+    background:rgba(8,8,8,.82);
+
+    border:1px solid rgba(255,255,255,.14);
+}
+
+#ammoNumber{
+    font-size:27px;
+    font-weight:bold;
+}
+
+#ammoReserve{
+    color:#999;
+    font-size:9px;
+}
+
+/* =========================
+   MENSAJES
+========================= */
 
 #message{
     position:absolute;
@@ -209,267 +245,202 @@ HUD
 
     transform:translateX(-50%);
 
-    padding:9px 16px;
+    padding:9px 15px;
 
-    min-width:210px;
-
-    border-radius:10px;
-
-    background:rgba(0,0,0,.82);
-
-    border:1px solid rgba(255,255,255,.15);
+    min-width:180px;
 
     text-align:center;
 
-    font-size:11px;
+    font-size:10px;
+
+    background:rgba(0,0,0,.82);
+
+    border-radius:9px;
 
     opacity:0;
-    transition:.2s;
+
+    transition:opacity .15s;
 }
 
-/* munición */
+/* =========================
+   ZONA CÁMARA
+========================= */
 
-#ammo{
+#look{
     position:absolute;
-
-    right:15px;
-    bottom:15px;
-
-    min-width:100px;
-
-    padding:8px 12px;
-
-    border-radius:12px;
-
-    background:rgba(5,5,5,.76);
-
-    text-align:right;
-}
-
-#ammoMain{
-    font-size:28px;
-    font-weight:bold;
-}
-
-#ammoReserve{
-    color:#aaa;
-    font-size:10px;
-}
-
-/* =========================================================
-BOTONES
-========================================================= */
-
-button{
-    font-family:Arial,sans-serif;
-}
-
-.ctrl{
-    position:absolute;
-
-    pointer-events:auto;
-
-    border-radius:50%;
-
-    border:1px solid rgba(255,255,255,.2);
-
-    background:rgba(10,10,10,.72);
-
-    color:white;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-weight:bold;
-
-    box-shadow:
-        0 5px 18px rgba(0,0,0,.35);
-
-    backdrop-filter:blur(7px);
-}
-
-.ctrl:active{
-    transform:scale(.92);
-}
-
-/* joystick */
-
-#moveZone{
-    position:absolute;
-
-    left:8px;
-    bottom:8px;
-
-    width:155px;
-    height:155px;
-
-    pointer-events:auto;
-}
-
-#moveBase{
-    position:absolute;
-
-    left:10px;
-    bottom:10px;
-
-    width:125px;
-    height:125px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.055);
-
-    border:2px solid rgba(255,255,255,.18);
-}
-
-#moveStick{
-    position:absolute;
-
-    left:72px;
-    top:72px;
-
-    width:52px;
-    height:52px;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.19);
-
-    border:2px solid rgba(255,255,255,.3);
-}
-
-/* disparo */
-
-#fireBtn{
-    right:18px;
-    bottom:102px;
-
-    width:78px;
-    height:78px;
-
-    font-size:11px;
-}
-
-/* recarga */
-
-#reloadBtn{
-    right:110px;
-    bottom:22px;
-
-    width:64px;
-    height:64px;
-
-    font-size:9px;
-}
-
-/* cura */
-
-#medBtn{
-    right:182px;
-    bottom:25px;
-
-    width:59px;
-    height:59px;
-
-    font-size:27px;
-}
-
-/* seguir */
-
-#followBtn{
-    display:none;
-
-    left:162px;
-    bottom:24px;
-
-    width:64px;
-    height:64px;
-
-    font-size:8px;
-}
-
-/* acción */
-
-#actionBtn{
-    display:none;
-
-    position:absolute;
-
-    left:50%;
-    bottom:87px;
-
-    transform:translateX(-50%);
-
-    width:130px;
-    height:50px;
-
-    border-radius:13px;
-
-    border:1px solid rgba(95,220,130,.5);
-
-    background:rgba(25,95,52,.9);
-
-    color:white;
-
-    font-size:11px;
-    font-weight:bold;
-
-    pointer-events:auto;
-}
-
-#actionBtn:active{
-    transform:
-        translateX(-50%)
-        scale(.94);
-}
-
-/* zona cámara */
-
-#lookZone{
-    position:absolute;
-
     right:0;
     top:0;
 
-    width:62%;
+    width:63%;
     height:100%;
 
     pointer-events:auto;
 }
 
-/* móvil */
+/* =========================
+   JOYSTICK
+========================= */
+
+#joystick{
+    position:absolute;
+
+    left:9px;
+    bottom:9px;
+
+    width:145px;
+    height:145px;
+
+    pointer-events:auto;
+}
+
+#joyBase{
+    position:absolute;
+
+    left:8px;
+    bottom:8px;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.055);
+
+    border:2px solid rgba(255,255,255,.16);
+}
+
+#joyStick{
+    position:absolute;
+
+    width:52px;
+    height:52px;
+
+    left:68px;
+    top:68px;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.17);
+
+    border:2px solid rgba(255,255,255,.26);
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+.btn{
+    position:absolute;
+
+    pointer-events:auto;
+
+    border:1px solid rgba(255,255,255,.18);
+
+    background:rgba(8,8,8,.78);
+
+    color:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+
+    font-size:9px;
+    font-weight:bold;
+}
+
+.btn:active{
+    transform:scale(.92);
+}
+
+#fire{
+    width:78px;
+    height:78px;
+
+    right:16px;
+    bottom:105px;
+}
+
+#reload{
+    width:61px;
+    height:61px;
+
+    right:105px;
+    bottom:20px;
+}
+
+#med{
+    width:58px;
+    height:58px;
+
+    right:175px;
+    bottom:22px;
+
+    font-size:27px;
+}
+
+#follow{
+    display:none;
+
+    width:61px;
+    height:61px;
+
+    left:158px;
+    bottom:22px;
+}
+
+#action{
+    display:none;
+
+    pointer-events:auto;
+
+    position:absolute;
+
+    left:50%;
+    bottom:82px;
+
+    transform:translateX(-50%);
+
+    width:125px;
+    height:47px;
+
+    border:1px solid rgba(90,200,120,.5);
+
+    border-radius:12px;
+
+    background:rgba(30,105,55,.9);
+
+    color:white;
+
+    font-size:10px;
+    font-weight:bold;
+}
 
 @media(max-width:600px){
 
-    #mapPanel{
-        width:150px;
-        height:150px;
+    #mapBox{
+        width:145px;
+        height:145px;
     }
 
-    #playerPanel,
-    #survivorPanel{
-        width:170px;
+    #status,
+    #rescue{
+        width:165px;
     }
 
-    #survivorPanel{
-        top:91px;
+    #rescue{
+        top:85px;
     }
 
-    #objective{
-        top:168px;
-        font-size:8px;
-        max-width:240px;
+    #mission{
+        top:160px;
     }
 
-    #followBtn{
-        left:150px;
-    }
-
-    #medBtn{
-        right:180px;
+    #med{
+        right:174px;
     }
 }
 </style>
@@ -479,69 +450,64 @@ button{
 
 <canvas id="game"></canvas>
 
-<div id="hud">
+<div id="ui">
 
-    <div id="playerPanel" class="panel">
+    <div id="status">
 
-        <div class="smallTitle">
-            ESTADO
-        </div>
+        <div class="label">JUGADOR</div>
 
-        <div id="playerName">
+        <div class="name">
             LEON
         </div>
 
-        <div class="bar">
-            <div id="playerHealthFill"></div>
+        <div class="health">
+            <div id="healthFill"></div>
         </div>
 
-        <div style="
-            margin-top:5px;
-            font-size:9px;
-            color:#aaa;
-        ">
-            VIDA <span id="playerHealthText">100</span>
+        <div id="healthText">
+            VIDA 100
         </div>
 
     </div>
 
 
-    <div id="survivorPanel" class="panel">
+    <div id="rescue">
 
-        <div class="smallTitle">
-            SUPERVIVIENTE RESCATADO
+        <div class="label">
+            SUPERVIVIENTE
         </div>
 
-        <div id="survivorName">
+        <div class="name"
+             id="survivorName">
             —
         </div>
 
-        <div class="bar">
-            <div id="survivorHealthFill"></div>
+        <div class="health">
+            <div id="survivorHealth"></div>
         </div>
 
-        <div style="
-            margin-top:5px;
-            font-size:9px;
-            color:#aaa;
-        ">
-            VIDA <span id="survivorHealthText">100</span>
+        <div id="survivorHealthText"
+             style="font-size:9px;color:#aaa;margin-top:4px">
+            VIDA 100
         </div>
 
     </div>
 
 
-    <div id="mapPanel" class="panel">
-        <canvas id="mapCanvas"></canvas>
+    <div id="mapBox">
+        <canvas id="mini"></canvas>
     </div>
 
 
-    <div id="objective">
+    <div id="mission">
         ENCUENTRA AL SUPERVIVIENTE
     </div>
 
 
-    <div id="crosshair"></div>
+    <div id="crosshair">
+        <i class="v"></i>
+        <i class="h"></i>
+    </div>
 
 
     <div id="message"></div>
@@ -549,7 +515,7 @@ button{
 
     <div id="ammo">
 
-        <div id="ammoMain">
+        <div id="ammoNumber">
             12
         </div>
 
@@ -560,39 +526,43 @@ button{
     </div>
 
 
-    <div id="moveZone">
+    <div id="look"></div>
 
-        <div id="moveBase"></div>
 
-        <div id="moveStick"></div>
+    <div id="joystick">
+
+        <div id="joyBase"></div>
+
+        <div id="joyStick"></div>
 
     </div>
 
 
-    <div id="lookZone"></div>
-
-
-    <button id="fireBtn" class="ctrl">
+    <button id="fire"
+            class="btn">
         DISPARAR
     </button>
 
 
-    <button id="reloadBtn" class="ctrl">
+    <button id="reload"
+            class="btn">
         RECARGAR
     </button>
 
 
-    <button id="medBtn" class="ctrl">
+    <button id="med"
+            class="btn">
         +
     </button>
 
 
-    <button id="followBtn" class="ctrl">
+    <button id="follow"
+            class="btn">
         SEGUIR
     </button>
 
 
-    <button id="actionBtn">
+    <button id="action">
         RESCATAR
     </button>
 
@@ -602,8 +572,8 @@ button{
 "use strict";
 
 /* =========================================================
-RESIDENT RAYCASTER 0.2
-MOTOR
+   RESIDENT RAYCASTER 0.3
+   MOTOR 2.5D
 ========================================================= */
 
 const canvas =
@@ -612,25 +582,34 @@ const canvas =
 const ctx =
     canvas.getContext("2d");
 
-const mapCanvas =
-    document.getElementById("mapCanvas");
+const mini =
+    document.getElementById("mini");
 
-const mapCtx =
-    mapCanvas.getContext("2d");
-
+const mctx =
+    mini.getContext("2d");
 
 let W=0;
 let H=0;
+let DPR=1;
 
 function resize(){
 
-    W=canvas.width=
-        Math.floor(innerWidth*
-        devicePixelRatio);
+    DPR=Math.min(
+        window.devicePixelRatio||1,
+        2
+    );
 
-    H=canvas.height=
-        Math.floor(innerHeight*
-        devicePixelRatio);
+    W=
+        canvas.width=
+        Math.floor(
+            innerWidth*DPR
+        );
+
+    H=
+        canvas.height=
+        Math.floor(
+            innerHeight*DPR
+        );
 
     canvas.style.width=
         innerWidth+"px";
@@ -638,42 +617,50 @@ function resize(){
     canvas.style.height=
         innerHeight+"px";
 
-    mapCanvas.width=
-        190*devicePixelRatio;
+    mini.width=
+        180*DPR;
 
-    mapCanvas.height=
-        190*devicePixelRatio;
+    mini.height=
+        180*DPR;
 }
 
-addEventListener("resize",resize);
+addEventListener(
+    "resize",
+    resize
+);
+
 resize();
 
 
 /* =========================================================
-CONFIGURACIÓN
+   CONFIG
 ========================================================= */
 
 const TILE=64;
 
+const MAP_W=29;
+const MAP_H=29;
+
 const FOV=Math.PI/3;
 
-const MAX_DEPTH=1300;
+const MAX_DISTANCE=1200;
 
 const PLAYER_RADIUS=15;
 
 const PLAYER_HEIGHT=1.7;
 
-const CAMERA_HEIGHT=1.65;
+const CAMERA_HEIGHT=1.62;
 
 
 /* =========================================================
-JUGADOR
+   JUGADOR
 ========================================================= */
 
 const player={
 
-    x:2.5*TILE,
-    y:2.5*TILE,
+    x:14.5*TILE,
+
+    y:14.5*TILE,
 
     angle:0,
 
@@ -687,30 +674,17 @@ const player={
 
     medkits:3,
 
-    speed:155,
-
-    turnSensitivity:.0026,
+    speed:145,
 
     moving:false
-
 };
 
 
 /* =========================================================
-PISO
+   MUNDO
 ========================================================= */
 
-let floorNumber=1;
-
-let world=[];
-
-let mapW=0;
-let mapH=0;
-
-
-/* =========================================================
-ENTIDADES
-========================================================= */
+let map=[];
 
 let zombies=[];
 
@@ -722,329 +696,46 @@ let stairs=null;
 
 let door=null;
 
-
-/* =========================================================
-MISIÓN
-========================================================= */
+let floorNumber=1;
 
 let mission=0;
 
 
-/*
-0 = encontrar superviviente
-1 = llevar superviviente
-2 = llegar escalera
-3 = completada
-*/
+/* =========================================================
+   NOMBRES
+========================================================= */
+
+const names=[
+    "MATEO",
+    "SOFIA",
+    "DANIEL",
+    "VALENTINA",
+    "MARTIN",
+    "CAMILA",
+    "NICOLAS",
+    "EMILIA"
+];
 
 
 /* =========================================================
-INPUT
+   RANDOM
 ========================================================= */
 
-const keys={};
+function rnd(a,b){
 
-addEventListener("keydown",e=>{
-    keys[e.key.toLowerCase()]=true;
-
-    if(e.key.toLowerCase()==="r")
-        reload();
-
-    if(e.key.toLowerCase()==="f")
-        action();
-});
-
-addEventListener("keyup",e=>{
-    keys[e.key.toLowerCase()]=false;
-});
-
-
-/* =========================================================
-JOYSTICK MOVIMIENTO
-========================================================= */
-
-const moveZone=
-    document.getElementById("moveZone");
-
-const moveStick=
-    document.getElementById("moveStick");
-
-let movePointer=null;
-
-let moveX=0;
-let moveY=0;
-
-function resetMove(){
-
-    moveX=0;
-    moveY=0;
-
-    moveStick.style.left="72px";
-    moveStick.style.top="72px";
+    return a+
+        Math.random()*
+        (b-a);
 }
 
-function updateJoystick(x,y){
+function rndi(a,b){
 
-    const rect=
-        moveZone.getBoundingClientRect();
-
-    const cx=
-        rect.left+72;
-
-    const cy=
-        rect.top+72;
-
-    let dx=x-cx;
-    let dy=y-cy;
-
-    const max=52;
-
-    const len=
-        Math.hypot(dx,dy);
-
-    if(len>max){
-
-        dx=
-            dx/len*max;
-
-        dy=
-            dy/len*max;
-    }
-
-    moveX=dx/max;
-    moveY=dy/max;
-
-    moveStick.style.left=
-        (72+dx)+"px";
-
-    moveStick.style.top=
-        (72+dy)+"px";
-}
-
-moveZone.addEventListener(
-    "pointerdown",
-    e=>{
-
-        movePointer=e.pointerId;
-
-        moveZone.setPointerCapture(
-            e.pointerId
-        );
-
-        updateJoystick(
-            e.clientX,
-            e.clientY
-        );
-    }
-);
-
-moveZone.addEventListener(
-    "pointermove",
-    e=>{
-
-        if(e.pointerId!==movePointer)
-            return;
-
-        updateJoystick(
-            e.clientX,
-            e.clientY
-        );
-    }
-);
-
-moveZone.addEventListener(
-    "pointerup",
-    resetMove
-);
-
-moveZone.addEventListener(
-    "pointercancel",
-    resetMove
-);
-
-
-/* =========================================================
-CÁMARA FPS TÁCTIL
-========================================================= */
-
-const lookZone=
-    document.getElementById("lookZone");
-
-let lookPointer=null;
-
-let lastLookX=0;
-let lastLookY=0;
-
-lookZone.addEventListener(
-    "pointerdown",
-    e=>{
-
-        lookPointer=e.pointerId;
-
-        lastLookX=e.clientX;
-        lastLookY=e.clientY;
-
-        lookZone.setPointerCapture(
-            e.pointerId
-        );
-    }
-);
-
-lookZone.addEventListener(
-    "pointermove",
-    e=>{
-
-        if(e.pointerId!==lookPointer)
-            return;
-
-        const dx=
-            e.clientX-lastLookX;
-
-        const dy=
-            e.clientY-lastLookY;
-
-        lastLookX=e.clientX;
-        lastLookY=e.clientY;
-
-        /*
-        Cámara suave:
-        no demasiado sensible.
-        */
-
-        player.angle +=
-            dx*player.turnSensitivity;
-
-        player.pitch +=
-            dy*.0018;
-
-        player.pitch=
-            Math.max(
-                -.42,
-                Math.min(
-                    .42,
-                    player.pitch
-                )
-            );
-    }
-);
-
-lookZone.addEventListener(
-    "pointerup",
-    ()=>{
-        lookPointer=null;
-    }
-);
-
-lookZone.addEventListener(
-    "pointercancel",
-    ()=>{
-        lookPointer=null;
-    }
-);
-
-
-/* =========================================================
-BOTONES
-========================================================= */
-
-document
-.getElementById("fireBtn")
-.addEventListener(
-    "pointerdown",
-    e=>{
-        e.preventDefault();
-        shoot();
-    }
-);
-
-
-document
-.getElementById("reloadBtn")
-.addEventListener(
-    "pointerdown",
-    e=>{
-        e.preventDefault();
-        reload();
-    }
-);
-
-
-document
-.getElementById("medBtn")
-.addEventListener(
-    "pointerdown",
-    e=>{
-        e.preventDefault();
-        useMedkit();
-    }
-);
-
-
-document
-.getElementById("actionBtn")
-.addEventListener(
-    "pointerdown",
-    e=>{
-        e.preventDefault();
-        action();
-    }
-);
-
-
-document
-.getElementById("followBtn")
-.addEventListener(
-    "pointerdown",
-    e=>{
-        e.preventDefault();
-
-        if(!survivor)
-            return;
-
-        survivor.following=
-            !survivor.following;
-
-        document.getElementById(
-            "followBtn"
-        ).textContent=
-            survivor.following
-            ? "DETENER"
-            : "SEGUIR";
-    }
-);
-
-
-/* =========================================================
-UTILIDADES
-========================================================= */
-
-function clamp(v,a,b){
-    return Math.max(a,Math.min(b,v));
-}
-
-
-function dist(a,b){
-
-    return Math.hypot(
-        a.x-b.x,
-        a.y-b.y
+    return Math.floor(
+        rnd(a,b+1)
     );
 }
 
-
-function normAngle(a){
-
-    while(a>Math.PI)
-        a-=Math.PI*2;
-
-    while(a<-Math.PI)
-        a+=Math.PI*2;
-
-    return a;
-}
-
-
-function random(arr){
+function choose(arr){
 
     return arr[
         Math.floor(
@@ -1055,181 +746,250 @@ function random(arr){
 
 
 /* =========================================================
-GENERADOR DE MAPA
+   MAPA PROCEDURAL
 ========================================================= */
-
-/*
-El mapa se construye como una red de corredores
-y espacios abiertos.
-
-Nunca se generan habitaciones aisladas sin salida.
-*/
 
 function generateMap(){
 
-    mapW=25;
-    mapH=25;
-
-    world=
+    map=
         Array.from(
-            {length:mapH},
-            ()=>Array(mapW).fill(1)
+            {length:MAP_H},
+            ()=>Array(
+                MAP_W
+            ).fill(1)
         );
 
-    /*
-    Corredor principal
-    */
-
-    for(let y=1;y<mapH-1;y++)
-        world[y][12]=0;
-
-    for(let x=1;x<mapW-1;x++)
-        world[12][x]=0;
-
 
     /*
-    Brazos secundarios.
+    El edificio empieza con
+    corredores conectados.
     */
 
-    const branches=[
-        [4,12,4,6],
-        [8,12,8,4],
-        [16,12,16,6],
-        [20,12,20,4],
+    const corridors=[
+        [2,14,26,14],
+        [14,2,14,26],
 
-        [12,4,18,4],
-        [12,20,18,20],
-        [6,12,6,19],
-        [18,12,18,19]
+        [5,14,5,5],
+        [23,14,23,5],
+
+        [5,5,14,5],
+        [14,5,23,5],
+
+        [5,14,5,23],
+        [5,23,14,23],
+
+        [23,14,23,23],
+        [14,23,23,23],
+
+        [9,14,9,8],
+        [19,14,19,8],
+
+        [9,8,19,8],
+
+        [9,14,9,20],
+        [19,14,19,20]
     ];
 
-    for(const b of branches){
 
-        let [x1,y1,x2,y2]=b;
+    for(
+        const c of corridors
+    ){
+
+        const x1=c[0];
+        const y1=c[1];
+
+        const x2=c[2];
+        const y2=c[3];
 
         if(x1===x2){
 
-            const a=Math.min(y1,y2);
-            const c=Math.max(y1,y2);
-
             for(
-                let y=a;
-                y<=c;
+                let y=
+                    Math.min(
+                        y1,y2
+                    );
+                y<=
+                    Math.max(
+                        y1,y2
+                    );
                 y++
             ){
 
-                world[y][x1]=0;
+                openCell(
+                    x1,
+                    y
+                );
 
-                if(x1+1<mapW)
-                    world[y][x1+1]=0;
+                openCell(
+                    x1+1,
+                    y
+                );
 
-                if(x1-1>=0)
-                    world[y][x1-1]=0;
+                openCell(
+                    x1-1,
+                    y
+                );
             }
 
         }else{
 
-            const a=Math.min(x1,x2);
-            const c=Math.max(x1,x2);
-
             for(
-                let x=a;
-                x<=c;
+                let x=
+                    Math.min(
+                        x1,x2
+                    );
+                x<=
+                    Math.max(
+                        x1,x2
+                    );
                 x++
             ){
 
-                world[y1][x]=0;
+                openCell(
+                    x,
+                    y1
+                );
 
-                if(y1+1<mapH)
-                    world[y1+1][x]=0;
+                openCell(
+                    x,
+                    y1+1
+                );
 
-                if(y1-1>=0)
-                    world[y1-1][x]=0;
+                openCell(
+                    x,
+                    y1-1
+                );
             }
         }
     }
 
 
     /*
-    Abrimos pequeñas zonas laterales.
+    Generamos zonas abiertas
+    conectadas al corredor.
     */
 
-    for(let i=0;i<18;i++){
+    for(let i=0;i<25;i++){
 
         const x=
-            2+
-            Math.floor(
-                Math.random()*(mapW-4)
-            );
+            rndi(3,25);
 
         const y=
-            2+
-            Math.floor(
-                Math.random()*(mapH-4)
-            );
+            rndi(3,25);
+
+        if(map[y][x]!==1)
+            continue;
+
+        let connected=false;
+
+        for(
+            let yy=-2;
+            yy<=2;
+            yy++
+        )
+        for(
+            let xx=-2;
+            xx<=2;
+            xx++
+        ){
+
+            const nx=x+xx;
+            const ny=y+yy;
+
+            if(
+                nx>=0 &&
+                ny>=0 &&
+                nx<MAP_W &&
+                ny<MAP_H &&
+                map[ny][nx]===0
+            ){
+
+                connected=true;
+            }
+        }
+
+        if(!connected)
+            continue;
 
         /*
-        Solo crear si ya está cerca
-        de una zona transitable.
+        Pequeña zona abierta.
         */
 
-        if(world[y][x]===1){
+        for(
+            let yy=-1;
+            yy<=1;
+            yy++
+        )
+        for(
+            let xx=-1;
+            xx<=1;
+            xx++
+        ){
 
-            let near=false;
-
-            for(let yy=-2;yy<=2;yy++)
-            for(let xx=-2;xx<=2;xx++){
-
-                const nx=x+xx;
-                const ny=y+yy;
-
-                if(
-                    nx>=0 &&
-                    ny>=0 &&
-                    nx<mapW &&
-                    ny<mapH &&
-                    world[ny][nx]===0
-                )
-                    near=true;
-            }
-
-            if(near){
-
-                world[y][x]=0;
-
-                if(x+1<mapW)
-                    world[y][x+1]=0;
-
-                if(y+1<mapH)
-                    world[y+1][x]=0;
-            }
+            openCell(
+                x+xx,
+                y+yy
+            );
         }
     }
 
 
     /*
-    Borde exterior.
+    Pared exterior.
     */
 
-    for(let x=0;x<mapW;x++){
+    for(let x=0;x<MAP_W;x++){
 
-        world[0][x]=1;
-        world[mapH-1][x]=1;
+        map[0][x]=1;
+        map[MAP_H-1][x]=1;
     }
 
-    for(let y=0;y<mapH;y++){
+    for(let y=0;y<MAP_H;y++){
 
-        world[y][0]=1;
-        world[y][mapW-1]=1;
+        map[y][0]=1;
+        map[y][MAP_W-1]=1;
+    }
+
+
+    /*
+    Abrimos la zona inicial.
+    */
+
+    for(
+        let y=12;
+        y<=16;
+        y++
+    )
+    for(
+        let x=12;
+        x<=16;
+        x++
+    ){
+
+        map[y][x]=0;
+    }
+}
+
+
+function openCell(x,y){
+
+    if(
+        x>0 &&
+        y>0 &&
+        x<MAP_W-1 &&
+        y<MAP_H-1
+    ){
+
+        map[y][x]=0;
     }
 }
 
 
 /* =========================================================
-COLISIÓN
+   COLISIONES
 ========================================================= */
 
-function wallAtPixel(x,y){
+function isWall(x,y){
 
     const gx=
         Math.floor(x/TILE);
@@ -1240,108 +1000,132 @@ function wallAtPixel(x,y){
     if(
         gx<0 ||
         gy<0 ||
-        gx>=mapW ||
-        gy>=mapH
+        gx>=MAP_W ||
+        gy>=MAP_H
     )
         return true;
 
-    return world[gy][gx]===1;
+    return map[gy][gx]===1;
 }
 
 
-function canMove(x,y,r=PLAYER_RADIUS){
+function circleFree(
+    x,
+    y,
+    radius
+){
+
+    /*
+    Cuatro puntos + centro.
+    */
 
     return !(
-        wallAtPixel(x-r,y-r) ||
-        wallAtPixel(x+r,y-r) ||
-        wallAtPixel(x-r,y+r) ||
-        wallAtPixel(x+r,y+r)
+        isWall(
+            x-radius,
+            y-radius
+        ) ||
+        isWall(
+            x+radius,
+            y-radius
+        ) ||
+        isWall(
+            x-radius,
+            y+radius
+        ) ||
+        isWall(
+            x+radius,
+            y+radius
+        ) ||
+        isWall(x,y)
     );
 }
 
 
-function moveEntity(ent,dx,dy){
-
-    const nx=
-        ent.x+dx;
-
-    const ny=
-        ent.y+dy;
+function moveEntity(
+    e,
+    dx,
+    dy
+){
 
     const r=
-        ent.radius || 14;
+        e.radius||15;
 
-    if(canMove(nx,ent.y,r))
-        ent.x=nx;
+    if(
+        circleFree(
+            e.x+dx,
+            e.y,
+            r
+        )
+    ){
 
-    if(canMove(ent.x,ny,r))
-        ent.y=ny;
+        e.x+=dx;
+    }
+
+    if(
+        circleFree(
+            e.x,
+            e.y+dy,
+            r
+        )
+    ){
+
+        e.y+=dy;
+    }
 }
 
 
 /* =========================================================
-POSICIONES VÁLIDAS
+   POSICIONES
 ========================================================= */
 
-function randomOpenPosition(
-    minDistance=0
+function openPosition(
+    minimum
 ){
 
     for(let i=0;i<1000;i++){
 
-        const x=
-            1+
-            Math.floor(
-                Math.random()*
-                (mapW-2)
-            );
+        const gx=
+            rndi(2,MAP_W-3);
 
-        const y=
-            1+
-            Math.floor(
-                Math.random()*
-                (mapH-2)
-            );
+        const gy=
+            rndi(2,MAP_H-3);
 
-        if(world[y][x]!==0)
+        if(map[gy][gx]!==0)
             continue;
 
-        const px=
-            (x+.5)*TILE;
+        const x=
+            (gx+.5)*TILE;
 
-        const py=
-            (y+.5)*TILE;
+        const y=
+            (gy+.5)*TILE;
 
         if(
             Math.hypot(
-                px-player.x,
-                py-player.y
-            )<minDistance
+                x-player.x,
+                y-player.y
+            )<minimum
         )
             continue;
 
-        return {
-            x:px,
-            y:py
-        };
+        return {x,y};
     }
 
     return {
-        x:12.5*TILE,
-        y:12.5*TILE
+        x:player.x+TILE*3,
+        y:player.y
     };
 }
 
 
 /* =========================================================
-ZOMBIES
+   CREAR ZOMBIES
 ========================================================= */
 
 function createZombie(){
 
     const p=
-        randomOpenPosition(
-            TILE*5
+        openPosition(
+            TILE*4
         );
 
     return {
@@ -1353,23 +1137,19 @@ function createZombie(){
 
         radius:17,
 
-        height:1.82,
+        height:1.8,
 
         health:100,
 
         alive:true,
 
-        speed:
-            34+
-            Math.random()*15,
+        speed:rnd(27,42),
 
-        attackTimer:0,
+        attack:0,
 
-        hitFlash:0,
+        flash:0,
 
-        phase:
-            Math.random()*10
-
+        wander:Math.random()*10
     };
 }
 
@@ -1378,45 +1158,40 @@ function spawnZombies(){
 
     zombies=[];
 
-    const count=
-        8+
+    const amount=
+        9+
         Math.floor(
             Math.random()*5
         );
 
-    for(let i=0;i<count;i++)
+    for(
+        let i=0;
+        i<amount;
+        i++
+    ){
+
         zombies.push(
             createZombie()
         );
+    }
 }
 
 
 /* =========================================================
-SUPERVIVIENTE
+   SUPERVIVIENTE
 ========================================================= */
-
-const survivorNames=[
-    "MATEO",
-    "VALENTINA",
-    "DANIEL",
-    "SOFÍA",
-    "NICOLÁS",
-    "CAMILA",
-    "MARTÍN",
-    "EMILIA"
-];
-
 
 function createSurvivor(){
 
     const p=
-        randomOpenPosition(
+        openPosition(
             TILE*7
         );
 
     return {
 
         x:p.x,
+
         y:p.y,
 
         z:0,
@@ -1427,9 +1202,7 @@ function createSurvivor(){
 
         health:100,
 
-        name:random(
-            survivorNames
-        ),
+        name:choose(names),
 
         rescued:false,
 
@@ -1437,157 +1210,142 @@ function createSurvivor(){
 
         escaping:false,
 
-        speed:48,
+        speed:47,
 
-        safeTimer:0
-
+        safeTime:0
     };
 }
 
 
 /* =========================================================
-OBJETOS
+   ITEMS
 ========================================================= */
 
 function spawnItems(){
 
     items=[];
 
-    for(let i=0;i<12;i++){
+    for(let i=0;i<13;i++){
 
         const p=
-            randomOpenPosition(
+            openPosition(
                 TILE*2
             );
 
         items.push({
 
             x:p.x,
+
             y:p.y,
 
             type:
-                Math.random()<.68
-                ? "ammo"
-                : "med",
+                Math.random()<.7
+                ?"ammo"
+                :"med",
 
             amount:
-                Math.random()<.68
-                ? 12
-                : 1,
+                Math.random()<.7
+                ?12
+                :1,
 
             collected:false
-
         });
     }
 }
 
 
 /* =========================================================
-ESCALERA
+   ESCALERA
 ========================================================= */
 
 function spawnStairs(){
 
     const p=
-        randomOpenPosition(
-            TILE*4
+        openPosition(
+            TILE*5
         );
 
     stairs={
-
         x:p.x,
-        y:p.y,
-
-        type:"stairs"
-
+        y:p.y
     };
 }
 
 
 /* =========================================================
-PUERTA
+   PUERTA
 ========================================================= */
 
 function spawnDoor(){
 
     /*
-    La puerta siempre se coloca sobre
-    un corredor existente, no flotando
-    en medio del mapa.
+    Busca una pared con espacio
+    transitable a ambos lados.
     */
 
     for(let i=0;i<500;i++){
 
         const x=
-            2+
-            Math.floor(
-                Math.random()*
-                (mapW-4)
-            );
+            rndi(2,MAP_W-3);
 
         const y=
-            2+
-            Math.floor(
-                Math.random()*
-                (mapH-4)
-            );
+            rndi(2,MAP_H-3);
 
-        if(world[y][x]!==0)
+        if(map[y][x]!==0)
             continue;
 
-        const horizontal=
-            world[y][x-1]===0 &&
-            world[y][x+1]===0;
-
-        const vertical=
-            world[y-1][x]===0 &&
-            world[y+1][x]===0;
-
-        if(horizontal||vertical){
+        if(
+            map[y][x-1]===0 &&
+            map[y][x+1]===0
+        ){
 
             door={
-
                 x:(x+.5)*TILE,
                 y:(y+.5)*TILE,
+                open:false
+            };
 
+            return;
+        }
+
+        if(
+            map[y-1][x]===0 &&
+            map[y+1][x]===0
+        ){
+
+            door={
+                x:(x+.5)*TILE,
+                y:(y+.5)*TILE,
                 open:false
             };
 
             return;
         }
     }
-
-    door={
-        x:12.5*TILE,
-        y:8.5*TILE,
-        open:false
-    };
 }
 
 
 /* =========================================================
-INICIO DEL PISO
+   NUEVO PISO
 ========================================================= */
 
-function newFloor(){
+function createFloor(){
 
     generateMap();
 
     player.x=
-        12.5*TILE;
+        14.5*TILE;
 
     player.y=
-        12.5*TILE;
+        14.5*TILE;
 
     player.angle=
-        Math.random()*Math.PI*2;
+        Math.random()*
+        Math.PI*2;
 
     player.pitch=0;
 
     spawnZombies();
-
-    survivor=
-        createSurvivor();
 
     spawnItems();
 
@@ -1595,39 +1353,57 @@ function newFloor(){
 
     spawnDoor();
 
+    survivor=
+        createSurvivor();
+
     mission=0;
 
-    updateObjective();
+    updateMission();
 
     showMessage(
-        "PISO "+floorNumber+
-        " · ENCUENTRA AL SUPERVIVIENTE"
+        "PISO "+floorNumber
     );
 }
 
 
 /* =========================================================
-OBJETOS AUTOMÁTICOS
+   DISTANCIA
+========================================================= */
+
+function distance(a,b){
+
+    return Math.hypot(
+        a.x-b.x,
+        a.y-b.y
+    );
+}
+
+
+/* =========================================================
+   RECOGIDA AUTOMÁTICA
 ========================================================= */
 
 function collectItems(){
 
-    for(const item of items){
+    for(
+        const item of items
+    ){
 
         if(item.collected)
             continue;
 
-        const d=
+        if(
             Math.hypot(
                 player.x-item.x,
                 player.y-item.y
-            );
-
-        if(d<45){
+            )<42
+        ){
 
             item.collected=true;
 
-            if(item.type==="ammo"){
+            if(
+                item.type==="ammo"
+            ){
 
                 player.reserve+=
                     item.amount;
@@ -1640,8 +1416,7 @@ function collectItems(){
 
             }else{
 
-                player.medkits+=
-                    item.amount;
+                player.medkits++;
 
                 showMessage(
                     "+1 BOTIQUÍN"
@@ -1655,7 +1430,7 @@ function collectItems(){
 
 
 /* =========================================================
-BOTIQUÍN
+   CURA
 ========================================================= */
 
 function useMedkit(){
@@ -1672,7 +1447,7 @@ function useMedkit(){
     if(player.medkits<=0){
 
         showMessage(
-            "NO TIENES BOTIQUINES"
+            "SIN BOTIQUINES"
         );
 
         return;
@@ -1689,11 +1464,13 @@ function useMedkit(){
     showMessage(
         "BOTIQUÍN UTILIZADO"
     );
+
+    updateHUD();
 }
 
 
 /* =========================================================
-RECARGA
+   RECARGAR
 ========================================================= */
 
 let reloading=false;
@@ -1703,13 +1480,19 @@ function reload(){
     if(reloading)
         return;
 
-    if(player.ammo>=12)
+    if(player.ammo>=12){
+
+        showMessage(
+            "CARGADOR COMPLETO"
+        );
+
         return;
+    }
 
     if(player.reserve<=0){
 
         showMessage(
-            "SIN MUNICIÓN DE RESERVA"
+            "SIN MUNICIÓN"
         );
 
         return;
@@ -1717,98 +1500,43 @@ function reload(){
 
     reloading=true;
 
-    showMessage("RECARGANDO...");
+    showMessage(
+        "RECARGANDO..."
+    );
 
-    setTimeout(()=>{
+    setTimeout(
+        ()=>{
 
-        const needed=
-            12-player.ammo;
+            const need=
+                12-player.ammo;
 
-        const amount=
-            Math.min(
-                needed,
-                player.reserve
-            );
+            const amount=
+                Math.min(
+                    need,
+                    player.reserve
+                );
 
-        player.ammo+=amount;
+            player.ammo+=amount;
 
-        player.reserve-=amount;
+            player.reserve-=amount;
 
-        reloading=false;
+            reloading=false;
 
-        updateAmmo();
+            updateAmmo();
 
-    },650);
+        },
+        650
+    );
 }
 
 
 /* =========================================================
-PARTÍCULAS
-========================================================= */
-
-const particles=[];
-
-
-function createParticles(
-    x,
-    y,
-    count=8
-){
-
-    for(let i=0;i<count;i++){
-
-        particles.push({
-
-            x,
-            y,
-
-            life:.25+
-                Math.random()*.25,
-
-            max:.5,
-
-            angle:
-                Math.random()*
-                Math.PI*2,
-
-            speed:
-                30+
-                Math.random()*100
-
-        });
-    }
-}
-
-
-function updateParticles(dt){
-
-    for(let i=particles.length-1;i>=0;i--){
-
-        const p=particles[i];
-
-        p.life-=dt;
-
-        p.x+=
-            Math.cos(p.angle)*
-            p.speed*
-            dt;
-
-        p.y+=
-            Math.sin(p.angle)*
-            p.speed*
-            dt;
-
-        if(p.life<=0)
-            particles.splice(i,1);
-    }
-}
-
-
-/* =========================================================
-DISPARO
+   DISPARO
 ========================================================= */
 
 let lastShot=0;
+
+let weaponKick=0;
 
 function shoot(){
 
@@ -1818,7 +1546,10 @@ function shoot(){
     if(reloading)
         return;
 
-    if(now-lastShot<180)
+    if(
+        now-lastShot<
+        190
+    )
         return;
 
     if(player.ammo<=0){
@@ -1834,95 +1565,95 @@ function shoot(){
 
     player.ammo--;
 
+    weaponKick=.13;
+
     updateAmmo();
 
-    /*
-    Retroceso del arma.
-    */
-
-    weaponKick=.12;
+    muzzleFlash=.08;
 
     /*
-    Partículas de boca.
+    El disparo se hace exactamente
+    desde el centro de la cámara.
     */
 
-    createParticles(
-        player.x+
-        Math.cos(player.angle)*30,
-
-        player.y+
-        Math.sin(player.angle)*30,
-
-        10
-    );
-
-    /*
-    Raycast central.
-    */
-
-    const rayAngle=
+    const angle=
         player.angle;
 
-    const dirX=
-        Math.cos(rayAngle);
+    const dx=
+        Math.cos(angle);
 
-    const dirY=
-        Math.sin(rayAngle);
+    const dy=
+        Math.sin(angle);
 
     let hit=null;
 
+    let hitDistance=
+        MAX_DISTANCE;
+
+
+    /*
+    Avance de la bala.
+    */
+
     for(
         let d=5;
-        d<MAX_DEPTH;
-        d+=4
+        d<MAX_DISTANCE;
+        d+=3
     ){
 
-        const bx=
-            player.x+
-            dirX*d;
+        const x=
+            player.x+dx*d;
 
-        const by=
-            player.y+
-            dirY*d;
+        const y=
+            player.y+dy*d;
 
-        if(wallAtPixel(bx,by))
+        if(isWall(x,y))
             break;
 
-        for(const z of zombies){
+        /*
+        Hitbox circular.
+        */
+
+        for(
+            const z of zombies
+        ){
 
             if(!z.alive)
                 continue;
 
-            const dx=
-                z.x-bx;
+            const zx=
+                z.x-x;
 
-            const dy=
-                z.y-by;
+            const zy=
+                z.y-y;
 
             if(
-                Math.hypot(dx,dy)
-                <=z.radius+8
+                Math.hypot(
+                    zx,
+                    zy
+                )<=
+                z.radius+6
             ){
 
-                hit=z;
-                break;
+                if(d<hitDistance){
+
+                    hit=z;
+                    hitDistance=d;
+                }
             }
         }
-
-        if(hit)
-            break;
     }
+
 
     if(hit){
 
         hit.health-=45;
 
-        hit.hitFlash=.12;
+        hit.flash=.12;
 
-        createParticles(
+        createImpact(
             hit.x,
-            hit.y,
-            12
+            hit.y
         );
 
         if(hit.health<=0){
@@ -1935,57 +1666,164 @@ function shoot(){
                 "ZOMBIE ELIMINADO"
             );
         }
+
+    }else{
+
+        /*
+        Impacto visual aproximado
+        al final del disparo.
+        */
+
+        createMuzzleParticles();
     }
 }
 
 
 /* =========================================================
-ARMAS
+   PARTÍCULAS
 ========================================================= */
 
-let weaponKick=0;
+const particles=[];
+
+let muzzleFlash=0;
 
 
-function updateWeapon(dt){
+function createImpact(x,y){
+
+    for(let i=0;i<12;i++){
+
+        particles.push({
+
+            x:x,
+
+            y:y,
+
+            life:rnd(.15,.4),
+
+            speed:rnd(35,100),
+
+            angle:rnd(
+                0,
+                Math.PI*2
+            )
+        });
+    }
+}
+
+
+function createMuzzleParticles(){
+
+    for(let i=0;i<9;i++){
+
+        particles.push({
+
+            x:
+                player.x+
+                Math.cos(
+                    player.angle
+                )*25,
+
+            y:
+                player.y+
+                Math.sin(
+                    player.angle
+                )*25,
+
+            life:rnd(.1,.3),
+
+            speed:rnd(30,100),
+
+            angle:
+                player.angle+
+                rnd(-.8,.8)
+        });
+    }
+}
+
+
+function updateParticles(dt){
+
+    for(
+        let i=
+            particles.length-1;
+        i>=0;
+        i--
+    ){
+
+        const p=
+            particles[i];
+
+        p.life-=dt;
+
+        p.x+=
+            Math.cos(
+                p.angle
+            )*
+            p.speed*
+            dt;
+
+        p.y+=
+            Math.sin(
+                p.angle
+            )*
+            p.speed*
+            dt;
+
+        if(p.life<=0)
+            particles.splice(
+                i,
+                1
+            );
+    }
+
+    muzzleFlash=
+        Math.max(
+            0,
+            muzzleFlash-dt
+        );
 
     weaponKick=
         Math.max(
             0,
-            weaponKick-
-            dt*.65
+            weaponKick-dt*.7
         );
 }
 
 
 /* =========================================================
-IA ZOMBIES
+   IA ZOMBIES
 ========================================================= */
 
 function updateZombies(dt){
 
-    for(const z of zombies){
+    for(
+        const z of zombies
+    ){
 
         if(!z.alive)
             continue;
 
-        z.hitFlash=
+        z.attack=
             Math.max(
                 0,
-                z.hitFlash-dt
+                z.attack-dt
             );
 
-        z.attackTimer=
+        z.flash=
             Math.max(
                 0,
-                z.attackTimer-dt
+                z.flash-dt
             );
+
+
+        let target=
+            player;
+
 
         /*
-        Objetivo:
-        jugador o superviviente.
+        El superviviente se convierte
+        en objetivo prioritario.
         */
-
-        let target=player;
 
         if(
             survivor &&
@@ -1993,21 +1831,22 @@ function updateZombies(dt){
             survivor.health>0
         ){
 
+            const ds=
+                distance(
+                    z,
+                    survivor
+                );
+
             const dp=
-                Math.hypot(
-                    z.x-survivor.x,
-                    z.y-survivor.y
+                distance(
+                    z,
+                    player
                 );
 
-            const du=
-                Math.hypot(
-                    z.x-player.x,
-                    z.y-player.y
-                );
-
-            if(dp<du*1.2)
+            if(ds<dp*1.15)
                 target=survivor;
         }
+
 
         const dx=
             target.x-z.x;
@@ -2018,21 +1857,28 @@ function updateZombies(dt){
         const d=
             Math.hypot(dx,dy);
 
-        if(d<260){
 
-            if(d>32){
+        if(d<310){
+
+            if(d>34){
 
                 moveEntity(
                     z,
+
                     dx/d*
-                    z.speed*dt,
+                    z.speed*
+                    dt,
 
                     dy/d*
-                    z.speed*dt
+                    z.speed*
+                    dt
                 );
+
             }else{
 
-                if(z.attackTimer<=0){
+                if(
+                    z.attack<=0
+                ){
 
                     target.health=
                         Math.max(
@@ -2040,7 +1886,7 @@ function updateZombies(dt){
                             target.health-8
                         );
 
-                    z.attackTimer=.8;
+                    z.attack=.8;
                 }
             }
         }
@@ -2049,7 +1895,7 @@ function updateZombies(dt){
 
 
 /* =========================================================
-IA SUPERVIVIENTE
+   IA SUPERVIVIENTE
 ========================================================= */
 
 function updateSurvivor(dt){
@@ -2060,17 +1906,25 @@ function updateSurvivor(dt){
     if(!survivor.rescued)
         return;
 
+
+    /*
+    Buscar peligro.
+    */
+
     let danger=null;
 
-    let nearest=Infinity;
+    let nearest=
+        Infinity;
 
-    for(const z of zombies){
+    for(
+        const z of zombies
+    ){
 
         if(!z.alive)
             continue;
 
         const d=
-            dist(
+            distance(
                 survivor,
                 z
             );
@@ -2082,9 +1936,9 @@ function updateSurvivor(dt){
         }
     }
 
+
     /*
-    Si un zombie está demasiado cerca,
-    huye.
+    Huir.
     */
 
     if(
@@ -2093,48 +1947,57 @@ function updateSurvivor(dt){
     ){
 
         survivor.escaping=true;
-        survivor.safeTimer=0;
+
+        survivor.safeTime=0;
 
         const dx=
-            survivor.x-danger.x;
+            survivor.x-
+            danger.x;
 
         const dy=
-            survivor.y-danger.y;
+            survivor.y-
+            danger.y;
 
         const d=
-            Math.hypot(dx,dy)||1;
+            Math.hypot(
+                dx,
+                dy
+            )||1;
 
         moveEntity(
             survivor,
+
             dx/d*
             survivor.speed*
-            1.8*
+            1.9*
             dt,
 
             dy/d*
             survivor.speed*
-            1.8*
+            1.9*
             dt
         );
 
         return;
     }
 
+
     if(survivor.escaping){
 
-        survivor.safeTimer+=dt;
+        survivor.safeTime+=dt;
 
         if(
-            survivor.safeTimer>2
+            survivor.safeTime>2
         ){
 
             survivor.escaping=false;
-            survivor.safeTimer=0;
+            survivor.safeTime=0;
         }
     }
 
+
     /*
-    Seguir al jugador.
+    Seguir jugador.
     */
 
     if(
@@ -2151,12 +2014,16 @@ function updateSurvivor(dt){
             survivor.y;
 
         const d=
-            Math.hypot(dx,dy);
+            Math.hypot(
+                dx,
+                dy
+            );
 
-        if(d>75){
+        if(d>70){
 
             moveEntity(
                 survivor,
+
                 dx/d*
                 survivor.speed*
                 dt,
@@ -2171,70 +2038,312 @@ function updateSurvivor(dt){
 
 
 /* =========================================================
-CAMBIO DE PISO
+   MOVIMIENTO
 ========================================================= */
 
-function nextFloor(){
+let moveX=0;
+let moveY=0;
 
-    floorNumber++;
-
-    newFloor();
-
-    survivor.rescued=true;
-    survivor.following=true;
-
-    mission=1;
-
+const joy=
     document.getElementById(
-        "survivorPanel"
-    ).style.display="block";
+        "joystick"
+    );
 
+const joyStick=
     document.getElementById(
-        "followBtn"
-    ).style.display="flex";
+        "joyStick"
+    );
 
-    /*
-    El superviviente aparece
-    cerca del jugador en el nuevo piso.
-    */
+let joyPointer=null;
 
-    const angle=
-        Math.random()*
-        Math.PI*2;
 
-    const d=55;
+function updateJoy(x,y){
 
-    survivor.x=
-        player.x+
-        Math.cos(angle)*d;
+    const r=
+        joy.getBoundingClientRect();
 
-    survivor.y=
-        player.y+
-        Math.sin(angle)*d;
+    const cx=
+        r.left+68;
 
-    if(!canMove(
-        survivor.x,
-        survivor.y,
-        survivor.radius
-    )){
+    const cy=
+        r.top+68;
 
-        survivor.x=player.x+50;
-        survivor.y=player.y;
+    let dx=x-cx;
+    let dy=y-cy;
+
+    const max=48;
+
+    const d=
+        Math.hypot(dx,dy);
+
+    if(d>max){
+
+        dx=
+            dx/d*max;
+
+        dy=
+            dy/d*max;
     }
 
-    updateObjective();
+    moveX=dx/max;
+    moveY=dy/max;
 
-    showMessage(
-        "PISO "+
-        floorNumber+
-        " · SIGUE A "+
-        survivor.name
-    );
+    joyStick.style.left=
+        (68+dx)+"px";
+
+    joyStick.style.top=
+        (68+dy)+"px";
 }
 
 
+function resetJoy(){
+
+    joyPointer=null;
+
+    moveX=0;
+    moveY=0;
+
+    joyStick.style.left="68px";
+    joyStick.style.top="68px";
+}
+
+
+joy.addEventListener(
+    "pointerdown",
+    e=>{
+
+        joyPointer=e.pointerId;
+
+        joy.setPointerCapture(
+            e.pointerId
+        );
+
+        updateJoy(
+            e.clientX,
+            e.clientY
+        );
+    }
+);
+
+
+joy.addEventListener(
+    "pointermove",
+    e=>{
+
+        if(
+            e.pointerId===
+            joyPointer
+        ){
+
+            updateJoy(
+                e.clientX,
+                e.clientY
+            );
+        }
+    }
+);
+
+
+joy.addEventListener(
+    "pointerup",
+    resetJoy
+);
+
+joy.addEventListener(
+    "pointercancel",
+    resetJoy
+);
+
+
 /* =========================================================
-ACCIÓN
+   TECLADO
+========================================================= */
+
+const keys={};
+
+addEventListener(
+    "keydown",
+    e=>{
+        keys[
+            e.key.toLowerCase()
+        ]=true;
+    }
+);
+
+addEventListener(
+    "keyup",
+    e=>{
+        keys[
+            e.key.toLowerCase()
+        ]=false;
+    }
+);
+
+
+/* =========================================================
+   CÁMARA TÁCTIL
+========================================================= */
+
+const look=
+    document.getElementById(
+        "look"
+    );
+
+let lookPointer=null;
+
+let lx=0;
+let ly=0;
+
+
+look.addEventListener(
+    "pointerdown",
+    e=>{
+
+        lookPointer=
+            e.pointerId;
+
+        lx=e.clientX;
+        ly=e.clientY;
+
+        look.setPointerCapture(
+            e.pointerId
+        );
+    }
+);
+
+
+look.addEventListener(
+    "pointermove",
+    e=>{
+
+        if(
+            e.pointerId!==
+            lookPointer
+        )
+            return;
+
+        const dx=
+            e.clientX-lx;
+
+        const dy=
+            e.clientY-ly;
+
+        lx=e.clientX;
+        ly=e.clientY;
+
+
+        /*
+        Sensibilidad intermedia
+        y progresiva.
+        */
+
+        player.angle+=
+            dx*.0024;
+
+        player.pitch+=
+            dy*.0017;
+
+        player.pitch=
+            Math.max(
+                -.45,
+                Math.min(
+                    .45,
+                    player.pitch
+                )
+            );
+    }
+);
+
+
+look.addEventListener(
+    "pointerup",
+    ()=>{
+        lookPointer=null;
+    }
+);
+
+look.addEventListener(
+    "pointercancel",
+    ()=>{
+        lookPointer=null;
+    }
+);
+
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+document
+.getElementById("fire")
+.addEventListener(
+    "pointerdown",
+    e=>{
+        e.preventDefault();
+        shoot();
+    }
+);
+
+
+document
+.getElementById("reload")
+.addEventListener(
+    "pointerdown",
+    e=>{
+        e.preventDefault();
+        reload();
+    }
+);
+
+
+document
+.getElementById("med")
+.addEventListener(
+    "pointerdown",
+    e=>{
+        e.preventDefault();
+        useMedkit();
+    }
+);
+
+
+document
+.getElementById("action")
+.addEventListener(
+    "pointerdown",
+    e=>{
+        e.preventDefault();
+        action();
+    }
+);
+
+
+document
+.getElementById("follow")
+.addEventListener(
+    "pointerdown",
+    e=>{
+
+        e.preventDefault();
+
+        if(!survivor)
+            return;
+
+        survivor.following=
+            !survivor.following;
+
+        document.getElementById(
+            "follow"
+        ).textContent=
+            survivor.following
+            ?"DETENER"
+            :"SEGUIR";
+    }
+);
+
+
+/* =========================================================
+   ACCIÓN
 ========================================================= */
 
 function action(){
@@ -2242,33 +2351,39 @@ function action(){
     if(
         mission===0 &&
         !survivor.rescued &&
-        dist(player,survivor)<90
+        distance(
+            player,
+            survivor
+        )<90
     ){
 
         survivor.rescued=true;
+
         survivor.following=true;
 
         mission=1;
 
         document.getElementById(
-            "survivorPanel"
-        ).style.display="block";
+            "rescue"
+        ).style.display=
+            "block";
+
+        document.getElementById(
+            "follow"
+        ).style.display=
+            "flex";
 
         document.getElementById(
             "survivorName"
         ).textContent=
             survivor.name;
 
-        document.getElementById(
-            "followBtn"
-        ).style.display="flex";
-
         showMessage(
             survivor.name+
             " · TE SEGUIRÉ"
         );
 
-        updateObjective();
+        updateMission();
 
         return;
     }
@@ -2277,75 +2392,96 @@ function action(){
     if(
         mission>=1 &&
         stairs &&
-        dist(player,stairs)<90
+        distance(
+            player,
+            stairs
+        )<90
     ){
 
-        nextFloor();
+        floorNumber++;
 
-        return;
+        createFloor();
+
+        survivor.rescued=true;
+
+        survivor.following=true;
+
+        mission=1;
+
+        /*
+        Aparece junto al jugador,
+        con los pies en el suelo.
+        */
+
+        survivor.x=
+            player.x+
+            Math.cos(
+                player.angle+
+                Math.PI
+            )*65;
+
+        survivor.y=
+            player.y+
+            Math.sin(
+                player.angle+
+                Math.PI
+            )*65;
+
+        if(
+            !circleFree(
+                survivor.x,
+                survivor.y,
+                survivor.radius
+            )
+        ){
+
+            survivor.x=
+                player.x;
+
+            survivor.y=
+                player.y+
+                60;
+        }
+
+        document.getElementById(
+            "rescue"
+        ).style.display=
+            "block";
+
+        document.getElementById(
+            "follow"
+        ).style.display=
+            "flex";
+
+        document.getElementById(
+            "survivorName"
+        ).textContent=
+            survivor.name;
+
+        updateMission();
     }
 }
 
 
 /* =========================================================
-ACCIÓN DINÁMICA
+   OBJETIVO
 ========================================================= */
 
-function updateAction(){
+function updateMission(){
 
-    const btn=
+    const m=
         document.getElementById(
-            "actionBtn"
-        );
-
-    if(
-        mission===0 &&
-        !survivor.rescued &&
-        dist(player,survivor)<90
-    ){
-
-        btn.style.display="flex";
-        btn.textContent="RESCATAR";
-
-        return;
-    }
-
-
-    if(
-        mission>=1 &&
-        stairs &&
-        dist(player,stairs)<90
-    ){
-
-        btn.style.display="flex";
-        btn.textContent="SUBIR";
-
-        return;
-    }
-
-    btn.style.display="none";
-}
-
-
-/* =========================================================
-OBJETIVO
-========================================================= */
-
-function updateObjective(){
-
-    const o=
-        document.getElementById(
-            "objective"
+            "mission"
         );
 
     if(mission===0){
 
-        o.textContent=
+        m.textContent=
             "ENCUENTRA AL SUPERVIVIENTE";
 
     }else{
 
-        o.textContent=
+        m.textContent=
             "LLEVA A "+
             survivor.name+
             " HASTA LA ESCALERA";
@@ -2354,34 +2490,82 @@ function updateObjective(){
 
 
 /* =========================================================
-MENSAJES
+   HUD ACCIÓN
 ========================================================= */
 
-let messageTimer=0;
+function updateAction(){
+
+    const b=
+        document.getElementById(
+            "action"
+        );
+
+    if(
+        mission===0 &&
+        !survivor.rescued &&
+        distance(
+            player,
+            survivor
+        )<90
+    ){
+
+        b.style.display="block";
+        b.textContent="RESCATAR";
+
+        return;
+    }
+
+
+    if(
+        mission>=1 &&
+        stairs &&
+        distance(
+            player,
+            stairs
+        )<90
+    ){
+
+        b.style.display="block";
+        b.textContent="SUBIR";
+
+        return;
+    }
+
+
+    b.style.display="none";
+}
+
+
+/* =========================================================
+   MENSAJES
+========================================================= */
+
+let messageTime=0;
 
 
 function showMessage(text){
 
-    const m=
+    const el=
         document.getElementById(
             "message"
         );
 
-    m.textContent=text;
-    m.style.opacity="1";
+    el.textContent=text;
 
-    messageTimer=2;
+    el.style.opacity="1";
+
+    messageTime=1.8;
 }
 
 
 function updateMessage(dt){
 
-    if(messageTimer<=0)
+    if(messageTime<=0)
         return;
 
-    messageTimer-=dt;
+    messageTime-=dt;
 
-    if(messageTimer<=0){
+    if(messageTime<=0){
 
         document.getElementById(
             "message"
@@ -2391,13 +2575,13 @@ function updateMessage(dt){
 
 
 /* =========================================================
-AMMO HUD
+   HUD
 ========================================================= */
 
 function updateAmmo(){
 
     document.getElementById(
-        "ammoMain"
+        "ammoNumber"
     ).textContent=
         player.ammo;
 
@@ -2411,32 +2595,33 @@ function updateAmmo(){
 }
 
 
-/* =========================================================
-HUD VIDA
-========================================================= */
-
-function updateHealthHUD(){
+function updateHUD(){
 
     document.getElementById(
-        "playerHealthFill"
+        "healthFill"
     ).style.width=
         player.health+"%";
 
     document.getElementById(
-        "playerHealthText"
+        "healthText"
     ).textContent=
-        Math.ceil(player.health);
+        "VIDA "+
+        Math.ceil(
+            player.health
+        );
+
 
     if(survivor){
 
         document.getElementById(
-            "survivorHealthFill"
+            "survivorHealth"
         ).style.width=
             survivor.health+"%";
 
         document.getElementById(
             "survivorHealthText"
         ).textContent=
+            "VIDA "+
             Math.ceil(
                 survivor.health
             );
@@ -2445,13 +2630,16 @@ function updateHealthHUD(){
 
 
 /* =========================================================
-MOVIMIENTO JUGADOR
+   MOVIMIENTO
 ========================================================= */
 
 function updatePlayer(dt){
 
-    let forward=0;
-    let strafe=0;
+    let forward=
+        moveY*-1;
+
+    let strafe=
+        moveX;
 
     if(keys["w"])
         forward+=1;
@@ -2464,9 +2652,6 @@ function updatePlayer(dt){
 
     if(keys["d"])
         strafe+=1;
-
-    forward-=moveY;
-    strafe+=moveX;
 
     const len=
         Math.hypot(
@@ -2488,112 +2673,213 @@ function updatePlayer(dt){
         return;
 
     const speed=
-        player.speed*
-        dt;
+        player.speed*dt;
 
     const dx=
         (
-            Math.cos(player.angle)*
-            forward -
-            Math.sin(player.angle)*
-            strafe
+            Math.cos(
+                player.angle
+            )*forward -
+
+            Math.sin(
+                player.angle
+            )*strafe
         )*speed;
 
     const dy=
         (
-            Math.sin(player.angle)*
-            forward +
-            Math.cos(player.angle)*
-            strafe
+            Math.sin(
+                player.angle
+            )*forward +
+
+            Math.cos(
+                player.angle
+            )*strafe
         )*speed;
 
-    const nx=
-        player.x+dx;
+    if(
+        circleFree(
+            player.x+dx,
+            player.y,
+            PLAYER_RADIUS
+        )
+    ){
 
-    const ny=
-        player.y+dy;
-
-    if(canMove(
-        nx,
-        player.y,
-        PLAYER_RADIUS
-    ))
-        player.x=nx;
-
-    if(canMove(
-        player.x,
-        ny,
-        PLAYER_RADIUS
-    ))
-        player.y=ny;
-}
-
-
-/* =========================================================
-RAYCAST
-========================================================= */
-
-function castRay(angle){
-
-    const dirX=
-        Math.cos(angle);
-
-    const dirY=
-        Math.sin(angle);
-
-    let distance=0;
-
-    while(distance<MAX_DEPTH){
-
-        distance+=4;
-
-        const x=
-            player.x+
-            dirX*distance;
-
-        const y=
-            player.y+
-            dirY*distance;
-
-        if(wallAtPixel(x,y))
-            return distance;
+        player.x+=dx;
     }
 
-    return MAX_DEPTH;
+    if(
+        circleFree(
+            player.x,
+            player.y+dy,
+            PLAYER_RADIUS
+        )
+    ){
+
+        player.y+=dy;
+    }
 }
 
 
 /* =========================================================
-RENDER DEL MUNDO
+   RAYCAST
 ========================================================= */
 
-function renderWorld(){
+function rayDistance(angle){
+
+    const dx=
+        Math.cos(angle);
+
+    const dy=
+        Math.sin(angle);
+
+    let d=0;
+
+    while(
+        d<MAX_DISTANCE
+    ){
+
+        d+=4;
+
+        if(
+            isWall(
+                player.x+dx*d,
+                player.y+dy*d
+            )
+        ){
+
+            return d;
+        }
+    }
+
+    return MAX_DISTANCE;
+}
+
+
+/* =========================================================
+   PROYECCIÓN
+========================================================= */
+
+function project(e){
+
+    const dx=
+        e.x-player.x;
+
+    const dy=
+        e.y-player.y;
+
+    const distance=
+        Math.hypot(dx,dy);
+
+    let angle=
+        Math.atan2(
+            dy,
+            dx
+        )-
+        player.angle;
+
+
+    while(angle>Math.PI)
+        angle-=Math.PI*2;
+
+    while(angle<-Math.PI)
+        angle+=Math.PI*2;
+
+
+    const corrected=
+        distance*
+        Math.cos(angle);
+
+    if(
+        corrected<=2 ||
+        Math.abs(angle)>FOV*.8
+    )
+        return null;
+
+
+    const sx=
+        W/2+
+        (
+            Math.tan(angle)/
+            Math.tan(FOV/2)
+        )*
+        W/2;
+
 
     /*
-    Cielo
+    MUY IMPORTANTE:
+    bottom = suelo.
     */
 
     const horizon=
         H/2+
         player.pitch*
-        H*.7;
+        H*.72;
+
+
+    const feet=
+        horizon+
+        CAMERA_HEIGHT*
+        H*.52/
+        corrected;
+
+
+    const height=
+        e.height*
+        H*.52/
+        corrected;
+
+
+    return {
+
+        x:sx,
+
+        top:
+            feet-height,
+
+        bottom:
+            feet,
+
+        width:
+            height*.52,
+
+        distance:corrected
+    };
+}
+
+
+/* =========================================================
+   RENDER MUNDO
+========================================================= */
+
+function render(){
+
+    const horizon=
+        H/2+
+        player.pitch*
+        H*.72;
+
+
+    /*
+    CIELO
+    */
 
     const sky=
         ctx.createLinearGradient(
             0,
             0,
             0,
-            H/2
+            horizon
         );
 
     sky.addColorStop(
         0,
-        "#111820"
+        "#0c1217"
     );
 
     sky.addColorStop(
         1,
-        "#252525"
+        "#282525"
     );
 
     ctx.fillStyle=sky;
@@ -2610,10 +2896,10 @@ function renderWorld(){
 
 
     /*
-    Suelo
+    SUELO
     */
 
-    const ground=
+    const floor=
         ctx.createLinearGradient(
             0,
             horizon,
@@ -2621,17 +2907,17 @@ function renderWorld(){
             H
         );
 
-    ground.addColorStop(
+    floor.addColorStop(
         0,
-        "#28251f"
+        "#302c27"
     );
 
-    ground.addColorStop(
+    floor.addColorStop(
         1,
         "#090909"
     );
 
-    ctx.fillStyle=ground;
+    ctx.fillStyle=floor;
 
     ctx.fillRect(
         0,
@@ -2642,80 +2928,93 @@ function renderWorld(){
 
 
     /*
-    Rayos.
+    RAYCAST
     */
 
-    const rayCount=
+    const rays=
         Math.floor(
             Math.min(
                 W,
-                800
-            )*.75
+                900
+            )*.72
         );
 
     const strip=
-        W/rayCount;
+        W/rays;
 
-    const depthBuffer=
-        new Array(rayCount);
+    const depth=
+        new Float32Array(
+            rays
+        );
 
 
-    for(let i=0;i<rayCount;i++){
+    for(
+        let i=0;
+        i<rays;
+        i++
+    ){
 
         const cameraX=
-            i/rayCount-.5;
+            i/rays-.5;
 
-        const rayAngle=
+        const angle=
             player.angle+
             Math.atan(
                 cameraX*
-                Math.tan(FOV/2)*2
+                Math.tan(
+                    FOV/2
+                )*2
             );
 
-        let distance=
-            castRay(rayAngle);
 
-        /*
-        Corrección fish-eye.
-        */
+        let d=
+            rayDistance(
+                angle
+            );
 
-        distance*=
+
+        d*=
             Math.cos(
-                rayAngle-
+                angle-
                 player.angle
             );
 
-        depthBuffer[i]=distance;
+
+        depth[i]=d;
+
 
         const wallHeight=
-            (TILE*1.7/
-            distance)*
-            H;
+            TILE*
+            1.7*
+            H/
+            d;
+
 
         const top=
             horizon-
             wallHeight/2;
 
-        const shade=
-            clamp(
-                1-distance/900,
-                .15,
-                1
+
+        const light=
+            Math.max(
+                .12,
+                1-d/950
             );
 
-        /*
-        Color por distancia.
-        */
 
         const v=
             Math.floor(
-                85*shade
+                100*light
             );
 
+
         ctx.fillStyle=
-            `rgb(${v+25},
-                 ${v+22},
-                 ${v+18})`;
+            `rgb(
+                ${v+20},
+                ${v+18},
+                ${v+16}
+            )`;
+
 
         ctx.fillRect(
             i*strip,
@@ -2726,141 +3025,52 @@ function renderWorld(){
     }
 
 
-    /*
-    Entidades.
-    */
-
     renderEntities(
-        depthBuffer,
-        rayCount
+        depth,
+        rays
     );
 
 
-    /*
-    Objetos.
-    */
-
-    renderObjects(
-        depthBuffer,
-        rayCount
+    renderItems(
+        depth,
+        rays
     );
 
-
-    /*
-    Arma.
-    */
 
     renderWeapon();
 }
 
 
 /* =========================================================
-PROYECCIÓN DE ENTIDADES
-========================================================= */
-
-function projectEntity(ent){
-
-    const dx=
-        ent.x-player.x;
-
-    const dy=
-        ent.y-player.y;
-
-    const distance=
-        Math.hypot(dx,dy);
-
-    let angle=
-        Math.atan2(dy,dx)-
-        player.angle;
-
-    angle=
-        normAngle(angle);
-
-    const corrected=
-        distance*
-        Math.cos(angle);
-
-    if(corrected<=3)
-        return null;
-
-    if(
-        Math.abs(angle)>
-        FOV*.75
-    )
-        return null;
-
-    const screenX=
-        W/2+
-        (
-            Math.tan(angle)/
-            Math.tan(FOV/2)
-        )*
-        W/2;
-
-    /*
-    Pies SIEMPRE se proyectan
-    sobre el suelo.
-
-    No centramos el sprite.
-    */
-
-    const feetY=
-        H/2+
-        player.pitch*H*.7+
-        (
-            CAMERA_HEIGHT*
-            H*.55/
-            corrected
-        );
-
-    const height=
-        ent.height*
-        H*.55/
-        corrected;
-
-    return {
-
-        x:screenX,
-
-        top:
-            feetY-height,
-
-        bottom:
-            feetY,
-
-        width:
-            height*.52,
-
-        distance:corrected
-    };
-}
-
-
-/* =========================================================
-ENTIDADES
+   ENTIDADES
 ========================================================= */
 
 function renderEntities(
-    depthBuffer,
-    rayCount
+    depth,
+    rays
 ){
 
     const list=[];
 
-    for(const z of zombies){
+
+    for(
+        const z of zombies
+    ){
 
         if(!z.alive)
             continue;
 
         const p=
-            projectEntity(z);
+            project(z);
 
-        if(p)
+        if(p){
+
             list.push({
-                ent:z,
-                p,
+                entity:z,
+                projection:p,
                 type:"zombie"
             });
+        }
     }
 
 
@@ -2870,109 +3080,106 @@ function renderEntities(
     ){
 
         const p=
-            projectEntity(
+            project(
                 survivor
             );
 
-        if(p)
+        if(p){
+
             list.push({
-                ent:survivor,
-                p,
+                entity:survivor,
+                projection:p,
                 type:"survivor"
             });
+        }
     }
 
 
+    /*
+    Más lejos primero.
+    */
+
     list.sort(
         (a,b)=>
-            b.p.distance-
-            a.p.distance
+            b.projection.distance-
+            a.projection.distance
     );
 
 
-    for(const item of list){
+    for(
+        const item of list
+    ){
 
-        const p=item.p;
+        const p=
+            item.projection;
 
-        /*
-        Comprobamos si está detrás
-        de una pared usando una
-        aproximación de depth buffer.
-        */
-
-        const screenIndex=
+        const idx=
             Math.floor(
-                p.x/
-                W*
-                rayCount
+                p.x/W*rays
             );
+
 
         if(
-            screenIndex>=0 &&
-            screenIndex<rayCount
+            idx>=0 &&
+            idx<rays &&
+            p.distance>
+            depth[idx]+12
+        )
+            continue;
+
+
+        if(
+            item.type==="zombie"
         ){
 
-            if(
-                p.distance>
-                depthBuffer[
-                    screenIndex
-                ]+10
-            )
-                continue;
-        }
-
-
-        if(item.type==="zombie")
             drawZombie(
-                item.ent,
+                item.entity,
                 p
             );
-        else
+
+        }else{
+
             drawSurvivor(
-                item.ent,
+                item.entity,
                 p
             );
+        }
     }
 }
 
 
 /* =========================================================
-ZOMBIE VISUAL CSS/CANVAS
+   ZOMBIE
 ========================================================= */
 
-function drawZombie(z,p){
+function drawZombie(
+    z,
+    p
+){
 
-    const x=
-        p.x;
+    const x=p.x;
+    const y=p.top;
+    const w=p.width;
+    const h=p.height;
 
-    const y=
-        p.top;
-
-    const w=
-        p.width;
-
-    const h=
-        p.height;
 
     ctx.save();
 
-    if(z.hitFlash>0)
-        ctx.globalAlpha=.65;
 
     /*
     sombra
     */
 
     ctx.fillStyle=
-        "rgba(0,0,0,.45)";
+        "rgba(0,0,0,.5)";
 
     ctx.beginPath();
 
     ctx.ellipse(
         x,
         p.bottom,
-        w*.45,
-        h*.08,
+        w*.46,
+        h*.065,
         0,
         0,
         Math.PI*2
@@ -2982,16 +3189,56 @@ function drawZombie(z,p){
 
 
     /*
+    piernas
+    */
+
+    ctx.strokeStyle="#292929";
+
+    ctx.lineWidth=
+        Math.max(
+            4,
+            w*.11
+        );
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        x-w*.1,
+        y+h*.68
+    );
+
+    ctx.lineTo(
+        x-w*.15,
+        p.bottom
+    );
+
+    ctx.moveTo(
+        x+w*.1,
+        y+h*.68
+    );
+
+    ctx.lineTo(
+        x+w*.15,
+        p.bottom
+    );
+
+    ctx.stroke();
+
+
+    /*
     cuerpo
     */
 
-    ctx.fillStyle="#505050";
+    ctx.fillStyle=
+        z.flash>0
+        ?"white"
+        :"#505050";
 
     ctx.fillRect(
-        x-w*.28,
+        x-w*.27,
         y+h*.28,
-        w*.56,
-        h*.48
+        w*.54,
+        h*.45
     );
 
 
@@ -2999,7 +3246,10 @@ function drawZombie(z,p){
     cabeza
     */
 
-    ctx.fillStyle="#777";
+    ctx.fillStyle=
+        z.flash>0
+        ?"white"
+        :"#777";
 
     ctx.beginPath();
 
@@ -3018,17 +3268,17 @@ function drawZombie(z,p){
     ojos
     */
 
-    ctx.fillStyle="#b33";
+    ctx.fillStyle="#c52e2e";
 
     ctx.fillRect(
-        x-w*.11,
+        x-w*.105,
         y+h*.15,
         w*.055,
         w*.055
     );
 
     ctx.fillRect(
-        x+w*.055,
+        x+w*.05,
         y+h*.15,
         w*.055,
         w*.055
@@ -3039,7 +3289,10 @@ function drawZombie(z,p){
     brazos
     */
 
-    ctx.strokeStyle="#555";
+    ctx.strokeStyle=
+        z.flash>0
+        ?"white"
+        :"#555";
 
     ctx.lineWidth=
         Math.max(
@@ -3051,83 +3304,48 @@ function drawZombie(z,p){
 
     ctx.moveTo(
         x-w*.27,
-        y+h*.34
+        y+h*.35
     );
 
     ctx.lineTo(
         x-w*.45,
-        y+h*.55
+        y+h*.56
     );
 
     ctx.moveTo(
         x+w*.27,
-        y+h*.34
+        y+h*.35
     );
 
     ctx.lineTo(
         x+w*.45,
-        y+h*.55
+        y+h*.56
     );
 
     ctx.stroke();
 
-
-    /*
-    piernas
-    */
-
-    ctx.strokeStyle="#303030";
-
-    ctx.lineWidth=
-        Math.max(
-            4,
-            w*.11
-        );
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        x-w*.12,
-        y+h*.72
-    );
-
-    ctx.lineTo(
-        x-w*.18,
-        p.bottom
-    );
-
-    ctx.moveTo(
-        x+w*.12,
-        y+h*.72
-    );
-
-    ctx.lineTo(
-        x+w*.18,
-        p.bottom
-    );
-
-    ctx.stroke();
 
     ctx.restore();
 }
 
 
 /* =========================================================
-SUPERVIVIENTE
+   SUPERVIVIENTE
 ========================================================= */
 
-function drawSurvivor(s,p){
+function drawSurvivor(
+    s,
+    p
+){
 
     const x=p.x;
     const y=p.top;
     const w=p.width;
     const h=p.height;
 
+
     ctx.save();
 
-    /*
-    sombra de pies
-    */
 
     ctx.fillStyle=
         "rgba(0,0,0,.45)";
@@ -3138,64 +3356,9 @@ function drawSurvivor(s,p){
         x,
         p.bottom,
         w*.45,
-        h*.08,
+        h*.065,
         0,
         0,
-        Math.PI*2
-    );
-
-    ctx.fill();
-
-
-    /*
-    cuerpo
-    */
-
-    ctx.fillStyle=
-        s.escaping
-        ? "#b68a39"
-        : "#315c83";
-
-    ctx.fillRect(
-        x-w*.26,
-        y+h*.28,
-        w*.52,
-        h*.45
-    );
-
-
-    /*
-    cabeza
-    */
-
-    ctx.fillStyle="#bd8967";
-
-    ctx.beginPath();
-
-    ctx.arc(
-        x,
-        y+h*.17,
-        w*.17,
-        0,
-        Math.PI*2
-    );
-
-    ctx.fill();
-
-
-    /*
-    pelo
-    */
-
-    ctx.fillStyle="#222";
-
-    ctx.beginPath();
-
-    ctx.arc(
-        x,
-        y+h*.12,
-        w*.18,
-        Math.PI,
         Math.PI*2
     );
 
@@ -3206,12 +3369,12 @@ function drawSurvivor(s,p){
     piernas
     */
 
-    ctx.strokeStyle="#202020";
+    ctx.strokeStyle="#252525";
 
     ctx.lineWidth=
         Math.max(
             4,
-            w*.11
+            w*.1
         );
 
     ctx.beginPath();
@@ -3240,7 +3403,62 @@ function drawSurvivor(s,p){
 
 
     /*
-    nombre.
+    cuerpo
+    */
+
+    ctx.fillStyle=
+        s.escaping
+        ?" #9d7438"
+        :"#315b80";
+
+    ctx.fillRect(
+        x-w*.26,
+        y+h*.28,
+        w*.52,
+        h*.45
+    );
+
+
+    /*
+    cabeza
+    */
+
+    ctx.fillStyle="#b9876a";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y+h*.17,
+        w*.17,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    /*
+    cabello
+    */
+
+    ctx.fillStyle="#222";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y+h*.12,
+        w*.18,
+        Math.PI,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    /*
+    nombre
     */
 
     ctx.font=
@@ -3253,62 +3471,71 @@ function drawSurvivor(s,p){
 
     ctx.textAlign="center";
 
-    ctx.fillStyle="#fff";
+    ctx.fillStyle="white";
 
     ctx.fillText(
         s.name,
         x,
-        y-5
+        y-6
     );
+
 
     ctx.restore();
 }
 
 
 /* =========================================================
-OBJETOS
+   ITEMS
 ========================================================= */
 
-function renderObjects(
-    depthBuffer,
-    rayCount
+function renderItems(
+    depth,
+    rays
 ){
 
-    for(const item of items){
+    for(
+        const item of items
+    ){
 
         if(item.collected)
             continue;
 
+
         const p=
-            projectEntity({
+            project({
+
                 x:item.x,
+
                 y:item.y,
 
                 height:.28
             });
 
+
         if(!p)
             continue;
 
+
         const idx=
             Math.floor(
-                p.x/W*rayCount
+                p.x/W*rays
             );
+
 
         if(
             idx>=0 &&
-            idx<rayCount &&
+            idx<rays &&
             p.distance>
-            depthBuffer[idx]
+            depth[idx]+8
         )
             continue;
 
-        ctx.save();
 
         ctx.fillStyle=
             item.type==="ammo"
-            ? "#d0ad4a"
-            : "#53bd6e";
+            ?" #d3ad45"
+            :"#4fc779";
+
 
         ctx.fillRect(
             p.x-p.width*.25,
@@ -3316,8 +3543,6 @@ function renderObjects(
             p.width*.5,
             p.height
         );
-
-        ctx.restore();
     }
 
 
@@ -3328,11 +3553,15 @@ function renderObjects(
     if(stairs){
 
         const p=
-            projectEntity({
+            project({
+
                 x:stairs.x,
+
                 y:stairs.y,
-                height:.35
+
+                height:.4
             });
+
 
         if(p){
 
@@ -3345,22 +3574,26 @@ function renderObjects(
                     p.width*.08
                 );
 
-            for(let i=0;i<4;i++){
+            for(
+                let i=0;
+                i<5;
+                i++
+            ){
 
                 const yy=
                     p.bottom-
                     i*
-                    p.height/3;
+                    p.height/4;
 
                 ctx.beginPath();
 
                 ctx.moveTo(
-                    p.x-p.width*.4,
+                    p.x-p.width*.42,
                     yy
                 );
 
                 ctx.lineTo(
-                    p.x+p.width*.4,
+                    p.x+p.width*.42,
                     yy
                 );
 
@@ -3372,56 +3605,49 @@ function renderObjects(
 
 
 /* =========================================================
-ARMA
+   ARMA
 ========================================================= */
 
 function renderWeapon(){
 
-    const scale=
-        Math.min(
-            innerWidth,
-            innerHeight
-        );
+    const x=
+        W*.70;
 
-    const baseX=
-        W*.68;
+    const y=
+        H*.80+
+        weaponKick*
+        H;
 
-    const baseY=
-        H*.77+
-        weaponKick*H;
-
-    /*
-    arma estilizada
-    */
 
     ctx.save();
+
 
     /*
     brazo
     */
 
-    ctx.fillStyle="#9b765f";
+    ctx.fillStyle="#9c7862";
 
     ctx.beginPath();
 
     ctx.moveTo(
-        baseX-50,
-        baseY+80
+        x-55,
+        y+75
     );
 
     ctx.lineTo(
-        baseX+25,
-        baseY+10
+        x+20,
+        y+10
     );
 
     ctx.lineTo(
-        baseX+60,
-        baseY+70
+        x+60,
+        y+70
     );
 
     ctx.lineTo(
-        baseX-10,
-        baseY+115
+        x-8,
+        y+110
     );
 
     ctx.closePath();
@@ -3433,82 +3659,110 @@ function renderWeapon(){
     arma
     */
 
-    ctx.fillStyle="#222";
+    ctx.fillStyle="#202020";
 
     ctx.fillRect(
-        baseX-12,
-        baseY-40,
-        26,
+        x-13,
+        y-48,
+        27,
         130
     );
+
 
     ctx.fillStyle="#555";
 
     ctx.fillRect(
-        baseX-8,
-        baseY-75,
-        18,
+        x-8,
+        y-82,
+        17,
         42
     );
+
 
     ctx.fillStyle="#111";
 
     ctx.fillRect(
-        baseX-15,
-        baseY-87,
-        32,
-        18
+        x-15,
+        y-94,
+        31,
+        17
     );
+
+
+    /*
+    flash
+    */
+
+    if(muzzleFlash>0){
+
+        ctx.fillStyle=
+            "rgba(255,210,100,.8)";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x,
+            y-100,
+            17+
+            Math.random()*8,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fill();
+    }
+
 
     ctx.restore();
 }
 
 
 /* =========================================================
-MINIMAPA
+   MINIMAPA
 ========================================================= */
 
-function renderMiniMap(){
+function renderMini(){
 
-    const mw=
-        mapCanvas.width;
+    const mw=mini.width;
+    const mh=mini.height;
 
-    const mh=
-        mapCanvas.height;
-
-    mapCtx.clearRect(
+    mctx.clearRect(
         0,
         0,
         mw,
         mh
     );
 
+
     const cell=
         Math.min(
-            mw/mapW,
-            mh/mapH
+            mw/MAP_W,
+            mh/MAP_H
         );
 
 
     /*
-    mapa completo
+    mapa completo.
     */
 
-    for(let y=0;y<mapH;y++)
-    for(let x=0;x<mapW;x++){
+    for(
+        let y=0;
+        y<MAP_H;
+        y++
+    )
+    for(
+        let x=0;
+        x<MAP_W;
+        x++
+    ){
 
-        if(world[y][x]===1){
+        mctx.fillStyle=
+            map[y][x]===1
+            ?" #222"
+            :"#888";
 
-            mapCtx.fillStyle=
-                "#252525";
 
-        }else{
-
-            mapCtx.fillStyle=
-                "#8c8c8c";
-        }
-
-        mapCtx.fillRect(
+        mctx.fillRect(
             x*cell,
             y*cell,
             cell+.5,
@@ -3518,20 +3772,22 @@ function renderMiniMap(){
 
 
     /*
-    objetos
+    Items
     */
 
-    for(const item of items){
+    for(
+        const item of items
+    ){
 
         if(item.collected)
             continue;
 
-        mapCtx.fillStyle=
+        mctx.fillStyle=
             item.type==="ammo"
-            ? "#e1bd45"
-            : "#49c878";
+            ?" #e0bc4c"
+            :"#45ca77";
 
-        mapCtx.fillRect(
+        mctx.fillRect(
             item.x/TILE*cell-2,
             item.y/TILE*cell-2,
             4,
@@ -3546,9 +3802,10 @@ function renderMiniMap(){
 
     if(stairs){
 
-        mapCtx.fillStyle="#fff";
+        mctx.fillStyle=
+            "white";
 
-        mapCtx.fillRect(
+        mctx.fillRect(
             stairs.x/TILE*cell-3,
             stairs.y/TILE*cell-3,
             6,
@@ -3563,9 +3820,10 @@ function renderMiniMap(){
 
     if(door){
 
-        mapCtx.fillStyle="#38a7ff";
+        mctx.fillStyle=
+            "#42a9ff";
 
-        mapCtx.fillRect(
+        mctx.fillRect(
             door.x/TILE*cell-3,
             door.y/TILE*cell-3,
             6,
@@ -3578,24 +3836,26 @@ function renderMiniMap(){
     zombies
     */
 
-    for(const z of zombies){
+    for(
+        const z of zombies
+    ){
 
         if(!z.alive)
             continue;
 
-        mapCtx.fillStyle="#d33";
+        mctx.fillStyle="#d53d3d";
 
-        mapCtx.beginPath();
+        mctx.beginPath();
 
-        mapCtx.arc(
+        mctx.arc(
             z.x/TILE*cell,
             z.y/TILE*cell,
-            3.5,
+            3.2,
             0,
             Math.PI*2
         );
 
-        mapCtx.fill();
+        mctx.fill();
     }
 
 
@@ -3608,11 +3868,12 @@ function renderMiniMap(){
         survivor.health>0
     ){
 
-        mapCtx.fillStyle="#45dc82";
+        mctx.fillStyle=
+            "#45dc82";
 
-        mapCtx.beginPath();
+        mctx.beginPath();
 
-        mapCtx.arc(
+        mctx.arc(
             survivor.x/TILE*cell,
             survivor.y/TILE*cell,
             4,
@@ -3620,12 +3881,12 @@ function renderMiniMap(){
             Math.PI*2
         );
 
-        mapCtx.fill();
+        mctx.fill();
     }
 
 
     /*
-    jugador
+    jugador + dirección.
     */
 
     const px=
@@ -3634,73 +3895,72 @@ function renderMiniMap(){
     const py=
         player.y/TILE*cell;
 
-    mapCtx.save();
 
-    mapCtx.translate(
+    mctx.save();
+
+    mctx.translate(
         px,
         py
     );
 
-    mapCtx.rotate(
+    mctx.rotate(
         player.angle
     );
 
-    /*
-    dirección de mirada
-    */
 
-    mapCtx.strokeStyle="#fff";
+    mctx.strokeStyle=
+        "white";
 
-    mapCtx.lineWidth=2;
+    mctx.lineWidth=2;
 
-    mapCtx.beginPath();
+    mctx.beginPath();
 
-    mapCtx.moveTo(0,0);
-
-    mapCtx.lineTo(
-        13,
+    mctx.moveTo(
+        0,
         0
     );
 
-    mapCtx.stroke();
-
-
-    /*
-    jugador
-    */
-
-    mapCtx.fillStyle="#fff";
-
-    mapCtx.beginPath();
-
-    mapCtx.moveTo(
-        6,
+    mctx.lineTo(
+        14,
         0
     );
 
-    mapCtx.lineTo(
-        -5,
-        -4
+    mctx.stroke();
+
+
+    mctx.fillStyle=
+        "white";
+
+    mctx.beginPath();
+
+    mctx.moveTo(
+        7,
+        0
     );
 
-    mapCtx.lineTo(
+    mctx.lineTo(
         -5,
-        4
+        -5
     );
 
-    mapCtx.closePath();
+    mctx.lineTo(
+        -5,
+        5
+    );
 
-    mapCtx.fill();
+    mctx.closePath();
 
-    mapCtx.restore();
+    mctx.fill();
+
+    mctx.restore();
 }
 
 
 /* =========================================================
-UPDATE
+   GAME UPDATE
 ========================================================= */
 
-let lastTime=
+let last=
     performance.now();
 
 
@@ -3710,9 +3970,9 @@ function update(){
         performance.now();
 
     let dt=
-        (now-lastTime)/1000;
+        (now-last)/1000;
 
-    lastTime=now;
+    last=now;
 
     dt=
         Math.min(
@@ -3731,30 +3991,16 @@ function update(){
 
     updateParticles(dt);
 
-    updateWeapon(dt);
-
     updateMessage(dt);
 
     updateAction();
 
-    updateHealthHUD();
+    updateHUD();
 }
 
 
 /* =========================================================
-RENDER
-========================================================= */
-
-function render(){
-
-    renderWorld();
-
-    renderMiniMap();
-}
-
-
-/* =========================================================
-GAME LOOP
+   LOOP
 ========================================================= */
 
 function loop(){
@@ -3763,17 +4009,23 @@ function loop(){
 
     render();
 
-    requestAnimationFrame(loop);
+    renderMini();
+
+    requestAnimationFrame(
+        loop
+    );
 }
 
 
 /* =========================================================
-INICIAR
+   INICIO
 ========================================================= */
 
-newFloor();
+createFloor();
 
 updateAmmo();
+
+updateHUD();
 
 loop();
 
