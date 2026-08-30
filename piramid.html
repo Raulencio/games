@@ -2,14 +2,17 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Pyramid of the Gods 0.2</title>
+<meta name="viewport"
+content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Pyramid of the Gods 0.3</title>
 
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
+    user-select:none;
+    -webkit-user-select:none;
     -webkit-tap-highlight-color:transparent;
 }
 
@@ -17,13 +20,9 @@ html,body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#15100a;
+    background:#171109;
     touch-action:none;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-canvas{
-    display:block;
+    font-family:Arial,sans-serif;
 }
 
 #game{
@@ -33,9 +32,9 @@ canvas{
     height:100%;
 }
 
-/* =========================================================
+/* =========================
    MENÚ
-========================================================= */
+========================= */
 
 #menu{
     position:fixed;
@@ -45,46 +44,40 @@ canvas{
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    color:#ead59e;
     background:
-        radial-gradient(
-            circle at 50% 35%,
-            #715b37,
-            #302414 48%,
-            #100c08 100%
-        );
+        radial-gradient(circle at 50% 30%,
+        #806b47 0%,
+        #392b1b 45%,
+        #120d08 100%);
+    color:#ead39b;
 }
 
 .title{
     text-align:center;
-    font-size:clamp(30px,9vw,58px);
-    line-height:.9;
+    font-size:clamp(31px,9vw,60px);
+    line-height:.88;
     letter-spacing:4px;
-    text-shadow:
-        0 4px 0 #080604,
-        0 0 30px #d6aa5433;
+    text-shadow:0 5px 0 #090604;
 }
 
 .subtitle{
-    margin-top:10px;
+    margin-top:12px;
     font-size:10px;
     letter-spacing:4px;
-    color:#c5a96f;
 }
 
 .menuBox{
-    width:min(94vw,440px);
+    width:min(94vw,430px);
     margin-top:25px;
     padding:18px;
-    border:1px solid #9d7b43;
+    border:1px solid #a27f43;
     border-radius:18px;
     background:#17120de8;
-    box-shadow:0 15px 50px #000b;
 }
 
 .menuLabel{
     text-align:center;
-    font-size:12px;
+    font-size:11px;
     margin-bottom:12px;
 }
 
@@ -95,46 +88,43 @@ canvas{
 }
 
 .godButton{
-    min-height:80px;
-    border:1px solid #5c482a;
-    border-radius:11px;
-    background:#2a2116;
-    color:#e7d19a;
+    min-height:78px;
+    border-radius:10px;
+    border:1px solid #59452a;
+    background:#292015;
+    color:#ead39a;
 }
 
 .godButton.selected{
-    border-color:#e7bd61;
-    background:#594421;
-    box-shadow:
-        0 0 16px #d7aa4c44,
-        inset 0 0 15px #e2bb6422;
+    border-color:#e0b85e;
+    background:#57431f;
 }
 
 .glyph{
     display:block;
-    font-size:28px;
-    line-height:36px;
+    font-size:27px;
+    line-height:34px;
 }
 
 .godButton small{
-    font-size:9px;
+    font-size:8px;
 }
 
 #start{
     width:100%;
-    margin-top:15px;
-    padding:15px;
+    margin-top:14px;
+    padding:14px;
     border:0;
-    border-radius:11px;
-    background:#c99c48;
-    color:#1a1208;
+    border-radius:10px;
+    background:#c99b49;
+    color:#1c1308;
+    font-size:14px;
     font-weight:bold;
-    font-size:15px;
 }
 
-/* =========================================================
+/* =========================
    HUD
-========================================================= */
+========================= */
 
 #hud{
     display:none;
@@ -145,18 +135,18 @@ canvas{
 }
 
 .panel{
-    background:#17120dcc;
-    border:1px solid #aa884f99;
+    border:1px solid #aa884d99;
     border-radius:11px;
+    background:#17120dcc;
+    color:#ecd7a2;
     box-shadow:0 4px 18px #0007;
-    color:#ecd8a4;
 }
 
 #top{
     position:absolute;
-    top:7px;
     left:7px;
     right:7px;
+    top:7px;
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
@@ -169,31 +159,30 @@ canvas{
 }
 
 .hpTrack{
-    width:100%;
     height:10px;
     margin:5px 0;
-    background:#311816;
+    background:#321714;
     border-radius:5px;
     overflow:hidden;
 }
 
 #hpBar{
-    height:100%;
     width:100%;
-    background:#c34a3c;
+    height:100%;
+    background:#c84b3c;
 }
 
 .xpTrack{
     height:5px;
-    background:#292235;
-    border-radius:4px;
+    background:#292234;
+    border-radius:5px;
     overflow:hidden;
 }
 
 #xpBar{
     height:100%;
     width:0;
-    background:#9572d0;
+    background:#9270d1;
 }
 
 #statLine{
@@ -214,8 +203,8 @@ canvas{
 
 #godCurrent{
     position:absolute;
-    top:95px;
     left:7px;
+    top:94px;
     padding:7px 10px;
     font-size:10px;
 }
@@ -223,69 +212,18 @@ canvas{
 #message{
     position:absolute;
     left:50%;
-    bottom:125px;
+    bottom:124px;
     transform:translateX(-50%);
-    width:min(68vw,400px);
+    width:min(70vw,400px);
     min-height:40px;
     padding:8px;
     text-align:center;
     font-size:11px;
 }
 
-/* =========================================================
-   BENDICIONES
-========================================================= */
-
-#blessingPanel{
-    display:none;
-    pointer-events:auto;
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    width:min(90vw,380px);
-    padding:15px;
-    z-index:60;
-}
-
-#blessingPanel h3{
-    text-align:center;
-    margin-bottom:12px;
-    font-size:14px;
-}
-
-.blessingGrid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:8px;
-}
-
-.blessing{
-    min-height:68px;
-    border-radius:10px;
-    border:1px solid #624d2d;
-    background:#2c2215;
-    color:#e7d29d;
-}
-
-.blessing.active{
-    border-color:#e5bd62;
-    background:#5a4522;
-}
-
-.closeBlessing{
-    width:100%;
-    margin-top:10px;
-    padding:10px;
-    border-radius:9px;
-    border:1px solid #725a32;
-    background:#3a2b19;
-    color:#ead49b;
-}
-
-/* =========================================================
+/* =========================
    JOYSTICK
-========================================================= */
+========================= */
 
 #joystick{
     pointer-events:auto;
@@ -295,7 +233,7 @@ canvas{
     width:116px;
     height:116px;
     border-radius:50%;
-    border:2px solid #c8aa6c66;
+    border:2px solid #c5a76566;
     background:#211a10aa;
 }
 
@@ -306,13 +244,13 @@ canvas{
     width:48px;
     height:48px;
     border-radius:50%;
-    border:2px solid #ead9aa;
-    background:#d1b16a99;
+    border:2px solid #ead8a8;
+    background:#d1ae6599;
 }
 
-/* =========================================================
+/* =========================
    BOTONES
-========================================================= */
+========================= */
 
 #actions{
     pointer-events:auto;
@@ -325,13 +263,13 @@ canvas{
 }
 
 .action{
-    width:61px;
-    height:61px;
+    width:60px;
+    height:60px;
     border-radius:50%;
-    border:2px solid #ae8b4f;
+    border:2px solid #ad894d;
     background:#21190fcc;
-    color:#ead49b;
-    font-size:11px;
+    color:#ead49a;
+    font-size:10px;
     font-weight:bold;
 }
 
@@ -342,12 +280,62 @@ canvas{
 }
 
 #god{
-    border-color:#9b76d1;
+    border-color:#9872d0;
 }
 
-/* =========================================================
+/* =========================
+   BENDICIONES
+========================= */
+
+#blessingPanel{
+    display:none;
+    pointer-events:auto;
+    position:absolute;
+    z-index:60;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:min(90vw,380px);
+    padding:15px;
+}
+
+#blessingPanel h3{
+    text-align:center;
+    margin-bottom:12px;
+}
+
+.blessingGrid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+}
+
+.blessing{
+    min-height:65px;
+    border-radius:10px;
+    border:1px solid #604b2c;
+    background:#2b2115;
+    color:#ead49a;
+}
+
+.blessing.active{
+    border-color:#e5bc5e;
+    background:#58431f;
+}
+
+.closeBlessing{
+    width:100%;
+    margin-top:10px;
+    padding:10px;
+    border-radius:9px;
+    border:1px solid #72592f;
+    background:#3b2c19;
+    color:#ead49a;
+}
+
+/* =========================
    PAUSA
-========================================================= */
+========================= */
 
 #pause{
     pointer-events:auto;
@@ -360,7 +348,7 @@ canvas{
     border-radius:50%;
     border:1px solid #a8874d;
     background:#17120dcc;
-    color:#ead49c;
+    color:#ead49a;
 }
 
 #pauseScreen{
@@ -371,6 +359,7 @@ canvas{
     align-items:center;
     justify-content:center;
     background:#0009;
+    pointer-events:auto;
 }
 
 .pauseBox{
@@ -378,8 +367,8 @@ canvas{
     padding:20px;
     text-align:center;
     border-radius:16px;
-    background:#21180d;
     border:1px solid #9d7b43;
+    background:#21180d;
     color:#ecd6a0;
 }
 
@@ -393,12 +382,16 @@ canvas{
     color:#ecd6a0;
 }
 
+/* =========================
+   TELÉFONOS PEQUEÑOS
+========================= */
+
 @media(max-height:620px){
 
     #joystick{
         width:92px;
         height:92px;
-        bottom:9px;
+        bottom:8px;
     }
 
     #stick{
@@ -419,7 +412,7 @@ canvas{
     }
 
     #message{
-        bottom:91px;
+        bottom:90px;
     }
 }
 </style>
@@ -429,9 +422,9 @@ canvas{
 
 <canvas id="game"></canvas>
 
-<!-- =======================================================
+<!-- =========================
      MENÚ
-======================================================= -->
+========================= -->
 
 <div id="menu">
 
@@ -490,9 +483,9 @@ canvas{
     </div>
 </div>
 
-<!-- =======================================================
+<!-- =========================
      HUD
-======================================================= -->
+========================= -->
 
 <div id="hud">
 
@@ -510,9 +503,7 @@ canvas{
                 <div id="xpBar"></div>
             </div>
 
-            <div id="statLine">
-                VEL 1.00 · EVA 5% · CRIT 5%
-            </div>
+            <div id="statLine"></div>
 
         </div>
 
@@ -527,7 +518,7 @@ canvas{
     </div>
 
     <div id="message" class="panel">
-        Encuentra la puerta.
+        Explora la cámara.
     </div>
 
     <button id="pause">
@@ -549,8 +540,6 @@ canvas{
         </button>
 
     </div>
-
-    <!-- SELECTOR DURANTE EL JUEGO -->
 
     <div id="blessingPanel" class="panel">
 
@@ -600,10 +589,6 @@ canvas{
 
 </div>
 
-<!-- =======================================================
-     PAUSA
-======================================================= -->
-
 <div id="pauseScreen">
 
     <div class="pauseBox">
@@ -629,39 +614,55 @@ canvas{
    CANVAS
 ========================================================= */
 
-const canvas=
-    document.getElementById("game");
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
 
-const ctx=
-    canvas.getContext("2d");
-
-const mini=
-    document.getElementById("mini");
-
-const mctx=
-    mini.getContext("2d");
+const mini=document.getElementById("mini");
+const mctx=mini.getContext("2d");
 
 let W=innerWidth;
 let H=innerHeight;
 
-/* =========================================================
-   CONFIGURACIÓN
-========================================================= */
-
 const TILE=64;
-
 const FOV=Math.PI/3;
+
+/* =========================================================
+   ESTADO
+========================================================= */
 
 let map=[];
 let mapW=35;
 let mapH=27;
 
+let enemies=[];
+
 let running=false;
 let paused=false;
 
-let enemies=[];
-
 let last=performance.now();
+
+/* =========================================================
+   CÁMARA VERTICAL
+========================================================= */
+
+/*
+    pitch:
+    0 = horizonte normal.
+
+    El jugador puede mirar arriba y abajo.
+
+    IMPORTANTE:
+    El movimiento vertical está INVERTIDO:
+    dedo hacia ARRIBA -> mirada hacia ABAJO
+    dedo hacia ABAJO  -> mirada hacia ARRIBA
+*/
+
+let cameraPitch=0;
+
+const MIN_PITCH=-0.42;
+const MAX_PITCH=0.42;
+
+let lookPointer=null;
 
 /* =========================================================
    DIOSES
@@ -739,7 +740,7 @@ const GODS={
 let selectedGod="horus";
 
 /* =========================================================
-   PROGRESIÓN
+   GUARDADO
 ========================================================= */
 
 let save={
@@ -752,30 +753,27 @@ let save={
     god:"horus"
 };
 
-function loadSave(){
+try{
 
-    try{
+    const stored=
+        JSON.parse(
+            localStorage.getItem(
+                "POTG_SAVE_06"
+            )
+        );
 
-        const data=
-            JSON.parse(
-                localStorage.getItem(
-                    "POTG_SAVE_05"
-                )
-            );
+    if(stored){
 
-        if(data){
+        save={
+            ...save,
+            ...stored
+        };
 
-            save={
-                ...save,
-                ...data
-            };
+        selectedGod=
+            save.god||"horus";
+    }
 
-            selectedGod=
-                save.god||"horus";
-        }
-
-    }catch(e){}
-}
+}catch(e){}
 
 function saveGame(){
 
@@ -784,14 +782,12 @@ function saveGame(){
     try{
 
         localStorage.setItem(
-            "POTG_SAVE_05",
+            "POTG_SAVE_06",
             JSON.stringify(save)
         );
 
     }catch(e){}
 }
-
-loadSave();
 
 /* =========================================================
    PLAYER
@@ -835,9 +831,24 @@ const companion={
    PUERTA
 ========================================================= */
 
+/*
+    La puerta NO es una decoración flotante.
+
+    door.wall:
+      "N" = pared al norte
+      "S" = pared al sur
+      "E" = pared al este
+      "W" = pared al oeste
+
+    door.x/y = celda de la pared.
+
+    El portal se dibuja en la cara de esa pared.
+*/
+
 let door={
     x:0,
-    y:0
+    y:0,
+    wall:"N"
 };
 
 /* =========================================================
@@ -889,6 +900,11 @@ function getStats(){
 
 function generateMap(){
 
+    /*
+      Dimensiones pares para mantener
+      corredores limpios.
+    */
+
     mapW=
         35+
         Math.floor(
@@ -920,49 +936,50 @@ function generateMap(){
         Math.floor(mapH/2);
 
     /*
-      Zona central grande.
+      Gran cámara central.
     */
 
     carve(
-        cx-8,
-        cy-6,
-        cx+9,
-        cy+7
+        cx-7,
+        cy-5,
+        cx+8,
+        cy+6
     );
 
     /*
-      Grandes sectores.
+      Grandes zonas laterales.
+      Evitamos habitaciones diminutas.
     */
 
     carve(
-        2,
+        3,
         4,
         11,
         mapH-5
     );
 
     carve(
-        mapW-11,
+        mapW-12,
         4,
-        mapW-2,
+        mapW-3,
         mapH-5
     );
 
     /*
-      Conexiones amplias.
+      Estructura principal.
     */
 
     corridor(
         cx,
         cy,
-        5,
+        7,
         cy
     );
 
     corridor(
         cx,
         cy,
-        mapW-6,
+        mapW-8,
         cy
     );
 
@@ -970,24 +987,24 @@ function generateMap(){
         cx,
         cy,
         cx,
-        4
+        5
     );
 
     corridor(
         cx,
         cy,
         cx,
-        mapH-5
+        mapH-6
     );
 
     /*
-      Cámaras adicionales.
+      Cámaras amplias adicionales.
     */
 
-    for(let i=0;i<8;i++){
+    for(let i=0;i<7;i++){
 
         const rw=
-            4+
+            5+
             Math.floor(
                 Math.random()*5
             );
@@ -999,17 +1016,17 @@ function generateMap(){
             );
 
         const rx=
-            2+
+            3+
             Math.floor(
                 Math.random()*
-                (mapW-rw-4)
+                (mapW-rw-6)
             );
 
         const ry=
-            2+
+            3+
             Math.floor(
                 Math.random()*
-                (mapH-rh-4)
+                (mapH-rh-6)
             );
 
         carve(
@@ -1018,6 +1035,11 @@ function generateMap(){
             rx+rw,
             ry+rh
         );
+
+        /*
+          Conexión directa.
+          Esto evita salas cerradas.
+        */
 
         corridor(
             cx,
@@ -1028,7 +1050,7 @@ function generateMap(){
     }
 
     /*
-      Borde sólido.
+      Borde.
     */
 
     for(let x=0;x<mapW;x++){
@@ -1056,6 +1078,7 @@ function generateMap(){
         (cy+.5)*TILE;
 
     player.angle=0;
+    cameraPitch=0;
 
     companion.x=
         player.x-TILE;
@@ -1071,9 +1094,13 @@ function generateMap(){
         getStats().maxHp;
 
     message(
-        "Nueva sala generada."
+        "Nueva cámara generada."
     );
 }
+
+/* =========================================================
+   CARVADO
+========================================================= */
 
 function carve(x1,y1,x2,y2){
 
@@ -1093,6 +1120,10 @@ function carve(x1,y1,x2,y2){
         }
     }
 }
+
+/* =========================================================
+   CORREDORES
+========================================================= */
 
 function corridor(x1,y1,x2,y2){
 
@@ -1126,13 +1157,14 @@ function corridor(x1,y1,x2,y2){
     }
 }
 
+/* =========================================================
+   PARED
+========================================================= */
+
 function wallAt(x,y){
 
-    const tx=
-        Math.floor(x/TILE);
-
-    const ty=
-        Math.floor(y/TILE);
+    const tx=Math.floor(x/TILE);
+    const ty=Math.floor(y/TILE);
 
     if(
         tx<0||
@@ -1145,51 +1177,122 @@ function wallAt(x,y){
     return map[ty][tx]===1;
 }
 
+function cellWall(x,y){
+
+    if(
+        x<0||
+        y<0||
+        x>=mapW||
+        y>=mapH
+    )
+        return true;
+
+    return map[y][x]===1;
+}
+
 /* =========================================================
-   PUERTA
+   PUERTA REALMENTE PEGADA A PARED
 ========================================================= */
 
 function createDoor(){
 
     const candidates=[];
 
-    for(let y=2;y<mapH-2;y++){
+    /*
+      Buscamos una celda ABIERTA que tenga
+      exactamente una pared adyacente.
 
-        for(let x=2;x<mapW-2;x++){
+      La puerta se coloca en esa frontera.
+    */
+
+    for(let y=3;y<mapH-3;y++){
+
+        for(let x=3;x<mapW-3;x++){
 
             if(map[y][x]!==0)
                 continue;
 
-            const px=
+            const centerX=
                 (x+.5)*TILE;
 
-            const py=
+            const centerY=
                 (y+.5)*TILE;
 
+            if(
+                Math.hypot(
+                    centerX-player.x,
+                    centerY-player.y
+                )<
+                TILE*5
+            )
+                continue;
+
             /*
-              La puerta está en una celda abierta
-              inmediatamente pegada a una pared.
+              Pared al norte.
             */
 
             if(
-                wallAt(px,py-TILE)||
-                wallAt(px,py+TILE)||
-                wallAt(px-TILE,py)||
-                wallAt(px+TILE,py)
+                cellWall(x,y-1)&&
+                !cellWall(x-1,y)&&
+                !cellWall(x+1,y)
             ){
 
-                if(
-                    Math.hypot(
-                        px-player.x,
-                        py-player.y
-                    )>TILE*5
-                ){
+                candidates.push({
+                    x,
+                    y,
+                    wall:"N"
+                });
+            }
 
-                    candidates.push({
-                        x,
-                        y
-                    });
-                }
+            /*
+              Pared al sur.
+            */
+
+            if(
+                cellWall(x,y+1)&&
+                !cellWall(x-1,y)&&
+                !cellWall(x+1,y)
+            ){
+
+                candidates.push({
+                    x,
+                    y,
+                    wall:"S"
+                });
+            }
+
+            /*
+              Pared al oeste.
+            */
+
+            if(
+                cellWall(x-1,y)&&
+                !cellWall(x,y-1)&&
+                !cellWall(x,y+1)
+            ){
+
+                candidates.push({
+                    x,
+                    y,
+                    wall:"W"
+                });
+            }
+
+            /*
+              Pared al este.
+            */
+
+            if(
+                cellWall(x+1,y)&&
+                !cellWall(x,y-1)&&
+                !cellWall(x,y+1)
+            ){
+
+                candidates.push({
+                    x,
+                    y,
+                    wall:"E"
+                });
             }
         }
     }
@@ -1203,7 +1306,66 @@ function createDoor(){
                     candidates.length
                 )
             ];
+
+    }else{
+
+        /*
+          Fallback seguro.
+        */
+
+        door={
+            x:Math.floor(mapW/2),
+            y:Math.floor(mapH/2)+7,
+            wall:"N"
+        };
     }
+}
+
+/* =========================================================
+   POSICIÓN DE LA PUERTA
+========================================================= */
+
+function doorWorldPosition(){
+
+    const cx=
+        (door.x+.5)*TILE;
+
+    const cy=
+        (door.y+.5)*TILE;
+
+    /*
+      La puerta está exactamente sobre
+      la cara de la pared.
+    */
+
+    if(door.wall==="N"){
+
+        return{
+            x:cx,
+            y:cy-TILE*.48
+        };
+    }
+
+    if(door.wall==="S"){
+
+        return{
+            x:cx,
+            y:cy+TILE*.48
+        };
+    }
+
+    if(door.wall==="W"){
+
+        return{
+            x:cx-TILE*.48,
+            y:cy
+        };
+    }
+
+    return{
+        x:cx+TILE*.48,
+        y:cy
+    };
 }
 
 /* =========================================================
@@ -1240,21 +1402,16 @@ function hasLineOfSight(
     const steps=
         Math.ceil(distance/3);
 
-    for(
-        let i=1;
-        i<steps;
-        i++
-    ){
+    for(let i=1;i<steps;i++){
 
         const t=i/steps;
 
-        const x=
-            x1+dx*t;
-
-        const y=
-            y1+dy*t;
-
-        if(wallAt(x,y))
+        if(
+            wallAt(
+                x1+dx*t,
+                y1+dy*t
+            )
+        )
             return false;
     }
 
@@ -1506,13 +1663,13 @@ function updateCompanion(dt){
         Math.hypot(dx,dy);
 
     /*
-      Nunca se mete encima del jugador.
+      Mantiene aproximadamente 72 px
+      de separación.
     */
 
-    if(distance>100){
+    if(distance>105){
 
-        const target=
-            72;
+        const target=72;
 
         const tx=
             player.x-
@@ -1598,14 +1755,10 @@ function movePlayer(dx,dy){
 ========================================================= */
 
 const joystick=
-    document.getElementById(
-        "joystick"
-    );
+    document.getElementById("joystick");
 
 const stick=
-    document.getElementById(
-        "stick"
-    );
+    document.getElementById("stick");
 
 let joyActive=false;
 let joyId=null;
@@ -1667,6 +1820,8 @@ joystick.addEventListener(
     "pointerdown",
     e=>{
 
+        e.preventDefault();
+
         joyActive=true;
         joyId=e.pointerId;
 
@@ -1709,10 +1864,8 @@ joystick.addEventListener(
 );
 
 /* =========================================================
-   CÁMARA
+   CÁMARA CON PITCH INVERTIDO
 ========================================================= */
-
-let lookPointer=null;
 
 canvas.addEventListener(
     "pointerdown",
@@ -1720,7 +1873,8 @@ canvas.addEventListener(
 
         lookPointer={
             id:e.pointerId,
-            x:e.clientX
+            x:e.clientX,
+            y:e.clientY
         };
 
         canvas.setPointerCapture(
@@ -1743,11 +1897,39 @@ canvas.addEventListener(
             e.clientX-
             lookPointer.x;
 
+        const dy=
+            e.clientY-
+            lookPointer.y;
+
+        /*
+          Horizontal:
+          derecha = mirar derecha.
+
+          Vertical INVERTIDO:
+          dedo arriba = pitch negativo = mirada abajo.
+          dedo abajo = pitch positivo = mirada arriba.
+        */
+
         player.angle+=
             dx*.0045;
 
+        cameraPitch+=
+            dy*.0032;
+
+        cameraPitch=
+            Math.max(
+                MIN_PITCH,
+                Math.min(
+                    MAX_PITCH,
+                    cameraPitch
+                )
+            );
+
         lookPointer.x=
             e.clientX;
+
+        lookPointer.y=
+            e.clientY;
     }
 );
 
@@ -1780,40 +1962,29 @@ function attack(){
 
     player.attacking=true;
     player.attackTime=0;
-
     player.cooldown=.42;
 
-    const stats=
-        getStats();
+    const stats=getStats();
 
     /*
-      Alcance reducido.
+      Alcance controlado.
     */
 
-    const range=
-        TILE*1.4;
+    const range=TILE*1.4;
 
     for(const e of enemies){
 
         if(e.dead)
             continue;
 
-        const dx=
-            e.x-player.x;
-
-        const dy=
-            e.y-player.y;
+        const dx=e.x-player.x;
+        const dy=e.y-player.y;
 
         const distance=
             Math.hypot(dx,dy);
 
         if(distance>range)
             continue;
-
-        /*
-          Un enemigo detrás de una pared
-          no puede recibir daño.
-        */
 
         if(
             !hasLineOfSight(
@@ -1830,13 +2001,8 @@ function attack(){
 
         const difference=
             normalizeAngle(
-                targetAngle-
-                player.angle
+                targetAngle-player.angle
             );
-
-        /*
-          Barrido horizontal.
-        */
 
         if(
             Math.abs(difference)<.78
@@ -1887,7 +2053,7 @@ function normalizeAngle(a){
 }
 
 /* =========================================================
-   HABILIDAD DIOS
+   HABILIDAD DEL DIOS
 ========================================================= */
 
 let skillCooldown=0;
@@ -1964,7 +2130,7 @@ function godSkill(){
         save.crit+=.10;
 
         message(
-            "THOTH mejora tu precisión."
+            "THOTH mejora tu crítico."
         );
 
         skillCooldown=8;
@@ -2011,7 +2177,7 @@ function godSkill(){
         }
 
         message(
-            "RA libera una llama solar."
+            "RA libera poder solar."
         );
 
         skillCooldown=10;
@@ -2021,7 +2187,7 @@ function godSkill(){
 }
 
 /* =========================================================
-   CAMBIO DE BENDICIÓN
+   CAMBIO DE DIOS
 ========================================================= */
 
 function openBlessings(){
@@ -2057,12 +2223,6 @@ function changeGod(god){
 
     selectedGod=god;
 
-    /*
-      No reiniciamos sala.
-      El jugador conserva posición,
-      experiencia y nivel.
-    */
-
     player.hp=
         Math.min(
             player.hp,
@@ -2073,8 +2233,7 @@ function changeGod(god){
 
     message(
         GODS[god].glyph+
-        " Bendición de "+
-        GODS[god].name
+        " "+GODS[god].name
     );
 
     updateBlessingButtons();
@@ -2137,21 +2296,19 @@ function gainXP(amount){
 
 function checkDoor(){
 
-    const dx=
-        player.x-
-        (door.x+.5)*TILE;
+    const p=
+        doorWorldPosition();
 
-    const dy=
-        player.y-
-        (door.y+.5)*TILE;
+    const distance=
+        Math.hypot(
+            player.x-p.x,
+            player.y-p.y
+        );
 
-    const d=
-        Math.hypot(dx,dy);
-
-    if(d<TILE*.9){
+    if(distance<TILE*.85){
 
         message(
-            "Atravesando la puerta..."
+            "Atravesando el portal..."
         );
 
         setTimeout(()=>{
@@ -2167,7 +2324,7 @@ function checkDoor(){
 }
 
 /* =========================================================
-   MENSAJE
+   MENSAJES
 ========================================================= */
 
 let messageTimer=0;
@@ -2190,11 +2347,8 @@ function castRay(x,y,angle){
     const dx=Math.cos(angle);
     const dy=Math.sin(angle);
 
-    let mx=
-        Math.floor(x/TILE);
-
-    let my=
-        Math.floor(y/TILE);
+    let mx=Math.floor(x/TILE);
+    let my=Math.floor(y/TILE);
 
     const deltaX=
         Math.abs(
@@ -2263,7 +2417,15 @@ function castRay(x,y,angle){
             side=1;
         }
 
-        if(isWall(mx,my)){
+        /*
+          La celda de puerta se sigue tratando
+          como pared para que su marco quede
+          exactamente integrado en ella.
+        */
+
+        if(
+            isWall(mx,my)
+        ){
 
             let distance;
 
@@ -2289,7 +2451,9 @@ function castRay(x,y,angle){
             return{
                 distance:
                     Math.abs(distance),
+
                 side,
+
                 cellX:mx,
                 cellY:my
             };
@@ -2318,30 +2482,33 @@ function isWall(x,y){
 }
 
 /* =========================================================
-   PAREDES
+   RENDER DE PAREDES
 ========================================================= */
 
 function renderWalls(){
 
+    /*
+      Pitch desplaza el horizonte.
+    */
+
     const horizon=
-        H*.47;
+        H*.47+
+        cameraPitch*H*.42;
 
     const rays=
         Math.min(
-            420,
+            440,
             Math.max(
                 220,
-                Math.floor(W*.75)
+                Math.floor(W*.78)
             )
         );
 
-    const step=
-        W/rays;
+    const step=W/rays;
 
     for(let i=0;i<rays;i++){
 
-        const sx=
-            i*step;
+        const sx=i*step;
 
         const cameraX=
             sx/W-.5;
@@ -2380,81 +2547,230 @@ function renderWalls(){
             horizon-
             wallHeight/2;
 
-        const isDoor=
-            hit.cellX===door.x&&
-            hit.cellY===door.y;
+        /*
+          La pared se dibuja con arena.
+        */
 
-        if(isDoor){
+        const shade=
+            hit.side===0
+            ?1
+            :.72;
 
-            ctx.fillStyle="#3b2a18";
-
-            ctx.fillRect(
-                sx,
-                top,
-                step+1,
-                wallHeight
+        const depth=
+            1-
+            Math.min(
+                distance/1500,
+                .7
             );
 
-            ctx.fillStyle="#0d0b08";
-
-            ctx.fillRect(
-                sx+step*.17,
-                top+wallHeight*.08,
-                step*.66,
-                wallHeight*.92
+        const v=
+            Math.floor(
+                82+
+                100*
+                shade*
+                depth
             );
 
-            ctx.fillStyle="#c19a4c";
+        ctx.fillStyle=
+            `rgb(${v},${Math.floor(v*.78)},${Math.floor(v*.51)})`;
 
-            ctx.fillRect(
-                sx,
-                top,
-                step*.11,
-                wallHeight
-            );
-
-            ctx.fillRect(
-                sx+step*.89,
-                top,
-                step*.11,
-                wallHeight
-            );
-
-        }else{
-
-            const shade=
-                hit.side===0
-                ?1
-                :.72;
-
-            const depth=
-                1-
-                Math.min(
-                    distance/1500,
-                    .7
-                );
-
-            const v=
-                Math.floor(
-                    82+
-                    100*
-                    shade*
-                    depth
-                );
-
-            ctx.fillStyle=
-                `rgb(${v},
-                ${Math.floor(v*.78)},
-                ${Math.floor(v*.51)})`;
-
-            ctx.fillRect(
-                sx,
-                top,
-                step+1,
-                wallHeight
-            );
-        }
+        ctx.fillRect(
+            sx,
+            top,
+            step+1,
+            wallHeight
+        );
     }
+}
+
+/* =========================================================
+   PUERTA 3D INTEGRADA EN LA PARED
+========================================================= */
+
+function renderDoor(){
+
+    const p=
+        doorWorldPosition();
+
+    const dx=
+        p.x-player.x;
+
+    const dy=
+        p.y-player.y;
+
+    const distance=
+        Math.hypot(dx,dy);
+
+    if(distance<10)
+        return;
+
+    if(
+        !hasLineOfSight(
+            player.x,
+            player.y,
+            p.x,
+            p.y
+        )
+    )
+        return;
+
+    const relative=
+        normalizeAngle(
+            Math.atan2(dy,dx)-
+            player.angle
+        );
+
+    if(
+        Math.abs(relative)>
+        FOV*.75
+    )
+        return;
+
+    const projection=
+        W/
+        (
+            2*
+            Math.tan(FOV/2)
+        );
+
+    const sx=
+        W/2+
+        Math.tan(relative)*
+        projection;
+
+    /*
+      La puerta tiene altura completa
+      de una abertura humana.
+    */
+
+    const horizon=
+        H*.47+
+        cameraPitch*H*.42;
+
+    const doorHeight=
+        Math.min(
+            H*.92,
+            TILE*
+            H*.70/
+            distance
+        );
+
+    const doorWidth=
+        doorHeight*.46;
+
+    const top=
+        horizon-
+        doorHeight*.72;
+
+    /*
+      Comprobación de profundidad:
+      la pared no puede tapar la puerta.
+    */
+
+    const centerHit=
+        castRay(
+            player.x,
+            player.y,
+            player.angle+
+            relative
+        );
+
+    if(
+        distance>
+        centerHit.distance+8
+    )
+        return;
+
+    /*
+      MARCO.
+    */
+
+    ctx.fillStyle="#5a3d20";
+
+    ctx.fillRect(
+        sx-doorWidth*.52,
+        top,
+        doorWidth*.12,
+        doorHeight*.73
+    );
+
+    ctx.fillRect(
+        sx+doorWidth*.40,
+        top,
+        doorWidth*.12,
+        doorHeight*.73
+    );
+
+    ctx.fillRect(
+        sx-doorWidth*.52,
+        top,
+        doorWidth*1.04,
+        doorHeight*.10
+    );
+
+    /*
+      Interior oscuro.
+    */
+
+    ctx.fillStyle="#0b0907";
+
+    ctx.fillRect(
+        sx-doorWidth*.40,
+        top+doorHeight*.09,
+        doorWidth*.80,
+        doorHeight*.64
+    );
+
+    /*
+      Luz interior muy sutil.
+    */
+
+    const glow=
+        ctx.createLinearGradient(
+            sx,
+            top,
+            sx,
+            top+doorHeight*.7
+        );
+
+    glow.addColorStop(
+        0,
+        "#6d543022"
+    );
+
+    glow.addColorStop(
+        1,
+        "#c08b3511"
+    );
+
+    ctx.fillStyle=glow;
+
+    ctx.fillRect(
+        sx-doorWidth*.38,
+        top+doorHeight*.1,
+        doorWidth*.76,
+        doorHeight*.61
+    );
+
+    /*
+      Símbolo superior.
+    */
+
+    ctx.fillStyle="#d0a957";
+
+    ctx.fillRect(
+        sx-2,
+        top+doorHeight*.18,
+        4,
+        doorHeight*.13
+    );
+
+    ctx.fillRect(
+        sx-doorWidth*.09,
+        top+doorHeight*.235,
+        doorWidth*.18,
+        3
+    );
 }
 
 /* =========================================================
@@ -2522,9 +2838,7 @@ function drawSprite(type,o){
         return;
 
     /*
-      Seguridad principal.
-      Si una pared está entre cámara
-      y personaje, no se renderiza.
+      Oclusión total.
     */
 
     if(
@@ -2561,10 +2875,6 @@ function drawSprite(type,o){
         Math.tan(relative)*
         projection;
 
-    /*
-      Personajes con proporción vertical.
-    */
-
     const size=
         Math.min(
             H*1.1,
@@ -2573,8 +2883,17 @@ function drawSprite(type,o){
             distance
         );
 
-    const ground=
+    /*
+      La cámara vertical mueve todo el escenario
+      sin modificar la altura física del personaje.
+    */
+
+    const horizon=
         H*.47+
+        cameraPitch*H*.42;
+
+    const ground=
+        horizon+
         size*.50;
 
     const top=
@@ -2592,10 +2911,6 @@ function drawSprite(type,o){
         Math.ceil(
             screenX+width/2
         );
-
-    /*
-      Oclusión columna por columna.
-    */
 
     for(
         let x=start;
@@ -2625,10 +2940,6 @@ function drawSprite(type,o){
             Math.cos(
                 rayAngle-player.angle
             );
-
-        /*
-          La pared gana.
-        */
 
         if(distance>=wallDistance-3)
             continue;
@@ -2666,39 +2977,17 @@ function drawCharacterColumn(
     const a=Math.abs(nx);
 
     /*
-      SOMBRA DEL SUELO
+      Cabeza.
     */
 
-    if(a<.50){
-
-        ctx.fillStyle="#0005";
-
-        ctx.fillRect(
-            x,
-            ground-size*.025,
-            1.5,
-            Math.max(
-                2,
-                size*.045
-            )
-        );
-    }
-
-    /*
-      CABEZA
-      Aproximadamente 1/8 de la altura.
-    */
-
-    if(
-        a<.19
-    ){
+    if(a<.19){
 
         ctx.fillStyle=
             type==="enemy"
             ?(
                 o.hit>0
                 ?" #ffffff"
-                :"#4b3025"
+                :"#553529"
             )
             :"#d2ba83";
 
@@ -2711,14 +3000,14 @@ function drawCharacterColumn(
     }
 
     /*
-      CUELLO
+      Cuello.
     */
 
     if(a<.09){
 
         ctx.fillStyle=
             type==="enemy"
-            ?" #3b251e"
+            ?"#3b251e"
             :"#9f8054";
 
         ctx.fillRect(
@@ -2730,14 +3019,14 @@ function drawCharacterColumn(
     }
 
     /*
-      HOMBROS / TORSO
+      Torso.
     */
 
     if(a<.29){
 
         ctx.fillStyle=
             type==="enemy"
-            ?" #673b2c"
+            ?"#673b2c"
             :"#8f7548";
 
         ctx.fillRect(
@@ -2749,26 +3038,7 @@ function drawCharacterColumn(
     }
 
     /*
-      CINTURA.
-    */
-
-    if(a<.20){
-
-        ctx.fillStyle=
-            type==="enemy"
-            ?" #34231c"
-            :"#57432c";
-
-        ctx.fillRect(
-            x,
-            top+size*.585,
-            1.5,
-            size*.07
-        );
-    }
-
-    /*
-      BRAZOS.
+      Brazos.
     */
 
     if(
@@ -2778,7 +3048,7 @@ function drawCharacterColumn(
 
         ctx.fillStyle=
             type==="enemy"
-            ?" #4b2d24"
+            ?"#4b2d24"
             :"#715a3b";
 
         ctx.fillRect(
@@ -2790,14 +3060,14 @@ function drawCharacterColumn(
     }
 
     /*
-      CADERA.
+      Cadera.
     */
 
     if(a<.28){
 
         ctx.fillStyle=
             type==="enemy"
-            ?" #3c2922"
+            ?"#3c2922"
             :"#4d3c29";
 
         ctx.fillRect(
@@ -2809,18 +3079,15 @@ function drawCharacterColumn(
     }
 
     /*
-      PIERNAS.
-
-      Terminan exactamente en GROUND.
+      Piernas.
+      TERMINAN EN GROUND.
     */
 
-    if(
-        a<.12
-    ){
+    if(a<.12){
 
         ctx.fillStyle=
             type==="enemy"
-            ?" #251a16"
+            ?"#251a16"
             :"#3c3022";
 
         ctx.fillRect(
@@ -2832,29 +3099,7 @@ function drawCharacterColumn(
     }
 
     /*
-      Separación entre piernas.
-    */
-
-    if(
-        a>=.12&&
-        a<.23
-    ){
-
-        ctx.fillStyle=
-            type==="enemy"
-            ?" #241915"
-            :"#3b2d20";
-
-        ctx.fillRect(
-            x,
-            top+size*.77,
-            1.5,
-            size*.20
-        );
-    }
-
-    /*
-      BARRA DE VIDA.
+      Barra de vida.
     */
 
     if(
@@ -2940,9 +3185,7 @@ function renderWeapon(){
     );
 
     const scale=
-        Math.min(
-            W,H
-        )/650;
+        Math.min(W,H)/650;
 
     ctx.scale(
         scale,
@@ -3008,7 +3251,6 @@ function renderWeapon(){
 
     ctx.strokeStyle="#f0dfb3";
     ctx.lineWidth=2;
-
     ctx.stroke();
 
     ctx.restore();
@@ -3021,7 +3263,10 @@ function renderWeapon(){
 function renderCrosshair(){
 
     const x=W/2;
-    const y=H*.47;
+
+    const y=
+        H*.47+
+        cameraPitch*H*.42;
 
     ctx.strokeStyle="#f5e5bb";
     ctx.lineWidth=2;
@@ -3041,15 +3286,6 @@ function renderCrosshair(){
     ctx.lineTo(x,y+10);
 
     ctx.stroke();
-
-    ctx.fillStyle="#e0bd60";
-
-    ctx.fillRect(
-        x-1,
-        y-1,
-        2,
-        2
-    );
 }
 
 /* =========================================================
@@ -3093,7 +3329,7 @@ function renderMiniMap(){
     );
 
     /*
-      ESCALA PARA QUE ENTRE TODO EL MAPA.
+      ESCALA PARA MOSTRAR TODO EL MAPA.
     */
 
     const scale=
@@ -3117,10 +3353,6 @@ function renderMiniMap(){
             mapH*TILE*scale
         )/2;
 
-    /*
-      MAPA.
-    */
-
     for(let y=0;y<mapH;y++){
 
         for(let x=0;x<mapW;x++){
@@ -3142,10 +3374,10 @@ function renderMiniMap(){
     }
 
     /*
-      PUERTA.
+      Puerta.
     */
 
-    mctx.fillStyle="#e1b94f";
+    mctx.fillStyle="#e3bb53";
 
     mctx.fillRect(
         ox+
@@ -3157,7 +3389,7 @@ function renderMiniMap(){
     );
 
     /*
-      ENEMIGOS.
+      Enemigos.
     */
 
     for(const e of enemies){
@@ -3184,10 +3416,10 @@ function renderMiniMap(){
     }
 
     /*
-      COMPAÑERO.
+      Compañero.
     */
 
-    mctx.fillStyle="#5dc3cf";
+    mctx.fillStyle="#58bec9";
 
     mctx.beginPath();
 
@@ -3205,7 +3437,7 @@ function renderMiniMap(){
     mctx.fill();
 
     /*
-      JUGADOR.
+      Jugador.
     */
 
     const px=
@@ -3249,14 +3481,9 @@ function renderMiniMap(){
 
     mctx.lineTo(
         px+
-        Math.cos(
-            player.angle
-        )*13,
-
+        Math.cos(player.angle)*13,
         py+
-        Math.sin(
-            player.angle
-        )*13
+        Math.sin(player.angle)*13
     );
 
     mctx.stroke();
@@ -3362,7 +3589,7 @@ function update(dt){
     }
 
     /*
-      Movimiento.
+      Movimiento joystick.
     */
 
     let mx=joyX;
@@ -3463,7 +3690,8 @@ function render(){
     );
 
     const horizon=
-        H*.47;
+        H*.47+
+        cameraPitch*H*.42;
 
     /*
       CIELO.
@@ -3474,17 +3702,20 @@ function render(){
             0,
             0,
             0,
-            horizon
+            Math.max(
+                1,
+                horizon
+            )
         );
 
     sky.addColorStop(
         0,
-        "#776247"
+        "#69553c"
     );
 
     sky.addColorStop(
         1,
-        "#c5a66b"
+        "#c4a56b"
     );
 
     ctx.fillStyle=sky;
@@ -3493,11 +3724,12 @@ function render(){
         0,
         0,
         W,
-        horizon
+        Math.max(0,horizon)
     );
 
     /*
-      SUELO ARENA SIN REFLEJO.
+      SUELO ARENA.
+      Sin reflejos.
     */
 
     const floor=
@@ -3510,12 +3742,12 @@ function render(){
 
     floor.addColorStop(
         0,
-        "#b18b50"
+        "#ad874d"
     );
 
     floor.addColorStop(
         1,
-        "#d0ae72"
+        "#d0ad70"
     );
 
     ctx.fillStyle=floor;
@@ -3524,12 +3756,36 @@ function render(){
         0,
         horizon,
         W,
-        H-horizon
+        Math.max(
+            0,
+            H-horizon
+        )
     );
+
+    /*
+      Paredes.
+    */
 
     renderWalls();
 
+    /*
+      Puerta:
+      se dibuja ANTES de sprites,
+      pero después de paredes,
+      respetando su profundidad.
+    */
+
+    renderDoor();
+
+    /*
+      Personajes.
+    */
+
     renderSprites();
+
+    /*
+      Arma.
+    */
 
     renderWeapon();
 
@@ -3541,7 +3797,7 @@ function render(){
 }
 
 /* =========================================================
-   MENÚ DIOS
+   MENÚ
 ========================================================= */
 
 document.querySelectorAll(
@@ -3572,7 +3828,7 @@ document.querySelectorAll(
 });
 
 /* =========================================================
-   BENDICIONES IN-GAME
+   BENDICIONES
 ========================================================= */
 
 document.querySelectorAll(
@@ -3610,7 +3866,7 @@ document.getElementById(
 );
 
 /* =========================================================
-   START
+   INICIO
 ========================================================= */
 
 document.getElementById(
@@ -3638,7 +3894,7 @@ document.getElementById(
 );
 
 /* =========================================================
-   BOTONES
+   ATAQUE
 ========================================================= */
 
 document.getElementById(
@@ -3652,6 +3908,10 @@ document.getElementById(
         attack();
     }
 );
+
+/* =========================================================
+   PAUSA
+========================================================= */
 
 document.getElementById(
     "pause"
@@ -3728,9 +3988,7 @@ function loop(now){
     );
 }
 
-requestAnimationFrame(
-    loop
-);
+requestAnimationFrame(loop);
 
 </script>
 </body>
