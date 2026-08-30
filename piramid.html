@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PYRAMID OF THE GODS</title>
 
 <style>
@@ -21,7 +22,7 @@ html,body{
     overflow:hidden;
     background:#111;
     touch-action:none;
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 #game{
@@ -30,12 +31,11 @@ html,body{
     width:100%;
     height:100%;
     display:block;
-    background:#b88b50;
 }
 
-/* =========================================================
-   MENU
-========================================================= */
+/* =========================
+   MENÚ
+========================= */
 
 #menu{
     position:fixed;
@@ -46,150 +46,147 @@ html,body{
     justify-content:center;
     padding:16px;
     background:
-        radial-gradient(circle at center,#70502c 0,#251a11 55%,#080706 100%);
+    radial-gradient(
+        circle,
+        #72552f 0%,
+        #281c12 55%,
+        #080706 100%
+    );
 }
 
 .menuBox{
-    width:min(94vw,430px);
-    max-height:94vh;
-    overflow:auto;
-    padding:22px 17px;
-    border:2px solid #d5ac58;
+    width:min(430px,94vw);
+    padding:22px 16px;
+    border:2px solid #d5ae5d;
     border-radius:22px;
-    background:rgba(19,14,10,.97);
+    background:rgba(17,13,9,.97);
     box-shadow:0 0 45px rgba(0,0,0,.8);
     text-align:center;
 }
 
 .logo{
-    color:#e5c474;
-    font-size:clamp(25px,8vw,42px);
-    line-height:.95;
+    color:#e6c879;
+    font-size:clamp(27px,8vw,42px);
     font-weight:900;
+    line-height:.95;
     letter-spacing:2px;
-    text-shadow:0 3px 0 #553617;
 }
 
 .subtitle{
     margin:10px 0 18px;
-    color:#c8b28b;
-    font-size:11px;
+    color:#cbb78d;
+    font-size:10px;
 }
 
 .start{
     width:100%;
     min-height:57px;
-    margin-bottom:18px;
     border:0;
     border-radius:15px;
-    background:linear-gradient(#f2d47e,#b77b28);
+    background:linear-gradient(#f1d47d,#b67b29);
     color:#24170b;
-    font-size:17px;
     font-weight:900;
+    font-size:17px;
 }
 
 .godTitle{
-    margin-bottom:10px;
-    color:#e0c47c;
+    margin:17px 0 9px;
+    color:#e1c478;
+    font-size:13px;
     font-weight:bold;
-    font-size:14px;
 }
 
-.godsMenu{
+.gods{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:8px;
 }
 
-.godCard{
-    padding:9px 4px;
-    border:1px solid #594127;
+.god{
+    padding:8px 3px;
+    border:1px solid #59442a;
     border-radius:12px;
-    background:#1b1510;
+    background:#1c1510;
     color:#ddd;
 }
 
-.godCard.selected{
-    border-color:#e6c26c;
-    box-shadow:0 0 14px rgba(230,194,108,.35);
+.god.selected{
+    border-color:#e9c96f;
+    box-shadow:0 0 13px rgba(233,201,111,.35);
 }
 
 .glyph{
-    width:42px;
-    height:42px;
+    width:40px;
+    height:40px;
     margin:auto;
     display:flex;
     align-items:center;
     justify-content:center;
-    border:1px solid #9c793b;
-    border-radius:10px;
+    border:1px solid #9c7839;
+    border-radius:9px;
     background:#302317;
-    color:#e5c16a;
-    font-size:24px;
+    color:#e5c16b;
+    font-size:23px;
 }
 
 .godName{
-    margin-top:5px;
-    font-size:10px;
+    margin-top:4px;
+    font-size:9px;
     font-weight:bold;
 }
 
-/* =========================================================
+/* =========================
    HUD
-========================================================= */
+========================= */
 
 #hud{
     position:fixed;
     inset:0;
-    z-index:20;
+    z-index:10;
     pointer-events:none;
 }
 
-#topHud{
+#top{
     position:absolute;
     top:max(7px,env(safe-area-inset-top));
     left:7px;
     right:7px;
     display:flex;
     gap:7px;
-    align-items:center;
 }
 
-#playerPanel{
+#stats{
     flex:1;
-    min-width:0;
     padding:7px 9px;
-    border:1px solid rgba(225,192,109,.6);
+    border:1px solid rgba(225,192,109,.55);
     border-radius:12px;
-    background:rgba(17,13,9,.78);
+    background:rgba(15,11,8,.78);
 }
 
-#playerName{
-    color:#e6ca83;
+#name{
+    color:#e8cb83;
     font-size:10px;
     font-weight:bold;
 }
 
 .bar{
-    height:7px;
+    height:6px;
     margin-top:4px;
-    overflow:hidden;
     border-radius:5px;
-    background:#261a12;
+    overflow:hidden;
+    background:#261a11;
 }
 
-.fill{
+#hp{
     height:100%;
     width:100%;
-    transition:width .15s;
+    background:#c64c43;
 }
 
-#hpFill{
-    background:#c94e42;
-}
-
-#xpFill{
-    background:#4ea6d0;
+#xp{
+    height:100%;
+    width:0%;
+    background:#4c9dc5;
 }
 
 #level{
@@ -198,167 +195,234 @@ html,body{
     font-size:9px;
 }
 
-#godHUD{
-    width:50px;
-    height:50px;
+#godHud{
+    width:49px;
+    height:49px;
     flex:none;
     display:flex;
     align-items:center;
     justify-content:center;
-    border:1px solid #d1aa58;
+    border:1px solid #d1a94f;
     border-radius:13px;
-    background:rgba(22,16,11,.9);
-    color:#e8c774;
-    font-size:27px;
+    background:rgba(20,15,10,.9);
+    color:#e6c66d;
+    font-size:25px;
 }
 
-/* =========================================================
+/* =========================
    MINIMAPA
-========================================================= */
+========================= */
 
-#mapWrap{
+#mapBox{
     position:absolute;
-    top:68px;
+    top:65px;
     right:7px;
-    width:min(31vw,125px);
+    width:min(30vw,120px);
     aspect-ratio:1;
     padding:3px;
     border:1px solid #d2a952;
     border-radius:10px;
-    background:rgba(10,8,6,.88);
+    background:rgba(8,7,5,.9);
 }
 
-#minimap{
+#mini{
     width:100%;
     height:100%;
     display:block;
 }
 
-/* =========================================================
+/* =========================
    MENSAJES
-========================================================= */
+========================= */
 
 #messages{
     position:absolute;
     left:50%;
-    bottom:117px;
+    bottom:118px;
     transform:translateX(-50%);
-    width:min(67vw,310px);
-    height:75px;
-    padding:7px;
+    width:min(64vw,300px);
+    height:70px;
+    padding:6px;
     overflow:hidden;
-    border:1px solid rgba(216,178,88,.4);
+    border:1px solid rgba(216,178,88,.35);
     border-radius:10px;
-    background:rgba(13,10,7,.48);
-    color:#e7d5a7;
-    font-size:10px;
-    line-height:1.35;
+    background:rgba(10,8,5,.45);
+    color:#e9d6a8;
+    font-size:9px;
+    line-height:1.4;
 }
 
-.msg{
-    opacity:.78;
-    margin-bottom:2px;
-}
-
-.msg:last-child{
-    opacity:1;
-    color:#fff0bf;
-}
-
-/* =========================================================
-   JOYSTICK
-========================================================= */
+/* =========================
+   JOYSTICK PROFESIONAL
+========================= */
 
 #joystick{
     position:absolute;
     left:max(12px,env(safe-area-inset-left));
-    bottom:max(17px,env(safe-area-inset-bottom));
-    width:112px;
-    height:112px;
-    border:2px solid rgba(220,184,101,.42);
+    bottom:max(15px,env(safe-area-inset-bottom));
+
+    width:116px;
+    height:116px;
+
     border-radius:50%;
-    background:rgba(26,20,15,.45);
+
+    border:
+        2px solid
+        rgba(230,198,117,.48);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(226,192,107,.12),
+            rgba(20,15,10,.5)
+        );
+
     pointer-events:auto;
+
+    touch-action:none;
+}
+
+#joystick::after{
+    content:"";
+    position:absolute;
+    inset:17px;
+    border:
+        1px solid
+        rgba(231,200,119,.15);
+    border-radius:50%;
 }
 
 #stick{
     position:absolute;
+
     left:50%;
     top:50%;
-    width:49px;
-    height:49px;
-    transform:translate(-50%,-50%);
-    border:2px solid #e8c875;
+
+    width:50px;
+    height:50px;
+
+    transform:
+        translate3d(-50%,-50%,0);
+
+    border:
+        2px solid
+        rgba(242,210,125,.95);
+
     border-radius:50%;
-    background:rgba(216,178,90,.68);
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ead18b,
+            #a8752c
+        );
+
+    box-shadow:
+        0 4px 14px
+        rgba(0,0,0,.45);
+
+    will-change:
+        transform;
 }
 
-/* =========================================================
+/* =========================
    BOTONES
-========================================================= */
+========================= */
 
 #buttons{
     position:absolute;
-    right:max(11px,env(safe-area-inset-right));
-    bottom:max(17px,env(safe-area-inset-bottom));
+    right:max(10px,env(safe-area-inset-right));
+    bottom:max(14px,env(safe-area-inset-bottom));
     width:125px;
     height:120px;
     pointer-events:none;
 }
 
-.action{
+.btn{
     position:absolute;
-    border:2px solid rgba(229,194,104,.8);
+    border:2px solid rgba(231,196,108,.75);
     border-radius:50%;
-    background:rgba(35,25,17,.84);
-    color:#efd185;
+    background:rgba(31,23,16,.85);
+    color:#efd083;
     font-weight:900;
     pointer-events:auto;
+    touch-action:none;
 }
 
 #attack{
-    right:0;
-    bottom:0;
     width:72px;
     height:72px;
-    font-size:12px;
+    right:0;
+    bottom:0;
 }
 
 #ability{
-    left:0;
-    bottom:48px;
     width:53px;
     height:53px;
-    font-size:20px;
+    left:0;
+    bottom:48px;
+    font-size:19px;
 }
 
-#godSelect{
-    left:0;
-    bottom:0;
+#godButton{
     width:42px;
     height:42px;
-    font-size:15px;
+    left:0;
+    bottom:0;
 }
 
-.action:active,
-.start:active{
-    transform:scale(.94);
+/* =========================
+   CRUZ
+========================= */
+
+#crosshair{
+    position:absolute;
+    left:50%;
+    top:46%;
+    width:18px;
+    height:18px;
+    transform:translate(-50%,-50%);
 }
 
-/* =========================================================
+#crosshair::before,
+#crosshair::after{
+    content:"";
+    position:absolute;
+    background:rgba(255,245,210,.9);
+}
+
+#crosshair::before{
+    left:8px;
+    top:0;
+    width:2px;
+    height:18px;
+}
+
+#crosshair::after{
+    left:0;
+    top:8px;
+    width:18px;
+    height:2px;
+}
+
+/* =========================
    TELÉFONOS PEQUEÑOS
-========================================================= */
+========================= */
 
 @media(max-width:340px){
 
     #joystick{
-        width:94px;
-        height:94px;
+        width:98px;
+        height:98px;
     }
 
     #stick{
-        width:42px;
-        height:42px;
+        width:43px;
+        height:43px;
+    }
+
+    #joystick::after{
+        inset:14px;
     }
 
     #buttons{
@@ -366,21 +430,18 @@ html,body{
     }
 
     #attack{
-        width:63px;
-        height:63px;
-        font-size:10px;
+        width:64px;
+        height:64px;
     }
 
     #messages{
-        bottom:103px;
-        width:61vw;
-        height:67px;
-        font-size:9px;
+        bottom:104px;
+        width:59vw;
+        height:65px;
     }
 
-    #mapWrap{
-        width:104px;
-        top:65px;
+    #mapBox{
+        width:101px;
     }
 }
 </style>
@@ -390,197 +451,214 @@ html,body{
 
 <canvas id="game"></canvas>
 
-<!-- =======================================================
+<!-- =====================================================
      MENÚ
-======================================================= -->
+===================================================== -->
 
 <div id="menu">
 
-    <div class="menuBox">
+<div class="menuBox">
 
-        <div class="logo">
-            PYRAMID<br>OF THE GODS
-        </div>
-
-        <div class="subtitle">
-            FPS 2.5D · TEMPLOS · DIOSES · EXPLORACIÓN
-        </div>
-
-        <button class="start" id="startBtn">
-            INICIAR EXPLORACIÓN
-        </button>
-
-        <div class="godTitle">
-            ELIGE TU DIOS
-        </div>
-
-        <div class="godsMenu">
-
-            <div class="godCard selected" data-god="RA">
-                <div class="glyph">☀</div>
-                <div class="godName">RA</div>
-            </div>
-
-            <div class="godCard" data-god="ANUBIS">
-                <div class="glyph">𓃢</div>
-                <div class="godName">ANUBIS</div>
-            </div>
-
-            <div class="godCard" data-god="HORUS">
-                <div class="glyph">𓅃</div>
-                <div class="godName">HORUS</div>
-            </div>
-
-            <div class="godCard" data-god="ISIS">
-                <div class="glyph">𓊨</div>
-                <div class="godName">ISIS</div>
-            </div>
-
-            <div class="godCard" data-god="SETH">
-                <div class="glyph">𓃩</div>
-                <div class="godName">SETH</div>
-            </div>
-
-            <div class="godCard" data-god="OSIRIS">
-                <div class="glyph">𓀀</div>
-                <div class="godName">OSIRIS</div>
-            </div>
-
-        </div>
-    </div>
+<div class="logo">
+PYRAMID<br>OF THE GODS
 </div>
 
-<!-- =======================================================
+<div class="subtitle">
+FPS 2.5D · TEMPLOS · EXPLORACIÓN
+</div>
+
+<button class="start" id="start">
+INICIAR EXPLORACIÓN
+</button>
+
+<div class="godTitle">
+SELECCIONA TU DIOS
+</div>
+
+<div class="gods">
+
+<div class="god selected" data-god="RA">
+<div class="glyph">☀</div>
+<div class="godName">RA</div>
+</div>
+
+<div class="god" data-god="ANUBIS">
+<div class="glyph">𓃢</div>
+<div class="godName">ANUBIS</div>
+</div>
+
+<div class="god" data-god="HORUS">
+<div class="glyph">𓅃</div>
+<div class="godName">HORUS</div>
+</div>
+
+<div class="god" data-god="ISIS">
+<div class="glyph">𓊨</div>
+<div class="godName">ISIS</div>
+</div>
+
+<div class="god" data-god="SETH">
+<div class="glyph">𓃩</div>
+<div class="godName">SETH</div>
+</div>
+
+<div class="god" data-god="OSIRIS">
+<div class="glyph">𓀀</div>
+<div class="godName">OSIRIS</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- =====================================================
      HUD
-======================================================= -->
+===================================================== -->
 
 <div id="hud">
 
-    <div id="topHud">
+<div id="top">
 
-        <div id="playerPanel">
+<div id="stats">
 
-            <div id="playerName">
-                EXPLORADOR · NIVEL 1
-            </div>
+<div id="name">
+EXPLORADOR · NIVEL 1
+</div>
 
-            <div class="bar">
-                <div class="fill" id="hpFill"></div>
-            </div>
+<div class="bar">
+<div id="hp"></div>
+</div>
 
-            <div class="bar">
-                <div class="fill" id="xpFill"></div>
-            </div>
+<div class="bar">
+<div id="xp"></div>
+</div>
 
-            <div id="level">
-                HP 100 / 100 · XP 0 / 100
-            </div>
+<div id="level">
+HP 100 / 100 · XP 0 / 100
+</div>
 
-        </div>
+</div>
 
-        <div id="godHUD">☀</div>
+<div id="godHud">
+☀
+</div>
 
-    </div>
+</div>
 
-    <div id="mapWrap">
-        <canvas id="minimap"></canvas>
-    </div>
+<div id="mapBox">
+<canvas id="mini"></canvas>
+</div>
 
-    <div id="messages"></div>
+<div id="crosshair"></div>
 
-    <div id="joystick">
-        <div id="stick"></div>
-    </div>
+<div id="messages"></div>
 
-    <div id="buttons">
+<!-- JOYSTICK -->
+<div id="joystick">
+<div id="stick"></div>
+</div>
 
-        <button class="action" id="ability">✦</button>
+<!-- BOTONES -->
+<div id="buttons">
 
-        <button class="action" id="godSelect">☀</button>
+<button class="btn"
+        id="ability">
+✦
+</button>
 
-        <button class="action" id="attack">
-            ATAQUE
-        </button>
+<button class="btn"
+        id="godButton">
+☀
+</button>
 
-    </div>
+<button class="btn"
+        id="attack">
+ATAQUE
+</button>
+
+</div>
 
 </div>
 
 <script>
 "use strict";
 
-/* =========================================================
+/* =====================================================
    CANVAS
-========================================================= */
+===================================================== */
 
 const canvas =
-    document.getElementById("game");
+document.getElementById("game");
 
 const ctx =
-    canvas.getContext("2d",{alpha:false});
+canvas.getContext("2d");
 
 const mini =
-    document.getElementById("minimap");
+document.getElementById("mini");
 
 const mctx =
-    mini.getContext("2d");
+mini.getContext("2d");
 
 let W=0;
 let H=0;
 
 function resize(){
 
-    W=canvas.width=window.innerWidth;
-    H=canvas.height=window.innerHeight;
+    W=canvas.width=
+        window.innerWidth;
 
-    const size =
+    H=canvas.height=
+        window.innerHeight;
+
+    const s=
         Math.min(
             180,
             Math.max(
                 100,
-                window.innerWidth*.31
+                innerWidth*.30
             )
         );
 
-    mini.width=size;
-    mini.height=size;
+    mini.width=s;
+    mini.height=s;
 }
 
-window.addEventListener(
+addEventListener(
     "resize",
     resize
 );
 
 resize();
 
-/* =========================================================
+/* =====================================================
    UTILIDADES
-========================================================= */
+===================================================== */
 
-function randomInt(min,max){
+function randomInt(a,b){
 
     return Math.floor(
-        Math.random()*(max-min+1)
-    )+min;
+        Math.random()*
+        (b-a+1)
+    )+a;
 }
 
-function clamp(v,min,max){
+function clamp(v,a,b){
 
     return Math.max(
-        min,
-        Math.min(max,v)
+        a,
+        Math.min(b,v)
     );
 }
 
-function dist(ax,ay,bx,by){
+function distance(ax,ay,bx,by){
 
     return Math.hypot(
-        ax-bx,
-        ay-by
+        bx-ax,
+        by-ay
     );
 }
 
-function angleDiff(a,b){
+function angleDifference(a,b){
 
     let d=a-b;
 
@@ -593,9 +671,9 @@ function angleDiff(a,b){
     return d;
 }
 
-/* =========================================================
+/* =====================================================
    MAPA
-========================================================= */
+===================================================== */
 
 const FLOOR=0;
 const WALL=1;
@@ -605,97 +683,77 @@ let map=[];
 let mapW=0;
 let mapH=0;
 
-let currentRooms=[];
+let rooms=[];
 
-const TILE_SIZE=1;
-
-function emptyMap(w,h){
-
-    mapW=w;
-    mapH=h;
-
-    map=
-        Array.from(
-            {length:h},
-            ()=>Array(w).fill(WALL)
-        );
-}
-
-/*
-   El mapa utiliza celdas reales.
-
-   1 celda = 1 unidad de distancia.
-
-   El arma utiliza exactamente esta misma escala.
-*/
+let door={
+    x:0,
+    y:0
+};
 
 function generateMap(){
 
-    emptyMap(
-        randomInt(48,60),
-        randomInt(48,60)
-    );
+    mapW=
+        randomInt(48,60);
 
-    const rooms=[];
+    mapH=
+        randomInt(48,60);
 
-    const roomCount=
+    map=
+        Array.from(
+            {length:mapH},
+            ()=>Array(
+                mapW
+            ).fill(WALL)
+        );
+
+    rooms=[];
+
+    const amount=
         randomInt(8,11);
 
     for(
         let i=0;
-        i<roomCount;
+        i<amount;
         i++
     ){
 
-        let placed=false;
-
         for(
             let attempt=0;
-            attempt<100 && !placed;
+            attempt<100;
             attempt++
         ){
 
-            const rw=
+            const w=
                 randomInt(7,12);
 
-            const rh=
+            const h=
                 randomInt(7,12);
 
-            const rx=
+            const x=
                 randomInt(
                     2,
-                    mapW-rw-3
+                    mapW-w-3
                 );
 
-            const ry=
+            const y=
                 randomInt(
                     2,
-                    mapH-rh-3
+                    mapH-h-3
                 );
-
-            const room={
-                x:rx,
-                y:ry,
-                w:rw,
-                h:rh,
-                cx:Math.floor(
-                    rx+rw/2
-                ),
-                cy:Math.floor(
-                    ry+rh/2
-                )
-            };
 
             let overlap=false;
 
-            for(const r of rooms){
+            for(
+                const r of rooms
+            ){
 
                 if(
-                    rx < r.x+r.w+2 &&
-                    rx+rw+2 > r.x &&
-                    ry < r.y+r.h+2 &&
-                    ry+rh+2 > r.y
+                    x<r.x+r.w+2 &&
+                    x+w+2>r.x &&
+                    y<r.y+r.h+2 &&
+                    y+h+2>r.y
                 ){
+
                     overlap=true;
                     break;
                 }
@@ -704,40 +762,46 @@ function generateMap(){
             if(overlap)
                 continue;
 
+            const room={
+                x,
+                y,
+                w,
+                h,
+                cx:
+                    Math.floor(
+                        x+w/2
+                    ),
+                cy:
+                    Math.floor(
+                        y+h/2
+                    )
+            };
+
             rooms.push(room);
 
             for(
-                let y=ry;
-                y<ry+rh;
-                y++
+                let yy=y;
+                yy<y+h;
+                yy++
             ){
 
                 for(
-                    let x=rx;
-                    x<rx+rw;
-                    x++
+                    let xx=x;
+                    xx<x+w;
+                    xx++
                 ){
 
-                    map[y][x]=FLOOR;
+                    map[yy][xx]=FLOOR;
                 }
             }
 
-            placed=true;
+            break;
         }
     }
-
-    /*
-       Ordenamos para crear una estructura
-       de habitaciones y pasillos.
-    */
 
     rooms.sort(
         (a,b)=>a.cx-b.cx
     );
-
-    /*
-       Conexión principal.
-    */
 
     for(
         let i=1;
@@ -745,16 +809,11 @@ function generateMap(){
         i++
     ){
 
-        connectRooms(
+        connect(
             rooms[i-1],
             rooms[i]
         );
     }
-
-    /*
-       Algunas conexiones adicionales.
-       Esto evita convertir el mapa en un laberinto.
-    */
 
     for(
         let i=0;
@@ -762,9 +821,11 @@ function generateMap(){
         i++
     ){
 
-        if(Math.random()<.38){
+        if(
+            Math.random()<.35
+        ){
 
-            connectRooms(
+            connect(
                 rooms[i],
                 rooms[i+2]
             );
@@ -772,41 +833,22 @@ function generateMap(){
     }
 
     /*
-       Bordes sólidos.
-    */
-
-    for(
-        let x=0;
-        x<mapW;
-        x++
-    ){
-
-        map[0][x]=WALL;
-        map[mapH-1][x]=WALL;
-    }
-
-    for(
-        let y=0;
-        y<mapH;
-        y++
-    ){
-
-        map[y][0]=WALL;
-        map[y][mapW-1]=WALL;
-    }
-
-    /*
        Sala inicial.
     */
 
-    const start=rooms[0];
+    const startRoom=
+        rooms[0];
 
-    player.x=start.cx+.5;
-    player.y=start.cy+.5;
+    player.x=
+        startRoom.cx+.5;
+
+    player.y=
+        startRoom.cy+.5;
+
     player.angle=0;
 
     /*
-       Puerta únicamente en una sala posterior.
+       Puerta SOLO en una sala diferente.
     */
 
     const exitRoom=
@@ -814,22 +856,22 @@ function generateMap(){
             rooms.length-1
         ];
 
-    placeDoor(exitRoom);
-
-    currentRooms=rooms;
+    createDoor(exitRoom);
 }
 
-function connectRooms(a,b){
+function connect(a,b){
 
-    if(Math.random()<.5){
+    if(
+        Math.random()<.5
+    ){
 
-        carveHorizontal(
+        horizontal(
             a.cx,
             b.cx,
             a.cy
         );
 
-        carveVertical(
+        vertical(
             a.cy,
             b.cy,
             b.cx
@@ -837,13 +879,13 @@ function connectRooms(a,b){
 
     }else{
 
-        carveVertical(
+        vertical(
             a.cy,
             b.cy,
             a.cx
         );
 
-        carveHorizontal(
+        horizontal(
             a.cx,
             b.cx,
             b.cy
@@ -851,10 +893,13 @@ function connectRooms(a,b){
     }
 }
 
-function carveHorizontal(a,b,y){
+function horizontal(a,b,y){
 
-    const min=Math.min(a,b);
-    const max=Math.max(a,b);
+    const min=
+        Math.min(a,b);
+
+    const max=
+        Math.max(a,b);
 
     for(
         let x=min;
@@ -881,10 +926,13 @@ function carveHorizontal(a,b,y){
     }
 }
 
-function carveVertical(a,b,x){
+function vertical(a,b,x){
 
-    const min=Math.min(a,b);
-    const max=Math.max(a,b);
+    const min=
+        Math.min(a,b);
+
+    const max=
+        Math.max(a,b);
 
     for(
         let y=min;
@@ -911,38 +959,24 @@ function carveVertical(a,b,x){
     }
 }
 
-/* =========================================================
-   PUERTA
-========================================================= */
-
-let door={
-    x:0,
-    y:0,
-    side:"N"
-};
-
-function placeDoor(room){
+function createDoor(room){
 
     const options=[
         {
             x:room.cx,
-            y:room.y,
-            side:"N"
+            y:room.y
         },
         {
             x:room.cx,
-            y:room.y+room.h-1,
-            side:"S"
+            y:room.y+room.h-1
         },
         {
             x:room.x,
-            y:room.cy,
-            side:"W"
+            y:room.cy
         },
         {
             x:room.x+room.w-1,
-            y:room.cy,
-            side:"E"
+            y:room.cy
         }
     ];
 
@@ -954,24 +988,23 @@ function placeDoor(room){
             )
         ];
 
-    /*
-       La puerta ocupa una celda de pared.
-       Por eso forma parte del muro.
-    */
+    door.x=selected.x;
+    door.y=selected.y;
 
     map[
-        selected.y
+        door.y
     ][
-        selected.x
+        door.x
     ]=DOOR;
-
-    door=selected;
 }
 
 function tileAt(x,y){
 
-    const tx=Math.floor(x);
-    const ty=Math.floor(y);
+    const tx=
+        Math.floor(x);
+
+    const ty=
+        Math.floor(y);
 
     if(
         tx<0 ||
@@ -979,6 +1012,7 @@ function tileAt(x,y){
         tx>=mapW ||
         ty>=mapH
     ){
+
         return WALL;
     }
 
@@ -987,7 +1021,8 @@ function tileAt(x,y){
 
 function solid(x,y){
 
-    const t=tileAt(x,y);
+    const t=
+        tileAt(x,y);
 
     return (
         t===WALL ||
@@ -995,49 +1030,23 @@ function solid(x,y){
     );
 }
 
-/* =========================================================
-   VISIBILIDAD
-========================================================= */
+/* =====================================================
+   VISIÓN
+===================================================== */
 
-/*
-   Esta es una de las partes importantes:
-
-   Antes de dibujar un enemigo comprobamos cada pequeño
-   tramo entre jugador y enemigo.
-
-   Si aparece WALL o DOOR:
-       enemigo NO visible.
-
-   Esto evita enemigos atravesando paredes.
-*/
-
-function hasLineOfSight(
-    x1,
-    y1,
-    x2,
-    y2
+function lineOfSight(
+    x1,y1,
+    x2,y2
 ){
 
     const dx=x2-x1;
     const dy=y2-y1;
 
-    const distance=
+    const d=
         Math.hypot(dx,dy);
 
-    if(distance<.05){
-        return true;
-    }
-
-    /*
-       0.06 unidades por comprobación.
-       Suficiente para detectar paredes
-       incluso en ángulos diagonales.
-    */
-
     const steps=
-        Math.ceil(
-            distance/.06
-        );
+        Math.ceil(d/.05);
 
     for(
         let i=1;
@@ -1068,9 +1077,9 @@ function hasLineOfSight(
     return true;
 }
 
-/* =========================================================
+/* =====================================================
    JUGADOR
-========================================================= */
+===================================================== */
 
 const player={
 
@@ -1093,118 +1102,66 @@ const player={
 
     damage:25,
 
-    /*
-       IMPORTANTE:
-       5 = cinco celdas reales del mapa.
-    */
-
     range:5,
 
-    attackTime:0,
-
-    attackDuration:.28,
-
-    attackCooldown:0
+    attackCooldown:0,
+    attackTimer:0
 };
 
-function movePlayer(dx,dy){
-
-    const nx=
-        player.x+dx;
-
-    const ny=
-        player.y+dy;
-
-    /*
-       Colisión X.
-    */
-
-    if(
-        !solid(
-            nx-player.radius,
-            player.y
-        ) &&
-        !solid(
-            nx+player.radius,
-            player.y
-        )
-    ){
-
-        player.x=nx;
-    }
-
-    /*
-       Colisión Y.
-    */
-
-    if(
-        !solid(
-            player.x,
-            ny-player.radius
-        ) &&
-        !solid(
-            player.x,
-            ny+player.radius
-        )
-    ){
-
-        player.y=ny;
-    }
-}
-
-/* =========================================================
+/* =====================================================
    DIOSES
-========================================================= */
+===================================================== */
 
 const gods={
 
-    RA:{
-        icon:"☀",
-        speed:1,
-        damage:1.1,
-        hp:1,
-        ability:"Lanza solar"
-    },
+RA:{
+    icon:"☀",
+    speed:1,
+    damage:1.1,
+    hp:1,
+    ability:"Lanza solar"
+},
 
-    ANUBIS:{
-        icon:"𓃢",
-        speed:1.05,
-        damage:1.25,
-        hp:1,
-        ability:"Juicio"
-    },
+ANUBIS:{
+    icon:"𓃢",
+    speed:1.05,
+    damage:1.25,
+    hp:1,
+    ability:"Juicio"
+},
 
-    HORUS:{
-        icon:"𓅃",
-        speed:1.15,
-        damage:1,
-        hp:1,
-        ability:"Ojo de Horus"
-    },
+HORUS:{
+    icon:"𓅃",
+    speed:1.15,
+    damage:1,
+    hp:1,
+    ability:"Ojo de Horus"
+},
 
-    ISIS:{
-        icon:"𓊨",
-        speed:1,
-        damage:.9,
-        hp:1.3,
-        ability:"Bendición"
-    },
+ISIS:{
+    icon:"𓊨",
+    speed:1,
+    damage:.9,
+    hp:1.3,
+    ability:"Bendición"
+},
 
-    SETH:{
-        icon:"𓃩",
-        speed:1.25,
-        damage:1.3,
-        hp:.9,
-        ability:"Tormenta"
-    },
+SETH:{
+    icon:"𓃩",
+    speed:1.25,
+    damage:1.3,
+    hp:.9,
+    ability:"Tormenta"
+},
 
-    OSIRIS:{
-        icon:"𓀀",
-        speed:.9,
-        damage:1.15,
-        hp:1.45,
-        ability:"Renacimiento"
-    }
+OSIRIS:{
+    icon:"𓀀",
+    speed:.9,
+    damage:1.15,
+    hp:1.45,
+    ability:"Renacimiento"
+}
+
 };
 
 let selectedGod="RA";
@@ -1226,23 +1183,28 @@ function applyGod(){
         );
 
     player.hp=
-        clamp(
+        Math.min(
             player.hp,
-            0,
             player.maxHp
         );
 
-    document.getElementById(
-        "godHUD"
-    ).textContent=god.icon;
+    document
+    .getElementById(
+        "godHud"
+    )
+    .textContent=
+        god.icon;
 
-    document.getElementById(
-        "godSelect"
-    ).textContent=god.icon;
+    document
+    .getElementById(
+        "godButton"
+    )
+    .textContent=
+        god.icon;
 }
 
 document
-.querySelectorAll(".godCard")
+.querySelectorAll(".god")
 .forEach(card=>{
 
     card.addEventListener(
@@ -1253,7 +1215,9 @@ document
                 card.dataset.god;
 
             document
-            .querySelectorAll(".godCard")
+            .querySelectorAll(
+                ".god"
+            )
             .forEach(c=>{
                 c.classList.remove(
                     "selected"
@@ -1265,28 +1229,19 @@ document
             );
 
             applyGod();
-
-            addMessage(
-                selectedGod+
-                " seleccionado."
-            );
         }
     );
 });
 
-/* =========================================================
+/* =====================================================
    ENEMIGOS
-========================================================= */
+===================================================== */
 
 let enemies=[];
 
-function spawnEnemies(rooms){
+function spawnEnemies(){
 
     enemies=[];
-
-    /*
-       No colocamos enemigos en la primera sala.
-    */
 
     for(
         let i=1;
@@ -1294,186 +1249,244 @@ function spawnEnemies(rooms){
         i++
     ){
 
-        const room=rooms[i];
+        const room=
+            rooms[i];
 
-        const count=
-            randomInt(
-                1,
-                Math.min(
-                    3,
-                    Math.floor(room.w/4)
-                )
-            );
+        const amount=
+            randomInt(1,3);
 
         for(
             let n=0;
-            n<count;
+            n<amount;
             n++
         ){
 
-            let x;
-            let y;
+            let x=
+                room.x+2+
+                Math.random()*
+                Math.max(
+                    1,
+                    room.w-4
+                );
 
-            /*
-               Buscamos una posición libre.
-            */
+            let y=
+                room.y+2+
+                Math.random()*
+                Math.max(
+                    1,
+                    room.h-4
+                );
 
-            for(
-                let attempt=0;
-                attempt<40;
-                attempt++
+            if(
+                distance(
+                    x,y,
+                    player.x,
+                    player.y
+                )<5
             ){
 
-                x=
-                    room.x+
-                    1.5+
-                    Math.random()*
-                    (room.w-3);
-
-                y=
-                    room.y+
-                    1.5+
-                    Math.random()*
-                    (room.h-3);
-
-                if(
-                    !solid(x,y) &&
-                    dist(
-                        x,y,
-                        player.x,
-                        player.y
-                    )>5
-                ){
-                    break;
-                }
+                x=room.cx+.5;
+                y=room.cy+.5;
             }
-
-            const maxHp=
-                60+
-                player.level*10;
 
             enemies.push({
 
                 x,
                 y,
 
-                radius:.28,
+                hp:
+                    60+
+                    player.level*10,
 
-                hp:maxHp,
-                maxHp:maxHp,
+                maxHp:
+                    60+
+                    player.level*10,
 
                 speed:
                     .65+
                     Math.random()*.35,
 
-                attackCooldown:0,
-
-                hitFlash:0
+                cooldown:0,
+                hit:0
             });
         }
     }
 }
 
-/* =========================================================
-   IA ENEMIGOS
-========================================================= */
+/* =====================================================
+   GUARDIÁN
+===================================================== */
+
+const guardian={
+
+    active:false,
+
+    x:0,
+    y:0,
+
+    hp:140,
+    maxHp:140,
+
+    speed:1.9,
+
+    cooldown:0
+};
+
+function summonGuardian(){
+
+    const spots=[
+        [.9,.3],
+        [-.9,.3],
+        [.7,-.8],
+        [-.7,-.8]
+    ];
+
+    for(
+        const p of spots
+    ){
+
+        const x=
+            player.x+p[0];
+
+        const y=
+            player.y+p[1];
+
+        if(
+            !solid(x,y)
+        ){
+
+            guardian.x=x;
+            guardian.y=y;
+
+            guardian.active=true;
+
+            addMessage(
+                "Guardián invocado."
+            );
+
+            return;
+        }
+    }
+
+    guardian.x=
+        player.x+1;
+
+    guardian.y=
+        player.y;
+
+    guardian.active=true;
+}
+
+/* =====================================================
+   COLISIÓN SUAVE
+===================================================== */
+
+function moveEntity(
+    entity,
+    dx,
+    dy,
+    radius=.22
+){
+
+    const nx=
+        entity.x+dx;
+
+    if(
+        !solid(nx-radius,entity.y) &&
+        !solid(nx+radius,entity.y)
+    ){
+
+        entity.x=nx;
+    }
+
+    const ny=
+        entity.y+dy;
+
+    if(
+        !solid(entity.x,ny-radius) &&
+        !solid(entity.x,ny+radius)
+    ){
+
+        entity.y=ny;
+    }
+}
+
+/* =====================================================
+   IA
+===================================================== */
 
 function updateEnemies(dt){
 
-    for(const enemy of enemies){
+    for(
+        const e of enemies
+    ){
 
-        if(enemy.hp<=0){
+        if(e.hp<=0)
             continue;
-        }
 
-        enemy.attackCooldown=
+        e.cooldown=
             Math.max(
                 0,
-                enemy.attackCooldown-dt
+                e.cooldown-dt
             );
 
-        enemy.hitFlash=
+        e.hit=
             Math.max(
                 0,
-                enemy.hitFlash-dt
+                e.hit-dt
             );
 
-        const distance=
-            dist(
-                enemy.x,
-                enemy.y,
-                player.x,
-                player.y
+        const d=
+            distance(
+                e.x,e.y,
+                player.x,player.y
             );
 
-        /*
-           El enemigo solamente entra en persecución
-           cuando tiene visión del jugador.
-        */
-
-        const visible=
-            distance<12 &&
-            hasLineOfSight(
-                enemy.x,
-                enemy.y,
-                player.x,
-                player.y
-            );
-
-        if(!visible){
+        if(
+            d>12
+        )
             continue;
-        }
 
-        if(distance>1.15){
+        if(
+            !lineOfSight(
+                e.x,e.y,
+                player.x,player.y
+            )
+        )
+            continue;
+
+        if(d>1.15){
 
             const dx=
-                (player.x-enemy.x)/
-                Math.max(distance,.001);
+                (player.x-e.x)/d;
 
             const dy=
-                (player.y-enemy.y)/
-                Math.max(distance,.001);
+                (player.y-e.y)/d;
 
-            const speed=
-                enemy.speed*dt;
-
-            /*
-               Movimiento con colisión.
-            */
-
-            if(
-                !solid(
-                    enemy.x+dx*speed,
-                    enemy.y
-                )
-            ){
-                enemy.x+=dx*speed;
-            }
-
-            if(
-                !solid(
-                    enemy.x,
-                    enemy.y+dy*speed
-                )
-            ){
-                enemy.y+=dy*speed;
-            }
+            moveEntity(
+                e,
+                dx*e.speed*dt,
+                dy*e.speed*dt,
+                .25
+            );
 
         }else{
 
             if(
-                enemy.attackCooldown<=0
+                e.cooldown<=0
             ){
 
                 player.hp-=8;
 
-                enemy.attackCooldown=1.1;
+                e.cooldown=1.1;
 
                 addMessage(
-                    "Has recibido daño."
+                    "Un enemigo te ha golpeado."
                 );
 
-                if(player.hp<=0){
+                if(
+                    player.hp<=0
+                ){
 
                     player.hp=
                         player.maxHp;
@@ -1490,92 +1503,21 @@ function updateEnemies(dt){
     }
 }
 
-/* =========================================================
-   GUARDIÁN
-========================================================= */
-
-const guardian={
-
-    active:false,
-
-    x:0,
-    y:0,
-
-    angle:0,
-
-    hp:140,
-    maxHp:140,
-
-    speed:2,
-
-    attackCooldown:0
-};
-
-function summonGuardian(){
-
-    /*
-       El guardián siempre aparece cerca del jugador.
-    */
-
-    const spots=[
-        [.9,.4],
-        [-.9,.4],
-        [.7,-.8],
-        [-.7,-.8]
-    ];
-
-    let found=false;
-
-    for(const s of spots){
-
-        const x=
-            player.x+s[0];
-
-        const y=
-            player.y+s[1];
-
-        if(!solid(x,y)){
-
-            guardian.x=x;
-            guardian.y=y;
-
-            found=true;
-
-            break;
-        }
-    }
-
-    if(!found){
-
-        guardian.x=
-            player.x+.8;
-
-        guardian.y=
-            player.y+.8;
-    }
-
-    guardian.active=true;
-
-    addMessage(
-        selectedGod+
-        " ha invocado al guardián."
-    );
-}
-
 function updateGuardian(dt){
 
-    if(!guardian.active){
+    if(
+        !guardian.active
+    )
         return;
-    }
 
-    guardian.attackCooldown=
+    guardian.cooldown=
         Math.max(
             0,
-            guardian.attackCooldown-dt
+            guardian.cooldown-dt
         );
 
-    const distance=
-        dist(
+    const d=
+        distance(
             guardian.x,
             guardian.y,
             player.x,
@@ -1583,130 +1525,384 @@ function updateGuardian(dt){
         );
 
     /*
-       Sigue al jugador sin pegarse a él.
+       Mantiene una distancia mínima.
+       Nunca se coloca encima.
     */
 
-    if(distance>2){
+    if(d>2){
 
         const dx=
-            (player.x-guardian.x)/
-            distance;
+            (player.x-guardian.x)/d;
 
         const dy=
-            (player.y-guardian.y)/
-            distance;
+            (player.y-guardian.y)/d;
 
-        const speed=
-            guardian.speed*dt;
-
-        if(
-            !solid(
-                guardian.x+dx*speed,
-                guardian.y
-            )
-        ){
-            guardian.x+=dx*speed;
-        }
-
-        if(
-            !solid(
-                guardian.x,
-                guardian.y+dy*speed
-            )
-        ){
-            guardian.y+=dy*speed;
-        }
+        moveEntity(
+            guardian,
+            dx*guardian.speed*dt,
+            dy*guardian.speed*dt,
+            .25
+        );
     }
 
-    /*
-       Busca enemigo visible.
-    */
-
     let target=null;
-    let best=999;
+    let closest=999;
 
-    for(const enemy of enemies){
+    for(
+        const e of enemies
+    ){
 
-        if(enemy.hp<=0){
+        if(e.hp<=0)
             continue;
-        }
 
-        const d=
-            dist(
+        const d2=
+            distance(
                 guardian.x,
                 guardian.y,
-                enemy.x,
-                enemy.y
+                e.x,
+                e.y
             );
 
         if(
-            d<3.4 &&
-            d<best &&
-            hasLineOfSight(
+            d2<3.5 &&
+            d2<closest &&
+            lineOfSight(
                 guardian.x,
                 guardian.y,
-                enemy.x,
-                enemy.y
+                e.x,
+                e.y
             )
         ){
 
-            target=enemy;
-            best=d;
+            closest=d2;
+            target=e;
+        }
+    }
+
+    if(
+        target &&
+        guardian.cooldown<=0
+    ){
+
+        target.hp-=18;
+
+        target.hit=.15;
+
+        guardian.cooldown=.8;
+
+        createParticles(
+            target.x,
+            target.y,
+            "ally"
+        );
+
+        if(
+            target.hp<=0
+        ){
+
+            gainXP(30);
+        }
+    }
+}
+
+/* =====================================================
+   ATAQUE
+===================================================== */
+
+function attack(){
+
+    if(
+        player.attackCooldown>0
+    )
+        return;
+
+    player.attackCooldown=.42;
+
+    player.attackTimer=.30;
+
+    createParticles(
+        player.x+
+        Math.cos(player.angle)*.8,
+        player.y+
+        Math.sin(player.angle)*.8,
+        "attack"
+    );
+
+    let target=null;
+    let nearest=player.range;
+
+    for(
+        const e of enemies
+    ){
+
+        if(e.hp<=0)
+            continue;
+
+        const d=
+            distance(
+                player.x,
+                player.y,
+                e.x,
+                e.y
+            );
+
+        /*
+           ALCANCE REAL DEL MAPA.
+        */
+
+        if(
+            d>player.range
+        )
+            continue;
+
+        const a=
+            Math.atan2(
+                e.y-player.y,
+                e.x-player.x
+            );
+
+        if(
+            Math.abs(
+                angleDifference(
+                    a,
+                    player.angle
+                )
+            )>.52
+        )
+            continue;
+
+        /*
+           PARED BLOQUEA ATAQUE.
+        */
+
+        if(
+            !lineOfSight(
+                player.x,
+                player.y,
+                e.x,
+                e.y
+            )
+        )
+            continue;
+
+        if(d<nearest){
+
+            nearest=d;
+            target=e;
         }
     }
 
     if(target){
 
-        guardian.angle=
-            Math.atan2(
-                target.y-guardian.y,
-                target.x-guardian.x
-            );
+        target.hp-=
+            player.damage;
+
+        target.hit=.15;
+
+        createParticles(
+            target.x,
+            target.y,
+            "hit"
+        );
 
         if(
-            guardian.attackCooldown<=0
+            target.hp<=0
         ){
 
-            target.hp-=18;
+            gainXP(35);
 
-            target.hitFlash=.16;
-
-            guardian.attackCooldown=.85;
-
-            createBurst(
-                target.x,
-                target.y,
-                "ally"
+            addMessage(
+                "Enemigo derrotado · +35 XP"
             );
-
-            if(target.hp<=0){
-
-                gainXP(30);
-            }
         }
     }
 }
 
-/* =========================================================
+/* =====================================================
+   HABILIDAD
+===================================================== */
+
+function ability(){
+
+    const radius=
+        selectedGod==="SETH"
+        ?4
+        :selectedGod==="HORUS"
+        ?6
+        :3.5;
+
+    let hits=0;
+
+    for(
+        const e of enemies
+    ){
+
+        if(e.hp<=0)
+            continue;
+
+        const d=
+            distance(
+                player.x,
+                player.y,
+                e.x,
+                e.y
+            );
+
+        if(
+            d<=radius &&
+            lineOfSight(
+                player.x,
+                player.y,
+                e.x,
+                e.y
+            )
+        ){
+
+            let damage=45;
+
+            if(
+                selectedGod==="SETH"
+            )
+                damage=70;
+
+            if(
+                selectedGod==="ANUBIS"
+            )
+                damage=60;
+
+            e.hp-=damage;
+
+            e.hit=.25;
+
+            createParticles(
+                e.x,
+                e.y,
+                "ability"
+            );
+
+            hits++;
+
+            if(e.hp<=0)
+                gainXP(50);
+        }
+    }
+
+    if(
+        selectedGod==="ISIS"
+    ){
+
+        player.hp=
+            Math.min(
+                player.maxHp,
+                player.hp+30
+            );
+    }
+
+    addMessage(
+        gods[selectedGod].ability+
+        " · "+
+        hits+
+        " afectados."
+    );
+}
+
+/* =====================================================
+   XP
+===================================================== */
+
+function gainXP(n){
+
+    player.xp+=n;
+
+    while(
+        player.xp>=player.nextXP
+    ){
+
+        player.xp-=player.nextXP;
+
+        player.level++;
+
+        player.nextXP=
+            Math.floor(
+                player.nextXP*1.32
+            );
+
+        player.maxHp+=12;
+
+        player.hp=
+            player.maxHp;
+
+        player.damage+=4;
+
+        addMessage(
+            "NIVEL "+
+            player.level+
+            " · Estadísticas mejoradas."
+        );
+    }
+}
+
+/* =====================================================
+   PUERTA
+===================================================== */
+
+let doorTimer=0;
+
+function checkDoor(){
+
+    if(
+        doorTimer>0
+    )
+        return;
+
+    if(
+        distance(
+            player.x,
+            player.y,
+            door.x+.5,
+            door.y+.5
+        )<1
+    ){
+
+        doorTimer=.8;
+
+        addMessage(
+            "Entrando a una nueva sala..."
+        );
+
+        setTimeout(
+            ()=>{
+                generateMap();
+                spawnEnemies();
+                guardian.active=false;
+                summonGuardian();
+                addMessage(
+                    "Nueva sala generada."
+                );
+            },
+            350
+        );
+    }
+}
+
+/* =====================================================
    PARTICULAS
-========================================================= */
+===================================================== */
 
 const particles=[];
 
-function createBurst(
-    x,
-    y,
-    type="attack"
+function createParticles(
+    x,y,type
 ){
 
-    const count=
+    const amount=
         type==="ability"
         ?25
         :15;
 
     for(
         let i=0;
-        i<count;
+        i<amount;
         i++
     ){
 
@@ -1714,28 +1910,25 @@ function createBurst(
             Math.random()*
             Math.PI*2;
 
-        const speed=
+        const s=
             .5+
             Math.random()*2;
 
         particles.push({
 
-            x,
-            y,
+            x,y,
 
             vx:
-                Math.cos(a)*
-                speed,
+                Math.cos(a)*s,
 
             vy:
-                Math.sin(a)*
-                speed,
+                Math.sin(a)*s,
 
             life:
-                .35+
-                Math.random()*.45,
+                .3+
+                Math.random()*.4,
 
-            maxLife:.8,
+            max:.7,
 
             type
         });
@@ -1758,403 +1951,34 @@ function updateParticles(dt){
 
         p.life-=dt;
 
-        if(p.life<=0){
-
-            particles.splice(
-                i,
-                1
-            );
-        }
-    }
-}
-
-/* =========================================================
-   COMBATE
-========================================================= */
-
-function attack(){
-
-    if(
-        player.attackCooldown>0
-    ){
-        return;
-    }
-
-    player.attackTime=
-        player.attackDuration;
-
-    player.attackCooldown=.42;
-
-    createBurst(
-
-        player.x+
-        Math.cos(player.angle)*.8,
-
-        player.y+
-        Math.sin(player.angle)*.8,
-
-        "attack"
-    );
-
-    let best=null;
-
-    /*
-       IMPORTANTE:
-       El máximo es exactamente el alcance
-       definido en celdas del mapa.
-    */
-
-    let bestDistance=
-        player.range;
-
-    for(const enemy of enemies){
-
-        if(enemy.hp<=0){
-            continue;
-        }
-
-        const distance=
-            dist(
-                player.x,
-                player.y,
-                enemy.x,
-                enemy.y
-            );
-
-        /*
-           FUERA DEL ALCANCE REAL.
-        */
-
         if(
-            distance>
-            player.range
-        ){
-            continue;
-        }
-
-        /*
-           Ángulo del objetivo.
-        */
-
-        const targetAngle=
-            Math.atan2(
-                enemy.y-player.y,
-                enemy.x-player.x
-            );
-
-        const difference=
-            Math.abs(
-                angleDiff(
-                    targetAngle,
-                    player.angle
-                )
-            );
-
-        /*
-           El barrido tiene un arco frontal.
-        */
-
-        if(difference>.50){
-            continue;
-        }
-
-        /*
-           NO atraviesa paredes.
-        */
-
-        if(
-            !hasLineOfSight(
-                player.x,
-                player.y,
-                enemy.x,
-                enemy.y
-            )
-        ){
-            continue;
-        }
-
-        if(
-            distance<
-            bestDistance
+            p.life<=0
         ){
 
-            best=enemy;
-
-            bestDistance=
-                distance;
+            particles.splice(i,1);
         }
     }
-
-    if(best){
-
-        best.hp-=player.damage;
-
-        best.hitFlash=.16;
-
-        createBurst(
-            best.x,
-            best.y,
-            "hit"
-        );
-
-        addMessage(
-            "Golpe · "+
-            Math.round(
-                player.damage
-            )+
-            " daño · "+
-            bestDistance.toFixed(1)+
-            " celdas"
-        );
-
-        if(best.hp<=0){
-
-            gainXP(35);
-
-            addMessage(
-                "Enemigo derrotado · +35 XP"
-            );
-        }
-
-    }else{
-
-        addMessage(
-            "Ataque sin objetivo."
-        );
-    }
 }
 
-/* =========================================================
-   HABILIDADES
-========================================================= */
-
-function useAbility(){
-
-    const god=
-        gods[selectedGod];
-
-    const radius=
-        selectedGod==="SETH"
-        ?4
-        :selectedGod==="HORUS"
-        ?6
-        :3.5;
-
-    let hits=0;
-
-    for(const enemy of enemies){
-
-        if(enemy.hp<=0){
-            continue;
-        }
-
-        const d=
-            dist(
-                player.x,
-                player.y,
-                enemy.x,
-                enemy.y
-            );
-
-        /*
-           La habilidad tampoco atraviesa paredes.
-        */
-
-        if(
-            d<=radius &&
-            hasLineOfSight(
-                player.x,
-                player.y,
-                enemy.x,
-                enemy.y
-            )
-        ){
-
-            let damage=45;
-
-            if(
-                selectedGod==="ANUBIS"
-            ){
-                damage=60;
-            }
-
-            if(
-                selectedGod==="HORUS"
-            ){
-                damage=38;
-            }
-
-            if(
-                selectedGod==="SETH"
-            ){
-                damage=70;
-            }
-
-            if(
-                selectedGod==="OSIRIS"
-            ){
-                damage=42;
-            }
-
-            enemy.hp-=damage;
-
-            enemy.hitFlash=.3;
-
-            createBurst(
-                enemy.x,
-                enemy.y,
-                "ability"
-            );
-
-            hits++;
-
-            if(enemy.hp<=0){
-
-                gainXP(50);
-            }
-        }
-    }
-
-    if(
-        selectedGod==="ISIS"
-    ){
-
-        player.hp=
-            clamp(
-                player.hp+30,
-                0,
-                player.maxHp
-            );
-
-        addMessage(
-            "Isis restaura tu vida."
-        );
-    }
-
-    addMessage(
-        god.ability+
-        " · "+
-        hits+
-        " objetivo(s)."
-    );
-}
-
-/* =========================================================
-   XP
-========================================================= */
-
-function gainXP(amount){
-
-    player.xp+=amount;
-
-    while(
-        player.xp>=player.nextXP
-    ){
-
-        player.xp-=
-            player.nextXP;
-
-        player.level++;
-
-        player.nextXP=
-            Math.floor(
-                player.nextXP*1.32
-            );
-
-        player.maxHp+=12;
-
-        player.hp=
-            player.maxHp;
-
-        player.damage+=4;
-
-        addMessage(
-            "¡NIVEL "+
-            player.level+
-            "! Estadísticas mejoradas."
-        );
-    }
-}
-
-/* =========================================================
-   PUERTA / NUEVA SALA
-========================================================= */
-
-let doorCooldown=0;
-
-function checkDoor(){
-
-    const d=
-        dist(
-            player.x,
-            player.y,
-            door.x+.5,
-            door.y+.5
-        );
-
-    if(
-        d<.9 &&
-        doorCooldown<=0
-    ){
-
-        generateNextRoom();
-    }
-}
-
-function generateNextRoom(){
-
-    doorCooldown=1;
-
-    addMessage(
-        "Atravesando la puerta..."
-    );
-
-    setTimeout(()=>{
-
-        generateMap();
-
-        spawnEnemies(
-            currentRooms
-        );
-
-        guardian.active=false;
-
-        /*
-           Nuevo guardián invocado junto al jugador.
-        */
-
-        summonGuardian();
-
-        addMessage(
-            "Nueva sala generada."
-        );
-
-    },350);
-}
-
-/* =========================================================
+/* =====================================================
    RAYCASTER
-========================================================= */
+===================================================== */
 
 const FOV=
     Math.PI/3;
 
 function castRay(angle){
 
-    const sin=
-        Math.sin(angle);
-
     const cos=
         Math.cos(angle);
 
-    const step=.035;
-
-    const maxDistance=30;
+    const sin=
+        Math.sin(angle);
 
     for(
         let d=.02;
-        d<maxDistance;
-        d+=step
+        d<30;
+        d+=.035
     ){
 
         const x=
@@ -2174,21 +1998,21 @@ function castRay(angle){
         ){
 
             return {
-                dist:d,
+                distance:d,
                 type:tile
             };
         }
     }
 
     return {
-        dist:maxDistance,
+        distance:30,
         type:WALL
     };
 }
 
-/* =========================================================
-   RENDER DEL MUNDO
-========================================================= */
+/* =====================================================
+   RENDER
+===================================================== */
 
 function renderWorld(){
 
@@ -2196,25 +2020,20 @@ function renderWorld(){
         H*.46;
 
     /*
-       CIELO.
+       Cielo.
     */
 
-    ctx.fillStyle="#b9a072";
+    ctx.fillStyle="#b8a071";
 
     ctx.fillRect(
-        0,
-        0,
-        W,
-        horizon
+        0,0,W,horizon
     );
 
     /*
-       SUELO ARENA.
-
-       No tiene reflejos de las paredes.
+       Suelo arena plano.
     */
 
-    ctx.fillStyle="#b78b50";
+    ctx.fillStyle="#b78a4f";
 
     ctx.fillRect(
         0,
@@ -2223,18 +2042,13 @@ function renderWorld(){
         H-horizon
     );
 
-    /*
-       Cantidad de columnas adaptada
-       al teléfono.
-    */
-
     const columns=
         Math.min(
             W,
             520
         );
 
-    const columnWidth=
+    const cw=
         W/columns;
 
     for(
@@ -2246,58 +2060,47 @@ function renderWorld(){
         const cameraX=
             i/columns-.5;
 
-        const rayAngle=
+        const angle=
             player.angle+
             cameraX*FOV;
 
         const hit=
-            castRay(rayAngle);
+            castRay(angle);
 
-        let distance=
-            hit.dist;
-
-        /*
-           Corrección de perspectiva.
-        */
-
-        distance*=
+        let d=
+            hit.distance*
             Math.cos(
-                rayAngle-player.angle
+                angle-player.angle
             );
 
-        const wallHeight=
+        d=
+            Math.max(
+                .01,
+                d
+            );
+
+        const height=
             Math.min(
                 H*1.5,
-                H*.92/
-                Math.max(
-                    distance,
-                    .001
-                )
+                H*.92/d
             );
 
         const top=
-            horizon-
-            wallHeight/2;
-
-        /*
-           Puerta oscura integrada
-           en la pared.
-        */
+            horizon-height/2;
 
         if(
             hit.type===DOOR
         ){
 
             ctx.fillStyle=
-                "#241a12";
+                "#241a11";
 
         }else{
 
             const shade=
                 clamp(
-                    150-
-                    distance*8,
-                    35,
+                    150-d*8,
+                    40,
                     145
                 );
 
@@ -2316,25 +2119,23 @@ function renderWorld(){
         }
 
         ctx.fillRect(
-            i*columnWidth,
+            i*cw,
             top,
-            columnWidth+1,
-            wallHeight
+            cw+1,
+            height
         );
     }
 
-    renderSprites();
+    renderObjects();
 
     renderWeapon();
 
     renderParticles();
 }
 
-/* =========================================================
-   SPRITES
-========================================================= */
-
-function projectSprite(obj){
+function project(
+    obj
+){
 
     const dx=
         obj.x-player.x;
@@ -2342,133 +2143,85 @@ function projectSprite(obj){
     const dy=
         obj.y-player.y;
 
-    const distance=
+    const d=
         Math.hypot(dx,dy);
 
-    if(
-        distance<.15
-    ){
+    if(d<.1)
         return null;
-    }
 
     /*
-       SEGUNDA comprobación de seguridad:
-       jamás proyectamos un objeto detrás de un muro.
+       No renderizar detrás de paredes.
     */
 
     if(
-        !hasLineOfSight(
+        !lineOfSight(
             player.x,
             player.y,
             obj.x,
             obj.y
         )
-    ){
-
+    )
         return null;
-    }
 
-    const targetAngle=
-        Math.atan2(
-            dy,
-            dx
-        );
+    const a=
+        Math.atan2(dy,dx);
 
     const relative=
-        angleDiff(
-            targetAngle,
+        angleDifference(
+            a,
             player.angle
         );
 
     if(
         Math.abs(relative)>
-        FOV*.72
-    ){
-
+        FOV*.75
+    )
         return null;
-    }
 
-    const screenX=
+    const sx=
         W/2+
         Math.tan(relative)*
         (
             W/
             (
                 2*
-                Math.tan(
-                    FOV/2
-                )
+                Math.tan(FOV/2)
             )
         );
 
     const size=
         Math.min(
             H*.75,
-            H/
-            (distance*.95)
+            H/(d*.95)
         );
 
     return {
-        x:screenX,
+        x:sx,
         y:H*.46,
         size,
-        distance
+        distance:d
     };
 }
 
-/* =========================================================
-   RENDER SPRITES
-========================================================= */
-
-function renderSprites(){
+function renderObjects(){
 
     const objects=[];
 
-    /*
-       ENEMIGOS
-    */
-
     for(
-        const enemy of enemies
+        const e of enemies
     ){
 
-        if(enemy.hp<=0){
-            continue;
+        if(e.hp>0){
+
+            objects.push({
+                type:"enemy",
+                obj:e
+            });
         }
-
-        /*
-           No entra en la lista si hay pared.
-        */
-
-        if(
-            !hasLineOfSight(
-                player.x,
-                player.y,
-                enemy.x,
-                enemy.y
-            )
-        ){
-            continue;
-        }
-
-        objects.push({
-            type:"enemy",
-            obj:enemy
-        });
     }
 
-    /*
-       GUARDIÁN
-    */
-
     if(
-        guardian.active &&
-        hasLineOfSight(
-            player.x,
-            player.y,
-            guardian.x,
-            guardian.y
-        )
+        guardian.active
     ){
 
         objects.push({
@@ -2477,31 +2230,20 @@ function renderSprites(){
         });
     }
 
-    /*
-       Profundidad.
-    */
-
     objects.sort(
-        (a,b)=>{
-
-            const da=
-                dist(
-                    b.obj.x,
-                    b.obj.y,
-                    player.x,
-                    player.y
-                );
-
-            const db=
-                dist(
-                    a.obj.x,
-                    a.obj.y,
-                    player.x,
-                    player.y
-                );
-
-            return da-db;
-        }
+        (a,b)=>
+        distance(
+            player.x,
+            player.y,
+            b.obj.x,
+            b.obj.y
+        )-
+        distance(
+            player.x,
+            player.y,
+            a.obj.x,
+            a.obj.y
+        )
     );
 
     for(
@@ -2509,56 +2251,39 @@ function renderSprites(){
     ){
 
         const p=
-            projectSprite(
-                item.obj
-            );
+            project(item.obj);
 
-        if(!p){
+        if(!p)
             continue;
-        }
 
         if(
             item.type==="enemy"
-        ){
-
-            renderEnemy(
+        )
+            drawEnemy(
                 item.obj,
                 p
             );
-
-        }else{
-
-            renderGuardian(
-                item.obj,
+        else
+            drawGuardian(
                 p
             );
-        }
     }
 }
 
-/* =========================================================
-   ENEMIGO
-========================================================= */
+/* =====================================================
+   ENEMIGO VISUAL
+===================================================== */
 
-function renderEnemy(
-    enemy,
-    p
-){
+function drawEnemy(e,p){
 
     const s=p.size;
-
     const x=p.x;
-
-    /*
-       Punto del suelo.
-       Esto mantiene al enemigo anclado.
-    */
 
     const ground=
         H*.46+s*.5;
 
     /*
-       SOMBRA.
+       Sombra.
     */
 
     ctx.fillStyle=
@@ -2571,19 +2296,17 @@ function renderEnemy(
         ground,
         s*.23,
         s*.07,
-        0,
-        0,
-        Math.PI*2
+        0,0,Math.PI*2
     );
 
     ctx.fill();
 
     /*
-       CUERPO.
+       Cuerpo.
     */
 
     ctx.fillStyle=
-        enemy.hitFlash>0
+        e.hit>0
         ?"#fff"
         :"#633b2b";
 
@@ -2595,7 +2318,7 @@ function renderEnemy(
     );
 
     /*
-       CABEZA.
+       Cabeza.
     */
 
     ctx.fillStyle="#38241d";
@@ -2604,19 +2327,18 @@ function renderEnemy(
 
     ctx.arc(
         x,
-        ground-s*.57,
+        ground-s*.58,
         s*.15,
-        0,
-        Math.PI*2
+        0,Math.PI*2
     );
 
     ctx.fill();
 
     /*
-       OJOS.
+       Ojos.
     */
 
-    ctx.fillStyle="#e3b44d";
+    ctx.fillStyle="#e5b74f";
 
     ctx.fillRect(
         x-s*.075,
@@ -2633,13 +2355,10 @@ function renderEnemy(
     );
 
     /*
-       BARRA DE VIDA.
-
-       Se dibuja encima del enemigo.
+       Vida.
     */
 
-    const bw=
-        s*.52;
+    const bw=s*.55;
 
     const bh=
         Math.max(
@@ -2647,8 +2366,7 @@ function renderEnemy(
             s*.035
         );
 
-    ctx.fillStyle=
-        "rgba(20,10,8,.85)";
+    ctx.fillStyle="#20110c";
 
     ctx.fillRect(
         x-bw/2,
@@ -2657,41 +2375,34 @@ function renderEnemy(
         bh
     );
 
-    ctx.fillStyle="#d34c43";
+    ctx.fillStyle="#d44d42";
 
     ctx.fillRect(
         x-bw/2,
         ground-s*.76,
         bw*
         clamp(
-            enemy.hp/
-            enemy.maxHp,
-            0,
-            1
+            e.hp/e.maxHp,
+            0,1
         ),
         bh
     );
 }
 
-/* =========================================================
-   GUARDIÁN
-========================================================= */
+/* =====================================================
+   GUARDIÁN VISUAL
+===================================================== */
 
-function renderGuardian(
-    g,
-    p
-){
+function drawGuardian(p){
 
-    const s=
-        p.size*.95;
-
+    const s=p.size;
     const x=p.x;
 
     const ground=
         H*.46+s*.5;
 
     ctx.fillStyle=
-        "rgba(30,20,8,.3)";
+        "rgba(20,15,7,.35)";
 
     ctx.beginPath();
 
@@ -2700,16 +2411,10 @@ function renderGuardian(
         ground,
         s*.28,
         s*.08,
-        0,
-        0,
-        Math.PI*2
+        0,0,Math.PI*2
     );
 
     ctx.fill();
-
-    /*
-       AURA.
-    */
 
     const pulse=
         1+
@@ -2718,7 +2423,7 @@ function renderGuardian(
         )*.08;
 
     ctx.strokeStyle=
-        "rgba(236,195,88,.72)";
+        "rgba(238,196,84,.7)";
 
     ctx.lineWidth=3;
 
@@ -2728,17 +2433,12 @@ function renderGuardian(
         x,
         ground-s*.38,
         s*.32*pulse,
-        0,
-        Math.PI*2
+        0,Math.PI*2
     );
 
     ctx.stroke();
 
-    /*
-       CUERPO.
-    */
-
-    ctx.fillStyle="#a77a2f";
+    ctx.fillStyle="#a67b32";
 
     ctx.beginPath();
 
@@ -2771,10 +2471,6 @@ function renderGuardian(
 
     ctx.fill();
 
-    /*
-       CABEZA.
-    */
-
     ctx.fillStyle="#d5ad68";
 
     ctx.beginPath();
@@ -2783,72 +2479,31 @@ function renderGuardian(
         x,
         ground-s*.62,
         s*.14,
-        0,
-        Math.PI*2
+        0,Math.PI*2
     );
 
     ctx.fill();
-
-    /*
-       TOCADO.
-    */
-
-    ctx.fillStyle="#201711";
-
-    ctx.fillRect(
-        x-s*.17,
-        ground-s*.75,
-        s*.34,
-        s*.07
-    );
-
-    /*
-       BASTÓN.
-    */
-
-    ctx.strokeStyle="#e0bd62";
-
-    ctx.lineWidth=
-        Math.max(
-            2,
-            s*.025
-        );
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        x+s*.16,
-        ground-s*.15
-    );
-
-    ctx.lineTo(
-        x+s*.23,
-        ground-s*.68
-    );
-
-    ctx.stroke();
 }
 
-/* =========================================================
+/* =====================================================
    ARMA
-========================================================= */
+===================================================== */
 
 function renderWeapon(){
 
-    const attacking=
-        player.attackTime>0;
+    const active=
+        player.attackTimer>0;
 
     let swing=0;
 
-    if(attacking){
+    if(active){
 
         const t=
             1-
-            player.attackTime/
-            player.attackDuration;
+            player.attackTimer/.30;
 
         /*
-           Movimiento suave de barrido.
+           Barrido horizontal suave.
         */
 
         swing=
@@ -2867,35 +2522,25 @@ function renderWeapon(){
     const baseY=
         H*1.04;
 
-    const handX=
-        baseX-
-        swing*W*.24;
-
-    const handY=
-        baseY-
-        swing*H*.13;
-
     ctx.save();
 
     ctx.translate(
-        handX,
-        handY
+        baseX-
+        swing*W*.23,
+        baseY-
+        swing*H*.12
     );
-
-    /*
-       Barrido horizontal.
-    */
 
     ctx.rotate(
         -.48-
-        swing*1.18
+        swing*1.15
     );
 
     /*
-       BRAZO.
+       Brazo.
     */
 
-    ctx.fillStyle="#8d5c39";
+    ctx.fillStyle="#8c5b38";
 
     ctx.fillRect(
         -13,
@@ -2905,7 +2550,7 @@ function renderWeapon(){
     );
 
     /*
-       MANGO.
+       Mango.
     */
 
     ctx.fillStyle="#3d2417";
@@ -2918,7 +2563,7 @@ function renderWeapon(){
     );
 
     /*
-       HOJA.
+       Hoja.
     */
 
     ctx.beginPath();
@@ -2940,18 +2585,18 @@ function renderWeapon(){
 
     ctx.closePath();
 
-    ctx.fillStyle="#d4c59a";
+    ctx.fillStyle="#d5c59b";
 
     ctx.fill();
 
     /*
-       Destello.
+       Arco visual.
     */
 
-    if(attacking){
+    if(active){
 
         ctx.strokeStyle=
-            "rgba(239,205,105,.85)";
+            "rgba(240,205,105,.8)";
 
         ctx.lineWidth=5;
 
@@ -2971,9 +2616,9 @@ function renderWeapon(){
     ctx.restore();
 }
 
-/* =========================================================
-   PARTICULAS
-========================================================= */
+/* =====================================================
+   PARTICULAS RENDER
+===================================================== */
 
 function renderParticles(){
 
@@ -2981,67 +2626,56 @@ function renderParticles(){
         const p of particles
     ){
 
-        const projected=
-            projectSprite({
+        const pr=
+            project({
                 x:p.x,
                 y:p.y
             });
 
-        if(!projected){
+        if(!pr)
             continue;
-        }
 
         const alpha=
             clamp(
-                p.life/
-                p.maxLife,
-                0,
-                1
+                p.life/p.max,
+                0,1
             );
 
-        let color;
-
         if(
-            p.type==="ability"
+            p.type==="ally"
         ){
 
-            color=
-                "rgba(245,205,91,"+
+            ctx.fillStyle=
+                "rgba(100,200,255,"+
                 alpha+
                 ")";
 
         }else if(
-            p.type==="ally"
+            p.type==="ability"
         ){
 
-            color=
-                "rgba(115,200,255,"+
+            ctx.fillStyle=
+                "rgba(245,205,90,"+
                 alpha+
                 ")";
 
         }else{
 
-            color=
+            ctx.fillStyle=
                 "rgba(255,220,120,"+
                 alpha+
                 ")";
         }
 
-        ctx.fillStyle=color;
-
-        const size=
-            Math.max(
-                2,
-                projected.size*.025
-            );
-
         ctx.beginPath();
 
         ctx.arc(
-            projected.x,
-            projected.y-
-                projected.size*.25,
-            size,
+            pr.x,
+            pr.y-pr.size*.25,
+            Math.max(
+                2,
+                pr.size*.025
+            ),
             0,
             Math.PI*2
         );
@@ -3050,37 +2684,30 @@ function renderParticles(){
     }
 }
 
-/* =========================================================
+/* =====================================================
    MINIMAPA COMPLETO
-========================================================= */
+===================================================== */
 
-function renderMinimap(){
+function renderMini(){
 
     const mw=mini.width;
     const mh=mini.height;
 
     mctx.clearRect(
-        0,
-        0,
-        mw,
-        mh
+        0,0,mw,mh
     );
 
-    if(!map.length){
+    if(!map.length)
         return;
-    }
 
     mctx.fillStyle="#100c08";
 
     mctx.fillRect(
-        0,
-        0,
-        mw,
-        mh
+        0,0,mw,mh
     );
 
     /*
-       Escala para mostrar TODO el mapa.
+       El mapa completo siempre cabe.
     */
 
     const scale=
@@ -3095,10 +2722,6 @@ function renderMinimap(){
     const oy=
         (mh-mapH*scale)/2;
 
-    /*
-       TODO EL MAPA.
-    */
-
     for(
         let y=0;
         y<mapH;
@@ -3111,92 +2734,71 @@ function renderMinimap(){
             x++
         ){
 
-            const tile=
+            const t=
                 map[y][x];
 
-            if(
-                tile===WALL
-            ){
+            if(t===WALL){
 
                 mctx.fillStyle=
-                    "#3d3023";
+                    "#403225";
 
-            }else if(
-                tile===DOOR
-            ){
+            }else if(t===DOOR){
 
                 mctx.fillStyle=
-                    "#e0b849";
+                    "#e2b94e";
 
             }else{
 
                 mctx.fillStyle=
-                    "#b48b55";
+                    "#b78d56";
             }
 
             mctx.fillRect(
                 ox+x*scale,
                 oy+y*scale,
-                Math.ceil(scale)+.3,
-                Math.ceil(scale)+.3
+                Math.ceil(scale)+.2,
+                Math.ceil(scale)+.2
             );
         }
     }
 
     /*
-       PUERTA.
-    */
-
-    mctx.fillStyle="#f4d06a";
-
-    mctx.fillRect(
-        ox+door.x*scale,
-        oy+door.y*scale,
-        Math.max(2,scale*1.5),
-        Math.max(2,scale*1.5)
-    );
-
-    /*
-       ENEMIGOS.
-
-       Se muestran en el minimapa aunque estén detrás
-       de una pared porque el minimapa representa
-       la posición completa del mapa.
+       Enemigos.
     */
 
     for(
-        const enemy of enemies
+        const e of enemies
     ){
 
-        if(enemy.hp<=0){
+        if(e.hp<=0)
             continue;
-        }
 
-        mctx.fillStyle="#d64c42";
+        mctx.fillStyle="#d84b42";
 
         mctx.beginPath();
 
         mctx.arc(
-            ox+enemy.x*scale,
-            oy+enemy.y*scale,
+            ox+e.x*scale,
+            oy+e.y*scale,
             Math.max(
                 1.5,
-                scale*1.1
+                scale
             ),
-            0,
-            Math.PI*2
+            0,Math.PI*2
         );
 
         mctx.fill();
     }
 
     /*
-       GUARDIÁN.
+       Guardián.
     */
 
-    if(guardian.active){
+    if(
+        guardian.active
+    ){
 
-        mctx.fillStyle="#59b7d6";
+        mctx.fillStyle="#59b9d5";
 
         mctx.beginPath();
 
@@ -3205,17 +2807,16 @@ function renderMinimap(){
             oy+guardian.y*scale,
             Math.max(
                 2,
-                scale*1.3
+                scale*1.2
             ),
-            0,
-            Math.PI*2
+            0,Math.PI*2
         );
 
         mctx.fill();
     }
 
     /*
-       JUGADOR.
+       Jugador.
     */
 
     mctx.fillStyle="#fff0a0";
@@ -3229,14 +2830,13 @@ function renderMinimap(){
             2,
             scale*1.5
         ),
-        0,
-        Math.PI*2
+        0,Math.PI*2
     );
 
     mctx.fill();
 
     /*
-       DIRECCIÓN.
+       Dirección.
     */
 
     mctx.strokeStyle="#fff0a0";
@@ -3254,27 +2854,31 @@ function renderMinimap(){
         ox+
         (
             player.x+
-            Math.cos(player.angle)*2
+            Math.cos(
+                player.angle
+            )*2
         )*scale,
 
         oy+
         (
             player.y+
-            Math.sin(player.angle)*2
+            Math.sin(
+                player.angle
+            )*2
         )*scale
     );
 
     mctx.stroke();
 }
 
-/* =========================================================
+/* =====================================================
    MENSAJES
-========================================================= */
+===================================================== */
 
 const messageBox=
-    document.getElementById(
-        "messages"
-    );
+document.getElementById(
+    "messages"
+);
 
 function addMessage(text){
 
@@ -3282,8 +2886,6 @@ function addMessage(text){
         document.createElement(
             "div"
         );
-
-    div.className="msg";
 
     div.textContent=text;
 
@@ -3299,9 +2901,9 @@ function addMessage(text){
     }
 }
 
-/* =========================================================
+/* =====================================================
    HUD
-========================================================= */
+===================================================== */
 
 function updateHUD(){
 
@@ -3309,30 +2911,28 @@ function updateHUD(){
         clamp(
             player.hp/
             player.maxHp,
-            0,
-            1
+            0,1
         )*100;
 
     const xp=
         clamp(
             player.xp/
             player.nextXP,
-            0,
-            1
+            0,1
         )*100;
 
     document.getElementById(
-        "hpFill"
+        "hp"
     ).style.width=
         hp+"%";
 
     document.getElementById(
-        "xpFill"
+        "xp"
     ).style.width=
         xp+"%";
 
     document.getElementById(
-        "playerName"
+        "name"
     ).textContent=
         "EXPLORADOR · NIVEL "+
         player.level;
@@ -3350,89 +2950,228 @@ function updateHUD(){
         player.nextXP;
 }
 
-/* =========================================================
-   JOYSTICK
-========================================================= */
+/* =====================================================
+   JOYSTICK ANALÓGICO PROFESIONAL
+===================================================== */
+
+/*
+   Este joystick NO mueve al jugador con saltos.
+
+   Devuelve un vector:
+
+       x = -1 ... +1
+       y = -1 ... +1
+
+   La magnitud indica cuánto se ha desplazado
+   el dedo desde el centro.
+
+   Se utiliza una curva suave para conseguir:
+       - precisión cerca del centro
+       - máxima velocidad al borde
+       - movimiento progresivo
+*/
 
 const joystick=
-    document.getElementById(
-        "joystick"
-    );
+document.getElementById(
+    "joystick"
+);
 
 const stick=
-    document.getElementById(
-        "stick"
-    );
+document.getElementById(
+    "stick"
+);
 
-const joy={
+const joystickState={
+
     active:false,
+
+    pointerId:null,
+
     x:0,
     y:0,
-    id:null
+
+    targetX:0,
+    targetY:0,
+
+    centerX:0,
+    centerY:0,
+
+    radius:0,
+
+    knobRadius:0
 };
+
+function prepareJoystick(){
+
+    const rect=
+        joystick.getBoundingClientRect();
+
+    joystickState.centerX=
+        rect.left+
+        rect.width/2;
+
+    joystickState.centerY=
+        rect.top+
+        rect.height/2;
+
+    /*
+       El radio útil deja margen para
+       que el knob nunca salga del círculo.
+    */
+
+    joystickState.radius=
+        rect.width/2;
+
+    joystickState.knobRadius=
+        stick.offsetWidth/2;
+
+    joystickState.radius-=
+        joystickState.knobRadius;
+}
 
 function updateJoystick(
     clientX,
     clientY
 ){
 
-    const rect=
-        joystick.getBoundingClientRect();
-
-    const cx=
-        rect.left+
-        rect.width/2;
-
-    const cy=
-        rect.top+
-        rect.height/2;
+    prepareJoystick();
 
     let dx=
-        clientX-cx;
+        clientX-
+        joystickState.centerX;
 
     let dy=
-        clientY-cy;
+        clientY-
+        joystickState.centerY;
 
     const max=
-        rect.width*.34;
+        joystickState.radius;
 
-    const d=
+    const rawDistance=
         Math.hypot(dx,dy);
 
-    if(d>max){
+    /*
+       Limitar al círculo.
+    */
+
+    if(
+        rawDistance>max
+    ){
 
         dx=
-            dx/d*max;
+            dx/rawDistance*
+            max;
 
         dy=
-            dy/d*max;
+            dy/rawDistance*
+            max;
     }
 
-    stick.style.left=
-        "calc(50% + "+
-        dx+
-        "px)";
+    const normalizedDistance=
+        Math.min(
+            1,
+            Math.hypot(dx,dy)/max
+        );
 
-    stick.style.top=
-        "calc(50% + "+
-        dy+
-        "px)";
+    /*
+       ZONA MUERTA.
 
-    joy.x=dx/max;
-    joy.y=dy/max;
+       Evita micro movimientos accidentales.
+    */
+
+    const deadZone=.08;
+
+    let magnitude=0;
+
+    if(
+        normalizedDistance>deadZone
+    ){
+
+        magnitude=
+            (
+                normalizedDistance-
+                deadZone
+            )/
+            (1-deadZone);
+
+        /*
+           Curva suave.
+
+           Cerca del centro:
+               mucho control.
+
+           Cerca del borde:
+               máxima respuesta.
+        */
+
+        magnitude=
+            Math.pow(
+                magnitude,
+                .82
+            );
+    }
+
+    if(
+        rawDistance>0
+    ){
+
+        const nx=
+            dx/rawDistance;
+
+        const ny=
+            dy/rawDistance;
+
+        joystickState.targetX=
+            nx*magnitude;
+
+        joystickState.targetY=
+            ny*magnitude;
+
+    }else{
+
+        joystickState.targetX=0;
+        joystickState.targetY=0;
+    }
+
+    /*
+       Posición física del knob.
+
+       El knob sigue al dedo exactamente.
+    */
+
+    const knobX=
+        dx;
+
+    const knobY=
+        dy;
+
+    stick.style.transform=
+        "translate3d("+
+        (
+            knobX-
+            joystickState.knobRadius
+        )+
+        "px,"+
+        (
+            knobY-
+            joystickState.knobRadius
+        )+
+        "px,0)";
 }
 
 function resetJoystick(){
 
-    joy.active=false;
+    joystickState.active=false;
+    joystickState.pointerId=null;
 
-    joy.x=0;
-    joy.y=0;
+    joystickState.targetX=0;
+    joystickState.targetY=0;
 
-    joy.id=null;
+    joystickState.x=0;
+    joystickState.y=0;
 
-    stick.style.left="50%";
-    stick.style.top="50%";
+    stick.style.transform=
+        "translate3d(-50%,-50%,0)";
 }
 
 joystick.addEventListener(
@@ -3441,8 +3180,12 @@ joystick.addEventListener(
 
         e.preventDefault();
 
-        joy.active=true;
-        joy.id=e.pointerId;
+        prepareJoystick();
+
+        joystickState.active=true;
+
+        joystickState.pointerId=
+            e.pointerId;
 
         joystick.setPointerCapture(
             e.pointerId
@@ -3460,21 +3203,33 @@ joystick.addEventListener(
     e=>{
 
         if(
-            joy.active &&
-            e.pointerId===joy.id
-        ){
+            !joystickState.active ||
+            e.pointerId!==
+            joystickState.pointerId
+        )
+            return;
 
-            updateJoystick(
-                e.clientX,
-                e.clientY
-            );
-        }
+        e.preventDefault();
+
+        updateJoystick(
+            e.clientX,
+            e.clientY
+        );
     }
 );
 
 joystick.addEventListener(
     "pointerup",
-    resetJoystick
+    e=>{
+
+        if(
+            e.pointerId===
+            joystickState.pointerId
+        ){
+
+            resetJoystick();
+        }
+    }
 );
 
 joystick.addEventListener(
@@ -3482,18 +3237,93 @@ joystick.addEventListener(
     resetJoystick
 );
 
-/* =========================================================
+/* =====================================================
+   CÁMARA TÁCTIL
+===================================================== */
+
+let cameraPointer=null;
+let previousCameraX=0;
+
+canvas.addEventListener(
+    "pointerdown",
+    e=>{
+
+        if(!gameRunning)
+            return;
+
+        /*
+           Solamente la parte derecha
+           controla cámara.
+        */
+
+        if(
+            e.clientX<
+            innerWidth*.44
+        )
+            return;
+
+        cameraPointer=
+            e.pointerId;
+
+        previousCameraX=
+            e.clientX;
+
+        canvas.setPointerCapture(
+            e.pointerId
+        );
+    }
+);
+
+canvas.addEventListener(
+    "pointermove",
+    e=>{
+
+        if(
+            cameraPointer!==
+            e.pointerId
+        )
+            return;
+
+        const dx=
+            e.clientX-
+            previousCameraX;
+
+        previousCameraX=
+            e.clientX;
+
+        /*
+           Sensibilidad suave.
+        */
+
+        player.angle+=
+            dx*.0055;
+    }
+);
+
+canvas.addEventListener(
+    "pointerup",
+    e=>{
+
+        if(
+            cameraPointer===
+            e.pointerId
+        ){
+
+            cameraPointer=null;
+        }
+    }
+);
+
+/* =====================================================
    BOTONES
-========================================================= */
+===================================================== */
 
 document.getElementById(
     "attack"
 ).addEventListener(
     "pointerdown",
     e=>{
-
         e.preventDefault();
-
         attack();
     }
 );
@@ -3503,38 +3333,36 @@ document.getElementById(
 ).addEventListener(
     "pointerdown",
     e=>{
-
         e.preventDefault();
-
-        useAbility();
+        ability();
     }
 );
 
 document.getElementById(
-    "godSelect"
+    "godButton"
 ).addEventListener(
     "pointerdown",
     e=>{
 
         e.preventDefault();
 
-        const keys=
+        const list=
             Object.keys(gods);
 
         const index=
-            keys.indexOf(
+            list.indexOf(
                 selectedGod
             );
 
         selectedGod=
-            keys[
+            list[
                 (index+1)%
-                keys.length
+                list.length
             ];
 
         document
         .querySelectorAll(
-            ".godCard"
+            ".god"
         )
         .forEach(card=>{
 
@@ -3554,13 +3382,13 @@ document.getElementById(
     }
 );
 
-/* =========================================================
+/* =====================================================
    TECLADO
-========================================================= */
+===================================================== */
 
 const keys={};
 
-window.addEventListener(
+addEventListener(
     "keydown",
     e=>{
 
@@ -3568,20 +3396,19 @@ window.addEventListener(
             e.key.toLowerCase()
         ]=true;
 
-        if(e.key===" "){
+        if(
+            e.key===" "
+        )
             attack();
-        }
 
         if(
             e.key.toLowerCase()==="e"
-        ){
-
-            useAbility();
-        }
+        )
+            ability();
     }
 );
 
-window.addEventListener(
+addEventListener(
     "keyup",
     e=>{
 
@@ -3591,151 +3418,14 @@ window.addEventListener(
     }
 );
 
-/* =========================================================
-   CONTROL DE CÁMARA TÁCTIL
-========================================================= */
-
-let lookPointer=null;
-let lastLookX=0;
-
-canvas.addEventListener(
-    "pointerdown",
-    e=>{
-
-        if(!gameRunning){
-            return;
-        }
-
-        /*
-           La mitad derecha controla cámara.
-        */
-
-        if(
-            e.clientX<
-            window.innerWidth*.45
-        ){
-            return;
-        }
-
-        lookPointer=
-            e.pointerId;
-
-        lastLookX=
-            e.clientX;
-
-        canvas.setPointerCapture(
-            e.pointerId
-        );
-    }
-);
-
-canvas.addEventListener(
-    "pointermove",
-    e=>{
-
-        if(
-            lookPointer!==e.pointerId
-        ){
-            return;
-        }
-
-        const dx=
-            e.clientX-
-            lastLookX;
-
-        lastLookX=
-            e.clientX;
-
-        player.angle+=
-            dx*.006;
-    }
-);
-
-canvas.addEventListener(
-    "pointerup",
-    e=>{
-
-        if(
-            lookPointer===
-            e.pointerId
-        ){
-
-            lookPointer=null;
-        }
-    }
-);
-
-/* =========================================================
-   CROSSHAIR
-========================================================= */
-
-function renderCrosshair(){
-
-    const cx=W/2;
-    const cy=H*.46;
-
-    ctx.strokeStyle=
-        "rgba(255,245,210,.92)";
-
-    ctx.lineWidth=2;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        cx-8,
-        cy
-    );
-
-    ctx.lineTo(
-        cx-2,
-        cy
-    );
-
-    ctx.moveTo(
-        cx+2,
-        cy
-    );
-
-    ctx.lineTo(
-        cx+8,
-        cy
-    );
-
-    ctx.moveTo(
-        cx,
-        cy-8
-    );
-
-    ctx.lineTo(
-        cx,
-        cy-2
-    );
-
-    ctx.moveTo(
-        cx,
-        cy+2
-    );
-
-    ctx.lineTo(
-        cx,
-        cy+8
-    );
-
-    ctx.stroke();
-}
-
-/* =========================================================
+/* =====================================================
    ACTUALIZACIÓN
-========================================================= */
-
-let gameRunning=false;
-let lastTime=0;
+===================================================== */
 
 function update(dt){
 
-    if(!gameRunning){
+    if(!gameRunning)
         return;
-    }
 
     player.attackCooldown=
         Math.max(
@@ -3743,42 +3433,58 @@ function update(dt){
             player.attackCooldown-dt
         );
 
-    player.attackTime=
+    player.attackTimer=
         Math.max(
             0,
-            player.attackTime-dt
+            player.attackTimer-dt
         );
 
-    doorCooldown=
+    doorTimer=
         Math.max(
             0,
-            doorCooldown-dt
+            doorTimer-dt
         );
-
-    let forward=0;
-    let strafe=0;
 
     /*
-       JOYSTICK:
+       -------------------------------------------------
+       SUAVIZADO DEL JOYSTICK
+       -------------------------------------------------
 
-       arriba = avanzar
-       abajo = retroceder
-       izquierda = girar
-       derecha = girar
+       El valor real se acerca progresivamente
+       al valor objetivo.
+
+       Esto elimina tirones.
     */
 
-    if(joy.active){
+    const smoothing=
+        1-
+        Math.pow(
+            .001,
+            dt
+        );
 
-        forward=-joy.y;
+    joystickState.x+=
+        (
+            joystickState.targetX-
+            joystickState.x
+        )*
+        smoothing;
 
-        player.angle+=
-            joy.x*
-            dt*
-            2.8;
-    }
+    joystickState.y+=
+        (
+            joystickState.targetY-
+            joystickState.y
+        )*
+        smoothing;
+
+    let forward=
+        -joystickState.y;
+
+    let strafe=
+        joystickState.x;
 
     /*
-       WASD.
+       Teclado.
     */
 
     if(keys["w"])
@@ -3793,20 +3499,38 @@ function update(dt){
     if(keys["d"])
         strafe+=1;
 
-    const length=
+    const len=
         Math.hypot(
             forward,
             strafe
         );
 
-    if(length>1){
+    if(len>1){
 
-        forward/=length;
-        strafe/=length;
+        forward/=len;
+        strafe/=len;
     }
 
     const speed=
         player.speed*dt;
+
+    /*
+       Movimiento relativo a la cámara.
+
+       Esto es lo que hace que:
+
+       ARRIBA =
+       hacia donde mira el jugador.
+
+       ABAJO =
+       atrás.
+
+       IZQUIERDA =
+       lateral izquierda.
+
+       DERECHA =
+       lateral derecha.
+    */
 
     const dx=
         (
@@ -3817,7 +3541,8 @@ function update(dt){
             Math.sin(
                 player.angle
             )*strafe
-        )*speed;
+        )*
+        speed;
 
     const dy=
         (
@@ -3828,11 +3553,14 @@ function update(dt){
             Math.cos(
                 player.angle
             )*strafe
-        )*speed;
+        )*
+        speed;
 
-    movePlayer(
+    moveEntity(
+        player,
         dx,
-        dy
+        dy,
+        player.radius
     );
 
     updateEnemies(dt);
@@ -3846,36 +3574,28 @@ function update(dt){
     updateHUD();
 }
 
-/* =========================================================
-   RENDER
-========================================================= */
-
-function render(){
-
-    renderWorld();
-
-    renderCrosshair();
-
-    renderMinimap();
-}
-
-/* =========================================================
+/* =====================================================
    LOOP
-========================================================= */
+===================================================== */
+
+let gameRunning=false;
+let lastTime=0;
 
 function loop(time){
 
     const dt=
         Math.min(
             .033,
-            (time-lastTime)/1000 || 0
+            (time-lastTime)/1000||0
         );
 
     lastTime=time;
 
     update(dt);
 
-    render();
+    renderWorld();
+
+    renderMini();
 
     requestAnimationFrame(
         loop
@@ -3886,12 +3606,12 @@ requestAnimationFrame(
     loop
 );
 
-/* =========================================================
+/* =====================================================
    INICIO
-========================================================= */
+===================================================== */
 
 document.getElementById(
-    "startBtn"
+    "start"
 ).addEventListener(
     "click",
     ()=>{
@@ -3904,38 +3624,33 @@ document.getElementById(
 
         generateMap();
 
-        spawnEnemies(
-            currentRooms
-        );
+        spawnEnemies();
 
         applyGod();
 
         /*
-           EL GUARDIÁN SE INVOCA AQUÍ.
-           No aparece solo al crear el mapa.
+           El guardián siempre es INVOCADO.
         */
 
         summonGuardian();
 
         addMessage(
-            "Has entrado al templo."
+            "Exploración iniciada."
         );
 
         addMessage(
-            "Busca la puerta dorada en el minimapa."
+            "Usa el joystick para desplazarte."
         );
 
         addMessage(
-            "Alcance del arma: "+
-            player.range+
-            " celdas."
+            "Desliza el lado derecho para mirar."
         );
     }
 );
 
-/* =========================================================
+/* =====================================================
    ESTADO INICIAL
-========================================================= */
+===================================================== */
 
 updateHUD();
 
